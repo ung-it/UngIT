@@ -8,6 +8,7 @@
 ***
 
 **How to run server**
+
 1. Navigate to project folder in terminal
 2. To start django-server type: `python manage.py runserver`
 3. Navigate to "localhost:8080" in a browser
@@ -15,6 +16,7 @@
 ***
 
 **Development**
+
 1. Navigate to project folder in terminal
 2. Run (Only required the first time): `pip install django-webpack-loader`
 3. Run: `node server.js`

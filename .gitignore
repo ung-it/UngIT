@@ -247,3 +247,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/intellij,webstorm,pycharm,macos,windows,linux,django,node
+
+### User Defined ###
+/react/webpack-stats.json

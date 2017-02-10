@@ -5,28 +5,31 @@ var BundleTracker = require('webpack-bundle-tracker');
 module.exports = {
     context: __dirname,
 
-    entry: './assets/js/index', // entry point of our app. assets/js/index.js should require other js modules and dependencies it needs
+    entry: [
+        'webpack-dev-server/client?http://localhost:3000',
+        'webpack/hot/only-dev-server',
+        './assets/js/index'
+    ],
 
     output: {
         path: path.resolve('./assets/bundles/'),
-        filename: "bundle.js",
+        filename: '[name]-[hash].js',
+        publicPath: 'http://localhost:3000/assets/bundles/', // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
     },
 
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
         new BundleTracker({filename: './webpack-stats.json'}),
     ],
 
     module: {
         loaders: [
             {
-                test: /\.jsx?$/,         // Match both .js and .jsx files
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: "babel-loader",
-                query:
-                    {
-                        presets:['react']
-                    }
-            }, // to transform JSX into JS
+                loaders: ['react-hot-loader', 'babel-loader?presets[]=es2015,presets[]=stage-0,presets[]=react,plugins[]=transform-runtime'],
+            }
         ],
     },
 

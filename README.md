@@ -32,5 +32,6 @@
 ***
 
 **Development without Django**
+
 1. Run: `npm run server`
 2. Navigate to "http://localhost:8080/public/" in a browser

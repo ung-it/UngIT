@@ -6,8 +6,3 @@ ReactDOM.render(
     <App />,
     document.getElementById('react-app')
 );
-
-ReactDOM.render(
-    <App />,
-    document.getElementById('component2')
-);

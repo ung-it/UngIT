@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Aktiviteter from './Aktiviteter';
+import Aktiviteter from './Aktivities';
 
 ReactDOM.render(
     <Aktiviteter />,

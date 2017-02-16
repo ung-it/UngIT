@@ -30,6 +30,10 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loaders: ['react-hot-loader', 'babel-loader?presets[]=es2015,presets[]=stage-0,presets[]=react,plugins[]=transform-runtime'],
+            },
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
             }
         ],
     },

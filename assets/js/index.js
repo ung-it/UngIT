@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Aktiviteter from './Aktivities';
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('react-app')
+    <Aktiviteter />,
+    document.getElementById('activities')
 );

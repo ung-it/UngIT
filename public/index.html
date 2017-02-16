@@ -3,9 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>SkalVi</title>
+
+    <link rel="stylesheet" href="res/styles/style.css">
+    <link rel="stylesheet" href="res/styles/promoVideoContainer.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="res/javascript/promoVideoContainer.js"></script>
 </head>
 <body>
-    <div id="react-app"></div>
+
+    <div id="header"></div>
+
+
+    <div class="homepage-hero-module">
+        <div class="video-container">
+            <div class="filter"></div>
+            <video autoplay loop class="fillWidth">
+                <source src="/public/res/video/Everest.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                <source src="/public/res/video/Everest.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            </video>
+            <div class="poster hidden">
+                <img src="/public/res/images/Everest.jpg" alt="Klatring på fjell">
+            </div>
+        </div>
+    </div>
+    <div class="content-padding">
+        <div id="activities"></div>
+    </div>
     <script src="bundle.js"></script>
+
+    <!--Loads nav bar to the top of the page -->
+    <script>
+		$(function() {
+			$("#header").load("navbar.html"); // loads the  header and the footer into into the HTML document
+    	});
+    </script>
 </body>
 </html>

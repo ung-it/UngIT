@@ -11,6 +11,7 @@ class App extends Component {
                 <Aktivitet/>
                 <Aktivitet/>
                 <Aktivitet/>
+                <Aktivitet/>
               </div>
             </div>
         );

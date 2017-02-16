@@ -1,3 +1,7 @@
 .navbar.navbar-inverse {
     margin-bottom: 0px;
 }
+
+a.navbar-brand {
+    padding: 0;
+}

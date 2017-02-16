@@ -5,7 +5,6 @@
     <title>SkalVi</title>
 
     <link rel="stylesheet" href="res/styles/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="res/styles/promoVideoContainer.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -13,32 +12,9 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse">
-        <div class="content-padding">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div class="logo-div">
-                <a class="navbar-brand" href="#">
-                    <img src="res/images/logoSmall.png" id="logo-image" alt="Logo">
-                </a>
-                </div>
+    <div id="header"></div>
 
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Hjem</a></li>
-                    <li><a href="#">Aktiviteter</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logg inn</a></li>
-                </ul>
-            </div>
-        </div>
-        </div>
-    </nav>
+
     <div class="homepage-hero-module">
         <div class="video-container">
             <div class="filter"></div>
@@ -51,9 +27,16 @@
             </div>
         </div>
     </div>
-    <div class="content-padding">
+    <div class="content">
         <div id="activities"></div>
     </div>
     <script src="bundle.js"></script>
+
+    <!--Loads nav bar to the top of the page -->
+    <script>
+		$(function() {
+			$("#header").load("navbar.html"); // loads the  header and the footer into into the HTML document
+    	});
+    </script>
 </body>
 </html>

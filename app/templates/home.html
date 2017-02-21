@@ -1,17 +1,37 @@
 {% load render_bundle from webpack_loader %}
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="no">
 <head>
     <meta charset="UTF-8">
-    <title>UngIT</title>
-</head>
+    <title>SkalVi</title>
 
+    <link rel="stylesheet" href="{% static "styles/style.css" %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href=" {% static "styles/promoVideoContainer.css" %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{% static "javascript/promoVideoContainer.js" %}"></script>
+</head>
 <body>
-<div id="react-app"></div>
-<hr>
-This line represents a divide in two react components
-<hr>
-<div id="component2"></div>
+
+<div>{% include "navbar.html" %}</div>
+
+<div class="homepage-hero-module">
+    <div class="video-container">
+        <div class="filter"></div>
+        <video autoplay loop class="fillWidth">
+            <source src="{% static "video/Everest.mp4" type="video/mp4" %}" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            <source src="{% static "video/Everest.webm" type="video/webm" %}" />Your browser does not support the video tag. I suggest you upgrade your browser.
+        </video>
+        <div class="poster hidden">
+            <img src="{% static "images/Everest.jpg" alt="Klatring på fjell" %}">
+        </div>
+    </div>
+</div>
+<div class="content-padding">
+    <div id="activities"></div>
+</div>
 {% render_bundle 'main' %}
 </body>
 </html>

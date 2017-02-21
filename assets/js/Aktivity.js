@@ -5,7 +5,7 @@ import styles from '../styles/activityStyle.css'
 class Aktivitet extends Component {
   render() {
     return (
-      <Thumbnail src="./res/images/logoSmall.png" alt="242x200">
+      <Thumbnail src="./static/images/logoSmall.png" alt="242x200">
         <h3>Møte Babak og Peter</h3>
         <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> 17.02.17</p>
         <p><Glyphicon glyph="glyphicon glyphicon-time"/> Kl: 10:00</p>

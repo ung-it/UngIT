@@ -28,10 +28,3 @@
 5. If any migrations need to be applied, do so now. This is done acheived with `python manage.py migrate`
 6. Run: `python manage.py runserver`
 7. Navigate to "localhost:8080" in a browser
-
-***
-
-**Development without Django**
-
-1. Run: `npm run server`
-2. Navigate to "http://localhost:8080/public/" in a browser

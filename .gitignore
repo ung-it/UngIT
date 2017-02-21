@@ -251,3 +251,4 @@ $RECYCLE.BIN/
 ### User Defined ###
 webpack-stats.json
 /public/bundle.js
+/assets/bundles/*

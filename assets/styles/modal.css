@@ -10,8 +10,7 @@
     display: flex;
 }
 
-#modal-title {
-    width: 100%;
-    text-align: center;
-    margin: auto;
+.modal-header {
+    background-image: url("/static/images/grass.png");
+    background-position-y: 250px;
 }

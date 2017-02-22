@@ -17,19 +17,47 @@ class ActivityBox extends Component {
             date: "22.02.17",
             time: "12:00",
             location: "Lerkendal Stadion",
+
+            provider: "Glenn Åges Fotballklubb"
         }
     }
 
     render() {
 
-        const ActivitySmalStyle = {
-            width: "20em",
-            cursor: "pointer"
+        const styles = {
+            activitySmalStyle: {
+                width: "20em",
+                cursor: "pointer"
+            },
+            modalTitleStyle: {
+                width: "100%",
+                textAlign: "center",
+                margin: "auto"
+            },
+            modalProviderTitle: {
+                margin: "30px 0 0 15px",
+                textAlign: "left"
+            },
+            modalAdapted: {
+                backgroundColor: "rgb(207, 226, 243)"
+            }
+            ,
+            modalInfoContainer: {
+                display: "flex"
+            },
+            modalInfobox1: {
+                width: "50%",
+                backgroundColor: "rgb(207, 206, 255)"
+            },
+            modalInfobox2: {
+                width: "50%",
+                backgroundColor: "rgb(207, 106, 255)"
+            }
         };
 
         return (
             <div>
-                <Thumbnail style={ActivitySmalStyle} src="./static/images/logoSmall.png" alt="Logo til aktivitet"
+                <Thumbnail style={styles.activitySmalStyle} src="./static/images/logoSmall.png" alt="Logo til aktivitet"
                            onClick={this.openActivityModal.bind(this)}>
                     <h3>{this.state.title}</h3>
                     <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {this.state.date}</p>
@@ -45,10 +73,28 @@ class ActivityBox extends Component {
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-lg">
                             <CalendarDateBox day="22" month="Februar" weekday="Onsdag"/>
-                            <div id="modal-title"><h3>{this.state.title}</h3></div></Modal.Title>
+                            <div style={styles.modalTitleStyle}>
+                                <h1><b>{this.state.title}</b></h1>
+                                <div style={styles.modalProviderTitle}>Arrangør: <b>{this.state.provider}</b></div>
+                            </div>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Her vil det stå ekstra informasjon om en aktivitet! Hurra dette blir gøy! :)
+                        <div style={styles.modalAdapted}>
+                            This arrangement is adapted for: XXX
+                        </div>
+                        <div style={styles.modalInfoContainer}>
+                           <div style={styles.modalInfobox1}>
+                               Alder, tid, sted
+                           </div>
+                            <div style={styles.modalInfobox2}>
+                                Påmelding
+                            </div>
+                        </div>
+                        <div>
+                            <h2>Om arrangement</h2>
+                            Her vil det stå ekstra informasjon om en aktivitet! Hurra dette blir gøy! :)
+                        </div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.closeActivityModal.bind(this)}>Lukk</Button>

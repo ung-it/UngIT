@@ -1,7 +1,9 @@
 export function getActivityInfo(id, callback) {
+    /*
     fetchFromServer().then(data => {
         callback(data);
     });
+    */
 }
 
 function fetchFromServer(query) {

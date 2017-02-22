@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 import {getActivityInfo} from './APIFunctions';
+import CalendarDateBox from './CalendarDateBox';
 
 //Imports for Modal
 import {Modal, Button} from 'react-bootstrap';
@@ -42,7 +43,9 @@ class ActivityBox extends Component {
                     bsSize="large"
                     aria-labelledby="contained-modal-title-lg">
                     <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title-lg">{this.state.title}</Modal.Title>
+                        <Modal.Title id="contained-modal-title-lg">
+                            <CalendarDateBox day="22" month="Februar" weekday="Onsdag"/>
+                            <div id="modal-title"><h3>{this.state.title}</h3></div></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         Her vil det stå ekstra informasjon om en aktivitet! Hurra dette blir gøy! :)

@@ -1,6 +1,17 @@
 .modal-container {
     position: relative;
 }
+
 .modal-container .modal, .modal-container .modal-backdrop {
     position: absolute;
+}
+
+.modal-title {
+    display: flex;
+}
+
+#modal-title {
+    width: 100%;
+    text-align: center;
+    margin: auto;
 }

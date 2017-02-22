@@ -12,14 +12,17 @@ class ActivityBox extends Component {
         super(props);
         this.state = {
             show: false,
-            title: "Fotball Demo",
+            title: "Astronaut Demo",
             date: "22.02.17",
             time: "12:00",
-            location: "Lerkendal Stadion",
+            location: "Trondheim Space Centre",
 
-            provider: "Glenn Åges Fotballklubb",
+            provider: "SINTEF",
             adaptions: "XXX",
-            age: "Alle aldre"
+            age: "Alle aldre",
+
+            videos: ["The-Launch.mp4"],
+            images: ["spaceImage1.png","spaceImage1.png"]
         }
     }
 
@@ -28,15 +31,19 @@ class ActivityBox extends Component {
         const styles = {
             activitySmalStyle: {
                 width: "20em",
-                cursor: "pointer"
+                cursor: "pointer",
+                marginLeft: "5px",
+                marginRight: "5px"
             },
             modalTitleStyle: {
                 width: "100%",
                 textAlign: "center",
-                margin: "auto"
+                position: "relative"
             },
             modalProviderTitle: {
-                margin: "30px 0 0 15px",
+                position: "absolute",
+                bottom: "0px",
+                left: "10px",
                 textAlign: "left"
             },
             modalAdapted: {
@@ -49,21 +56,58 @@ class ActivityBox extends Component {
             modalInfobox1: {
                 width: "50%",
                 backgroundColor: "rgb(207, 206, 255)",
-                textAlign: "left-justify"
+                textAlign: "left-justify",
+                lineHeight: "2"
             },
             modalInfobox2: {
                 width: "50%",
                 backgroundColor: "rgb(207, 106, 255)"
+            },
+            modalMediaContainer: {
+
+
             }
         };
 
+        const videos = this.state.videos.map((video, i) => {
+            const path = "static/video/" + video;
+            return (
+                <video className="modal-video" controls="controls" key={i}>
+                    <source src={path}/>
+                </video>
+            )
+        });
+        let videoContainer = null;
+        if (videos.length > 0) {
+            videoContainer =
+                <div>
+                    <h3>Video fra arrangementet</h3>
+                    {videos}
+                </div>;
+        }
+
+        const images = this.state.images.map((image, i) => {
+            const path = "static/images/" + image;
+            return (
+               <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
+            )
+        });
+        let imageContainer = null;
+        if (images.length > 0) {
+            imageContainer =
+                <div>
+                    <h3>Bilder fra arrangementet</h3>
+                    {images}
+                </div>;
+        }
+
         return (
             <div>
-                <Thumbnail style={styles.activitySmalStyle} src="./static/images/logoSmall.png" alt="Logo til aktivitet"
+                <Thumbnail style={styles.activitySmalStyle} src="static/images/astronaut.jpg" alt="Logo til aktivitet"
                            onClick={this.openActivityModal.bind(this)}>
                     <h3>{this.state.title}</h3>
                     <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {this.state.date}</p>
-                    <p><Glyphicon glyph="glyphicon glyphicon-time"/> Kl: {this.state.time}</p>
+                    <p><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.time}</p>
                     <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.state.location}</p>
                 </Thumbnail>
                 <Modal
@@ -77,7 +121,7 @@ class ActivityBox extends Component {
                             <CalendarDateBox day="22" month="Februar" weekday="Onsdag"/>
                             <div style={styles.modalTitleStyle}>
                                 <h1><b>{this.state.title}</b></h1>
-                                <div style={styles.modalProviderTitle}>Arrangør: <b>{this.state.provider}</b></div>
+                                <div style={styles.modalProviderTitle}>Arrangeres av: <b>{this.state.provider}</b></div>
                             </div>
                         </Modal.Title>
                     </Modal.Header>
@@ -87,9 +131,9 @@ class ActivityBox extends Component {
                         </div>
                         <div style={styles.modalInfoContainer}>
                            <div style={styles.modalInfobox1}>
-                               <div>Alder: {this.state.age}</div>
-                               <div>Tid: {this.state.time}</div>
-                               <div>Sted: {this.state.location}</div>
+                               <div><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {this.state.age}</div>
+                               <div><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.time}</div>
+                               <div><Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {this.state.location}</div>
                            </div>
                             <div style={styles.modalInfobox2}>
                                 Påmelding
@@ -100,13 +144,8 @@ class ActivityBox extends Component {
                             <h2>Om arrangement</h2>
                             Her vil det stå ekstra informasjon om arrangementet! Hurra dette blir gøy! :)
                         </div>
-                        <div>
-                            <h3>Video fra arrangement</h3>
-                            <video className="modal-video" controls="controls">
-                                <source src="static/video/The-Launch.mp4" type="video/mp4"/>Your browser does not support the video tag. I suggest you upgrade your browser.
-                                <source src="static/video/The-Launch.webm" type="video/webm"/>Your browser does not support the video tag. I suggest you upgrade your browser.
-                            </video>
-                        </div>
+                        {videoContainer}
+                        {imageContainer}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.closeActivityModal.bind(this)}>Lukk</Button>

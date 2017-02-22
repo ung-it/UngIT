@@ -2,21 +2,20 @@
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import Permission, User
 
 
-class Users(models.Model):
-    # attributes:
-    email = models.EmailField(primary_key=True)
-    first_name = models.CharField(max_length=40)
-    last_name = models.CharField(max_length=80)
-    password = models.CharField(max_length=20)
-    type = models.CharField(max_length=1)  # A = admin, P = parent, C = child, etc.
-    phone = models.CharField(max_length=8)  # 90 90 99 09 <-- gives length 8
-
-
-
-    def __str__(self):
-        return self.first_name + " " + self.last_name
+# class Users(models.Model):
+#     # attributes:
+#     email = models.EmailField(primary_key=True)
+#     first_name = models.CharField(max_length=40)
+#     last_name = models.CharField(max_length=80)
+#     password = models.CharField(max_length=20)
+#     type = models.CharField(max_length=1)  # A = admin, P = parent, C = child, etc.
+#     phone = models.CharField(max_length=8)  # 90 90 99 09 <-- gives length 8
+#
+#     def __str__(self):
+#         return self.first_name + " " + self.last_name
 
 
 class Activity(models.Model):
@@ -43,19 +42,19 @@ class Organisation(models.Model):
 ###########  Relations tables  ##########
 
 class ParticipateIn(models.Model):
-    userId = models.ForeignKey(Users, on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
     activityId = models.ForeignKey(Activity, on_delete=models.CASCADE)
 
 
 class Hosts(models.Model):
     activityId = models.OneToOneField(Activity, on_delete=models.CASCADE)
-    adminId = models.ForeignKey(Users, on_delete=models.CASCADE)
+    adminId = models.ForeignKey(User, on_delete=models.CASCADE)
     # orgNr = models.ForeignKey(Organisation, on_delete=models.CASCADE) <-- should get the same information through the
     # admin user reference.
 
 
 class EmployedIn(models.Model):
     orgNr = models.ForeignKey(Organisation, on_delete=models.CASCADE)
-    userId = models.OneToOneField(Users, on_delete=models.CASCADE)
+    userId = models.OneToOneField(User, on_delete=models.CASCADE)
 
 

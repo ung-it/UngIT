@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Thumbnail, Glyphicon} from "react-bootstrap";
+import {Thumbnail, Glyphicon} from 'react-bootstrap';
+import {getActivityInfo} from './APIFunctions';
 
 class ActivityBox extends Component {
 
@@ -22,6 +23,10 @@ class ActivityBox extends Component {
             <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.location}</p>
             </Thumbnail>
         );
+    }
+
+    componentDidMount() {
+        
     }
 
     openActivityModal() {

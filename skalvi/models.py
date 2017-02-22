@@ -14,6 +14,7 @@ class Users(models.Model):
     phone = models.CharField(max_length=8)  # 90 90 99 09 <-- gives length 8
 
 
+
     def __str__(self):
         return self.first_name + " " + self.last_name
 
@@ -54,6 +55,6 @@ class Hosts(models.Model):
 
 class EmployedIn(models.Model):
     orgNr = models.ForeignKey(Organisation, on_delete=models.CASCADE)
-    userId = models.ForeignKey(Users, on_delete=models.CASCADE)
+    userId = models.OneToOneField(Users, on_delete=models.CASCADE)
 
 

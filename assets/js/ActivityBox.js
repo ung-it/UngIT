@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {Thumbnail, Glyphicon} from 'react-bootstrap';
+import {Thumbnail, Glyphicon, Modal, Button} from 'react-bootstrap';
 import {getActivityInfo} from './APIFunctions';
 import CalendarDateBox from './CalendarDateBox';
 
 //Imports for Modal
-import {Modal, Button} from 'react-bootstrap';
 import '../styles/modal.css';
 
 class ActivityBox extends Component {
@@ -18,7 +17,9 @@ class ActivityBox extends Component {
             time: "12:00",
             location: "Lerkendal Stadion",
 
-            provider: "Glenn Åges Fotballklubb"
+            provider: "Glenn Åges Fotballklubb",
+            adaptions: "XXX",
+            age: "Alle aldre"
         }
     }
 
@@ -47,7 +48,8 @@ class ActivityBox extends Component {
             },
             modalInfobox1: {
                 width: "50%",
-                backgroundColor: "rgb(207, 206, 255)"
+                backgroundColor: "rgb(207, 206, 255)",
+                textAlign: "left-justify"
             },
             modalInfobox2: {
                 width: "50%",
@@ -81,19 +83,29 @@ class ActivityBox extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <div style={styles.modalAdapted}>
-                            This arrangement is adapted for: XXX
+                            Dette arrangementet er tilpasset for: {this.state.adaptions}
                         </div>
                         <div style={styles.modalInfoContainer}>
                            <div style={styles.modalInfobox1}>
-                               Alder, tid, sted
+                               <div>Alder: {this.state.age}</div>
+                               <div>Tid: {this.state.time}</div>
+                               <div>Sted: {this.state.location}</div>
                            </div>
                             <div style={styles.modalInfobox2}>
                                 Påmelding
+                                <Button>Meld på!</Button>
                             </div>
                         </div>
                         <div>
                             <h2>Om arrangement</h2>
-                            Her vil det stå ekstra informasjon om en aktivitet! Hurra dette blir gøy! :)
+                            Her vil det stå ekstra informasjon om arrangementet! Hurra dette blir gøy! :)
+                        </div>
+                        <div>
+                            <h3>Video fra arrangement</h3>
+                            <video className="modal-video" controls="controls">
+                                <source src="static/video/The-Launch.mp4" type="video/mp4"/>Your browser does not support the video tag. I suggest you upgrade your browser.
+                                <source src="static/video/The-Launch.webm" type="video/webm"/>Your browser does not support the video tag. I suggest you upgrade your browser.
+                            </video>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>

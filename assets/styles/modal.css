@@ -14,3 +14,7 @@
     background-image: url("/static/images/grass.png");
     background-position-y: 250px;
 }
+
+.modal-video{
+    width: 300px;
+}

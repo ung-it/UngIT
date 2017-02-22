@@ -1,0 +1,39 @@
+{% load render_bundle from webpack_loader %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static "styles/style.css" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+    {% include "navbar.html" %}
+
+    <div class="content">
+        <div class="content-margin-top">
+            <h2>Alle aktiviteter</h2>
+            <p>Her er en oversikt over alle aktiviteter som tilbys i Trondheim kommune</p>
+
+             <div class="input-group">
+                 <input type="text" class="form-control" placeholder="Søk etter en aktivitet...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Søk!</button>
+                </span>
+            </div><!-- /input-group -->
+        </div>
+
+        <h3>Tilpasset for</h3>
+        <div class="checkbox">
+            <label><input type="checkbox">Rullestol</label>
+            <label><input type="checkbox">Ekstra assistent</label>
+        </div>
+
+    </div>
+{% render_bundle 'main' %}
+</body>
+</html>

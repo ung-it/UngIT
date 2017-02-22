@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Activities from './Activities';
+import ActivitiesContainer from './ActivitiesContainer';
 
 ReactDOM.render(
-    <Activities />,
+    <ActivitiesContainer/>,
     document.getElementById('activities')
 );

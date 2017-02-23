@@ -81,6 +81,7 @@ DATABASES = {
     }
 }
 
+AUTH_PROFILE_MODULE = "skalvi.UserProfile"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

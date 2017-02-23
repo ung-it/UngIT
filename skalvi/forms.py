@@ -14,7 +14,8 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
-    type = forms.CharField(max_length=10)
+    type = forms.BooleanField(label="Parent", required=False)
+
 
     class Meta:
         model = UserProfile

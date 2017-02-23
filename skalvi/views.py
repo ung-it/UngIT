@@ -97,11 +97,27 @@ class UserFormView(View):
             })
 
 
-class MyPageView(generic.DetailView):
+class MyPageView(View):
     template_name = 'mypage.html'
-    context_object_name = 'user'
-    model = User
+    model = UserProfile
 
+    def get(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        print(pk)
+
+        print("userprofile query: ")
+        userprofileObject = UserProfile.objects.get(pk=pk)
+        print(userprofileObject)
+        print()
+        print("userobject query: " + str(userprofileObject.user_id))
+        userObject = User.objects.get(pk=userprofileObject.user_id)
+        print(userObject)
+
+        return render(request, self.template_name,
+                      {
+                          'userprofile': userprofileObject,
+                          'user': userObject
+                      })
 
 
 

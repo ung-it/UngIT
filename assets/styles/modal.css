@@ -1,0 +1,26 @@
+.modal-container {
+    position: relative;
+}
+
+.modal-container .modal, .modal-container .modal-backdrop {
+    position: absolute;
+}
+
+.modal-title {
+    display: flex;
+}
+
+.modal-header {
+    background-color: #f5f5f5;
+    background-position-y: 250px;
+}
+
+.modal-video {
+    width: 300px;
+    margin: 5px;
+}
+
+.modal-image{
+    width: 300px;
+    margin: 5px;
+}

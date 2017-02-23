@@ -8,9 +8,13 @@ a.navbar-brand {
     padding: 0;
 }
 
-.content-padding {
+.content {
     padding-left: 100px;
     padding-right: 100px;
+}
+
+.content-margin-top {
+    margin-top: 100px;
 }
 
 .navbar-right > li {

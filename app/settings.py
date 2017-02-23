@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'app',
     'webpack_loader',
+    'skalvi',
 )
 
 MIDDLEWARE_CLASSES = (

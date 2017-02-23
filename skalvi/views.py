@@ -79,7 +79,7 @@ class UserFormView(View):
 
         # If not successfully logged in, returns to the same page.
         # Return to the login page
-        print("NEEEI")
+        
         return render(request, self.template_name,
             {
                 'form' : form,

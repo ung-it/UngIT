@@ -15,13 +15,6 @@ class UserProfile(models.Model):
     type = models.CharField(max_length=5)  # A = admin, P = parent, C = child, etc.
     phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-    #instance.userprofile.save()
-    #print(instance.username)
-    #print(instance.userprofile)
 
 
 ########### END USER PROFILE

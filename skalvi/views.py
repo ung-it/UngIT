@@ -92,9 +92,21 @@ class UserFormView(View):
         
         return render(request, self.template_name,
             {
-                'form' : form,
-                'profile' : profile_form
+                'form': form,
+                'profile': profile_form
             })
+
+
+class MyPageView(generic.DetailView):
+    template_name = 'mypage.html'
+    context_object_name = 'user'
+    model = User
+
+
+
+
+
+
 
 
 def detail(request, question_id):

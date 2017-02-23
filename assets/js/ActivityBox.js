@@ -20,6 +20,7 @@ class ActivityBox extends Component {
             provider: "SINTEF",
             adaptions: "XXX",
             age: "Alle aldre",
+            description: "Her kommer det mye kul informasjon om arrangementet!",
 
             videos: ["The-Launch.mp4"],
             images: ["spaceImage1.png","spaceImage1.png"]
@@ -142,7 +143,7 @@ class ActivityBox extends Component {
                         </div>
                         <div>
                             <h2>Om arrangement</h2>
-                            Her vil det stå ekstra informasjon om arrangementet! Hurra dette blir gøy! :)
+                            {this.state.description}
                         </div>
                         {videoContainer}
                         {imageContainer}
@@ -157,7 +158,7 @@ class ActivityBox extends Component {
 
     componentDidMount() {
         getActivityInfo(this.props.id, function (data) {
-            this.setState({title: data.title, date: data.date, time: data.time, location: data.location});
+            this.setState({title: data.activityName, date: data.pub_date, location: data.location, description: data.description});
         }.bind(this));
     }
 

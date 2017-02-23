@@ -10,8 +10,17 @@
     display: flex;
 }
 
-#modal-title {
-    width: 100%;
-    text-align: center;
-    margin: auto;
+.modal-header {
+    background-color: #f5f5f5;
+    background-position-y: 250px;
+}
+
+.modal-video {
+    width: 300px;
+    margin: 5px;
+}
+
+.modal-image{
+    width: 300px;
+    margin: 5px;
 }

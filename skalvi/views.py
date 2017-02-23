@@ -51,6 +51,12 @@ class UserFormView(View):
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
 
+            if types:
+                types = "P"
+            else:
+                types = "C"
+
+
             # Make som changes or something useful
             user.set_password(password)
 

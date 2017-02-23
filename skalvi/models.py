@@ -1,22 +1,30 @@
 # Create your models here.
 
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import Permission, User
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-# class Users(models.Model):
-#     # attributes:
-#     email = models.EmailField(primary_key=True)
-#     first_name = models.CharField(max_length=40)
-#     last_name = models.CharField(max_length=80)
-#     password = models.CharField(max_length=20)
-#     type = models.CharField(max_length=1)  # A = admin, P = parent, C = child, etc.
-#     phone = models.CharField(max_length=8)  # 90 90 99 09 <-- gives length 8
-#
-#     def __str__(self):
-#         return self.first_name + " " + self.last_name
 
+
+########### USER PROFILES that extends the auth.models.User table
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # set the relation / extension to the user model
+    type = models.CharField(max_length=5)  # A = admin, P = parent, C = child, etc.
+    phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+    #instance.userprofile.save()
+    #print(instance.username)
+    #print(instance.userprofile)
+
+
+########### END USER PROFILE
 
 class Activity(models.Model):
     activityName = models.CharField(max_length=80)

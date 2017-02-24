@@ -123,7 +123,11 @@ class ActivityBox extends Component {
 
         return (
             <div>
-                <Thumbnail className="activitySmalStyle" src={poster} onClick={this.openActivityModal.bind(this)}>
+                <Thumbnail
+                    className="activitySmalStyle"
+                    src={poster}
+                    onClick={this.openActivityModal.bind(this)}
+                    title="Klikk på aktiviteten for mer informasjon">
                     <h3>{this.state.title}</h3>
                     <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {this.state.date.getDate()}. {getMonth(this.state.date.getMonth())}</p>
                     <p><Glyphicon glyph="glyphicon glyphicon-time"/> {this.state.timeStart} - {this.state.timeEnd}</p>

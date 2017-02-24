@@ -9,11 +9,15 @@ from django.views.generic import View
 from .forms import UserForm, UserProfileForm
 from .models import *
 from django.contrib.auth.models import User
+
 from django.core import serializers
+
 
 
 def index(request):
     return TemplateResponse(request, "home.html", {})
+
+
 
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
@@ -25,6 +29,7 @@ def getActivity(request, id):
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
 
+# Register view
 class UserFormView(View):
     form_class = UserForm  # Form View blueprint
     profile_form_class = UserProfileForm

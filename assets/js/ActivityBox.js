@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {Thumbnail, Glyphicon, Modal, Button} from 'react-bootstrap';
 import {getActivityInfo} from './APIFunctions';
+import {getMonth} from './DateFunctions'
 import CalendarDateBox from './CalendarDateBox';
 
 //Imports for Modal
 import '../styles/modal.css';
+import '../styles/activityBox.css';
 
 class ActivityBox extends Component {
 
@@ -12,30 +14,44 @@ class ActivityBox extends Component {
         super(props);
         this.state = {
             show: false,
-            title: "Astronaut Demo",
-            date: "22.02.17",
-            time: "12:00",
-            location: "Trondheim Space Centre",
 
-            provider: "SINTEF",
-            adaptions: "XXX",
-            age: "Alle aldre",
-            description: "Her kommer det mye kul informasjon om arrangementet!",
+            title: "",
+            provider: "",
+            adaptions: "",
+            age: "",
+            location: "",
+            description: "",
+            price: "",
+            date: new Date(),
+            timeStart: "",
+            timeEnd: "",
+            images: [],
+            videos: []
+        };
 
-            videos: ["The-Launch.mp4"],
-            images: ["spaceImage1.png","spaceImage1.png"]
-        }
+        getActivityInfo(this.props.id, function (data) {
+            this.setState({
+                title: data.activityName,
+                provider: data.provider,
+                adaptions: data.adaptions,
+                age: data.age,
+                location: data.location,
+                description: data.description,
+                price: data.price,
+                date: new Date(data.date),
+                timeStart: data.time_start.substring(0,data.time_start.lastIndexOf(":")),
+                timeEnd: data.time_end.substring(0,data.time_end.lastIndexOf(":")),
+                images: data.images.split(","),
+                videos: data.videos.split(",")
+            });
+        }.bind(this));
+
+        this.showMap = this.showMap.bind(this);
     }
 
     render() {
 
         const styles = {
-            activitySmalStyle: {
-                width: "20em",
-                cursor: "pointer",
-                marginLeft: "5px",
-                marginRight: "5px"
-            },
             modalTitleStyle: {
                 width: "100%",
                 textAlign: "center",
@@ -70,16 +86,16 @@ class ActivityBox extends Component {
             }
         };
 
-        const videos = this.state.videos.map((video, i) => {
-            const path = "static/video/" + video;
-            return (
-                <video className="modal-video" controls="controls" key={i}>
-                    <source src={path}/>
-                </video>
-            )
-        });
         let videoContainer = null;
-        if (videos.length > 0) {
+        if (this.state.videos.length > 0 && this.state.videos[0] != "") {
+            const videos = this.state.videos.map((video, i) => {
+                const path = "static/provider/video/" + video;
+                return (
+                    <video className="modal-video" controls="controls" key={i}>
+                        <source src={path}/>
+                    </video>
+                )
+            });
             videoContainer =
                 <div>
                     <h3>Video fra arrangementet</h3>
@@ -87,14 +103,14 @@ class ActivityBox extends Component {
                 </div>;
         }
 
-        const images = this.state.images.map((image, i) => {
-            const path = "static/images/" + image;
-            return (
-               <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
-            )
-        });
         let imageContainer = null;
-        if (images.length > 0) {
+        if (this.state.images.length > 0 && this.state.images[0] != "") {
+            const images = this.state.images.map((image, i) => {
+                const path = "static/provider/images/" + image;
+                return (
+                   <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
+                )
+            });
             imageContainer =
                 <div>
                     <h3>Bilder fra arrangementet</h3>
@@ -102,14 +118,30 @@ class ActivityBox extends Component {
                 </div>;
         }
 
+        let poster = null;
+        if (this.state.images.length > 0) {
+            poster = "static/provider/images/" + this.state.images[0];
+        }
         return (
-            <div>
-                <Thumbnail style={styles.activitySmalStyle} src="static/images/astronaut.jpg" alt="Logo til aktivitet"
-                           onClick={this.openActivityModal.bind(this)}>
+            <div tabIndex={this.props.tabIndex}>
+                <Thumbnail
+                    className="activitySmalStyle"
+                    src={poster}
+                    onClick={this.openActivityModal.bind(this)}
+                    title="Klikk på aktiviteten for mer informasjon">
                     <h3>{this.state.title}</h3>
-                    <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {this.state.date}</p>
-                    <p><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.time}</p>
-                    <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.state.location}</p>
+                    <div className="info-box-wrapper">
+                        <div className="icon-container">
+                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
+                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
+                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                        </div>
+                        <div className="info-container">
+                            <p>{this.state.date.getDate()}. {getMonth(this.state.date.getMonth())}</p>
+                            <p>{this.state.timeStart} - {this.state.timeEnd}</p>
+                            <p>{this.state.location}</p>
+                        </div>
+                    </div>
                 </Thumbnail>
                 <Modal
                     show={this.state.show}
@@ -119,7 +151,7 @@ class ActivityBox extends Component {
                     aria-labelledby="contained-modal-title-lg">
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-lg">
-                            <CalendarDateBox day="22" month="Februar" weekday="Onsdag"/>
+                            <CalendarDateBox date={this.state.date}/>
                             <div style={styles.modalTitleStyle}>
                                 <h1><b>{this.state.title}</b></h1>
                                 <div style={styles.modalProviderTitle}>Arrangeres av: <b>{this.state.provider}</b></div>
@@ -133,8 +165,9 @@ class ActivityBox extends Component {
                         <div style={styles.modalInfoContainer}>
                            <div style={styles.modalInfobox1}>
                                <div><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {this.state.age}</div>
-                               <div><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.time}</div>
+                               <div><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.timeStart} - {this.state.timeEnd}</div>
                                <div><Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {this.state.location}</div>
+                               <div><Button onClick={this.showMap}>Vis på kart</Button></div>
                            </div>
                             <div style={styles.modalInfobox2}>
                                 Påmelding
@@ -143,7 +176,7 @@ class ActivityBox extends Component {
                         </div>
                         <div>
                             <h2>Om arrangement</h2>
-                            {this.state.description}
+                            <pre>{this.state.description}</pre>
                         </div>
                         {videoContainer}
                         {imageContainer}
@@ -156,10 +189,8 @@ class ActivityBox extends Component {
         );
     }
 
-    componentDidMount() {
-        getActivityInfo(this.props.id, function (data) {
-            this.setState({title: data.activityName, date: data.pub_date, location: data.location, description: data.description});
-        }.bind(this));
+    showMap() {
+        window.open('https://www.google.no/maps/place/' + this.state.location,'_blank');
     }
 
     openActivityModal() {

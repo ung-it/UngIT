@@ -15,6 +15,26 @@ from django.contrib.auth.models import User
 def index(request):
     return TemplateResponse(request, "home.html", {})
 
+
+# Login view, method = POST.
+def logginView(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    urlToPageFrom = request.POST['page']
+
+    user = authenticate(username=username, password=password)
+
+    # Check that we got a user back
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+
+            return redirect(request, 'skalvi:' + urlToPageFrom)
+
+    return render(request)
+
+
+# Register view
 class UserFormView(View):
     form_class = UserForm  # Form View blueprint
     profile_form_class = UserProfileForm

@@ -19,32 +19,6 @@ def index(request):
     return TemplateResponse(request, "home.html", {})
 
 
-# Login view, method = POST.
-@csrf_exempt
-def loginView(request):
-    print(request)
-    print(request.body)
-    json_string = request.body.decode('utf-8') # request becomes string
-    print(json_string)
-    print(type(json_string))
-    parsed_json = json.loads(json_string)
-    username = parsed_json['username']
-    password = parsed_json['password']
-    print(username + " " + password)
-
-    #urlToPageFrom = request.POST['page']
-
-    user = authenticate(username=username, password=password)
-
-
-    # Check that we got a user back
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-
-            return redirect("skalvi:index")
-
-    return render(request, template_name="register.html")
 
 
 # Register view

@@ -11,7 +11,7 @@ from django.dispatch import receiver
 ########### USER PROFILES that extends the auth.models.User table
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # set the relation / extension to the user model
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')  # set the relation / extension to the user model
     type = models.CharField(max_length=5)  # A = admin, P = parent, C = child, etc.
     phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
 

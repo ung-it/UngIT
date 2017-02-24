@@ -45,6 +45,8 @@ class ActivityBox extends Component {
                 videos: data.videos.split(",")
             });
         }.bind(this));
+
+        this.showMap = this.showMap.bind(this);
     }
 
     render() {
@@ -120,9 +122,8 @@ class ActivityBox extends Component {
         if (this.state.images.length > 0) {
             poster = "static/provider/images/" + this.state.images[0];
         }
-
         return (
-            <div>
+            <div tabIndex={this.props.tabIndex}>
                 <Thumbnail
                     className="activitySmalStyle"
                     src={poster}
@@ -136,9 +137,9 @@ class ActivityBox extends Component {
                             <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
                         </div>
                         <div className="info-container">
-                            <p> {this.state.date.getDate()}. {getMonth(this.state.date.getMonth())}</p>
+                            <p>{this.state.date.getDate()}. {getMonth(this.state.date.getMonth())}</p>
                             <p>{this.state.timeStart} - {this.state.timeEnd}</p>
-                            <p> {this.state.location}</p>
+                            <p>{this.state.location}</p>
                         </div>
                     </div>
                 </Thumbnail>
@@ -166,6 +167,7 @@ class ActivityBox extends Component {
                                <div><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {this.state.age}</div>
                                <div><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.timeStart} - {this.state.timeEnd}</div>
                                <div><Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {this.state.location}</div>
+                               <div><Button onClick={this.showMap}>Vis på kart</Button></div>
                            </div>
                             <div style={styles.modalInfobox2}>
                                 Påmelding
@@ -185,6 +187,10 @@ class ActivityBox extends Component {
                 </Modal>
             </div>
         );
+    }
+
+    showMap() {
+        window.open('https://www.google.no/maps/place/' + this.state.location,'_blank');
     }
 
     openActivityModal() {

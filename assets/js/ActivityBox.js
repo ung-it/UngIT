@@ -39,8 +39,8 @@ class ActivityBox extends Component {
                 description: data.description,
                 price: data.price,
                 date: new Date(data.date),
-                timeStart: data.time_start,
-                timeEnd: data.time_end,
+                timeStart: data.time_start.substring(0,data.time_start.lastIndexOf(":")),
+                timeEnd: data.time_end.substring(0,data.time_end.lastIndexOf(":")),
                 images: data.images.split(","),
                 videos: data.videos.split(",")
             });

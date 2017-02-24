@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Thumbnail, Glyphicon, Modal, Button} from 'react-bootstrap';
 import {getActivityInfo} from './APIFunctions';
+import {getMonth} from './DateFunctions'
 import CalendarDateBox from './CalendarDateBox';
 
 //Imports for Modal
@@ -21,7 +22,7 @@ class ActivityBox extends Component {
             location: "",
             description: "",
             price: "",
-            date: "",
+            date: new Date(),
             timeStart: "",
             timeEnd: "",
             images: [],
@@ -37,7 +38,7 @@ class ActivityBox extends Component {
                 location: data.location,
                 description: data.description,
                 price: data.price,
-                date: data.date,
+                date: new Date(data.date),
                 timeStart: data.time_start,
                 timeEnd: data.time_end,
                 images: data.images.split(","),
@@ -124,8 +125,8 @@ class ActivityBox extends Component {
             <div>
                 <Thumbnail className="activitySmalStyle" src={poster} onClick={this.openActivityModal.bind(this)}>
                     <h3>{this.state.title}</h3>
-                    <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {this.state.date}</p>
-                    <p><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.timeStart} - {this.state.timeEnd}</p>
+                    <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {this.state.date.getDate()}. {getMonth(this.state.date.getMonth())}</p>
+                    <p><Glyphicon glyph="glyphicon glyphicon-time"/> {this.state.timeStart} - {this.state.timeEnd}</p>
                     <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.state.location}</p>
                 </Thumbnail>
                 <Modal
@@ -136,7 +137,7 @@ class ActivityBox extends Component {
                     aria-labelledby="contained-modal-title-lg">
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-lg">
-                            <CalendarDateBox day="22" month="Februar" weekday="Onsdag"/>
+                            <CalendarDateBox date={this.state.date}/>
                             <div style={styles.modalTitleStyle}>
                                 <h1><b>{this.state.title}</b></h1>
                                 <div style={styles.modalProviderTitle}>Arrangeres av: <b>{this.state.provider}</b></div>

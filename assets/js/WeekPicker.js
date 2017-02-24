@@ -22,13 +22,13 @@ var WeekPicker = React.createClass({
     render: function () {
 		var start = this.state.startDate.format('DD-MM-YYYY');
 		var end = this.state.endDate.format('DD-MM-YYYY');
-		var label = start + '   -   ' + end;
+		var label = start + '		-		' + end;
 		if (start === end) {
 			label = start;
 		}
 		return (
 		    <DateRangePicker startDate={this.state.startDate} endDate={this.state.endDate} onEvent={this.handleEvent}>
-            <button type="button" className="btn btn-default"><Glyphicon glyph="glyphicon glyphicon-calendar"/></button> {label}
+            <button type="button" className="btn btn-default"><Glyphicon glyph="glyphicon glyphicon-calendar"/></button>{label}
             </DateRangePicker>
         );
 

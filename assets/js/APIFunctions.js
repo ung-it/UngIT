@@ -1,9 +1,18 @@
 export function getActivityInfo(id, callback) {
-    /*
-    fetchFromServer().then(data => {
-        callback(data);
+
+    fetchFromServer('/api/activity/' + id).then(data => {
+        callback(data[0].fields);
     });
-    */
+
+}
+
+export function getUpcomingActivities(callback) {
+    fetchFromServer('/api/activities/').then(data => {
+        const ids = data.map(activity => {
+            return activity.pk;
+        });
+        callback(ids);
+    });
 }
 
 function fetchFromServer(query) {
@@ -20,7 +29,7 @@ function fetchFromServer(query) {
             return [];
         }
         else {
-            return JSON.parse(result);
+            return result;
         }
     });
 }

@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import ActivityBox from './ActivityBox';
+import {getUpcomingActivities} from './APIFunctions';
 
 class ActivitiesContainer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            ids: []
+        }
+    }
+
     render() {
 
         const styles = {
@@ -16,21 +25,26 @@ class ActivitiesContainer extends Component {
             }
         };
 
+        const activities = this.state.ids.map(id => {
+           return(
+               <ActivityBox id={id} key={id}/>
+           )
+        });
+
         return (
             <div style={styles.activitiesContainerStyle}>
               <h2>Kommende Aktiviteter</h2>
               <div style={styles.activitiesStyle}>
-                <ActivityBox id="000001"/>
-                <ActivityBox id="000002"/>
-                <ActivityBox id="000003"/>
-                <ActivityBox id="000004"/>
-                <ActivityBox id="000005"/>
-                <ActivityBox id="000006"/>
-                <ActivityBox id="000007"/>
-                <ActivityBox id="000008"/>
+                  {activities}
               </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        getUpcomingActivities(function(idArray) {
+            this.setState({ids: idArray});
+        }.bind(this));
     }
 }
 

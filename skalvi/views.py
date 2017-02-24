@@ -9,9 +9,8 @@ from django.views.generic import View
 from .forms import UserForm, UserProfileForm
 from .models import *
 from django.contrib.auth.models import User
-from django.views.decorators.csrf import csrf_exempt
-import json
 
+from django.core import serializers
 
 
 
@@ -20,6 +19,15 @@ def index(request):
 
 
 
+def getActivities(request):
+    json_serializer = serializers.get_serializer("json")()
+    activities = json_serializer.serialize(Activity.objects.all(), ensure_ascii=False)
+    return HttpResponse(activities, content_type='application/json')
+
+def getActivity(request, id):
+    json_serializer = serializers.get_serializer("json")()
+    activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
+    return HttpResponse(activities, content_type='application/json')
 
 # Register view
 class UserFormView(View):
@@ -89,9 +97,37 @@ class UserFormView(View):
         
         return render(request, self.template_name,
             {
-                'form' : form,
-                'profile' : profile_form
+                'form': form,
+                'profile': profile_form
             })
+
+
+class MyPageView(View):
+    template_name = 'mypage.html'
+    model = UserProfile
+
+    def get(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        print(pk)
+
+        print("userprofile query: ")
+        userprofileObject = UserProfile.objects.get(pk=pk)
+        print(userprofileObject)
+        print()
+        print("userobject query: " + str(userprofileObject.user_id))
+        userObject = User.objects.get(pk=userprofileObject.user_id)
+        print(userObject)
+
+        return render(request, self.template_name,
+                      {
+                          'userprofile': userprofileObject,
+                          'user': userObject
+                      })
+
+
+
+
+
 
 
 def detail(request, question_id):

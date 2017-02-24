@@ -129,9 +129,18 @@ class ActivityBox extends Component {
                     onClick={this.openActivityModal.bind(this)}
                     title="Klikk på aktiviteten for mer informasjon">
                     <h3>{this.state.title}</h3>
-                    <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {this.state.date.getDate()}. {getMonth(this.state.date.getMonth())}</p>
-                    <p><Glyphicon glyph="glyphicon glyphicon-time"/> {this.state.timeStart} - {this.state.timeEnd}</p>
-                    <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.state.location}</p>
+                    <div className="info-box-wrapper">
+                        <div className="icon-container">
+                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
+                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
+                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                        </div>
+                        <div className="info-container">
+                            <p> {this.state.date.getDate()}. {getMonth(this.state.date.getMonth())}</p>
+                            <p>{this.state.timeStart} - {this.state.timeEnd}</p>
+                            <p> {this.state.location}</p>
+                        </div>
+                    </div>
                 </Thumbnail>
                 <Modal
                     show={this.state.show}

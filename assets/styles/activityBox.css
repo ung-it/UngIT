@@ -14,3 +14,15 @@
 .activitySmalStyle img {
     height: 15em;
 }
+
+.caption {
+    height: 12em;
+}
+
+.info-box-wrapper {
+    display: flex;
+}
+
+.icon-container {
+    width: 1.5em;
+}

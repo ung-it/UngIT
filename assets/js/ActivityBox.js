@@ -5,6 +5,7 @@ import CalendarDateBox from './CalendarDateBox';
 
 //Imports for Modal
 import '../styles/modal.css';
+import '../styles/activityBox.css';
 
 class ActivityBox extends Component {
 
@@ -48,12 +49,6 @@ class ActivityBox extends Component {
     render() {
 
         const styles = {
-            activitySmalStyle: {
-                width: "20em",
-                cursor: "pointer",
-                marginLeft: "5px",
-                marginRight: "5px"
-            },
             modalTitleStyle: {
                 width: "100%",
                 textAlign: "center",
@@ -120,10 +115,14 @@ class ActivityBox extends Component {
                 </div>;
         }
 
+        let poster = null;
+        if (this.state.images.length > 0) {
+            poster = "static/provider/images/" + this.state.images[0];
+        }
+
         return (
             <div>
-                <Thumbnail style={styles.activitySmalStyle} src={"static/provider/images/" + this.state.images[0]} alt="Logo til aktivitet"
-                           onClick={this.openActivityModal.bind(this)}>
+                <Thumbnail className="activitySmalStyle" src={poster} onClick={this.openActivityModal.bind(this)}>
                     <h3>{this.state.title}</h3>
                     <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {this.state.date}</p>
                     <p><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.timeStart} - {this.state.timeEnd}</p>
@@ -151,7 +150,7 @@ class ActivityBox extends Component {
                         <div style={styles.modalInfoContainer}>
                            <div style={styles.modalInfobox1}>
                                <div><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {this.state.age}</div>
-                               <div><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.time}</div>
+                               <div><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {this.state.timeStart} - {this.state.timeEnd}</div>
                                <div><Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {this.state.location}</div>
                            </div>
                             <div style={styles.modalInfobox2}>

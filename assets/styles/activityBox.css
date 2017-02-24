@@ -1,0 +1,16 @@
+.activitySmalStyle {
+    width: 20em;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.activitySmalStyle:hover {
+    background-color: whitesmoke;
+    border-style: solid;
+    border-color: dimgray;
+}
+
+.activitySmalStyle img {
+    height: 15em;
+}

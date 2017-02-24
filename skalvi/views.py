@@ -17,7 +17,7 @@ def index(request):
 
 
 # Login view, method = POST.
-def logginView(request):
+def loginView(request):
     username = request.POST['username']
     password = request.POST['password']
     urlToPageFrom = request.POST['page']

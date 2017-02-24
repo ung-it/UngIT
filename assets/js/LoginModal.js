@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Modal, Button, Glyphicon, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import FacebookButton from './FacebookButton';
-import styles from '../styles/loginModalStyle.css'
+import styles from '../styles/loginModalStyle.css';
+import 'whatwg-fetch';
 
 
 class LoginModal extends Component {
@@ -21,6 +22,22 @@ class LoginModal extends Component {
     }
 
     onSubmit(e) {
+        var request = {
+            username: this.state.username,
+            password: this.state.password,
+        };
+
+        fetch('http://localhost:8000/api/skalvi/login/', {
+            method: 'POST',
+            headers: {
+                'Credentials': "same-origin",
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(request)
+
+        }).then((response) => {
+            return response.status
+        })
 
     }
 

@@ -21,10 +21,18 @@ class UserProfile(models.Model):
 
 class Activity(models.Model):
     activityName = models.CharField(max_length=80)
+    provider = models.CharField(max_length=80)
+    adaptions = models.TextField()
+    age = models.CharField(max_length=80)
     location = models.CharField(max_length=80)
     description = models.TextField()
-    ingress = models.CharField(max_length=100)
-    pub_date = models.DateTimeField('date published')
+    registration_required = models.BooleanField()
+    price = models.IntegerField()
+    date = models.DateField()
+    time_start = models.TimeField()
+    time_end = models.TimeField()
+    images = models.CharField(max_length=200, blank=True)
+    videos = models.CharField(max_length=200, blank=True)
 
     def was_published(self):
         return self.pub_date

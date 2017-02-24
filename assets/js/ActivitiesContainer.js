@@ -25,9 +25,9 @@ class ActivitiesContainer extends Component {
             }
         };
 
-        const activities = this.state.ids.map(id => {
+        const activities = this.state.ids.map((id, i) => {
            return(
-               <ActivityBox id={id} key={id}/>
+               <ActivityBox id={id} key={id} tabIndex={i+1}/>
            )
         });
 

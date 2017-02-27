@@ -198,10 +198,12 @@ class AllActivitiesBox extends Component {
 
     openActivityModal() {
         this.setState({show: true})
+        document.body.style.overflow = "hidden";
     }
 
     closeActivityModal() {
         this.setState({show: false})
+        document.body.style.overflow = "hidden";
     }
 }
 

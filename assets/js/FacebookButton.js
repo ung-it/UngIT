@@ -6,15 +6,13 @@ class FacebookButton extends Component {
         super(props);
 
         this.state = {
-            login: "Log in"
+            connected: "",
+            buttonText: ""
         };
 
-        this.handleLogin = this.handleLogin.bind(this);
-        this.handleLogout = this.handleLogout.bind(this);
+        this.handleLogInOut = this.handleLogInOut.bind(this);
         this.checkLoginState = this.checkLoginState.bind(this);
-        this.statusChangeCallback = this.statusChangeCallback.bind(this);
         this.testAPI = this.testAPI.bind(this);
-        this.testMe = this.testMe.bind(this);
    }
 
 
@@ -29,20 +27,26 @@ class FacebookButton extends Component {
             version    : 'v2.8' // use version 2.1
         });
     }.bind(this);
-
-
-/*
-    // Load the SDK asynchronously
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8&appId=1658650714438155";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-*/
+    this.checkLoginState();
 
     }
+
+    handleLogInOut() {
+        var that = this;
+        if(this.state.connected === "notconnected"){
+            FB.login(function(response) {
+                console.log(response);
+                that.checkLoginState();
+            });
+        }
+        else{
+            FB.logout(function(response) {
+                console.log(response);
+                that.checkLoginState();
+            });
+        }
+    }
+
 
     testAPI() {
         console.log('Welcome!  Fetching your information.... ');
@@ -54,50 +58,28 @@ class FacebookButton extends Component {
         });
     }
 
-    statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        setTimeout("",1000);
-        if (response.status === 'connected') {
-            this.testAPI();
-        } else if (response.status === 'not_authorized') {
-            console.log('Please log into this app.');
-        } else {
-            console.log('Please log into facebook.');
-        }
-    }
-
     checkLoginState() {
         FB.getLoginStatus(function(response) {
-            this.statusChangeCallback(response);
+            console.log(response);
+            if (response.status === 'connected') {
+                this.setState(() => ({
+                    connected: "connected",
+                    buttonText: "Log out"
+                }));
+            } else {
+                this.setState(() => ({
+                    connected: "notconnected",
+                    buttonText: "Log in"
+                }));
+            }
         }.bind(this));
     }
 
-    handleLogin() {
-        //FB.login(this.checkLoginState());
-        FB.login(function(response) {
-          console.log(response);
-        });
-    }
-    handleLogout() {
-        //FB.login(this.checkLoginState());
-        FB.logout(function(response) {
-            console.log(response);
-        });
-    }
 
     render(){
         return (
             <div>
-                <div id="fb-root"></div>
-                <div
-                    className="fb-login-button"
-                    data-size="large"
-                    data-show-faces="false"
-                    data-auto-logout-link="true">
-                </div>
-                <Button onClick={this.handleLogin}>{this.state.login + " with Facebook"}</Button>
-                <Button onClick={this.handleLogout}>Logout</Button>
+                <Button id="" onClick={this.handleLogInOut}>{this.state.buttonText + " with Facebook"}</Button>
                 <Button onClick={this.checkLoginState}>Status</Button>
             </div>
         );

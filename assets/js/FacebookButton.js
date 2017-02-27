@@ -12,7 +12,7 @@ class FacebookButton extends Component {
 
         this.handleLogInOut = this.handleLogInOut.bind(this);
         this.checkLoginState = this.checkLoginState.bind(this);
-        this.testAPI = this.testAPI.bind(this);
+        this.findInfo = this.findInfo.bind(this);
    }
 
 
@@ -35,25 +35,25 @@ class FacebookButton extends Component {
         var that = this;
         if(this.state.connected === "notconnected"){
             FB.login(function(response) {
-                console.log(response);
                 that.checkLoginState();
             });
         }
         else{
             FB.logout(function(response) {
-                console.log(response);
                 that.checkLoginState();
             });
         }
     }
 
 
-    testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
+    findInfo() {
+        console.log('Fetching your information.... ');
         FB.api('/me', 'GET', {fields: 'name,id,picture,email'}, function(response) {
-            console.log('Successful login for: ' + response.name);
-            console.log('Thanks for logging in, ' + response.name + '!');
-            console.log(JSON.stringify(response));
+            console.log('Thanks for logging in:');
+            console.log(response.name);
+            console.log(response.id);
+            console.log(response.email);
+            console.log(response.picture.data.url);
 
         });
     }
@@ -66,6 +66,7 @@ class FacebookButton extends Component {
                     connected: "connected",
                     buttonText: "Log out"
                 }));
+                this.findInfo();
             } else {
                 this.setState(() => ({
                     connected: "notconnected",
@@ -80,7 +81,6 @@ class FacebookButton extends Component {
         return (
             <div>
                 <Button id="" onClick={this.handleLogInOut}>{this.state.buttonText + " with Facebook"}</Button>
-                <Button onClick={this.checkLoginState}>Status</Button>
             </div>
         );
     }

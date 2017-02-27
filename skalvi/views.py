@@ -15,7 +15,7 @@ from django.core import serializers
 
 
 def index(request):
-    return TemplateResponse(request, "allActivities.html", {})
+    return TemplateResponse(request, "home.html", {})
 
 
 def getActivities(request):
@@ -139,5 +139,5 @@ def results(request, question_id):
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
 
-def allActivities(request):
-    return TemplateResponse(request, "allActivities.html", {})
+def allactivities(request):
+    return HttpResponse("allActivities.html")

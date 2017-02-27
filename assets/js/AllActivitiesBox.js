@@ -125,7 +125,7 @@ class AllActivitiesBox extends Component {
         return (
             <div tabIndex={this.props.tabIndex}>
                 <Thumbnail
-                    className="activitySmalStyle"
+                    className="activityBigStyle"
                     src={poster}
                     onClick={this.openActivityModal.bind(this)}
                     title="Klikk på aktiviteten for mer informasjon">
@@ -140,6 +140,9 @@ class AllActivitiesBox extends Component {
                             <p>{this.state.date.getDate()}. {getMonth(this.state.date.getMonth())}</p>
                             <p>{this.state.timeStart} - {this.state.timeEnd}</p>
                             <p>{this.state.location}</p>
+                        </div>
+                        <div className="about-container">
+                            <p>{this.state.description}</p>
                         </div>
                     </div>
                 </Thumbnail>

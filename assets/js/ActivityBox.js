@@ -194,11 +194,13 @@ class ActivityBox extends Component {
     }
 
     openActivityModal() {
-        this.setState({show: true})
+        this.setState({show: true});
+        document.body.style.overflow = "hidden";
     }
 
     closeActivityModal() {
-        this.setState({show: false})
+        this.setState({show: false});
+        document.body.style.overflow = null;
     }
 }
 

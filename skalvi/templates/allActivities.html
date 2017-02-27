@@ -1,51 +1,36 @@
-{% load render_bundle from webpack_loader %}
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Aktiviter</title>
-    <link rel="stylesheet" href="{% static "styles/style.css" %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<body>
+{% extends "base_template.html" %}
+{% block pageTitle %}MyPage{% endblock %}
 
-{% include "navbar.html" %}
 
-<div class="content">
-    <div class="content-margin-top">
-        <h2>Alle aktiviteter</h2>
-        <p>Her er en oversikt over alle aktiviteter som tilbys i Trondheim kommune</p>
+{% block body %}
 
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Søk etter en aktivitet...">
-            <span class="input-group-btn">
+    <div class="content">
+        <div class="content-margin-top">
+            <h2>Alle aktiviteter</h2>
+            <p>Her er en oversikt over alle aktiviteter som tilbys i Trondheim kommune</p>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Søk etter en aktivitet...">
+                <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Søk!</button>
                 </span>
-        </div><!-- /input-group -->
-    </div>
+            </div><!-- /input-group -->
+        </div>
 
-    <div class="filter-container">
-        <h3 id="info-txt">Filtrer aktiviteter</h3>
-        <div class="row">
-            <div class="col-md-6" id="whatContainer">
-                <div id="activityfilter"></div>
-            </div>
-            <div class="col-md-6" id="whoContainer">
-                <div id="suitedfor"></div>
+        <div class="filter-container">
+            <h3 id="info-txt">Filtrer aktiviteter</h3>
+            <div class="row">
+                <div class="col-md-6" id="whatContainer">
+                    <div id="activityfilter"></div>
+                </div>
+                <div class="col-md-6" id="whoContainer">
+                    <div id="suitedfor"></div>
+                </div>
             </div>
         </div>
+        <div class="date-picker-container">
+            <h3 id="info-txt">Tidsperiode</h3>
+            <div  id="week"></div></div>
+        <div id="allActivities"></div>
     </div>
-    <div class="date-picker-container">
-        <h3 id="info-txt">Tidsperiode</h3>
-        <div  id="week"></div>
-    </div>
-    <div id="allActivities"></div>
 
-
-</div>
-{% render_bundle 'main' %}
-</body>
-</html>
+{% endblock %}

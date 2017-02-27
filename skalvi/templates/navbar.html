@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="logo-div">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <img src="{% static "images/logoSmall.png" %}" id="logo-image" alt="Logo">
                     </a>
                 </div>
@@ -19,9 +19,9 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Hjem</a></li>
-                    <li><a href="{% url 'activities' %}">Aktiviteter</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logg inn</a></li>
+                    <li class="active"><a href="/">Hjem</a></li>
+                    <li><a href="#">Aktiviteter</a></li>
+                    <li><a href="#" id="loginComponent" ></a></li>
                 </ul>
             </div>
         </div>

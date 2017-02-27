@@ -5,6 +5,13 @@
  * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs
  * MIT License: https://github.com/JedWatson/react-select
 */
+/**
+ * React Select
+ * ============
+ * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/
+ * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs
+ * MIT License: https://github.com/JedWatson/react-select
+*/
 .Select {
   position: relative;
 }
@@ -16,13 +23,23 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
+.Select.is-disabled > .Select-control {
+  background-color: #f9f9f9;
+}
+.Select.is-disabled > .Select-control:hover {
+  box-shadow: none;
+}
+.Select.is-disabled .Select-arrow-zone {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.35;
+}
 .Select-control {
-  background-color: black;
-  border-color: ;
+  background-color: #fff;
+  border-color: #d9d9d9 #ccc #b3b3b3;
   border-radius: 4px;
-  border: dimgrey;
-  color: #d9d9d9 #ccc #b3b3b3;
+  border: 1px solid #ccc;
+  color: #333;
   cursor: default;
   display: table;
   border-spacing: 0;
@@ -45,17 +62,19 @@
 .is-open > .Select-control {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  background: black;
-  border-color: black;
+  background: #fff;
+  border-color: #b3b3b3 #ccc #d9d9d9;
 }
 .is-open > .Select-control .Select-arrow {
   top: -2px;
   border-color: transparent transparent #999;
   border-width: 0 5px 5px;
 }
-
+.is-searchable.is-focused:not(.is-open) > .Select-control {
+  cursor: text;
+}
 .is-focused:not(.is-open) > .Select-control {
-  border-color: dimgrey;
+  border-color: #007eff;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(0, 126, 255, 0.1);
 }
 .Select-placeholder,
@@ -76,7 +95,7 @@
 }
 .has-value.Select--single > .Select-control .Select-value .Select-value-label,
 .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
-  color: #d9d9d9 #ccc #b3b3b3;
+  color: #333;
 }
 .has-value.Select--single > .Select-control .Select-value a.Select-value-label,
 .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label {
@@ -87,7 +106,7 @@
 .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover,
 .has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus,
 .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus {
-  color: dimgrey;
+  color: #007eff;
   outline: none;
   text-decoration: underline;
 }
@@ -110,7 +129,7 @@
   outline: none;
   line-height: 14px;
   /* For IE 8 compatibility */
-  /*padding: 8px 0 12px;*/
+  padding: 8px 0 12px;
   /* For IE 8 compatibility */
   -webkit-appearance: none;
 }
@@ -240,8 +259,8 @@
 }
 .Select-option {
   box-sizing: border-box;
-  background-color: black;
-  color: #d9d9d9 #ccc #b3b3b3;
+  background-color: #fff;
+  color: #666666;
   cursor: pointer;
   display: block;
   padding: 8px 10px;
@@ -254,7 +273,7 @@
   background-color: #f5faff;
   /* Fallback color for IE 8 */
   background-color: rgba(0, 126, 255, 0.04);
-  color: #d9d9d9 #ccc #b3b3b3;
+  color: #333;
 }
 .Select-option.is-focused {
   background-color: #ebf5ff;
@@ -289,7 +308,7 @@
   border: 1px solid #c2e0ff;
   /* Fallback color for IE 8 */
   border: 1px solid rgba(0, 126, 255, 0.24);
-  color: darkgrey;
+  color: #007eff;
   display: inline-block;
   font-size: 0.9em;
   line-height: 1.4;
@@ -330,7 +349,7 @@
   background-color: #d8eafd;
   /* Fallback color for IE 8 */
   background-color: rgba(0, 113, 230, 0.08);
-  color: #D0021B;
+  color: #0071e6;
 }
 .Select--multi .Select-value-icon:active {
   background-color: #c2e0ff;
@@ -360,184 +379,4 @@
   to {
     -webkit-transform: rotate(1turn);
   }
-}
-body {
-  color: #333;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.4;
-  margin: 0;
-  padding: 0;
-}
-a {
-  color: #007eff;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 400px;
-  padding: 0 30px;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  color: black;
-  font-weight: 500;
-  line-height: 1;
-  margin-bottom: .66em;
-  margin-top: 0;
-}
-h1,
-.h1 {
-  font-size: 3em;
-}
-h2,
-.h2 {
-  font-size: 2em;
-  font-weight: 300;
-}
-h3,
-.h3 {
-  font-size: 1.25em;
-}
-h4,
-.h4 {
-  font-size: 1em;
-}
-h5,
-.h5 {
-  font-size: .85em;
-}
-h6,
-.h6 {
-  font-size: .75em;
-}
-.page-body,
-.page-footer,
-.page-header {
-  padding: 30px 0;
-}
-.page-header {
-  background-color: #007eff;
-  color: #bfdfff;
-}
-.page-header h1,
-.page-header h2,
-.page-header h3 {
-  color: white;
-}
-.page-header p {
-  font-size: 1.2em;
-  margin: 0;
-}
-.page-header a {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  text-decoration: none;
-}
-.page-header a:hover,
-.page-header a:focus {
-  border-bottom-color: white;
-  outline: none;
-  text-decoration: none;
-}
-.page-subheader {
-  background-color: #e6f2ff;
-  line-height: 20px;
-  padding: 30px 0;
-}
-.page-subheader__button {
-  float: right;
-}
-.page-subheader__link {
-  border-bottom: 1px solid rgba(0, 126, 255, 0.3);
-  outline: none;
-  text-decoration: none;
-}
-.page-subheader__link:hover,
-.page-subheader__link:focus {
-  border-bottom-color: #007eff;
-  outline: none;
-  text-decoration: none;
-}
-.page-footer {
-  background-color: #fafafa;
-  color: #999;
-  padding: 30px 0;
-  text-align: center;
-}
-.page-footer a {
-  color: black;
-}
-@media (min-width: 480px) {
-  .page-body,
-  .page-header {
-    padding: 60px 0;
-  }
-  .page-header {
-    font-size: 1.4em;
-  }
-  .page-subheader {
-    font-size: 1.125em;
-    line-height: 28px;
-  }
-}
-.checkbox-list {
-  margin-top: .5em;
-  overflow: hidden;
-}
-.checkbox-list > .checkbox {
-  clear: left;
-  float: left;
-  margin-top: .5em;
-}
-.checkbox-control {
-  margin-right: .5em;
-  position: relative;
-  top: -1px;
-}
-.switcher {
-  color: #999;
-  cursor: default;
-  font-size: 12px;
-  margin: 10px 0;
-  text-transform: uppercase;
-}
-.switcher .link {
-  color: #007eff;
-  cursor: pointer;
-  font-weight: bold;
-  margin-left: 10px;
-}
-.switcher .link:hover {
-  text-decoration: underline;
-}
-.switcher .active {
-  color: #666;
-  font-weight: bold;
-  margin-left: 10px;
-}
-.section {
-  margin-bottom: 40px;
-}
-.hint {
-  font-size: .85em;
-  margin: 15px 0;
-  color: #666;
-}
-.virtual-scroll {
-  z-index: 1;
 }

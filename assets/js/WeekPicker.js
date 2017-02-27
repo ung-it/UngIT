@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-var moment = require('moment');
-var DateRangePicker = require('react-bootstrap-daterangepicker');
 import {Thumbnail, Glyphicon} from "react-bootstrap";
 import styles from '../styles/daterangepicker.css'
+var moment = require('moment');
+var DateRangePicker = require('react-bootstrap-daterangepicker');
+
 
 var WeekPicker = React.createClass({
     getInitialState: function () {
@@ -20,15 +21,16 @@ var WeekPicker = React.createClass({
 	},
 
     render: function () {
-		var start = this.state.startDate.format('DD-MM-YYYY');
-		var end = this.state.endDate.format('DD-MM-YYYY');
-		var label = start + '		-		' + end;
+		var start = this.state.startDate.format('DD.MM.YYYY');
+		var end = this.state.endDate.format('DD.MM.YYYY');
+		var label = start + ' - ' + end;
 		if (start === end) {
 			label = start;
 		}
 		return (
 		    <DateRangePicker startDate={this.state.startDate} endDate={this.state.endDate} onEvent={this.handleEvent}>
-            <button type="button" className="btn btn-default"><Glyphicon glyph="glyphicon glyphicon-calendar"/></button>{label}
+            <span id="time-period">{label}</span>
+		    <button type="button" className="btn btn-default"><Glyphicon glyph="glyphicon glyphicon-calendar"/></button>
             </DateRangePicker>
         );
 

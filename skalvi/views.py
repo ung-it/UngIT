@@ -9,6 +9,7 @@ from django.views.generic import View
 from .forms import UserForm, UserProfileForm
 from .models import *
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from django.core import serializers
 
@@ -16,8 +17,6 @@ from django.core import serializers
 
 def index(request):
     return TemplateResponse(request, "home.html", {})
-
-
 
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
@@ -101,6 +100,9 @@ class UserFormView(View):
                 'profile': profile_form
             })
 
+class ActivityView(generic.DetailView):
+    model = Activity
+    template_name = "activity.html"
 
 class MyPageView(View):
     template_name = 'mypage.html'
@@ -123,20 +125,3 @@ class MyPageView(View):
                           'userprofile': userprofileObject,
                           'user': userObject
                       })
-
-
-
-
-
-
-
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
-
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
-

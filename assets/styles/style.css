@@ -20,7 +20,6 @@ a.navbar-brand {
 .navbar-right > li {
     padding: 0 5px;
 }
-
 .logo-div {
     position: absolute;
 	z-index: 1;
@@ -44,4 +43,26 @@ a.navbar-brand {
 pre {
     border: 0;
     background-color: transparent;
+}
+
+.filter-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 4px;
+    border-color: darkgrey;
+    border-width: thin;
+}
+
+.date-picker-container {
+    margin-top: 8px;
+}
+
+#time-period {
+    font-size: large;
+    padding-right: 15px;
 }

@@ -18,7 +18,6 @@ def index(request):
     return TemplateResponse(request, "home.html", {})
 
 
-
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.all(), ensure_ascii=False)
@@ -140,3 +139,5 @@ def results(request, question_id):
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
 
+def allactivities(request):
+    return TemplateResponse(request, 'allActivities.html', {})

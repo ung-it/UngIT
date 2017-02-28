@@ -10,10 +10,29 @@
 
     <h1>Manage Activity</h1>
     <h2>{{ activity.activityName }}</h2>
-    <form action="/activity/"+ {{ activity.pk }} method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" />
-    </form>
 
+    {% if error_message %}
+        <p><b>{{ error_message }}</b></p>
+    {% endif %}
+
+    <form action="editActivity" method="post">
+        {% csrf_token %}
+        <input type="text" name="activityName" value="{{ activity.activityName }}">
+        <input type="text" name="provider" value="{{ activity.provider }}">
+        <input type="text" name="adaptions" value="{{ activity.adaptions }}">
+        <input type="text" name="age" value="{{ activity.age }}">
+        <input type="text" name="location" value="{{ activity.location }}">
+        <input type="text" name="description" value="{{ activity.description }}">
+        {% if activity.registration_required %}
+            <input type="checkbox" name="registration_required" checked>
+        {% else %}
+            <input type="checkbox" name="registration_required">
+        {% endif %}
+        <input type="text" name="price" value="{{ activity.price }}">
+        <input type="text" name="date" value="{{ activity.date }}">
+        <input type="text" name="time_start" value="{{ activity.time_start }}">
+        <input type="text" name="time_end" value="{{ activity.time_end }}">
+        <input type="text" name="images" value="{{ activity.images }}">
+        <input type="text" name="videos" value="{{ activity.videos }}">
+    </form>
 {% endblock %}

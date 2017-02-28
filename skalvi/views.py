@@ -104,6 +104,9 @@ class ActivityView(generic.DetailView):
     model = Activity
     template_name = "activity.html"
 
+def editActivity(request):
+    return TemplateResponse(request, "home.html", {})
+
 class MyPageView(View):
     template_name = 'mypage.html'
     model = UserProfile

@@ -89,7 +89,7 @@ class AllActivitiesBox extends Component {
         let videoContainer = null;
         if (this.state.videos.length > 0 && this.state.videos[0] != "") {
             const videos = this.state.videos.map((video, i) => {
-                const path = "static/provider/video/" + video;
+                const path = "../static/provider/video/" + video;
                 return (
                     <video className="modal-video" controls="controls" key={i}>
                         <source src={path}/>
@@ -106,7 +106,7 @@ class AllActivitiesBox extends Component {
         let imageContainer = null;
         if (this.state.images.length > 0 && this.state.images[0] != "") {
             const images = this.state.images.map((image, i) => {
-                const path = "static/provider/images/" + image;
+                const path = "../static/provider/images/" + image;
                 return (
                    <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
                 )
@@ -120,7 +120,7 @@ class AllActivitiesBox extends Component {
 
         let poster = null;
         if (this.state.images.length > 0) {
-            poster = "static/provider/images/" + this.state.images[0];
+            poster = "../static/provider/images/" + this.state.images[0];
         }
         return (
             <div tabIndex={this.props.tabIndex}>
@@ -203,7 +203,7 @@ class AllActivitiesBox extends Component {
 
     closeActivityModal() {
         this.setState({show: false})
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow = null;
     }
 }
 

@@ -49,7 +49,9 @@ class FacebookButton extends Component {
 
     postInfo() {
         console.log('Fetching your information.... ');
-        FB.api('/me', 'GET', {fields: 'name,id,picture,email'}, function(response) {
+        FB.api('/me', 'GET', {fields: 'id, age_range, first_name, last_name, picture, email'}, function(response) {
+            console.log("response " + JSON.stringify(response));
+            console.log("Age " + JSON.stringify(response.age_range));
             /*
             console.log('Thanks for logging in:');
             console.log(response.name);
@@ -59,17 +61,19 @@ class FacebookButton extends Component {
             */
             var request = {
                 id: response.id,
-                name: response.name,
+                age_range: response.age_range.min,
+                first_name: response.first_name,
+                last_name: response.last_name,
                 email: response.email
             };
 
-            fetch('http://localhost:8000/api/skalvi/login/', {
+            fetch('http://localhost:8000/api/skalvi/loginF/', {
                 method: 'POST',
                 headers: {
                     'Credentials': "same-origin",
                     'Content-Type': 'application/json',
                 },
-                body: request
+                body: JSON.stringify(request)
 
             }).then((response) => {
                 return response

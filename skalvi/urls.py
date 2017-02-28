@@ -5,6 +5,7 @@ from . import ApiFunctions
 
 app_name = 'skalvi'
 urlpatterns = [
+    url(r'^allactivities/', views.allactivities, name='allactivities'),
     url(r'^$', views.index, name='index'),
     url(r'^register/$', views.UserFormView.as_view(), name="register"),
     url(r'^activity/(?P<pk>\d+)/$', views.ActivityView.as_view(), name="activity"),

@@ -128,3 +128,7 @@ class MyPageView(View):
                           'userprofile': userprofileObject,
                           'user': userObject
                       })
+
+def allactivities(request):
+    return TemplateResponse(request, 'allActivities.html', {})
+

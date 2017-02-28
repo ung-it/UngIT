@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from "react-bootstrap";
+import 'whatwg-fetch';
 
 class FacebookButton extends Component {
         constructor(props) {
@@ -12,7 +13,7 @@ class FacebookButton extends Component {
 
         this.handleLogInOut = this.handleLogInOut.bind(this);
         this.checkLoginState = this.checkLoginState.bind(this);
-        this.findInfo = this.findInfo.bind(this);
+        this.postInfo = this.postInfo.bind(this);
    }
 
 
@@ -46,16 +47,35 @@ class FacebookButton extends Component {
     }
 
 
-    findInfo() {
+    postInfo() {
         console.log('Fetching your information.... ');
         FB.api('/me', 'GET', {fields: 'name,id,picture,email'}, function(response) {
+            /*
             console.log('Thanks for logging in:');
             console.log(response.name);
             console.log(response.id);
             console.log(response.email);
             console.log(response.picture.data.url);
+            */
+            var request = {
+                id: response.id,
+                name: response.name,
+                email: response.email
+            };
 
+            fetch('http://localhost:8000/api/skalvi/login/', {
+                method: 'POST',
+                headers: {
+                    'Credentials': "same-origin",
+                    'Content-Type': 'application/json',
+                },
+                body: request
+
+            }).then((response) => {
+                return response
+            })
         });
+
     }
 
     checkLoginState() {
@@ -66,7 +86,7 @@ class FacebookButton extends Component {
                     connected: "connected",
                     buttonText: "Log out"
                 }));
-                this.findInfo();
+                this.postInfo();
             } else {
                 this.setState(() => ({
                     connected: "notconnected",

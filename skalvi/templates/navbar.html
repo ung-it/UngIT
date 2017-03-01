@@ -40,8 +40,8 @@
                         <!--<li><a href="#" id="loginComponent" ></a></li>-->
                         <li>
                             <div class="popover-markup">
-                                <a href="#" class="trigger btn btn-default" data-placement="bottom">Popover link</a>
-                                <div class="head hide">Lorem Ipsum</div>
+                                <a href="#" class="trigger btn btn-success" data-trigger="focus" data-placement="bottom">Logg inn</a>
+                                <div class="head hide">Logg inn</div>
                                 <div class="content hide">
                                     <div class="form-group">
                                         <form class="navbar-form" method="POST" action="/api/skalvi/login/">
@@ -57,12 +57,13 @@
                                             </fieldset>
                                             <button type="submit" class="btn btn-primary">Logg inn</button>
                                         </form>
+                                        <a href="{% url 'skalvi:register' %}">Registrer</a>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     {% else %}
-                        <li class="active"><a href="/">Hjem</a></li>
+                        <li><a href="/">Logg ut</a></li>
                     {% endif %}
                 </ul>
             </div>

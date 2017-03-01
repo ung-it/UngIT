@@ -64,6 +64,7 @@ class UserFormView(View):
             last_name = form.cleaned_data['last_name']
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
+            profile_name = profile_form.cleaned_data['profile_name']
 
             if types:
                 types = "P"
@@ -77,7 +78,7 @@ class UserFormView(View):
 
             user.save()  # saves users to the database
 
-            userProfile = UserProfile(user=user, type=types, phone=phone)
+            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name)
             userProfile.save()
 
 

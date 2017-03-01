@@ -16,10 +16,9 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     type = forms.BooleanField(label="Parent", required=False)
 
-
     class Meta:
         model = UserProfile
-        fields = ['phone', 'type']
+        fields = ['phone', 'profile_name', 'type']
 
 class DateInput(forms.DateInput):
     input_type = 'date'

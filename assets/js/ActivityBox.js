@@ -182,6 +182,7 @@ class ActivityBox extends Component {
                         {imageContainer}
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button onClick={this.editActivity.bind(this)}>Endre aktivitet</Button>
                         <Button onClick={this.closeActivityModal.bind(this)}>Lukk</Button>
                     </Modal.Footer>
                 </Modal>
@@ -191,6 +192,10 @@ class ActivityBox extends Component {
 
     showMap() {
         window.open('https://www.google.no/maps/place/' + this.state.location,'_blank');
+    }
+
+    editActivity() {
+        window.location = "/activity/" + this.props.id;
     }
 
     openActivityModal() {

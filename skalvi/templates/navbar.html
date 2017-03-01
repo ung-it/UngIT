@@ -23,7 +23,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="/">Hjem</a></li>
                     <li><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
-                    <li><a href="#" id="loginComponent" ></a></li>
+                    {% if not user.is_authenticated %}
+                        <li><a href="#" id="loginComponent" ></a></li>
+                    {% else %}
+                        <li class="active"><a href="/">Hjem</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

@@ -6,10 +6,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login  # Login module handles sessions
 from django.views import generic
 from django.views.generic import View
-from .forms import UserForm, UserProfileForm
+from .forms import UserForm, UserProfileForm, ActivityForm
+from django.forms.models import model_to_dict
 from .models import *
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 from django.core import serializers
 
@@ -101,11 +101,17 @@ class UserFormView(View):
             })
 
 class ActivityView(generic.DetailView):
-    model = Activity
-    template_name = "activity.html"
+        model = Activity
+        template_name = "activity.html"
+        form_class = ActivityForm
 
-def editActivity(request):
-    return TemplateResponse(request, "home.html", {})
+        def get(self, request, *args, **kwargs):
+            form = self.form_class(initial=model_to_dict(self.get_object()))
+            return render(request, self.template_name, {'form':form})
+
+        def post(self, request, *args, **kwargs):
+            print("hei")
+
 
 class MyPageView(View):
     template_name = 'mypage.html'

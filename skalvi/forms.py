@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
 
-from .models import UserProfile
+from .models import UserProfile, Activity
 
 # Login View
 # Make a blueprint for user forms
@@ -20,3 +20,19 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['phone', 'type']
+
+class ActivityForm(forms.ModelForm):
+
+    adaptions = forms.CharField(widget=forms.Textarea)
+    description = forms.CharField(widget=forms.Textarea)
+    registration_required = forms.BooleanField(label='Registration required')
+    price = forms.IntegerField()
+    date = forms.DateField()
+    time_start = forms.TimeField()
+    time_end = forms.TimeField()
+    images = forms.ImageField(required=False)
+    videos = forms.ImageField(required=False)
+
+    class Meta:
+        model = Activity
+        fields = ['activityName', 'provider', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'time_start', 'time_end', 'images', 'videos']

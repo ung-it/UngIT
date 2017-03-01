@@ -116,8 +116,8 @@ class ActivityView(generic.DetailView):
             if form.is_valid():
                 form.save()
                 return redirect('/')
-            #else:
-                #return redirect('/')
+            else:
+                return render(request, self.template_name, {'form':form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
 
 
 class MyPageView(View):

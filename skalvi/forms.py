@@ -21,17 +21,24 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ['phone', 'type']
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class ActivityForm(forms.ModelForm):
 
-    adaptions = forms.CharField(widget=forms.Textarea)
-    description = forms.CharField(widget=forms.Textarea)
-    registration_required = forms.BooleanField(label='Registration required')
-    price = forms.IntegerField()
-    date = forms.DateField()
-    time_start = forms.TimeField()
-    time_end = forms.TimeField()
-    images = forms.CharField(required=False)
-    videos = forms.CharField(required=False)
+    activityName = forms.CharField(max_length=80, label="Navn på aktivitet")
+    provider = forms.CharField(max_length=80, label="Arrangør")
+    adaptions = forms.CharField(widget=forms.Textarea, max_length=80,label="Tilrettelegging")
+    age = forms.CharField(max_length=80, label="Alder")
+    location = forms.CharField(max_length=80, label="Sted")
+    description = forms.CharField(widget=forms.Textarea, label="Om arrangement")
+    registration_required = forms.BooleanField(label='Arrangement krever registrering')
+    price = forms.IntegerField(label="Pris")
+    date = forms.DateField(label="Dato", widget=DateInput)
+    time_start = forms.TimeField(label="Tid start")
+    time_end = forms.TimeField(label="Tid slutt")
+    images = forms.CharField(required=False, label="Bilder", max_length=200)
+    videos = forms.CharField(required=False, label="Videoer", max_length=200)
 
     class Meta:
         model = Activity

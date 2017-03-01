@@ -46,10 +46,9 @@ def loginFacebook(request):
     age = parsed_json["age_range"]
 
     password = facebookId[:5] + first_name
-    userCheck = authenticate(username=facebookId, password=password)
+    user = authenticate(username=facebookId, password=password)
 
-    print("USERCHECK", userCheck)
-    if userCheck is None:
+    if user is None:
         user = User(username=facebookId, email=email, first_name=first_name, last_name=last_name, is_staff=False)
         user.set_password(facebookId[:5] + first_name)
         user.save()
@@ -59,9 +58,10 @@ def loginFacebook(request):
         else:
             type = "C"
 
-        userProfile = UserProfile(user=user, type=type, phone=None)
+        userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name)
         userProfile.save()
 
+    login(request, user)
     return redirect("skalvi:index")
 
 

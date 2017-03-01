@@ -18,7 +18,6 @@ def index(request):
     return TemplateResponse(request, "home.html", {})
 
 
-
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.all(), ensure_ascii=False)
@@ -65,6 +64,7 @@ class UserFormView(View):
             last_name = form.cleaned_data['last_name']
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
+            profile_name = profile_form.cleaned_data['profile_name']
 
             if types:
                 types = "P"
@@ -78,7 +78,7 @@ class UserFormView(View):
 
             user.save()  # saves users to the database
 
-            userProfile = UserProfile(user=user, type=types, phone=phone)
+            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name)
             userProfile.save()
 
 
@@ -140,3 +140,5 @@ def results(request, question_id):
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
 
+def allactivities(request):
+    return TemplateResponse(request, 'allActivities.html', {})

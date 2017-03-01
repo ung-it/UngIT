@@ -1,0 +1,37 @@
+{% extends "base_template.html" %}
+{% load static %}
+{% block pageTitle %}Aktiviteter{% endblock %}
+
+
+{% block body %}
+
+    <div class="content">
+        <div class="content-margin-top">
+            <h2>Alle aktiviteter</h2>
+            <p>Her er en oversikt over alle aktiviteter som tilbys i Trondheim kommune</p>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Søk etter en aktivitet...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Søk!</button>
+                </span>
+            </div><!-- /input-group -->
+        </div>
+
+        <div class="filter-container">
+            <h3 id="info-txt">Filtrer aktiviteter</h3>
+            <div class="row">
+                <div class="col-md-6" id="whatContainer">
+                    <div id="activityfilter"></div>
+                </div>
+                <div class="col-md-6" id="whoContainer">
+                    <div id="suitedfor"></div>
+                </div>
+            </div>
+        </div>
+        <div class="date-picker-container">
+            <h3 id="info-txt">Tidsperiode</h3>
+            <div  id="week"></div></div>
+        <div id="allActivities"></div>
+    </div>
+
+{% endblock %}

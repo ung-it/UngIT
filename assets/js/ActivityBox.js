@@ -106,7 +106,7 @@ class ActivityBox extends Component {
         let imageContainer = null;
         if (this.state.images.length > 0 && this.state.images[0] != "") {
             const images = this.state.images.map((image, i) => {
-                const path = "static/provider/images/" + image;
+                const path = "/media/provider/images/" + image;
                 return (
                    <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
                 )

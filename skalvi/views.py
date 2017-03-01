@@ -111,7 +111,7 @@ class ActivityView(generic.DetailView):
 
         def post(self, request, pk):
             instance = get_object_or_404(Activity, pk=pk)
-            form = ActivityForm(request.POST, instance=instance)
+            form = ActivityForm(request.POST, request.FILES, instance=instance)
 
             if form.is_valid():
                 form.save()
@@ -128,7 +128,7 @@ class createActivity(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        form = ActivityForm(request.POST)
+        form = ActivityForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()

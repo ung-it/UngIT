@@ -30,8 +30,8 @@ class ActivityForm(forms.ModelForm):
     date = forms.DateField()
     time_start = forms.TimeField()
     time_end = forms.TimeField()
-    images = forms.ImageField(required=False)
-    videos = forms.ImageField(required=False)
+    images = forms.CharField(required=False)
+    videos = forms.CharField(required=False)
 
     class Meta:
         model = Activity

@@ -10,6 +10,7 @@ from .forms import UserForm, UserProfileForm, ActivityForm
 from django.forms.models import model_to_dict
 from .models import *
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 from django.core import serializers
 
@@ -48,7 +49,6 @@ class UserFormView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         profile_form = self.profile_form_class(request.POST)
-
         if form.is_valid():
 
             # Take submitted data and save to database
@@ -109,8 +109,15 @@ class ActivityView(generic.DetailView):
             form = self.form_class(initial=model_to_dict(self.get_object()))
             return render(request, self.template_name, {'form':form})
 
-        def post(self, request, *args, **kwargs):
-            print("hei")
+        def post(self, request, pk):
+            instance = get_object_or_404(Activity, pk=pk)
+            form = ActivityForm(request.POST, instance=instance)
+
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+            #else:
+                #return redirect('/')
 
 
 class MyPageView(View):

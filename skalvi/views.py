@@ -107,7 +107,7 @@ class ActivityView(generic.DetailView):
 
         def get(self, request, *args, **kwargs):
             form = self.form_class(initial=model_to_dict(self.get_object()))
-            return render(request, self.template_name, {'form':form})
+            return render(request, self.template_name, {'form': form})
 
         def post(self, request, pk):
             instance = get_object_or_404(Activity, pk=pk)
@@ -117,8 +117,24 @@ class ActivityView(generic.DetailView):
                 form.save()
                 return redirect('/')
             else:
-                return render(request, self.template_name, {'form':form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
+                return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
 
+class createActivity(View):
+    template_name = "activity.html"
+    form_class = ActivityForm
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = ActivityForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
 
 class MyPageView(View):
     template_name = 'mypage.html'

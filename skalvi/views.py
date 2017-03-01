@@ -28,7 +28,8 @@ def getActivity(request, id):
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
 
-# Register view
+
+    # Register view
 class UserFormView(View):
     form_class = UserForm  # Form View blueprint
     profile_form_class = UserProfileForm
@@ -41,7 +42,6 @@ class UserFormView(View):
         return render(request, self.template_name, {
             'form': form,
             'profile': profile
-
         })
 
     # process form data
@@ -50,13 +50,11 @@ class UserFormView(View):
         profile_form = self.profile_form_class(request.POST)
 
         if form.is_valid():
-
             # Take submitted data and save to database
             user = form.save(commit=False)  # temporary saved, not saved in database
             profile_form.save(commit=False)
 
-
-            # cleaned (normalized) data / formated properly
+            # Cleaned (normalized) data / formated properly
             email = form.cleaned_data['email']
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -71,18 +69,14 @@ class UserFormView(View):
             else:
                 types = "C"
 
-
             # Make som changes or something useful
             user.set_password(password)
-
-
             user.save()  # saves users to the database
 
             userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name)
             userProfile.save()
 
-
-            #Returns User Object if credentials are correct
+            # Returns User Object if credentials are correct
             user = authenticate(username=username, password=password)
 
             # Check that we got a user back
@@ -125,7 +119,14 @@ class MyPageView(View):
                       })
 
 
-
+# class IsLogedInView(View):
+#     template_name = "navbar.html"
+#     model = User
+#
+#     def get(self, request):
+#         return None;
+#
+#     def post(self, request):
 
 
 

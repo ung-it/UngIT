@@ -24,12 +24,10 @@ def loginView(request):
         if user.is_active:
             if user.is_authenticated():
                 login(request, user)
-                print(request.session.session_key)
                 print("Successfully logged in")
+                if user.is_staff:
+                    return redirect("/admin")
                 return redirect("skalvi:index")
-
-            print("HALLOOOOOOO")
-        print("AIOLI")
 
     print("Not logged in!")
     return render(request, template_name="register.html")

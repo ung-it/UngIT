@@ -1,0 +1,25 @@
+{% extends "base_template.html" %}
+{% block pageTitle %}MyPage{% endblock %}
+
+
+
+{% block body %}
+
+    <div style="height: 100px"></div>
+    <h1>Mypage</h1>
+    <h3>Username: {{ user.username}}</h3>
+    <h4>UserType: {{ userprofile.type }}</h4>
+    <h4>Name : {{ user.first_name }} {{ user.last_name }}</h4>
+    <h4>Phone: {{ userprofile.phone }}</h4>
+    <h4>Email: {{ user.email }}</h4>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+

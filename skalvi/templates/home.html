@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block pageTitle %}
+    Skalvi.no
+{% endblock %}
+
+
+{% block body %}
+    <div class="banner-container">
+        <img src="{% static "images/banner.jpg" %}" alt="Banner">
+    </div>
+
+    <div class="content-padding">
+        <div id="activities"></div>
+    </div>
+
+{% endblock %}

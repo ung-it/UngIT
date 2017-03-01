@@ -28,6 +28,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'skalvi.apps.SkalviConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'app',
     'webpack_loader',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,6 +82,7 @@ DATABASES = {
     }
 }
 
+AUTH_PROFILE_MODULE = "skalvi.UserProfile"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

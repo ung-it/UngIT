@@ -40,7 +40,7 @@
                         <!--<li><a href="#" id="loginComponent" ></a></li>-->
                         <li>
                             <div class="popover-markup">
-                                <a href="#" class="trigger btn btn-success" data-trigger="focus" data-placement="bottom">Logg inn</a>
+                                <a href="#" class="trigger btn btn-success" data-placement="bottom">Logg inn</a>
                                 <div class="head hide">Logg inn</div>
                                 <div class="content hide">
                                     <div class="form-group">
@@ -63,7 +63,10 @@
                             </div>
                         </li>
                     {% else %}
-                        <li><a href="/">Logg ut</a></li>
+                        <li> <a href="{% url 'skalvi:logout_user' %}">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

@@ -9,6 +9,7 @@ from django.views.generic import View
 from .forms import UserForm, UserProfileForm
 from .models import *
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 
 from django.core import serializers
 
@@ -27,6 +28,12 @@ def getActivity(request, id):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
+
+def logout_user(request):
+    logout(request)
+    return redirect("skalvi:index")
+
+
 
 
     # Register view

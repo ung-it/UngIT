@@ -6,9 +6,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login  # Login module handles sessions
 from django.views import generic
 from django.views.generic import View
-from .forms import UserForm, UserProfileForm
+from .forms import UserForm, UserProfileForm, ActivityForm
+from django.forms.models import model_to_dict
 from .models import *
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 from django.core import serializers
 
@@ -16,7 +18,6 @@ from django.core import serializers
 
 def index(request):
     return TemplateResponse(request, "home.html", {})
-
 
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
@@ -48,7 +49,6 @@ class UserFormView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         profile_form = self.profile_form_class(request.POST)
-
         if form.is_valid():
 
             # Take submitted data and save to database
@@ -101,6 +101,41 @@ class UserFormView(View):
                 'profile': profile_form
             })
 
+class ActivityView(generic.DetailView):
+        model = Activity
+        template_name = "activity.html"
+        form_class = ActivityForm
+
+        def get(self, request, *args, **kwargs):
+            form = self.form_class(initial=model_to_dict(self.get_object()))
+            return render(request, self.template_name, {'form': form})
+
+        def post(self, request, pk):
+            instance = get_object_or_404(Activity, pk=pk)
+            form = ActivityForm(request.POST, request.FILES, instance=instance)
+
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+            else:
+                return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
+
+class createActivity(View):
+    template_name = "activity.html"
+    form_class = ActivityForm
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = ActivityForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
 
 class MyPageView(View):
     template_name = 'mypage.html'
@@ -124,21 +159,6 @@ class MyPageView(View):
                           'user': userObject
                       })
 
-
-
-
-
-
-
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
-
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
-
 def allactivities(request):
     return TemplateResponse(request, 'allActivities.html', {})
+

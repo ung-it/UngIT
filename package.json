@@ -25,15 +25,17 @@
     "react-bootstrap": "^0.30.7",
     "react-bootstrap-daterangepicker": "^3.2.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
     "react-select": "^1.0.0-rc.3",
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "webpack --config webpack.config.js --progress --colors",
-    "build-production": "webpack --config webpack.prod.config.js --progress --colors",
-    "watch": "node server.js",
-    "server": "webpack-dev-server",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "redux": "^3.6.0",
+    "scripts": {
+      "build": "webpack --config webpack.config.js --progress --colors",
+      "build-production": "webpack --config webpack.prod.config.js --progress --colors",
+      "eject": "react-scripts eject",
+      "server": "webpack-dev-server",
+      "start": "react-scripts start",
+      "test": "react-scripts test --env=jsdom",
+      "watch": "node server.js"
+    }
   }
-}
 }

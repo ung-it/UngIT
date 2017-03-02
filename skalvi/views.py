@@ -126,17 +126,6 @@ class MyPageView(View):
                       })
 
 
-# class IsLogedInView(View):
-#     template_name = "navbar.html"
-#     model = User
-#
-#     def get(self, request):
-#         return None;
-#
-#     def post(self, request):
-
-
-
 
 def detail(request, question_id):
     return HttpResponse("You're looking at question %s." % question_id)

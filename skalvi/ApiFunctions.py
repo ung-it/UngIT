@@ -69,6 +69,21 @@ def loginFacebook(request):
 
 
 
+# @csrf_exempt
+# def register_sub_profile(request):
+#     profile_form = request.POST
+#     print("FORM ", profile_form)
+#
+#
+#     if profile_form.is_valid():
+#         # Take submitted data and save to database
+#         profile_form.save(commit=False)
+#         # Cleaned (normalized) data / formated properly
+#         phone = profile_form.cleaned_data['phone']
+#         types = profile_form.cleaned_data['type']
+#         profile_name = profile_form.cleaned_data['profile_name']
+#
+#         profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
 
 
 

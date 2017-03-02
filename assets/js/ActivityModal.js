@@ -1,7 +1,7 @@
 //React Component import
 import React, { Component } from 'react';
 //Bootstrap import
-import {Thumbnail, Glyphicon, Modal, Button} from 'react-bootstrap';
+import {Glyphicon, Modal, Button} from 'react-bootstrap';
 //Project component import
 import {getMonth} from './DateFunctions'
 import {getActivityInfo} from './APIFunctions';
@@ -50,13 +50,12 @@ class ActivityModal extends Component {
     }
 
     componentWillReceiveProps(props) {
-        
+        this.setState({show:props.show});
     }
 
     render() {
 
         const {date, title, provider, adaptions, age, timeStart, timeEnd, location, description} = this.state;
-        console.log(this.state.show)
         let videoContainer = null;
         if (this.state.videos.length > 0 && this.state.videos[0] != "") {
             const videos = this.state.videos.map((video, i) => {

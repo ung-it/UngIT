@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Thumbnail, Glyphicon, Modal, Button} from 'react-bootstrap';
+import {Thumbnail, Glyphicon, Button} from 'react-bootstrap';
 import ActivityModal from './ActivityModal';
 import {getMonth} from './DateFunctions'
 import {getActivityInfo} from './APIFunctions';
@@ -22,6 +22,17 @@ class ActivityBox extends Component {
             timeEnd: "",
             images: [],
         };
+
+        getActivityInfo(this.props.id, function (data) {
+            this.setState({
+                title: data.activityName,
+                location: data.location,
+                date: new Date(data.date),
+                timeStart: data.time_start.substring(0,data.time_start.lastIndexOf(":")),
+                timeEnd: data.time_end.substring(0,data.time_end.lastIndexOf(":")),
+                images: data.images.split(","),
+            });
+        }.bind(this));
     }
 
     render() {

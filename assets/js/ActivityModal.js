@@ -50,7 +50,7 @@ class ActivityModal extends Component {
     }
 
     componentWillReceiveProps(props) {
-        this.setState({show:props.show});
+        this.setState({show: props.show});
     }
 
     render() {
@@ -92,7 +92,6 @@ class ActivityModal extends Component {
             <Modal
                 show={this.state.show}
                 onHide={this.closeActivityModal.bind(this)}
-                container={this}
                 bsSize="large"
                 aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
@@ -144,8 +143,8 @@ class ActivityModal extends Component {
     }
 
     closeActivityModal() {
-        this.setState({show: false});
         document.body.style.overflow = null;
+        this.setState({show: false});
     }
 }
 

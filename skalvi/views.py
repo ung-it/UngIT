@@ -10,24 +10,31 @@ from .forms import UserForm, UserProfileForm, ActivityForm
 from django.forms.models import model_to_dict
 from .models import *
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404
-
 from django.core import serializers
-
 
 
 def index(request):
     return TemplateResponse(request, "home.html", {})
+
 
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.all(), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
 
+
 def getActivity(request, id):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("skalvi:index")
+
 
 # Register view
 class UserFormView(View):
@@ -42,7 +49,6 @@ class UserFormView(View):
         return render(request, self.template_name, {
             'form': form,
             'profile': profile
-
         })
 
     # process form data
@@ -50,13 +56,11 @@ class UserFormView(View):
         form = self.form_class(request.POST)
         profile_form = self.profile_form_class(request.POST)
         if form.is_valid():
-
             # Take submitted data and save to database
             user = form.save(commit=False)  # temporary saved, not saved in database
             profile_form.save(commit=False)
 
-
-            # cleaned (normalized) data / formated properly
+            # Cleaned (normalized) data / formated properly
             email = form.cleaned_data['email']
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -71,18 +75,14 @@ class UserFormView(View):
             else:
                 types = "C"
 
-
             # Make som changes or something useful
             user.set_password(password)
-
-
             user.save()  # saves users to the database
 
             userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name)
             userProfile.save()
 
-
-            #Returns User Object if credentials are correct
+            # Returns User Object if credentials are correct
             user = authenticate(username=username, password=password)
 
             # Check that we got a user back
@@ -158,6 +158,17 @@ class MyPageView(View):
                           'userprofile': userprofileObject,
                           'user': userObject
                       })
+
+
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
 
 def allactivities(request):
     return TemplateResponse(request, 'allActivities.html', {})

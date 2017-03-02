@@ -24,3 +24,40 @@
     width: 300px;
     margin: 5px;
 }
+
+.modal-title-style {
+    width: 100%;
+    textAlign: center;
+    position: relative;
+}
+.modal-provider-title {
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    textAlign: left;
+}
+
+.modal-adapted {
+    backgroundColor: rgb(207, 226, 243)
+}
+
+.modal-info-container {
+    display: flex
+}
+
+.modal-infobox1 {
+    width: 50%;
+    backgroundColor: rgb(207, 206, 255);
+    textAlign: left-justify;
+    lineHeight: 2;
+}
+
+.modal-infobox2 {
+    width: 50%;
+    backgroundColor: rgb(207, 106, 255)
+}
+
+.modal-media-container {
+
+
+}

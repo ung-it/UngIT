@@ -1,2 +1,4 @@
 Django==1.10.5
 django-webpack-loader==0.4.1
+olefile==0.44
+Pillow==4.0.0

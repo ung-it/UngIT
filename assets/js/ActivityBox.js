@@ -89,7 +89,7 @@ class ActivityBox extends Component {
         let videoContainer = null;
         if (this.state.videos.length > 0 && this.state.videos[0] != "") {
             const videos = this.state.videos.map((video, i) => {
-                const path = "static/provider/video/" + video;
+                const path = "media/video/" + video;
                 return (
                     <video className="modal-video" controls="controls" key={i}>
                         <source src={path}/>
@@ -106,7 +106,7 @@ class ActivityBox extends Component {
         let imageContainer = null;
         if (this.state.images.length > 0 && this.state.images[0] != "") {
             const images = this.state.images.map((image, i) => {
-                const path = "static/provider/images/" + image;
+                const path = "media/" + image;
                 return (
                    <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
                 )
@@ -119,8 +119,8 @@ class ActivityBox extends Component {
         }
 
         let poster = null;
-        if (this.state.images.length > 0) {
-            poster = "static/provider/images/" + this.state.images[0];
+        if (this.state.images.length > 0 && this.state.images[0] != "") {
+            poster = "media/" + this.state.images[0];
         }
         return (
             <div tabIndex={this.props.tabIndex}>
@@ -182,6 +182,7 @@ class ActivityBox extends Component {
                         {imageContainer}
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button onClick={this.editActivity.bind(this)}>Endre aktivitet</Button>
                         <Button onClick={this.closeActivityModal.bind(this)}>Lukk</Button>
                     </Modal.Footer>
                 </Modal>
@@ -191,6 +192,10 @@ class ActivityBox extends Component {
 
     showMap() {
         window.open('https://www.google.no/maps/place/' + this.state.location,'_blank');
+    }
+
+    editActivity() {
+        window.location = "/activity/" + this.props.id;
     }
 
     openActivityModal() {

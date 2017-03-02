@@ -11,11 +11,11 @@ import json
 @csrf_exempt
 def loginView(request):
 
-    json_string = request.body.decode('utf-8')  # request becomes string
-    json_string = json_string.split("&")
+    infoArray = request.body.decode('utf-8')  # request becomes string
+    infoArray = infoArray.split("&")
 
-    username = json_string[0].split("=")[1]
-    password = json_string[1].split("=")[1]
+    username = infoArray[0].split("=")[1]
+    password = infoArray[1].split("=")[1]
 
     user = authenticate(username=username, password=password)
 
@@ -34,19 +34,19 @@ def loginView(request):
 
 @csrf_exempt
 def loginFacebook(request):
-    print("Request", request.body)
-    json_string = request.body.decode('utf-8')  # request becomes string
-    parsed_json = json.loads(json_string)
+    infoArray = request.body.decode('utf-8')  # request becomes string
+    infoArray = infoArray.split("&")
 
-    if "email" in json_string:
-        email = parsed_json["email"]
+    if len(infoArray) > 4:
+        email = infoArray[4].split("=")[1]
+        email = email.replace("%40", "@")
     else:
         email = ""
 
-    facebookId = parsed_json["id"]
-    first_name = parsed_json["first_name"]
-    last_name = parsed_json["last_name"]
-    age = parsed_json["age_range"]
+    facebookId = infoArray[0].split("=")[1]
+    age = infoArray[1].split("=")[1]
+    first_name = infoArray[2].split("=")[1]
+    last_name = infoArray[3].split("=")[1]
 
     password = facebookId[:5] + first_name
     user = authenticate(username=facebookId, password=password)
@@ -56,7 +56,7 @@ def loginFacebook(request):
         user.set_password(facebookId[:5] + first_name)
         user.save()
 
-        if age >= 21:
+        if int(age) >= 21:
             type = "P"
         else:
             type = "C"

@@ -1,6 +1,5 @@
 {% load base_extras %}
 {% load static %}
-
 <script src="//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8&appId=1658650714438155"></script>
 
 <!-- Latest compiled and minified CSS -->
@@ -13,6 +12,65 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <nav class="navbar navbar-inverse">
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId      : '1658650714438155',
+            cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v2.8' // use version 2.1
+            });
+        };
+
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                  fetchInfo();
+                }
+            });
+        }
+
+        function logOut() {
+            FB.logout(function(response) {
+               // Person is now logged out
+            });
+        }
+
+        function fetchInfo() {
+            var URL = "{% url 'skalvi:loginFacebook' %}";
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', 'GET', {fields: 'id, age_range, first_name, last_name, email, picture'}, function(response) {
+                console.log("response " + JSON.stringify(response));
+                var data = {
+                    id: response.id,
+                    age_range: response.age_range.min,
+                    first_name: response.first_name,
+                    last_name: response.last_name,
+                    email: response.email
+                };
+                $.post(URL, data, function(response){
+                    if(response === 'success'){
+                        console.log("Logging in");
+                    }
+                    else{
+                        console.log("Error");
+                    }
+                });
+            });
+        }
+    </script>
+
+
     <div class="content-padding">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -50,6 +108,8 @@
                                         </fieldset>
                                         <br>
                                         <button type="submit" class="btn btn-primary">Logg inn</button>
+                                        <br>
+                                        <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLoginState();"></div>
                                     </form>
                                     <a href="{% url 'skalvi:register' %}">Registrer</a>
                                 </li>

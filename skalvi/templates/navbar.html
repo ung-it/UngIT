@@ -37,36 +37,29 @@
                     <li class="active"><a href="/">Hjem</a></li>
                     <li><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
                     {% if not user.is_authenticated %}
-                        <!--<li><a href="#" id="loginComponent" ></a></li>-->
-                        <li>
-                            <div class="popover-markup" style="padding: 0">
-                                <a href="#" class="trigger" data-placement="bottom">Logg inn</a>
-                                <div class="head hide">Logg inn</div>
-                                <div class="content hide">
-                                    <div class="form-group">
-                                        <form class="navbar-form" method="POST" action="/api/skalvi/login/">
-                                            <fieldset class="textbox">
-                                                <div class="input-group">
-                                                    <label for="id_username">Brukernavn</label>
-                                                    <input type="text" name="username" id="id_username" class="form-control">
-                                                </div>
-                                                <div class="input-group">
-                                                    <label for="id_password">Passord</label>
-                                                    <input type="password" name="password" id="id_password" class="form-control">
-                                                </div>
-                                            </fieldset>
-                                            <button type="submit" class="btn btn-primary">Logg inn</button>
-                                        </form>
-                                        <a href="{% url 'skalvi:register' %}">Registrer</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>Logg inn</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <form class="navbar-form" method="POST" action="/api/skalvi/login/">
+                                        <fieldset class="textbox">
+                                            <div class="input-group">
+                                                <label for="id_username">Brukernavn</label>
+                                                <input type="text" name="username" id="id_username" class="form-control">
+                                            </div>
+                                            <div class="input-group">
+                                                <label for="id_password">Passord</label>
+                                                <input type="password" name="password" id="id_password" class="form-control">
+                                            </div>
+                                        </fieldset>
+                                        <button type="submit" class="btn btn-primary">Logg inn</button>
+                                    </form>
+                                    <a href="{% url 'skalvi:register' %}">Registrer</a>
+                                </li>
+                            </ul>
                         </li>
                     {% else %}
-                        <li> <a href="{% url 'skalvi:logout_user' %}">
-                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
-                            </a>
-                        </li>
+                        <li><a href="{% url 'skalvi:logout_user' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Logg ut</a></li>
                     {% endif %}
                 </ul>
             </div>

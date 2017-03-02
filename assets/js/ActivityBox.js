@@ -39,7 +39,7 @@ class ActivityBox extends Component {
 
         let poster = null;
         if (this.state.images.length > 0 && this.state.images[0] != "") {
-            poster = "media/" + this.state.images[0];
+            poster = "/media/" + this.state.images[0];
         }
         return (
             <div tabIndex={this.props.tabIndex}>
@@ -62,7 +62,7 @@ class ActivityBox extends Component {
                         </div>
                     </div>
                 </Thumbnail>
-                <ActivityModal id={this.props.id} show={this.state.show}></ActivityModal>
+                <ActivityModal id={this.props.id}></ActivityModal>
             </div>
         );
     }

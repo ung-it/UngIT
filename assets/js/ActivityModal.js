@@ -59,7 +59,7 @@ class ActivityModal extends Component {
         let videoContainer = null;
         if (this.state.videos.length > 0 && this.state.videos[0] != "") {
             const videos = this.state.videos.map((video, i) => {
-                const path = "media/video/" + video;
+                const path = "/media/video/" + video;
                 return (
                     <video className="modal-video" controls="controls" key={i}>
                         <source src={path}/>
@@ -76,7 +76,7 @@ class ActivityModal extends Component {
         let imageContainer = null;
         if (this.state.images.length > 0 && this.state.images[0] != "") {
             const images = this.state.images.map((image, i) => {
-                const path = "media/" + image;
+                const path = "/media/" + image;
                 return (
                     <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
                 )

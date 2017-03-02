@@ -6,13 +6,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login  # Login module handles sessions
 from django.views import generic
 from django.views.generic import View
-from .forms import UserForm, UserProfileForm
+from .forms import UserForm, UserProfileForm, ActivityForm, RegisterProfileForm
+from django.forms.models import model_to_dict
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-
+from django.shortcuts import get_object_or_404
 from django.core import serializers
-
 
 
 def index(request):
@@ -24,19 +24,19 @@ def getActivities(request):
     activities = json_serializer.serialize(Activity.objects.all(), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
 
+
 def getActivity(request, id):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
+
 
 def logout_user(request):
     logout(request)
     return redirect("skalvi:index")
 
 
-
-
-    # Register view
+# Register view
 class UserFormView(View):
     form_class = UserForm  # Form View blueprint
     profile_form_class = UserProfileForm
@@ -55,7 +55,6 @@ class UserFormView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         profile_form = self.profile_form_class(request.POST)
-
         if form.is_valid():
             # Take submitted data and save to database
             user = form.save(commit=False)  # temporary saved, not saved in database
@@ -102,28 +101,81 @@ class UserFormView(View):
                 'profile': profile_form
             })
 
+class ActivityView(generic.DetailView):
+        model = Activity
+        template_name = "activity.html"
+        form_class = ActivityForm
+
+        def get(self, request, *args, **kwargs):
+            form = self.form_class(initial=model_to_dict(self.get_object()))
+            return render(request, self.template_name, {'form': form})
+
+        def post(self, request, pk):
+            instance = get_object_or_404(Activity, pk=pk)
+            form = ActivityForm(request.POST, request.FILES, instance=instance)
+
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+            else:
+                return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
+
+class createActivity(View):
+    template_name = "activity.html"
+    form_class = ActivityForm
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = ActivityForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
 
 class MyPageView(View):
     template_name = 'mypage.html'
     model = UserProfile
+    form_class = RegisterProfileForm
 
     def get(self, request, *args, **kwargs):
-        pk = self.kwargs['pk']
-        print(pk)
+        form = self.form_class(None)
+        if request.user.is_authenticated():
+            user_object = request.user
+            user_profile_objects = UserProfile.objects.filter(user=request.user)
+            return render(request, self.template_name,
+                          {
+                              'userprofiles': user_profile_objects,
+                              'user': user_object,
+                              'form': form
+                          })
+        return HttpResponse("Du må være logget inn for å ha tilgang til denne siden")
 
-        print("userprofile query: ")
-        userprofileObject = UserProfile.objects.get(pk=pk)
-        print(userprofileObject)
-        print()
-        print("userobject query: " + str(userprofileObject.user_id))
-        userObject = User.objects.get(pk=userprofileObject.user_id)
-        print(userObject)
+    def post(self, request):
+        profile_form = self.form_class(request.POST)
+        print("FORM ", profile_form)
 
-        return render(request, self.template_name,
-                      {
-                          'userprofile': userprofileObject,
-                          'user': userObject
-                      })
+        if profile_form.is_valid():
+            # Take submitted data and save to database
+            profile_form.save(commit=False)
+            # Cleaned (normalized) data / formated properly
+            phone = profile_form.cleaned_data['phone']
+            types = profile_form.cleaned_data['type']
+            profile_name = profile_form.cleaned_data['profile_name']
+
+            if types:
+                types = "P"
+            else:
+                types = "C"
+
+            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
+            profile.save()
+
+        return redirect("skalvi:mypage")
 
 
 
@@ -139,3 +191,4 @@ def vote(request, question_id):
 
 def allactivities(request):
     return TemplateResponse(request, 'allActivities.html', {})
+

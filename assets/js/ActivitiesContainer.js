@@ -37,6 +37,7 @@ class ActivitiesContainer extends Component {
               <div style={styles.activitiesStyle}>
                   {activities}
               </div>
+                <a href="/activity">Opprett ny aktivitet</a>
             </div>
         );
     }

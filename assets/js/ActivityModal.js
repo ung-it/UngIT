@@ -143,7 +143,6 @@ class ActivityModal extends Component {
     }
 
     closeActivityModal() {
-        document.body.style.overflow = null;
         this.setState({show: false});
     }
 }

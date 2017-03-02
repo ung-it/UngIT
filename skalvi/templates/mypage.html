@@ -1,18 +1,46 @@
 {% extends "base_template.html" %}
 {% block pageTitle %}MyPage{% endblock %}
 
-
-
 {% block body %}
 
-    <div style="height: 100px"></div>
-    <h1>Mypage</h1>
-    <h3>Username: {{ user.username}}</h3>
-    <h4>UserType: {{ userprofile.type }}</h4>
-    <h4>Name : {{ user.first_name }} {{ user.last_name }}</h4>
-    <h4>Phone: {{ userprofile.phone }}</h4>
-    <h4>Email: {{ user.email }}</h4>
+    <div class="row" style="padding-left: 2%">
+        <div class="col-sm-4">
+            <div style="height: 100px"></div>
+            <h1>Min side</h1>
+            <h3>Brukernavn: {{ user.username}}</h3>
+            <h4>Navn : {{ user.first_name.title }} {{ user.last_name.title }}</h4>
+            <h4>Epost: {{ user.email }}</h4>
+            <br>
+            <h3>Brukere i din familie</h3>
+            {% for profile in userprofiles %}
+                <hr style="width: 10%; float: left;"><br><br>
 
+                <h4>Profilnavn: {{ profile.profile_name }}</h4>
+                {% if profile.type == "P" %}
+                    <h4>Brukertype: Voksen</h4>
+                {%  else %}
+                    <h4>Brukertype: Barn </h4>
+                {% endif %}
+                <h4>Telefon: {{ profile.phone }}</h4>
+
+            {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <div style="height: 100px"></div>
+            <h1>Registrer ny bruker på din profil</h1>
+            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% include 'form_template.html' %}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">Registrer</button>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
 
 
 

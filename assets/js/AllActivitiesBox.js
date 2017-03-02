@@ -79,7 +79,7 @@ class AllActivitiesBox extends Component {
                         </div>
                     </div>
                 </Thumbnail>
-                <ActivityModal id={this.props.id}></ActivityModal>
+                <ActivityModal id={this.props.id} show={this.state.show}></ActivityModal>
             </div>
         );
     }
@@ -90,12 +90,6 @@ class AllActivitiesBox extends Component {
 
     openActivityModal() {
         this.setState({show: true})
-        document.body.style.overflow = "hidden";
-    }
-
-    closeActivityModal() {
-        this.setState({show: false})
-        document.body.style.overflow = null;
     }
 }
 

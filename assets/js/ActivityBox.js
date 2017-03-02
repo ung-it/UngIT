@@ -62,7 +62,7 @@ class ActivityBox extends Component {
                         </div>
                     </div>
                 </Thumbnail>
-                <ActivityModal id={this.props.id}></ActivityModal>
+                <ActivityModal id={this.props.id} show={this.state.show}></ActivityModal>
             </div>
         );
     }

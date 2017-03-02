@@ -54,7 +54,6 @@ class ActivityModal extends Component {
     }
 
     render() {
-
         const {date, title, provider, adaptions, age, timeStart, timeEnd, location, description} = this.state;
         let videoContainer = null;
         if (this.state.videos.length > 0 && this.state.videos[0] != "") {

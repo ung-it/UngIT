@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
 
-from .models import UserProfile
+from .models import UserProfile, Activity
 
 # Login View
 # Make a blueprint for user forms
@@ -19,3 +19,26 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['phone', 'profile_name', 'type']
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class ActivityForm(forms.ModelForm):
+
+    activityName = forms.CharField(max_length=80, label="Navn på aktivitet")
+    provider = forms.CharField(max_length=80, label="Arrangør")
+    adaptions = forms.CharField(widget=forms.Textarea, max_length=80,label="Tilrettelegging")
+    age = forms.CharField(max_length=80, label="Alder")
+    location = forms.CharField(max_length=80, label="Sted")
+    description = forms.CharField(widget=forms.Textarea, label="Om arrangement")
+    registration_required = forms.BooleanField(label='Arrangement krever registrering')
+    price = forms.IntegerField(label="Pris")
+    date = forms.DateField(label="Dato", widget=DateInput)
+    time_start = forms.TimeField(label="Tid start")
+    time_end = forms.TimeField(label="Tid slutt")
+    images = forms.ImageField(required=False, label="Bilder")
+    videos = forms.ImageField(required=False, label="Videoer")
+
+    class Meta:
+        model = Activity
+        fields = ['activityName', 'provider', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'time_start', 'time_end', 'images', 'videos']

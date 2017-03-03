@@ -10,21 +10,24 @@ import json
 # Login view, method = POST.
 @csrf_exempt
 def loginView(request):
-    json_string = request.body.decode('utf-8') # request becomes string
-    parsed_json = json.loads(json_string)
 
-    username = parsed_json['username']
-    password = parsed_json['password']
+    json_string = request.body.decode('utf-8')  # request becomes string
+    json_string = json_string.split("&")
+
+    username = json_string[0].split("=")[1]
+    password = json_string[1].split("=")[1]
 
     user = authenticate(username=username, password=password)
 
     # Check that we got a user back
     if user is not None:
         if user.is_active:
-            login(request, user)
-            print("Successfully logged in")
-
-            return redirect("skalvi:index")
+            if user.is_authenticated():
+                login(request, user)
+                print("Successfully logged in")
+                if user.is_staff:
+                    return redirect("/admin")
+                return redirect("skalvi:index")
 
     print("Not logged in!")
     return render(request, template_name="register.html")

@@ -26,6 +26,7 @@
     "react-bootstrap-daterangepicker": "^3.2.2",
     "react-dom": "^15.4.2",
     "react-select": "^1.0.0-rc.3",
+},
   "scripts": {
     "start": "react-scripts start",
     "build": "webpack --config webpack.config.js --progress --colors",
@@ -35,5 +36,4 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
-}
 }

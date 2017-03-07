@@ -33,6 +33,12 @@ def getActivity(request, id):
 
 
 def logout_user(request):
+    userprofiles = UserProfile.objects.filter(user=request.user)
+    for profile in userprofiles:
+        if profile.is_active:
+            profile.is_active = False
+            profile.save()
+
     logout(request)
     return redirect("skalvi:index")
 
@@ -51,15 +57,58 @@ def loginView(request):
         if user is not None:
             if user.is_active:
                 if user.is_authenticated():
+                    profiles = UserProfile.objects.filter(user=user)
                     login(request, user)
                     print("Successfully logged in")
                     if user.is_staff:
                         return redirect("/admin")
-                    return redirect("skalvi:index")
+                    elif len(profiles) > 1:
+                        return redirect("skalvi:choose")
+                    else:
+                        for profile in profiles:
+                            profile.is_active = True
+                            profile.save()
+                        return redirect("/")
+                    # return render(request, "chooseUser.html")
         else:
             return render(request, template_name, {'error_message':"Kontoen eksisterer ikke, ellers er det feil kombinasjon av brukernavn og passord"})
 
     return redirect("/")
+
+
+@csrf_exempt
+def selectedUser(request):
+    name = request.POST.get("profile_name", "")
+    pk = request.POST.get("pk", "")
+    user_profiles = UserProfile.objects.filter(user=request.user)
+
+    for profile in user_profiles:
+        # Checks if one profile already is active and makes is unactive
+        if profile.is_active:
+            profile.is_active = False
+            profile.save()
+
+        # makes the new profile active
+        if profile.pk == int(pk):
+            profile.is_active = True
+            profile.save()
+            return render(request, "home.html", {"name": name})
+
+    # return redirect("skalvi:index")
+
+
+class ChooseUserView(View):
+    template_name = "chooseUser.html"
+    model = UserProfile
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            user_profile_objects = UserProfile.objects.filter(user=request.user)
+            return render(request, self.template_name,
+                          {
+                              'userprofiles': user_profile_objects,
+                          })
+        return redirect("skalvi:index")
 
 
 # Register view

@@ -1,0 +1,16 @@
+{% block body %}
+    <div>
+        <h1>Velg bruker</h1>
+
+
+        {% for profile in userprofiles %}
+            <form action="/selected/" method="POST">
+                <input type="text" name="profile_name" value="{{ profile.profile_name }}"hidden>
+                <input type="text" name="pk" value="{{ profile.pk }}" hidden>
+                <input type="submit" value="{{ profile.profile_name }} + {{ profile.pk }}">
+            </form>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

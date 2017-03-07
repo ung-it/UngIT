@@ -16,7 +16,20 @@
 
     <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% include 'form_template.html' %}
+        {% for field in form %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <span class="text-danger small">{{ field.errors }}</span>
+                </div>
+                <label class="control-label col-sm-2" for="field_title">{{ field.label_tag }}</label>
+                <div class="col-sm-10">
+                    {{ field }}
+                    {% if field.label == "Bilder" %}
+                        <a href="https://www.instagram.com/oauth/authorize/?client_id=e3b85b32b9eb461190ba27b4c32e2cc6&redirect_uri=localhost:8000&response_type=code" class="btn btn-info" role="button">Finn bilde på Instagram</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-success">Lagre</button>

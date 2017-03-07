@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 def index(request):
@@ -34,6 +36,35 @@ def getActivity(request, id):
 def logout_user(request):
     logout(request)
     return redirect("skalvi:index")
+
+@csrf_exempt
+def loginView(request):
+    template_name = "home.html"
+    if(request.POST):
+        print("HEIEIHEIIEHIIHEIH")
+        infoArray = request.body.decode('utf-8')  # request becomes string
+        infoArray = infoArray.split("&")
+
+        username = infoArray[0].split("=")[1]
+        password = infoArray[1].split("=")[1]
+
+        user = authenticate(username=username, password=password)
+        print("User", user)
+
+        # Check that we got a user back
+        if user is not None:
+            if user.is_active:
+                if user.is_authenticated():
+                    login(request, user)
+                    print("Successfully logged in")
+                    if user.is_staff:
+                        return redirect("/admin")
+                    return redirect("skalvi:index")
+        else:
+            print("Need error message to user here!")
+            return render(request, template_name, {'error_message':"Kontoen eksisterer ikke, ellers er det feil kombinasjon av brukernavn og passord"})
+
+    return redirect("/")
 
 
 # Register view

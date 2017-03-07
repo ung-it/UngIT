@@ -3,34 +3,48 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .models import *
-
+from django.contrib import messages
 import json
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template.response import TemplateResponse
 
+from django.core.exceptions import ObjectDoesNotExist
+
+from django.db.models.base import ObjectDoesNotExist
 
 # Login view, method = POST.
-@csrf_exempt
-def loginView(request):
-
-    infoArray = request.body.decode('utf-8')  # request becomes string
-    infoArray = infoArray.split("&")
-
-    username = infoArray[0].split("=")[1]
-    password = infoArray[1].split("=")[1]
-
-    user = authenticate(username=username, password=password)
-
-    # Check that we got a user back
-    if user is not None:
-        if user.is_active:
-            if user.is_authenticated():
-                login(request, user)
-                print("Successfully logged in")
-                if user.is_staff:
-                    return redirect("/admin")
-                return redirect("skalvi:index")
-
-    print("Not logged in!")
-    return render(request, template_name="register.html")
+# @csrf_exempt
+# def loginView(request):
+#     infoArray = request.body.decode('utf-8')  # request becomes string
+#     infoArray = infoArray.split("&")
+#
+#     username = infoArray[0].split("=")[1]
+#     password = infoArray[1].split("=")[1]
+#
+#     user = authenticate(username=username, password=password)
+#     print("User", user)
+#     try:
+#         check_username = User.objects.get(username=username)
+#         print("check TRY", check_username)
+#     except ObjectDoesNotExist:
+#         check_username = False
+#         print("except TRY", check_username)
+#
+#     print("CheckUsername", check_username)
+#
+#     # Check that we got a user back
+#     if user is not None:
+#         if user.is_active:
+#             if user.is_authenticated():
+#                 login(request, user)
+#                 print("Successfully logged in")
+#                 if user.is_staff:
+#                     return redirect("/admin")
+#                 return redirect("skalvi:index")
+#
+#     else:
+#         print("Need error message to user here!")
+#         return redirect("skalvi:index")
 
 @csrf_exempt
 def loginFacebook(request):
@@ -65,7 +79,7 @@ def loginFacebook(request):
         userProfile.save()
 
     login(request, user)
-    return redirect("skalvi:index")
+    return redirect("skalvi:allactivities")
 
 
 

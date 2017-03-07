@@ -6,13 +6,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login  # Login module handles sessions
 from django.views import generic
 from django.views.generic import View
-from .forms import UserForm, UserProfileForm, ActivityForm
+from .forms import UserForm, UserProfileForm, ActivityForm, RegisterProfileForm
 from django.forms.models import model_to_dict
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -34,6 +35,31 @@ def getActivity(request, id):
 def logout_user(request):
     logout(request)
     return redirect("skalvi:index")
+
+@csrf_exempt
+def loginView(request):
+    template_name = "home.html"
+    if(request.POST):
+        infoArray = request.body.decode('utf-8')  # request becomes string
+        infoArray = infoArray.split("&")
+
+        username = infoArray[0].split("=")[1]
+        password = infoArray[1].split("=")[1]
+
+        user = authenticate(username=username, password=password)
+        # Check that we got a user back
+        if user is not None:
+            if user.is_active:
+                if user.is_authenticated():
+                    login(request, user)
+                    print("Successfully logged in")
+                    if user.is_staff:
+                        return redirect("/admin")
+                    return redirect("skalvi:index")
+        else:
+            return render(request, template_name, {'error_message':"Kontoen eksisterer ikke, ellers er det feil kombinasjon av brukernavn og passord"})
+
+    return redirect("/")
 
 
 # Register view
@@ -140,24 +166,43 @@ class createActivity(View):
 class MyPageView(View):
     template_name = 'mypage.html'
     model = UserProfile
+    form_class = RegisterProfileForm
 
     def get(self, request, *args, **kwargs):
-        pk = self.kwargs['pk']
-        print(pk)
+        form = self.form_class(None)
+        if request.user.is_authenticated():
+            user_object = request.user
+            user_profile_objects = UserProfile.objects.filter(user=request.user)
+            return render(request, self.template_name,
+                          {
+                              'userprofiles': user_profile_objects,
+                              'user': user_object,
+                              'form': form
+                          })
+        return HttpResponse("Du må være logget inn for å ha tilgang til denne siden")
 
-        print("userprofile query: ")
-        userprofileObject = UserProfile.objects.get(pk=pk)
-        print(userprofileObject)
-        print()
-        print("userobject query: " + str(userprofileObject.user_id))
-        userObject = User.objects.get(pk=userprofileObject.user_id)
-        print(userObject)
+    def post(self, request):
+        profile_form = self.form_class(request.POST)
+        print("FORM ", profile_form)
 
-        return render(request, self.template_name,
-                      {
-                          'userprofile': userprofileObject,
-                          'user': userObject
-                      })
+        if profile_form.is_valid():
+            # Take submitted data and save to database
+            profile_form.save(commit=False)
+            # Cleaned (normalized) data / formated properly
+            phone = profile_form.cleaned_data['phone']
+            types = profile_form.cleaned_data['type']
+            profile_name = profile_form.cleaned_data['profile_name']
+
+            if types:
+                types = "P"
+            else:
+                types = "C"
+
+            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
+            profile.save()
+
+        return redirect("skalvi:mypage")
+
 
 
 def detail(request, question_id):

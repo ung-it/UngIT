@@ -16,7 +16,6 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 
-
 def index(request):
     return TemplateResponse(request, "home.html", {})
 
@@ -41,7 +40,6 @@ def logout_user(request):
 def loginView(request):
     template_name = "home.html"
     if(request.POST):
-        print("HEIEIHEIIEHIIHEIH")
         infoArray = request.body.decode('utf-8')  # request becomes string
         infoArray = infoArray.split("&")
 
@@ -49,8 +47,6 @@ def loginView(request):
         password = infoArray[1].split("=")[1]
 
         user = authenticate(username=username, password=password)
-        print("User", user)
-
         # Check that we got a user back
         if user is not None:
             if user.is_active:
@@ -61,7 +57,6 @@ def loginView(request):
                         return redirect("/admin")
                     return redirect("skalvi:index")
         else:
-            print("Need error message to user here!")
             return render(request, template_name, {'error_message':"Kontoen eksisterer ikke, ellers er det feil kombinasjon av brukernavn og passord"})
 
     return redirect("/")

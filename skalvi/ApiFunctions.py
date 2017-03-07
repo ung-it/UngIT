@@ -12,40 +12,6 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.db.models.base import ObjectDoesNotExist
 
-# Login view, method = POST.
-# @csrf_exempt
-# def loginView(request):
-#     infoArray = request.body.decode('utf-8')  # request becomes string
-#     infoArray = infoArray.split("&")
-#
-#     username = infoArray[0].split("=")[1]
-#     password = infoArray[1].split("=")[1]
-#
-#     user = authenticate(username=username, password=password)
-#     print("User", user)
-#     try:
-#         check_username = User.objects.get(username=username)
-#         print("check TRY", check_username)
-#     except ObjectDoesNotExist:
-#         check_username = False
-#         print("except TRY", check_username)
-#
-#     print("CheckUsername", check_username)
-#
-#     # Check that we got a user back
-#     if user is not None:
-#         if user.is_active:
-#             if user.is_authenticated():
-#                 login(request, user)
-#                 print("Successfully logged in")
-#                 if user.is_staff:
-#                     return redirect("/admin")
-#                 return redirect("skalvi:index")
-#
-#     else:
-#         print("Need error message to user here!")
-#         return redirect("skalvi:index")
-
 @csrf_exempt
 def loginFacebook(request):
     infoArray = request.body.decode('utf-8')  # request becomes string
@@ -80,26 +46,6 @@ def loginFacebook(request):
 
     login(request, user)
     return redirect("skalvi:allactivities")
-
-
-
-# @csrf_exempt
-# def register_sub_profile(request):
-#     profile_form = request.POST
-#     print("FORM ", profile_form)
-#
-#
-#     if profile_form.is_valid():
-#         # Take submitted data and save to database
-#         profile_form.save(commit=False)
-#         # Cleaned (normalized) data / formated properly
-#         phone = profile_form.cleaned_data['phone']
-#         types = profile_form.cleaned_data['type']
-#         profile_name = profile_form.cleaned_data['profile_name']
-#
-#         profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
-
-
 
 
 

@@ -1,15 +1,24 @@
 {% extends "base_template.html" %}
 {% block pageTitle %}MyPage{% endblock %}
-
+{% load static %}
 {% block body %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
+
     <div class="row" style="padding-left: 2%">
-        <div class="col-sm-4">
-            <div style="height: 100px"></div>
-            <h1>Min side</h1>
-            <h3>Brukernavn: {{ user.username}}</h3>
-            <h4>Navn : {{ user.first_name.title }} {{ user.last_name.title }}</h4>
-            <h4>Epost: {{ user.email }}</h4>
+        <div style="height: 100px"></div>
+        <div class="col-sm-4 ">
+            <div id="userInfo">
+                <div><img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile"></div>
+
+                <div>
+                    <h1>Min side</h1>
+                    <h3>Brukernavn: {{ user.username}}</h3>
+                    <h4>Navn : {{ user.first_name.title }} {{ user.last_name.title }}</h4>
+                    <h4>Epost: {{ user.email }}</h4>
+                </div>
+            </div>
+
             <br>
             <h3>Brukere i din familie</h3>
             {% for profile in userprofiles %}

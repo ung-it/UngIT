@@ -41,12 +41,6 @@
             });
         }
 
-        function logOut() {
-            FB.logout(function(response) {
-               // Person is now logged out
-            });
-        }
-
         function fetchInfo() {
             var URL = "{% url 'skalvi:loginFacebook' %}";
             console.log('Welcome!  Fetching your information.... ');
@@ -60,13 +54,13 @@
                     email: response.email
                 };
                 $.post(URL, data, function(response){
-                    if(response === 'success'){
-                        console.log("Logging in");
-                    }
-                    else{
-                        console.log("Error");
-                    }
                 });
+                setTimeout(function(){
+                    FB.logout(function(response) {
+                       // Person is now logged out
+                    });
+                    location.reload()
+                }, 500);
             });
         }
     </script>

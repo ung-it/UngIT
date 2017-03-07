@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {Thumbnail, Glyphicon, Modal, Button} from 'react-bootstrap';
-import {getActivityInfo} from './APIFunctions';
-import {getMonth} from './DateFunctions';
-import ActivityModal from './ActivityModal';
-import CalendarDateBox from './CalendarDateBox';
+import {getActivityInfo} from '../APIFunctions';
+import {getMonth} from '../DateFunctions';
+import ActivityModal from '../ActivityModal';
+import CalendarDateBox from '../CalendarDateBox';
 
 //Imports for Modal
-import '../styles/activityBox.css';
+import '../../styles/activityBox.css';
 
 class AllActivitiesBox extends Component {
 

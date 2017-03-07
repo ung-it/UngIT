@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AllActivitiesBox from './AllActivitiesBox';
+import AllActivitiesBox from './components/AllActivitiesBox';
 import {getUpcomingActivities} from './APIFunctions';
 
 class AllActivitiesContainer extends Component {

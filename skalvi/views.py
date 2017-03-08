@@ -117,7 +117,7 @@ class ActivityView(generic.DetailView):
 
         def get(self, request, *args, **kwargs):
             form = self.form_class(initial=model_to_dict(self.get_object()))
-            return render(request, self.template_name, {'form': form})
+            return activityGet(self, request, form)
 
         def post(self, request, pk):
             instance = get_object_or_404(Activity, pk=pk)
@@ -135,41 +135,51 @@ class createActivity(View):
 
     def get(self, request):
         form = self.form_class(None)
-        token = request.GET.get('code')
-        if token: #User has logged in with Instagram
-            post_data = [
-                ('client_id', 'e3b85b32b9eb461190ba27b4c32e2cc6'),
-                ('client_secret', 'f9ad52972e1a4a21a7d34fa508d2bba4'),
-                ('grant_type', 'authorization_code'),
-                ('redirect_uri', directory + 'activity/'),
-                ('code', token)
-            ]
-            data = urllib.parse.urlencode(post_data)
-            try:
-                result = urllib.request.urlopen('https://api.instagram.com/oauth/access_token', data.encode("ascii"))
-                temp = result.read().decode('ascii')
-                content = json.loads(temp)
-                accessToken = content['access_token']
-                url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
-                result = urllib.request.urlopen(url)
-                content = json.loads(result.read().decode('ascii'))
-                images = []
-                for image in content['data']:
-                    images.append(image['images']['standard_resolution']['url'])
-                return render(request, self.template_name, {'form': form, 'images': images})
-            except urllib.error.URLError as e:
-                return render(request, self.template_name, {'form': form})
-
-        return render(request, self.template_name, {'form': form})
+        return activityGet(self, request, form)
 
     def post(self, request):
         form = ActivityForm(request.POST, request.FILES)
 
         if form.is_valid():
+            instagram = request.POST['instagramImages']
+            if instagram:
+                form.cleaned_data['images'] = instagram
             form.save()
             return redirect('/')
         else:
             return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
+
+def activityGet(self, request, form):
+    token = request.GET.get('code')
+    link = 'https://www.instagram.com/oauth/authorize/?client_id=e3b85b32b9eb461190ba27b4c32e2cc6&redirect_uri=' + directory + 'activity/&response_type=code&scope=public_content'
+    if 'accessToken' in request.session:
+        accessToken = request.session['accessToken']
+        print(accessToken)
+    if token: #User has logged in with Instagram
+        post_data = [
+            ('client_id', 'e3b85b32b9eb461190ba27b4c32e2cc6'),
+            ('client_secret', 'f9ad52972e1a4a21a7d34fa508d2bba4'),
+            ('grant_type', 'authorization_code'),
+            ('redirect_uri', directory + 'activity/'),
+            ('code', token)
+        ]
+        data = urllib.parse.urlencode(post_data)
+        try:
+            result = urllib.request.urlopen('https://api.instagram.com/oauth/access_token', data.encode("ascii"))
+            temp = result.read().decode('ascii')
+            content = json.loads(temp)
+            accessToken = content['access_token']
+            request.session['accessToken'] = accessToken
+            url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
+            result = urllib.request.urlopen(url)
+            content = json.loads(result.read().decode('ascii'))
+            images = []
+            for image in content['data']:
+                images.append(image['images']['standard_resolution']['url'])
+            return render(request, self.template_name, {'form': form, 'images': images})
+        except urllib.error.URLError as e:
+            return redirect(link)
+    return render(request, self.template_name, {'form': form, 'link': link})
 
 class MyPageView(View):
     template_name = 'mypage.html'
@@ -193,17 +203,5 @@ class MyPageView(View):
                           'user': userObject
                       })
 
-
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
-
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
-
 def allactivities(request):
     return TemplateResponse(request, 'allActivities.html', {})
-

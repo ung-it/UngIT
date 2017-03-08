@@ -1,6 +1,8 @@
 {% extends "base_template.html" %}
 {% load static %}
+
 {% block explicitPageHeader %}
+    <script type="text/javascript" src={% static 'js/instagramPicturePicker.js' %}></script>
     <link rel="stylesheet" href="{% static "styles/instagram.css" %}">
 {% endblock %}
 
@@ -28,11 +30,13 @@
                     {{ field }}
                     {% if field.label == "Bilder" %}
                         {% if images %}
+                            <div>Klikk på et bilde for å legge det til</div>
+                            <input name="instagramImages" id="instagramImages" type="hidden">
                             {% for image in images %}
-                                <img class='instagram-image' alt="Bilde fra Instagram" src={{ image }}>
+                                <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
                             {% endfor %}
                             {% else %}
-                                <a href="https://www.instagram.com/oauth/authorize/?client_id=e3b85b32b9eb461190ba27b4c32e2cc6&redirect_uri=http://localhost:8000/activity/&response_type=code&scope=public_content" class="btn btn-info" role="button">Finn bilde på Instagram</a>
+                                <a class="btn btn-info" role="button" href={{ link }} >Finn bilde på Instagram</a>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -44,5 +48,4 @@
             </div>
         </div>
     </form>
-
 {% endblock %}

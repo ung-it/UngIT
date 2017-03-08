@@ -3,7 +3,7 @@
  */
 import React from "react"
 import { connect } from "react-redux"
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import { fetchActivities } from "../actions/activitiesActions"
 
 class ActivityPageContainer extends React.Component {
@@ -14,7 +14,9 @@ class ActivityPageContainer extends React.Component {
     }
 
     createActivityItem(){
+        console.log(this.props);
         return this.props.activities.map((activity) => {
+            let poster = null;
             return (
                 <div tabIndex={activity.tabIndex}>
                 <Thumbnail
@@ -39,7 +41,7 @@ class ActivityPageContainer extends React.Component {
                         </div>
                     </div>
                 </Thumbnail>
-                <ActivityModal id={activity.id} show={activity.show}></ActivityModal>
+                <ActivityModal id={activity.id} show={activity.show}>Activiy</ActivityModal>
             </div>
             );
         })
@@ -47,7 +49,7 @@ class ActivityPageContainer extends React.Component {
 
     render() {
         console.log(' su render me from ActivitiesPage Container ');
-        let poster = null;
+
         // if (this.state.images.length > 0 && this.state.images[0] != "") {
         //     poster = "/media/" + this.state.images[0];
         // }
@@ -66,6 +68,7 @@ class ActivityPageContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
+    console.log( 'state '  + state.activities);
     return {
         activities: state.activities
     };

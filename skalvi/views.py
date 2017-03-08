@@ -154,8 +154,7 @@ def activityGet(self, request, form):
     link = 'https://www.instagram.com/oauth/authorize/?client_id=e3b85b32b9eb461190ba27b4c32e2cc6&redirect_uri=' + directory + 'activity/&response_type=code&scope=public_content'
     if 'accessToken' in request.session:
         accessToken = request.session['accessToken']
-        print(accessToken)
-    if token: #User has logged in with Instagram
+    elif token: #User has logged in with Instagram
         post_data = [
             ('client_id', 'e3b85b32b9eb461190ba27b4c32e2cc6'),
             ('client_secret', 'f9ad52972e1a4a21a7d34fa508d2bba4'),
@@ -170,15 +169,18 @@ def activityGet(self, request, form):
             content = json.loads(temp)
             accessToken = content['access_token']
             request.session['accessToken'] = accessToken
-            url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
-            result = urllib.request.urlopen(url)
-            content = json.loads(result.read().decode('ascii'))
-            images = []
-            for image in content['data']:
-                images.append(image['images']['standard_resolution']['url'])
-            return render(request, self.template_name, {'form': form, 'images': images})
         except urllib.error.URLError as e:
             return redirect(link)
+        
+    if accessToken:
+        url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
+        result = urllib.request.urlopen(url)
+        content = json.loads(result.read().decode('ascii'))
+        images = []
+        for image in content['data']:
+            images.append(image['images']['standard_resolution']['url'])
+        return render(request, self.template_name, {'form': form, 'images': images})
+
     return render(request, self.template_name, {'form': form, 'link': link})
 
 class MyPageView(View):

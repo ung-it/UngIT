@@ -14,7 +14,8 @@ class ActivityPageContainer extends React.Component {
     }
 
     createActivityItem(){
-        console.log( 'createActivityItem in APC' + this.props);
+        console.log(this.props);
+        console.log('^ came from createActivityItem in APC' );
         return this.props.activities.map((activity) => {
             let poster = null;
             return (
@@ -54,7 +55,9 @@ class ActivityPageContainer extends React.Component {
         //     poster = "/media/" + this.state.images[0];
         // }
         return (
-            <div>{this.createActivityItem()};</div>
+            <div>
+                {this.createActivityItem()}
+            </div>
         );
     }
 

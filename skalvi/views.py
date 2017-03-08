@@ -121,7 +121,6 @@ class ActivityView(generic.DetailView):
 
         def post(self, request, pk):
             request.POST = request.POST.copy()
-            request.POST['images'] = request.POST['instagramImages']
             instance = get_object_or_404(Activity, pk=pk)
             form = ActivityForm(request.POST, request.FILES, instance=instance)
             form.data = form.data.copy()

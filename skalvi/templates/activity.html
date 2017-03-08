@@ -27,17 +27,18 @@
                 </div>
                 <label class="control-label col-sm-2" for="field_title">{{ field.label_tag }}</label>
                 <div class="col-sm-10">
-                    {{ field }}
-                    {% if field.label == "Bilder" %}
+                    {% if field.label == "Instagram" %}
                         {% if images %}
                             <div>Klikk på et bilde for å legge det til</div>
-                            <input name="instagramImages" id="instagramImages" type="hidden">
+                            <input name="instagram" id="instagramImages" type="hidden">
                             {% for image in images %}
                                 <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
                             {% endfor %}
                             {% else %}
                                 <a class="btn btn-info" role="button" href={{ link }} >Finn bilde på Instagram</a>
                         {% endif %}
+                        {% else %}
+                            {{ field }}
                     {% endif %}
                 </div>
             </div>

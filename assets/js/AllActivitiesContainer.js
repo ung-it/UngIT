@@ -31,7 +31,7 @@ class AllActivitiesContainer extends Component {
                <ActivityPageLayout id={id} key={id} tabIndex={i+1}/>
            )
         });
-
+        console.log('render');
         return (
             <div style={styles.activitiesContainerStyle}>
               <h3>Aktiviteter</h3>

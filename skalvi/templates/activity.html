@@ -31,9 +31,12 @@
                         {% if images %}
                             <div>Klikk på et bilde for å legge det til</div>
                             <input name="instagram" id="instagramImages" type="hidden">
-                            {% for image in images %}
-                                <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
-                            {% endfor %}
+                            <div id="instagram-div">
+                                {% for image in images %}
+                                    <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
+                                {% endfor %}
+                            </div>
+                            <script> selectedImages("{{ field.value }}") </script>
                             {% else %}
                                 <a class="btn btn-info" role="button" href={{ link }} >Finn bilde på Instagram</a>
                         {% endif %}

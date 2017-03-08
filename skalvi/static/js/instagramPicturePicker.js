@@ -15,3 +15,14 @@ function imageClicked(image) {
     });
     $('#instagramImages').val(imageText);
 }
+
+function selectedImages(images) {
+    let imageList = images.split(",").map(function (image) {
+        image = "'" + image + "'";
+        return $("img[src=" + image + "]");
+    });
+   for (i in imageList) {
+       console.log(imageList[i])
+       imageClicked(imageList[i]);
+   }
+}

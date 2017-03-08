@@ -41,26 +41,31 @@
             });
         }
 
+        function logIn() {
+            FB.login(function(response){
+                console.log(response)
+                fetchInfo();
+            }, {scope: 'user_events'});
+        }
+
         function fetchInfo() {
             var URL = "{% url 'skalvi:loginFacebook' %}";
             console.log('Welcome!  Fetching your information.... ');
             FB.api('/me', 'GET', {fields: 'id, age_range, first_name, last_name, email, picture'}, function(response) {
-                console.log("response " + JSON.stringify(response));
-                var data = {
-                    id: response.id,
-                    age_range: response.age_range.min,
-                    first_name: response.first_name,
-                    last_name: response.last_name,
-                    email: response.email
-                };
-{#                $.post(URL, data, function(response){#}
-{#                });#}
-{#                setTimeout(function(){#}
-{#                    FB.logout(function(response) {#}
-{#                       // Person is now logged out#}
-{#                    });#}
-{#                    location.reload()#}
-{#                }, 500);#}
+{#                var data = {#}
+{#                    id: response.id,#}
+{#                    age_range: response.age_range.min,#}
+{#                    first_name: response.first_name,#}
+{#                    last_name: response.last_name,#}
+{#                    email: response.email#}
+{#                };#}
+                $('#id_Fusername').val(response.id);
+                $('#id_agerange').val(response.age_range.min);
+                $('#id_firstname').val(response.first_name);
+                $('#id_lastname').val(response.last_name);
+                $('#id_email').val(response.email);
+
+                $('#faceForm').submit();
             });
             FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
                   if (response && !response.error) {

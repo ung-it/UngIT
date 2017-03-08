@@ -120,8 +120,11 @@ class ActivityView(generic.DetailView):
             return activityGet(self, request, form)
 
         def post(self, request, pk):
+            request.POST = request.POST.copy()
+            request.POST['images'] = request.POST['instagramImages']
             instance = get_object_or_404(Activity, pk=pk)
             form = ActivityForm(request.POST, request.FILES, instance=instance)
+            form.data = form.data.copy()
 
             if form.is_valid():
                 form.save()
@@ -139,7 +142,6 @@ class createActivity(View):
 
     def post(self, request):
         form = ActivityForm(request.POST, request.FILES)
-
         if form.is_valid():
             instagram = request.POST['instagramImages']
             if instagram:
@@ -171,7 +173,7 @@ def activityGet(self, request, form):
             request.session['accessToken'] = accessToken
         except urllib.error.URLError as e:
             return redirect(link)
-        
+
     if accessToken:
         url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
         result = urllib.request.urlopen(url)

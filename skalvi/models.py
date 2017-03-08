@@ -33,6 +33,7 @@ class Activity(models.Model):
     time_start = models.TimeField()
     time_end = models.TimeField()
     images = models.ImageField(upload_to='images/',max_length=200, blank=True)
+    instagram = models.TextField(blank=True)
     videos = models.ImageField(upload_to='videos/',max_length=200, blank=True)
 
     def was_published(self):

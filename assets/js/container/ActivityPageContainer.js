@@ -14,7 +14,7 @@ class ActivityPageContainer extends React.Component {
     }
 
     createActivityItem(){
-        console.log(this.props);
+        console.log( 'createActivityItem in APC' + this.props);
         return this.props.activities.map((activity) => {
             let poster = null;
             return (

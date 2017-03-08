@@ -67,6 +67,7 @@ class ActivityPageContainer extends React.Component {
     }
 }
 
+// Takes the provider store that is given when called, and gives this container the this.props.whatWeCallIt
 function mapStateToProps(state) {
     console.log(state.activity);
     console.log("^ is from mapStateToProps in APC");
@@ -79,4 +80,5 @@ function matchDispatchToProps(dispatch){
     return bindActionCreators({fetchActivities: fetchActivities }, dispatch);
 }
 
+// connect actually calles the functions so that their purposes are fulfilled
 export default connect(mapStateToProps, matchDispatchToProps)(ActivityPageContainer);

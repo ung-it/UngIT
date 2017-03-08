@@ -43,9 +43,22 @@ def loginFacebook(request):
 
         userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name)
         userProfile.save()
+        login(request, user)
+        return redirect("skalvi:allactivities")
+    elif user is not None:
+        profiles = UserProfile.objects.filter(user=user)
+        login(request,user)
+        if user.is_staff:
+            return redirect("/admin")
+        elif len(profiles) > 1:
+            return redirect("skalvi:choose")
+        else:
+            for profile in profiles:
+                profile.is_active = True
+                profile.save()
+            return redirect("/")
 
-    login(request, user)
-    return redirect("skalvi:allactivities")
+
 
 
 

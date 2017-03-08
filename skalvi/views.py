@@ -145,17 +145,21 @@ class createActivity(View):
                 ('code', token)
             ]
             data = urllib.parse.urlencode(post_data)
-            result = urllib.request.urlopen('https://api.instagram.com/oauth/access_token', data.encode("ascii"))
-            temp = result.read().decode('ascii')
-            content = json.loads(temp)
-            accessToken = content['access_token']
-            url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
-            result = urllib.request.urlopen(url)
-            content = json.loads(result.read().decode('ascii'))
-            images = []
-            for image in content['data']:
-                images.append(image['images']['standard_resolution']['url'])
-            return render(request, self.template_name, {'form': form, 'images': images})
+            try:
+                result = urllib.request.urlopen('https://api.instagram.com/oauth/access_token', data.encode("ascii"))
+                temp = result.read().decode('ascii')
+                content = json.loads(temp)
+                accessToken = content['access_token']
+                url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
+                result = urllib.request.urlopen(url)
+                content = json.loads(result.read().decode('ascii'))
+                images = []
+                for image in content['data']:
+                    images.append(image['images']['standard_resolution']['url'])
+                return render(request, self.template_name, {'form': form, 'images': images})
+            except urllib.error.URLError as e:
+                return render(request, self.template_name, {'form': form})
+
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):

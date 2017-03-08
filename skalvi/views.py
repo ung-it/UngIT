@@ -92,9 +92,7 @@ def selectedUser(request):
         if profile.pk == int(pk):
             profile.is_active = True
             profile.save()
-            return render(request, "home.html", {"name": name})
-
-    # return redirect("skalvi:index")
+    return render(request, "home.html", {"name": name})
 
 
 class ChooseUserView(View):

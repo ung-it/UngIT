@@ -4,7 +4,8 @@
 import React from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux';
-import { fetchActivities } from "../actions/activitiesActions"
+import { fetchActivities } from "../actions/activitiesActions";
+import {Thumbnail, Glyphicon} from 'react-bootstrap';
 
 class ActivityPageContainer extends React.Component {
 
@@ -16,34 +17,37 @@ class ActivityPageContainer extends React.Component {
     createActivityItem(){
         console.log(this.props);
         console.log('^ came from createActivityItem in APC' );
-        return this.props.activities.map((activity) => {
+        return this.props.activities.activities.map((activity) => {
             let poster = null;
             return (
-                <div tabIndex={activity.tabIndex}>
-                <Thumbnail
-                    className="activityBigStyle"
-                    src={poster}
-                    onClick={this.openActivityModal.bind(this)}
-                    title="Klikk på aktiviteten for mer informasjon">
-                    <h3>{activity.title}</h3>
-                    <div className="info-box-wrapper">
-                        <div className="icon-container">
-                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                <div
+                    key={activity.id}
+                    tabIndex={activity.tabIndex}>
+                    <Thumbnail
+                        className="activityBigStyle"
+                        src={poster}
+                        onClick={this.openActivityModal.bind(this)}
+                        title="Klikk på aktiviteten for mer informasjon"
+                    >
+                        <h3>{activity.title}</h3>
+                        <div className="info-box-wrapper">
+                            <div className="icon-container">
+                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                            </div>
+                            <div className="info-container">
+                                <p>{activity.date.getDate()}. {activity.date.getMonth()}</p>
+                                <p>{activity.timeStart} - {activity.timeEnd}</p>
+                                <p>{activity.location}</p>
+                            </div>
+                            <div className="about-container">
+                                <p>{activity.description}</p>
+                            </div>
                         </div>
-                        <div className="info-container">
-                            <p>{activity.date.getDate()}. {getMonth(activity.date.getMonth())}</p>
-                            <p>{activity.timeStart} - {activity.timeEnd}</p>
-                            <p>{activity.location}</p>
-                        </div>
-                        <div className="about-container">
-                            <p>{activity.description}</p>
-                        </div>
-                    </div>
-                </Thumbnail>
-                <ActivityModal id={activity.id} show={activity.show}>Activiy</ActivityModal>
-            </div>
+                    </Thumbnail>
+
+                </div>
             );
         })
     }

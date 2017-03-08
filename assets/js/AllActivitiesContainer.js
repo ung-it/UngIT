@@ -7,7 +7,9 @@ class AllActivitiesContainer extends Component {
 
     constructor(props) {
         super(props);
+        console.log("AllActivitiesContainer is here");
         this.state = {
+
             ids: []
         }
     }
@@ -28,9 +30,10 @@ class AllActivitiesContainer extends Component {
 
         const activities = this.state.ids.map((id, i) => {
            return(
-               <ActivityPageLayout id={id} key={id} tabIndex={i+1}/>
+                   <ActivityPageLayout id={id} key={id} tabIndex={i+1}/>
            )
         });
+
         console.log('render');
         return (
             <div style={styles.activitiesContainerStyle}>

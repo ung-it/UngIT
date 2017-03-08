@@ -10,7 +10,7 @@ class ActivityPageContainer extends React.Component {
 
     componentWillMount() {
         this.showMap = this.showMap.bind(this);
-        console.log('mount');
+        console.log('mount from ActivityPageContainer');
     }
 
     createActivityItem(){
@@ -46,7 +46,7 @@ class ActivityPageContainer extends React.Component {
     }
 
     render() {
-        console.log('render');
+        console.log(' su render me from ActivitiesPage Container ');
         let poster = null;
         // if (this.state.images.length > 0 && this.state.images[0] != "") {
         //     poster = "/media/" + this.state.images[0];

@@ -5,7 +5,11 @@ import React from 'react';
 import activities from '../container/ActivityPageContainer';
 
 const ActivityPageLayout = () => (
-    <activities />
+    <div>
+        <activities />
+        <p> Hello from ActivityPageLayout</p>
+    </div>
+
 );
 
 export default ActivityPageLayout;

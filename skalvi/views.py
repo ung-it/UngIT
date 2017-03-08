@@ -13,11 +13,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404
 from django.core import serializers
+from django.conf import settings
 
 #Python POST-request
 import urllib.request
 import json
 
+#Changing directories if in dev/prod
+directory = "http://skalvi.no/"
+if settings.DEBUG:
+    directory = "http://localhost:8000/"
 
 def index(request):
     return TemplateResponse(request, "home.html", {})
@@ -136,14 +141,21 @@ class createActivity(View):
                 ('client_id', 'e3b85b32b9eb461190ba27b4c32e2cc6'),
                 ('client_secret', 'f9ad52972e1a4a21a7d34fa508d2bba4'),
                 ('grant_type', 'authorization_code'),
-                ('redirect_uri', 'http://localhost:8000/activity/'),
+                ('redirect_uri', directory + 'activity/'),
                 ('code', token)
-            ]     # a sequence of two element tuples
+            ]
             data = urllib.parse.urlencode(post_data)
             result = urllib.request.urlopen('https://api.instagram.com/oauth/access_token', data.encode("ascii"))
             temp = result.read().decode('ascii')
             content = json.loads(temp)
-            print(content['user'])
+            accessToken = content['access_token']
+            url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
+            result = urllib.request.urlopen(url)
+            content = json.loads(result.read().decode('ascii'))
+            images = []
+            for image in content['data']:
+                images.append(image['images']['standard_resolution']['url'])
+            return render(request, self.template_name, {'form': form, 'images': images})
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):

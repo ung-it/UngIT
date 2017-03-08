@@ -53,16 +53,21 @@
                     last_name: response.last_name,
                     email: response.email
                 };
-                $.post(URL, data, function(response){
-                    console.log(response)
-                });
-                setTimeout(function(){
-                    FB.logout(function(response) {
-                       // Person is now logged out
-                    });
-                    location.reload()
-                }, 500);
+{#                $.post(URL, data, function(response){#}
+{#                });#}
+{#                setTimeout(function(){#}
+{#                    FB.logout(function(response) {#}
+{#                       // Person is now logged out#}
+{#                    });#}
+{#                    location.reload()#}
+{#                }, 500);#}
             });
+            FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
+                  if (response && !response.error) {
+                    console.log(response)
+                  }
+                }
+            );
         }
     </script>
 

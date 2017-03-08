@@ -68,9 +68,9 @@ class ActivityPageContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log( 'state '  + state.activities);
+    console.log( 'state '  + state.activity);
     return {
-        activities: state.activities
+        activities: state.activity
     };
 }
 

@@ -11,7 +11,7 @@ export default function reducer(state={
 
 
     switch (action.type) {
-      case "FETCH_ACTIVITY_FULFILLED": {
+      case "ACTIVITY_FETCHED": {
         return {
             ...state,
             activities: [...state, action.payload]

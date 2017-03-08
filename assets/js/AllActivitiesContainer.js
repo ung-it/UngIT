@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AllActivitiesBox from './components/AllActivitiesBox';
 import {getUpcomingActivities} from './APIFunctions';
+import ActivityPageLayout from "./components/ActivityPageLayout"
 
 class AllActivitiesContainer extends Component {
 
@@ -27,7 +28,7 @@ class AllActivitiesContainer extends Component {
 
         const activities = this.state.ids.map((id, i) => {
            return(
-               <AllActivitiesBox id={id} key={id} tabIndex={i+1}/>
+               <ActivityPageLayout id={id} key={id} tabIndex={i+1}/>
            )
         });
 

@@ -1,13 +1,13 @@
 /**
  * Created by ingrskar on 3/6/2017.
  */
-import {getAllActivities} from "./../components/APIFunctions";
-import {getActivityInfo} from './../components/APIFunctions';
+import {getAllActivities} from "../APIFunctions";
+import {getActivityInfo} from '../APIFunctions';
 
 export function fetchActivities() {
    return function(dispatch) {
 
-       let tempActivities = [];
+       //let tempActivities = [];
         getAllActivities(function (activityID) {
             activityID.map(id => {
                 getActivityInfo(id, function (data) {
@@ -26,8 +26,9 @@ export function fetchActivities() {
                         images: data.images.split(","),
                         videos: data.videos.split(",")
                     });
-                    tempActivities.push({key: id, activity: oneActivity});
+                    //tempActivities.push({activity: oneActivity});
                     //console.log(tempActivities)
+                    dispatch({type: "FETCH_ACTIVITY_FULFILLED", payload: oneActivity});
                 }.bind(this));
 
                 })
@@ -35,5 +36,5 @@ export function fetchActivities() {
         // console.log("second");
         // console.log(tempActivities);
 
-        dispatch({type: "FETCH_ACTIVITIES_FULFILLED", payload: tempActivities});
+   }
 }

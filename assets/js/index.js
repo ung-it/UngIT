@@ -7,6 +7,10 @@ import LoginModal from './LoginModal';
 import ActivitiesContainer from './ActivitiesContainer';
 import AllActivitiesContainer from './AllActivitiesContainer';
 
+//redux import
+import { Provider } from "react-redux"
+import store from "./store"
+
 if (document.getElementById('activities')) {
     ReactDOM.render(
         <ActivitiesContainer/>,
@@ -43,8 +47,7 @@ if (document.getElementById('loginComponent')) {
 }
 
 if (document.getElementById('allActivities')) {
-    ReactDOM.render(
-        <AllActivitiesContainer/>,
-        document.getElementById('allActivities')
-    );
+    <Provider store={store}>
+        <AllActivitiesContainer />
+    </Provider>, document.getElementById('allActivities')
 }

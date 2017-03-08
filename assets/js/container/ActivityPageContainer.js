@@ -68,7 +68,8 @@ class ActivityPageContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log( 'state '  + state.activity);
+    console.log(state.activity);
+    console.log("^ is from mapStateToProps in APC");
     return {
         activities: state.activity
     };

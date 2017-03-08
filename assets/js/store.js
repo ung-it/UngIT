@@ -12,6 +12,6 @@ import allReducers from "./reducers/indexReducer"
 //const middleware = applyMiddleware(promise());
 
 console.log('store');
-const store = createStore(allReducers)
+const store = createStore(allReducers);
 
 export default store;

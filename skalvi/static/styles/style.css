@@ -25,6 +25,10 @@ a.navbar-brand {
     padding: 0;
 }
 
+.nav-color {
+    background-color: rgb(55, 55, 55);
+}
+
 .content {
     padding-left: 100px;
     padding-right: 100px;
@@ -41,7 +45,7 @@ a.navbar-brand {
     position: absolute;
 	z-index: 1;
 	text-align: center;
-	background-color: rgb(34,34,34);
+	background-color: rgb(55, 55, 55);
 
 	/*margin: -30px 37%;*/
 	margin-top: 20px;

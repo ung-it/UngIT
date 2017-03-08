@@ -12,7 +12,7 @@
 }
 
 .activitySmalStyle img {
-    height: 15em;
+   height: 15em !important;
 }
 
 .caption {

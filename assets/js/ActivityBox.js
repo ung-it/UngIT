@@ -3,7 +3,6 @@ import {Thumbnail, Glyphicon, Button} from 'react-bootstrap';
 import ActivityModal from './ActivityModal';
 import {getMonth} from './DateFunctions'
 import {getActivityInfo} from './APIFunctions';
-import CalendarDateBox from './CalendarDateBox';
 
 //Imports for Modal
 import '../styles/activityBox.css';

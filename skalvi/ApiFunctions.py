@@ -44,7 +44,7 @@ def loginFacebook(request):
         userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name)
         userProfile.save()
         login(request, user)
-        return redirect("skalvi:allactivities")
+        return redirect("skalvi:skalvi")
     elif user is not None:
         profiles = UserProfile.objects.filter(user=user)
         login(request,user)

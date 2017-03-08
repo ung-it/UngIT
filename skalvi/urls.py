@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^mypage/$', views.MyPageView.post, name='mypageregister'),
     url(r'^logout_user/$', views.logout_user, name='logout_user'),
     url(r'^choose/$', views.ChooseUserView.as_view(), name='choose'),
-    url(r'^selected/$', views.selectedUser, name='selected')
+    url(r'^selected/$', views.selectedUser, name='selected'),
+    url(r'^signupActivity/$', views.signUpActivity, name='signupActivity')
 
 ]

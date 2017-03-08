@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -16,8 +17,54 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 
+# class IndexView(View):
+#     user = None
+#
+#     def get(self, request):
+#         global user
+#         user = request.user
+#         print("REQUEST ", user)
+#         return TemplateResponse(request, "home.html", {})
+#
+#     @login_required
+#     def post(self, *args, **kwargs):
+#         # print("POST", req.POST)
+#         global user
+#         print("User post", user)
+#
+#         # activity = req.body
+#         # print("Activity id", activity)
+#
+#         if user.is_authenticated:
+#             user_profiles = UserProfile.objects.filter(user=user)
+#             for profile in user_profiles:
+#                 if profile.is_active:
+#                     user_profile = profile
+#
+#             # participate = ParticipateIn(activityId=activity, userId=user.username, user_profile_id=user_profile.pk)
+#             # participate.save()
+#         return redirect("/")
+
 def index(request):
     return TemplateResponse(request, "home.html", {})
+
+@csrf_exempt
+def signUpActivity(request):
+    print("POST", request.POST)
+
+    # activity = req.body
+    # print("Activity id", activity)
+    #
+    # if user.is_authenticated:
+    #     user_profiles = UserProfile.objects.filter(user=user)
+    #     for profile in user_profiles:
+    #         if profile.is_active:
+    #             user_profile = profile
+
+        # participate = ParticipateIn(activityId=activity, userId=user.username, user_profile_id=user_profile.pk)
+        # participate.save()
+    return redirect("/")
+
 
 
 def getActivities(request):

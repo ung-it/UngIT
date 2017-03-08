@@ -28,6 +28,7 @@ class ActivityModal extends Component {
             images: [],
             videos: []
         };
+    this.onSignup = this.onSignup.bind(this);
 
         getActivityInfo(this.props.id, function (data) {
             this.setState({
@@ -51,6 +52,26 @@ class ActivityModal extends Component {
 
     componentWillReceiveProps(props) {
         this.setState({show: props.show});
+    }
+
+    onSignup(e) {
+        var request = {
+            id: this.props.id
+
+        };
+
+        fetch('http://localhost:8000/signupActivity/', {
+            method: 'POST',
+            headers: {
+                'Credentials': "same-origin",
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(request)
+
+        }).then((response) => {
+            return response.status
+        })
+
     }
 
     render() {
@@ -115,7 +136,7 @@ class ActivityModal extends Component {
                         </div>
                         <div className="modal-infobox2">
                             Påmelding
-                            <Button>Meld på!</Button>
+                            <Button onClick={this.onSignup}>Meld på!</Button>
                         </div>
                     </div>
                     <div>

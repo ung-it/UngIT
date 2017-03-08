@@ -1,0 +1,22 @@
+{% load static %}
+<link rel="stylesheet" href="../static/styles/chooseUser.css">
+{% block body %}
+
+    <div id="body" >
+        <h1>Velg bruker</h1>
+
+        <div id="users">
+        {% for profile in userprofiles %}
+
+            <form action="/selected/" method="POST">
+                <input type="text" name="profile_name" value="{{ profile.profile_name }}"hidden>
+                <input type="text" name="pk" value="{{ profile.pk }}" hidden>
+                <input class="buttons" type="submit" value="{{ profile.profile_name }}">
+
+            </form>
+
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

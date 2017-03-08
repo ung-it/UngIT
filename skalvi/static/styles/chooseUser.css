@@ -1,0 +1,26 @@
+body{
+    margin-top: 7.5em;
+    background-image: url("../images/login_background.jpg");
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+}
+
+.buttons{
+    text-align: center;
+    width: 20em;
+    height: 20em;
+    color: white;
+    margin: 3em;
+    background-color: #252120;
+}
+
+#users{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}

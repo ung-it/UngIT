@@ -54,6 +54,7 @@
                     email: response.email
                 };
                 $.post(URL, data, function(response){
+                    console.log(response)
                 });
                 setTimeout(function(){
                     FB.logout(function(response) {
@@ -64,9 +65,6 @@
             });
         }
     </script>
-
-
-
 
     <div class="content-padding">
         <div class="container-fluid">

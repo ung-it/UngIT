@@ -7,7 +7,7 @@ export default function reducer(state={
     activities: []
     }, action) {
 
-    console.log('reducer');
+    console.log('Activityreducer');
 
 
     switch (action.type) {

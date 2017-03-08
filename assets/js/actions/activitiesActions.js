@@ -7,6 +7,7 @@ import {getActivityInfo} from '../APIFunctions';
 export const fetchActivities = () => {
 
        let tempActivities = [];
+
         getAllActivities(function (activityID) {
             activityID.map(id => {
                 getActivityInfo(id, function (data) {
@@ -25,12 +26,15 @@ export const fetchActivities = () => {
                         images: data.images.split(","),
                         videos: data.videos.split(",")
                     }).bind(this);
+
                     tempActivities.push({activity: oneActivity});
-                    console.log(oneActivity);
-                }).bind(this);
-                return {
+                    console.log('OneActivity activitiesActions'  + oneActivity);
+
+                    return {
                     type: 'ACTIVITY_FETCHED',
-                    payload: tempActivities
+                    payload: oneActivity
                 };
+                }).bind(this);
+
             })
         })};

@@ -46,35 +46,40 @@
                 <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="text" id="activityName">
+                        <input class="mdl-textfield__input" type="text" id="activityName" value="{{ form.activityName.value }}">
                         <label class="mdl-textfield__label" for="activityName">Navn på aktivitet</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="text" id="provider">
+                        <input class="mdl-textfield__input" type="text" id="provider" value="{{ form.provider.value }}">
                         <label class="mdl-textfield__label" for="provider">Arrangør</label>
                     </div>
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">Tilrettelegging</span>
                     </span>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="text" id="location">
+                        <input class="mdl-textfield__input" type="text" id="location" value="{{ form.location.value }}">
                         <label class="mdl-textfield__label" for="location">Sted</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="text" id="description">
+                        <textarea class="mdl-textfield__input" type="text" rows= "5" id="description">{{ form.description.value }}</textarea>
                         <label class="mdl-textfield__label" for="description">Om arrangement</label>
                     </div>
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect input-box" for="registration_required">
+                        {% if form.registration_required.value %}
+                            <input type="checkbox" id="registration_required" class="mdl-checkbox__input" checked>
+                            {% else %}
+                                <input type="checkbox" id="registration_required" class="mdl-checkbox__input">
+                        {% endif %}
+                        <span class="mdl-checkbox__label">Arrangement krever registrering</span>
+                    </label>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="text" id="registration_required">
-                        <label class="mdl-textfield__label" for="registration_required">registration_required</label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}">
                         <label class="mdl-textfield__label" for="price">Pris i kr</label>
                         <span class="mdl-textfield__error">Pris må være et tall</span>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="date" id="date">
+                        {{ form.date.value }}
+                        <input class="mdl-textfield__input" type="date" id="date" value="{{ form.date.value }}">
                         <label class="mdl-textfield__label" for="age">Dato</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">

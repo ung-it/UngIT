@@ -8,8 +8,6 @@ import ActivityPageContainer from '../container/ActivityPageContainer';
 const ActivityPageLayout = () => (
     <div>
         <ActivityPageContainer />
-
-        <p> Hello from ActivityPageLayout</p>
     </div>
 
 );

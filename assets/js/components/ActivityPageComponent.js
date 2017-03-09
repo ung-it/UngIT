@@ -46,7 +46,7 @@ class ActivityPageContainer extends React.Component {
                                 <p>{this.props.activity.description}</p>
                             </div>
                         </div>
-
+                        <ActivityModal id={this.props.activity.id} show={this.props.activity.show}>test</ActivityModal>
                     </Thumbnail>
                 </div>
             );

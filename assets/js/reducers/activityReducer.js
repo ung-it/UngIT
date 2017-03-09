@@ -25,7 +25,8 @@ export default function reducer(state={
                 timeStart: new Date('2017','03','02'),
                 timeEnd: new Date('2017', '04', '02'),
                 images: null,
-                videos: null
+                videos: null,
+                show: false,
 
             },
             {
@@ -41,7 +42,8 @@ export default function reducer(state={
                 timeStart: new Date('2017','03','02'),
                 timeEnd: new Date('2017', '04', '02'),
                 images: null,
-                videos: null
+                videos: null,
+                show: false,
 
 
             }

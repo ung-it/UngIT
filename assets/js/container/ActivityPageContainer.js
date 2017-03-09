@@ -15,47 +15,11 @@ class ActivityPageContainer extends React.Component {
         //console.log('mount from ActivityPageContainer');
     }
 
-    createActivityItem(){
-        //console.log(this.props);
-        //console.log('^ came from createActivityItem in APC' );
-        return this.props.activities.activities.map((activity) => {
-            let poster = null;
-            return (
-                <div
-                    key={activity.id}
-                    tabIndex={activity.tabIndex}>
-                    <Thumbnail
-                        className="activityBigStyle"
-                        src={poster}
-                        onClick={this.openActivityModal.bind(this)}
-                        title="Klikk på aktiviteten for mer informasjon"
-                    >
-                        <h3>{activity.title}</h3>
-                        <div className="info-box-wrapper">
-                            <div className="icon-container">
-                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                                <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
-                            </div>
-                            <div className="info-container">
-                                <p>{activity.date.getDate()}. {activity.date.getMonth()}</p>
-                                <p>{activity.timeStart} - {activity.timeEnd}</p>
-                                <p>{activity.location}</p>
-                            </div>
-                            <div className="about-container">
-                                <p>{activity.description}</p>
-                            </div>
-                        </div>
-                    </Thumbnail>
 
-                </div>
-            );
-        })
-    }
 
     // <ActivityModal id={activity.id} show={activity.show}>test</ActivityModal> <-- add between </div< and </Thumbnail>
 
-    createActivityItemTest(){
+    createActivityItem(){
         console.log(this.props);
         //console.log('^ came from createActivityItem in APC' );
         let poster = null;
@@ -102,7 +66,7 @@ class ActivityPageContainer extends React.Component {
         // }
         return (
             <div>
-                {this.createActivityItemTest()}
+                {this.createActivityItem()}
             </div>
         );
     }

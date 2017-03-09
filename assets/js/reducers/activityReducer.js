@@ -2,6 +2,12 @@
  * Created by ingrskar on 3/7/2017.
  */
 
+
+
+import getUpcomingActivities from '../APIFunctions';
+
+
+
 /*
 * A reducer is just a little pice of data that we want to return
 * It gets notified from all Action creators when they are fired, with the action type
@@ -43,7 +49,7 @@ export default function reducer(state={
                 timeEnd: new Date('2017', '04', '02'),
                 images: null,
                 videos: null,
-                
+
 
 
             }
@@ -61,5 +67,13 @@ export default function reducer(state={
             }
         }
     }
+
+    // use the api function to get all data from the db, and save in activities array
+    // so that we do not need to query for each request.
+
+
+
+
+
     return state
 }

@@ -98,6 +98,10 @@ def selectedUser(request):
         if profile.pk == int(pk):
             profile.is_active = True
             profile.save()
+            request.session['profile_name'] = profile.profile_name
+            request.session['profile_pk'] = profile.pk
+            print(request.session['profile_name'], request.session['profile_pk'])
+
     return render(request, "home.html", {"name": name})
 
 

@@ -16,8 +16,8 @@ export default function reducer(state={
                 description: 'Male',
                 price: 'Expensive',
                 date: new Date(),
-                timeStart: new Date(),
-                timeEnd: new Date(),
+                timeStart: new Date('2017','03','02'),
+                timeEnd: new Date('2017', '04', '02'),
                 images: null,
                 videos: null
 
@@ -32,8 +32,8 @@ export default function reducer(state={
                 description: 'Female',
                 price: 'Expensive',
                 date: new Date(),
-                timeStart: new Date(),
-                timeEnd: new Date(),
+                timeStart: new Date('2017','03','02'),
+                timeEnd: new Date('2017', '04', '02'),
                 images: null,
                 videos: null
 

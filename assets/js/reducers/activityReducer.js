@@ -13,7 +13,7 @@ export default function reducer(state={
     activities:
         [
             {
-                id: 23232323,
+                id: 1,
                 title: 'Sigve',
                 provider: 'Skaugvoll',
                 adaptions: 'Nada',
@@ -26,11 +26,11 @@ export default function reducer(state={
                 timeEnd: new Date('2017', '04', '02'),
                 images: null,
                 videos: null,
-                show: false,
+
 
             },
             {
-                id: 2131323,
+                id: 2,
                 title: 'Ellen',
                 provider: 'Bakksjo',
                 adaptions: 'Nada',
@@ -43,7 +43,7 @@ export default function reducer(state={
                 timeEnd: new Date('2017', '04', '02'),
                 images: null,
                 videos: null,
-                show: false,
+                
 
 
             }

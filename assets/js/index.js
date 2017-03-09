@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import WeekPicker from './WeekPicker';
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
-import LoginModal from './LoginModal';
 import ActivitiesContainer from './ActivitiesContainer';
 import AllActivitiesContainer from './containers/AllActivitiesContainer';
 

@@ -52,6 +52,40 @@ class ActivityPageContainer extends React.Component {
         })
     }
 
+    createActivityItemTest(){
+        console.log(this.props);
+        console.log('^ came from createActivityItem in APC' );
+        let poster = null;
+        return this.props.activities.activities.map((activity) => {
+            return (
+                <div
+                    key={activity.id}
+                >
+                    <Thumbnail
+                        className="activityBigStyle"
+                        src={poster}
+
+                        title="Klikk på aktiviteten for mer informasjon"
+                    >
+                    </Thumbnail>
+                    <h3>{activity.title}</h3>
+                    <div className="info-box-wrapper">
+                        <div className="icon-container">
+                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
+                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
+                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                        </div>
+                        <div className="about-container">
+                            <p>{activity.description}</p>
+                        </div>
+                    </div>
+
+                </div>
+            );
+        })
+    }
+
+
     render() {
         console.log(' su render me from ActivitiesPage Container ');
 
@@ -60,7 +94,7 @@ class ActivityPageContainer extends React.Component {
         // }
         return (
             <div>
-                {this.createActivityItem()}
+                {this.createActivityItemTest()}
             </div>
         );
     }

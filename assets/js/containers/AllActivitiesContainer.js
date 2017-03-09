@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import AllActivitiesBox from './components/AllActivitiesBox';
-import {getUpcomingActivities} from './APIFunctions';
-import ActivityPageLayout from "./components/ActivityPageLayout";
-import ActivityPageContainer from './container/ActivityPageContainer';
+import AllActivitiesBox from '../components/AllActivitiesBox';
+import {getUpcomingActivities} from '../APIFunctions';
+
+import ActivityPageContainer from '../components/ActivityPageComponent';
 import { connect } from "react-redux";
 
 class AllActivitiesContainer extends Component {

@@ -5,7 +5,7 @@ import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
 import LoginModal from './LoginModal';
 import ActivitiesContainer from './ActivitiesContainer';
-import AllActivitiesContainer from './AllActivitiesContainer';
+import AllActivitiesContainer from './containers/AllActivitiesContainer';
 
 //redux import
 import { Provider } from "react-redux";

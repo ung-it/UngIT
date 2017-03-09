@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AllActivitiesBox from './components/AllActivitiesBox';
 import {getUpcomingActivities} from './APIFunctions';
 import ActivityPageLayout from "./components/ActivityPageLayout";
+import ActivityPageContainer from './container/ActivityPageContainer';
 import { connect } from "react-redux";
 
 class AllActivitiesContainer extends Component {
@@ -14,6 +15,17 @@ class AllActivitiesContainer extends Component {
             ids: []
         }
     }
+
+    createActivityPageComponent() {
+        console.log(this.props.activities);
+        console.log('^from All activities Container');
+        return this.props.activities.activities.map((activity) => {
+            return (
+                <ActivityPageContainer key={activity.id} activity={activity}/>
+            )
+        });
+    }
+
 
     render() {
 
@@ -29,19 +41,16 @@ class AllActivitiesContainer extends Component {
             }
         };
 
-        
-        const activities = this.state.ids.map((id, i) => {
-           return(
-                   <ActivityPageLayout id={id} key={id} tabIndex={i+1}/>
-           )
-        });
+
+
+
 
         console.log('render');
         return (
             <div style={styles.activitiesContainerStyle}>
               <h3>Aktiviteter</h3>
               <div style={styles.activitiesStyle}>
-                  {activities}
+                  {this.createActivityPageComponent()}
               </div>
             </div>
         );

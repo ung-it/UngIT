@@ -62,4 +62,5 @@ export const fetchActivities = () => {
                 }).bind(this);
 
             })
-        })};
+        })
+};

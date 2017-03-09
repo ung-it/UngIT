@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from 'redux';
 import { fetchActivities } from "../actions/activitiesActions";
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
+import ActivityModal from '../ActivityModal';
 
 class ActivityPageContainer extends React.Component {
 
@@ -52,6 +53,8 @@ class ActivityPageContainer extends React.Component {
         })
     }
 
+    // <ActivityModal id={activity.id} show={activity.show}>test</ActivityModal> <-- add between </div< and </Thumbnail>
+
     createActivityItemTest(){
         console.log(this.props);
         //console.log('^ came from createActivityItem in APC' );
@@ -64,7 +67,7 @@ class ActivityPageContainer extends React.Component {
                     <Thumbnail
                         className="activityBigStyle"
                         src={poster}
-
+                        onClick={this.openActivityModal.bind(this)}
                         title="Klikk på aktiviteten for mer informasjon"
                     >
                         <h3>{activity.title}</h3>
@@ -83,6 +86,7 @@ class ActivityPageContainer extends React.Component {
                                 <p>{activity.description}</p>
                             </div>
                         </div>
+
                     </Thumbnail>
                 </div>
             );

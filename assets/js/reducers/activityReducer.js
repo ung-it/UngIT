@@ -2,6 +2,12 @@
  * Created by ingrskar on 3/7/2017.
  */
 
+/*
+* A reducer is just a little pice of data that we want to return
+* It gets notified from all Action creators when they are fired, with the action type
+* Thus, the reducer can listen for action type, and if it's something the reducer wants to handle and return some
+* data. It can do so.
+* */
 
 export default function reducer(state={
     activities:

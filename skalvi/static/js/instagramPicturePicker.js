@@ -21,8 +21,7 @@ function selectedImages(images) {
         image = "'" + image + "'";
         return $("img[src=" + image + "]");
     });
-   for (i in imageList) {
-       console.log(imageList[i])
+   for (var i in imageList) {
        imageClicked(imageList[i]);
    }
 }

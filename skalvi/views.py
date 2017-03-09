@@ -245,6 +245,7 @@ def activityGet(self, request, form):
 
     if accessToken:
         url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
+        # url = 'https://api.instagram.com/v1/users/5405987/media/recent?access_token=' + accessToken
         result = urllib.request.urlopen(url)
         content = json.loads(result.read().decode('ascii'))
         images = []

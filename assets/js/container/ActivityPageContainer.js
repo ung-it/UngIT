@@ -15,7 +15,7 @@ class ActivityPageContainer extends React.Component {
     }
 
     createActivityItem(){
-        console.log(this.props);
+        //console.log(this.props);
         //console.log('^ came from createActivityItem in APC' );
         return this.props.activities.activities.map((activity) => {
             let poster = null;
@@ -53,7 +53,7 @@ class ActivityPageContainer extends React.Component {
     }
 
     createActivityItemTest(){
-        //console.log(this.props);
+        console.log(this.props);
         //console.log('^ came from createActivityItem in APC' );
         let poster = null;
         return this.props.activities.activities.map((activity) => {
@@ -67,24 +67,23 @@ class ActivityPageContainer extends React.Component {
 
                         title="Klikk på aktiviteten for mer informasjon"
                     >
+                        <h3>{activity.title}</h3>
+                        <div className="info-box-wrapper">
+                            <div className="icon-container">
+                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                            </div>
+                            <div className="info-container">
+                                <p>{activity.date.getDate()}. {activity.date.getMonth()}</p>
+                                <p>{activity.timeStart.toDateString()} - {activity.timeEnd.toDateString()}</p>
+                                <p>{activity.location}</p>
+                            </div>
+                            <div className="about-container">
+                                <p>{activity.description}</p>
+                            </div>
+                        </div>
                     </Thumbnail>
-                    <h3>{activity.title}</h3>
-                    <div className="info-box-wrapper">
-                        <div className="icon-container">
-                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
-                        </div>
-                        <div className="info-container">
-                           <p>{activity.date.getDate()}. {activity.date.getMonth()}</p>
-                            <p>{activity.timeStart.toDateString()} - {activity.timeEnd.toDateString()}</p>
-                            <p>{activity.location}</p>
-                        </div>
-                        <div className="about-container">
-                            <p>{activity.description}</p>
-                        </div>
-                    </div>
-
                 </div>
             );
         })
@@ -115,16 +114,16 @@ class ActivityPageContainer extends React.Component {
 
 // Takes the provider store that is given when called, and gives this container the this.props.whatWeCallIt
 function mapStateToProps(state) {
-    console.log(state.activity);
-    console.log("^ is from mapStateToProps in APC");
+    //console.log(state.activity);
+    //console.log("^ is from mapStateToProps in APC");
     return {
         activities: state.activity
     };
 }
 
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({fetchActivities: fetchActivities }, dispatch);
-}
+// function matchDispatchToProps(dispatch){
+//     return bindActionCreators({fetchActivities: fetchActivities }, dispatch);
+// }
 
 // connect actually calles the functions so that their purposes are fulfilled
-export default connect(mapStateToProps, matchDispatchToProps)(ActivityPageContainer);
+export default connect(mapStateToProps)(ActivityPageContainer);

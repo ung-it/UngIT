@@ -11,12 +11,12 @@ class ActivityPageContainer extends React.Component {
 
     componentWillMount() {
         this.showMap = this.showMap.bind(this);
-        console.log('mount from ActivityPageContainer');
+        //console.log('mount from ActivityPageContainer');
     }
 
     createActivityItem(){
         console.log(this.props);
-        console.log('^ came from createActivityItem in APC' );
+        //console.log('^ came from createActivityItem in APC' );
         return this.props.activities.activities.map((activity) => {
             let poster = null;
             return (
@@ -53,8 +53,8 @@ class ActivityPageContainer extends React.Component {
     }
 
     createActivityItemTest(){
-        console.log(this.props);
-        console.log('^ came from createActivityItem in APC' );
+        //console.log(this.props);
+        //console.log('^ came from createActivityItem in APC' );
         let poster = null;
         return this.props.activities.activities.map((activity) => {
             return (
@@ -74,6 +74,11 @@ class ActivityPageContainer extends React.Component {
                             <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
                             <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
                             <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                        </div>
+                        <div className="info-container">
+                           <p>{activity.date.getDate()}. {activity.date.getMonth()}</p>
+                            <p>{activity.timeStart.toDateString()} - {activity.timeEnd.toDateString()}</p>
+                            <p>{activity.location}</p>
                         </div>
                         <div className="about-container">
                             <p>{activity.description}</p>

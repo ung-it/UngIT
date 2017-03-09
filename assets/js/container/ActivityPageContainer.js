@@ -57,6 +57,41 @@ class ActivityPageContainer extends React.Component {
         })
     }
 
+    createActivityItemTest(){
+        let poster = null;
+        return (
+                <div
+                    key={this.props.activity.id}
+                >
+                    <Thumbnail
+                        className="activityBigStyle"
+                        src={poster}
+                        onClick={this.openActivityModal.bind(this)}
+                        title="Klikk på aktiviteten for mer informasjon"
+                    >
+                        <h3>{this.props.activity.title}</h3>
+                        <div className="info-box-wrapper">
+                            <div className="icon-container">
+                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                            </div>
+                            <div className="info-container">
+                                <p>{this.props.activity.date.getDate()}. {this.props.activity.date.getMonth()}</p>
+                                <p>{this.props.activity.timeStart.toDateString()} - {this.props.activity.timeEnd.toDateString()}</p>
+                                <p>{this.props.activity.location}</p>
+                            </div>
+                            <div className="about-container">
+                                <p>{this.props.activity.description}</p>
+                            </div>
+                        </div>
+
+                    </Thumbnail>
+                </div>
+            );
+        };
+
+
 
     render() {
         console.log(' su render me from ActivitiesPage Container ');
@@ -66,7 +101,7 @@ class ActivityPageContainer extends React.Component {
         // }
         return (
             <div>
-                {this.createActivityItem()}
+                {this.createActivityItemTest()}
             </div>
         );
     }
@@ -81,17 +116,17 @@ class ActivityPageContainer extends React.Component {
 }
 
 // Takes the provider store that is given when called, and gives this container the this.props.whatWeCallIt
-function mapStateToProps(state) {
-    //console.log(state.activity);
-    //console.log("^ is from mapStateToProps in APC");
-    return {
-        activities: state.activity
-    };
-}
+// function mapStateToProps(state) {
+//     //console.log(state.activity);
+//     //console.log("^ is from mapStateToProps in APC");
+//     return {
+//         activities: state.activity
+//     };
+// }
 
 // function matchDispatchToProps(dispatch){
 //     return bindActionCreators({fetchActivities: fetchActivities }, dispatch);
 // }
 
 // connect actually calles the functions so that their purposes are fulfilled
-export default connect(mapStateToProps)(ActivityPageContainer);
+export default ActivityPageContainer;

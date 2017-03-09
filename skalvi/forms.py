@@ -42,3 +42,11 @@ class ActivityForm(forms.ModelForm):
     class Meta:
         model = Activity
         fields = ['activityName', 'provider', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'time_start', 'time_end', 'images', 'instagram', 'videos']
+
+class RegisterProfileForm(forms.ModelForm):
+    type = forms.BooleanField(label="Voksen", required=False)
+    profile_name = forms.CharField(label="Profilnavn", required=True)
+    phone = forms.CharField(label="Telefon", required=False)
+    class Meta:
+        model = UserProfile
+        fields = ["profile_name", 'phone', 'type']

@@ -1,0 +1,49 @@
+{% if not user.is_authenticated %}
+    <li class="dropdown" id="styledropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Logg inn</a>
+        <ul class="dropdown-menu" style="width: 20em;">
+            <li>
+                <form class="navbar-form" method="POST" action="/api/skalvi/login/">
+                    <fieldset class="textbox">
+                        <div class="input-group">
+                            <label for="id_username">Brukernavn</label>
+                            <input type="text" name="username" id="id_username" class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <label for="id_password">Passord</label>
+                            <input type="password" name="password" id="id_password" class="form-control">
+                        </div><br><br>
+                        <button type="submit" class="btn btn-primary">Logg inn</button>
+                    </fieldset>
+
+                    {% if error_message %}
+                        <p style="color: red;"><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <hr>
+                    <h5>Logg inn med Facebook</h5>
+                    <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLoginState();"></div>
+                </form>
+                <hr>
+                <a href="{% url 'skalvi:register' %}">Registrer ny bruker</a>
+            </li>
+        </ul>
+    </li>
+{% else %}
+
+    <li class="dropdown">
+    {% if name %}
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"> Hei {{ name }}</span></a>
+    {% else %}
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+
+    {% endif %}
+
+    <ul class="dropdown-menu">
+
+        </li><li><a href="{% url 'skalvi:mypage' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Min side</a></li>
+        </li><li><a href="{% url 'skalvi:choose' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Bytt bruker</a></li>
+        <li><a href="{% url 'skalvi:logout_user' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logg ut</a></li>
+    </ul>
+{% endif %}
+

@@ -1,8 +1,7 @@
 {% load base_extras %}
 {% load static %}
-
 <script src="//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8&appId=1658650714438155"></script>
-
+<link rel="stylesheet" href="{% static 'styles/style.css' %}">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -12,7 +11,61 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<link rel="stylesheet" href="../static/styles/style.css">
 <nav class="navbar navbar-inverse">
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId      : '1658650714438155',
+            cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v2.8' // use version 2.1
+            });
+        };
+
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                  fetchInfo();
+                }
+            });
+        }
+
+        function fetchInfo() {
+            var URL = "{% url 'skalvi:loginFacebook' %}";
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', 'GET', {fields: 'id, age_range, first_name, last_name, email, picture'}, function(response) {
+                console.log("response " + JSON.stringify(response));
+                var data = {
+                    id: response.id,
+                    age_range: response.age_range.min,
+                    first_name: response.first_name,
+                    last_name: response.last_name,
+                    email: response.email
+                };
+                $.post(URL, data, function(response){
+                    console.log(response)
+                });
+                setTimeout(function(){
+                    FB.logout(function(response) {
+                       // Person is now logged out
+                    });
+                    location.reload()
+                }, 500);
+            });
+        }
+    </script>
+
     <div class="content-padding">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -32,37 +85,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="/">Hjem</a></li>
                     <li><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
-                    {% if not user.is_authenticated %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Logg inn</a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <form class="navbar-form" method="POST" action="/api/skalvi/login/">
-                                        <fieldset class="textbox">
-                                            <div class="input-group">
-                                                <label for="id_username">Brukernavn</label>
-                                                <input type="text" name="username" id="id_username" class="form-control">
-                                            </div>
-                                            <div class="input-group">
-                                                <label for="id_password">Passord</label>
-                                                <input type="password" name="password" id="id_password" class="form-control">
-                                            </div>
-                                        </fieldset>
-                                        <br>
-                                        <button type="submit" class="btn btn-primary">Logg inn</button>
-                                    </form>
-                                    <a href="{% url 'skalvi:register' %}">Registrer</a>
-                                </li>
-                            </ul>
-                        </li>
-                    {% else %}
-                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
-                            <ul class="dropdown-menu">
-                                </li><li><a href="{% url 'skalvi:mypage' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Min side</a></li>
-                                <li><a href="{% url 'skalvi:logout_user' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logg ut</a></li>
-                            </ul>
-                    {% endif %}
+                    {% include "loginBox.html" %}
                 </ul>
             </div>
         </div>

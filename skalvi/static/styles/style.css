@@ -84,14 +84,6 @@ pre {
     border-width: thin;
 }
 
-.date-picker-container {
-    margin-top: 8px;
-}
-
-#time-period {
-    font-size: large;
-    padding-right: 15px;
-}
 
 .footer {
     padding: 10px;
@@ -106,3 +98,4 @@ pre {
 .footer-list {
     font-size: 8pt;
 }
+

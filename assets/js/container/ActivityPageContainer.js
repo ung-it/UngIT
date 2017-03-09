@@ -4,7 +4,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux';
-import { fetchActivities } from "../actions/activitiesActions";
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 import ActivityModal from '../ActivityModal';
 
@@ -77,18 +76,6 @@ class ActivityPageContainer extends React.Component {
     }
 }
 
-// Takes the provider store that is given when called, and gives this container the this.props.whatWeCallIt
-// function mapStateToProps(state) {
-//     //console.log(state.activity);
-//     //console.log("^ is from mapStateToProps in APC");
-//     return {
-//         activities: state.activity
-//     };
-// }
-
-// function matchDispatchToProps(dispatch){
-//     return bindActionCreators({fetchActivities: fetchActivities }, dispatch);
-// }
 
 // connect actually calles the functions so that their purposes are fulfilled
 export default ActivityPageContainer;

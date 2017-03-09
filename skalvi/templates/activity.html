@@ -78,12 +78,11 @@
                         <span class="mdl-textfield__error">Pris må være et tall</span>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        {{ form.date.value }}
-                        <input class="mdl-textfield__input" type="date" id="date" value="{{ form.date.value }}">
+                        <input class="mdl-textfield__input" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}">
                         <label class="mdl-textfield__label" for="age">Dato</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="text" id="age">
+                        <input class="mdl-textfield__input" type="text" id="age" value="{{ form.age.value }}">
                         <label class="mdl-textfield__label" for="age">Alder</label>
                     </div>
 {#                    {% for field in form %}#}

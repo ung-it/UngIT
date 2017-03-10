@@ -3,50 +3,30 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .models import *
-
+from django.contrib import messages
 import json
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template.response import TemplateResponse
 
+from django.core.exceptions import ObjectDoesNotExist
 
-# Login view, method = POST.
-@csrf_exempt
-def loginView(request):
-
-    json_string = request.body.decode('utf-8')  # request becomes string
-    json_string = json_string.split("&")
-
-    username = json_string[0].split("=")[1]
-    password = json_string[1].split("=")[1]
-
-    user = authenticate(username=username, password=password)
-
-    # Check that we got a user back
-    if user is not None:
-        if user.is_active:
-            if user.is_authenticated():
-                login(request, user)
-                print("Successfully logged in")
-                if user.is_staff:
-                    return redirect("/admin")
-                return redirect("skalvi:index")
-
-    print("Not logged in!")
-    return render(request, template_name="register.html")
+from django.db.models.base import ObjectDoesNotExist
 
 @csrf_exempt
 def loginFacebook(request):
-    print("Request", request.body)
-    json_string = request.body.decode('utf-8')  # request becomes string
-    parsed_json = json.loads(json_string)
+    infoArray = request.body.decode('utf-8')  # request becomes string
+    infoArray = infoArray.split("&")
 
-    if "email" in json_string:
-        email = parsed_json["email"]
+    if len(infoArray) > 4:
+        email = infoArray[4].split("=")[1]
+        email = email.replace("%40", "@")
     else:
         email = ""
 
-    facebookId = parsed_json["id"]
-    first_name = parsed_json["first_name"]
-    last_name = parsed_json["last_name"]
-    age = parsed_json["age_range"]
+    facebookId = infoArray[0].split("=")[1]
+    age = infoArray[1].split("=")[1]
+    first_name = infoArray[2].split("=")[1]
+    last_name = infoArray[3].split("=")[1]
 
     password = facebookId[:5] + first_name
     user = authenticate(username=facebookId, password=password)
@@ -56,19 +36,27 @@ def loginFacebook(request):
         user.set_password(facebookId[:5] + first_name)
         user.save()
 
-        if age >= 21:
+        if int(age) >= 21:
             type = "P"
         else:
             type = "C"
 
         userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name)
         userProfile.save()
-
-    login(request, user)
-    return redirect("skalvi:index")
-
-
-
+        login(request, user)
+        return redirect("skalvi:skalvi")
+    elif user is not None:
+        profiles = UserProfile.objects.filter(user=user)
+        login(request,user)
+        if user.is_staff:
+            return redirect("/admin")
+        elif len(profiles) > 1:
+            return redirect("skalvi:choose")
+        else:
+            for profile in profiles:
+                profile.is_active = True
+                profile.save()
+            return redirect("/")
 
 
 

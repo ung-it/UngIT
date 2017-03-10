@@ -22,6 +22,7 @@
 
 </head>
 <body>
+<div class="site-content">
     {% include "navbar.html" %}
 
     <!-- Use this tag to contain the page content /template -->
@@ -29,6 +30,12 @@
     {%  endblock %}
 
 
+
 {% render_bundle 'main' %}
+</div>
+<footer class="footer">
+    {% include "footer.html" %}
+</footer>
 </body>
 </html>
+

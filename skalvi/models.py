@@ -15,6 +15,7 @@ class UserProfile(models.Model):
     type = models.CharField(max_length=5)  # A = admin, P = parent, C = child, etc.
     phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
     profile_name = models.CharField(max_length=30)
+    is_active = models.BooleanField(default=False)
 
 
 
@@ -32,8 +33,9 @@ class Activity(models.Model):
     date = models.DateField()
     time_start = models.TimeField()
     time_end = models.TimeField()
-    images = models.ImageField(upload_to='images/',max_length=200, blank=True)
-    videos = models.ImageField(upload_to='videos/',max_length=200, blank=True)
+    images = models.ImageField(upload_to='images/',max_length=255, blank=True)
+    instagram = models.TextField(blank=True)
+    videos = models.ImageField(upload_to='videos/',max_length=255, blank=True)
 
     def was_published(self):
         return self.pub_date

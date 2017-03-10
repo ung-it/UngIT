@@ -31,7 +31,7 @@ class ActivityForm(forms.ModelForm):
     age = forms.CharField(max_length=80, label="Alder")
     location = forms.CharField(max_length=80, label="Sted")
     description = forms.CharField(widget=forms.Textarea, label="Om arrangement")
-    registration_required = forms.BooleanField(label='Arrangement krever registrering')
+    registration_required = forms.BooleanField(label='Arrangement krever registrering', required=False)
     price = forms.IntegerField(label="Pris")
     date = forms.DateField(label="Dato", widget=DateInput)
     time_start = forms.TimeField(label="Tid start")
@@ -41,4 +41,12 @@ class ActivityForm(forms.ModelForm):
 
     class Meta:
         model = Activity
-        fields = ['activityName', 'provider', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'time_start', 'time_end', 'images', 'videos']
+        fields = ['activityName', 'provider', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'time_start', 'time_end', 'images', 'instagram', 'videos']
+
+class RegisterProfileForm(forms.ModelForm):
+    type = forms.BooleanField(label="Voksen", required=False)
+    profile_name = forms.CharField(label="Profilnavn", required=True)
+    phone = forms.CharField(label="Telefon", required=False)
+    class Meta:
+        model = UserProfile
+        fields = ["profile_name", 'phone', 'type']

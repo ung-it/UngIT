@@ -9,7 +9,6 @@ class AllActivitiesContainer extends Component {
 
     constructor(props) {
         super(props);
-        console.log("AllActivitiesContainer is here");
         this.state = {
 
             ids: []
@@ -17,9 +16,7 @@ class AllActivitiesContainer extends Component {
     }
 
     createActivityPageComponent() {
-        console.log(this.props.activities);
-        console.log('^from All activities Container');
-        return this.props.activities.activities.map((activity) => {
+        return this.props.activities.map((activity) => {
             return (
                 <ActivityPageContainer key={activity.id} activity={activity}/>
             )
@@ -42,10 +39,6 @@ class AllActivitiesContainer extends Component {
         };
 
 
-
-
-
-        console.log('render');
         return (
             <div style={styles.activitiesContainerStyle}>
               <h3>Aktiviteter</h3>
@@ -64,8 +57,6 @@ class AllActivitiesContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    //console.log(state.activity);
-    //console.log("^ is from mapStateToProps in APC");
     return {
         activities: state.activity
     };

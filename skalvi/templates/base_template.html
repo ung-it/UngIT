@@ -9,11 +9,10 @@
         {% endblock %}
     </title>
 
-    <!-- Every page needs access to jqueery -->
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+
     <!--Every page needs access to bootstrap -->
     <link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
-    <script src={% static 'js/bootstrap.min.js' %}></script>
+
     <!--Every page needs access and to use the style.css file -->
     <link rel="stylesheet" href="{% static "styles/style.css" %}">
 
@@ -32,11 +31,23 @@
 
 
 
-{% render_bundle 'main' %}
 </div>
 <footer class="footer">
     {% include "footer.html" %}
 </footer>
+
+<!-- Every page needs to access React -->
+{% render_bundle 'main' %}
+<!-- Every page needs access to jqueery -->
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<!--Every page needs access to bootstrap -->
+<script src={% static 'js/bootstrap.min.js' %}></script>
+<!--Every page needs access to facebook login -->
+<script src="//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8&appId=1658650714438155"></script>
+<!-- Use this tag to load scripts after page has loaded -->
+{% block explicitPageFooter %}
+{% endblock %}
+
 </body>
 </html>
 

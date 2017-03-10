@@ -46,12 +46,10 @@ if (document.getElementById('loginComponent')) {
 }
 
 if (document.getElementById('allActivities')) {
-    console.log("Hello from index");
     ReactDOM.render(
         <Provider store={store}>
             <AllActivitiesContainer />
         </Provider>, document.getElementById('allActivities')
     )
-    console.log("bye from index");
 }
 

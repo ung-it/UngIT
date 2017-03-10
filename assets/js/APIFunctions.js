@@ -33,3 +33,16 @@ function fetchFromServer(query) {
         }
     });
 }
+
+export function getAllActivitiesAsArrayForReducer() {
+    fetchFromServer('api/activities').then((data) => {
+        let tempArray = [];
+        data.map((activity) => {
+            let tempActivity = activity.fields;
+            tempActivity['id'] = activity.pk;
+            tempArray.push(tempActivity);
+        });
+        console.log(tempArray);
+        console.log('^  TempArray from activityReducer setStateFromDB');
+    })
+}

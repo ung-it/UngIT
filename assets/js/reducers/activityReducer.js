@@ -15,48 +15,8 @@ import getUpcomingActivities from '../APIFunctions';
 * data. It can do so.
 * */
 
-export default function reducer(state={
-    activities:
-        [
-            {
-                id: 1,
-                title: 'Sigve',
-                provider: 'Skaugvoll',
-                adaptions: 'Nada',
-                age: '22',
-                location: 'Gård',
-                description: 'Male',
-                price: 'Expensive',
-                date: new Date(),
-                timeStart: new Date('2017','03','02'),
-                timeEnd: new Date('2017', '04', '02'),
-                images: null,
-                videos: null,
+export default function reducer(state=null, action) {
 
-
-            },
-            {
-                id: 2,
-                title: 'Ellen',
-                provider: 'Bakksjo',
-                adaptions: 'Nada',
-                age: '21',
-                location: 'by',
-                description: 'Female',
-                price: 'Expensive',
-                date: new Date(),
-                timeStart: new Date('2017','03','02'),
-                timeEnd: new Date('2017', '04', '02'),
-                images: null,
-                videos: null,
-
-
-
-            }
-        ]
-}, action) {
-
-    console.log('Activityreducer');
 
 
     switch (action.type) {

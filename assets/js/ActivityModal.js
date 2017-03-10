@@ -115,14 +115,23 @@ class ActivityModal extends Component {
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">
-                            <div><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
-                            <div><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {timeStart} - {timeEnd}</div>
-                            <div><Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {location}</div>
-                            <div><Button onClick={this.showMap}>Vis på kart</Button></div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {timeStart} - {timeEnd}</div>
+                            <div className="modal-infobox1-element">
+                                <Glyphicon glyph="glyphicon glyphicon-map-marker"/>
+                                Sted: {location}
+                            </div>
+                            <div className="modal-infobox1-map">
+                                <a onClick={this.showMap} >Vis på kart</a>
+                            </div>
                         </div>
                         <div className="modal-infobox2">
-                            Påmelding
-                            <Button>Meld på!</Button>
+                            <div className="modal-infobox2-element">
+                                Påmelding til {title}
+                            </div>
+                            <div className="modal-infobox2-element">
+                                <Button bsStyle="info">Meld meg på</Button>
+                            </div>
                         </div>
                     </div>
                     <div>

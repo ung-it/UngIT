@@ -29,6 +29,7 @@
     width: 100%;
     textAlign: center;
     position: relative;
+    padding-left: 10px;
 }
 .modal-provider-title {
     position: absolute;
@@ -42,7 +43,9 @@
 }
 
 .modal-info-container {
-    display: flex
+    display: flex;
+    margin-top: 20px;
+    font-size: 13pt;
 }
 
 .modal-infobox1 {
@@ -52,9 +55,23 @@
     lineHeight: 2;
 }
 
+.modal-infobox1-element {
+    padding-top: 5px;
+}
+
+.modal-infobox1-map {
+    margin-left: 15px;
+    font-size: 11pt;
+}
+
 .modal-infobox2 {
     width: 50%;
     backgroundColor: rgb(207, 106, 255)
+}
+
+.modal-infobox2-element {
+    text-align: center;
+    padding-top: 10px;
 }
 
 .modal-media-container {

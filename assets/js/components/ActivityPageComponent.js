@@ -7,6 +7,10 @@ import { bindActionCreators } from 'redux';
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 import ActivityModal from '../ActivityModal';
 
+import {getMonth, getDay} from '../DateFunctions';
+
+
+
 class ActivityPageContainer extends React.Component {
 
 
@@ -47,8 +51,8 @@ class ActivityPageContainer extends React.Component {
                             <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
                         </div>
                         <div className="info-container">
-                            <p>{this.props.activity.date.getDate()}. {this.props.activity.date.getMonth()}</p>
-                            <p>{this.props.activity.timeStart.toDateString()} - {this.props.activity.timeEnd.toDateString()}</p>
+                            <p>{this.props.activity.date.getDate()}. {getMonth(this.props.activity.date.getMonth())}</p>
+                            <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
                             <p>{this.props.activity.location}</p>
                         </div>
                         <div className="about-container">
@@ -64,8 +68,6 @@ class ActivityPageContainer extends React.Component {
 
 
     render() {
-        console.log(' su render me from ActivitiesPage Container ');
-
         // if (this.state.images.length > 0 && this.state.images[0] != "") {
         //     poster = "/media/" + this.state.images[0];
         // }

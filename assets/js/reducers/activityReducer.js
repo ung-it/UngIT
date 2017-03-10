@@ -15,7 +15,7 @@ import getUpcomingActivities from '../APIFunctions';
 * data. It can do so.
 * */
 
-export default function reducer(state=null, action) {
+export default function Activityreducer(state=null, action) {
 
 
 

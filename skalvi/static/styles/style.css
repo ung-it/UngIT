@@ -74,8 +74,6 @@ a.navbar-brand {
 
 .banner-container {
     z-index: -1;
-    height: 300px;
-    overflow: hidden;
 }
 
 pre {

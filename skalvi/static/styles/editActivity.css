@@ -14,3 +14,11 @@
     box-sizing: border-box;
     border: 1em solid #2ecc40;
 }
+
+.input-box {
+    display: block !important;
+}
+
+.input-box span {
+    font-weight: 400;
+}

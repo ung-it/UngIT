@@ -33,3 +33,15 @@ function fetchFromServer(query) {
         }
     });
 }
+
+export function getAllActivitiesAsArrayForReducer() {
+    return fetch('/api/activities/', {
+        credentials: "same-origin"
+    }).then(response => {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json()
+    });
+
+}

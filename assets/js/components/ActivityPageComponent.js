@@ -19,6 +19,7 @@ class ActivityPageContainer extends React.Component {
         this.state = {
             show: false,
         }
+
     }
 
 
@@ -29,9 +30,13 @@ class ActivityPageContainer extends React.Component {
 
 
 
-
     createActivityItem(){
         let poster = null;
+        if(this.props.activity.images.length > 0 && this.props.activity.images[0] != ''){
+            console.log(this.props.activity.images);
+            poster = '/media/'+ this.props.activity.images;
+            console.log(poster);
+        }
         return (
             <div
                 key={this.props.activity.id}
@@ -67,9 +72,6 @@ class ActivityPageContainer extends React.Component {
 
 
     render() {
-        // if (this.state.images.length > 0 && this.state.images[0] != "") {
-        //     poster = "/media/" + this.state.images[0];
-        // }
         return (
             <div>
                 {this.createActivityItem()}

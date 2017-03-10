@@ -21,9 +21,10 @@ function getActivitiesFromDB(){
         body.map((activity) => {
             let act = activity.fields;
             act['id'] = activity.pk;
+            console.log(act);
             let obj = {
                 id: act.id,
-                title: act.title,
+                activityName: act.activityName,
                 provider: act.provider,
                 adaptions: act.adaptions,
                 age: act.age,

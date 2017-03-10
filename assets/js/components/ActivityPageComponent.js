@@ -29,7 +29,6 @@ class ActivityPageContainer extends React.Component {
 
 
 
-    // <ActivityModal id={activity.id} show={activity.show}>test</ActivityModal> <-- add between </div< and </Thumbnail>
 
     createActivityItem(){
         let poster = null;

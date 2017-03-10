@@ -30,6 +30,14 @@ class ActivityModal extends Component {
         };
 
         getActivityInfo(this.props.id, function (data) {
+            let images = data.images.split(",").filter(image => {
+                return image != "";
+            }).map(image => {
+                return "/media/" + image;
+            });
+            images = images.concat(data.instagram.split(",").filter(image => {
+                return image != "";
+            }));
             this.setState({
                 title: data.activityName,
                 provider: data.provider,
@@ -41,7 +49,7 @@ class ActivityModal extends Component {
                 date: new Date(data.date),
                 timeStart: data.time_start.substring(0,data.time_start.lastIndexOf(":")),
                 timeEnd: data.time_end.substring(0,data.time_end.lastIndexOf(":")),
-                images: data.images.split(","),
+                images: images,
                 videos: data.videos.split(",")
             });
         }.bind(this));
@@ -75,9 +83,8 @@ class ActivityModal extends Component {
         let imageContainer = null;
         if (this.state.images.length > 0 && this.state.images[0] != "") {
             const images = this.state.images.map((image, i) => {
-                const path = "/media/" + image;
                 return (
-                    <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
+                    <img className="modal-image" src={image} alt="Et bilde fra arrangementet" key={i}></img>
                 )
             });
             imageContainer =

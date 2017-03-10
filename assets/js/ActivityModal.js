@@ -75,7 +75,7 @@ class ActivityModal extends Component {
             });
             videoContainer =
                 <div>
-                    <h3>Video fra arrangementet</h3>
+                    <h3 className="modal-image-header">Video fra arrangementet</h3>
                     {videos}
                 </div>;
         }
@@ -89,8 +89,10 @@ class ActivityModal extends Component {
             });
             imageContainer =
                 <div>
-                    <h3>Bilder fra arrangementet</h3>
-                    {images}
+                    <h3 className="modal-image-header">Bilder fra arrangementet</h3>
+                    <div className="modal-image-container">
+                        {images}
+                    </div>
                 </div>;
         }
 
@@ -135,8 +137,8 @@ class ActivityModal extends Component {
                         </div>
                     </div>
                     <div>
-                        <h2>Om arrangement</h2>
-                        <pre>{description}</pre>
+                        <h2 className="modal-description-header">Om arrangementet</h2>
+                        <p className="modal-description">{description}</p>
                     </div>
                     {videoContainer}
                     {imageContainer}

@@ -81,8 +81,12 @@
                         <label class="mdl-textfield__label" for="age">Dato</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                        <input class="mdl-textfield__input" type="text" id="age" value="{{ form.age.value }}">
-                        <label class="mdl-textfield__label" for="age">Alder</label>
+                        <input class="mdl-textfield__input" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}">
+                        <label class="mdl-textfield__label" for="time_start">Tid start</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                        <input class="mdl-textfield__input" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}">
+                        <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
                     </div>
 {#                    {% for field in form %}#}
 {#                        <div class="form-group">#}

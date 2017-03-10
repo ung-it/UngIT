@@ -1,18 +1,15 @@
 {% load base_extras %}
 {% load static %}
-<script src="//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8&appId=1658650714438155"></script>
-<link rel="stylesheet" href="{% static 'styles/style.css' %}">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+{% block explicitPageHeader %}
+    <script src="//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8&appId=1658650714438155"></script>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+{% endblock %}
 
-<link rel="stylesheet" href="../static/styles/style.css">
 <nav class="navbar navbar-inverse">
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <div id="fb-root"></div>
     <script>
         window.fbAsyncInit = function() {
@@ -75,9 +72,9 @@
             );
         }
     </script>
+    <div class="nav-color">
 
-    <div class="content-padding">
-        <div class="container-fluid">
+            <div class="content">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
@@ -86,7 +83,7 @@
                 </button>
                 <div class="logo-div">
                     <a class="navbar-brand" href="/">
-                        <img src="{% static "images/logoSmall.png" %}" id="logo-image" alt="Logo">
+                        <img src="{% static "images/logo.png" %}" id="logo-image" alt="Logo">
                     </a>
                 </div>
 
@@ -98,6 +95,17 @@
                     {% include "loginBox.html" %}
                 </ul>
             </div>
-        </div>
+            </div>
     </div>
 </nav>
+
+<script>
+
+    $(".nav a").on("click", function(){
+        console.log("click");
+        $(".nav").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+    });
+
+
+</script>

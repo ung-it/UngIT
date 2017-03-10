@@ -11,17 +11,21 @@
 }
 
 .modal-header {
-    background-color: #f5f5f5;
+    background-color: rgb(244, 244, 244);
     background-position-y: 250px;
 }
 
 .modal-video {
-    width: 300px;
+    width: 290px;
     margin: 5px;
 }
 
+.modal-image-container {
+    padding: 0 20px;
+}
+
 .modal-image{
-    width: 300px;
+    height: 290px;
     margin: 5px;
 }
 
@@ -29,6 +33,7 @@
     width: 100%;
     textAlign: center;
     position: relative;
+    padding-left: 10px;
 }
 .modal-provider-title {
     position: absolute;
@@ -38,26 +43,57 @@
 }
 
 .modal-adapted {
-    backgroundColor: rgb(207, 226, 243)
+    backgroundColor: rgb(255, 255, 255);
 }
 
 .modal-info-container {
-    display: flex
+    display: flex;
+    margin-top: 20px;
+    padding: 0 20px;
+    font-size: 13pt;
 }
 
 .modal-infobox1 {
     width: 50%;
-    backgroundColor: rgb(207, 206, 255);
     textAlign: left-justify;
     lineHeight: 2;
 }
 
+.modal-infobox1-element {
+    padding-top: 5px;
+}
+
+.modal-infobox1-map {
+    margin-left: 15px;
+    font-size: 11pt;
+}
+
 .modal-infobox2 {
     width: 50%;
-    backgroundColor: rgb(207, 106, 255)
+}
+
+.modal-infobox2-element {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.modal-description-header {
+    color: #ffc62f !important;
+}
+
+.modal-description {
+    font-size: 13pt;
+    padding: 0 20px;
+}
+
+.modal-image-header {
+    color: #83d32c;
 }
 
 .modal-media-container {
 
+}
 
+.modal-glyphicon {
+    color: #f39019;
 }

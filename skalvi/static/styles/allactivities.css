@@ -1,0 +1,16 @@
+#new-activity-button {
+    float: right;
+    margin-top: -80px;
+}
+
+#date-picker-text {
+    /*margin: 7px 0 0 0;*/
+    padding: 0;
+    font-size: 15pt;
+}
+
+#time-period {
+    font-size: 15pt;
+    padding-right: 15px;
+}
+

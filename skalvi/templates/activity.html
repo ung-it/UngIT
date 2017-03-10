@@ -19,125 +19,103 @@
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
+        <div class="content activity-wrapper">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-    <h2>{{ activity.activityName }}</h2>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title">Oppdater Aktivitet</span>
-                <!-- Add spacer, to align navigation to the right -->
-                <div class="mdl-layout-spacer"></div>
-                <!-- Navigation. We hide it in small screens. -->
-                <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" href="">Link</a>
-                </nav>
-            </div>
-        </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Hurtig Navigasjon</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Link</a>
-            </nav>
-        </div>
-        <main class="mdl-layout__content">
-            <div class="page-content content">
-                <form action="" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
+            <ul class='mdl-list'>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                            <input class="mdl-textfield__input" type="text" id="activityName" value="{{ form.activityName.value }}">
+                            <label class="mdl-textfield__label" for="activityName">Navn på aktivitet</label>
+                        </div>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                            <input class="mdl-textfield__input" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}">
+                            <label class="mdl-textfield__label" for="age">Dato</label>
+                        </div>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}">
+                            <label class="mdl-textfield__label" for="time_start">Tid start</label>
+                        </div>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}">
+                            <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
+                        </div>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                            <input class="mdl-textfield__input" type="text" id="location" value="{{ form.location.value }}">
+                            <label class="mdl-textfield__label" for="location">Sted</label>
+                        </div>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <div id="adaptions-container"></div>
 
-                    <ul class='mdl-list'>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                                    <input class="mdl-textfield__input" type="text" id="activityName" value="{{ form.activityName.value }}">
-                                    <label class="mdl-textfield__label" for="activityName">Navn på aktivitet</label>
-                                </div>
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                                    <input class="mdl-textfield__input" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}">
-                                    <label class="mdl-textfield__label" for="age">Dato</label>
-                                </div>
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}">
-                                    <label class="mdl-textfield__label" for="time_start">Tid start</label>
-                                </div>
-                            </span>
-                            <span class="mdl-list__item-secondary-content">
-                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}">
-                                    <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
-                                </div>
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                                    <input class="mdl-textfield__input" type="text" id="location" value="{{ form.location.value }}">
-                                    <label class="mdl-textfield__label" for="location">Sted</label>
-                                </div>
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <div id="adaptions-container"></div>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                            <input class="mdl-textfield__input" type="text" id="provider" value="{{ form.provider.value }}">
+                            <label class="mdl-textfield__label" for="provider">Arrangør</label>
+                        </div>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                            <textarea class="mdl-textfield__input" type="text" rows= "5" id="description">{{ form.description.value }}</textarea>
+                            <label class="mdl-textfield__label" for="description">Om arrangement</label>
+                        </div>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect input-box" for="registration_required">
+                            {% if form.registration_required.value %}
+                                <input type="checkbox" id="registration_required" class="mdl-checkbox__input" checked>
+                            {% else %}
+                                <input type="checkbox" id="registration_required" class="mdl-checkbox__input">
+                            {% endif %}
+                            <span class="mdl-checkbox__label">Arrangement krever registrering</span>
+                        </label>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}">
+                            <label class="mdl-textfield__label" for="price">Pris i kr</label>
+                            <span class="mdl-textfield__error">Pris må være et tall</span>
+                        </div>
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
 
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                                    <input class="mdl-textfield__input" type="text" id="provider" value="{{ form.provider.value }}">
-                                    <label class="mdl-textfield__label" for="provider">Arrangør</label>
-                                </div>
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                                    <textarea class="mdl-textfield__input" type="text" rows= "5" id="description">{{ form.description.value }}</textarea>
-                                    <label class="mdl-textfield__label" for="description">Om arrangement</label>
-                                </div>
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect input-box" for="registration_required">
-                                    {% if form.registration_required.value %}
-                                        <input type="checkbox" id="registration_required" class="mdl-checkbox__input" checked>
-                                    {% else %}
-                                        <input type="checkbox" id="registration_required" class="mdl-checkbox__input">
-                                    {% endif %}
-                                    <span class="mdl-checkbox__label">Arrangement krever registrering</span>
-                                </label>
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}">
-                                    <label class="mdl-textfield__label" for="price">Pris i kr</label>
-                                    <span class="mdl-textfield__error">Pris må være et tall</span>
-                                </div>
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
 
-                            </span>
-                        </li>
-                        <li class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-
-                            </span>
-                        </li>
-                    </ul>
+                    </span>
+                </li>
+            </ul>
 
 {#                    {% for field in form %}#}
 {#                        <div class="form-group">#}
@@ -165,14 +143,12 @@
 {#                            </div>#}
 {#                        </div>#}
 {#                    {% endfor %}#}
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Lagre</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Lagre</button>
+                </div>
             </div>
-        </main>
+        </form>
     </div>
 
 {% endblock %}

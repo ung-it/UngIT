@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
-import AllActivitiesBox from './AllActivitiesBox';
-import {getUpcomingActivities} from './APIFunctions';
+import AllActivitiesBox from '../components/AllActivitiesBox';
+import {getUpcomingActivities} from '../APIFunctions';
+
+import ActivityPageContainer from '../components/ActivityPageComponent';
+import { connect } from "react-redux";
 
 class AllActivitiesContainer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+
             ids: []
         }
     }
+
+    createActivityPageComponent() {
+        return this.props.activities.map((activity) => {
+            return (
+                <ActivityPageContainer key={activity.id} activity={activity}/>
+            )
+        });
+    }
+
 
     render() {
 
@@ -25,17 +38,12 @@ class AllActivitiesContainer extends Component {
             }
         };
 
-        const activities = this.state.ids.map((id, i) => {
-           return(
-               <AllActivitiesBox id={id} key={id} tabIndex={i+1}/>
-           )
-        });
 
         return (
             <div style={styles.activitiesContainerStyle}>
               <h3>Aktiviteter</h3>
               <div style={styles.activitiesStyle}>
-                  {activities}
+                  {this.createActivityPageComponent()}
               </div>
             </div>
         );
@@ -48,4 +56,11 @@ class AllActivitiesContainer extends Component {
     }
 }
 
-export default AllActivitiesContainer;
+function mapStateToProps(state) {
+    return {
+        activities: state.activity
+    };
+}
+
+
+export default connect(mapStateToProps)(AllActivitiesContainer);

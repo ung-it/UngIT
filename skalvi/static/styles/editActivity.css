@@ -19,6 +19,6 @@
     display: block !important;
 }
 
-.input-box label {
-
+.input-box span {
+    font-weight: 400;
 }

@@ -35,14 +35,13 @@ function fetchFromServer(query) {
 }
 
 export function getAllActivitiesAsArrayForReducer() {
-    fetchFromServer('api/activities').then((data) => {
-        let tempArray = [];
-        data.map((activity) => {
-            let tempActivity = activity.fields;
-            tempActivity['id'] = activity.pk;
-            tempArray.push(tempActivity);
-        });
-        console.log(tempArray);
-        console.log('^  TempArray from activityReducer setStateFromDB');
-    })
+    return fetch('/api/activities/', {
+        credentials: "same-origin"
+    }).then(response => {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json()
+    });
+
 }

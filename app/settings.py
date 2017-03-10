@@ -51,6 +51,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
+# SESSION_ENGINE = {
+#
+# }
+
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [

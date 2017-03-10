@@ -1,6 +1,11 @@
 {% extends "base_template.html" %}
 {% load static %}
 
+{% block explicitPageHeader %}
+    <script type="text/javascript" src={% static 'js/instagramPicturePicker.js' %}></script>
+    <link rel="stylesheet" href="{% static "styles/instagram.css" %}">
+{% endblock %}
+
 {% block pageTitle %}
     Oppdater Aktivitet
 {% endblock %}
@@ -13,15 +18,38 @@
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
-
     <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% include 'form_template.html' %}
+        {% for field in form %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <span class="text-danger small">{{ field.errors }}</span>
+                </div>
+                <label class="control-label col-sm-2" for="field_title">{{ field.label_tag }}</label>
+                <div class="col-sm-10">
+                    {% if field.label == "Instagram" %}
+                        {% if images %}
+                            <div>Klikk på et bilde for å legge det til</div>
+                            <input name="instagram" id="instagramImages" type="hidden">
+                            <div id="instagram-div">
+                                {% for image in images %}
+                                    <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
+                                {% endfor %}
+                            </div>
+                            <script> selectedImages("{{ field.value }}") </script>
+                            {% else %}
+                                <a class="btn btn-info" role="button" href={{ link }} >Finn bilde på Instagram</a>
+                        {% endif %}
+                        {% else %}
+                            {{ field }}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-success">Lagre</button>
             </div>
         </div>
     </form>
-
 {% endblock %}

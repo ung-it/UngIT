@@ -6,6 +6,7 @@ import SuitedForPicker from './SuitedForPicker';
 import LoginModal from './LoginModal';
 import ActivitiesContainer from './ActivitiesContainer';
 import AllActivitiesContainer from './AllActivitiesContainer';
+import AdaptionChips from './AdaptionChips';
 
 if (document.getElementById('activities')) {
     ReactDOM.render(
@@ -46,5 +47,12 @@ if (document.getElementById('allActivities')) {
     ReactDOM.render(
         <AllActivitiesContainer/>,
         document.getElementById('allActivities')
+    );
+}
+
+if (document.getElementById('adaptions-container')) {
+    ReactDOM.render(
+        <AdaptionChips/>,
+        document.getElementById('adaptions-container')
     );
 }

@@ -1,34 +1,32 @@
-<footer id="footer">
-    <div class="container">
-        <!-- <p class="text-muted">Place sticky footer content here.</p> -->
-        <div class="row">
-            <div class="col-sm-4">Navigasjon
-                <ul>
-                    <li>Hovedside</li>
-                    <li>Alle aktiviteter</li>
-                    <li>Min side</li>
-                    <li>Formum</li>
-                </ul>
-
-            </div>
-
-            <div class="col-sm-4">Kontaktinformasjon
-
-            </div>
-
-            <div class="col-sm-4">
-                <p class="text-muted">Versjon </p>
-                <p class="text-muted">Lisens: Apache-2.0 </p>
-                <p class="text-muted">Laget av </p>
-                <ul class="text-muted">
-                    <li>Martin Stigen</li>
-                    <li>Ingrid Skar</li>
-                    <li>Andreas Norstein</li>
-                    <li>Christina H. Andresen</li>
-                    <li>Thomas Wold</li>
-                    <li>Sigve Skaugvoll</li>
-                </ul>
+{% load base_extras %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <p class="footer-header">Navigasjon</p>
+            <div class="footer-list">
+                <p>Hovedside</p>
+                <p>Alle aktiviteter</p>
+                <p>Min side</p>
+                <p>Formum</p>
             </div>
         </div>
+
+
+
+        <div class="col-md-4">
+            <p class="footer-header">Laget av</p>
+            <div class="footer-list">
+                <p>Christina H. Andresen</p>
+                <p>Andreas Norstein</p>
+                <p>Ingrid Skar</p>
+                <p>Martin Stigen</p>
+                <p>Sigve Skaugvoll</p>
+                <p>Thomas Wold</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p class="footer-header">Versjon: </p>
+            <p class="footer-header">Lisens: Apache-2.0 </p>
+        </div>
     </div>
-</footer>
+</div>

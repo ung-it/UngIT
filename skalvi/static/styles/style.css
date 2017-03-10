@@ -1,12 +1,14 @@
 html {
     position: relative;
     height: 100%;
+
 }
 
 body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: rgb(244, 244, 244);
 }
 
 .site-content {
@@ -23,6 +25,10 @@ a.navbar-brand {
     padding: 0;
 }
 
+.nav-color {
+    background-color: rgb(55, 55, 55);
+}
+
 .content {
     padding-left: 100px;
     padding-right: 100px;
@@ -35,18 +41,35 @@ a.navbar-brand {
 .navbar-right > li {
     padding: 0 5px;
 }
+
+.active > a{
+    background: rgb(0,256,0);
+}
+
+ .navbar-default .navbar-nav > .active > a,
+ .navbar-default .navbar-nav > .active > a:hover,
+ .navbar-default .navbar-nav > .active > a:focus {
+      color: #000;
+      background: #67c200;
+ }
+
 .logo-div {
     position: absolute;
 	z-index: 1;
 	text-align: center;
-	background-color: rgb(34,34,34);
+	background-color: rgb(55, 55, 55);
 
 	/*margin: -30px 37%;*/
-	margin-top: 20px;
+	margin-top: 30px;
 	padding: 10px;
-	width: 185px;
-	height: 100px;
+	/*width: 185px;
+	height: 75px;*/
     border-radius: 4px;
+}
+
+#logo-image {
+    height: 75px;
+    margin-top: -20px;
 }
 
 .banner-container {
@@ -71,19 +94,36 @@ pre {
     border-width: thin;
 }
 
-.date-picker-container {
-    margin-top: 8px;
-}
-
-#time-period {
-    font-size: large;
-    padding-right: 15px;
-}
-
-
-
 
 .footer {
-    height: 230px;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
 }
 
+.footer-header {
+    font-weight: bold;
+}
+
+.footer-list {
+    font-size: 8pt;
+}
+
+
+
+li.dropdown.open > a:focus {
+    color: #000 !important;
+    background: #ffdb61 !important;
+    background: -webkit-linear-gradient(left top, #ffdb61, #ffb200) !important; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #ffdb61, #ffb200) !important; /* Standard syntax */
+}
+
+.active > a {
+    color: #000 !important;
+    background: #ffdb61 !important;
+    background: -webkit-linear-gradient(left top, #ffdb61, #ffb200) !important; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #ffdb61, #ffb200) !important; /* Standard syntax */
+}

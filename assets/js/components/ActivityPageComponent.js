@@ -42,7 +42,7 @@ class ActivityPageContainer extends React.Component {
                     onClick={this.openActivityModal.bind(this)}
                     title="Klikk på aktiviteten for mer informasjon"
                 >
-                    <h3>{this.props.activity.title}</h3>
+                    <h3>{this.props.activity.activityName}</h3>
                     <div className="info-box-wrapper">
                         <div className="icon-container">
                             <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>

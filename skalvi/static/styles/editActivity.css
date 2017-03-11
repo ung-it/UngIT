@@ -1,3 +1,7 @@
+.activity-wrapper {
+    margin-top: 5em;
+}
+
 .instagram-image {
     height: 15em;
     padding: 0.2em;
@@ -21,4 +25,12 @@
 
 .input-box span {
     font-weight: 400;
+}
+
+.adaptions-container {
+    display: block; !important;
+}
+
+.adaptions-box {
+
 }

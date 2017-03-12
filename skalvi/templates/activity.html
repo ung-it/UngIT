@@ -1,4 +1,5 @@
 {% extends "base_template.html" %}
+{% load render_bundle from webpack_loader %}
 {% load static %}
 
 {% block explicitPageHeader %}
@@ -151,4 +152,8 @@
         </form>
     </div>
 
+{% endblock %}
+
+{% block explicitPageFooter %}
+    {% render_bundle 'adaptionChips' %}
 {% endblock %}

@@ -21,8 +21,8 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="/">Hjem</a></li>
-                    <li><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
+                    <li {% if "/" == request.path %}class="active"{% endif %}><a href="/">Hjem</a></li>
+                    <li {% if "allactivities" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
                     {% include "loginBox.html" %}
                 </ul>
             </div>

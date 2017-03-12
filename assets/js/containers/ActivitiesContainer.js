@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
-import ActivityBox from './ActivityBox';
-import {getUpcomingActivities} from './APIFunctions';
+import AllActivitiesBox from '../components/AllActivitiesBox';
+import {getUpcomingActivities} from '../APIFunctions';
+
+import HomePageContainer from '../components/HomePageComponent';
+import { connect } from "react-redux";
 
 class ActivitiesContainer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+
             ids: []
         }
     }
+
+    createHomePageComponent() {
+        return this.props.activities.map((activity) => {
+            return (
+                <HomePageContainer key={activity.id} activity={activity}/>
+            )
+        });
+    }
+
 
     render() {
 
@@ -25,19 +38,13 @@ class ActivitiesContainer extends Component {
             }
         };
 
-        const activities = this.state.ids.map((id, i) => {
-           return(
-               <ActivityBox id={id} key={id} tabIndex={i+1}/>
-           )
-        });
 
         return (
             <div style={styles.activitiesContainerStyle}>
-              <h2>Kommende Aktiviteter</h2>
+              <h3>Aktiviteter</h3>
               <div style={styles.activitiesStyle}>
-                  {activities}
+                  {this.createHomePageComponent()}
               </div>
-                <a href="/activity">Opprett ny aktivitet</a>
             </div>
         );
     }
@@ -49,4 +56,11 @@ class ActivitiesContainer extends Component {
     }
 }
 
-export default ActivitiesContainer;
+function mapStateToProps(state) {
+    return {
+        activities: state.activity
+    };
+}
+
+
+export default connect(mapStateToProps)(ActivitiesContainer);

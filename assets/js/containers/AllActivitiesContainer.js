@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AllActivitiesBox from '../components/AllActivitiesBox';
 import {getUpcomingActivities} from '../APIFunctions';
 
 import ActivityPageContainer from '../components/ActivityPageComponent';

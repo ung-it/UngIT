@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import WeekPicker from './WeekPicker';
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
-import ActivitiesContainer from './ActivitiesContainer';
+import ActivitiesContainer from './containers/ActivitiesContainer';
 import AdaptionChips from './AdaptionChips';
 import AllActivitiesContainer from './containers/AllActivitiesContainer';
 import { Provider } from "react-redux";
@@ -11,9 +11,10 @@ import store from "./store";
 
 if (document.getElementById('activities')) {
     ReactDOM.render(
-        <ActivitiesContainer/>,
-        document.getElementById('activities')
-    );
+        <Provider store={store}>
+            <ActivitiesContainer />
+        </Provider>, document.getElementById('activities')
+    )
 }
 
 if (document.getElementById('week')) {

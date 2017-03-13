@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {getUpcomingActivities} from '../APIFunctions';
 
 import HomePageContainer from '../components/HomePageComponent';
-import { connect } from "react-redux";
+import { Provider, connect } from "react-redux";
+import store from "../store";
 
 import '../../styles/activityBox.css';
 
@@ -62,5 +64,12 @@ function mapStateToProps(state) {
     };
 }
 
+ActivitiesContainer = connect(mapStateToProps)(ActivitiesContainer);
 
-export default connect(mapStateToProps)(ActivitiesContainer);
+ReactDOM.render(
+    <Provider store={store}>
+        <ActivitiesContainer />
+    </Provider>, document.getElementById('activities')
+);
+
+

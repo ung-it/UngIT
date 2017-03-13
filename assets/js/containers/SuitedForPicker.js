@@ -1,9 +1,7 @@
-/**
- * Created by ingrskar on 2/24/2017.
- */
 import React from 'react';
 import Select from 'react-select';
-import styles from '../styles/activitypickerStyle.css'
+import ReactDOM from 'react-dom';
+import '../../styles/activitypickerStyle.css'
 
 const FILTERTYPES = [
 	{ label: 'Rullestol', value: 'rullestol' },
@@ -35,4 +33,8 @@ var SuitedForPicker = React.createClass({
 		);
 	}
 });
-module.exports = SuitedForPicker;
+
+ReactDOM.render(
+	<SuitedForPicker />,
+    document.getElementById('suitedfor')
+);

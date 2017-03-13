@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-
-
-class ActivityBox extends Component {
-
+class AdaptionChips extends Component {
 
     constructor(props) {
         super(props);
@@ -72,4 +70,7 @@ class ActivityBox extends Component {
     }
 }
 
-export default ActivityBox;
+ReactDOM.render(
+    <AdaptionChips/>,
+    document.getElementById('adaptions-container')
+);

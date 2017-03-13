@@ -1,6 +1,3 @@
-/**
- * Created by ingrskar on 3/7/2017.
- */
 import { applyMiddleware, createStore } from "redux"
 
 // import logger from "redux-logger"
@@ -17,10 +14,20 @@ import {getAllActivitiesAsArrayForReducer} from "./APIFunctions";
 
 function getActivitiesFromDB(){
     let tempArray =[];
-    getAllActivitiesAsArrayForReducer().then((body) =>{
-        body.map((activity) => {
+    getAllActivitiesAsArrayForReducer(data => {
+        data.map((activity) => {
             let act = activity.fields;
             act['id'] = activity.pk;
+            let images = act.images.split(",").filter(image => {
+                return image != "";
+            }).map(image => {
+                return "/media/" + image;
+            });
+            images = images.concat(act.instagram.split(",").filter(image => {
+                return image != "";
+            }));
+
+
             let obj = {
                 id: act.id,
                 activityName: act.activityName,
@@ -33,7 +40,7 @@ function getActivitiesFromDB(){
                 date: new Date(act.date),
                 time_start: act.time_start.substring(0,act.time_start.lastIndexOf(":")),
                 time_end: act.time_end.substring(0,act.time_end.lastIndexOf(":")),
-                images: act.images,
+                images: images,
                 videos: act.videos,
             };
 

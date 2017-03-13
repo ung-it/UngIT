@@ -1,6 +1,3 @@
-/**
- * Created by ingrskar on 3/8/2017.
- */
 import React from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux';
@@ -33,9 +30,7 @@ class ActivityPageContainer extends React.Component {
     createActivityItem(){
         let poster = null;
         if(this.props.activity.images.length > 0 && this.props.activity.images[0] != ''){
-            console.log(this.props.activity.images);
-            poster = '/media/'+ this.props.activity.images;
-            console.log(poster);
+            poster = this.props.activity.images[0];
         }
         return (
             <div

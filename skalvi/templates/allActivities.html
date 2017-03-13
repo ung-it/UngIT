@@ -1,4 +1,5 @@
 {% extends "base_template.html" %}
+{% load render_bundle from webpack_loader %}
 {% load static %}
 {% block pageTitle %}Aktiviteter{% endblock %}
 
@@ -46,4 +47,11 @@
 
     </div>
 
+{% endblock %}
+
+{% block explicitPageFooter %}
+    {% render_bundle 'allActivitiesContainer' %}
+    {% render_bundle 'suitedForPicker' %}
+    {% render_bundle 'activityPicker' %}
+    {% render_bundle 'weekPicker' %}
 {% endblock %}

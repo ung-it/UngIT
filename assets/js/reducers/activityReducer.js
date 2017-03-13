@@ -1,12 +1,4 @@
-/**
- * Created by ingrskar on 3/7/2017.
- */
-
-
-
 import getUpcomingActivities from '../APIFunctions';
-
-
 
 /*
 * A reducer is just a little pice of data that we want to return

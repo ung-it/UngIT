@@ -36,8 +36,10 @@
     {% include "footer.html" %}
 </footer>
 
-<!-- Every page needs to access React -->
-{% render_bundle 'main' %}
+<!-- Every page needs to common React -->
+{#<script src="{% static '/assets/js/bundles/common.js' %}"></script>#}
+{% render_bundle 'common' %}
+
 <!-- Every page needs access to jqueery -->
 <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <!--Every page needs access to bootstrap -->
@@ -45,6 +47,7 @@
 <!--Every page needs access to facebook login -->
 <script src="{% static 'js/facebook.js' %}"></script>
 <script src="//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8&appId=1658650714438155"></script>
+
 <!-- Use this tag to load scripts after page has loaded -->
 {% block explicitPageFooter %}
 {% endblock %}

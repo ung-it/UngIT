@@ -7,6 +7,8 @@ import store from "../store";
 import ActivityPageContainer from '../components/ActivityPageComponent';
 import { connect } from "react-redux";
 
+import '../../styles/activityBox.css';
+
 class AllActivitiesContainer extends Component {
 
     constructor(props) {

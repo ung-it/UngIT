@@ -1,9 +1,3 @@
-/**
- * Created by ingrskar on 3/7/2017.
- */
-
-
-
 import getUpcomingActivities from '../APIFunctions';
 
 

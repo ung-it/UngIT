@@ -8,11 +8,17 @@
 
 
 {% block body %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}" />
+
     <div class="banner-container">
         <img src="{% static "images/banner.png" %}" alt="Banner">
     </div>
 
     <div class="content">
+        <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
+        <div class="content-margin-top">
+            <h2>Kommende Aktiviteter</h2>
+        </div>
         <div id="activities"></div>
     </div>
 

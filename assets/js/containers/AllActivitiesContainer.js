@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import AllActivitiesBox from '../components/AllActivitiesBox';
 import {getUpcomingActivities} from '../APIFunctions';
 
 import { Provider } from "react-redux";
@@ -13,7 +12,6 @@ class AllActivitiesContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
             ids: []
         }
     }

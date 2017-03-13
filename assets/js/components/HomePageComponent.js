@@ -6,9 +6,7 @@ import ActivityModal from '../ActivityModal';
 
 import {getMonth, getDay} from '../DateFunctions';
 
-
-
-class ActivityPageContainer extends React.Component {
+class HomePageContainer extends React.Component {
 
 
     constructor(props) {
@@ -22,7 +20,6 @@ class ActivityPageContainer extends React.Component {
 
     componentWillMount() {
         this.showMap = this.showMap.bind(this);
-        //console.log('mount from ActivityPageContainer');
     }
 
 
@@ -30,14 +27,14 @@ class ActivityPageContainer extends React.Component {
     createActivityItem(){
         let poster = null;
         if(this.props.activity.images.length > 0 && this.props.activity.images[0] != ''){
+            console.log(this.props.activity.images);
             poster = '/media/'+ this.props.activity.images;
+            console.log(poster);
         }
         return (
-            <div
-                key={this.props.activity.id}
-            >
+            <div key={this.props.activity.id}>
                 <Thumbnail
-                    className="activityBigStyle"
+                    className="activitySmalStyle"
                     src={poster}
                     onClick={this.openActivityModal.bind(this)}
                     title="Klikk på aktiviteten for mer informasjon"
@@ -53,9 +50,6 @@ class ActivityPageContainer extends React.Component {
                             <p>{this.props.activity.date.getDate()}. {getMonth(this.props.activity.date.getMonth())}</p>
                             <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
                             <p>{this.props.activity.location}</p>
-                        </div>
-                        <div className="about-container">
-                            <p>{this.props.activity.description}</p>
                         </div>
                     </div>
                     <ActivityModal id={this.props.activity.id} show={this.state.show}>test</ActivityModal>
@@ -85,4 +79,4 @@ class ActivityPageContainer extends React.Component {
 
 
 // connect actually calles the functions so that their purposes are fulfilled
-export default ActivityPageContainer;
+export default HomePageContainer;

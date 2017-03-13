@@ -1,7 +1,5 @@
 import getUpcomingActivities from '../APIFunctions';
 
-
-
 /*
 * A reducer is just a little pice of data that we want to return
 * It gets notified from all Action creators when they are fired, with the action type

@@ -30,7 +30,7 @@ class ActivityPageContainer extends React.Component {
     createActivityItem(){
         let poster = null;
         if(this.props.activity.images.length > 0 && this.props.activity.images[0] != ''){
-            poster = '/media/'+ this.props.activity.images;
+            poster = this.props.activity.images[0];
         }
         return (
             <div

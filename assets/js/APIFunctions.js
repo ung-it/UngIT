@@ -1,5 +1,4 @@
 export function getActivityInfo(id, callback) {
-
     fetchFromServer('/api/activity/' + id).then(data => {
         callback(data[0].fields);
     });
@@ -15,6 +14,14 @@ export function getUpcomingActivities(callback) {
     });
 }
 
+export function getAllActivitiesAsArrayForReducer(callback) {
+
+    fetchFromServer('/api/activities/').then(data => {
+        callback(data);
+    });
+}
+
+//Use only this method when doing GET-requests to server for JSON-data, don't make your own
 function fetchFromServer(query) {
     return fetch(query, {
         credentials: "same-origin"
@@ -34,14 +41,3 @@ function fetchFromServer(query) {
     });
 }
 
-export function getAllActivitiesAsArrayForReducer() {
-    return fetch('/api/activities/', {
-        credentials: "same-origin"
-    }).then(response => {
-        if (response.status >= 400) {
-            throw new Error("Bad response from server");
-        }
-        return response.json()
-    });
-
-}

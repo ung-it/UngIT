@@ -8,7 +8,6 @@ import {getMonth, getDay} from '../DateFunctions';
 
 class HomePageContainer extends React.Component {
 
-
     constructor(props) {
         super(props);
         this.state = {
@@ -17,19 +16,14 @@ class HomePageContainer extends React.Component {
 
     }
 
-
     componentWillMount() {
         this.showMap = this.showMap.bind(this);
     }
 
-
-
     createActivityItem(){
         let poster = null;
         if(this.props.activity.images.length > 0 && this.props.activity.images[0] != ''){
-            console.log(this.props.activity.images);
-            poster = '/media/'+ this.props.activity.images;
-            console.log(poster);
+            poster = this.props.activity.images[0];
         }
         return (
             <div key={this.props.activity.id}>
@@ -58,8 +52,6 @@ class HomePageContainer extends React.Component {
         );
     };
 
-
-
     render() {
         return (
             <div>
@@ -76,7 +68,6 @@ class HomePageContainer extends React.Component {
        this.setState({show:true})
     }
 }
-
 
 // connect actually calles the functions so that their purposes are fulfilled
 export default HomePageContainer;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {Thumbnail, Glyphicon} from "react-bootstrap";
-import styles from '../styles/daterangepicker.css'
+import styles from '../../styles/activitypickerStyle.css'
+
 var moment = require('moment');
 var DateRangePicker = require('react-bootstrap-daterangepicker');
 
@@ -36,4 +38,7 @@ var WeekPicker = React.createClass({
 
 }});
 
-export default WeekPicker;
+ReactDOM.render(
+	<WeekPicker/>,
+    document.getElementById('week')
+);

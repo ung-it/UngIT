@@ -1,9 +1,7 @@
-/**
- * Created by ingrskar on 2/24/2017.
- */
 import React from 'react';
 import Select from 'react-select';
-import styles from '../styles/activitypickerStyle.css'
+import ReactDOM from 'react-dom';
+import '../../styles/activitypickerStyle.css'
 
 const ACTIVITYTYPES = [
 	{ label: 'Fotball', value: 'fotball' },
@@ -35,4 +33,8 @@ var ActivityPicker = React.createClass({
 		);
 	}
 });
-module.exports = ActivityPicker;
+
+ReactDOM.render(
+	<ActivityPicker/>,
+	document.getElementById('activityfilter')
+);

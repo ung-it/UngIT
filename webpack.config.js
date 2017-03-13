@@ -20,9 +20,12 @@ module.exports = {
     context: __dirname,
 
     entry: {
-        main: './assets/js/index',
         activitiesContainer: './assets/js/containers/ActivitiesContainer',
+        allActivitiesContainer: './assets/js/containers/AllActivitiesContainer',
         adaptionChips: './assets/js/containers/AdaptionChips',
+        suitedForPicker: './assets/js/containers/SuitedForPicker',
+        activityPicker: './assets/js/containers/ActivityPicker',
+        weekPicker: './assets/js/containers/WeekPicker',
     },
 
     output: {

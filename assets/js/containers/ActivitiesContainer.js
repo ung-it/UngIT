@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import AllActivitiesBox from '../components/AllActivitiesBox';
 import {getUpcomingActivities} from '../APIFunctions';
 
 import HomePageContainer from '../components/HomePageComponent';
 import { connect } from "react-redux";
+
+import '../../styles/activityBox.css';
 
 class ActivitiesContainer extends Component {
 

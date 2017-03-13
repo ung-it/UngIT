@@ -63,12 +63,13 @@ class ActivityModal extends Component {
         fetch('http://localhost:8000/signupActivity/', {
             method: 'POST',
             headers: {
-                'Credentials': "same-origin",
                 'Content-Type': 'application/json',
             },
+            credentials: "same-origin",
             body: JSON.stringify(request)
 
         }).then((response) => {
+            console.log(response);
             return response.status
         })
 

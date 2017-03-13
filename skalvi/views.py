@@ -17,53 +17,41 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 
-# class IndexView(View):
-#     user = None
-#
-#     def get(self, request):
-#         global user
-#         user = request.user
-#         print("REQUEST ", user)
-#         return TemplateResponse(request, "home.html", {})
-#
-#     @login_required
-#     def post(self, *args, **kwargs):
-#         # print("POST", req.POST)
-#         global user
-#         print("User post", user)
-#
-#         # activity = req.body
-#         # print("Activity id", activity)
-#
-#         if user.is_authenticated:
-#             user_profiles = UserProfile.objects.filter(user=user)
-#             for profile in user_profiles:
-#                 if profile.is_active:
-#                     user_profile = profile
-#
-#             # participate = ParticipateIn(activityId=activity, userId=user.username, user_profile_id=user_profile.pk)
-#             # participate.save()
-#         return redirect("/")
-
 def index(request):
     return TemplateResponse(request, "home.html", {})
 
 @csrf_exempt
 def signUpActivity(request):
-    print("POST", request.POST)
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activity = Activity.objects.get(pk=activityId)
 
-    # activity = req.body
-    # print("Activity id", activity)
-    #
-    # if user.is_authenticated:
-    #     user_profiles = UserProfile.objects.filter(user=user)
-    #     for profile in user_profiles:
-    #         if profile.is_active:
-    #             user_profile = profile
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        # username = request.session['username']
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
 
-        # participate = ParticipateIn(activityId=activity, userId=user.username, user_profile_id=user_profile.pk)
-        # participate.save()
-    return redirect("/")
+        # Check if user already is attending
+        try:
+            participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
+            print("Du er allerede påmeldt", participate.activityId.activityName)
+            return render(request, "home.html", {'message': 'Du er allerede påmeldt dette arrangementet.'})
+
+        # if user is not attending
+        except ParticipateIn.DoesNotExist:
+            participate = ParticipateIn(activityId=activity, userId=request.user, user_profile_id=profile)
+            participate.save()
+            print("Attending")
+            message = {"message": "Du er nå påmeldt dette arrangementet"}
+
+            return HttpResponse(message, content_type='application/json')
+            # return render(request, "home.html", {"message": "Du er nå påmeldt dette arrangementet."})
+    # User not logged in
+    else:
+        # user is not loged in, should not be possible to attend activity
+        print("bruker ikke logget inn")
+        return render(request, "home.html", {"message": "Du må være logget inn for å kunne melde deg på dette arrangementet."})
+
 
 
 
@@ -139,9 +127,10 @@ def selectedUser(request):
         if profile.pk == int(pk):
             profile.is_active = True
             profile.save()
+            request.session['username'] = request.user.username
             request.session['profile_name'] = profile.profile_name
             request.session['profile_pk'] = profile.pk
-            print(request.session['profile_name'], request.session['profile_pk'])
+            print(request.session['username'], request.session['profile_name'], request.session['profile_pk'])
 
     return render(request, "home.html", {"name": name})
 
@@ -269,6 +258,11 @@ class MyPageView(View):
     def get(self, request, *args, **kwargs):
         form = self.form_class(None)
         if request.user.is_authenticated():
+
+            if 'username' in request.session:
+                username = request.session['username']
+                print("brukernavn: " + username)
+
             user_object = request.user
             user_profile_objects = UserProfile.objects.filter(user=request.user)
             return render(request, self.template_name,

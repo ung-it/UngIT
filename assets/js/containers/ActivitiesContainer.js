@@ -41,10 +41,11 @@ class ActivitiesContainer extends Component {
 
         return (
             <div style={styles.activitiesContainerStyle}>
-              <h3>Aktiviteter</h3>
+              <h2>Kommende Aktiviteter</h2>
               <div style={styles.activitiesStyle}>
                   {this.createHomePageComponent()}
               </div>
+                <a href="/activity">Opprett ny aktivitet</a>
             </div>
         );
     }

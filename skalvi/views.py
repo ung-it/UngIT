@@ -51,6 +51,7 @@ def signUpActivity(request):
         return HttpResponse(status=206) # not logged in
 
 
+@csrf_exempt
 def checkIfSingedUp(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)

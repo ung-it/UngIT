@@ -23,8 +23,6 @@
                         <p style="color: red;"><strong>{{ error_message }}</strong></p>
                     {% endif %}
                 </form>
-                <h5>Logg inn med Facebook</h5>
-                <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLoginState();"></div>
 
                 <hr>
                 <form id="faceForm" method="POST" action="/api/skalvi/loginF/" hidden>

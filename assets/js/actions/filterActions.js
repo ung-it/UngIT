@@ -6,3 +6,11 @@ export const filterActivity = (activity) => {
         payload: activity
     }
 };
+
+export const setActivityPickerFilter = (active) => {
+     console.log("You clicked on user: ", active);
+    return {
+        type: 'ACTIVITY_PICKER',
+        payload: active
+    }
+}

@@ -15,6 +15,7 @@ class ActivityModal extends Component {
         super(props);
         this.state = {
             show: false,
+            hasChecked: false,
             attending: false,
             title: "",
             provider: "",
@@ -137,7 +138,7 @@ class ActivityModal extends Component {
                 </div>;
         }
 
-        if(this.state.show){
+        if(this.state.show && !this.state.hasChecked){
             var request = {
                 id: this.props.id
             };
@@ -153,9 +154,11 @@ class ActivityModal extends Component {
                 console.log(response);
                 if(response.status == 204){
                     this.setState({
-                        attending: true
+                        attending: true,
+                        hasChecked:true
                     });
                 }
+
                 return response.status;
             })
         }
@@ -180,17 +183,21 @@ class ActivityModal extends Component {
         if(this.state.attending == false){
             attendingContainer =
                 <div className="modal-infobox2">
-                Påmelding
-                <Button onClick={this.onSignup}>Meld på!</Button>
+                    <div className="modal-infobox2-element">
+                        <h5>Påmelding til {title}</h5>
+                        <Button className="btn btn-success" onClick={this.onSignup}>Meld på!</Button>
+                    </div>
             </div>;
+
         }else{
             attendingContainer =
-            <div className="modal-infobox2">
-                <p> Du er meldt på dette arrangementet</p>
-                <Button onClick={this.onSignOf}>Meld av</Button>
-            </div>;
+                <div className="modal-infobox2">
+                    <div className="modal-infobox2-element">
+                        <h5>Du er påmeldt {title}</h5>
+                        <Button onClick={this.onSignOf} className="btn btn-danger">Meld av</Button>
+                    </div>
+                </div>;
         }
-
 
 
 
@@ -225,13 +232,8 @@ class ActivityModal extends Component {
                                 <a onClick={this.showMap} >Vis på kart</a>
                             </div>
                         </div>
-                        <div className="modal-infobox2">
-                            <div className="modal-infobox2-element">
-                                Påmelding til {title}
-                            </div>
-                                {attendingContainer}
+                        {attendingContainer}
 
-                        </div>
                     </div>
                     <div>
                         <h2 className="modal-description-header">Om arrangementet</h2>
@@ -257,7 +259,7 @@ class ActivityModal extends Component {
     }
 
     closeActivityModal() {
-        this.setState({show: false});
+        this.setState({show: false, hasChecked: false});
     }
 }
 

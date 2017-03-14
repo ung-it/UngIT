@@ -18,7 +18,6 @@ window.fbAsyncInit = function() {
 
 function logIn() {
     FB.login(function(response){
-        console.log(response)
         fetchInfo();
     }, {scope: 'user_events'});
 }
@@ -27,7 +26,6 @@ function getFacebookEvents() {
      FB.login(function(response){
         FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
             if (response && !response.error) {
-                console.log(response.data)
                 $(response.data).each(function(index, obj) {
                     $("#faceEvents ul").append('<li>'+'Navn: '+obj.name+'</li>')
                         .append('<p>'+'Dato: '+obj.start_time.split('T')[0]+'</p>')
@@ -40,7 +38,6 @@ function getFacebookEvents() {
 }
 
 function fetchInfo() {
-    console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', 'GET', {fields: 'id, age_range, first_name, last_name, email, picture'}, function(response) {
         $('#id_Fusername').val(response.id);
         $('#id_agerange').val(response.age_range.min);

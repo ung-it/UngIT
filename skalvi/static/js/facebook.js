@@ -27,8 +27,12 @@ function getFacebookEvents() {
      FB.login(function(response){
         FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
             if (response && !response.error) {
+                console.log(response.data)
                 $(response.data).each(function(index, obj) {
-                    $("#faceEvents ul").append('<li>'+obj.name+' - '+obj.start_time.split("T")[0]+'</li>');
+                    $("#faceEvents ul").append('<li>'+'Navn: '+obj.name+'</li>')
+                        .append('<p>'+'Dato: '+obj.start_time.split('T')[0]+'</p>')
+                        .append('<p>'+'Beskrivelse: '+obj.description+'</p>')
+                        .append('<br/>')
                 });
             }
         });

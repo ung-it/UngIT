@@ -51,7 +51,6 @@ def signUpActivity(request):
     # User not logged in
     else:
         # user is not loged in, should not be possible to attend activity
-        print("bruker ikke logget inn")
         return HttpResponse(status=206) # not logged in
 
 
@@ -75,7 +74,6 @@ def checkIfSingedUp(request):
             return HttpResponse(status=205)  # 205 == not attending
     else:
         # If user is not loged in
-        print("bruker ikke logget inn")
         return HttpResponse(status=206)  # not logged in
 
 @csrf_exempt
@@ -99,7 +97,7 @@ def signOfEvent(request):
 
     else:
         # If user is not loged in
-        print("bruker ikke logget inn")
+        # Will never happen
         return HttpResponse(status=206)  # not logged in
 
 
@@ -142,7 +140,6 @@ def loginView(request):
                 if user.is_authenticated():
                     profiles = UserProfile.objects.filter(user=user)
                     login(request, user)
-                    print("Successfully logged in")
                     if user.is_staff:
                         return redirect("/admin")
                     elif len(profiles) > 1:

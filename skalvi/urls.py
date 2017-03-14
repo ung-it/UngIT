@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^logout_user/$', views.logout_user, name='logout_user'),
     url(r'^choose/$', views.ChooseUserView.as_view(), name='choose'),
     url(r'^selected/$', views.selectedUser, name='selected'),
-    url(r'^signupActivity/$', views.signUpActivity, name='signupActivity')
+    url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
+    url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
+    url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent')
 
 ]

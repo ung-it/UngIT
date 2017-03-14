@@ -1,24 +1,35 @@
 {% extends "base_template.html" %}
+{% load render_bundle from webpack_loader %}
 {% load static %}
 {% block pageTitle %}Aktiviteter{% endblock %}
 
 
 {% block body %}
 
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/allactivities.css' %}" />
+
     <div class="content">
+
+        <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
         <div class="content-margin-top">
-            <h2>Alle aktiviteter</h2>
-            <p>Her er en oversikt over alle aktiviteter som tilbys i Trondheim kommune</p>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Søk etter en aktivitet...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Søk!</button>
-                </span>
-            </div><!-- /input-group -->
+            <h2>Aktiviteter</h2>
+            <p>Her er en oversikt over alle aktiviteter og grupper som tilbys i Trondheim kommune</p>
         </div>
 
         <div class="filter-container">
-            <h3 id="info-txt">Filtrer aktiviteter</h3>
+            <h3 id="info-txt">Finn aktiviteter</h3>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="search" placeholder="Søk etter en aktivitet...">
+                    </div>
+                    <div class="col-md-6">
+                    <div class="date-picker-container">
+                        <div id="week"></div>
+                    </div>
+                </div>
+                </div>
+
+
             <div class="row">
                 <div class="col-md-6" id="whatContainer">
                     <div id="activityfilter"></div>
@@ -27,11 +38,20 @@
                     <div id="suitedfor"></div>
                 </div>
             </div>
+            <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Søk!</button>
+                    </span>
         </div>
-        <div class="date-picker-container">
-            <h3 id="info-txt">Tidsperiode</h3>
-            <div  id="week"></div></div>
+
         <div id="allActivities"></div>
+
     </div>
 
+{% endblock %}
+
+{% block explicitPageFooter %}
+    {% render_bundle 'allActivitiesContainer' %}
+    {% render_bundle 'suitedForPicker' %}
+    {% render_bundle 'activityPicker' %}
+    {% render_bundle 'weekPicker' %}
 {% endblock %}

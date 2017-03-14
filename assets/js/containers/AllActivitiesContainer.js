@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import AllActivitiesBox from './AllActivitiesBox';
-import {getUpcomingActivities} from './APIFunctions';
+import ReactDOM from 'react-dom';
+import {getUpcomingActivities} from '../APIFunctions';
+
+import { Provider } from "react-redux";
+import store from "../store";
+import ActivityPageContainer from '../components/ActivityPageComponent';
+import { connect } from "react-redux";
+
+import '../../styles/activityBox.css';
 
 class AllActivitiesContainer extends Component {
 
@@ -10,6 +17,15 @@ class AllActivitiesContainer extends Component {
             ids: []
         }
     }
+
+    createActivityPageComponent() {
+        return this.props.activities.map((activity) => {
+            return (
+                <ActivityPageContainer key={activity.id} activity={activity}/>
+            )
+        });
+    }
+
 
     render() {
 
@@ -25,17 +41,12 @@ class AllActivitiesContainer extends Component {
             }
         };
 
-        const activities = this.state.ids.map((id, i) => {
-           return(
-               <AllActivitiesBox id={id} key={id} tabIndex={i+1}/>
-           )
-        });
 
         return (
             <div style={styles.activitiesContainerStyle}>
               <h3>Aktiviteter</h3>
               <div style={styles.activitiesStyle}>
-                  {activities}
+                  {this.createActivityPageComponent()}
               </div>
             </div>
         );
@@ -48,4 +59,17 @@ class AllActivitiesContainer extends Component {
     }
 }
 
-export default AllActivitiesContainer;
+function mapStateToProps(state) {
+    return {
+        activities: state.activity
+    };
+}
+
+AllActivitiesContainer = connect(mapStateToProps)(AllActivitiesContainer);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <AllActivitiesContainer />
+    </Provider>, document.getElementById('allActivities')
+);
+

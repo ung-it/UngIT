@@ -1,0 +1,36 @@
+.activity-wrapper {
+    margin-top: 5em;
+}
+
+.instagram-image {
+    height: 15em;
+    padding: 0.2em;
+    cursor: pointer;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.instagram-image:hover {
+    opacity: 0.5;
+}
+
+.instagram-image-selected {
+    box-sizing: border-box;
+    border: 1em solid #2ecc40;
+}
+
+.input-box {
+    display: block !important;
+}
+
+.input-box span {
+    font-weight: 400;
+}
+
+.adaptions-container {
+    display: block; !important;
+}
+
+.adaptions-box {
+
+}

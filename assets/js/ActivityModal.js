@@ -35,6 +35,14 @@ class ActivityModal extends Component {
     this.onSignOf = this.onSignOf.bind(this);
 
         getActivityInfo(this.props.id, function (data) {
+            let images = data.images.split(",").filter(image => {
+                return image != "";
+            }).map(image => {
+                return "/media/" + image;
+            });
+            images = images.concat(data.instagram.split(",").filter(image => {
+                return image != "";
+            }));
             this.setState({
                 title: data.activityName,
                 provider: data.provider,
@@ -46,7 +54,7 @@ class ActivityModal extends Component {
                 date: new Date(data.date),
                 timeStart: data.time_start.substring(0,data.time_start.lastIndexOf(":")),
                 timeEnd: data.time_end.substring(0,data.time_end.lastIndexOf(":")),
-                images: data.images.split(","),
+                images: images,
                 videos: data.videos.split(",")
             });
         }.bind(this));
@@ -124,7 +132,7 @@ class ActivityModal extends Component {
             });
             videoContainer =
                 <div>
-                    <h3>Video fra arrangementet</h3>
+                    <h3 className="modal-image-header">Video fra arrangementet</h3>
                     {videos}
                 </div>;
         }
@@ -155,15 +163,16 @@ class ActivityModal extends Component {
         let imageContainer = null;
         if (this.state.images.length > 0 && this.state.images[0] != "") {
             const images = this.state.images.map((image, i) => {
-                const path = "/media/" + image;
                 return (
-                    <img className="modal-image" src={path} alt="Et bilde fra arrangementet" key={i}></img>
+                    <img className="modal-image" src={image} alt="Et bilde fra arrangementet" key={i}></img>
                 )
             });
             imageContainer =
                 <div>
-                    <h3>Bilder fra arrangementet</h3>
-                    {images}
+                    <h3 className="modal-image-header">Bilder fra arrangementet</h3>
+                    <div className="modal-image-container">
+                        {images}
+                    </div>
                 </div>;
         }
 
@@ -206,16 +215,27 @@ class ActivityModal extends Component {
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">
-                            <div><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
-                            <div><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {timeStart} - {timeEnd}</div>
-                            <div><Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {location}</div>
-                            <div><Button onClick={this.showMap}>Vis på kart</Button></div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {timeStart} - {timeEnd}</div>
+                            <div className="modal-infobox1-element">
+                                <Glyphicon glyph="glyphicon glyphicon-map-marker"/>
+                                Sted: {location}
+                            </div>
+                            <div className="modal-infobox1-map">
+                                <a onClick={this.showMap} >Vis på kart</a>
+                            </div>
                         </div>
-                        {attendingContainer}
+                        <div className="modal-infobox2">
+                            <div className="modal-infobox2-element">
+                                Påmelding til {title}
+                            </div>
+                                {attendingContainer}
+
+                        </div>
                     </div>
                     <div>
-                        <h2>Om arrangement</h2>
-                        <pre>{description}</pre>
+                        <h2 className="modal-description-header">Om arrangementet</h2>
+                        <p className="modal-description">{description}</p>
                     </div>
                     {videoContainer}
                     {imageContainer}

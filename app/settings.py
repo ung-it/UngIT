@@ -51,6 +51,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
+# SESSION_ENGINE = {
+#
+# }
+
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
@@ -107,10 +111,10 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "/media/"
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'assets'),
-#
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets'),
+
+)
 
 WEBPACK_LOADER = {
     'DEFAULT': {

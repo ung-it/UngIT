@@ -33,8 +33,9 @@ class Activity(models.Model):
     date = models.DateField()
     time_start = models.TimeField()
     time_end = models.TimeField()
-    images = models.ImageField(upload_to='images/',max_length=200, blank=True)
-    videos = models.ImageField(upload_to='videos/',max_length=200, blank=True)
+    images = models.ImageField(upload_to='images/',max_length=255, blank=True)
+    instagram = models.TextField(blank=True)
+    videos = models.ImageField(upload_to='videos/',max_length=255, blank=True)
 
     def was_published(self):
         return self.pub_date

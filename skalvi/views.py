@@ -27,7 +27,6 @@ def signUpActivity(request):
 
     # User logged in
     if 'username' and 'profile_pk' in request.session:
-        # username = request.session['username']
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
 
@@ -35,24 +34,71 @@ def signUpActivity(request):
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
             print("Du er allerede påmeldt", participate.activityId.activityName)
-            return render(request, "home.html", {'message': 'Du er allerede påmeldt dette arrangementet.'})
+            return HttpResponse(status=201)
 
         # if user is not attending
         except ParticipateIn.DoesNotExist:
             participate = ParticipateIn(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.save()
             print("Attending")
-            message = {"message": "Du er nå påmeldt dette arrangementet"}
 
-            return HttpResponse(message, content_type='application/json')
+            return HttpResponse(status=204)
             # return render(request, "home.html", {"message": "Du er nå påmeldt dette arrangementet."})
     # User not logged in
     else:
         # user is not loged in, should not be possible to attend activity
         print("bruker ikke logget inn")
-        return render(request, "home.html", {"message": "Du må være logget inn for å kunne melde deg på dette arrangementet."})
+        return HttpResponse(status=206) # not logged in
 
 
+def checkIfSingedUp(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activity = Activity.objects.get(pk=activityId)
+
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+
+        # Check if user already is attending
+        try:
+            participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
+            print("Du er allerede påmeldt", participate.activityId.activityName)
+            return HttpResponse(status=204)  # 204 == attending
+
+        except ParticipateIn.DoesNotExist:
+            # If user isn't signed up
+            print("Ikke påmeldt")
+            return HttpResponse(status=205)  # 205 == not attending
+    else:
+        # If user is not loged in
+        print("bruker ikke logget inn")
+        return HttpResponse(status=206)  # not logged in
+
+@csrf_exempt
+def signOfEvent(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activity = Activity.objects.get(pk=activityId)
+
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+
+        try:
+            participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
+            participate.delete()
+            print("Meldt av ", participate.activityId.activityName)
+            return HttpResponse(status=210)  # 210 == unattending
+
+        except ParticipateIn.DoesNotExist:
+            # Not attending, can't sign of
+            return HttpResponse(status=204)
+
+    else:
+        # If user is not loged in
+        print("bruker ikke logget inn")
+        return HttpResponse(status=206)  # not logged in
 
 
 def getActivities(request):

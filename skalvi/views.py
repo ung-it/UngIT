@@ -39,14 +39,12 @@ def signUpActivity(request):
         # Check if user already is attending
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
-            print("Du er allerede påmeldt", participate.activityId.activityName)
             return HttpResponse(status=201)
 
         # if user is not attending
         except ParticipateIn.DoesNotExist:
             participate = ParticipateIn(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.save()
-            print("Attending")
 
             return HttpResponse(status=204)
             # return render(request, "home.html", {"message": "Du er nå påmeldt dette arrangementet."})
@@ -70,12 +68,10 @@ def checkIfSingedUp(request):
         # Check if user already is attending
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
-            print("Du er allerede påmeldt", participate.activityId.activityName)
             return HttpResponse(status=204)  # 204 == attending
 
         except ParticipateIn.DoesNotExist:
             # If user isn't signed up
-            print("Ikke påmeldt")
             return HttpResponse(status=205)  # 205 == not attending
     else:
         # If user is not loged in
@@ -95,7 +91,6 @@ def signOfEvent(request):
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.delete()
-            print("Meldt av ", participate.activityId.activityName)
             return HttpResponse(status=210)  # 210 == unattending
 
         except ParticipateIn.DoesNotExist:

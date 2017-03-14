@@ -16,14 +16,6 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-            fetchInfo();
-        }
-    });
-}
-
 function logIn() {
     FB.login(function(response){
         console.log(response)
@@ -31,29 +23,26 @@ function logIn() {
     }, {scope: 'user_events'});
 }
 
+function getFacebookEvents() {
+     FB.login(function(response){
+        FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
+            if (response && !response.error) {
+                $(response.data).each(function(index, obj) {
+                    $("#faceEvents ul").append('<li>'+obj.name+' - '+obj.start_time.split("T")[0]+'</li>');
+                });
+            }
+        });
+    }, {scope: 'user_events'});
+}
+
 function fetchInfo() {
-    var URL = "{% url 'skalvi:loginFacebook' %}";
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', 'GET', {fields: 'id, age_range, first_name, last_name, email, picture'}, function(response) {
-
         $('#id_Fusername').val(response.id);
         $('#id_agerange').val(response.age_range.min);
         $('#id_firstname').val(response.first_name);
         $('#id_lastname').val(response.last_name);
         $('#id_email').val(response.email);
-
         $('#faceForm').submit();
     });
-    FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
-            if (response && !response.error) {
-                console.log(response)
-            }
-        }
-    );
 }
-
-//for CSS?
-$(".nav a").on("click", function(){
-    $(".nav").find(".active").removeClass("active");
-    $(this).parent().addClass("active");
-});

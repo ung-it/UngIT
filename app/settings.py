@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '+g25&y9i+-6_z$$z!ov$l2s%b#0kcmnx)n7y*2_ehy-w011p#k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["178.62.236.72","www.skalvi.no","skalvi.no","52.43.209.46","*"]
 
 
 # Application definition
@@ -112,8 +112,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "/media/"
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
-
+    os.path.join(BASE_DIR, 'assets')
 )
 
 WEBPACK_LOADER = {
@@ -122,3 +121,9 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
     }
 }
+
+if not DEBUG:
+    WEBPACK_LOADER['DEFAULT'].update({
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json'),
+    })

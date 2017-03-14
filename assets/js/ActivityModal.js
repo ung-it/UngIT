@@ -17,6 +17,7 @@ class ActivityModal extends Component {
             show: false,
             hasChecked: false,
             attending: false,
+            loggedIn: false,
             title: "",
             provider: "",
             adaptions: "",
@@ -155,8 +156,20 @@ class ActivityModal extends Component {
                 if(response.status == 204){
                     this.setState({
                         attending: true,
-                        hasChecked:true
+                        hasChecked:true,
+                        loggedIn: true
                     });
+                }else if(response.status == 205){
+                    this.setState({
+                        loggedIn: true,
+                        hasChecked: true
+
+                    })
+
+                }else if(response == 206){
+                    this.setState({
+                        loggedIn: false
+                    })
                 }
 
                 return response.status;
@@ -180,7 +193,16 @@ class ActivityModal extends Component {
         }
 
         let attendingContainer = null;
-        if(this.state.attending == false){
+        if(!this.state.loggedIn){
+            attendingContainer =
+                <div className="modal-infobox2">
+                    <div className="modal-infobox2-element">
+                        <h4>Påmelding til {title}</h4>
+                        <p>Du må være logget inn for å kunne melde deg på dette arrangementet</p>
+                    </div>
+                </div>;
+        }
+        else if(this.state.attending == false){
             attendingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">

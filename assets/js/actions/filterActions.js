@@ -8,9 +8,12 @@ export const filterActivity = (activity) => {
 };
 
 export const setActivityPickerFilter = (active) => {
-     console.log("You clicked on user: ", active);
+    console.log(active);
+
     return {
         type: 'ACTIVITY_PICKER',
-        payload: active
+        active
     }
-}
+};
+
+

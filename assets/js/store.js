@@ -1,8 +1,7 @@
 import { applyMiddleware, createStore } from "redux";
 import allReducers from "./reducers/indexReducer";
-import {getAllActivitiesAsArrayForReducer} from "./APIFunctions";
-
-import activityPicker from "./containers/ActivityPicker";
+import { getAllActivitiesAsArrayForReducer } from "./APIFunctions";
+import { setActivityPickerFilter } from "./actions/filterActions";
 
 
 //const middleware = applyMiddleware(promise());
@@ -58,20 +57,26 @@ function getActiveFilters() {
 };
 
 function getActivityPicker() {
-    activityPicker.filter((active) => {
+    /*activityPicker.filter((active) => {
         console.log(active);
-    })
+    })*/
+    console.log();
+
     let activeActtivites = [];
 
 }
 
 const initState = getActivitiesFromDB();
+const activeActivityPicker = getActivityPicker();
 
 
 
 const store = createStore(
     allReducers,
-    initState
+    initState,
+    activeActivityPicker
 );
+
+store.dispatch(setActivityPickerFilter(''));
 
 export default store;

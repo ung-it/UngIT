@@ -4,7 +4,7 @@ import filterReducer from "./filterReducer"
 
 const allReducers = combineReducers({
     activity: activityReducer,
-    filter: filterReducer
+    filterActive: filterReducer
 });
 
 export default allReducers

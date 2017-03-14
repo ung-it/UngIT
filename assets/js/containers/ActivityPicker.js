@@ -42,7 +42,9 @@ class ActivityPicker extends Component {
 		this.setState({
 			value: value
 		});
-		setActivityPickerFilter(this.state.value);
+		console.log("Yo")
+		//setActivityPickerFilter(this.state.value);
+		dispatch(setActivityPickerFilter(this.state.value));
 
 	}
 

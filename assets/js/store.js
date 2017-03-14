@@ -1,11 +1,5 @@
 import { applyMiddleware, createStore } from "redux"
-
-// import logger from "redux-logger"
-// import thunk from "redux-thunk"
-// import promise from "redux-promise-middleware"
-
 import allReducers from "./reducers/indexReducer"
-
 import {getAllActivitiesAsArrayForReducer} from "./APIFunctions";
 
 
@@ -53,6 +47,15 @@ function getActivitiesFromDB(){
     };
 
     return state
+
+}
+
+function getActiveFilters() {
+
+};
+
+function getActivityPicker() {
+    let activeActtivites = [];
 
 }
 

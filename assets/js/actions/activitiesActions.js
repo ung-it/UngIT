@@ -1,6 +1,3 @@
-/**
- * Created by ingrskar on 3/6/2017.
- */
 import {getAllActivities} from "../APIFunctions";
 import {getActivityInfo} from '../APIFunctions';
 

@@ -1,8 +1,10 @@
 import { combineReducers } from "redux"
 import activityReducer from "./activityReducer"
+import filterReducer from "./filterReducer"
 
 const allReducers = combineReducers({
-    activity: activityReducer
+    activity: activityReducer,
+    filter: filterReducer
 });
 
 export default allReducers

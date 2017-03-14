@@ -15,6 +15,7 @@ class ActivityModal extends Component {
         super(props);
         this.state = {
             show: false,
+            attending: false,
             title: "",
             provider: "",
             adaptions: "",
@@ -28,7 +29,10 @@ class ActivityModal extends Component {
             images: [],
             videos: []
         };
+
+
     this.onSignup = this.onSignup.bind(this);
+    this.onSignOf = this.onSignOf.bind(this);
 
         getActivityInfo(this.props.id, function (data) {
             this.setState({
@@ -50,14 +54,14 @@ class ActivityModal extends Component {
         this.showMap = this.showMap.bind(this);
     }
 
+
     componentWillReceiveProps(props) {
         this.setState({show: props.show});
     }
 
-    onSignup(e) {
+    onSignup() {
         var request = {
             id: this.props.id
-
         };
 
         fetch('http://localhost:8000/signupActivity/', {
@@ -70,9 +74,40 @@ class ActivityModal extends Component {
 
         }).then((response) => {
             console.log(response);
-            return response.status
+            if(response.status == 204){
+                this.setState({
+                    attending: true
+                });
+            }
+            return response.status;
         })
 
+    }
+
+    onSignOf(){
+        console.log("id " + this.props.id);
+
+        var request = {
+            id: this.props.id
+        };
+
+        fetch('http://localhost:8000/signOfEvent/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: "same-origin",
+            body: JSON.stringify(request)
+
+        }).then((response) => {
+            console.log(response);
+            if(response.status == 210){
+                this.setState({
+                    attending: false
+                });
+            }
+            return response.status;
+        })
     }
 
     render() {
@@ -94,6 +129,29 @@ class ActivityModal extends Component {
                 </div>;
         }
 
+        if(this.state.show){
+            var request = {
+                id: this.props.id
+            };
+            fetch('http://localhost:8000/checkIfSignedUp/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: "same-origin",
+                body: JSON.stringify(request)
+
+            }).then((response) => {
+                console.log(response);
+                if(response.status == 204){
+                    this.setState({
+                        attending: true
+                    });
+                }
+                return response.status;
+            })
+        }
+
         let imageContainer = null;
         if (this.state.images.length > 0 && this.state.images[0] != "") {
             const images = this.state.images.map((image, i) => {
@@ -108,6 +166,24 @@ class ActivityModal extends Component {
                     {images}
                 </div>;
         }
+
+        let attendingContainer = null;
+        if(this.state.attending == false){
+            attendingContainer =
+                <div className="modal-infobox2">
+                Påmelding
+                <Button onClick={this.onSignup}>Meld på!</Button>
+            </div>;
+        }else{
+            attendingContainer =
+            <div className="modal-infobox2">
+                <p> Du er meldt på dette arrangementet</p>
+                <Button onClick={this.onSignOf}>Meld av</Button>
+            </div>;
+        }
+
+
+
 
         return (
             <Modal
@@ -135,10 +211,7 @@ class ActivityModal extends Component {
                             <div><Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {location}</div>
                             <div><Button onClick={this.showMap}>Vis på kart</Button></div>
                         </div>
-                        <div className="modal-infobox2">
-                            Påmelding
-                            <Button onClick={this.onSignup}>Meld på!</Button>
-                        </div>
+                        {attendingContainer}
                     </div>
                     <div>
                         <h2>Om arrangement</h2>

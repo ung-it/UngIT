@@ -21,7 +21,7 @@ import json
 directory = "http://skalvi.no/"
 if settings.DEBUG:
     directory = "http://localhost:8000/"
-
+@csrf_exempt
 def index(request):
     return TemplateResponse(request, "home.html", {})
 
@@ -102,7 +102,7 @@ def selectedUser(request):
             request.session['profile_pk'] = profile.pk
             print(request.session['profile_name'], request.session['profile_pk'])
 
-    return render(request, "home.html", {"name": name})
+    return redirect("skalvi:index")
 
 
 class ChooseUserView(View):

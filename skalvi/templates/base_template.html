@@ -9,6 +9,8 @@
         {% endblock %}
     </title>
 
+    <!-- Every page needs access to jqueery -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <!--Every page needs access to bootstrap -->
     <link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
     <!--Every page needs access and to use the style.css file -->
@@ -39,8 +41,6 @@
 {#<script src="{% static '/assets/js/bundles/common.js' %}"></script>#}
 {% render_bundle 'common' %}
 
-<!-- Every page needs access to jqueery -->
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <!--Every page needs access to bootstrap -->
 <script src={% static 'js/bootstrap.min.js' %}></script>
 <!--Every page needs access to facebook login -->

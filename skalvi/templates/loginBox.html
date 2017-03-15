@@ -47,21 +47,13 @@
 {% else %}
 
     <li class="dropdown">
-    {% if name %}
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-           aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"> Hei {{ name }}</span></a>
-    {% else %}
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-           aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
-
-    {% endif %}
+           aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"> Hei {{request.session.profile_name}}</span></a>
 
     <ul class="dropdown-menu">
 
-        </li>
         <li><a href="{% url 'skalvi:mypage' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Min
             side</a></li>
-        </li>
         <li><a href="{% url 'skalvi:choose' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Bytt
             bruker</a></li>
         <li><a href="{% url 'skalvi:logout_user' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>

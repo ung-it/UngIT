@@ -1,4 +1,5 @@
-import { applyMiddleware, createStore } from "redux";
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import allReducers from "./reducers/indexReducer";
 import { getAllActivitiesAsArrayForReducer } from "./APIFunctions";
 import { setActivityPickerFilter } from "./actions/filterActions";
@@ -60,23 +61,22 @@ function getActivityPicker() {
     /*activityPicker.filter((active) => {
         console.log(active);
     })*/
-    console.log();
+    console.log("get activity picker");
 
     let activeActtivites = [];
 
 }
 
 const initState = getActivitiesFromDB();
-const activeActivityPicker = getActivityPicker();
 
-
+// const activeActivityPicker = getActivityPicker();
 
 const store = createStore(
     allReducers,
     initState,
-    activeActivityPicker
+    applyMiddleware(thunk)
 );
 
-store.dispatch(setActivityPickerFilter(''));
+// store.dispatch(setActivityPickerFilter(''));
 
 export default store;

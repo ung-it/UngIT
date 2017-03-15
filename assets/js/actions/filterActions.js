@@ -7,13 +7,21 @@ export const filterActivity = (activity) => {
     }
 };
 
-export const setActivityPickerFilter = (active) => {
-    console.log(active);
+// export const setActivityPickerFilter = (active) => {
+//     console.log("set activity picker -" + active);
+//     return {
+//         type: 'ACTIVITY_PICKER',
+//         active
+//     }
+// };
 
-    return {
+export function setActivityPickerFilter(active) {
+  console.log("set activity picker filter - " + active);
+    return (dispatch) => {
         type: 'ACTIVITY_PICKER',
         active
     }
-};
+}
+
 
 

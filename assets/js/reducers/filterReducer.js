@@ -15,7 +15,8 @@ export default function (state = null, action) {
                activity.description.includes()
             });
 */
-            return { ...state,
+            return {
+                ...state,
                 active: [action.payload]
             }
     }

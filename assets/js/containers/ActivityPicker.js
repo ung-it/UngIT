@@ -5,7 +5,7 @@ import Select from 'react-select';
 import ReactDOM from 'react-dom';
 import '../../styles/activitypickerStyle.css';
 
-import {setActivityPickerFilter} from "../actions/filterActions";
+import { setActivityPickerFilter } from "../actions/filterActions";
 
 const ACTIVITYTYPES = [
 	{ label: 'Fotball', value: 'fotball' },
@@ -26,8 +26,8 @@ class ActivityPicker extends Component {
 			options: ACTIVITYTYPES,
 			value: []
 
-		}
-
+		};
+		setActivityPickerFilter(this.state.value);
 		this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
 
@@ -38,13 +38,18 @@ class ActivityPicker extends Component {
 		};
 	}*/
 
+	// componentDidMount() {
+	// 	this.props.dispatch(
+	// 		setActivityPickerFilter(this.state.value)
+	// 	);
+	// }
+
 	handleSelectChange (value) {
 		this.setState({
 			value: value
 		});
-		console.log("Yo")
-		//setActivityPickerFilter(this.state.value);
-		dispatch(setActivityPickerFilter(this.state.value));
+		console.log("Handling change activity picker");
+		setActivityPickerFilter(this.state.value);
 
 	}
 
@@ -64,14 +69,10 @@ function mapStateToProps(state) {
     };
 }
 
-// Get actions and pass them as props to to UserList
-//      > now UserList has this.props.selectUser
 function matchDispatchToProps(dispatch){
     return bindActionCreators({setActivityPickerFilter: setActivityPickerFilter}, dispatch);
 }
 
-// We don't want to return the plain UserList (component) anymore, we want to return the smart Container
-//      > UserList is now aware of state and actions
 export default connect(mapStateToProps, matchDispatchToProps)(ActivityPicker);
 
 

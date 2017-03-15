@@ -175,7 +175,7 @@ def selectedUser(request):
             request.session['username'] = request.user.username
             request.session['profile_name'] = profile.profile_name
             request.session['profile_pk'] = profile.pk
-            print(request.session['username'], request.session['profile_name'], request.session['profile_pk'])
+
 
     return redirect("skalvi:index")
 

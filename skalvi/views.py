@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.shortcuts import render, redirect
@@ -21,9 +22,83 @@ import json
 directory = "http://skalvi.no/"
 if settings.DEBUG:
     directory = "http://localhost:8000/"
-
+@csrf_exempt
 def index(request):
     return TemplateResponse(request, "home.html", {})
+
+@csrf_exempt
+def signUpActivity(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activity = Activity.objects.get(pk=activityId)
+
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+
+        # Check if user already is attending
+        try:
+            participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
+            return HttpResponse(status=201)
+
+        # if user is not attending
+        except ParticipateIn.DoesNotExist:
+            participate = ParticipateIn(activityId=activity, userId=request.user, user_profile_id=profile)
+            participate.save()
+
+            return HttpResponse(status=204)
+            # return render(request, "home.html", {"message": "Du er nå påmeldt dette arrangementet."})
+    # User not logged in
+    else:
+        # user is not loged in, should not be possible to attend activity
+        return HttpResponse(status=206) # not logged in
+
+
+@csrf_exempt
+def checkIfSingedUp(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activity = Activity.objects.get(pk=activityId)
+
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+
+        # Check if user already is attending
+        try:
+            participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
+            return HttpResponse(status=204)  # 204 == attending
+
+        except ParticipateIn.DoesNotExist:
+            # If user isn't signed up
+            return HttpResponse(status=205)  # 205 == not attending
+    else:
+        # If user is not loged in
+        return HttpResponse(status=206)  # not logged in
+
+@csrf_exempt
+def signOfEvent(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activity = Activity.objects.get(pk=activityId)
+
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+
+        try:
+            participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
+            participate.delete()
+            return HttpResponse(status=210)  # 210 == unattending
+
+        except ParticipateIn.DoesNotExist:
+            # Not attending, can't sign of
+            return HttpResponse(status=204)
+
+    else:
+        # If user is not loged in
+        # Will never happen
+        return HttpResponse(status=206)  # not logged in
 
 
 def getActivities(request):
@@ -65,7 +140,6 @@ def loginView(request):
                 if user.is_authenticated():
                     profiles = UserProfile.objects.filter(user=user)
                     login(request, user)
-                    print("Successfully logged in")
                     if user.is_staff:
                         return redirect("/admin")
                     elif len(profiles) > 1:
@@ -98,11 +172,12 @@ def selectedUser(request):
         if profile.pk == int(pk):
             profile.is_active = True
             profile.save()
+            request.session['username'] = request.user.username
             request.session['profile_name'] = profile.profile_name
             request.session['profile_pk'] = profile.pk
-            print(request.session['profile_name'], request.session['profile_pk'])
 
-    return render(request, "home.html", {"name": name})
+
+    return redirect("skalvi:index")
 
 
 class ChooseUserView(View):
@@ -267,6 +342,11 @@ class MyPageView(View):
     def get(self, request, *args, **kwargs):
         form = self.form_class(None)
         if request.user.is_authenticated():
+
+            if 'username' in request.session:
+                username = request.session['username']
+                print("brukernavn: " + username)
+
             user_object = request.user
             user_profile_objects = UserProfile.objects.filter(user=request.user)
             return render(request, self.template_name,

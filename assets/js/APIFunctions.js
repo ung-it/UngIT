@@ -21,6 +21,13 @@ export function getAllActivitiesAsArrayForReducer(callback) {
     });
 }
 
+export function signupActivity(id) {
+    let data = {
+        id: id
+    };
+    postToServer('http://localhost:8000/signupActivity/', data);
+}
+
 //Use only this method when doing GET-requests to server for JSON-data, don't make your own
 function fetchFromServer(query) {
     return fetch(query, {
@@ -41,3 +48,22 @@ function fetchFromServer(query) {
     });
 }
 
+function postToServer(query, data) {
+    return fetch(query, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: "same-origin",
+        body: JSON.stringify(data)
+
+    }).then((response) => {
+        console.log(response);
+        if(response.status == 204){
+            this.setState({
+                attending: true
+            });
+        }
+        return response.status;
+    })
+}

@@ -44,10 +44,16 @@ def loginFacebook(request):
         userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name)
         userProfile.save()
         login(request, user)
-        return redirect("skalvi:skalvi")
+
+        request.session['username'] = user.username
+        request.session['profile_name'] = userProfile.profile_name
+        request.session['profile_pk'] = userProfile.pk
+
+        return redirect("skalvi:index")
     elif user is not None:
         profiles = UserProfile.objects.filter(user=user)
         login(request,user)
+
         if user.is_staff:
             return redirect("/admin")
         elif len(profiles) > 1:

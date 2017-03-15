@@ -34,7 +34,7 @@ class ActivityForm(forms.ModelForm):
     registration_required = forms.BooleanField(label='Arrangement krever registrering', required=False)
     price = forms.IntegerField(label="Pris")
     date = forms.DateField(label="Dato start", widget=DateInput, input_formats=('%d-%m-%Y','%Y-%m-%d'))
-    date_end = forms.DateField(label="Dato slutt", widget=DateInput)
+    date_end = forms.DateField(label="Dato slutt", widget=DateInput, input_formats=('%d-%m-%Y','%Y-%m-%d'))
     time_start = forms.TimeField(label="Tid start")
     time_end = forms.TimeField(label="Tid slutt")
     images = forms.ImageField(required=False, label="Bilder")
@@ -42,7 +42,7 @@ class ActivityForm(forms.ModelForm):
 
     class Meta:
         model = Activity
-        fields = ['activityName', 'provider', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'time_start', 'time_end', 'images', 'instagram', 'videos']
+        fields = ['activityName', 'provider', 'facebookID', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'date_end', 'time_start', 'time_end', 'images', 'instagram', 'videos']
 
 class RegisterProfileForm(forms.ModelForm):
     type = forms.BooleanField(label="Voksen", required=False)

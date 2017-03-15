@@ -23,13 +23,13 @@ function logIn() {
 }
 
 function getFacebookEvents(callback) {
-     FB.login(function(response){
-        FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
+    FB.getLoginStatus(function(response) {
+        $.get('https://graph.facebook.com/'.concat("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]).concat('&access_token=').concat(response.authResponse.accessToken)), function (response) {
             if (response && !response.error) {
                 callback(response.data);
             }
         });
-    }, {scope: 'user_events'});
+    });
 }
 
 function fetchInfo() {

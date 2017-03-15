@@ -29,6 +29,10 @@
     font-weight: 400;
 }
 
+.full-box {
+    width: 100%;
+}
+
 .adaptions-container {
     display: block; !important;
 }
@@ -50,4 +54,5 @@
 
 #event-button {
     display: none;
+    margin-top: 16px;
 }

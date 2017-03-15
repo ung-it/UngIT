@@ -30,6 +30,8 @@ function selectedImages(images) {
 //Adding Facebook events to select box
 $(document).ready(function () {
     let eventSelect = $('#event-select');
+    eventSelect.on('change', showEvent);
+    $('#event-button').on('click', fillForm);
     getFacebookEvents(function (data) {
         eventData = data;
         for (let i = 0; i < data.length; i++) {
@@ -39,9 +41,13 @@ $(document).ready(function () {
                 .text(value));
         }
         $(".facebook-event-wrapper").slideDown(500);
+        //For dev
+        eventSelect.val(564635400412646);
+        $('#event-button').trigger('click');
+        //End dev
     });
-    eventSelect.on('change', showEvent);
-    $('#event-button').on('click', fillForm);
+
+
 
 });
 
@@ -55,6 +61,34 @@ function fillForm() {
     let event = $.grep(eventData, function (e) {
         return e.id == id;
     })[0];
-    $('#activityName').val(event.name);
-    $('#activityName').parent().addClass('is-dirty');
+    console.log(event);
+    updateInput($('#activityName'), event.name);
+    updateInput($('#description'), event.description);
+    updateInput($('#location'), event.place.location.street);
+    const startDate = new Date(event.start_time);
+    let day = ("0" + startDate.getDate()).slice(-2);
+    let month = ("0" + (startDate.getMonth() + 1)).slice(-2);
+    const date_start = startDate.getFullYear()+"-"+(month)+"-"+(day) ;
+    updateInput($('#date'), date_start);
+    let hours = ("0" + startDate.getHours()).slice(-2);
+    let minutes = ("0" + startDate.getMinutes()).slice(-2);
+    const startTime = hours + ":" + minutes;
+    updateInput($('#time_start'), startTime);
+    const endDate = new Date(event.end_time);
+    day = ("0" + endDate.getDate()).slice(-2);
+    month = ("0" + (endDate.getMonth() + 1)).slice(-2);
+    const date_end = endDate.getFullYear()+"-"+(month)+"-"+(day) ;
+    updateInput($('#date_end'), date_end);
+    hours = ("0" + endDate.getHours()).slice(-2);
+    minutes = ("0" + endDate.getMinutes()).slice(-2);
+    const endTime = hours + ":" + minutes;
+    updateInput($('#time_end'), endTime);
+    // const date = startDate.substr(0, 10);
+    // updateInput($('#date'), date);
+    // updateInput($('#activityName'), event.name);
+}
+
+function updateInput(input, value) {
+    $(input).val(value);
+    $(input).parent().addClass('is-dirty');
 }

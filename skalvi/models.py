@@ -31,6 +31,7 @@ class Activity(models.Model):
     registration_required = models.BooleanField()
     price = models.IntegerField()
     date = models.DateField()
+    date_end = models.DateField()
     time_start = models.TimeField()
     time_end = models.TimeField()
     images = models.ImageField(upload_to='images/',max_length=255, blank=True)

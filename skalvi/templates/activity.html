@@ -25,10 +25,10 @@
         <div class="content">
             <div class="facebook-event-wrapper mdl-shadow--2dp">
                 <h5>Vi fant disse arrangementene på Facebook</h5>
-                <span>Ønsker du å ta utgangspunkt i noen av de?</span>
                 <select id="event-select" class="facebook-event-select">
                     <option selected disabled hidden>Velg arrangement her</option>
                 </select>
+                <span>Ønsker du å ta utgangspunkt i noen av de?</span>
                 <button id="event-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                     Bruk arrangement
                 </button>
@@ -52,13 +52,23 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                  {% if form.date.value != None %}
                                      <input class="mdl-textfield__input" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}">
                                  {% else %}
                                      <input class="mdl-textfield__input" type="date" id="date">
                                  {% endif %}
-                                <label class="mdl-textfield__label" for="date">Dato</label>
+                                <label class="mdl-textfield__label" for="date">Dato start</label>
+                            </div>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {% if form.date.value != None %}
+                                    <input class="mdl-textfield__input" type="date" id="date_end" value="{{ form.date_end.value|date:"Y-m-d" }}">
+                                {% else %}
+                                    <input class="mdl-textfield__input" type="date" id="date_end">
+                                {% endif %}
+                                 <label class="mdl-textfield__label" for="date">Dato slutt</label>
                             </div>
                         </span>
                     </li>
@@ -116,11 +126,11 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box full-box">
                                  {% if form.description.value != None %}
-                                     <textarea class="mdl-textfield__input" type="text" rows= "5" id="description">{{ form.description.value }}</textarea>
+                                     <textarea class="mdl-textfield__input" type="text" rows="10" maxrows="20" id="description">{{ form.description.value }}</textarea>
                                  {% else %}
-                                     <textarea class="mdl-textfield__input" type="text" rows= "5" id="description"></textarea>
+                                     <textarea class="mdl-textfield__input" type="text" rows="10" maxrows="20" id="description"></textarea>
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="description">Om arrangement</label>
                             </div>

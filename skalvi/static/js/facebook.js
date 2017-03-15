@@ -12,7 +12,7 @@ window.fbAsyncInit = function() {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8";
+    js.src = "//connect.facebook.net/nb_NO/all.js#xfbml=1&version=v2.8&appId=1658650714438155";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
@@ -27,13 +27,6 @@ function getFacebookEvents(callback) {
         FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
             if (response && !response.error) {
                 callback(response.data);
-                // $("#faceEvents ul").empty()
-                // $(response.data).each(function(index, obj) {
-                //     $("#faceEvents ul").append('<li>'+'Navn: '+obj.name+'</li>')
-                //         .append('<p>'+'Dato: '+obj.start_time.split('T')[0]+'</p>')
-                //         .append('<p>'+'Beskrivelse: '+obj.description+'</p>')
-                //         .append('<br/>')
-                // });
             }
         });
     }, {scope: 'user_events'});

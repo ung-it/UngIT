@@ -89,3 +89,7 @@ function updateInput(input, value) {
     $(input).val(value);
     $(input).parent().addClass('is-dirty');
 }
+
+function closeFacebookBox() {
+    $('.facebook-event-wrapper').slideUp();
+}

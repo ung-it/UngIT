@@ -2,13 +2,15 @@
 //import { setActivityPickerFilter } from "../actions/filterActions";
 
 export default function (state = null, action) {
+    console.log(action);
+    console.log('^filter reducer');
     switch (action.type) {
         case 'ACTIVITY_FILTERED':
             return action.payload;
 
         case 'ACTIVITY_PICKER':
 
-            console.log(action.payload);
+            console.log(action);
 
             //tempActivites = [];
             /*activityReducer.filter( (activity) => {
@@ -17,7 +19,7 @@ export default function (state = null, action) {
 */
             return {
                 ...state,
-                active: [action.payload]
+                active: [action]
             }
     }
     return state;

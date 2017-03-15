@@ -11,7 +11,10 @@ const ACTIVITYTYPES = [
 	{ label: 'Fotball', value: 'fotball' },
 	{ label: 'Ski', value: 'ski' },
 	{ label: 'Klatring', value: 'klatring' },
-	{ label: 'Volleyball', value: 'volleyball' }
+	{ label: 'Volleyball', value: 'volleyball' },
+	{ label: 'Skating', value: 'skate' },
+	{ label: 'Klubb', value: 'klubb' },
+	{ label: 'Grupper', value: 'gruppe' }
 ];
 
 class ActivityPicker extends Component {
@@ -27,7 +30,9 @@ class ActivityPicker extends Component {
 			value: []
 
 		};
-		setActivityPickerFilter(this.state.value);
+		// this.props.dispatch(
+		// 	setActivityPickerFilter(this.state.value)
+		// );
 		this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
 
@@ -38,11 +43,11 @@ class ActivityPicker extends Component {
 		};
 	}*/
 
-	// componentDidMount() {
-	// 	this.props.dispatch(
-	// 		setActivityPickerFilter(this.state.value)
-	// 	);
-	// }
+	componentDidMount() {
+		this.props.dispatch(
+			setActivityPickerFilter(this.state.value)
+		);
+	}
 
 	handleSelectChange (value) {
 		this.setState({

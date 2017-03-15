@@ -11,7 +11,7 @@ export const filterActivity = (activity) => {
 //     console.log("set activity picker -" + active);
 //     return {
 //         type: 'ACTIVITY_PICKER',
-//         active
+//         payload: active
 //     }
 // };
 

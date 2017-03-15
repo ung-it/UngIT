@@ -46,9 +46,9 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.activityName.value != None %}
-                                    <input class="mdl-textfield__input" name="activityName" type="text" id="activityName" value="{{ form.activityName.value }}">
+                                    <input class="mdl-textfield__input" name="activityName" type="text" id="activityName" value="{{ form.activityName.value }}" required>
                                     {% else %}
-                                        <input class="mdl-textfield__input" name="activityName" type="text" id="activityName">
+                                        <input class="mdl-textfield__input" name="activityName" type="text" id="activityName" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="activityName">Navn på aktivitet</label>
                             </div>
@@ -58,9 +58,9 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                  {% if form.date.value != None %}
-                                     <input class="mdl-textfield__input" name="date" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}">
+                                     <input class="mdl-textfield__input" name="date" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}" required>
                                  {% else %}
-                                     <input class="mdl-textfield__input" name="date" type="date" id="date">
+                                     <input class="mdl-textfield__input" name="date" type="date" id="date" required>
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="date">Dato start</label>
                             </div>
@@ -68,9 +68,9 @@
                         <span class="mdl-list__item-secondary-content">
                              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {% if form.date.value != None %}
-                                    <input class="mdl-textfield__input" name="date_end" type="date" id="date_end" value="{{ form.date_end.value|date:"Y-m-d" }}">
+                                    <input class="mdl-textfield__input" name="date_end" type="date" id="date_end" value="{{ form.date_end.value|date:"Y-m-d" }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="date_end" type="date" id="date_end">
+                                    <input class="mdl-textfield__input" name="date_end" type="date" id="date_end" required>
                                 {% endif %}
                                  <label class="mdl-textfield__label" for="date">Dato slutt</label>
                             </div>
@@ -80,9 +80,9 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {% if form.time_start.value != None %}
-                                    <input class="mdl-textfield__input" name="time_start" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}">
+                                    <input class="mdl-textfield__input" name="time_start" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="time_start" type="time" id="time_start">
+                                    <input class="mdl-textfield__input" name="time_start" type="time" id="time_start" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="time_start">Tid start</label>
                             </div>
@@ -90,9 +90,9 @@
                         <span class="mdl-list__item-secondary-content">
                              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                  {% if form.time_end.value != None %}
-                                     <input class="mdl-textfield__input" name="time_end" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}">
+                                     <input class="mdl-textfield__input" name="time_end" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}" required>
                                  {% else %}
-                                     <input class="mdl-textfield__input" name="time_end" type="time" id="time_end">
+                                     <input class="mdl-textfield__input" name="time_end" type="time" id="time_end" required>
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
                             </div>
@@ -102,9 +102,9 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.location.value != None %}
-                                    <input class="mdl-textfield__input" name="location" type="text" id="location" value="{{ form.location.value }}">
+                                    <input class="mdl-textfield__input" name="location" type="text" id="location" value="{{ form.location.value }} required">
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="location" type="text" id="location">
+                                    <input class="mdl-textfield__input" name="location" type="text" id="location" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="location">Sted</label>
                             </div>
@@ -120,9 +120,9 @@
                         <span class="mdl-list__item-primary-content">
                              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.provider.value != None %}
-                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" value="{{ form.provider.value }}">
+                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" value="{{ form.provider.value }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider">
+                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="provider">Arrangør</label>
                             </div>
@@ -132,9 +132,9 @@
                         <span class="mdl-list__item-primary-content">
                              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.age.value != None %}
-                                    <input class="mdl-textfield__input" name="age" type="text" id="age" value="{{ form.age.value }}">
+                                    <input class="mdl-textfield__input" name="age" type="text" id="age" value="{{ form.age.value }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="age" type="text" id="age">
+                                    <input class="mdl-textfield__input" name="age" type="text" id="age" required>
                                 {% endif %}
                                  <label class="mdl-textfield__label" for="provider">Alder</label>
                             </div>
@@ -144,9 +144,9 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box full-box">
                                  {% if form.description.value != None %}
-                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description">{{ form.description.value }}</textarea>
+                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required>{{ form.description.value }}</textarea>
                                  {% else %}
-                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description"></textarea>
+                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required></textarea>
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="description">Om arrangement</label>
                             </div>
@@ -168,9 +168,9 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.price.value != None %}
-                                    <input class="mdl-textfield__input" name="price" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}">
+                                    <input class="mdl-textfield__input" name="price" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="price" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price">
+                                    <input class="mdl-textfield__input" name="price" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="price">Pris i kr</label>
                                 <span class="mdl-textfield__error">Pris må være et tall</span>
@@ -210,7 +210,7 @@
                 </ul>
                 <input type="number" id="facebookID" name="facebookID" hidden>
                 <div class="submit-button">
-                    <button type="submit" class="btn btn-success">Lagre</button>
+                    <input type="submit" class="btn btn-success" value="Lagre"></input>
                 </div>
             </form>
         </div>

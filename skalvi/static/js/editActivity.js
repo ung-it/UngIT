@@ -82,6 +82,7 @@ function fillForm() {
     minutes = ("0" + endDate.getMinutes()).slice(-2);
     const endTime = hours + ":" + minutes;
     updateInput($('#time_end'), endTime);
+    $('#facebookID').val(event.id);
 }
 
 function updateInput(input, value) {

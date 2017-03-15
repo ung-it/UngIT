@@ -291,6 +291,7 @@ class createActivity(View):
     def post(self, request):
         form = ActivityForm(request.POST, request.FILES)
         if form.is_valid():
+            print("XXXXprintXXXX: ", form.cleaned_data['date'])
             instagram = request.POST['instagramImages']
             if instagram:
                 form.cleaned_data['images'] = instagram

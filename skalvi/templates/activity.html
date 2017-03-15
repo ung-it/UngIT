@@ -113,7 +113,7 @@
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
                             <div id="adaptions-container"></div>
-
+                            <input name="adaptions" value="Implementeres senere" hidden>
                         </span>
                     </li>
                     <li class="mdl-list__item">
@@ -125,6 +125,18 @@
                                     <input class="mdl-textfield__input" name="provider" type="text" id="provider">
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="provider">Arrangør</label>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                {% if form.age.value != None %}
+                                    <input class="mdl-textfield__input" name="age" type="text" id="age" value="{{ form.age.value }}">
+                                {% else %}
+                                    <input class="mdl-textfield__input" name="age" type="text" id="age">
+                                {% endif %}
+                                 <label class="mdl-textfield__label" for="provider">Alder</label>
                             </div>
                         </span>
                     </li>
@@ -174,9 +186,9 @@
                         </span>
                     </li>
                     <li class="mdl-list__item input-box">
+                        <input name="instagramImages" id="instagramImages" type="hidden">
                         {% if images %}
                             <span>Klikk på et bilde for å legge det til</span>
-                            <input name="instagram" id="instagramImages" type="hidden">
                             <div id="instagram-div">
                                 {% for image in images %}
                                     <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
@@ -196,6 +208,7 @@
                         </span>
                     </li>
                 </ul>
+                <input type="number" id="facebookID" name="facebookID" hidden>
                 <div class="submit-button">
                     <button type="submit" class="btn btn-success">Lagre</button>
                 </div>

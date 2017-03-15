@@ -22,17 +22,18 @@ function logIn() {
     }, {scope: 'user_events'});
 }
 
-function getFacebookEvents() {
+function getFacebookEvents(callback) {
      FB.login(function(response){
         FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
             if (response && !response.error) {
-                $("#faceEvents ul").empty()
-                $(response.data).each(function(index, obj) {
-                    $("#faceEvents ul").append('<li>'+'Navn: '+obj.name+'</li>')
-                        .append('<p>'+'Dato: '+obj.start_time.split('T')[0]+'</p>')
-                        .append('<p>'+'Beskrivelse: '+obj.description+'</p>')
-                        .append('<br/>')
-                });
+                callback(response.data);
+                // $("#faceEvents ul").empty()
+                // $(response.data).each(function(index, obj) {
+                //     $("#faceEvents ul").append('<li>'+'Navn: '+obj.name+'</li>')
+                //         .append('<p>'+'Dato: '+obj.start_time.split('T')[0]+'</p>')
+                //         .append('<p>'+'Beskrivelse: '+obj.description+'</p>')
+                //         .append('<br/>')
+                // });
             }
         });
     }, {scope: 'user_events'});

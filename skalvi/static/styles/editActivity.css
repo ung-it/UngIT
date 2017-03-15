@@ -1,5 +1,7 @@
 .activity-wrapper {
-    margin-top: 5em;
+    padding: 8px;
+    margin: 8px;
+    background-color: white;
 }
 
 .instagram-image {
@@ -33,4 +35,19 @@
 
 .adaptions-box {
 
+}
+
+.facebook-event-wrapper {
+    padding: 24px;
+    margin: 8px;
+    background-color: white;
+    display: none;
+}
+
+.facebook-event-select {
+
+}
+
+#event-button {
+    display: none;
 }

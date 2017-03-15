@@ -22,193 +22,205 @@
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
-        <div class="content activity-wrapper">
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <ul class='mdl-list'>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                            {% if form.activityName.value != None %}
-                                <input class="mdl-textfield__input" type="text" id="activityName" value="{{ form.activityName.value }}">
-                                {% else %}
-                                    <input class="mdl-textfield__input" type="text" id="activityName">
-                            {% endif %}
-                            <label class="mdl-textfield__label" for="activityName">Navn på aktivitet</label>
-                        </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                             {% if form.date.value != None %}
-                                 <input class="mdl-textfield__input" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}">
-                             {% else %}
-                                 <input class="mdl-textfield__input" type="date" id="date">
-                             {% endif %}
-                            <label class="mdl-textfield__label" for="date">Dato</label>
-                        </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            {% if form.time_start.value != None %}
-                                <input class="mdl-textfield__input" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}">
-                            {% else %}
-                                <input class="mdl-textfield__input" type="time" id="time_start">
-                            {% endif %}
-                            <label class="mdl-textfield__label" for="time_start">Tid start</label>
-                        </div>
-                    </span>
-                    <span class="mdl-list__item-secondary-content">
-                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                             {% if form.time_end.value != None %}
-                                 <input class="mdl-textfield__input" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}">
-                             {% else %}
-                                 <input class="mdl-textfield__input" type="time" id="time_end">
-                             {% endif %}
-                            <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
-                        </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                            {% if form.location.value != None %}
-                                <input class="mdl-textfield__input" type="text" id="location" value="{{ form.location.value }}">
-                            {% else %}
-                                <input class="mdl-textfield__input" type="text" id="location">
-                            {% endif %}
-                            <label class="mdl-textfield__label" for="location">Sted</label>
-                        </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <div id="adaptions-container"></div>
-
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                            {% if form.provider.value != None %}
-                                <input class="mdl-textfield__input" type="text" id="provider" value="{{ form.provider.value }}">
-                            {% else %}
-                                <input class="mdl-textfield__input" type="text" id="provider">
-                            {% endif %}
-                            <label class="mdl-textfield__label" for="provider">Arrangør</label>
-                        </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                             {% if form.description.value != None %}
-                                 <textarea class="mdl-textfield__input" type="text" rows= "5" id="description">{{ form.description.value }}</textarea>
-                             {% else %}
-                                 <textarea class="mdl-textfield__input" type="text" rows= "5" id="description"></textarea>
-                             {% endif %}
-                            <label class="mdl-textfield__label" for="description">Om arrangement</label>
-                        </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect input-box" for="registration_required">
-                            {% if form.registration_required.value %}
-                                <input type="checkbox" id="registration_required" class="mdl-checkbox__input" checked>
-                            {% else %}
-                                <input type="checkbox" id="registration_required" class="mdl-checkbox__input">
-                            {% endif %}
-                            <span class="mdl-checkbox__label">Arrangement krever registrering</span>
-                        </label>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                            {% if form.price.value != None %}
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}">
-                            {% else %}
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price">
-                            {% endif %}
-                            <label class="mdl-textfield__label" for="price">Pris i kr</label>
-                            <span class="mdl-textfield__error">Pris må være et tall</span>
-                        </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                         <div class="mdl-file mdl-js-file mdl-file--floating-label">
-                            <input type="file" name="images" id="images">
-                            <label class="mdl-file__label" for="images">Last opp et bilde</label>
-                         </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item input-box">
-                    {% if images %}
-                        <span>Klikk på et bilde for å legge det til</span>
-                        <input name="instagram" id="instagramImages" type="hidden">
-                        <div id="instagram-div">
-                            {% for image in images %}
-                                <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
-                            {% endfor %}
-                        </div>
-                        <script> selectedImages("{{ form.instagram.value }}") </script>
-                        {% else %}
-                            <a class="btn btn-info" role="button" href={{ link }} >Finn bilde på Instagram</a>
-                    {% endif %}
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                         <div class="mdl-file mdl-js-file mdl-file--floating-label">
-                            <input type="file" name="videos" id="videos">
-                            <label class="mdl-file__label" for="videos">Last opp en video</label>
-                         </div>
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-
-                    </span>
-                </li>
-            </ul>
-
-{#                    {% for field in form %}#}
-{#                        <div class="form-group">#}
-{#                            <div class="col-sm-offset-2 col-sm-10">#}
-{#                                <span class="text-danger small">{{ field.errors }}</span>#}
-{#                            </div>#}
-{#                            <label class="control-label col-sm-2" for="field_title">{{ field.label_tag }}</label>#}
-{#                            <div class="col-sm-10">#}
-{#                                {% if field.label == "Instagram" %}#}
-{#                                    {% if images %}#}
-{#                                        <div>Klikk på et bilde for å legge det til</div>#}
-{#                                        <input name="instagram" id="instagramImages" type="hidden">#}
-{#                                        <div id="instagram-div">#}
-{#                                            {% for image in images %}#}
-{#                                                <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>#}
-{#                                            {% endfor %}#}
-{#                                        </div>#}
-{#                                        <script> selectedImages("{{ field.value }}") </script>#}
-{#                                        {% else %}#}
-{#                                            <a class="btn btn-info" role="button" href={{ link }} >Finn bilde på Instagram</a>#}
-{#                                    {% endif %}#}
-{#                                    {% else %}#}
-{#                                        {{ field }}#}
-{#                                {% endif %}#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    {% endfor %}#}
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-success">Lagre</button>
-                </div>
+        <div class="content">
+            <div class="facebook-event-wrapper mdl-shadow--2dp">
+                <h5>Vi fant disse arrangementene på Facebook</h5>
+                <span>Ønsker du å ta utgangspunkt i noen av de?</span>
+                <select id="event-select" class="facebook-event-select">
+                    <option selected disabled hidden>Velg arrangement her</option>
+                </select>
+                <button id="event-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                    Bruk arrangement
+                </button>
             </div>
-        </form>
+            <div class="content activity-wrapper mdl-shadow--2dp">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <ul class='mdl-list'>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                {% if form.activityName.value != None %}
+                                    <input class="mdl-textfield__input" type="text" id="activityName" value="{{ form.activityName.value }}">
+                                    {% else %}
+                                        <input class="mdl-textfield__input" type="text" id="activityName">
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="activityName">Navn på aktivitet</label>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                 {% if form.date.value != None %}
+                                     <input class="mdl-textfield__input" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}">
+                                 {% else %}
+                                     <input class="mdl-textfield__input" type="date" id="date">
+                                 {% endif %}
+                                <label class="mdl-textfield__label" for="date">Dato</label>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {% if form.time_start.value != None %}
+                                    <input class="mdl-textfield__input" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}">
+                                {% else %}
+                                    <input class="mdl-textfield__input" type="time" id="time_start">
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="time_start">Tid start</label>
+                            </div>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                 {% if form.time_end.value != None %}
+                                     <input class="mdl-textfield__input" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}">
+                                 {% else %}
+                                     <input class="mdl-textfield__input" type="time" id="time_end">
+                                 {% endif %}
+                                <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                {% if form.location.value != None %}
+                                    <input class="mdl-textfield__input" type="text" id="location" value="{{ form.location.value }}">
+                                {% else %}
+                                    <input class="mdl-textfield__input" type="text" id="location">
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="location">Sted</label>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <div id="adaptions-container"></div>
+
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                {% if form.provider.value != None %}
+                                    <input class="mdl-textfield__input" type="text" id="provider" value="{{ form.provider.value }}">
+                                {% else %}
+                                    <input class="mdl-textfield__input" type="text" id="provider">
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="provider">Arrangør</label>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                 {% if form.description.value != None %}
+                                     <textarea class="mdl-textfield__input" type="text" rows= "5" id="description">{{ form.description.value }}</textarea>
+                                 {% else %}
+                                     <textarea class="mdl-textfield__input" type="text" rows= "5" id="description"></textarea>
+                                 {% endif %}
+                                <label class="mdl-textfield__label" for="description">Om arrangement</label>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect input-box" for="registration_required">
+                                {% if form.registration_required.value %}
+                                    <input type="checkbox" id="registration_required" class="mdl-checkbox__input" checked>
+                                {% else %}
+                                    <input type="checkbox" id="registration_required" class="mdl-checkbox__input">
+                                {% endif %}
+                                <span class="mdl-checkbox__label">Arrangement krever registrering</span>
+                            </label>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                {% if form.price.value != None %}
+                                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}">
+                                {% else %}
+                                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price">
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="price">Pris i kr</label>
+                                <span class="mdl-textfield__error">Pris må være et tall</span>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                             <div class="mdl-file mdl-js-file mdl-file--floating-label">
+                                <input type="file" name="images" id="images">
+                                <label class="mdl-file__label" for="images">Last opp et bilde</label>
+                             </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item input-box">
+                        {% if images %}
+                            <span>Klikk på et bilde for å legge det til</span>
+                            <input name="instagram" id="instagramImages" type="hidden">
+                            <div id="instagram-div">
+                                {% for image in images %}
+                                    <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
+                                {% endfor %}
+                            </div>
+                            <script> selectedImages("{{ form.instagram.value }}") </script>
+                            {% else %}
+                                <a class="btn btn-info" role="button" href={{ link }} >Finn bilde på Instagram</a>
+                        {% endif %}
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                             <div class="mdl-file mdl-js-file mdl-file--floating-label">
+                                <input type="file" name="videos" id="videos">
+                                <label class="mdl-file__label" for="videos">Last opp en video</label>
+                             </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+
+                        </span>
+                    </li>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Lagre</button>
+                        </div>
+                    </div>
+                </ul>
+
+    {#                    {% for field in form %}#}
+    {#                        <div class="form-group">#}
+    {#                            <div class="col-sm-offset-2 col-sm-10">#}
+    {#                                <span class="text-danger small">{{ field.errors }}</span>#}
+    {#                            </div>#}
+    {#                            <label class="control-label col-sm-2" for="field_title">{{ field.label_tag }}</label>#}
+    {#                            <div class="col-sm-10">#}
+    {#                                {% if field.label == "Instagram" %}#}
+    {#                                    {% if images %}#}
+    {#                                        <div>Klikk på et bilde for å legge det til</div>#}
+    {#                                        <input name="instagram" id="instagramImages" type="hidden">#}
+    {#                                        <div id="instagram-div">#}
+    {#                                            {% for image in images %}#}
+    {#                                                <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>#}
+    {#                                            {% endfor %}#}
+    {#                                        </div>#}
+    {#                                        <script> selectedImages("{{ field.value }}") </script>#}
+    {#                                        {% else %}#}
+    {#                                            <a class="btn btn-info" role="button" href={{ link }} >Finn bilde på Instagram</a>#}
+    {#                                    {% endif %}#}
+    {#                                    {% else %}#}
+    {#                                        {{ field }}#}
+    {#                                {% endif %}#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    {% endfor %}#}
+            </form>
+        </div>
     </div>
 
 {% endblock %}

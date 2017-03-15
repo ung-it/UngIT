@@ -42,8 +42,8 @@ $(document).ready(function () {
         }
         $(".facebook-event-wrapper").slideDown(500);
         //For dev
-        eventSelect.val(564635400412646);
-        $('#event-button').trigger('click');
+        // eventSelect.val(564635400412646);
+        // $('#event-button').trigger('click');
         //End dev
     });
 
@@ -61,7 +61,6 @@ function fillForm() {
     let event = $.grep(eventData, function (e) {
         return e.id == id;
     })[0];
-    console.log(event);
     updateInput($('#activityName'), event.name);
     updateInput($('#description'), event.description);
     updateInput($('#location'), event.place.location.street);
@@ -83,9 +82,6 @@ function fillForm() {
     minutes = ("0" + endDate.getMinutes()).slice(-2);
     const endTime = hours + ":" + minutes;
     updateInput($('#time_end'), endTime);
-    // const date = startDate.substr(0, 10);
-    // updateInput($('#date'), date);
-    // updateInput($('#activityName'), event.name);
 }
 
 function updateInput(input, value) {

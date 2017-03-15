@@ -1,6 +1,6 @@
 .activity-wrapper {
     padding: 8px;
-    margin: 8px;
+    margin: 8px 0px 8px 0px;
     background-color: white;
 }
 
@@ -42,8 +42,9 @@
 }
 
 .facebook-event-wrapper {
-    padding: 24px;
-    margin: 8px;
+    padding: 16px 24px 24px 24px;
+    margin: 8px 0px 20px 0px;
+    height: 171.2px;
     background-color: white;
     display: none;
 }
@@ -52,7 +53,18 @@
 
 }
 
+#event-select {
+    font-family: "Helvetica","Arial",sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
 #event-button {
     display: none;
     margin-top: 16px;
+}
+
+.submit-button {
+    padding: 16px;
 }

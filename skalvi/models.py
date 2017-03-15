@@ -24,6 +24,7 @@ class UserProfile(models.Model):
 class Activity(models.Model):
     activityName = models.CharField(max_length=80)
     provider = models.CharField(max_length=80)
+    facebookID = models.IntegerField(blank=True, null=True)
     adaptions = models.TextField()
     age = models.CharField(max_length=80)
     location = models.CharField(max_length=80)

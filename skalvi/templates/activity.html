@@ -196,7 +196,7 @@
                         <span class="mdl-list__item-primary-content">
                              <div class="mdl-file mdl-js-file mdl-file--floating-label">
                                  <input type="file" name="images" id="images">
-                                 {% if form.images.value != "" %}
+                                 {% if form.images.value != ""  and form.images.value %}
                                     <label class="mdl-file__label" for="images">Last opp et annet bilde</label>
                                      {% else %}
                                     <label class="mdl-file__label" for="images">Last opp et bilde</label>
@@ -204,7 +204,7 @@
                              </div>
                         </span>
                         <span class="mdl-list__item-secondary-content">
-                            {% if form.images.value != "" %}
+                            {% if form.images.value != "" and form.images.value %}
                                 <div class="thumbnail">
                                     <img src="{{ MEDIA_URL }}{{ form.images.value }}" alt="Bilde lastet opp tidligere" class="upladed-image">
                                     <div class="caption">

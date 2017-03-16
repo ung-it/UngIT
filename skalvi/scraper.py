@@ -157,4 +157,4 @@ def main():
     informasjon = s.scrapeAktor(name='DANS MED OSS')
     print(informasjon)
 
-main()
+#main()

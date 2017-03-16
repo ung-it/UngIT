@@ -1,14 +1,16 @@
 .main-wrapper {
     padding: 40px 40px 8px 40px;
-    margin: 8px 0px 32px 0px;
+    margin: 8px auto 32px auto;
     background-color: white;
+    width: 900px;
 }
 .facebook-event-wrapper {
-    margin: 8px 0px 20px 0px;
+    margin: 8px auto 20px auto;
     padding: 16px 16px 16px 16px;
     height: 171.2px;
     background-color: white;
     display: none;
+    width: 900px;
 }
 
 .facebook-content-box {
@@ -45,12 +47,17 @@
     width: 100%;
 }
 
-.adaptions-container {
-    display: block; !important;
+.thumbnail {
+    height: 240px;
+    text-align: center;
 }
 
-.mdl-list__item {
-    padding-left: ;
+.thumbnail img {
+    height: 85%;
+}
+
+.adaptions-container {
+    display: block; !important;
 }
 
 #event-select {

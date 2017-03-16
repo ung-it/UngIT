@@ -195,9 +195,23 @@
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
                              <div class="mdl-file mdl-js-file mdl-file--floating-label">
-                                <input type="file" name="images" id="images">
-                                <label class="mdl-file__label" for="images">Last opp et bilde</label>
+                                 <input type="file" name="images" id="images">
+                                 {% if form.images.value != None %}
+                                    <label class="mdl-file__label" for="images">Last opp et annet bilde</label>
+                                     {% else %}
+                                    <label class="mdl-file__label" for="images">Last opp et bilde</label>
+                                 {% endif %}
                              </div>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                            {% if form.images.value != None %}
+                                <div class="thumbnail">
+                                    <img src="{{ MEDIA_URL }}{{ form.images.value }}" alt="Bilde lastet opp tidligere" class="upladed-image">
+                                    <div class="caption">
+                                        <span>Bilde lastet opp tidligere</span>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </span>
                     </li>
                     <li class="mdl-list__item input-box">

@@ -278,7 +278,6 @@ class ActivityView(generic.DetailView):
                 form.save()
                 return redirect('/')
             else:
-                print(form.errors)
                 return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
 
 class createActivity(View):

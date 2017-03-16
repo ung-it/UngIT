@@ -3,14 +3,15 @@
 {% load static %}
 
 {% block explicitPageHeader %}
-    <script type="text/javascript" src="{% static 'js/editActivity.js' %}"></script>
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script defer src="{% static 'js/material.components.ext.min.js'%}"></script>
-
+    <link rel="stylesheet" href="{% static 'styles/material.min.css'%}">
+    <script src="{% static 'js/material.min.js'%}"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
     <link rel="stylesheet" href="{% static "styles/material.components.ext.min.css" %}">
+    <script src="{% static 'js/material.components.ext.min.js'%}"></script>
+
     <link rel="stylesheet" href="{% static "styles/editActivity.css" %}">
+    <script type="text/javascript" src="{% static 'js/editActivity.js' %}"></script>
 {% endblock %}
 
 {% block pageTitle %}
@@ -19,7 +20,7 @@
 
 
 {% block body %}
-        <div class="content">
+        <div class="content content-margin-top">
             {% if error_message %}
                 <div class="alert alert-danger">
                     <strong>{{ error_message }}</strong>
@@ -54,6 +55,7 @@
                                         <input class="mdl-textfield__input" name="activityName" type="text" id="activityName" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="activityName">Navn på aktivitet</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                     </li>
@@ -66,6 +68,7 @@
                                      <input class="mdl-textfield__input" name="date" type="date" id="date" required>
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="date">Dato start</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                         <span class="mdl-list__item-secondary-content">
@@ -76,6 +79,7 @@
                                     <input class="mdl-textfield__input" name="date_end" type="date" id="date_end" required>
                                 {% endif %}
                                  <label class="mdl-textfield__label" for="date">Dato slutt</label>
+                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                     </li>
@@ -88,6 +92,7 @@
                                     <input class="mdl-textfield__input" name="time_start" type="time" id="time_start" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="time_start">Tid start</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                         <span class="mdl-list__item-secondary-content">
@@ -98,6 +103,7 @@
                                      <input class="mdl-textfield__input" name="time_end" type="time" id="time_end" required>
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                     </li>
@@ -110,6 +116,7 @@
                                     <input class="mdl-textfield__input" name="location" type="text" id="location" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="location">Sted</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                     </li>
@@ -128,6 +135,7 @@
                                     <input class="mdl-textfield__input" name="provider" type="text" id="provider" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="provider">Arrangør</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                     </li>
@@ -140,6 +148,7 @@
                                     <input class="mdl-textfield__input" name="age" type="text" id="age" required>
                                 {% endif %}
                                  <label class="mdl-textfield__label" for="provider">Alder</label>
+                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                     </li>
@@ -152,6 +161,7 @@
                                      <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required></textarea>
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="description">Om arrangement</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                     </li>
@@ -213,7 +223,7 @@
                 </ul>
                 <input type="number" id="facebookID" name="facebookID" hidden>
                 <div class="submit-button">
-                    <input type="submit" class="btn btn-success" value="Lagre"></input>
+                    <input type="submit" class="btn btn-success" value="Lagre">
                 </div>
             </form>
         </div>

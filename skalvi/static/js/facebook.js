@@ -1,12 +1,19 @@
-window.fbAsyncInit = function() {
-    FB.init({
-        appId      : '1658650714438155',
-        cookie     : true,  // enable cookies to allow the server to access
-        // the session
-        xfbml      : true,  // parse social plugins on this page
-        version    : 'v2.8' // use version 2.1
-    });
-};
+function asyncFacebook(callback) {
+    if (typeof(FB) != 'undefined' && FB != null ) {
+        callback();
+        return;
+    }
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1658650714438155',
+            cookie     : true,  // enable cookies to allow the server to access
+            // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v2.8' // use version 2.1
+        });
+        callback();
+    };
+}
 
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -17,17 +24,21 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 function logIn() {
-    FB.login(function(response){
-        fetchInfo();
-    }, {scope: 'user_events'});
+    asyncFacebook(function () {
+        FB.login(function(response){
+            fetchInfo();
+        }, {scope: 'user_events'});
+    })
 }
 
 function getFacebookEvents(callback) {
-    FB.getLoginStatus(function(response) {
-        $.get('https://graph.facebook.com/'.concat("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]).concat('&access_token=').concat(response.authResponse.accessToken)), function (response) {
-            if (response && !response.error) {
-                callback(response.data);
-            }
+    asyncFacebook(function () {
+        FB.getLoginStatus(function (response) {
+            $.get('https://graph.facebook.com/'.concat("/me/events?limit=25&since=".concat(String(Date.now() / 1000).split(".")[0]).concat('&access_token=').concat(response.authResponse.accessToken)), function (response) {
+                if (response && !response.error) {
+                    callback(response.data);
+                }
+            });
         });
     });
 }

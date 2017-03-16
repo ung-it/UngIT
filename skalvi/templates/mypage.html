@@ -1,49 +1,58 @@
 {% extends "base_template.html" %}
 {% block pageTitle %}MyPage{% endblock %}
 {% load static %}
+{% block explicitPageHeader %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
+{% endblock %}
+
 {% block body %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
-
-    <div class="row">
-        <div style="height: 100px"></div>
-        <div class="col-sm-4 ">
-            <div id="userInfo">
-                <div><img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile"></div>
-
-                <div>
-                    <h1>Min side</h1>
-                    <h3>Brukernavn: {{ user.username}}</h3>
-                    <h4>Navn : {{ user.first_name.title }} {{ user.last_name.title }}</h4>
-                    <h4>Epost: {{ user.email }}</h4>
-                </div>
-            </div>
-
-            <br>
-            <h3>Brukere i din familie</h3>
-            {% for profile in userprofiles %}
-                <hr style="width: 10%; float: left;"><br><br>
-
-                <h4>Profilnavn: {{ profile.profile_name }}</h4>
-                {% if profile.type == "P" %}
-                    <h4>Brukertype: Voksen</h4>
-                {%  else %}
-                    <h4>Brukertype: Barn </h4>
-                {% endif %}
-                <h4>Telefon: {{ profile.phone }}</h4>
-                <h4>Aktiv: {{ profile.is_active }}</h4>
 
 
-            {% endfor %}
+    <div style="height: 100px"></div>
+
+    <div id="profilesOnMyPage">
+        <div>
+        {% for inital in initiales %}
+            <button class="profileOnMyPage">{{inital}}</button>
+        {% endfor %}
         </div>
     </div>
-
 
 
 {% endblock %}
 
 
 
+
+{#        <div class="col-sm-4 ">#}
+{#            <div id="userInfo">#}
+{#                <div><img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile"></div>#}
+{##}
+{#                <div>#}
+{#                    <h1>Min side</h1>#}
+{#                    <h3>Brukernavn: {{ user.username}}</h3>#}
+{#                    <h4>Navn : {{ user.first_name.title }} {{ user.last_name.title }}</h4>#}
+{#                    <h4>Epost: {{ user.email }}</h4>#}
+{#                </div>#}
+{#            </div>#}
+
+
+{##}
+{#            {% for profile in userprofiles %}#}
+{#                <hr style="width: 10%; float: left;"><br><br>#}
+{##}
+{#                <h4>Profilnavn: {{ profile.profile_name }}</h4>#}
+{#                {% if profile.type == "P" %}#}
+{#                    <h4>Brukertype: Voksen</h4>#}
+{#                {%  else %}#}
+{#                    <h4>Brukertype: Barn </h4>#}
+{#                {% endif %}#}
+{#                <h4>Telefon: {{ profile.phone }}</h4>#}
+{#                <h4>Aktiv: {{ profile.is_active }}</h4>#}
+{##}
+{##}
+{#            {% endfor %}#}
 
 
 

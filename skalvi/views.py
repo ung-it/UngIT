@@ -349,35 +349,20 @@ class MyPageView(View):
 
             user_object = request.user
             user_profile_objects = UserProfile.objects.filter(user=request.user)
+            initiales = []
+
+            for profile in user_profile_objects:
+                initiales.append(profile.profile_name[0:2].upper())
+
             return render(request, self.template_name,
                           {
                               'userprofiles': user_profile_objects,
                               'user': user_object,
-                              'form': form
+                              'initiales':initiales
+
                           })
         return HttpResponse("Du må være logget inn for å ha tilgang til denne siden")
 
-    def post(self, request):
-        profile_form = self.form_class(request.POST)
-        print("FORM ", profile_form)
-
-        if profile_form.is_valid():
-            # Take submitted data and save to database
-            profile_form.save(commit=False)
-            # Cleaned (normalized) data / formated properly
-            phone = profile_form.cleaned_data['phone']
-            types = profile_form.cleaned_data['type']
-            profile_name = profile_form.cleaned_data['profile_name']
-
-            if types:
-                types = "P"
-            else:
-                types = "C"
-
-            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
-            profile.save()
-
-        return redirect("skalvi:mypage")
 
 class RegisterProfileView(View):
     template_name = 'registerProfile.html'
@@ -395,7 +380,6 @@ class RegisterProfileView(View):
 
     def post(self, request):
         profile_form = self.form_class(request.POST)
-        print("FORM ", profile_form)
 
         if profile_form.is_valid():
             # Take submitted data and save to database

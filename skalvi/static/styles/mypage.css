@@ -1,4 +1,15 @@
-#userInfo{
+#profilesOnMyPage{
+    background-color: #1b6d85;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: space-between;
+    color: green;
 }
+
+.profilesOnMyPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+

@@ -29,6 +29,13 @@ function selectedImages(images) {
 
 //Adding Facebook events to select box
 $(document).ready(function () {
+
+    //Fixing css layout on date and time fields
+    $('#date').on('blur', checkContent);
+    $('#date_end').on('blur', checkContent);
+    $('#time_start').on('blur', checkContent);
+    $('#time_end').on('blur', checkContent);
+
     let eventSelect = $('#event-select');
     eventSelect.on('change', showEvent);
     $('#event-button').on('click', fillForm);
@@ -89,6 +96,16 @@ function updateInput(input, value) {
 
 function closeFacebookBox() {
     $('.facebook-event-wrapper').slideUp();
+}
+
+function checkContent(event) {
+    let target = $(event.target);
+    if (target.val() != "") {
+        target.parent().removeClass('date-time-container');
+    }
+    else {
+        target.parent().addClass('date-time-container');
+    }
 }
 
 //This function fixes texfields showing 'is-required-error" when form loads

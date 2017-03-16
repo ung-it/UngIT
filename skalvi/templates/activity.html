@@ -61,7 +61,7 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="date-time-container mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                  {% if form.date.value != None %}
                                      <input class="mdl-textfield__input" name="date" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}" required>
                                  {% else %}
@@ -72,7 +72,7 @@
                             </div>
                         </span>
                         <span class="mdl-list__item-secondary-content">
-                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                             <div class="date-time-container mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {% if form.date.value != None %}
                                     <input class="mdl-textfield__input" name="date_end" type="date" id="date_end" value="{{ form.date_end.value|date:"Y-m-d" }}" required>
                                 {% else %}
@@ -85,7 +85,7 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="date-time-container mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {% if form.time_start.value != None %}
                                     <input class="mdl-textfield__input" name="time_start" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}" required>
                                 {% else %}
@@ -96,7 +96,7 @@
                             </div>
                         </span>
                         <span class="mdl-list__item-secondary-content">
-                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                             <div class="date-time-container mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                  {% if form.time_end.value != None %}
                                      <input class="mdl-textfield__input" name="time_end" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}" required>
                                  {% else %}

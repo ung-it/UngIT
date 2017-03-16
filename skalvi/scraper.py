@@ -149,6 +149,8 @@ class Scraper:
         return information
 
 
+
+# Remove before final release, this is only for debugging
 def main():
     s = Scraper()
     #informasjon = s.scrapeAktor(name='rosenborg ballklub')

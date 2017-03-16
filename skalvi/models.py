@@ -6,7 +6,13 @@ from django.contrib.auth.models import Permission, User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
+ACTIVITY_TYPES = (
+    (0, 'Ukjent'),
+    (1, 'Skating'),
+    (2, 'Klatring'),
+    (3, 'Ski'),
+    (4, 'Svømming'),
+)
 
 ########### USER PROFILES that extends the auth.models.User table
 
@@ -23,6 +29,7 @@ class UserProfile(models.Model):
 
 class Activity(models.Model):
     activityName = models.CharField(max_length=80)
+    activityType = models.PositiveSmallIntegerField(choices=ACTIVITY_TYPES, default=0)  # Defaults to 'Ukjent'
     provider = models.CharField(max_length=80)
     adaptions = models.TextField()
     age = models.CharField(max_length=80)
@@ -39,6 +46,9 @@ class Activity(models.Model):
 
     def was_published(self):
         return self.pub_date
+
+    def __str__(self):
+        return self.activityName
 
 
 class Organisation(models.Model):

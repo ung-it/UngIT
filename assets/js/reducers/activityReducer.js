@@ -1,5 +1,4 @@
-import getUpcomingActivities from '../APIFunctions';
-
+import * as actionTypes from '../actions/activitiesActions';
 /*
 * A reducer is just a little pice of data that we want to return
 * It gets notified from all Action creators when they are fired, with the action type
@@ -7,25 +6,31 @@ import getUpcomingActivities from '../APIFunctions';
 * data. It can do so.
 * */
 
-export default function Activityreducer(state=null, action) {
+const initialState = {
+    activityList: [],
+    activeActivityFilters: '',
+    activeSuitedForFilters: '',
+    activeDateFilter: '',
+    searchText: '',
+}
 
 
-
+export default function ActivityReducer(state=initialState, action) {
     switch (action.type) {
-        case "ACTIVITY_FETCHED": {
+        case actionTypes.FETCHED_ALL_ACTIVITIES:
             return {
                 ...state,
-                activities: [...state, action.payload]
-            }
-        }
+                activityList: action.activities,
+            };
+        case actionTypes.ADD_ACTIVITY_FILTER:
+            return {
+                ...state,
+                activeActivityFilters: action.filter,
+            };
+        default:
+            return state;
     }
-
-    // use the api function to get all data from the db, and save in activities array
-    // so that we do not need to query for each request.
-
-
-
-
-
-    return state
 }
+
+// use the api function to get all data from the db, and save in activities array
+// so that we do not need to query for each request.

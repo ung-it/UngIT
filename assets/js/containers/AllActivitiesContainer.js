@@ -1,75 +1,69 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {getUpcomingActivities} from '../APIFunctions';
-
 import { Provider } from "react-redux";
-import store from "../store";
-import ActivityPageContainer from '../components/ActivityPageComponent';
 import { connect } from "react-redux";
+
+import ActivityFilters from '../components/ActivityFilters';
+import ActivitiesList from '../components/ActivtiesList'
+import { fetchAllActivities, addActivityFilter } from '../actions/activitiesActions';
+import configureStore from "../configureStore";
 
 import '../../styles/activityBox.css';
 
+const store = configureStore();
+
 class AllActivitiesContainer extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            ids: []
-        }
+    componentDidMount() {
+        this.props.fetchActivities();
     }
-
-    createActivityPageComponent() {
-        return this.props.activities.map((activity) => {
-            return (
-                <ActivityPageContainer key={activity.id} activity={activity}/>
-            )
-        });
-    }
-
 
     render() {
-
-        const styles = {
-            activitiesContainerStyle: {
-                margin: "0px 10px 0px 10px"
-            },
-            activitiesStyle: {
-                display: "flex",
-                flexWrap: "wrap",
-                flexDirection: "row",
-                justifyContent: "center"
-            }
-        };
-
-
         return (
-            <div style={styles.activitiesContainerStyle}>
-              <h3>Aktiviteter</h3>
-              <div style={styles.activitiesStyle}>
-                  {this.createActivityPageComponent()}
-              </div>
+            <div>
+                <ActivityFilters
+                    onActivityFilterChange={this.props.changeActivityFilter}
+                    activityFilters={this.props.activeActivityFilters}
+                />
+                <ActivitiesList activities={this.props.activities} />
             </div>
         );
     }
 
-    componentDidMount() {
-        getUpcomingActivities(function(idArray) {
-            this.setState({ids: idArray});
-        }.bind(this));
-    }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+    let { activity: { activityList, activeActivityFilters } } = state; // Make activityList and activeActivityFilters from state become variables
+
+    activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
+
+    const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
+    const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
+
     return {
-        activities: state.activity
+        activities: hasActivityFilter
+            ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
+            : activityList,
+        activeActivityFilters: activeActivityFilters,
     };
 }
 
-AllActivitiesContainer = connect(mapStateToProps)(AllActivitiesContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchActivities: () => dispatch(fetchAllActivities()),
+        changeActivityFilter: (filter) => dispatch(addActivityFilter(filter))
+    }
+}
+
+AllActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllActivitiesContainer);
+
+// Fetch initial data for to the state
+store.dispatch(fetchAllActivities());
 
 ReactDOM.render(
     <Provider store={store}>
         <AllActivitiesContainer />
-    </Provider>, document.getElementById('allActivities')
+    </Provider>,
+    document.getElementById('allActivities')
 );
 

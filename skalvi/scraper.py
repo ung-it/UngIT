@@ -60,6 +60,12 @@ class Scraper:
             hrefEnd = link.find('>')
             orgLink = link[hrefStart:hrefEnd]
             resultName = link[start:end]
+            #print(orgLink)
+            resultSplit = orgLink.split('/')
+            #print(resultSplit)
+            aktorID = resultSplit[1]
+            aktorID = aktorID[:-1]
+            #print(aktorID)
             #print(orgLink) # organisations/573
             #no we can query on baseUrl + orgLink => https://organisasjoner.trondheim.kommune.no/rganisations/573
             #print(name.upper())
@@ -71,7 +77,7 @@ class Scraper:
                 orgLink =  self.baseURL + '/'+ orgLink
                 #print(orgLink)
                 #print('orgLink from scrapeAktor')
-                return self._scrapeInfo(orgLink=orgLink)
+                return self._scrapeInfo(orgLink=orgLink, orgID=aktorID)
 
         # if not match, return null
         return None
@@ -82,7 +88,7 @@ class Scraper:
 
     :param orgLink: the aktordatabase url to scrape
     '''
-    def _scrapeInfo(self, orgLink):
+    def _scrapeInfo(self, orgLink, orgID):
         information = {}
         r = requests.get(orgLink)
         self.soup = BeautifulSoup(r.content, 'html.parser')
@@ -136,6 +142,8 @@ class Scraper:
                     adr = adr.replace(' ', '')
 
                     information[keys[i].string] = adr.strip()
+        if(len(information) !=0 ):
+            information['Id'] = orgID
 
         #print(information)
         return information
@@ -149,4 +157,4 @@ def main():
     informasjon = s.scrapeAktor(name='DANS MED OSS')
     print(informasjon)
 
-#main()
+main()

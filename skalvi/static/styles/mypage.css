@@ -1,15 +1,82 @@
+#myPageContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 #profilesOnMyPage{
-    background-color: #1b6d85;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: green;
+    width: 6%;
 }
 
-.profilesOnMyPage{
+#profile{
+    margin-left: 10%;
+    width: 40%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+
 }
 
+.profile_picture{
+}
+
+/*hvis bilde skal være hele diven*/
+/*.profile_picture > img{*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+/*}*/
+
+.profile_information{
+    width: 60%;
+    margin-left: 4%;
+}
+
+
+ol, ul {
+    list-style: none; }
+
+
+a {
+
+    text-decoration: none; }
+
+ul.social {
+
+    text-align: center; }
+
+ul.social li {
+    font: inherit;
+    font-size: 100%;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    line-height: 60px;
+    background: #404040;
+    border-radius: 100%;
+    margin-bottom:.5em;
+    -webkit-transition-duration: 0.7s;
+    -moz-transition-duration: 0.7s;
+    -o-transition-duration: 0.7s;
+    transition-duration: 0.7s; }
+ul.social li:hover {
+    background: linear-gradient(to bottom right, #ffdb61, #ffb200);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); }
+ul.social li:hover a {
+    color: black;
+    -webkit-text-fill-color: black;
+    text-decoration: none;
+}
+ul.social li a {
+    display: block;
+    width: 100%;
+    height: 200%;
+    position: relative;
+    top: 0;
+    background:  -webkit-linear-gradient(#ffdb61, #ffb200);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-transition: top 0.7s;
+    -moz-transition: top 0.7s;
+    -o-transition: top 0.7s;
+    transition: top 0.7s; }
 

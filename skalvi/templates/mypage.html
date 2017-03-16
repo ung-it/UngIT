@@ -2,25 +2,46 @@
 {% block pageTitle %}MyPage{% endblock %}
 {% load static %}
 {% block explicitPageHeader %}
+    <link href='http://fonts.googleapis.com/css?family=Unica+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
 {% endblock %}
 
 {% block body %}
 
-
-
     <div style="height: 100px"></div>
 
-    <div id="profilesOnMyPage">
-        <div>
-        {% for inital in initiales %}
-            <button class="profileOnMyPage">{{inital}}</button>
-        {% endfor %}
+    <div id="myPageContent">
+        <div id="profilesOnMyPage">
+            <ul class="social">
+                {% for profile in profiles %}
+                    <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init">{{profile.initiales}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="profile" >
+            {% for profile in profiles %}
+                {% if request.path == profile.path %}
+                    <div class="profile_picture"><img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile"></div>
+                    <div class="profile_information">
+                        <h4>Profilnavn: {{ profile.profile_name }}</h4>
+                        {% if profile.type == "P" %}
+                            <h4>Brukertype: Voksen</h4>
+                        {%  else %}
+                            <h4>Brukertype: Barn </h4>
+                        {% endif %}
+                        <h4>Telefon: {{ profile.phone }}</h4>
+                        <h4>Aktiv: {{ profile.is_active }}</h4>
+
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
-
-
 {% endblock %}
+
+
+
 
 
 

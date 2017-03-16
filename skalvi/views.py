@@ -345,20 +345,20 @@ class MyPageView(View):
 
             if 'username' in request.session:
                 username = request.session['username']
-                print("brukernavn: " + username)
 
             user_object = request.user
             user_profile_objects = UserProfile.objects.filter(user=request.user)
-            initiales = []
+            profiles = []
 
             for profile in user_profile_objects:
-                initiales.append(profile.profile_name[0:2].upper())
+                path = "/mypage/" + str(profile.profile_name) + "/"
+                object = {'profile_name': profile.profile_name, "type": profile.type, "phone":profile.phone, "is_active":profile.is_active, 'initiales':profile.profile_name[0:2].upper(), 'path': path}
+                profiles.append(object)
 
             return render(request, self.template_name,
                           {
-                              'userprofiles': user_profile_objects,
                               'user': user_object,
-                              'initiales':initiales
+                              'profiles': profiles
 
                           })
         return HttpResponse("Du må være logget inn for å ha tilgang til denne siden")

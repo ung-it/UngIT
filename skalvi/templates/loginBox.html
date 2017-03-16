@@ -52,7 +52,7 @@
 
     <ul class="dropdown-menu">
 
-        <li><a href="{% url 'skalvi:mypage' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Min
+        <li><a href="/mypage/{{request.session.profile_name}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Min
             side</a></li>
         <li><a href="{% url 'skalvi:choose' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Bytt
             bruker</a></li>

@@ -35,6 +35,7 @@ $(document).ready(function () {
     $('#date_end').on('blur', checkContent);
     $('#time_start').on('blur', checkContent);
     $('#time_end').on('blur', checkContent);
+    showInputData()
 
     let eventSelect = $('#event-select');
     eventSelect.on('change', showEvent);
@@ -91,6 +92,13 @@ function updateInput(input, value) {
         $(input).parent().addClass('is-dirty');
         $(input).trigger('blur');
     }
+}
+
+function showInputData() {
+    $('#date').trigger('blur');
+    $('#date_end').trigger('blur');
+    $('#time_start').trigger('blur');
+    $('#time_end').trigger('blur');
 }
 
 function closeFacebookBox() {

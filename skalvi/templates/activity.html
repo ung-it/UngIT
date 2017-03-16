@@ -30,18 +30,20 @@
                 <button type="button" class="close" aria-label="Close" onClick="closeFacebookBox()">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h5>Vi fant disse arrangementene på Facebook</h5>
-                <select id="event-select" class="facebook-event-select">
-                    <option selected disabled hidden>Velg arrangement her</option>
-                </select>
-                <button id="event-button" class="btn btn-primary">
-                    Bruk arrangement
-                </button>
-                <div class="mdl-tooltip  mdl-tooltip--large" data-mdl-for="event-button">
-                    Fyller informasjonen registrert på Facebook inn i skjemaet nedenfor
+                <div class="facebook-content-box">
+                    <h5>Vi fant disse arrangementene på Facebook</h5>
+                    <select id="event-select" class="facebook-event-select">
+                        <option selected disabled hidden>Velg arrangement her</option>
+                    </select>
+                    <button id="event-button" class="btn btn-primary">
+                        Bruk arrangement
+                    </button>
+                    <div class="mdl-tooltip  mdl-tooltip--large" data-mdl-for="event-button">
+                        Fyller informasjonen registrert på Facebook inn i skjemaet nedenfor
+                    </div>
                 </div>
             </div>
-            <div class="content activity-wrapper mdl-shadow--2dp">
+            <div class="content main-wrapper mdl-shadow--2dp">
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
@@ -122,6 +124,19 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box full-box">
+                                 {% if form.description.value != None %}
+                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required>{{ form.description.value }}</textarea>
+                                 {% else %}
+                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required></textarea>
+                                 {% endif %}
+                                <label class="mdl-textfield__label" for="description">Om arrangement</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
                             <div id="adaptions-container"></div>
                             <input name="adaptions" value="Implementeres senere" hidden>
                         </span>
@@ -149,19 +164,6 @@
                                 {% endif %}
                                  <label class="mdl-textfield__label" for="provider">Alder</label>
                                  <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
-                            </div>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <span class="mdl-list__item-primary-content">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box full-box">
-                                 {% if form.description.value != None %}
-                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required>{{ form.description.value }}</textarea>
-                                 {% else %}
-                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required></textarea>
-                                 {% endif %}
-                                <label class="mdl-textfield__label" for="description">Om arrangement</label>
-                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                     </li>

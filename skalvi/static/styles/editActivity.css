@@ -1,15 +1,19 @@
+.main-wrapper {
+    padding: 40px 40px 8px 40px;
+    margin: 8px 0px 32px 0px;
+    background-color: white;
+}
 .facebook-event-wrapper {
-    padding: 16px 24px 24px 24px;
     margin: 8px 0px 20px 0px;
+    padding: 16px 16px 16px 16px;
     height: 171.2px;
     background-color: white;
     display: none;
 }
 
-.activity-wrapper {
-    padding: 8px;
-    margin: 8px 0px 32px 0px;
-    background-color: white;
+.facebook-content-box {
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .instagram-image {
@@ -45,12 +49,8 @@
     display: block; !important;
 }
 
-.adaptions-box {
-
-}
-
-.facebook-event-select {
-
+.mdl-list__item {
+    padding-left: ;
 }
 
 #event-select {

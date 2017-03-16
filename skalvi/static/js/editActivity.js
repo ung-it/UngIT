@@ -48,10 +48,6 @@ $(document).ready(function () {
                 .text(value));
         }
         $(".facebook-event-wrapper").slideDown(500);
-        //For dev
-        // eventSelect.val(564635400412646);
-        // $('#event-button').trigger('click');
-        //End dev
     });
 });
 
@@ -90,8 +86,11 @@ function fillForm() {
 }
 
 function updateInput(input, value) {
-    $(input).val(value);
-    $(input).parent().addClass('is-dirty');
+    if (value != 'NaN-aN-aN' && value != 'aN:aN') {
+        $(input).val(value);
+        $(input).parent().addClass('is-dirty');
+        $(input).trigger('blur');
+    }
 }
 
 function closeFacebookBox() {
@@ -102,9 +101,12 @@ function checkContent(event) {
     let target = $(event.target);
     if (target.val() != "") {
         target.parent().removeClass('date-time-container');
+        target.parent().removeClass('is-invalid');
     }
     else {
         target.parent().addClass('date-time-container');
+        target.parent().removeClass('is-invalid');
+        target.parent().removeClass('is-dirty');
     }
 }
 

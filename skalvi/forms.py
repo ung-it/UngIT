@@ -50,3 +50,4 @@ class RegisterProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ["profile_name", 'phone', 'type']
+

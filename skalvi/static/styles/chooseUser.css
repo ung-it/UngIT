@@ -24,3 +24,10 @@ h1 {
     justify-content: center;
 
 }
+
+.formLabel > label{
+    color: white;
+}
+
+
+

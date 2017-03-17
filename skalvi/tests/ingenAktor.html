@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Finn aktør - Aktørbasen</title>
+
+
+
+        <link rel="stylesheet" type="text/css" media="all" href="/static/gen/css/bootstrap.css?b9254e81" />
+
+
+        <link rel="icon" type="image/png"
+              href="/static/images/favicon.png">
+
+    </head>
+
+    <body>
+    <div class="container">
+    <div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <a class="brand pull-left-desktop-only" href="/"><img alt="Trondheim Kommune Logo" src="/static/images/tk-logo-only.png" /> TRONDHEIM KOMMUNE Aktørbasen</a>
+</div>
+</div>
+
+
+
+
+                <div class="row-fluid">
+    <div class="span9 flod-navbar">
+
+        <ul class="nav nav-pills">
+
+            <li class=" " >
+
+                <a href="/" >
+                    Forsiden
+
+                </a>
+
+            </li>
+
+            <li class="active " >
+
+                <span>Finn aktør</span>
+
+            </li>
+
+            <li class=" " >
+
+                <a href="/register_org" >
+                    Registrer aktør
+
+                </a>
+
+            </li>
+
+            <li class=" " >
+
+                <a href="https://www.trondheim.kommune.no/aktorbasen/" target="_blank">
+                    Om Aktørbasen
+
+                </a>
+
+            </li>
+
+        </ul>
+    </div>
+    <div class="span3 flod-navbar">
+        <ul class="nav nav-pills">
+
+            <li class="pull-right">
+                <a href="/login">Logg inn</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<hr class="navbar-separator">
+<div class="row-fluid">
+    <div class="span12 flod-navbar">
+        <ul class="nav nav-pills">
+
+        </ul>
+    </div>
+</div>
+
+    <script type="text/template" id="contact_template">
+
+</script>
+
+
+<div class="row-fluid spaced">
+    <div class="span10">
+
+
+        <h1 class="small">Finn aktør</h1>
+
+        <form class="form-horizontal org_search">
+            <div class="control-group">
+                <label class="control-label" for="name">Navn</label>
+                <div class="controls">
+                    <input type="text" id="name" name="name" placeholder="Navn" value="hghauasdkasdlad">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="brreg_activity_code">Kategori</label>
+                <div class="controls">
+                    <select id="brreg_activity_code" name="brreg_activity_code" placeholder="Kategori">
+                        <option value=''></option>
+
+                        <option  value="10 100" >Tros- og livssynsorganisasjoner</option>
+
+                        <option  value="1 100" >Kunst og kultur</option>
+
+                        <option  value="11 100" >Næringslivs- og arbeidsgiverorganisasjoner</option>
+
+                        <option  value="11 200" >Yrkessammenslutninger</option>
+
+                        <option  value="11 300" >Arbeidstakerorganisasjoner</option>
+
+                        <option  value="1 200" >Idrett</option>
+
+                        <option  value="12 100" >Andre</option>
+
+                        <option  value="1 300" >Rekreasjon og sosiale foreninger</option>
+
+                        <option  value="13 100" >Barne- og ungdomsorganisasjoner</option>
+
+                        <option  value="14 100" >Mangfold og inkludering</option>
+
+                        <option  value="2 100" >Grunn- og videregående utdanning</option>
+
+                        <option  value="2 200" >Høgskole og universitet</option>
+
+                        <option  value="2 300" >Annen utdanning</option>
+
+                        <option  value="2 400" >Andre helsetjenester</option>
+
+                        <option  value="3 100" >Sykehus og rehabilitering</option>
+
+                        <option  value="3 200" >Sykehjem</option>
+
+                        <option  value="3 300" >Psykiatriske institusjoner</option>
+
+                        <option  value="3 400" >Andre helsetjenester</option>
+
+                        <option  value="4 100" >Sosiale tjenester</option>
+
+                        <option  value="4 200" >Krisehjelp og støttearbeid</option>
+
+                        <option  value="4 300" >Økonomisk og materiell støtte</option>
+
+                        <option  value="5 100" >Natur- og miljøvern</option>
+
+                        <option  value="5 200" >Dyrevern</option>
+
+                        <option  value="6 100" >Lokalsamfunnsutvikling</option>
+
+                        <option  value="6 200" >Bolig- og lokalmiljø</option>
+
+                        <option  value="6 300" >Arbeidsopplæring</option>
+
+                        <option  value="7 100" >Interesseorganisasjoner</option>
+
+                        <option  value="7 200" >Juridisk rådgivning</option>
+
+                        <option  value="7 300" >Politiske organisasjoner</option>
+
+                        <option  value="8 100" >Pengeutdelende stiftelser</option>
+
+                        <option  value="8 200" >Frivillighetssentraler</option>
+
+                        <option  value="9 100" >Internasjonale organisasjoner</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="flod_activity_type">Aktivitet</label>
+                <div class="controls">
+                    <select id="flod_activity_type" name="flod_activity_type" placeholder="Aktivitet">
+                        <option value=''></option>
+
+                        <option  value="1"  >Aking, bob, skeleton</option>
+
+                        <option  value="2"  >Allidrett</option>
+
+                        <option  value="3"  >Amerikansk idrett</option>
+
+                        <option  value="4"  >Badminton</option>
+
+                        <option  value="5"  >Bandy</option>
+
+                        <option  value="6"  >Basketball</option>
+
+                        <option  value="7"  >Bedriftsidrett</option>
+
+                        <option  value="8"  >Biljard</option>
+
+                        <option  value="9"  >Boksing</option>
+
+                        <option  value="10"  >Bordtennis</option>
+
+                        <option  value="11"  >Bowling</option>
+
+                        <option  value="12"  >Bryting</option>
+
+                        <option  value="13"  >Bueskyting</option>
+
+                        <option  value="14"  >Casting</option>
+
+                        <option  value="15"  >Cheerleading</option>
+
+                        <option  value="16"  >Cricket</option>
+
+                        <option  value="17"  >Curling</option>
+
+                        <option  value="18"  >Dans</option>
+
+                        <option  value="19"  >Fekting</option>
+
+                        <option  value="20"  >Fotball</option>
+
+                        <option  value="21"  >Friidrett</option>
+
+                        <option  value="22"  >Håndball</option>
+
+                        <option  value="23"  >Ishockey</option>
+
+                        <option  value="24"  >Judo</option>
+
+                        <option  value="25"  >Kampsport</option>
+
+                        <option  value="26"  >Kickboksing</option>
+
+                        <option  value="27"  >Langrenn, hopp</option>
+
+                        <option  value="28"  >Orientering</option>
+
+                        <option  value="29"  >Skiskyting</option>
+
+                        <option  value="30"  >Skøytesport</option>
+
+                        <option  value="31"  >Softball og baseball</option>
+
+                        <option  value="32"  >Svømming</option>
+
+                        <option  value="33"  >Sykling</option>
+
+                        <option  value="34"  >Tennis</option>
+
+                        <option  value="35"  >Turn</option>
+
+                        <option  value="36"  >Volleyball</option>
+
+                        <option  value="37"  >Dans</option>
+
+                        <option  value="38"  >Festival</option>
+
+                        <option  value="39"  >Film/multimedia</option>
+
+                        <option  value="40"  >Historielag</option>
+
+                        <option  value="41"  >Hobby</option>
+
+                        <option  value="42"  >Husflid</option>
+
+                        <option  value="43"  >Kor</option>
+
+                        <option  value="44"  >Kulturminnevern</option>
+
+                        <option  value="45"  >Kunst</option>
+
+                        <option  value="46"  >Kurs/opplæring</option>
+
+                        <option  value="47"  >Litteratur</option>
+
+                        <option  value="48"  >Musikk/sang</option>
+
+                        <option  value="49"  >Scenekunst</option>
+
+                        <option  value="50"  >Skolekorps</option>
+
+                        <option  value="51"  >Ungdoms/voksenkorps</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="area">Bydel</label>
+                <div class="controls">
+                    <select id="area" name="area" placeholder="Bydel">
+                        <option value=''></option>
+
+                        <option  value="1"  >Trondheim Sentrum</option>
+
+                        <option  value="2"  >Trondheim Vest</option>
+
+                        <option  value="3"  >Trondheim Øst</option>
+
+                        <option  value="4"  >Trondheim Sør</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">Søk</button>
+                </div>
+            </div>
+        </form>
+
+
+        Ingen aktører funnet.
+
+        </p>
+    </div>
+</div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="/static/gen/js/libs.js?ce57c7c5"></script>
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>

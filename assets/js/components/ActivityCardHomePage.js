@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 
-import ActivityModal from './ActivityModal';
+import ActivityModal from '../ActivityModal';
 import {getMonth, getDay} from '../DateFunctions';
 
 class ActivityCardHomePage extends React.Component {
@@ -19,7 +19,6 @@ class ActivityCardHomePage extends React.Component {
            show:true
        });
     };
-
 
     createActivityItem = () => {
         let poster = null;
@@ -62,8 +61,7 @@ class ActivityCardHomePage extends React.Component {
             </div>
         );
     }
-
-
 }
 
+// connect actually calles the functions so that their purposes are fulfilled
 export default ActivityCardHomePage;

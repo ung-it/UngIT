@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom';
 
@@ -13,15 +13,15 @@ const ACTIVITY_TYPES = [
 ];
 
 
-class ActivityPicker extends Component {
+class ActivityPicker extends React.Component {
 
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			options: ACTIVITY_TYPES
-		}
-	}
+		};
+	};
 
 	handleSelectChange = filter => {
 		this.props.onFilterChange(filter);

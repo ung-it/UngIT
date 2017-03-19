@@ -27,6 +27,11 @@ export default function ActivityReducer(state=initialState, action) {
                 ...state,
                 activeActivityFilters: action.filter,
             };
+        case actionTypes.ADD_SUITED_FOR_FILTER:
+            return {
+                ...state,
+                activeSuitedForFilters: action.suitedFilter,
+            };
         default:
             return state;
     }

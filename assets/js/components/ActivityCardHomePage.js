@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 
-import ActivityModal from '../ActivityModal';
+import ActivityModal from './ActivityModal';
 import {getMonth, getDay} from '../DateFunctions';
 
 class ActivityCardHomePage extends React.Component {

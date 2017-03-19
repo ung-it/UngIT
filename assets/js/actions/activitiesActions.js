@@ -26,6 +26,7 @@ import {  getActivityInfo, getAllActivities} from "../APIFunctions";
 // ACTION TYPES
 export const FETCHED_ALL_ACTIVITIES = 'FETCH_ALL_ACTIVITIES';
 export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
+export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
 // more actions types here
 
 
@@ -41,6 +42,13 @@ export function addActivityFilter(filter) {
     return {
         type: ADD_ACTIVITY_FILTER,
         filter,
+    }
+}
+
+export function addSuitedForFilter(suitedFilter) {
+    return {
+        type: ADD_SUITED_FOR_FILTER,
+        suitedFilter,
     }
 }
 

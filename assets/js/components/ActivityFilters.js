@@ -14,7 +14,10 @@ class ActivityFilters extends React.Component {
                     activeFilters={this.props.activityFilters}
                 />
                 {/* NameFilter /> */}
-                <SuitedForPicker />
+                <SuitedForPicker
+                    onFilterChange={this.props.onSuitedForFilterChange}
+                    activeFilters={this.props.suitedForFilters}
+                />
                 <WeekPicker />
                 {/* ADD ALL FILTERS HERE */}
             </div>
@@ -25,6 +28,8 @@ class ActivityFilters extends React.Component {
 ActivityFilters.propTypes = {
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.string.isRequired,
+    onSuitedForFilterChange: React.PropTypes.func.isRequired,
+    suitedForFilters: React.PropTypes.string.isRequired,
 };
 
 export default ActivityFilters;

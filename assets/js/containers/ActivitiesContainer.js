@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
 
 import { fetchAllActivities } from '../actions/activitiesActions';
-import ActivityCard from '../components/ActivityCard';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 

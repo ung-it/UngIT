@@ -4,6 +4,7 @@ import { Provider, connect } from "react-redux";
 
 import { fetchAllActivities } from '../actions/activitiesActions';
 import ActivityCard from '../components/ActivityCard';
+import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 
 import '../../styles/activityBox.css';
@@ -19,8 +20,8 @@ class ActivitiesContainer extends Component {
     createActivityCardComponent = () => {
         return this.props.activities.map(activity => {
             return (
-                <ActivityCard
-                    key={activity.id}
+                <ActivityCardHomePage
+                    key={activity.id + activity.fields.activityName}
                     id={activity.pk}
                     activity={activity.fields}
                 />

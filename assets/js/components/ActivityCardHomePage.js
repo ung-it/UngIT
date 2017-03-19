@@ -1,12 +1,11 @@
 import React from "react"
 import { connect } from "react-redux"
-import { Thumbnail, Glyphicon } from 'react-bootstrap';
+import {Thumbnail, Glyphicon} from 'react-bootstrap';
 
 import ActivityModal from './ActivityModal';
-import { getMonth, getDay } from '../DateFunctions';
+import {getMonth, getDay} from '../DateFunctions';
 
-
-class ActivityCard extends React.Component {
+class ActivityCardHomePage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -15,23 +14,24 @@ class ActivityCard extends React.Component {
         };
     };
 
-    openActivityModal = () => {
+    openActivityModal = () =>  {
        this.setState({
-           show: true
+           show:true
        });
     };
+
 
     createActivityItem = () => {
         let poster = null;
 
-        if(this.props.activity.images.length > 0) {
+        if(this.props.activity.images.length > 0){
             poster = this.props.activity.images;
         }
 
         return (
             <div key={this.props.activity.id}>
                 <Thumbnail
-                    className="activityBigStyle"
+                    className="activitySmalStyle"
                     src={poster}
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
@@ -48,9 +48,6 @@ class ActivityCard extends React.Component {
                             <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
                             <p>{this.props.activity.location}</p>
                         </div>
-                        <div className="about-container">
-                            <p>{this.props.activity.description}</p>
-                        </div>
                     </div>
                     <ActivityModal id={this.props.id} activity={this.props.activity} show={this.state.show} />
                 </Thumbnail>
@@ -65,6 +62,8 @@ class ActivityCard extends React.Component {
             </div>
         );
     }
+
+
 }
 
-export default ActivityCard;
+export default ActivityCardHomePage;

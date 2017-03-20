@@ -1,5 +1,11 @@
 #profilesOnMyPage{
-    width: 6%;
+    max-width: 6%;
+
+
+}
+
+#myPageContent{
+    display: flex;
 }
 
 /*hvis bilde skal være hele diven*/
@@ -9,8 +15,11 @@
 /*}*/
 
 .profile_information{
-    width: 60%;
+    width: auto;
+    margin: auto;
     margin-left: 4%;
+
+
 }
 
 

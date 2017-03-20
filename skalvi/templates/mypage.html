@@ -19,64 +19,38 @@
             </ul>
         </div>
 
-        <div id="profile" >
+        <div class="container" style="margin: 0 0 0 12em; width: 85%">
             {% for profile in profiles %}
                 {% if request.path == profile.path %}
-                    <div class="profile_picture"><img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile"></div>
-                    <div class="profile_information">
-                        <h4>Profilnavn: {{ profile.profile_name }}</h4>
-                        {% if profile.type == "P" %}
-                            <h4>Brukertype: Voksen</h4>
-                        {%  else %}
-                            <h4>Brukertype: Barn </h4>
-                        {% endif %}
-                        <h4>Telefon: {{ profile.phone }}</h4>
-                        <h4>Aktiv: {{ profile.is_active }}</h4>
-                        <h4>Aktiviteter: {{ profile.activityIDs }}</h4>
-
+                    <div class="row">
+                        <div class="col-md-1 prfile_picture">
+                            <img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile">
+                        </div>
+                        <div class="col-md-2 profile_information" style="margin: 0">
+                            <h4>Profilnavn: {{ profile.profile_name }}</h4>
+                            {% if profile.type == "P" %}
+                                <h4>Brukertype: Voksen</h4>
+                            {%  else %}
+                                <h4>Brukertype: Barn </h4>
+                            {% endif %}
+                            <h4>Telefon: {{ profile.phone }}</h4>
+                            <h4>Aktiv: {{ profile.is_active }}</h4>
+                            <h4>Aktiviteter: {{ profile.activityIDs }}</h4>
+                        </div>
                     </div>
-
-
+                    <div class="row" style="margin-top: 5%">
+                        <div class="col-sm-5 col-md-8 col-lg-6">
+                            <p>Her kommer kommende aktiviteter</p>
+                        </div>
+                        <div class="col-sm-5 col-md-8 col-lg-6">
+                            <p>Her kommer mine aktiviteter</p>
+                        </div>
+                    </div>
                 {% endif %}
             {% endfor %}
         </div>
     </div>
 {% endblock %}
-
-
-
-
-
-
-
-{#        <div class="col-sm-4 ">#}
-{#            <div id="userInfo">#}
-{#                <div><img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile"></div>#}
-{##}
-{#                <div>#}
-{#                    <h1>Min side</h1>#}
-{#                    <h3>Brukernavn: {{ user.username}}</h3>#}
-{#                    <h4>Navn : {{ user.first_name.title }} {{ user.last_name.title }}</h4>#}
-{#                    <h4>Epost: {{ user.email }}</h4>#}
-{#                </div>#}
-{#            </div>#}
-
-
-{##}
-{#            {% for profile in userprofiles %}#}
-{#                <hr style="width: 10%; float: left;"><br><br>#}
-{##}
-{#                <h4>Profilnavn: {{ profile.profile_name }}</h4>#}
-{#                {% if profile.type == "P" %}#}
-{#                    <h4>Brukertype: Voksen</h4>#}
-{#                {%  else %}#}
-{#                    <h4>Brukertype: Barn </h4>#}
-{#                {% endif %}#}
-{#                <h4>Telefon: {{ profile.phone }}</h4>#}
-{#                <h4>Aktiv: {{ profile.is_active }}</h4>#}
-{##}
-{##}
-{#            {% endfor %}#}
 
 
 

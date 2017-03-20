@@ -15,6 +15,8 @@
     <link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
     <!--Every page needs access and to use the style.css file -->
     <link rel="stylesheet" href="{% static "styles/style.css" %}">
+    <!--Every page needs access to facebook login -->
+    <script src="{% static 'js/facebook.js' %}"></script>
 
 
     <!-- Use this tag on your template when you need to add something to the page header -->
@@ -43,8 +45,6 @@
 
 <!--Every page needs access to bootstrap -->
 <script src={% static 'js/bootstrap.min.js' %}></script>
-<!--Every page needs access to facebook login -->
-<script src="{% static 'js/facebook.js' %}"></script>
 
 <!-- Use this tag to load scripts after page has loaded -->
 {% block explicitPageFooter %}

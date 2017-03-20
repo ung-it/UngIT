@@ -1,41 +1,58 @@
-window.fbAsyncInit = function() {
-    FB.init({
-        appId      : '1658650714438155',
-        cookie     : true,  // enable cookies to allow the server to access
-        // the session
-        xfbml      : true,  // parse social plugins on this page
-        version    : 'v2.8' // use version 2.1
-    });
-};
+function asyncFacebook(callback) {
+    if (typeof(FB) != 'undefined' && FB != null ) {
+        callback();
+        return;
+    }
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1658650714438155',
+            cookie     : true,  // enable cookies to allow the server to access
+            // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v2.8' // use version 2.1
+        });
+        callback();
+    };
+}
 
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8";
+    js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.8&appId=1658650714438155";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
 function logIn() {
-    FB.login(function(response){
-        fetchInfo();
-    }, {scope: 'user_events'});
+    asyncFacebook(function () {
+        FB.login(function(response){
+            fetchInfo();
+        }, {scope: 'user_events'});
+    })
 }
 
-function getFacebookEvents() {
-     FB.login(function(response){
-        FB.api("/me/events?limit=25&since=".concat(String(Date.now()/1000).split(".")[0]),function (response) {
-            if (response && !response.error) {
-                $("#faceEvents ul").empty()
-                $(response.data).each(function(index, obj) {
-                    $("#faceEvents ul").append('<li>'+'Navn: '+obj.name+'</li>')
-                        .append('<p>'+'Dato: '+obj.start_time.split('T')[0]+'</p>')
-                        .append('<p>'+'Beskrivelse: '+obj.description+'</p>')
-                        .append('<br/>')
-                });
-            }
+function getFacebookEvents(callback) {
+    asyncFacebook(function () {
+        FB.getLoginStatus(function (response) {
+            $.get('https://graph.facebook.com'.concat("/me/events?limit=25&since=".concat(String(Date.now() / 1000).split(".")[0]).concat('&access_token=').concat(response.authResponse.accessToken)), function (response) {
+                if (response && !response.error) {
+                    callback(response.data);
+                }
+            });
         });
-    }, {scope: 'user_events'});
+    });
+}
+
+function getFacebookEventImages(eventID, size, callback) {
+    asyncFacebook(function () {
+        FB.getLoginStatus(function (response) {
+            $.get('https://graph.facebook.com'.concat("/v2.8/" + eventID + '/picture?redirect=0&type=' + size + '&access_token=').concat(response.authResponse.accessToken), function (response) {
+                if (response && !response.error) {
+                    callback(response.data);
+                }
+            });
+        });
+    })
 }
 
 function fetchInfo() {

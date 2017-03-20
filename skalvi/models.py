@@ -24,6 +24,8 @@ class UserProfile(models.Model):
 class Activity(models.Model):
     activityName = models.CharField(max_length=80)
     provider = models.CharField(max_length=80)
+    facebookID = models.IntegerField(blank=True, null=True)
+    facebookInfo = models.BooleanField(blank=True)
     adaptions = models.TextField()
     age = models.CharField(max_length=80)
     location = models.CharField(max_length=80)
@@ -31,6 +33,7 @@ class Activity(models.Model):
     registration_required = models.BooleanField()
     price = models.IntegerField()
     date = models.DateField()
+    date_end = models.DateField()
     time_start = models.TimeField()
     time_end = models.TimeField()
     images = models.ImageField(upload_to='images/',max_length=255, blank=True)

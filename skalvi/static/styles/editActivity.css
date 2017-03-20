@@ -55,11 +55,17 @@
 
 .thumbnail {
     height: 240px;
+    width: 300px;
     text-align: center;
 }
 
 .thumbnail img {
     height: 85%;
+}
+
+#facebook-thumbnail {
+    border: none;
+    display: none;
 }
 
 .adaptions-container {
@@ -84,4 +90,8 @@
 
 .date-time-container:not( .md-input-has-value ) input:not( :focus ) {
     color: transparent;
+}
+
+.mdl-list__item-secondary-content {
+    width: 300px;
 }

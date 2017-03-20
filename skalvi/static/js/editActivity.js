@@ -48,6 +48,10 @@ $(document).ready(function () {
             eventSelect.append($('<option>', {value: key})
                 .text(value));
         }
+        //START DEV
+        eventSelect.val(564635400412646);
+        $('#event-button').trigger('click');
+        //END DEV
         $(".facebook-event-wrapper").slideDown(500);
     });
 });
@@ -62,6 +66,8 @@ function fillForm() {
     let event = $.grep(eventData, function (e) {
         return e.id == id;
     })[0];
+    
+    //Filling the form with data
     updateInput($('#activityName'), event.name);
     updateInput($('#description'), event.description);
     updateInput($('#location'), event.place.location.street);
@@ -84,6 +90,12 @@ function fillForm() {
     const endTime = hours + ":" + minutes;
     updateInput($('#time_end'), endTime);
     $('#facebookID').val(event.id);
+
+    //Getting the event pictures
+    getFacebookEventImages(id, 'large' ,function (response) {
+        $('#facebook-event-image').attr('src', response.url);
+        $('#facebook-thumbnail').css('display', 'block');
+    })
 }
 
 function updateInput(input, value) {
@@ -122,6 +134,7 @@ function checkContent(event) {
 (function() {
     'use strict';
 
+    //noinspection JSUnresolvedVariable
     MaterialTextfield = window['MaterialTextfield'];
 
     /**

@@ -34,13 +34,25 @@ function logIn() {
 function getFacebookEvents(callback) {
     asyncFacebook(function () {
         FB.getLoginStatus(function (response) {
-            $.get('https://graph.facebook.com/'.concat("/me/events?limit=25&since=".concat(String(Date.now() / 1000).split(".")[0]).concat('&access_token=').concat(response.authResponse.accessToken)), function (response) {
+            $.get('https://graph.facebook.com'.concat("/me/events?limit=25&since=".concat(String(Date.now() / 1000).split(".")[0]).concat('&access_token=').concat(response.authResponse.accessToken)), function (response) {
                 if (response && !response.error) {
                     callback(response.data);
                 }
             });
         });
     });
+}
+
+function getFacebookEventImages(eventID, size, callback) {
+    asyncFacebook(function () {
+        FB.getLoginStatus(function (response) {
+            $.get('https://graph.facebook.com'.concat("/v2.8/" + eventID + '/picture?redirect=0&type=' + size + '&access_token=').concat(response.authResponse.accessToken), function (response) {
+                if (response && !response.error) {
+                    callback(response.data);
+                }
+            });
+        });
+    })
 }
 
 function fetchInfo() {

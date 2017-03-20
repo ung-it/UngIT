@@ -1,36 +1,38 @@
 import React from "react"
 import { connect } from "react-redux"
-import { bindActionCreators } from 'redux';
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
-import ActivityModal from '../ActivityModal';
 
+import ActivityModal from './ActivityModal';
 import {getMonth, getDay} from '../DateFunctions';
 
-class HomePageContainer extends React.Component {
+class ActivityCardHomePage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-        }
+        };
+    };
 
-    }
+    openActivityModal = () =>  {
+       this.setState({
+           show:true
+       });
+    };
 
-    componentWillMount() {
-        this.showMap = this.showMap.bind(this);
-    }
-
-    createActivityItem(){
+    createActivityItem = () => {
         let poster = null;
-        if(this.props.activity.images.length > 0 && this.props.activity.images[0] != ''){
-            poster = this.props.activity.images[0];
+
+        if(this.props.activity.images.length > 0){
+            poster = this.props.activity.images;
         }
+
         return (
             <div key={this.props.activity.id}>
                 <Thumbnail
                     className="activitySmalStyle"
                     src={poster}
-                    onClick={this.openActivityModal.bind(this)}
+                    onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
                 >
                     <h3>{this.props.activity.activityName}</h3>
@@ -41,12 +43,12 @@ class HomePageContainer extends React.Component {
                             <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
                         </div>
                         <div className="info-container">
-                            <p>{this.props.activity.date.getDate()}. {getMonth(this.props.activity.date.getMonth())}</p>
+                            <p>{getMonth(this.props.activity.date)}</p>
                             <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
                             <p>{this.props.activity.location}</p>
                         </div>
                     </div>
-                    <ActivityModal id={this.props.activity.id} show={this.state.show}>test</ActivityModal>
+                    <ActivityModal id={this.props.id} activity={this.props.activity} show={this.state.show} />
                 </Thumbnail>
             </div>
         );
@@ -59,15 +61,7 @@ class HomePageContainer extends React.Component {
             </div>
         );
     }
-
-    showMap() {
-        window.open('https://www.google.no/maps/place/' + this.state.location, '_blank');
-    }
-
-    openActivityModal() {
-       this.setState({show:true})
-    }
 }
 
 // connect actually calles the functions so that their purposes are fulfilled
-export default HomePageContainer;
+export default ActivityCardHomePage;

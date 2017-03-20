@@ -6,7 +6,21 @@ from django.contrib.auth.models import Permission, User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+ACTIVITY_TYPES = (
+    (0, 'Ukjent'),
+    (1, 'Skating'),
+    (2, 'Klatring'),
+    (3, 'Ski'),
+    (4, 'Svømming'),
+)
 
+SUITED_FOR_TYPES = (
+    (0, 'Ukjent'),
+    (1, 'Tilpasset 1'),
+    (2, 'Tilpasset 2'),
+    (3, 'Tilpasset 3'),
+    (4, 'Tilpasset 4'),
+)
 
 ########### USER PROFILES that extends the auth.models.User table
 
@@ -23,7 +37,11 @@ class UserProfile(models.Model):
 
 class Activity(models.Model):
     activityName = models.CharField(max_length=80)
+    activityType = models.PositiveSmallIntegerField(choices=ACTIVITY_TYPES, default=0)  # Defaults to 'Ukjent'
+    suitedForType = models.PositiveSmallIntegerField(choices=SUITED_FOR_TYPES, default=0)  # Defaults to 'Ukjent'
     provider = models.CharField(max_length=80)
+    facebookID = models.IntegerField(blank=True, null=True)
+    facebookInfo = models.BooleanField(blank=True)
     adaptions = models.TextField()
     age = models.CharField(max_length=80)
     location = models.CharField(max_length=80)
@@ -31,6 +49,7 @@ class Activity(models.Model):
     registration_required = models.BooleanField()
     price = models.IntegerField()
     date = models.DateField()
+    date_end = models.DateField()
     time_start = models.TimeField()
     time_end = models.TimeField()
     images = models.ImageField(upload_to='images/',max_length=255, blank=True)
@@ -39,6 +58,9 @@ class Activity(models.Model):
 
     def was_published(self):
         return self.pub_date
+
+    def __str__(self):
+        return self.activityName
 
 
 class Organisation(models.Model):

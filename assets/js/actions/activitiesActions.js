@@ -1,10 +1,4 @@
-/**
- * Created by ingrskar on 3/6/2017.
- */
-import {getAllActivities} from "../APIFunctions";
-import {getActivityInfo} from '../APIFunctions';
-
-
+import {  getActivityInfo, getAllActivities} from "../APIFunctions";
 /*
 * Action creator and action are two separate things, the action creator is the actual action-function
 *
@@ -29,38 +23,39 @@ import {getActivityInfo} from '../APIFunctions';
 *
 * */
 
-export const fetchActivities = () => {
+// ACTION TYPES
+export const FETCHED_ALL_ACTIVITIES = 'FETCH_ALL_ACTIVITIES';
+export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
+export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
+// more actions types here
 
-       let tempActivities = [];
 
-        getAllActivities(function (activityID) {
-            activityID.map(id => {
-                getActivityInfo(id, function (data) {
-                    const oneActivity = ({
-                        id: id,
-                        title: data.activityName,
-                        provider: data.provider,
-                        adaptions: data.adaptions,
-                        age: data.age,
-                        location: data.location,
-                        description: data.description,
-                        price: data.price,
-                        date: new Date(data.date),
-                        timeStart: data.time_start.substring(0, data.time_start.lastIndexOf(":")),
-                        timeEnd: data.time_end.substring(0, data.time_end.lastIndexOf(":")),
-                        images: data.images.split(","),
-                        videos: data.videos.split(",")
-                    }).bind(this);
+// ACTION CREATORS
+export function fetchedAllActivites(activities) {
+    return {
+        type: FETCHED_ALL_ACTIVITIES,
+        activities,
+    }
+}
 
-                    tempActivities.push({activity: oneActivity});
-                    console.log('OneActivity activitiesActions'  + oneActivity);
+export function addActivityFilter(filter) {
+    return {
+        type: ADD_ACTIVITY_FILTER,
+        filter,
+    }
+}
 
-                    return {
-                    type: 'ACTIVITY_FETCHED',
-                    payload: oneActivity
-                };
-                }).bind(this);
+export function addSuitedForFilter(suitedFilter) {
+    return {
+        type: ADD_SUITED_FOR_FILTER,
+        suitedFilter,
+    }
+}
 
-            })
-        })
+export function fetchAllActivities() {
+    return (dispatch) => {
+        getAllActivities()
+            .then(result => dispatch(fetchedAllActivites(result)))
+            .catch(error => console.error(error));
+    };
 };

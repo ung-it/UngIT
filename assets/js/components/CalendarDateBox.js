@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {getDay, getMonth} from './DateFunctions'
+import { getDay, getMonth } from '../DateFunctions'
 
-import '../styles/time.css';
+import '../../styles/time.css';
 
 class CalendarDateBox extends Component {
 

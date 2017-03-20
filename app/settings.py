@@ -63,6 +63,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -94,6 +95,8 @@ AUTH_PROFILE_MODULE = "skalvi.UserProfile"
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
+
+DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
 
 USE_I18N = True
 

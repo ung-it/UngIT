@@ -8,6 +8,7 @@ import CalendarDateBox from './CalendarDateBox';
 //CSS import
 import '../../styles/modal.css';
 
+
 class ActivityModal extends Component {
 
     constructor(props){
@@ -93,7 +94,22 @@ class ActivityModal extends Component {
     };
 
     render() {
-        const { date, activityName, activityType, provider, adaptions, age, time_start, time_end, location, description, videos, images } = this.props.activity;
+        const { date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, images } = this.props.activity;
+
+        let suitedForContainer =  [];
+        if(suitedForType >= 0) {
+            if (suitedForType == 1) {
+                suitedForContainer = 'Tilpasset 1';
+            } else if (suitedForType == 2) {
+                suitedForContainer = 'Tilpasset 2';
+            } else if (suitedForType == 3) {
+                suitedForContainer = 'Tilpasset 3';
+            } else if (suitedForType == 4) {
+                suitedForContainer = 'Tilpasset 4';
+            } else {
+                suitedForContainer = 'Ukjent';
+            }
+        }
 
         //let videoContainer = null;
         //if (videos.length > 0) {
@@ -205,7 +221,7 @@ class ActivityModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-adapted">
-                        Dette arrangementet er tilpasset for: {adaptions}
+                        Dette arrangementet er tilpasset for: <b>{suitedForContainer}</b>
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">

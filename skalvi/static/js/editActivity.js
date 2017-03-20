@@ -91,6 +91,11 @@ function fillForm() {
     updateInput($('#time_end'), endTime);
     $('#facebookID').val(event.id);
 
+    //Showing facebook checkbox
+    $('.facebook-info-box').css("cssText", "display: block !important;");
+    $('#facebookInfo').attr('checked', true);
+    $('#facebookInfo-label').addClass('is-checked');
+
     //Getting the event pictures
     getFacebookEventImages(id, 'large' ,function (response) {
         $('#facebook-event-image').attr('src', response.url);

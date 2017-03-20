@@ -18,6 +18,14 @@
     padding-right: 40px;
 }
 
+.facebook-info-box {
+    display: none !important;
+}
+
+.facebook-info-box span {
+    font-weight: 400;
+}
+
 .instagram-image {
     height: 15em;
     padding: 0.2em;
@@ -61,11 +69,6 @@
 
 .thumbnail img {
     height: 85%;
-}
-
-#facebook-thumbnail {
-    border: none;
-    display: none;
 }
 
 .adaptions-container {

@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import '../../styles/AdaptionChips.css'
+
+import IconAccessible from 'material-ui/svg-icons/action/accessible';
+import IconAccessibility from 'material-ui/svg-icons/action/accessibility';
+import IconVisibility from 'material-ui/svg-icons/action/visibility';
+import IconHearing from 'material-ui/svg-icons/av/hearing';
+
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 class AdaptionChips extends Component {
 
     constructor(props) {
         super(props);
-        const chipIcons =  {'Rullestol':'accessible','Ekstra assistent':'accessibility','Blinde':'visibility','Døve':'hearing'};
+        const chipIcons =  {'Rullestol':<IconAccessible/>,'Ekstra assistent':<IconAccessibility/>,'Blinde':<IconVisibility/>,'Døve':<IconHearing/>};
         this.state = {
             chipIcons: chipIcons,
             selected: [],
@@ -17,26 +28,32 @@ class AdaptionChips extends Component {
     }
 
     render() {
-        const unselected = this.state.unselected.map(item => {
-            const icon= this.state.chipIcons[item];
+
+        let selected = this.state.selected.map(name => {
+            let icon = this.state.chipIcons[name];
             return (
-                <span className="mdl-chip mdl-chip--contact" onClick={() => this.add(item)} key={item}>
-                    <span className="mdl-chip__contact mdl-color--teal mdl-color-text--white">
-                        <i className="material-icons">{icon}</i>
-                    </span>
-                    <span className="mdl-chip__text">{item}</span>
-                </span>
+               <Chip
+                   className='chip'
+                   key = {name}
+                   onTouchTap={this.remove}
+               >
+                   <Avatar>{icon}</Avatar>
+                   {name}
+               </Chip>
             )
         });
 
-        const selected = this.state.selected.map(item => {
-            const icon= this.state.chipIcons[item];
+        let unselected = this.state.unselected.map( name => {
+            let icon = this.state.chipIcons[name];
             return (
-                <span className="mdl-chip mdl-chip--contact mdl-chip--deletable" onClick={() => this.remove(item)} key={item}>
-                    <span className="mdl-chip__contact mdl-color--teal mdl-color-text--white"><i className="material-icons">{icon}</i></span>
-                    <span className="mdl-chip__text">{item}</span>
-                    <i className="material-icons mdl-chip__action">cancel</i>
-                </span>
+                <Chip
+                    className='chip'
+                    key = {name}
+                    onTouchTap={this.add}
+                >
+                    <Avatar icon={icon}></Avatar>
+                    {name}
+                </Chip>
             )
         });
 
@@ -50,27 +67,23 @@ class AdaptionChips extends Component {
     }
 
     add(item) {
-        const chipName = item;
-        this.setState({
-            unselected: this.state.unselected.filter(item => {
-                return item != chipName;
-            }),
-            selected: this.state.selected.concat(chipName),
-        });
+
     }
 
     remove(item) {
-        const chipName = item;
-        this.setState({
-            selected: this.state.selected.filter(item => {
-                return item != chipName;
-            }),
-            unselected: this.state.unselected.concat(chipName),
-        });
+
     }
 }
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+const App = () => (
+    <MuiThemeProvider>
+        <AdaptionChips />
+    </MuiThemeProvider>
+);
+
 ReactDOM.render(
-    <AdaptionChips/>,
+    <App/>,
     document.getElementById('adaptions-container')
 );

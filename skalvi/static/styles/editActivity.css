@@ -71,6 +71,10 @@
     height: 85%;
 }
 
+#adaptions-container {
+    width: 100%;
+}
+
 #event-select {
     font-family: "Helvetica","Arial",sans-serif;
     font-size: 16px;

@@ -7,6 +7,7 @@ import IconAccessibility from 'material-ui/svg-icons/action/accessibility';
 import IconVisibility from 'material-ui/svg-icons/action/visibility';
 import IconHearing from 'material-ui/svg-icons/av/hearing';
 
+import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -16,7 +17,7 @@ class AdaptionChips extends Component {
 
     constructor(props) {
         super(props);
-        const chipIcons =  {'Rullestol':<IconAccessible/>,'Ekstra assistent':<IconAccessibility/>,'Blinde':<IconVisibility/>,'Døve':<IconHearing/>};
+        const chipIcons =  {'Tilpassning 1':<IconAccessible/>,'Tilpassning 2':<IconAccessibility/>,'Tilpassning 3':<IconVisibility/>,'Tilpassning 4':<IconHearing/>};
         this.state = {
             chipIcons: chipIcons,
             selected: [],
@@ -35,9 +36,10 @@ class AdaptionChips extends Component {
                <Chip
                    className='chip'
                    key = {name}
-                   onTouchTap={this.remove}
+                   onRequestDelete={this.remove.bind(null, {name})}
+                   onTouchTap={this.remove.bind(null, {name})}
                >
-                   <Avatar>{icon}</Avatar>
+                   <Avatar icon={icon}></Avatar>
                    {name}
                </Chip>
             )
@@ -49,7 +51,7 @@ class AdaptionChips extends Component {
                 <Chip
                     className='chip'
                     key = {name}
-                    onTouchTap={this.add}
+                    onTouchTap={this.add.bind(null, {name})}
                 >
                     <Avatar icon={icon}></Avatar>
                     {name}
@@ -59,19 +61,35 @@ class AdaptionChips extends Component {
 
         return (
             <div>
-                <div>Tilpasninger</div>
-                <div className="adaptions-box">{unselected}</div>
-                <div className="adaptions-box">{selected}</div>
+                <span>Tilpasninger</span>
+                <div className="adaptions-container">
+                    <Paper className="adaptions-box" zDepth={1}>
+                        <div className="adaptions-title">Alle tilpassninger</div>
+                        <div className="adaptions-holder">
+                            {unselected}
+                        </div>
+                    </Paper>
+                    <Paper className="adaptions-box" zDepth={1}>
+                        <div className="adaptions-title">Valgte tilpassninger</div>
+                        <div className="adaptions-holder">
+                            {selected}
+                        </div>
+                    </Paper>
+                </div>
             </div>
         )
     }
 
     add(item) {
-
+        let selected = this.state.selected.concat(item.name);
+        this.state.unselected.splice(this.state.unselected.indexOf(item.name), 1);
+        this.setState({selected: selected, unselected: this.state.unselected});
     }
 
     remove(item) {
-
+        let unselected = this.state.unselected.concat(item.name);
+        this.state.selected.splice(this.state.selected.indexOf(item.name), 1);
+        this.setState({selected: this.state.selected, unselected: unselected});
     }
 }
 

@@ -75,6 +75,7 @@ class Organisation(models.Model):
 class ParticipateIn(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     activityId = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    user_profile_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
 
 class Hosts(models.Model):

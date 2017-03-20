@@ -1,20 +1,10 @@
-var path = require("path");
-var webpack = require('webpack');
-var BundleTracker = require('webpack-bundle-tracker');
-
+let path = require("path");
+let webpack = require('webpack');
+let BundleTracker = require('webpack-bundle-tracker');
 let commonsPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: "common",
-    // (the commons chunk name)
-
     filename: "common.bundle.js",
-    // (the filename of the commons chunk)
-
-    // minChunks: 3,
-    // (Modules must be shared between 3 entries)
-
-    // chunks: ["pageA", "pageB"],
-    // (Only use these entries)
-})
+});
 
 module.exports = {
     context: __dirname,
@@ -60,4 +50,4 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
-}
+};

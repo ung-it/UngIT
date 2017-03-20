@@ -1,34 +1,34 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {getUpcomingActivities} from '../APIFunctions';
-
-import HomePageContainer from '../components/HomePageComponent';
 import { Provider, connect } from "react-redux";
-import store from "../store";
+
+import { fetchAllActivities } from '../actions/activitiesActions';
+import ActivityCardHomePage from '../components/ActivityCardHomePage';
+import configureStore from "../configureStore";
 
 import '../../styles/activityBox.css';
 
+const store = configureStore();
+
 class ActivitiesContainer extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-
-            ids: []
-        }
+    componentDidMount() {
+        this.props.fetchActivities();
     }
 
-    createHomePageComponent() {
-        return this.props.activities.map((activity) => {
+    createActivityCardComponent = () => {
+        return this.props.activities.map(activity => {
             return (
-                <HomePageContainer key={activity.id} activity={activity}/>
+                <ActivityCardHomePage
+                    key={activity.id + activity.fields.activityName}
+                    id={activity.pk}
+                    activity={activity.fields}
+                />
             )
         });
-    }
-
+    };
 
     render() {
-
         const styles = {
             activitiesContainerStyle: {
                 margin: "0px 10px 0px 10px"
@@ -41,30 +41,36 @@ class ActivitiesContainer extends Component {
             }
         };
 
-
         return (
             <div style={styles.activitiesContainerStyle}>
               <div style={styles.activitiesStyle}>
-                  {this.createHomePageComponent()}
+                  {this.createActivityCardComponent()}
               </div>
             </div>
         );
     }
 
-    componentDidMount() {
-        getUpcomingActivities(function(idArray) {
-            this.setState({ids: idArray});
-        }.bind(this));
-    }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
     return {
-        activities: state.activity
+        activities: state.activity.activityList
+            .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
+            .slice(0, 5), // Only get five first
     };
-}
+};
 
-ActivitiesContainer = connect(mapStateToProps)(ActivitiesContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchActivities: () => dispatch(fetchAllActivities()),
+    }
+};
+
+
+// Fetch initial data for state
+store.dispatch(fetchAllActivities());
+
+ActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
 
 ReactDOM.render(
     <Provider store={store}>

@@ -49,8 +49,8 @@ $(document).ready(function () {
                 .text(value));
         }
         //START DEV
-        eventSelect.val(564635400412646);
-        $('#event-button').trigger('click');
+        // eventSelect.val(564635400412646);
+        // $('#event-button').trigger('click');
         //END DEV
         $(".facebook-event-wrapper").slideDown(500);
     });

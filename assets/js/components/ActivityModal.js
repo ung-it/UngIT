@@ -14,6 +14,9 @@ class ActivityModal extends Component {
         super(props);
         this.state = {
             show: false,
+            hasChecked: false,
+            attending: false,
+            loggedIn: false,
         }
     }
 
@@ -25,17 +28,69 @@ class ActivityModal extends Component {
 
     showMap = () => {
         window.open('https://www.google.no/maps/place/' + this.props.activity.location,'_blank');
-    }
+    };
 
     editActivity = () => {
         window.location = "/activity/" + this.props.id;
-    }
+    };
 
     closeActivityModal = () => {
         this.setState({
-            show: false
+            show: false,
+            hasChecked: false
         });
-    }
+    };
+
+    onSignup = () => {
+        var request = {
+            id: this.props.id
+        };
+
+        fetch('http://localhost:8000/signupActivity/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: "same-origin",
+            body: JSON.stringify(request)
+
+        }).then((response) => {
+            console.log(response);
+            if(response.status == 204){
+                this.setState({
+                    attending: true
+                });
+            }
+            return response.status;
+        })
+
+    };
+
+    onSignOf = () => {
+        console.log("id " + this.props.id);
+
+        var request = {
+            id: this.props.id
+        };
+
+        fetch('http://localhost:8000/signOfEvent/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: "same-origin",
+            body: JSON.stringify(request)
+
+        }).then((response) => {
+            console.log(response);
+            if(response.status == 210){
+                this.setState({
+                    attending: false
+                });
+            }
+            return response.status;
+        })
+    };
 
     render() {
         const { date, activityName, activityType, provider, adaptions, age, time_start, time_end, location, description, videos, images } = this.props.activity;
@@ -64,6 +119,71 @@ class ActivityModal extends Component {
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>
                     <div className="modal-image-container">
                         <img className="modal-image" src={images} alt="Et bilde fra arrangementet"></img>
+                    </div>
+                </div>;
+        }
+
+        if(this.state.show && !this.state.hasChecked){
+            var request = {
+                id: this.props.id
+            };
+            fetch('http://localhost:8000/checkIfSignedUp/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: "same-origin",
+                body: JSON.stringify(request)
+
+            }).then((response) => {
+                console.log(response);
+                if(response.status == 204){
+                    this.setState({
+                        attending: true,
+                        hasChecked:true,
+                        loggedIn: true
+                    });
+                }else if(response.status == 205){
+                    this.setState({
+                        loggedIn: true,
+                        hasChecked: true
+
+                    })
+
+                }else if(response == 206){
+                    this.setState({
+                        loggedIn: false
+                    })
+                }
+
+                return response.status;
+            })
+        }
+
+        let attendingContainer = null;
+        if(!this.state.loggedIn){
+            attendingContainer =
+                <div className="modal-infobox2">
+                    <div className="modal-infobox2-element">
+                        <h4>Påmelding til {activityName}</h4>
+                        <p>Du må være logget inn for å kunne melde deg på dette arrangementet</p>
+                    </div>
+                </div>;
+        } else if(this.state.attending == false) {
+            attendingContainer =
+                <div className="modal-infobox2">
+                    <div className="modal-infobox2-element">
+                        <h5>Påmelding til {activityName}</h5>
+                        <Button className="btn btn-success" onClick={this.onSignup}>Meld på!</Button>
+                    </div>
+            </div>;
+
+        } else {
+            attendingContainer =
+                <div className="modal-infobox2">
+                    <div className="modal-infobox2-element">
+                        <h5>Du er påmeldt {activityName}</h5>
+                        <Button onClick={this.onSignOf} className="btn btn-danger">Meld av</Button>
                     </div>
                 </div>;
         }
@@ -99,14 +219,7 @@ class ActivityModal extends Component {
                                 <a onClick={this.showMap} >Vis på kart</a>
                             </div>
                         </div>
-                        <div className="modal-infobox2">
-                            <div className="modal-infobox2-element">
-                                Påmelding til {activityName}
-                            </div>
-                            <div className="modal-infobox2-element">
-                                <Button bsStyle="info">Meld meg på</Button>
-                            </div>
-                        </div>
+                        {attendingContainer}
                     </div>
                     <div>
                         <h2 className="modal-description-header">Om arrangementet</h2>

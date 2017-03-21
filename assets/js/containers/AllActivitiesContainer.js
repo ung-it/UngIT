@@ -21,12 +21,13 @@ class AllActivitiesContainer extends Component {
     render() {
         return (
             <div>
+                <div className="filter-container">
                 <ActivityFilters
                     onActivityFilterChange={this.props.changeActivityFilter}
                     activityFilters={this.props.activeActivityFilters}
                     onSuitedForFilterChange={this.props.changeSuitedForFilter}
                     suitedForFilters={this.props.activeSuitedForFilters}
-                />
+                /></div>
                 <ActivitiesList activities={this.props.activities} />
             </div>
         );

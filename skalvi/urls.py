@@ -13,6 +13,9 @@ urlpatterns = [
     url(r'^api/skalvi/login/$', views.loginView, name="login"),
     url(r'^api/skalvi/loginF/$', ApiFunctions.loginFacebook, name="loginFacebook"),
     url(r'^api/activities/$', views.getActivities, name="getActivities"),
+
+    url(r'^api/attendingActivities/[a-zA-Z]+/$', views.getAttendingActivities, name="getAAttendingActivities"),
+
     url(r'^api/activity/(?P<id>[0-9]+)/$', views.getActivity, name="get-activity"),
     url(r'^register/$', views.UserFormView.as_view(), name="register"),
     url(r'^mypage/$', views.MyPageView.as_view(), name='mypage'),

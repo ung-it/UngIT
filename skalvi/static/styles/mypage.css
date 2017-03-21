@@ -4,8 +4,8 @@
 }
 
 #profileOnMyPage{
-    margin-left: 8em;
-    width: 80%;
+    margin-left: 1em;
+    width: 90%;
     display: flex;
     flex-direction: column;
 }
@@ -23,11 +23,16 @@
     flex-wrap: wrap;
 }
 
-#attendingActivities {
-    width: 50%;
+#attending_Activities {
+    width: 55%;
 }
+
+#attendingActivities {
+    margin: 0;
+}
+
 #hostingActivities {
-    width: 50%;
+    width: 45%;
 }
 #profileInformation {
     margin-left: 2em;

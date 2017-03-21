@@ -100,6 +100,18 @@ def signOfEvent(request):
         # Will never happen
         return HttpResponse(status=206)  # not logged in
 
+def getAttendingActivities(request):
+    profile_name = request.path.split("/")[3]
+    profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
+    activities = ParticipateIn.objects.filter(userId=request.user, user_profile_id=profile)
+    activitie_objects = []
+    for activity in activities:
+        act = Activity.objects.get(pk=activity.activityId.pk)
+        activitie_objects.append(act)
+    json_serializer = serializers.get_serializer("json")()
+    attendingActivities = json_serializer.serialize(activitie_objects, ensure_ascii=False)
+    return HttpResponse(attendingActivities, content_type='application/json')
+
 
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
@@ -341,7 +353,6 @@ class MyPageView(View):
     form_class = RegisterProfileForm
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(None)
         if request.user.is_authenticated():
 
             if 'username' in request.session:
@@ -353,14 +364,7 @@ class MyPageView(View):
 
             for profile in user_profile_objects:
                 path = "/mypage/" + str(profile.profile_name) + "/"
-                activities = ParticipateIn.objects.filter(userId=user_object, user_profile_id=profile)
-                activitie_objects = []
-                for activity in activities:
-                    act = Activity.objects.get(pk=activity.activityId.pk)
-                    activity_object = {'id': act.id, "activityName": act.activityName, "provider": act.provider, "adaptions": act.adaptions, "age": act.age, "location": act.location, "description": act.description, "registration_required": act.registration_required, "price": act.price, "date": act.date, "time_start": act.time_start, "time_end": act.time_end, "images": act.images, "instagram": act.instagram, "videos": act.videos }
-                    activitie_objects.append(activity_object)
-
-                object = {'profile_name': profile.profile_name, "type": profile.type, "phone": profile.phone, "is_active": profile.is_active, 'initiales': profile.profile_name[0:2].upper(), 'path': path, "activityIDs": activitie_objects}
+                object = {'profile_name': profile.profile_name, "type": profile.type, "phone": profile.phone, "is_active": profile.is_active, 'initiales': profile.profile_name[0:2].upper(), 'path': path}
                 profiles.append(object)
 
             return render(request, self.template_name,

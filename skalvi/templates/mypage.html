@@ -1,4 +1,5 @@
 {% extends "base_template.html" %}
+{% load render_bundle from webpack_loader %}
 {% block pageTitle %}MyPage{% endblock %}
 {% load static %}
 {% block explicitPageHeader %}
@@ -39,19 +40,19 @@
                             {% endif %}
                             <h4>Telefon: {{ profile.phone }}</h4>
                             <h4>Aktiv: {{ profile.is_active }}</h4>
-                            <h4>Aktiviteter: {{ profile.activityIDs }}</h4>
                         </div>
 
                     </div>
 
                     <div id="profileActivities">
 
-                        <div id="attendingActivities">
-                            <p>Her kommer kommende aktiviteter</p>
+                        <div id="attending_Activities">
+                            <h3>Dine kommende aktiviteter</h3>
+                            <div id="attendingActivities"></div>
                         </div>
 
                         <div id="hostingActivities">
-                            <p>Her kommer mine aktiviteter</p>
+                            <h3>Mine aktiviteter</h3>
                         </div>
 
                     </div>
@@ -61,5 +62,8 @@
     </div>
 {% endblock %}
 
+{% block explicitPageFooter %}
+    {% render_bundle 'attendingActivitiesContainer' %}
+{% endblock %}
 
 

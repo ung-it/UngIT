@@ -27,6 +27,7 @@ import {  getActivityInfo, getAllActivities} from "../APIFunctions";
 export const FETCHED_ALL_ACTIVITIES = 'FETCH_ALL_ACTIVITIES';
 export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
 export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
+export const ADD_WEEK_FILTER = 'ADD_WEEK_FILTER';
 // more actions types here
 
 
@@ -49,6 +50,13 @@ export function addSuitedForFilter(suitedFilter) {
     return {
         type: ADD_SUITED_FOR_FILTER,
         suitedFilter,
+    }
+}
+
+export function addWeekFilter(weekFilter) {
+    return {
+        type: ADD_WEEK_FILTER,
+        weekFilter,
     }
 }
 

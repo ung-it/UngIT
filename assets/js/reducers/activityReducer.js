@@ -32,6 +32,11 @@ export default function ActivityReducer(state=initialState, action) {
                 ...state,
                 activeSuitedForFilters: action.suitedFilter,
             };
+        case actionTypes.ADD_WEEK_FILTER:
+            return {
+                ...state,
+                activeDateFilter: action.weekFilter,
+            }
         default:
             return state;
     }

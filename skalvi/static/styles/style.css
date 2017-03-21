@@ -75,6 +75,10 @@ a.navbar-brand {
     z-index: -1;
 }
 
+.banner {
+    width: 100%;
+}
+
 pre {
     border: 0;
     background-color: transparent;

@@ -15,7 +15,6 @@ class WeekPicker extends React.Component {
 		this.state = {
 			startDate: moment(),
 			endDate: moment().add(29, 'days'),
-
 		};
 	};
 

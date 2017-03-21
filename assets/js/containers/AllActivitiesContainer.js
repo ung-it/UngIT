@@ -48,10 +48,12 @@ const mapStateToProps = state => {
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
     const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
 
-    //const hasWeekFilter = activeWeekFilters;
-    //const weekFilters = activeWeekFilters.split(',').map(a => parseInt(a));
-    console.log(activeDateFilter);
+    const hasWeekFilter = activeDateFilter.length > 0;
+    const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
 
+    activityList = hasWeekFilter
+        ? activityList.filter(activity => weekFilters.includes(activity.fields.date))
+        : activityList;
 
     activityList = hasActivityFilter
         ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))

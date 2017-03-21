@@ -2,31 +2,36 @@
 {% block pageTitle %}MyPage{% endblock %}
 {% load static %}
 {% block explicitPageHeader %}
-    <link href='http://fonts.googleapis.com/css?family=Unica+One' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
 {% endblock %}
 
 {% block body %}
+    <link href='http://fonts.googleapis.com/css?family=Unica+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
 
     <div style="height: 100px"></div>
-
     <div id="myPageContent">
+
         <div id="profilesOnMyPage">
             <ul class="social">
                 {% for profile in profiles %}
                     <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init">{{profile.initiales}}</a></li>
                 {% endfor %}
+
+                <li style="margin-top: 5em"><a href="/registerProfile/" aria-hidden="true" class="text-init" id="addProfile">+</a></li>
             </ul>
         </div>
 
-        <div class="container" style="margin: 0 0 0 12em; width: 85%">
+        <div id="profileOnMyPage">
             {% for profile in profiles %}
                 {% if request.path == profile.path %}
-                    <div class="row">
-                        <div class="col-md-1 prfile_picture">
+
+                    <div id="profile">
+
+                        <div id="profilePicture">
                             <img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile">
                         </div>
-                        <div class="col-md-2 profile_information" style="margin: 0">
+
+                        <div id="profileInformation">
                             <h4>Profilnavn: {{ profile.profile_name }}</h4>
                             {% if profile.type == "P" %}
                                 <h4>Brukertype: Voksen</h4>
@@ -37,14 +42,19 @@
                             <h4>Aktiv: {{ profile.is_active }}</h4>
                             <h4>Aktiviteter: {{ profile.activityIDs }}</h4>
                         </div>
+
                     </div>
-                    <div class="row" style="margin-top: 5%">
-                        <div class="col-sm-5 col-md-8 col-lg-6">
+
+                    <div id="profileActivities">
+
+                        <div id="attendingActivities">
                             <p>Her kommer kommende aktiviteter</p>
                         </div>
-                        <div class="col-sm-5 col-md-8 col-lg-6">
+
+                        <div id="hostingActivities">
                             <p>Her kommer mine aktiviteter</p>
                         </div>
+
                     </div>
                 {% endif %}
             {% endfor %}

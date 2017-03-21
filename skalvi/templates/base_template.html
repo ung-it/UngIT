@@ -1,0 +1,55 @@
+{% load render_bundle from webpack_loader %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block pageTitle %}
+        {% endblock %}
+    </title>
+
+    <!-- Every page needs access to jqueery -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <!--Every page needs access to bootstrap -->
+    <link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
+    <!--Every page needs access and to use the style.css file -->
+    <link rel="stylesheet" href="{% static "styles/style.css" %}">
+    <!--Every page needs access to facebook login -->
+    <script src="{% static 'js/facebook.js' %}"></script>
+
+
+    <!-- Use this tag on your template when you need to add something to the page header -->
+    {% block explicitPageHeader %}
+    {% endblock %}
+
+</head>
+<body>
+<div class="site-content">
+    {% include "navbar.html" %}
+
+    <!-- Use this tag to contain the page content /template -->
+    {% block body %}
+    {%  endblock %}
+
+
+
+</div>
+<footer class="footer">
+    {% include "footer.html" %}
+</footer>
+
+<!-- Every page needs to common React -->
+{#<script src="{% static '/assets/js/bundles/common.js' %}"></script>#}
+{% render_bundle 'common' %}
+
+<!--Every page needs access to bootstrap -->
+<script src={% static 'js/bootstrap.min.js' %}></script>
+
+<!-- Use this tag to load scripts after page has loaded -->
+{% block explicitPageFooter %}
+{% endblock %}
+
+</body>
+</html>
+

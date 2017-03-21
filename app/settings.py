@@ -22,12 +22,13 @@ SECRET_KEY = '+g25&y9i+-6_z$$z!ov$l2s%b#0kcmnx)n7y*2_ehy-w011p#k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["178.62.236.72", "www.skalvi.no", "skalvi.no", "52.43.209.46", "*"]
 
 
 # Application definition
 
 INSTALLED_APPS = (
+    'skalvi.apps.SkalviConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'app',
     'webpack_loader',
-    'skalvi',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,6 +50,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
+# SESSION_ENGINE = {
+#
+# }
+
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
@@ -59,10 +63,12 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -81,6 +87,7 @@ DATABASES = {
     }
 }
 
+AUTH_PROFILE_MODULE = "skalvi.UserProfile"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -88,6 +95,8 @@ DATABASES = {
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
+
+DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
 
 USE_I18N = True
 
@@ -99,7 +108,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
@@ -111,3 +124,9 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
     }
 }
+
+if not DEBUG:
+    WEBPACK_LOADER['DEFAULT'].update({
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json'),
+    })

@@ -23,15 +23,14 @@ class WeekPicker extends React.Component {
 			startDate: picker.startDate,
 			endDate: picker.endDate,
 		});
-		const date = picker.startDate.format('DD.MM.YYYY') + "," + picker.endDate.format('DD.MM.YYYY');
-		console.log(date)
+		const date = picker.startDate.format('YYYY-MM-DD') + "," + picker.endDate.format('YYYY-MM-DD');
 		this.props.onFilterChange(date);
 	};
 
 
 	render() {
-		const start = this.state.startDate.format('DD.MM.YYYY');
-		const end = this.state.endDate.format('DD.MM.YYYY');
+		const start = this.state.startDate.format('YYYY-MM-DD');
+		const end = this.state.endDate.format('YYYY-MM-DD');
 		let label = start + ' - ' + end;
 		if (start === end) {
 			label = start;

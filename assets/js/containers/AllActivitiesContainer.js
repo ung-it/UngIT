@@ -33,7 +33,6 @@ class AllActivitiesContainer extends Component {
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
@@ -52,7 +51,13 @@ const mapStateToProps = state => {
     const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
 
     activityList = hasWeekFilter
-        ? activityList.filter(activity => weekFilters.includes(activity.fields.date))
+        ? activityList.filter(activity =>
+        (
+            ((new Date (activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date (activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date (activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
+            (new Date (activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date (activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date (activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
+            (weekFilters[0].getYear() >= new Date (activity.fields.date).getYear()  && weekFilters[0].getMonth() >= new Date (activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date (activity.fields.date).getDay()) &&
+            (weekFilters[0].getYear() <= new Date (activity.fields.date_end).getYear()  && weekFilters[0].getMonth() <= new Date (activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date (activity.fields.date_end).getDay())
+        ))
         : activityList;
 
     activityList = hasActivityFilter

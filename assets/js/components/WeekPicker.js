@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Thumbnail, Glyphicon } from "react-bootstrap";
 
-import '../../styles/activitypickerStyle.css'
+import '../../styles/daterangepicker.css'
 
 var moment = require('moment');
 var DateRangePicker = require('react-bootstrap-daterangepicker');

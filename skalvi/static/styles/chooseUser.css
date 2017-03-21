@@ -39,4 +39,12 @@ h1 {
 }
 
 
+#back-arrow {
+    margin: -2em 0 0 1em;
+    float: left;
+    width: 2em;
+    color: white;
+    font-size: 35px;
+
+}
 

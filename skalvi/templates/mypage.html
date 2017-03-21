@@ -10,8 +10,7 @@
 
     <div style="height: 100px"></div>
     <div id="myPageContent">
-
-        <div id="profilesOnMyPage">
+        <div id="profilesOnMyPage" >
             <ul class="social">
                 {% for profile in profiles %}
                     <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init">{{profile.initiales}}</a></li>

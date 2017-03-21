@@ -9,6 +9,7 @@ h1 {
     color: white;
 }
 
+
 .buttons{
     text-align: center;
     width: 20em;
@@ -18,9 +19,17 @@ h1 {
     background-color: #252120;
 }
 
+#body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
 #users{
+    width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
 
 }

@@ -409,7 +409,7 @@ class RegisterProfileView(View):
             profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
             profile.save()
 
-        return redirect("skalvi:mypage")
+        return redirect("../mypage/" + profile_name )
 
 
 

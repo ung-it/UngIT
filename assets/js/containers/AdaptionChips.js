@@ -7,17 +7,26 @@ import IconAccessibility from 'material-ui/svg-icons/action/accessibility';
 import IconVisibility from 'material-ui/svg-icons/action/visibility';
 import IconHearing from 'material-ui/svg-icons/av/hearing';
 
+import {List, ListItem} from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+const style = {
+    backgroundColor: '#FFFFA5'
+};
+
 class AdaptionChips extends Component {
+
 
     constructor(props) {
         super(props);
-        const chipIcons =  {'Tilpassning 1':<IconAccessible/>,'Tilpassning 2':<IconAccessibility/>,'Tilpassning 3':<IconVisibility/>,'Tilpassning 4':<IconHearing/>};
+        const chipIcons =  {'Tilrettelegging 1':<IconAccessible/>,'Tilrettelegging 2':<IconAccessibility/>,'Tilrettelegging 3':<IconVisibility/>,'Tilrettelegging 4':<IconHearing/>};
         this.state = {
             chipIcons: chipIcons,
             selected: [],
@@ -33,49 +42,63 @@ class AdaptionChips extends Component {
         let selected = this.state.selected.map(name => {
             let icon = this.state.chipIcons[name];
             return (
-               <Chip
-                   className='chip'
-                   key = {name}
-                   onRequestDelete={this.remove.bind(null, {name})}
-                   onTouchTap={this.remove.bind(null, {name})}
-               >
-                   <Avatar icon={icon}></Avatar>
-                   {name}
-               </Chip>
+                <ListItem
+                    key={name}
+                    primaryText={name}
+                    leftIcon={icon}
+                    tooltip="test"
+                    onTouchTap={this.remove.bind(null, {name})}
+                    rightI
+                />
             )
         });
 
         let unselected = this.state.unselected.map( name => {
             let icon = this.state.chipIcons[name];
             return (
-                <Chip
-                    className='chip'
-                    key = {name}
-                    onTouchTap={this.add.bind(null, {name})}
-                >
-                    <Avatar icon={icon}></Avatar>
-                    {name}
-                </Chip>
+                <ListItem key={name} primaryText={name} leftIcon={icon} onTouchTap={this.add.bind(null, {name})} />
             )
         });
 
         return (
             <div>
-                <span>Tilpasninger</span>
-                <div className="adaptions-container">
-                    <Paper className="adaptions-box" zDepth={1}>
-                        <div className="adaptions-title">Alle tilpassninger</div>
-                        <div className="adaptions-holder">
-                            {unselected}
+                <div className="adaptions-header">Tilrettelegginger</div>
+                <Paper zDepth={1}>
+                    <div className="adaptions-info-container">
+                        <i id="adaptions-i" className="material-icons adaptions-info" >help</i>
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="adaptions-i">
+                            Klikk på en tilrettelegging for å flytte den over til den andre listen
                         </div>
-                    </Paper>
-                    <Paper className="adaptions-box" zDepth={1}>
-                        <div className="adaptions-title">Valgte tilpassninger</div>
-                        <div className="adaptions-holder">
-                            {selected}
+                    </div>
+                    <div className="adaptions-container">
+                        <Paper className="adaptions-box" zDepth={1} style={style}>
+                            <div className="adaptions-title">Alle tilrettelegginger</div>
+                            <List className="adaptions-holder">
+                                {unselected}
+                            </List>
+                        </Paper>
+                        <Paper className="adaptions-box" zDepth={1} style={style}>
+                            <div className="adaptions-title">Valgte tilrettelegginger</div>
+                            <div className="adaptions-holder">
+                                {selected}
+                            </div>
+                        </Paper>
+                    </div>
+                    <div className="adaptions-add">
+                        <div className="adaptions-add-input">
+                            <TextField
+                                hintText="Navn på tilpassning"
+                                floatingLabelText="Legg til ny tilpassning"
+                                fullWidth={true}
+                            />
                         </div>
-                    </Paper>
-                </div>
+                        <RaisedButton
+                            label="Legg til"
+                            className='adaptions-add-button'
+                            onTouchTap={this.addNew}
+                            primary={true}/>
+                    </div>
+                </Paper>
             </div>
         )
     }
@@ -91,12 +114,23 @@ class AdaptionChips extends Component {
         this.state.selected.splice(this.state.selected.indexOf(item.name), 1);
         this.setState({selected: this.state.selected, unselected: unselected});
     }
+
+    addNew(item) {
+
+    }
 }
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
 
 const App = () => (
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={muiTheme}>
         <AdaptionChips />
     </MuiThemeProvider>
 );

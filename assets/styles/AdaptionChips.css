@@ -1,24 +1,58 @@
+.adaptions-header {
+    padding-bottom: 16px;
+    color: #3F51B5;
+}
+
+.adaptions-info-container {
+    position: relative;
+    height: 28px;
+}
+
+.adaptions-info {
+    position: absolute;
+    top:10px;
+    right: 10px;
+}
+
 .adaptions-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     height: 300px;
 }
 
 .adaptions-box {
     padding: 10px;
-    margin: 10px;
-    width: 45%;
+    margin: 20px;
+    width: 360px;
 }
 
 .adaptions-title {
     line-height: 2;
     border-bottom: solid thin #bdbdbd;
+    text-align: center;
 }
 
 .adaptions-holder {
     padding: 10px;
 }
 
+.adaptions-add {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 10px;
+}
+
+.adaptions-add-input {
+    width: 630px;
+}
+
+.adaptions-add-button {
+    height: 36px;
+    margin-bottom: 8px;
+    align-self: flex-end;
+}
+
 .chip {
-    margin: 1px;
+    /*margin: 5px;*/
 }

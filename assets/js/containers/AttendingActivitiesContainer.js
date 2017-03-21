@@ -56,7 +56,7 @@ const mapStateToProps = state => {
     return {
         attendingActivities: state.activity.attendingActivityList
             .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            .slice(0, 5), // Only get five first
+            // Only get five first
     };
 };
 

@@ -1,8 +1,11 @@
 {% load base_extras %}
 {% load static %}
+
 <nav class="navbar navbar-inverse">
-    <div class="content-padding">
-        <div class="container-fluid">
+    <div id="fb-root"></div>
+    <div class="nav-color">
+
+            <div class="content">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
@@ -10,19 +13,19 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="logo-div">
-                    <a class="navbar-brand" href="#">
-                        <img src="{% static "images/logoSmall.png" %}" id="logo-image" alt="Logo">
+                    <a class="navbar-brand" href="/">
+                        <img src="{% static "images/logo.png" %}" id="logo-image" alt="Logo">
                     </a>
                 </div>
 
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Hjem</a></li>
-                    <li><a href="#">Aktiviteter</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logg inn</a></li>
+                    <li {% if "/" == request.path %}class="active"{% endif %}><a href="/">Hjem</a></li>
+                    <li {% if "allactivities" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
+                    {% include "loginBox.html" %}
                 </ul>
             </div>
-        </div>
+            </div>
     </div>
 </nav>

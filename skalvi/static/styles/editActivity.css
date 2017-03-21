@@ -1,0 +1,100 @@
+.main-wrapper {
+    padding: 40px 40px 8px 40px;
+    margin: 8px auto 32px auto;
+    background-color: white;
+    width: 900px;
+}
+.facebook-event-wrapper {
+    margin: 8px auto 20px auto;
+    padding: 16px 16px 16px 16px;
+    height: 171.2px;
+    background-color: white;
+    display: none;
+    width: 900px;
+}
+
+.facebook-content-box {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.facebook-info-box {
+    display: none !important;
+}
+
+.facebook-info-box span {
+    font-weight: 400;
+}
+
+.instagram-image {
+    height: 15em;
+    padding: 0.2em;
+    cursor: pointer;
+    transition: .3s ease;
+    backface-visibility: hidden;
+}
+
+.instagram-image:hover {
+    opacity: 0.5;
+}
+
+.instagram-image-selected {
+    box-sizing: border-box;
+    opacity: 0.7;
+    border: 0.3em #3f51b5;
+    border-style: none none solid none;
+}
+
+.instagram-image-selected:hover {
+    opacity: 1;
+}
+
+.input-box {
+    display: block !important;
+}
+
+.input-box span {
+    font-weight: 400;
+}
+
+.full-box {
+    width: 100%;
+}
+
+.thumbnail {
+    height: 240px;
+    width: 300px;
+    text-align: center;
+}
+
+.thumbnail img {
+    height: 85%;
+}
+
+.adaptions-container {
+    display: block; !important;
+}
+
+#event-select {
+    font-family: "Helvetica","Arial",sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+#event-button {
+    display: none;
+    margin-top: 16px;
+}
+
+.submit-button {
+    padding: 16px;
+}
+
+.date-time-container:not( .md-input-has-value ) input:not( :focus ) {
+    color: transparent;
+}
+
+.mdl-list__item-secondary-content {
+    width: 300px;
+}

@@ -90,10 +90,11 @@ class Scraper:
         return matches
 
     '''
-    Private function to scrape the page of an registered provider in the
+    PRIVATE function to scrape the page of an registered provider in the
     aktordatabasen.
 
     :param orgLink: the aktordatabase url to scrape
+    :param orgID: the aktordatabase id for the given aktor
     '''
     def _scrapeInfo(self, orgLink, orgID):
         information = {}

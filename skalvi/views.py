@@ -291,7 +291,7 @@ class ActivityView(generic.DetailView):
                 form.save()
                 return redirect('/')
             else:
-                return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
+                return render(request, self.template_name, {'form': form, 'error_message': form.errors})
 
 class createActivity(View):
     template_name = "activity.html"
@@ -304,14 +304,13 @@ class createActivity(View):
     def post(self, request):
         form = ActivityForm(request.POST, request.FILES)
         if form.is_valid():
-            print("XXXXprintXXXX: ", form.cleaned_data['date'])
-            instagram = request.POST['instagramImages']
-            if instagram:
-                form.cleaned_data['images'] = instagram
+            # instagram = request.POST['instagramImages']
+            # if instagram:
+            #     form.cleaned_data['instagram'] = instagram
             form.save()
             return redirect('/')
         else:
-            return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
+            return render(request, self.template_name, {'form': form, 'error_message': form.errors})
 
 def activityGet(self, request, form):
     token = request.GET.get('code')

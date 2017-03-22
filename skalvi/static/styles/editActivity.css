@@ -1,3 +1,7 @@
+.alert-wrapper {
+    width: 900px;
+}
+
 .main-wrapper {
     padding: 40px 40px 8px 40px;
     margin: 8px auto 32px auto;

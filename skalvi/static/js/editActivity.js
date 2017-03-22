@@ -49,8 +49,7 @@ function imageClicked(image) {
 
 function selectedImages(images) {
     let imageList = images.split(",").map(function (image) {
-        image = "'" + image + "'";
-        return $("img[src=" + image + "]");
+        return $('#instagram-div').find("img[src='" + image + "']")[0];
     });
     for (var i in imageList) {
         imageClicked(imageList[i]);

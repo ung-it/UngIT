@@ -22,7 +22,7 @@
 {% block body %}
         <div class="content content-margin-top">
             {% if error_message %}
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-wrapper">
                     <strong>{{ error_message }}</strong>
                 </div>
             {% endif %}
@@ -221,7 +221,7 @@
                         </span>
                     </li>
                     <li class="mdl-list__item input-box">
-                        <input name="instagramImages" id="instagramImages" type="hidden">
+                        <input name="instagram" id="instagramImages" type="hidden">
                         {% if images %}
                             <span>Klikk på et bilde for å legge det til</span>
                             <div id="instagram-div">

@@ -197,12 +197,12 @@ def main():
     #informasjon = s.scrapeAktor(name='DANS MED OSS')
 
     # Multiple matches
-    #informasjon = s.scrapeAktor(name='rosenborg')
+    informasjon = s.scrapeAktor(name='rosenborg')
 
     # scrape all
-    informasjon = s.scrapeAll()
+    #informasjon = s.scrapeAll()
 
     # print:
     print(informasjon)
 
-main()
+#main()

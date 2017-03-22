@@ -1,5 +1,6 @@
 import requests # html requests
 from bs4 import BeautifulSoup # to extract html content
+import json
 
 '''
 A class to scrape the organisasjoner.trondheim.kommune aktordatabasen
@@ -101,6 +102,7 @@ class Scraper:
         information = {}
         r = requests.get(orgLink)
         self.soup = BeautifulSoup(r.content, 'html.parser')
+        title = self.soup.find("h1")
         #print(self.soup.prettify())
         #self.soup = BeautifulSoup(open('./tests/ROSENBORG_BALLKLUB.html'), 'html.parser')
         rawInformation = self.soup.find_all('div', class_='summary-section')
@@ -152,6 +154,7 @@ class Scraper:
 
                     information[keys[i].string] = adr.strip()
         if(len(information) !=0 ):
+            information['Navn'] = title.string
             information['Id'] = orgID
 
         #print(information)
@@ -169,17 +172,15 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(500,510):
+        for i in range(1,1472):
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
 
+        # write all to .txt file, for prodction use to fill up database. without re-query
+        with open('aktordatabasen.json', 'w') as file:
+            json.dump(allProviders, file, indent=4)
+
         return allProviders
-
-
-
-
-
-
 
 
 

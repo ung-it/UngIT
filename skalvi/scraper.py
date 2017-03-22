@@ -39,7 +39,7 @@ class Scraper:
         # [<ul class="nav nav-tabs nav-stacked"> <li> <a href="organisations/573"><i class="icon-chevron-right"></i>ROSENBORG BALLKLUB</a> </li> </ul>]
         if(len(theList) == 0):
             print('No match')
-            return None
+            return {}
 
         self.soup = BeautifulSoup(theList, 'html.parser')
         theLinks = self.soup.find_all('a')
@@ -185,4 +185,4 @@ def main():
     informasjon = s.scrapeAktor(name='rosenborg')
     print(informasjon)
 
-main()
+#main()

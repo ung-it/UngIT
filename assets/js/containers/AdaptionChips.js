@@ -6,14 +6,15 @@ import IconAccessible from 'material-ui/svg-icons/action/accessible';
 import IconAccessibility from 'material-ui/svg-icons/action/accessibility';
 import IconVisibility from 'material-ui/svg-icons/action/visibility';
 import IconHearing from 'material-ui/svg-icons/av/hearing';
+import IconNew from 'material-ui/svg-icons/content/add';
 
 import {List, ListItem} from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
@@ -37,14 +38,17 @@ class AdaptionChips extends Component {
         this.remove = this.remove.bind(this);
         this.addNew = this.addNew.bind(this);
         this.addNewButton = this.addNewButton.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     render() {
 
         let selected = this.state.selected.map(name => {
             let icon = this.state.chipIcons[name];
+            let deleteButton = null;
             if (Object.keys(this.state.chipIcons).indexOf(name) == -1) {
-                console.log(name)
+                deleteButton = <FlatButton label="slett" primary={true} onTouchTap={this.deleteItem.bind(null, {name})} />
+                icon = <IconNew/>
             }
             return (
                 <ListItem
@@ -52,14 +56,26 @@ class AdaptionChips extends Component {
                     primaryText={name}
                     leftIcon={icon}
                     onTouchTap={this.remove.bind(null, {name})}
+                    rightIconButton={deleteButton}
                 />
             )
         });
 
         let unselected = this.state.unselected.map( name => {
             let icon = this.state.chipIcons[name];
+            let deleteButton = null;
+            if (Object.keys(this.state.chipIcons).indexOf(name) == -1) {
+                deleteButton = <FlatButton label="slett" primary={true} onTouchTap={this.deleteItem.bind(null, {name})} />
+                icon = <IconNew/>
+            }
             return (
-                <ListItem key={name} primaryText={name} leftIcon={icon} onTouchTap={this.add.bind(null, {name})} />
+                <ListItem
+                    key={name}
+                    primaryText={name}
+                    leftIcon={icon}
+                    onTouchTap={this.add.bind(null, {name})}
+                    rightIconButton={deleteButton}
+                />
             )
         });
 
@@ -137,6 +153,18 @@ class AdaptionChips extends Component {
             this.setState({selected: selected});
         }
         this.refs.AdaptionInput.input.value = null;
+    }
+
+    deleteItem(event) {
+        let name = event.name;
+        if (this.state.selected.indexOf(name) != -1) {
+            this.state.selected.splice(this.state.selected.indexOf(name), 1);
+            this.setState({selected: this.state.selected});
+        }
+        else {
+            this.state.unselected.splice(this.state.unselected.indexOf(name), 1);
+            this.setState({unselected: this.state.unselected});
+        }
     }
 }
 

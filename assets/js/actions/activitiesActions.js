@@ -70,10 +70,9 @@ export function addSearchForFilter(searchFilter) {
     }
 }
 
-export function trashButtonClicked(trashButton) {
+export function trashButtonClicked() {
     return {
         type: TRASH_BUTTON_CLICKED,
-        trashButton,
     }
 }
 

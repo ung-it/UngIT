@@ -53,7 +53,11 @@ export default function ActivityReducer(state=initialState, action) {
         case actionTypes.TRASH_BUTTON_CLICKED:
             return {
                 ...state,
-                activeButtonClicked: action.trashButton,
+                activeActivityFilters: '',
+                activeSuitedForFilters: '',
+                activeDateFilter: '',
+                activeSearchForFilters: '',
+                activeButtonClicked: false,
             }
         default:
             return state;

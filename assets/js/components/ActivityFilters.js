@@ -15,24 +15,13 @@ class ActivityFilters extends React.Component {
 		super(props);
 
 		this.state = {
-            tButtonClicked: false,
+            tButtonClicked: true,
 		};
 	};
 
 
-    handleEmptyFilter = (event) => {
-        console.log("ActivityFilter" + this.props.activeButton);
-        if (!this.state.tButtonClicked) {
-            this.setState({
-                tButtonClicked: true,
-            });
-        } else {
-            this.setState({
-                tButtonClicked: false,
-            });
-        };
-        this.props.onButtonChange();
-
+    handleEmptyFilter = () => {
+        this.props.onButtonChange(this.state.tButtonClicked);
     };
 
     render() {
@@ -93,7 +82,6 @@ ActivityFilters.propTypes = {
     searchForFilters: React.PropTypes.string.isRequired,
 
     onButtonChange: React.PropTypes.func.isRequired,
-	activeButton: React.PropTypes.bool.isRequired,
 };
 
 export default ActivityFilters;

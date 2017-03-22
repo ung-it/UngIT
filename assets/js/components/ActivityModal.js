@@ -1,13 +1,14 @@
 //React Component import
 import React, { Component } from 'react';
 //Bootstrap import
-import {Glyphicon, Modal, Button} from 'react-bootstrap';
+import { Glyphicon, Modal, Button } from 'react-bootstrap';
 //Project component import
-import {getMonth} from './DateFunctions'
-import {getActivityInfo} from './APIFunctions';
+import {getMonth} from '../DateFunctions'
 import CalendarDateBox from './CalendarDateBox';
 //CSS import
-import '../styles/modal.css';
+import '../../styles/modal.css';
+import { SUITED_FOR_TYPES } from './SuitedForPicker';
+
 
 class ActivityModal extends Component {
 
@@ -18,58 +19,31 @@ class ActivityModal extends Component {
             hasChecked: false,
             attending: false,
             loggedIn: false,
-            title: "",
-            provider: "",
-            adaptions: "",
-            age: "",
-            location: "",
-            description: "",
-            price: "",
-            date: new Date(),
-            timeStart: "",
-            timeEnd: "",
-            images: [],
-            videos: []
-        };
-
-
-    this.onSignup = this.onSignup.bind(this);
-    this.onSignOf = this.onSignOf.bind(this);
-
-        getActivityInfo(this.props.id, function (data) {
-            let images = data.images.split(",").filter(image => {
-                return image != "";
-            }).map(image => {
-                return "/media/" + image;
-            });
-            images = images.concat(data.instagram.split(",").filter(image => {
-                return image != "";
-            }));
-            this.setState({
-                title: data.activityName,
-                provider: data.provider,
-                adaptions: data.adaptions,
-                age: data.age,
-                location: data.location,
-                description: data.description,
-                price: data.price,
-                date: new Date(data.date),
-                timeStart: data.time_start.substring(0,data.time_start.lastIndexOf(":")),
-                timeEnd: data.time_end.substring(0,data.time_end.lastIndexOf(":")),
-                images: images,
-                videos: data.videos.split(",")
-            });
-        }.bind(this));
-
-        this.showMap = this.showMap.bind(this);
+        }
     }
-
 
     componentWillReceiveProps(props) {
-        this.setState({show: props.show});
+        this.setState({
+            show: props.show
+        });
     }
 
-    onSignup() {
+    showMap = () => {
+        window.open('https://www.google.no/maps/place/' + this.props.activity.location,'_blank');
+    };
+
+    editActivity = () => {
+        window.location = "/activity/" + this.props.id;
+    };
+
+    closeActivityModal = () => {
+        this.setState({
+            show: false,
+            hasChecked: false
+        });
+    };
+
+    onSignup = () => {
         var request = {
             id: this.props.id
         };
@@ -92,9 +66,9 @@ class ActivityModal extends Component {
             return response.status;
         })
 
-    }
+    };
 
-    onSignOf(){
+    onSignOf = () => {
         console.log("id " + this.props.id);
 
         var request = {
@@ -118,24 +92,41 @@ class ActivityModal extends Component {
             }
             return response.status;
         })
-    }
+    };
 
     render() {
-        const {date, title, provider, adaptions, age, timeStart, timeEnd, location, description} = this.state;
-        let videoContainer = null;
-        if (this.state.videos.length > 0 && this.state.videos[0] != "") {
-            const videos = this.state.videos.map((video, i) => {
-                const path = "/media/video/" + video;
-                return (
-                    <video className="modal-video" controls="controls" key={i}>
-                        <source src={path}/>
-                    </video>
-                )
-            });
-            videoContainer =
+        const { date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, images } = this.props.activity;
+
+        let suitedForContainer =  [];
+        if(suitedForType >= 0) {
+            suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
+        }
+
+        //let videoContainer = null;
+        //if (videos.length > 0) {
+        //    const videos = this.state.videos.map((video, i) => {
+        //        const path = "/media/video/" + video;
+        //        return (
+        //            <video className="modal-video" controls="controls" key={i}>
+        //                <source src={path}/>
+        //            </video>
+        //        )
+            //    });
+        //    videoContainer =
+        //        <div>
+        //            <h3 className="modal-image-header">Video fra arrangementet</h3>
+        //            {videos}
+        //        </div>;
+        //}
+
+        let imageContainer = null;
+        if (images.length > 0) {
+            imageContainer =
                 <div>
-                    <h3 className="modal-image-header">Video fra arrangementet</h3>
-                    {videos}
+                    <h3 className="modal-image-header">Bilder fra arrangementet</h3>
+                    <div className="modal-image-container">
+                        <img className="modal-image" src={images} alt="Et bilde fra arrangementet"></img>
+                    </div>
                 </div>;
         }
 
@@ -176,76 +167,57 @@ class ActivityModal extends Component {
             })
         }
 
-        let imageContainer = null;
-        if (this.state.images.length > 0 && this.state.images[0] != "") {
-            const images = this.state.images.map((image, i) => {
-                return (
-                    <img className="modal-image" src={image} alt="Et bilde fra arrangementet" key={i}></img>
-                )
-            });
-            imageContainer =
-                <div>
-                    <h3 className="modal-image-header">Bilder fra arrangementet</h3>
-                    <div className="modal-image-container">
-                        {images}
-                    </div>
-                </div>;
-        }
-
         let attendingContainer = null;
         if(!this.state.loggedIn){
             attendingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
-                        <h4>Påmelding til {title}</h4>
+                        <h4>Påmelding til {activityName}</h4>
                         <p>Du må være logget inn for å kunne melde deg på dette arrangementet</p>
                     </div>
                 </div>;
-        }
-        else if(this.state.attending == false){
+        } else if(this.state.attending == false) {
             attendingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
-                        <h5>Påmelding til {title}</h5>
+                        <h5>Påmelding til {activityName}</h5>
                         <Button className="btn btn-success" onClick={this.onSignup}>Meld på!</Button>
                     </div>
             </div>;
 
-        }else{
+        } else {
             attendingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
-                        <h5>Du er påmeldt {title}</h5>
+                        <h5>Du er påmeldt {activityName}</h5>
                         <Button onClick={this.onSignOf} className="btn btn-danger">Meld av</Button>
                     </div>
                 </div>;
         }
 
-
-
         return (
             <Modal
                 show={this.state.show}
-                onHide={this.closeActivityModal.bind(this)}
+                onHide={this.closeActivityModal}
                 bsSize="large"
                 aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-lg">
-                        <CalendarDateBox date={date}/>
+                        <CalendarDateBox date={new Date(date)}/>
                         <div className="modal-title-style">
-                            <h1><b>{title}</b></h1>
+                            <h1><b>{activityName}</b></h1>
                             <div className="modal-provider-title">Arrangeres av: <b>{provider}</b></div>
                         </div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-adapted">
-                        Dette arrangementet er tilpasset for: {adaptions}
+                        Dette arrangementet er tilpasset for: <b>{suitedForContainer.label}</b>
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">
                             <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {timeStart} - {timeEnd}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {time_start} - {time_end}</div>
                             <div className="modal-infobox1-element">
                                 <Glyphicon glyph="glyphicon glyphicon-map-marker"/>
                                 Sted: {location}
@@ -255,33 +227,20 @@ class ActivityModal extends Component {
                             </div>
                         </div>
                         {attendingContainer}
-
                     </div>
                     <div>
                         <h2 className="modal-description-header">Om arrangementet</h2>
                         <p className="modal-description">{description}</p>
                     </div>
-                    {videoContainer}
+                    {/* videoContainer */}
                     {imageContainer}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.editActivity.bind(this)}>Endre aktivitet</Button>
-                    <Button onClick={this.closeActivityModal.bind(this)}>Lukk</Button>
+                    <Button onClick={this.editActivity}>Endre aktivitet</Button>
+                    <Button onClick={this.closeActivityModal}>Lukk</Button>
                 </Modal.Footer>
             </Modal>
         )
-    }
-
-    showMap() {
-        window.open('https://www.google.no/maps/place/' + this.props.location,'_blank');
-    }
-
-    editActivity() {
-        window.location = "/activity/" + this.props.id;
-    }
-
-    closeActivityModal() {
-        this.setState({show: false, hasChecked: false});
     }
 }
 

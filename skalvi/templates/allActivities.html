@@ -16,34 +16,9 @@
             <p>Her er en oversikt over alle aktiviteter og grupper som tilbys i Trondheim kommune</p>
         </div>
 
-        <div class="filter-container">
-            <h3 id="info-txt">Finn aktiviteter</h3>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="search" placeholder="Søk etter en aktivitet...">
-                    </div>
-                    <div class="col-md-6">
-                    <div class="date-picker-container">
-                        <div id="week"></div>
-                    </div>
-                </div>
-                </div>
-
-
-            <div class="row">
-                <div class="col-md-6" id="whatContainer">
-                    <div id="activityfilter"></div>
-                </div>
-                <div class="col-md-6" id="whoContainer">
-                    <div id="suitedfor"></div>
-                </div>
-            </div>
-            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Søk!</button>
-                    </span>
+        <div>
+            <div id="allActivities"></div>
         </div>
-
-        <div id="allActivities"></div>
 
     </div>
 
@@ -51,7 +26,7 @@
 
 {% block explicitPageFooter %}
     {% render_bundle 'allActivitiesContainer' %}
-    {% render_bundle 'suitedForPicker' %}
-    {% render_bundle 'activityPicker' %}
-    {% render_bundle 'weekPicker' %}
+{#    {% render_bundle 'suitedForPicker' %}#}
+{#    {% render_bundle 'activityPicker' %}#}
+{#    {% render_bundle 'weekPicker' %}#}
 {% endblock %}

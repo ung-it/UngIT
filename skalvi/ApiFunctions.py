@@ -59,9 +59,14 @@ def loginFacebook(request):
         elif len(profiles) > 1:
             return redirect("skalvi:choose")
         else:
+            # if only one profile
             for profile in profiles:
                 profile.is_active = True
                 profile.save()
+                request.session['username'] = user.username
+                request.session['profile_name'] = profile.profile_name
+                request.session['profile_pk'] = profile.pk
+
             return redirect("/")
 
 

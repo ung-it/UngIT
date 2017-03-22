@@ -11,11 +11,9 @@ module.exports = {
 
     entry: {
         activitiesContainer: './assets/js/containers/ActivitiesContainer',
+        attendingActivitiesContainer: './assets/js/containers/AttendingActivitiesContainer',
         allActivitiesContainer: './assets/js/containers/AllActivitiesContainer',
         adaptionChips: './assets/js/containers/AdaptionChips',
-        suitedForPicker: './assets/js/containers/SuitedForPicker',
-        activityPicker: './assets/js/containers/ActivityPicker',
-        weekPicker: './assets/js/containers/WeekPicker',
     },
 
     output: {
@@ -25,6 +23,11 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('development'), // Change to production in prod
+            }
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
         new BundleTracker({filename: './webpack-stats.json'}),

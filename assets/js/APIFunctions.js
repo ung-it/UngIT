@@ -14,11 +14,13 @@ export function getUpcomingActivities(callback) {
     });
 }
 
-export function getAllActivitiesAsArrayForReducer(callback) {
+export function getAllActivities() {
+    return fetchFromServer('/api/activities/');
+}
 
-    fetchFromServer('/api/activities/').then(data => {
-        callback(data);
-    });
+export function getAllAttendingActivities() {
+    const profileName = window.location.href.split("/")[4];
+    return fetchFromServer('/api/attendingActivities/'+profileName);
 }
 
 export function signupActivity(id) {
@@ -38,11 +40,10 @@ function fetchFromServer(query) {
         }
         return response.json();
     }).then(function(result) {
-        if(result.error || result.length == 0) {
+        if (result.error || result.length == 0) {
             console.log("This query gave an empty result or threw an error:\n" + query);
-            return [];
-        }
-        else {
+            return Promise.reject(result.error);
+        } else {
             return result;
         }
     });

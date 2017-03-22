@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
 
-import { fetchAllActivities } from '../actions/activitiesActions';
+import { fetchAllAttendingActivities } from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 
@@ -10,14 +10,14 @@ import '../../styles/activityBox.css';
 
 const store = configureStore();
 
-class ActivitiesContainer extends Component {
+class AttendingActivitiesContainer extends Component {
 
     componentDidMount() {
-        this.props.fetchActivities();
+        this.props.fetchAttendingActivities();
     }
 
     createActivityCardComponent = () => {
-        return this.props.activities.map(activity => {
+        return this.props.attendingActivities.map(activity => {
             return (
                 <ActivityCardHomePage
                     key={activity.id + activity.fields.activityName}
@@ -37,7 +37,7 @@ class ActivitiesContainer extends Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "center"
+                justifyContent: "flex-start"
             }
         };
 
@@ -54,28 +54,28 @@ class ActivitiesContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        activities: state.activity.activityList
+        attendingActivities: state.activity.attendingActivityList
             .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            .slice(0, 5), // Only get five first
+            // Only get five first
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchActivities: () => dispatch(fetchAllActivities()),
+        fetchAttendingActivities: () => dispatch(fetchAllAttendingActivities()),
     }
 };
 
 
 // Fetch initial data for state
-store.dispatch(fetchAllActivities());
+store.dispatch(fetchAllAttendingActivities());
 
-ActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
+AttendingActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AttendingActivitiesContainer);
 
 ReactDOM.render(
     <Provider store={store}>
-        <ActivitiesContainer />
-    </Provider>, document.getElementById('activities')
+        <AttendingActivitiesContainer />
+    </Provider>, document.getElementById('attendingActivities')
 );
 
 

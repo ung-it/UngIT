@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import '../../styles/activitypickerStyle.css'
 
-const SUITED_FOR_TYPES = [
+export const SUITED_FOR_TYPES = [
 	{ label: 'Ukjent', value: '0' },
 	{ label: 'Tilpasset 1', value: '1' },
 	{ label: 'Tilpasset 2', value: '2' },
@@ -40,38 +40,13 @@ class SuitedForPicker extends React.Component {
 				/>
 			</div>
 		);
-	}
-}
+	};
+};
 
 SuitedForPicker.propTypes = {
 	onFilterChange: React.PropTypes.func.isRequired,
 	activeFilters: React.PropTypes.string.isRequired,
 };
-//
-//var SuitedForPicker = React.createClass({
-//	displayName: 'SuitedForPicker',
-//	propTypes: {
-//		label: React.PropTypes.string,
-//	},
-//	getInitialState () {
-//		return {
-//			options: FILTERTYPES,
-//			value: [],
-//		};
-//	},
-//	handleSelectChange (value) {
-//		this.setState({ value });
-//	},
-//	render () {
-//		return (
-//			<div className="section">
-//				<h3 className="section-heading">{this.props.label}</h3>
-//				<Select multi simpleValue value={this.state.value} placeholder="Aktiviter tilpasset for.." options={this.state.options} onChange={this.handleSelectChange} />
-//			</div>
-//		);
-//	}
-//});
-
 
 export default SuitedForPicker;
 

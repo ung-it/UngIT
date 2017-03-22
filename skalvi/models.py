@@ -83,8 +83,8 @@ class ParticipateIn(models.Model):
 
 class Hosts(models.Model):
     activityId = models.OneToOneField(Activity, on_delete=models.CASCADE)
-    adminId = models.OneToOneField(User, on_delete=models.CASCADE)
-    profileId = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    adminId = models.ForeignKey(User, on_delete=models.CASCADE)
+    profileId = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     # orgNr = models.ForeignKey(Organisation, on_delete=models.CASCADE) <-- should get the same information through the
     # admin user reference.
 

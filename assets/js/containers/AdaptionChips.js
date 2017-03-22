@@ -7,11 +7,10 @@ import IconAccessibility from 'material-ui/svg-icons/action/accessibility';
 import IconVisibility from 'material-ui/svg-icons/action/visibility';
 import IconHearing from 'material-ui/svg-icons/av/hearing';
 import IconNew from 'material-ui/svg-icons/content/add';
+import {orange500} from 'material-ui/styles/colors';
 
 import {List, ListItem} from 'material-ui/List';
 import Paper from 'material-ui/Paper';
-import Chip from 'material-ui/Chip';
-import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -24,6 +23,9 @@ const style = {
     },
     listItem: {
         height: 36.8
+    },
+    errorStyle: {
+        color: orange500,
     }
 };
 
@@ -46,6 +48,7 @@ class AdaptionChips extends Component {
         this.addNewButton = this.addNewButton.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.inputChange = this.inputChange.bind(this);
+        this.notExists = this.notExists.bind(this);
     }
 
     render() {
@@ -90,6 +93,7 @@ class AdaptionChips extends Component {
         });
 
         let button = null;
+        let errorText = null;
 
         if(this.state.value != "") {
             button = <RaisedButton
@@ -97,6 +101,10 @@ class AdaptionChips extends Component {
                 className='adaptions-add-button'
                 onTouchTap={this.addNewButton}
                 primary={true}/>
+            if (!this.notExists(this.state.value)) {
+                console.log(this.notExists(this.state.value))
+                errorText = "Denne tilretteleggingen finnes allerede"
+            }
         }
 
         return (
@@ -134,6 +142,8 @@ class AdaptionChips extends Component {
                                 fullWidth={true}
                                 onKeyPress={this.addNew}
                                 onChange={this.inputChange}
+                                errorStyle={style.errorStyle}
+                                errorText={errorText}
                             />
                             </form>
                         </div>
@@ -166,10 +176,14 @@ class AdaptionChips extends Component {
 
     addNewButton(event) {
         let value = this.state.value;
-        if (value != "" && this.state.selected.indexOf(value) == -1 && this.state.unselected.indexOf(value) == -1) {
+        if (this.notExists(value) && value != "") {
             let selected = this.state.selected.concat(value);
             this.setState({selected: selected, value: ""});
         }
+    }
+
+    notExists(name) {
+        return (this.state.selected.indexOf(name) == -1 && this.state.unselected.indexOf(name) == -1);
     }
 
     deleteItem(event) {

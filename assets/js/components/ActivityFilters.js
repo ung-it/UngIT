@@ -7,25 +7,25 @@ class ActivityFilters extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Finn aktiviteter</h1>
+             <div>
+                <h3>Finn aktiviteter</h3>
+                {/* ADD ALL FILTERS HERE */}
+                {/* NameFilter /> */}
                 <div className="row">
-                    <div className="col-6 col-md-6">
+                    <div className="col-md-6">
                         <ActivityPicker
                             onFilterChange={this.props.onActivityFilterChange}
                             activeFilters={this.props.activityFilters}
                         />
                     </div>
-                    <div className="col-6 col-md-6">
+                    <div className="col-md-6">
                          <SuitedForPicker
                              onFilterChange={this.props.onSuitedForFilterChange}
                              activeFilters={this.props.suitedForFilters}
                          />
                     </div>
-                    {/* NameFilter /> */}
                 </div>
                 <WeekPicker />
-                {/* ADD ALL FILTERS HERE */}
             </div>
         )
     }

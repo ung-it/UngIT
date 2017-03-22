@@ -95,6 +95,7 @@ class Scraper:
 
     :param orgLink: the aktordatabase url to scrape
     :param orgID: the aktordatabase id for the given aktor
+    :returns dictionary containing information:
     '''
     def _scrapeInfo(self, orgLink, orgID):
         information = {}
@@ -161,6 +162,19 @@ class Scraper:
 
 
 
+    '''
+    Function to scrape all registered providers in aktordatabasen, and then return them.
+
+    :returns list containg dictionary-representing each provider found:
+    '''
+    def scrapeAll(self):
+        allProviders = []
+        for i in range(500,510):
+            orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
+            allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
+
+        return allProviders
+
 
 
 
@@ -179,10 +193,15 @@ def main():
     #informasjon = s.scrapeAktor(name='rosenborg ballklub')
     #informasjon = s.scrapeAktor(name='LEANGEN ISHOCKEYKLUBB')
     #informasjon = s.scrapeAktor(name='Ikea Leangens Volleyball lag')
-    informasjon = s.scrapeAktor(name='DANS MED OSS')
+    #informasjon = s.scrapeAktor(name='DANS MED OSS')
 
     # Multiple matches
-    informasjon = s.scrapeAktor(name='rosenborg')
+    #informasjon = s.scrapeAktor(name='rosenborg')
+
+    # scrape all
+    informasjon = s.scrapeAll()
+
+    # print:
     print(informasjon)
 
-#main()
+main()

@@ -32,8 +32,13 @@ class ActivityFilters extends React.Component {
                         <h3>Finn aktiviteter</h3>
                     </div>
                     <div className="2">
-                        <button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}><Glyphicon
-                            glyph="glyphicon glyphicon-trash"/></button>
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">
+                            Tøm filter
+                        </div>
+                        <button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
+                            <Glyphicon glyph="glyphicon glyphicon-trash"/>
+                        </button>
+
                     </div>
                 </div>
                 {/* ADD ALL FILTERS HERE */}

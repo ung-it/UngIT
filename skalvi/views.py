@@ -100,6 +100,18 @@ def signOfEvent(request):
         # Will never happen
         return HttpResponse(status=206)  # not logged in
 
+def getAttendingActivities(request):
+    profile_name = request.path.split("/")[3]
+    profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
+    activities = ParticipateIn.objects.filter(userId=request.user, user_profile_id=profile)
+    activitie_objects = []
+    for activity in activities:
+        act = Activity.objects.get(pk=activity.activityId.pk)
+        activitie_objects.append(act)
+    json_serializer = serializers.get_serializer("json")()
+    attendingActivities = json_serializer.serialize(activitie_objects, ensure_ascii=False)
+    return HttpResponse(attendingActivities, content_type='application/json')
+
 
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
@@ -341,26 +353,45 @@ class MyPageView(View):
     form_class = RegisterProfileForm
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(None)
         if request.user.is_authenticated():
 
             if 'username' in request.session:
                 username = request.session['username']
-                print("brukernavn: " + username)
 
             user_object = request.user
             user_profile_objects = UserProfile.objects.filter(user=request.user)
+            profiles = []
+
+            for profile in user_profile_objects:
+                path = "/mypage/" + str(profile.profile_name) + "/"
+                object = {'profile_name': profile.profile_name, "type": profile.type, "phone": profile.phone, "is_active": profile.is_active, 'initiales': profile.profile_name[0:2].upper(), 'path': path}
+                profiles.append(object)
+
             return render(request, self.template_name,
                           {
-                              'userprofiles': user_profile_objects,
                               'user': user_object,
-                              'form': form
+                              'profiles': profiles
+
+                          })
+        return HttpResponse("Du må være logget inn for å ha tilgang til denne siden")
+
+
+class RegisterProfileView(View):
+    template_name = 'registerProfile.html'
+    model = UserProfile
+    form_class = RegisterProfileForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(None)
+        if request.user.is_authenticated():
+            return render(request, self.template_name,
+                          {
+                              'registerProfileForm': form
                           })
         return HttpResponse("Du må være logget inn for å ha tilgang til denne siden")
 
     def post(self, request):
         profile_form = self.form_class(request.POST)
-        print("FORM ", profile_form)
 
         if profile_form.is_valid():
             # Take submitted data and save to database
@@ -378,7 +409,9 @@ class MyPageView(View):
             profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
             profile.save()
 
-        return redirect("skalvi:mypage")
+        return redirect("../mypage/" + profile_name )
+
+
 
 
 def allactivities(request):

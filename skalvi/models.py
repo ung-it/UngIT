@@ -71,10 +71,9 @@ class Activity(models.Model):
 class Organisation(models.Model):
     # not every provider has a org.number, but most do. to handle this we use
     # auto increment, thus not specifying primary key, and lets Django handle this.
-    orgNumber = models.CharField(max_length=9)  # if there is found one in aktordatabase, set it equal to here as well
-    orgName = models.CharField(max_length=40)
-    phone = models.CharField(max_length=8)
-    email = models.CharField(max_length=40)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)  # set the relation / extension to the user model
+    userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)  # set the relation / extension to the user model
+    aktordatabase = JSONField()  # contains all found information
 
 
     def __str__(self):

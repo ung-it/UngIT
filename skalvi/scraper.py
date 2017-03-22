@@ -50,6 +50,9 @@ class Scraper:
         # </a>
         #print(theLinks)
 
+        #list to hold all names
+        matches = {}
+
         for link in theLinks:
             # check for match againt aktordatabasen
             # if match, get new url and get that information
@@ -79,8 +82,12 @@ class Scraper:
                 #print('orgLink from scrapeAktor')
                 return self._scrapeInfo(orgLink=orgLink, orgID=aktorID)
 
-        # if not match, return null
-        return None
+            # There are multiple matches, but non exacts.
+            else:
+                matches[resultName] = aktorID
+
+        # if not exact match, return suggestions
+        return matches
 
     '''
     Private function to scrape the page of an registered provider in the
@@ -150,13 +157,31 @@ class Scraper:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Remove before final release, this is only for debugging
 def main():
     s = Scraper()
+
+    # Exact matches
     #informasjon = s.scrapeAktor(name='rosenborg ballklub')
     #informasjon = s.scrapeAktor(name='LEANGEN ISHOCKEYKLUBB')
     #informasjon = s.scrapeAktor(name='Ikea Leangens Volleyball lag')
     informasjon = s.scrapeAktor(name='DANS MED OSS')
+
+    # Multiple matches
+    informasjon = s.scrapeAktor(name='rosenborg')
     print(informasjon)
 
-#main()
+main()

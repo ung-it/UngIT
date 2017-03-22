@@ -12,7 +12,8 @@ const initialState = {
     activeActivityFilters: '',
     activeSuitedForFilters: '',
     activeDateFilter: '',
-    searchText: '',
+    activeSearchForFilters: '',
+
 }
 
 
@@ -42,6 +43,11 @@ export default function ActivityReducer(state=initialState, action) {
             return {
                 ...state,
                 activeDateFilter: action.weekFilter,
+            }
+        case actionTypes.ADD_SEARCH_FOR_FILTER:
+            return {
+                ...state,
+                activeSearchForFilters: action.searchFilter,
             }
         default:
             return state;

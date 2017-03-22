@@ -2,6 +2,7 @@ import React from 'react';
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
 import WeekPicker from './WeekPicker';
+import SearchForActivity from './SearchForActivity';
 
 class ActivityFilters extends React.Component {
 
@@ -22,6 +23,10 @@ class ActivityFilters extends React.Component {
                     onFilterChange={this.props.onWeekPickerChange}
                     activeFilters={this.props.weekFilters}
                 />
+                <SearchForActivity
+                    onFilterChange={this.props.onSearchForChange}
+                    activeFilters={this.props.searchForFilters}
+                />
                 {/* ADD ALL FILTERS HERE */}
             </div>
         )
@@ -35,6 +40,8 @@ ActivityFilters.propTypes = {
     suitedForFilters: React.PropTypes.string.isRequired,
     onWeekPickerChange: React.PropTypes.func.isRequired,
     weekFilters: React.PropTypes.string.isRequired,
+    onSearchForChange: React.PropTypes.func.isRequired,
+    searchForFilters: React.PropTypes.string.isRequired,
 };
 
 export default ActivityFilters;

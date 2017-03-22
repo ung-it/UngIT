@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
-import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter } from '../actions/activitiesActions';
+import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter } from '../actions/activitiesActions';
 import configureStore from "../configureStore";
 
 import '../../styles/activityBox.css';
@@ -28,6 +28,8 @@ class AllActivitiesContainer extends Component {
                     suitedForFilters={this.props.activeSuitedForFilters}
                     onWeekPickerChange={this.props.changeWeekFilter}
                     weekFilters={this.props.activeDateFilter}
+                    onSearchForChange={this.props.changeSearchForFilter}
+                    searchForFilters={this.props.activeSearchForFilters}
                 />
                 <ActivitiesList activities={this.props.activities} />
             </div>
@@ -36,7 +38,7 @@ class AllActivitiesContainer extends Component {
 }
 
 const mapStateToProps = state => {
-    let { activity: { activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter } } = state; // Make activityList and activeActivityFilters from state become variables
+    let { activity: { activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters } } = state; // Make activityList and activeActivityFilters from state become variables
 
     activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
 
@@ -50,6 +52,17 @@ const mapStateToProps = state => {
     const hasWeekFilter = activeDateFilter.length > 0;
     const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
 
+    const hasSearchForFilter = activeSearchForFilters.length > 0;
+    const searchForFilter = activeSearchForFilters.toUpperCase();
+
+    activityList = hasActivityFilter
+        ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
+        : activityList;
+
+    activityList = hasSuitedForFilter
+        ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
+        : activityList;
+
     activityList = hasWeekFilter
         ? activityList.filter(activity =>
         (
@@ -60,12 +73,8 @@ const mapStateToProps = state => {
         ))
         : activityList;
 
-    activityList = hasActivityFilter
-        ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
-        : activityList;
-
-    activityList = hasSuitedForFilter
-        ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
+    activityList = hasSearchForFilter
+        ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter)))
         : activityList;
 
     return {
@@ -73,6 +82,7 @@ const mapStateToProps = state => {
         activeActivityFilters: activeActivityFilters,
         activeSuitedForFilters: activeSuitedForFilters,
         activeDateFilter: activeDateFilter,
+        activeSearchForFilters: activeSearchForFilters,
     };
 }
 
@@ -82,6 +92,7 @@ const mapDispatchToProps = dispatch => {
         changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
         changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
+        changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
     }
 }
 

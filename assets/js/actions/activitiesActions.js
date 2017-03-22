@@ -29,6 +29,7 @@ export const FETCHED_ALL_ATTENDING_ACTIVITIES = 'FETCH_ALL_ATTENDING_ACTIVITIES'
 export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
 export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
 export const ADD_WEEK_FILTER = 'ADD_WEEK_FILTER';
+export const ADD_SEARCH_FOR_FILTER = 'ADD_SEARCH_FOR_FILTER';
 // more actions types here
 
 
@@ -58,6 +59,13 @@ export function addWeekFilter(weekFilter) {
     return {
         type: ADD_WEEK_FILTER,
         weekFilter,
+    }
+}
+
+export function addSearchForFilter(searchFilter) {
+    return {
+        type: ADD_SEARCH_FOR_FILTER,
+        searchFilter,
     }
 }
 

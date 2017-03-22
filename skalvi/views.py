@@ -261,15 +261,13 @@ class UserFormView(View):
                 information = {}
 
 
-
-
-
             # Make som changes or something useful
             user.set_password(password)
             user.save()  # saves users to the database
 
             print('Before saving information: ', information)
             userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name, aktordatabase=information)
+            userProfile.is_active = True
             userProfile.save()
 
             # Returns User Object if credentials are correct
@@ -279,6 +277,9 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    request.session['username'] = user.username
+                    request.session['profile_name'] = userProfile.profile_name
+                    request.session['profile_pk'] = userProfile.pk
 
                     return redirect('skalvi:index')
 

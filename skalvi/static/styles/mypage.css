@@ -1,4 +1,104 @@
-#userInfo{
+#myPageContent{
     display: flex;
     flex-direction: row;
 }
+
+#profileOnMyPage{
+    margin-left: 1em;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+#profile{
+    display: flex;
+    flex-direction: row;
+}
+
+#profileActivities{
+    margin-top: 5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#attending_Activities {
+    width: 55%;
+}
+
+#attendingActivities {
+    margin: 0;
+}
+
+#hostingActivities {
+    width: 45%;
+}
+#profileInformation {
+    margin-left: 2em;
+}
+
+#profilesOnMyPage{
+    width: 9%;
+}
+
+/*hvis bilde skal være hele diven*/
+/*.profile_picture > img{*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+/*}*/
+
+ol, ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+#addProfile{
+    font-size: 2em;
+}
+
+ul.social {
+    text-align: center;
+}
+
+ul.social li {
+    font: inherit;
+    font-size: 100%;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    line-height: 60px;
+    background: #404040;
+    border-radius: 100%;
+    margin-bottom:.5em;
+    -webkit-transition-duration: 0.7s;
+    -moz-transition-duration: 0.7s;
+    -o-transition-duration: 0.7s;
+    transition-duration: 0.7s;
+}
+
+ul.social li:hover {
+    background: linear-gradient(to bottom right, #ffdb61, #ffb200);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+ul.social li:hover a {
+    color: black;
+    -webkit-text-fill-color: black;
+    text-decoration: none;
+}
+
+ul.social li a {
+    display: block;
+    width: 100%;
+    height: 200%;
+    position: relative;
+    top: 0;
+    background:  -webkit-linear-gradient(#ffdb61, #ffb200);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+

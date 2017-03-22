@@ -7,6 +7,8 @@ import {getMonth} from '../DateFunctions'
 import CalendarDateBox from './CalendarDateBox';
 //CSS import
 import '../../styles/modal.css';
+import { SUITED_FOR_TYPES } from './SuitedForPicker';
+
 
 class ActivityModal extends Component {
 
@@ -93,7 +95,12 @@ class ActivityModal extends Component {
     };
 
     render() {
-        const { date, activityName, activityType, provider, adaptions, age, time_start, time_end, location, description, videos, images } = this.props.activity;
+        const { date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, images } = this.props.activity;
+
+        let suitedForContainer =  [];
+        if(suitedForType >= 0) {
+            suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
+        }
 
         //let videoContainer = null;
         //if (videos.length > 0) {
@@ -205,7 +212,7 @@ class ActivityModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-adapted">
-                        Dette arrangementet er tilpasset for: {adaptions}
+                        Dette arrangementet er tilpasset for: <b>{suitedForContainer.label}</b>
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">

@@ -1,11 +1,12 @@
 #myPageContent{
     display: flex;
     flex-direction: row;
+    padding-left: 6em;
+    margin-right: 0;
 }
 
 #profileOnMyPage{
-    margin-left: 1em;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -48,8 +49,15 @@
     /*height: 100%;*/
 /*}*/
 
+#new-activity-button{
+    float: right;
+    height: 2.5em;
+}
+
 ol, ul {
+    float: left;
     list-style: none;
+
 }
 
 a {

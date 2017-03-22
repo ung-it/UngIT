@@ -33,6 +33,8 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
     profile_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=False)
+    is_provider = models.BooleanField(default=False)
+    aktordatabase = JSONField()  # contains all found information
 
 
 
@@ -73,7 +75,7 @@ class Organisation(models.Model):
     orgName = models.CharField(max_length=40)
     phone = models.CharField(max_length=8)
     email = models.CharField(max_length=40)
-    aktordatabase = JSONField()  # contains all found information
+
 
     def __str__(self):
         return self.orgName + ": org. number: " + self.orgNumber

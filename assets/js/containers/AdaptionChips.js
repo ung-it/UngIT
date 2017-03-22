@@ -46,9 +46,7 @@ class AdaptionChips extends Component {
                     key={name}
                     primaryText={name}
                     leftIcon={icon}
-                    tooltip="test"
                     onTouchTap={this.remove.bind(null, {name})}
-                    rightI
                 />
             )
         });
@@ -86,11 +84,13 @@ class AdaptionChips extends Component {
                     </div>
                     <div className="adaptions-add">
                         <div className="adaptions-add-input">
+                            <form onSubmit={this.addNew}>
                             <TextField
-                                hintText="Navn på tilpassning"
-                                floatingLabelText="Legg til ny tilpassning"
+                                hintText="Navn på tilrettelegging"
+                                floatingLabelText="Legg til ny tilrettelegging"
                                 fullWidth={true}
                             />
+                            </form>
                         </div>
                         <RaisedButton
                             label="Legg til"
@@ -116,7 +116,7 @@ class AdaptionChips extends Component {
     }
 
     addNew(item) {
-
+        console.log(item);
     }
 }
 

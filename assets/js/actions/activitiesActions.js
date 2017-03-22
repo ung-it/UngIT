@@ -1,4 +1,4 @@
-import {  getActivityInfo, getAllActivities} from "../APIFunctions";
+import {  getActivityInfo, getAllActivities, getAllAttendingActivities} from "../APIFunctions";
 /*
 * Action creator and action are two separate things, the action creator is the actual action-function
 *
@@ -25,6 +25,7 @@ import {  getActivityInfo, getAllActivities} from "../APIFunctions";
 
 // ACTION TYPES
 export const FETCHED_ALL_ACTIVITIES = 'FETCH_ALL_ACTIVITIES';
+export const FETCHED_ALL_ATTENDING_ACTIVITIES = 'FETCH_ALL_ATTENDING_ACTIVITIES';
 export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
 export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
 // more actions types here
@@ -59,3 +60,18 @@ export function fetchAllActivities() {
             .catch(error => console.error(error));
     };
 };
+
+export function fetchAllAttendingActivities() {
+    return (dispatch) => {
+        getAllAttendingActivities()
+            .then(result => dispatch(fetchedAllAttendingActivites(result)))
+            .catch(error => console.error(error));
+    };
+};
+
+export function fetchedAllAttendingActivites(attendingActivities) {
+    return {
+        type: FETCHED_ALL_ATTENDING_ACTIVITIES,
+        attendingActivities,
+    }
+}

@@ -19,7 +19,12 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const style = {
-    backgroundColor: '#FFFFA5'
+    postit: {
+        backgroundColor: '#FFFFA5'
+    },
+    listItem: {
+        height: 36.8
+    }
 };
 
 class AdaptionChips extends Component {
@@ -52,6 +57,7 @@ class AdaptionChips extends Component {
             }
             return (
                 <ListItem
+                    style={style.listItem}
                     key={name}
                     primaryText={name}
                     leftIcon={icon}
@@ -90,13 +96,13 @@ class AdaptionChips extends Component {
                         </div>
                     </div>
                     <div className="adaptions-container">
-                        <Paper className="adaptions-box" zDepth={1} style={style}>
+                        <Paper className="adaptions-box" zDepth={1} style={style.postit}>
                             <div className="adaptions-title">Alle tilrettelegginger</div>
                             <List className="adaptions-holder">
                                 {unselected}
                             </List>
                         </Paper>
-                        <Paper className="adaptions-box" zDepth={1} style={style}>
+                        <Paper className="adaptions-box" zDepth={1} style={style.postit}>
                             <div className="adaptions-title">Valgte tilrettelegginger</div>
                             <div className="adaptions-holder">
                                 {selected}
@@ -109,6 +115,7 @@ class AdaptionChips extends Component {
                             <TextField
                                 ref="AdaptionInput"
                                 hintText="Navn på tilrettelegging"
+                                value = {this.state.value}
                                 floatingLabelText="Legg til ny tilrettelegging"
                                 fullWidth={true}
                                 onKeyPress={this.addNew}
@@ -147,7 +154,7 @@ class AdaptionChips extends Component {
     }
 
     addNewButton(event) {
-        let value = this.refs.AdaptionInput.input.value;
+        let value = this.refs.AdaptionInput.getValue();
         if (value != "" && this.state.selected.indexOf(value) == -1 && this.state.unselected.indexOf(value) == -1) {
             let selected = this.state.selected.concat(value);
             this.setState({selected: selected});

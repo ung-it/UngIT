@@ -21,17 +21,19 @@ class AllActivitiesContainer extends Component {
     render() {
         return (
             <div>
-                <ActivityFilters
-                    onActivityFilterChange={this.props.changeActivityFilter}
-                    activityFilters={this.props.activeActivityFilters}
-                    onSuitedForFilterChange={this.props.changeSuitedForFilter}
-                    suitedForFilters={this.props.activeSuitedForFilters}
-                    onWeekPickerChange={this.props.changeWeekFilter}
-                    weekFilters={this.props.activeDateFilter}
-                    onSearchForChange={this.props.changeSearchForFilter}
-                    searchForFilters={this.props.activeSearchForFilters}
-                />
-                <ActivitiesList activities={this.props.activities} />
+                <div className="filter-container">
+                    <ActivityFilters
+                        onActivityFilterChange={this.props.changeActivityFilter}
+                        activityFilters={this.props.activeActivityFilters}
+                        onSuitedForFilterChange={this.props.changeSuitedForFilter}
+                        suitedForFilters={this.props.activeSuitedForFilters}
+                        onWeekPickerChange={this.props.changeWeekFilter}
+                        weekFilters={this.props.activeDateFilter}
+                        onSearchForChange={this.props.changeSearchForFilter}
+                        searchForFilters={this.props.activeSearchForFilters}
+                    />
+                </div>
+                <ActivitiesList activities={this.props.activities}/>
             </div>
         );
     }
@@ -74,7 +76,7 @@ const mapStateToProps = state => {
         : activityList;
 
     activityList = hasSearchForFilter
-        ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter)))
+        ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
         : activityList;
 
     return {

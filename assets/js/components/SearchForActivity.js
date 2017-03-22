@@ -25,9 +25,9 @@ class SearchForActivity extends React.Component {
 //value={this.props.value}
 	render () {
 		return (
-                <input
+                <FormControl
                     type="text"
-                    placeholder="Søk på aktivitet..."
+                    placeholder="Søk på aktivitet eller arrangør..."
                     onChange={this.handleChange}
                     value={this.props.activeFilters}
                 />

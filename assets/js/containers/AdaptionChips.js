@@ -37,6 +37,7 @@ class AdaptionChips extends Component {
             chipIcons: chipIcons,
             selected: [],
             unselected: Object.keys(chipIcons),
+            value: ""
         };
 
         this.add = this.add.bind(this);
@@ -44,6 +45,7 @@ class AdaptionChips extends Component {
         this.addNew = this.addNew.bind(this);
         this.addNewButton = this.addNewButton.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.inputChange = this.inputChange.bind(this);
     }
 
     render() {
@@ -87,6 +89,16 @@ class AdaptionChips extends Component {
             )
         });
 
+        let button = null;
+
+        if(this.state.value != "") {
+            button = <RaisedButton
+                label="Legg til"
+                className='adaptions-add-button'
+                onTouchTap={this.addNewButton}
+                primary={true}/>
+        }
+
         return (
             <div>
                 <div className="adaptions-header">Tilrettelegginger</div>
@@ -121,14 +133,11 @@ class AdaptionChips extends Component {
                                 floatingLabelText="Legg til ny tilrettelegging"
                                 fullWidth={true}
                                 onKeyPress={this.addNew}
+                                onChange={this.inputChange}
                             />
                             </form>
                         </div>
-                        <RaisedButton
-                            label="Legg til"
-                            className='adaptions-add-button'
-                            onTouchTap={this.addNewButton}
-                            primary={true}/>
+                        {button}
                     </div>
                 </Paper>
             </div>
@@ -156,12 +165,11 @@ class AdaptionChips extends Component {
     }
 
     addNewButton(event) {
-        let value = this.refs.AdaptionInput.getValue();
+        let value = this.state.value;
         if (value != "" && this.state.selected.indexOf(value) == -1 && this.state.unselected.indexOf(value) == -1) {
             let selected = this.state.selected.concat(value);
-            this.setState({selected: selected});
+            this.setState({selected: selected, value: ""});
         }
-        this.refs.AdaptionInput.input.value = null;
     }
 
     deleteItem(event) {
@@ -174,6 +182,10 @@ class AdaptionChips extends Component {
             this.state.unselected.splice(this.state.unselected.indexOf(name), 1);
             this.setState({unselected: this.state.unselected});
         }
+    }
+
+    inputChange(event, newValue) {
+        this.setState({value: newValue});
     }
 }
 

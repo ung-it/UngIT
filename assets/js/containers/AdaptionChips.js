@@ -48,6 +48,8 @@ class AdaptionChips extends Component {
 
     render() {
 
+        $('#adaptions').val(this.state.selected);
+
         let selected = this.state.selected.map(name => {
             let icon = this.state.chipIcons[name];
             let deleteButton = null;

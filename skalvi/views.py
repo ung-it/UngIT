@@ -113,6 +113,20 @@ def getAttendingActivities(request):
     return HttpResponse(attendingActivities, content_type='application/json')
 
 
+def getHostingActivities(request):
+    profile_name = request.path.split("/")[3]
+    profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
+
+    activities = Hosts.objects.filter(adminId=request.user, profileId=profile)
+    activitie_objects = []
+    for activity in activities:
+        act = Activity.objects.get(pk=activity.activityId.pk)
+        activitie_objects.append(act)
+    json_serializer = serializers.get_serializer("json")()
+    hostingActivities = json_serializer.serialize(activitie_objects, ensure_ascii=False)
+    return HttpResponse(hostingActivities, content_type='application/json')
+
+
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = Activity.objects.all()
@@ -298,9 +312,10 @@ class createActivity(View):
     form_class = ActivityForm
 
     def get(self, request):
-        form = self.form_class(None)
-        return activityGet(self, request, form)
-
+        if request.user.is_authenticated:
+            form = self.form_class(None)
+            return activityGet(self, request, form)
+        return HttpResponse("Du må være logget inn for å kunne lage et arrangement")  # Should render/redirect to something usefull
     def post(self, request):
         form = ActivityForm(request.POST, request.FILES)
         if form.is_valid():
@@ -308,6 +323,13 @@ class createActivity(View):
             # if instagram:
             #     form.cleaned_data['instagram'] = instagram
             form.save()
+
+            user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
+            print("usreprofile", user_profile.profile_name)
+            activity = Activity.objects.latest('id')
+            print("activity", activity.activityName)
+            hosts = Hosts(activityId=activity, adminId=request.user, profileId=user_profile)
+            hosts.save()
             return redirect('/')
         else:
             return render(request, self.template_name, {'form': form, 'error_message': form.errors})

@@ -35,12 +35,17 @@ class AdaptionChips extends Component {
 
         this.add = this.add.bind(this);
         this.remove = this.remove.bind(this);
+        this.addNew = this.addNew.bind(this);
+        this.addNewButton = this.addNewButton.bind(this);
     }
 
     render() {
 
         let selected = this.state.selected.map(name => {
             let icon = this.state.chipIcons[name];
+            if (Object.keys(this.state.chipIcons).indexOf(name) == -1) {
+                console.log(name)
+            }
             return (
                 <ListItem
                     key={name}
@@ -86,16 +91,18 @@ class AdaptionChips extends Component {
                         <div className="adaptions-add-input">
                             <form onSubmit={this.addNew}>
                             <TextField
+                                ref="AdaptionInput"
                                 hintText="Navn på tilrettelegging"
                                 floatingLabelText="Legg til ny tilrettelegging"
                                 fullWidth={true}
+                                onKeyPress={this.addNew}
                             />
                             </form>
                         </div>
                         <RaisedButton
                             label="Legg til"
                             className='adaptions-add-button'
-                            onTouchTap={this.addNew}
+                            onTouchTap={this.addNewButton}
                             primary={true}/>
                     </div>
                 </Paper>
@@ -115,8 +122,21 @@ class AdaptionChips extends Component {
         this.setState({selected: this.state.selected, unselected: unselected});
     }
 
-    addNew(item) {
-        console.log(item);
+    addNew(event) {
+        if (event.key == 'Enter') {
+            event.preventDefault();
+            this.addNewButton()
+        }
+        return false;
+    }
+
+    addNewButton(event) {
+        let value = this.refs.AdaptionInput.input.value;
+        if (value != "" && this.state.selected.indexOf(value) == -1 && this.state.unselected.indexOf(value) == -1) {
+            let selected = this.state.selected.concat(value);
+            this.setState({selected: selected});
+        }
+        this.refs.AdaptionInput.input.value = null;
     }
 }
 

@@ -15,7 +15,10 @@
     </div>
 
     <div class="content">
-        <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
+        {% if user.is_authenticated %}
+            <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
+        {% endif %}
+
         <div class="content-margin-top">
             <h2>Kommende Aktiviteter</h2>
         </div>

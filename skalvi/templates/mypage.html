@@ -51,8 +51,9 @@
                                     <div id="attendingActivities"></div>
                                 </div>
 
-                                <div id="hostingActivities">
+                                <div id="hosting_Activities">
                                     <h3>Mine aktiviteter <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a></h3>
+                                    <div id="hostingActivities"></div>
                                 </div>
 
                             </div>
@@ -66,6 +67,7 @@
 
 {% block explicitPageFooter %}
     {% render_bundle 'attendingActivitiesContainer' %}
+    {% render_bundle 'hostingActivitiesContainer' %}
 {% endblock %}
 
 

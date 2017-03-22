@@ -21,6 +21,7 @@ class AllActivitiesContainer extends Component {
     render() {
         return (
             <div>
+                <div className="filter-container">
                 <ActivityFilters
                     onActivityFilterChange={this.props.changeActivityFilter}
                     activityFilters={this.props.activeActivityFilters}
@@ -28,7 +29,7 @@ class AllActivitiesContainer extends Component {
                     suitedForFilters={this.props.activeSuitedForFilters}
                     onWeekPickerChange={this.props.changeWeekFilter}
                     weekFilters={this.props.activeDateFilter}
-                />
+                /></div>
                 <ActivitiesList activities={this.props.activities} />
             </div>
         );

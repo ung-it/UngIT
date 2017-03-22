@@ -84,19 +84,6 @@ pre {
     background-color: transparent;
 }
 
-.filter-container {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-bottom: 10px;
-    border-style: solid;
-    border-width: thin;
-    border-radius: 4px;
-    border-color: darkgrey;
-    border-width: thin;
-}
-
 
 .footer {
     padding: 10px;

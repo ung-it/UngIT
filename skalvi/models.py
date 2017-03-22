@@ -6,6 +6,9 @@ from django.contrib.auth.models import Permission, User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from jsonfield import JSONField
+
+
 ACTIVITY_TYPES = (
     (0, 'Ukjent'),
     (1, 'Skating'),
@@ -64,10 +67,13 @@ class Activity(models.Model):
 
 
 class Organisation(models.Model):
-    orgNumber = models.CharField(max_length=9, primary_key=True)
+    # not every provider has a org.number, but most do. to handle this we use
+    # auto increment, thus not specifying primary key, and lets Django handle this.
+    orgNumber = models.CharField(max_length=9)  # if there is found one in aktordatabase, set it equal to here as well
     orgName = models.CharField(max_length=40)
     phone = models.CharField(max_length=8)
     email = models.CharField(max_length=40)
+    aktordatabase = JSONField()  # contains all found information
 
     def __str__(self):
         return self.orgName + ": org. number: " + self.orgNumber

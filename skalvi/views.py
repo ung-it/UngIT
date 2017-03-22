@@ -113,6 +113,20 @@ def getAttendingActivities(request):
     return HttpResponse(attendingActivities, content_type='application/json')
 
 
+def getHostingActivities(request):
+    profile_name = request.path.split("/")[3]
+    profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
+
+    activities = Hosts.objects.filter(adminId=request.user, profileId=profile)
+    activitie_objects = []
+    for activity in activities:
+        act = Activity.objects.get(pk=activity.activityId.pk)
+        activitie_objects.append(act)
+    json_serializer = serializers.get_serializer("json")()
+    hostingActivities = json_serializer.serialize(activitie_objects, ensure_ascii=False)
+    return HttpResponse(hostingActivities, content_type='application/json')
+
+
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.all(), ensure_ascii=False)

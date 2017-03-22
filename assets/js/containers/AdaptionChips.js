@@ -21,11 +21,11 @@ const style = {
     postit: {
         backgroundColor: '#FFFFA5'
     },
-    listItem: {
-        height: 36.8
-    },
     errorStyle: {
         color: orange500,
+    },
+    deleteButton: {
+        height: 48
     }
 };
 
@@ -59,12 +59,16 @@ class AdaptionChips extends Component {
             let icon = this.state.chipIcons[name];
             let deleteButton = null;
             if (Object.keys(this.state.chipIcons).indexOf(name) == -1) {
-                deleteButton = <FlatButton label="slett" primary={true} onTouchTap={this.deleteItem.bind(null, {name})} />
+                deleteButton = <FlatButton
+                    label="slett"
+                    primary={true}
+                    onTouchTap={this.deleteItem.bind(null, {name})}
+                    style={style.deleteButton}
+                />
                 icon = <IconNew/>
             }
             return (
                 <ListItem
-                    style={style.listItem}
                     key={name}
                     primaryText={name}
                     leftIcon={icon}
@@ -78,7 +82,12 @@ class AdaptionChips extends Component {
             let icon = this.state.chipIcons[name];
             let deleteButton = null;
             if (Object.keys(this.state.chipIcons).indexOf(name) == -1) {
-                deleteButton = <FlatButton label="slett" primary={true} onTouchTap={this.deleteItem.bind(null, {name})} />
+                deleteButton = <FlatButton
+                    label="slett"
+                    primary={true}
+                    onTouchTap={this.deleteItem.bind(null, {name})}
+                    style={style.deleteButton}
+                />
                 icon = <IconNew/>
             }
             return (

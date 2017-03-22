@@ -77,5 +77,3 @@ ReactDOM.render(
         <ActivitiesContainer />
     </Provider>, document.getElementById('activities')
 );
-
-

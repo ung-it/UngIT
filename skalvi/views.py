@@ -115,7 +115,8 @@ def getAttendingActivities(request):
 
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
-    activities = json_serializer.serialize(Activity.objects.all(), ensure_ascii=False)
+    activities = Activity.objects.all()
+    activities = json_serializer.serialize(activities, ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
 
 

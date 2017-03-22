@@ -14,6 +14,9 @@ from django.core import serializers
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 
+# Aktørdatabase
+from .scraper import Scraper
+
 #Python POST-request
 import urllib.request
 import json
@@ -239,17 +242,34 @@ class UserFormView(View):
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
             profile_name = profile_form.cleaned_data['profile_name']
+            is_provider = profile_form.cleaned_data['is_provider']
+
+            print("Provider?  " + str(is_provider))
 
             if types:
                 types = "P"
             else:
                 types = "C"
 
+            if is_provider:
+                scraper = Scraper()
+                information = scraper.scrapeAktor(name=profile_name)
+                #information = json.dumps(information, ensure_ascii=False)
+
+                print("Information as json: ", information)
+            else:
+                information = {}
+
+
+
+
+
             # Make som changes or something useful
             user.set_password(password)
             user.save()  # saves users to the database
 
-            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name)
+            print('Before saving information: ', information)
+            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name, aktordatabase=information)
             userProfile.save()
 
             # Returns User Object if credentials are correct

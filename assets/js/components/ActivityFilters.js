@@ -1,15 +1,52 @@
 import React from 'react';
+import { Glyphicon } from "react-bootstrap";
+
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
 import WeekPicker from './WeekPicker';
 import SearchForActivity from './SearchForActivity';
 
+import '../../styles/activityFilters.css'
+
+
 class ActivityFilters extends React.Component {
+
+    constructor(props) {
+		super(props);
+
+		this.state = {
+            tButtonClicked: false,
+		};
+	};
+
+
+    handleEmptyFilter = (event) => {
+        console.log("ActivityFilter" + this.props.activeButton);
+        if (!this.state.tButtonClicked) {
+            this.setState({
+                tButtonClicked: true,
+            });
+        } else {
+            this.setState({
+                tButtonClicked: false,
+            });
+        };
+        this.props.onButtonChange();
+
+    };
 
     render() {
         return (
             <div>
-                <h3>Finn aktiviteter</h3>
+                <div className="row">
+                    <div className="col-md-10">
+                        <h3>Finn aktiviteter</h3>
+                    </div>
+                    <div className="2">
+                        <button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}><Glyphicon
+                            glyph="glyphicon glyphicon-trash"/></button>
+                    </div>
+                </div>
                 {/* ADD ALL FILTERS HERE */}
                 <div className="row">
                     <div className="col-md-6">
@@ -54,6 +91,9 @@ ActivityFilters.propTypes = {
     weekFilters: React.PropTypes.string.isRequired,
     onSearchForChange: React.PropTypes.func.isRequired,
     searchForFilters: React.PropTypes.string.isRequired,
+
+    onButtonChange: React.PropTypes.func.isRequired,
+	activeButton: React.PropTypes.bool.isRequired,
 };
 
 export default ActivityFilters;

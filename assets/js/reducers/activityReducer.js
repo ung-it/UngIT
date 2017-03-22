@@ -13,6 +13,7 @@ const initialState = {
     activeSuitedForFilters: '',
     activeDateFilter: '',
     activeSearchForFilters: '',
+    activeButtonClicked: false,
 
 }
 
@@ -48,6 +49,11 @@ export default function ActivityReducer(state=initialState, action) {
             return {
                 ...state,
                 activeSearchForFilters: action.searchFilter,
+            }
+        case actionTypes.TRASH_BUTTON_CLICKED:
+            return {
+                ...state,
+                activeButtonClicked: action.trashButton,
             }
         default:
             return state;

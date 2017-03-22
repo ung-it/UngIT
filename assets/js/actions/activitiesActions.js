@@ -30,6 +30,7 @@ export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
 export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
 export const ADD_WEEK_FILTER = 'ADD_WEEK_FILTER';
 export const ADD_SEARCH_FOR_FILTER = 'ADD_SEARCH_FOR_FILTER';
+export const TRASH_BUTTON_CLICKED = 'TRASH_BUTTON_CLICKED';
 // more actions types here
 
 
@@ -66,6 +67,13 @@ export function addSearchForFilter(searchFilter) {
     return {
         type: ADD_SEARCH_FOR_FILTER,
         searchFilter,
+    }
+}
+
+export function trashButtonClicked(trashButton) {
+    return {
+        type: TRASH_BUTTON_CLICKED,
+        trashButton,
     }
 }
 

@@ -22,7 +22,6 @@ class SearchForActivity extends React.Component {
 		this.props.onFilterChange(searchText);
 	};
 
-//value={this.props.value}
 	render () {
 		return (
                 <FormControl

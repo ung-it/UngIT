@@ -29,8 +29,8 @@ class WeekPicker extends React.Component {
 
 
 	render() {
-		const start = this.state.startDate.format('YYYY-MM-DD');
-		const end = this.state.endDate.format('YYYY-MM-DD');
+		const start = this.state.startDate.format('DD/MM/YYYY');
+		const end = this.state.endDate.format('DD/MM/YYYY');
 		let label = start + ' - ' + end;
 		if (start === end) {
 			label = start;

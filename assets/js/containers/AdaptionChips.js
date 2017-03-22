@@ -101,18 +101,16 @@ class AdaptionChips extends Component {
             )
         });
 
-        let button = null;
+        let showButton = false;
         let errorText = null;
 
         if(this.state.value != "") {
-            button = <RaisedButton
-                label="Legg til"
-                className='adaptions-add-button'
-                onTouchTap={this.addNewButton}
-                primary={true}/>
             if (!this.notExists(this.state.value)) {
                 console.log(this.notExists(this.state.value))
                 errorText = "Denne tilretteleggingen finnes allerede"
+            }
+            else {
+                showButton = true;
             }
         }
 
@@ -156,7 +154,13 @@ class AdaptionChips extends Component {
                             />
                             </form>
                         </div>
-                        {button}
+                        <RaisedButton
+                            label="Legg til"
+                            className='adaptions-add-button'
+                            onTouchTap={this.addNewButton}
+                            primary={showButton}
+                            disabled={!showButton}
+                        />
                     </div>
                 </Paper>
             </div>

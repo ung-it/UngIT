@@ -35,10 +35,25 @@ class AdaptionChips extends Component {
     constructor(props) {
         super(props);
         const chipIcons =  {'Tilrettelegging 1':<IconAccessible/>,'Tilrettelegging 2':<IconAccessibility/>,'Tilrettelegging 3':<IconVisibility/>,'Tilrettelegging 4':<IconHearing/>};
+
+        let selected = $('#adaptions').val().split(",");
+        let unselected = [];
+        if (selected[0] == "") {
+            selected = [];
+            unselected = Object.keys(chipIcons);
+        }
+        else {
+            for (let key in chipIcons) {
+                if (selected.indexOf(key) == -1) {
+                    unselected.push(key);
+                }
+            }
+        }
+
         this.state = {
             chipIcons: chipIcons,
-            selected: [],
-            unselected: Object.keys(chipIcons),
+            selected: selected,
+            unselected: unselected,
             value: ""
         };
 

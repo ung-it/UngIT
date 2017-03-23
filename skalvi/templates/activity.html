@@ -143,8 +143,13 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
+                            {% if form.adaptions.value != None %}
+                                <input name="adaptions" id="adaptions" hidden value="{{ form.adaptions.value }}">
+                            {% else %}
+                                <input name="adaptions" id="adaptions" hidden>
+                            {% endif %}
+
                             <div id="adaptions-container"></div>
-                            <input name="adaptions" id="adaptions" hidden>
                         </span>
                     </li>
                     <li class="mdl-list__item">

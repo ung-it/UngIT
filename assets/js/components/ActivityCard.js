@@ -42,12 +42,13 @@ class ActivityCard extends React.Component {
 
         return (
             <div key={this.props.activity.id}>
-                <Thumbnail
+                <div
                     className="activityBigStyle"
-                    src={poster}
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
                 >
+                    <div className="imageItem"><img src={poster}/></div>
+                    <div className="infoItem">
                     <h3>{this.props.activity.activityName}</h3>
                     <div className="info-box-wrapper">
                         <div className="icon-container">
@@ -64,8 +65,9 @@ class ActivityCard extends React.Component {
                             <p>{this.props.activity.description}</p>
                         </div>
                     </div>
+                        </div>
                     <ActivityModal id={this.props.id} activity={this.props.activity} images={images} show={this.state.show} />
-                </Thumbnail>
+                </div>
             </div>
         );
     };

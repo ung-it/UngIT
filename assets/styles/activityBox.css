@@ -28,11 +28,11 @@
 }
 
 .activityBigStyle {
-    width: 50em;
+    width: 100%;
     cursor: pointer;
-    margin-left: 5px;
-    margin-right: 5px;
     padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
 .activityBigStyle img {
@@ -52,6 +52,10 @@
 
 .activityBigStyle .info-container {
     font-weight: bold;
+}
+
+.imageItem {
+
 }
 
 .filter-container {

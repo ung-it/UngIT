@@ -1,7 +1,7 @@
 //React Component import
 import React, { Component } from 'react';
 //Bootstrap import
-import { Glyphicon, Modal, Button } from 'react-bootstrap';
+import { Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl,  } from 'react-bootstrap';
 //Project component import
 import {getMonth} from '../DateFunctions'
 import CalendarDateBox from './CalendarDateBox';
@@ -209,7 +209,7 @@ class ActivityModal extends Component {
         }
         if(this.state.loggedIn){
             ratingContainer =
-                <StarRatingComponent name="activityRating" emptyStarColor="#BBB" value={starRating} onStarClick={this.onRateChange.bind(this)}/>;
+                <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating} onStarClick={this.onRateChange.bind(this)}/>;
         }
 
         return (
@@ -223,7 +223,7 @@ class ActivityModal extends Component {
                         <CalendarDateBox date={new Date(date)}/>
                         <div className="modal-title-style">
                             <h1><b>{activityName}</b></h1>
-                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b> </div>
+                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b> {ratingContainer}</div>
                         </div>
                     </Modal.Title>
                 </Modal.Header>
@@ -251,9 +251,25 @@ class ActivityModal extends Component {
                     </div>
                     {/* videoContainer */}
                     {imageContainer}
+                    <hr/>
+                    <div id="postComment">
+                        <form className="comment-form" method="POST" action="">
+                            <div className="input-group">
+                                <textarea placeholder="Skriv inn din kommentar her" id="commentInput" className="form-control custom-control"></textarea>
+                                <span className="input-group-addon btn btn-primary">Send</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="commentDiv">
+                        <div className="commentBackground">
+                            <p className="comment">Det var en gang en gutt med downs som satt i rullestol og var blid. Han skulle på klatring for di han hadde veldig lyst og fordi han ville irritere moren sin. Hun hater å ta han med på aktiviteter han ikke kan være med på fordi det er så jævla flaut. </p>
+                        </div>
+                        <hr/>
+                        <div className="commentBackground"><p className="comment">Det var en gang en gutt med downs som satt i rullestol og var blid. Han skulle på klatring for di han hadde veldig lyst og fordi han ville irritere moren sin. Hun hater å ta han med på aktiviteter han ikke kan være med på fordi det er så jævla flaut. </p></div>
+                        
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    {ratingContainer}
                     <Button onClick={this.editActivity}>Endre aktivitet</Button>
                     <Button onClick={this.closeActivityModal}>Lukk</Button>
                 </Modal.Footer>

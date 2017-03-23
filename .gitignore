@@ -1,11 +1,6 @@
 
 # Created by https://www.gitignore.io/api/intellij,webstorm,pycharm,macos,windows,linux,django,node
 
-
-### Production ###
-/static/
-
-
 ### Django ###
 *.log
 *.pot

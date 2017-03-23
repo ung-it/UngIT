@@ -318,7 +318,9 @@ class createActivity(View):
             activityID = request.GET.get('activity')
             if activityID != '0' and activityID:
                 token = request.GET.get('code')
-                return redirect('/activity/' + activityID + "?code=" + token)
+                if token:
+                    return redirect('/activity/' + activityID + "?code=" + token)
+                return redirect('/activity/' + activityID)
             form = self.form_class(None)
             return activityGet(self, request, form)
         return HttpResponse("Du må være logget inn for å kunne lage et arrangement")  # Should render/redirect to something usefull

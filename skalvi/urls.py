@@ -31,5 +31,7 @@ urlpatterns = [
     url(r'^registerProfile/$', views.RegisterProfileView.as_view(), name='registerProfile'),
     url(r'^registerProfile/$', views.RegisterProfileView.post, name='registerProfile'),
 
+    url(r'^rateActivity/$', views.rateActivity, name='rateActivity'),
+
 
 ]

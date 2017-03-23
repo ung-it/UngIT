@@ -124,6 +124,16 @@ def getActivity(request, id):
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
 
+@csrf_exempt
+def rateActivity(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    rating = str(request.body.decode('utf-8')).split(":")[2][:1]
+    activity = Activity.objects.get(pk=activityId)
+    currentRating = activity.rating
+    activity.number_of_ratings = activity.number_of_ratings +1
+    activity.rating = (currentRating + float(rating))
+    activity.save()
+    return HttpResponse(status=200, content_type='application/json')
 
 def logout_user(request):
     userprofiles = UserProfile.objects.filter(user=request.user)

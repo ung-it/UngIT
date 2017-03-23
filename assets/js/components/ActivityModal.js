@@ -8,6 +8,8 @@ import CalendarDateBox from './CalendarDateBox';
 //CSS import
 import '../../styles/modal.css';
 import { SUITED_FOR_TYPES } from './SuitedForPicker';
+import StarRatingComponent from "react-star-rating-component";
+import {postNewRating} from "../APIFunctions";
 
 
 class ActivityModal extends Component {
@@ -94,9 +96,19 @@ class ActivityModal extends Component {
         })
     };
 
-    render() {
-        const { date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, images } = this.props.activity;
+    onRateChange = (nextValue,prevValue,name) => {
+        const obj={
+            id: this.props.id,
+            rating: nextValue
+        };
+        postNewRating(obj)
+    };
 
+    render() {
+        const { date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, images, rating, number_of_ratings} = this.props.activity;
+
+        const starRating = rating/number_of_ratings;
+        console.log(starRating)
         let suitedForContainer =  [];
         if(suitedForType >= 0) {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
@@ -168,6 +180,7 @@ class ActivityModal extends Component {
         }
 
         let attendingContainer = null;
+        let ratingContainer = null;
         if(!this.state.loggedIn){
             attendingContainer =
                 <div className="modal-infobox2">
@@ -194,6 +207,10 @@ class ActivityModal extends Component {
                     </div>
                 </div>;
         }
+        if(this.state.loggedIn){
+            ratingContainer =
+                <StarRatingComponent name="activityRating" emptyStarColor="#BBB" value={starRating} onStarClick={this.onRateChange.bind(this)}/>;
+        }
 
         return (
             <Modal
@@ -206,7 +223,7 @@ class ActivityModal extends Component {
                         <CalendarDateBox date={new Date(date)}/>
                         <div className="modal-title-style">
                             <h1><b>{activityName}</b></h1>
-                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b></div>
+                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b> </div>
                         </div>
                     </Modal.Title>
                 </Modal.Header>
@@ -236,6 +253,7 @@ class ActivityModal extends Component {
                     {imageContainer}
                 </Modal.Body>
                 <Modal.Footer>
+                    {ratingContainer}
                     <Button onClick={this.editActivity}>Endre aktivitet</Button>
                     <Button onClick={this.closeActivityModal}>Lukk</Button>
                 </Modal.Footer>

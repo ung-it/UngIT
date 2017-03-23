@@ -30,6 +30,10 @@ export function signupActivity(id) {
     postToServer('http://localhost:8000/signupActivity/', data);
 }
 
+export function postNewRating(object) {
+    return postToServer('/rateActivity/', object);
+}
+
 //Use only this method when doing GET-requests to server for JSON-data, don't make your own
 function fetchFromServer(query) {
     return fetch(query, {

@@ -234,7 +234,9 @@
                                     <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
                                 {% endfor %}
                             </div>
-                            <script> selectedImages("{{ form.instagram.value }}") </script>
+                            {% if form.instagram.value != "" and form.instagram.value %}
+                                <script> selectedImages("{{ form.instagram.value }}") </script>
+                            {% endif %}
                             {% else %}
                                 <a class="btn btn-primary" role="button" href={{ link }} >Finn bilde på Instagram</a>
                         {% endif %}

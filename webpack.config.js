@@ -12,6 +12,7 @@ module.exports = {
     entry: {
         activitiesContainer: './assets/js/containers/ActivitiesContainer',
         attendingActivitiesContainer: './assets/js/containers/AttendingActivitiesContainer',
+        hostingActivitiesContainer: './assets/js/containers/HostingActivitiesContainer',
         allActivitiesContainer: './assets/js/containers/AllActivitiesContainer',
         adaptionChips: './assets/js/containers/AdaptionChips',
     },

@@ -117,19 +117,3 @@ li.dropdown.open > a:focus {
     background: -moz-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Firefox 3.6 to 15 */
     background: linear-gradient(to bottom right, #ffdb61, #ffb200) !important; /* Standard syntax */
 }
-
-.facebook-icon-wrapper {
-    position: relative;
-}
-
-.facebook-icon-container {
-    position: absolute;
-    margin-top: 8px;
-    margin-left: 13px;
-}
-
-.facebook-icon-container img {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-}

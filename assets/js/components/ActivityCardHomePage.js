@@ -5,6 +5,26 @@ import {Thumbnail, Glyphicon} from 'react-bootstrap';
 import ActivityModal from './ActivityModal';
 import {getMonth, getDay} from '../DateFunctions';
 
+const styles = {
+    activityCard: {
+      height: 400
+    },
+    facebookWrapper: {
+        position: 'relative'
+    },
+    facebookIconContainer: {
+        position: 'absolute',
+        marginTop: 8,
+        marginLeft: 13
+    },
+    facebookIconImage: {
+        width: 40,
+        height: 40,
+        borderRadius: 10
+    }
+};
+
+
 class ActivityCardHomePage extends React.Component {
 
     constructor(props) {
@@ -46,18 +66,22 @@ class ActivityCardHomePage extends React.Component {
             let link = 'https://www.facebook.com/events/' + activity.facebookID;
 
             facebookIcon = (
-                <div className="facebook-icon-wrapper">
-                    <div className="facebook-icon-container">
+                <div style={styles.facebookWrapper}>
+                    <div style={styles.facebookIconContainer}>
                         <a href={link} target="__blank">
-                            <img src="/static/images/facebook-icon.jpg" id="facebookIcon"/>
+                            <img src="/static/images/facebook-icon.jpg" id="facebookIcon" style={styles.facebookIconImage}/>
                         </a>
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="facebookIcon">
-                            Dette arrangementet er linket til et facebook arrangement
+                            Dette arrangementet er linket til et Facebook arrangement<br/><br/>
+                            Klikk på ikonet for å se arrangementet på Facebook
                         </div>
                     </div>
                 </div>
             )
         }
+
+        let dato = new Date(this.props.activity.date);
+        dato = dato.getDate() + ". "+ getMonth(dato.getMonth());
 
         return (
             <div key={this.props.activity.id}>
@@ -67,6 +91,7 @@ class ActivityCardHomePage extends React.Component {
                     src={poster}
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
+                    style={styles.activityCard}
                 >
                     <h3>{this.props.activity.activityName}</h3>
                     <div className="info-box-wrapper">
@@ -76,7 +101,7 @@ class ActivityCardHomePage extends React.Component {
                             <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
                         </div>
                         <div className="info-container">
-                            <p>{getMonth(this.props.activity.date)}</p>
+                            <p>{dato}</p>
                             <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
                             <p>{this.props.activity.location}</p>
                         </div>

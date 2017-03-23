@@ -16,7 +16,7 @@
 }
 
 .caption {
-    height: 12em;
+    height: 13em;
 }
 
 .info-box-wrapper {
@@ -65,4 +65,20 @@
     border-radius: 4px;
     border-color: darkgrey;
     border-width: thin;
+}
+
+.facebook-icon-wrapper {
+    position: relative;
+}
+
+.facebook-icon-container {
+    position: absolute;
+    margin-top: 8px;
+    margin-left: 13px;
+}
+
+.facebook-icon-container img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
 }

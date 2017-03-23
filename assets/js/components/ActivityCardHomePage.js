@@ -5,26 +5,6 @@ import {Thumbnail, Glyphicon} from 'react-bootstrap';
 import ActivityModal from './ActivityModal';
 import {getMonth, getDay} from '../DateFunctions';
 
-const styles = {
-    activityCard: {
-      height: 400
-    },
-    facebookWrapper: {
-        position: 'relative'
-    },
-    facebookIconContainer: {
-        position: 'absolute',
-        marginTop: 8,
-        marginLeft: 13
-    },
-    facebookIconImage: {
-        width: 40,
-        height: 40,
-        borderRadius: 10
-    }
-};
-
-
 class ActivityCardHomePage extends React.Component {
 
     constructor(props) {
@@ -66,10 +46,10 @@ class ActivityCardHomePage extends React.Component {
             let link = 'https://www.facebook.com/events/' + activity.facebookID;
 
             facebookIcon = (
-                <div style={styles.facebookWrapper}>
-                    <div style={styles.facebookIconContainer}>
+                <div className="facebook-icon-wrapper">
+                    <div className="facebook-icon-container">
                         <a href={link} target="__blank">
-                            <img src="/static/images/facebook-icon.jpg" id="facebookIcon" style={styles.facebookIconImage}/>
+                            <img src="/static/images/facebook-icon.jpg" id="facebookIcon"/>
                         </a>
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="facebookIcon">
                             Dette arrangementet er linket til et Facebook arrangement<br/><br/>
@@ -91,7 +71,6 @@ class ActivityCardHomePage extends React.Component {
                     src={poster}
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
-                    style={styles.activityCard}
                 >
                     <h3>{this.props.activity.activityName}</h3>
                     <div className="info-box-wrapper">

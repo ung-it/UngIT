@@ -1,3 +1,7 @@
+.alert-wrapper {
+    width: 900px;
+}
+
 .main-wrapper {
     padding: 40px 40px 8px 40px;
     margin: 8px auto 32px auto;
@@ -71,8 +75,8 @@
     height: 85%;
 }
 
-.adaptions-container {
-    display: block; !important;
+#adaptions-container {
+    width: 100%;
 }
 
 #event-select {

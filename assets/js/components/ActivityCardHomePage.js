@@ -40,8 +40,28 @@ class ActivityCardHomePage extends React.Component {
             poster = images[0];
         }
 
+        let facebookIcon = null;
+        if (activity.facebookID != null) {
+
+            let link = 'https://www.facebook.com/events/' + activity.facebookID;
+
+            facebookIcon = (
+                <div className="facebook-icon-wrapper">
+                    <div className="facebook-icon-container">
+                        <a href={link} target="__blank">
+                            <img src="/static/images/facebook-icon.jpg" id="facebookIcon"/>
+                        </a>
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="facebookIcon">
+                            Dette arrangementet er linket til et facebook arrangement
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
         return (
             <div key={this.props.activity.id}>
+                {facebookIcon}
                 <Thumbnail
                     className="activitySmalStyle"
                     src={poster}

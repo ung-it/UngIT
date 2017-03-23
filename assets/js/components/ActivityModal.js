@@ -102,22 +102,22 @@ class ActivityModal extends Component {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
         }
 
-        //let videoContainer = null;
-        //if (videos.length > 0) {
-        //    const videos = this.state.videos.map((video, i) => {
-        //        const path = "/media/video/" + video;
-        //        return (
-        //            <video className="modal-video" controls="controls" key={i}>
-        //                <source src={path}/>
-        //            </video>
-        //        )
-            //    });
-        //    videoContainer =
-        //        <div>
-        //            <h3 className="modal-image-header">Video fra arrangementet</h3>
-        //            {videos}
-        //        </div>;
-        //}
+        let videoContainer = null;
+        if (videos.length > 0) {
+           const videos = this.state.videos.map((video, i) => {
+               const path = "/media/video/" + video;
+               return (
+                   <video className="modal-video" controls="controls" key={i}>
+                       <source src={path}/>
+                   </video>
+               )
+               });
+           videoContainer =
+               <div>
+                   <h3 className="modal-image-header">Video fra arrangementet</h3>
+                   {videos}
+               </div>;
+        }
 
         let imageContainer = null;
 
@@ -236,7 +236,7 @@ class ActivityModal extends Component {
                         <h2 className="modal-description-header">Om arrangementet</h2>
                         <p className="modal-description">{description}</p>
                     </div>
-                    {/* videoContainer */}
+                    {videoContainer}
                     {imageContainer}
                 </Modal.Body>
                 <Modal.Footer>

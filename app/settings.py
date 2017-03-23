@@ -56,6 +56,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'app.urls'
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

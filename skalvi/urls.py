@@ -36,5 +36,7 @@ urlpatterns = [
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
 
 
+    url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase"),
+
 
 ]

@@ -77,7 +77,11 @@ class Organisation(models.Model):
 
 
     def __str__(self):
-        return self.orgName + ": org. number: " + self.orgNumber
+        if(self.userprofile):
+            return self.userprofile.profile_name
+        else:
+            return 'Ikke koblet mot brukerprofil'
+
 
 
 ###########  Relations tables  ##########

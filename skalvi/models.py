@@ -75,6 +75,14 @@ class Organisation(models.Model):
         return self.orgName + ": org. number: " + self.orgNumber
 
 
+class Commentary(models.Model):
+    activityId = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
+    userProfile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    comment = models.TextField()
+    date = models.DateTimeField()
+
+    
 ###########  Relations tables  ##########
 
 class ParticipateIn(models.Model):

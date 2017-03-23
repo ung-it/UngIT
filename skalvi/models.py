@@ -77,10 +77,12 @@ class Organisation(models.Model):
 
 
     def __str__(self):
-        if(self.userprofile):
+        if self.userprofile:
             return self.userprofile.profile_name
+        elif self.aktordatabase:
+            return self.aktordatabase['Navn']
         else:
-            return 'Ikke koblet mot brukerprofil'
+            return 'Mangler informasjon'
 
 
 

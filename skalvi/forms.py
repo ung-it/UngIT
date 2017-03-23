@@ -29,7 +29,7 @@ class ActivityForm(forms.ModelForm):
 
     activityName = forms.CharField(max_length=80, label="Navn på aktivitet")
     provider = forms.CharField(max_length=80, label="Arrangør")
-    adaptions = forms.CharField(widget=forms.Textarea, max_length=80,label="Tilrettelegging")
+    adaptions = forms.CharField(required=False, max_length=255,label="Tilrettelegging")
     age = forms.CharField(max_length=80, label="Alder")
     location = forms.CharField(max_length=80, label="Sted")
     description = forms.CharField(widget=forms.Textarea, label="Om arrangement")

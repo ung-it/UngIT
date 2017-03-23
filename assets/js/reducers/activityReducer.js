@@ -8,6 +8,7 @@ import * as actionTypes from '../actions/activitiesActions';
 
 const initialState = {
     attendingActivityList: [],
+    hostingActivityList: [],
     activityList: [],
     activeActivityFilters: '',
     activeSuitedForFilters: '',
@@ -18,6 +19,11 @@ const initialState = {
 
 export default function ActivityReducer(state=initialState, action) {
     switch (action.type) {
+        case actionTypes.FETCHED_ALL_HOSTING_ACTIVITIES:
+            return {
+                ...state,
+                hostingActivityList: action.hostingActivities,
+            };
         case actionTypes.FETCHED_ALL_ATTENDING_ACTIVITIES:
             return {
                 ...state,

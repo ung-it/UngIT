@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
 
-import { fetchAllActivities } from '../actions/activitiesActions';
+import { fetchAllHostingActivities } from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 
@@ -10,14 +10,14 @@ import '../../styles/activityBox.css';
 
 const store = configureStore();
 
-class ActivitiesContainer extends Component {
+class HostingActivitiesContainer extends Component {
 
     componentDidMount() {
-        this.props.fetchActivities();
+        this.props.fetchHostingActivities();
     }
 
     createActivityCardComponent = () => {
-        return this.props.activities.map(activity => {
+        return this.props.hostingActivities.map(activity => {
             return (
                 <ActivityCardHomePage
                     key={activity.id + activity.fields.activityName}
@@ -37,7 +37,7 @@ class ActivitiesContainer extends Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "center"
+                justifyContent: "flex-start"
             }
         };
 
@@ -54,26 +54,28 @@ class ActivitiesContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        activities: state.activity.activityList
+        hostingActivities: state.activity.hostingActivityList
             .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            .slice(0, 5), // Only get five first
+            // Only get five first
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchActivities: () => dispatch(fetchAllActivities()),
+        fetchHostingActivities: () => dispatch(fetchAllHostingActivities()),
     }
 };
 
 
 // Fetch initial data for state
-store.dispatch(fetchAllActivities());
+store.dispatch(fetchAllHostingActivities());
 
-ActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
+HostingActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(HostingActivitiesContainer);
 
 ReactDOM.render(
     <Provider store={store}>
-        <ActivitiesContainer />
-    </Provider>, document.getElementById('activities')
+        <HostingActivitiesContainer />
+    </Provider>, document.getElementById('hostingActivities')
 );
+
+

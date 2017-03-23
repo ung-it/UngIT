@@ -6,12 +6,14 @@ import * as actionTypes from '../actions/activitiesActions';
 * data. It can do so.
 * */
 
+var moment = require('moment');
+
 const initialState = {
     attendingActivityList: [],
     activityList: [],
     activeActivityFilters: '',
     activeSuitedForFilters: '',
-    activeDateFilter: '',
+    activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
     activeSearchForFilters: '',
     activeButtonClicked: false,
 
@@ -55,7 +57,7 @@ export default function ActivityReducer(state=initialState, action) {
                 ...state,
                 activeActivityFilters: '',
                 activeSuitedForFilters: '',
-                activeDateFilter: '',
+                activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
                 activeSearchForFilters: '',
                 activeButtonClicked: false,
             }

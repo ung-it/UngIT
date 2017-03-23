@@ -10,6 +10,7 @@ import '../../styles/modal.css';
 import { SUITED_FOR_TYPES } from './SuitedForPicker';
 import StarRatingComponent from "react-star-rating-component";
 import {postNewRating} from "../APIFunctions";
+import {postNewComment} from "../APIFunctions";
 
 
 class ActivityModal extends Component {
@@ -102,6 +103,15 @@ class ActivityModal extends Component {
             rating: nextValue
         };
         postNewRating(obj)
+    };
+
+    onPostComment = (comment) => {
+        const obj = {
+            id: this.props.id,
+            comment2: $("#commentInput").val()
+        };
+        $("#commentInput").val("");
+        postNewComment(obj);
     };
 
     render() {
@@ -253,10 +263,10 @@ class ActivityModal extends Component {
                     {imageContainer}
                     <hr/>
                     <div id="postComment">
-                        <form className="comment-form" method="POST" action="">
+                        <form className="comment-form" method="POST" action="/postComment/">
                             <div className="input-group">
                                 <textarea placeholder="Skriv inn din kommentar her" id="commentInput" className="form-control custom-control"></textarea>
-                                <span className="input-group-addon btn btn-primary">Send</span>
+                                <span className="input-group-addon btn btn-primary" onClick={this.onPostComment.bind(this)}>Send</span>
                             </div>
                         </form>
                     </div>

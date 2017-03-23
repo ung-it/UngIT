@@ -38,6 +38,10 @@ export function postNewRating(object) {
     return postToServer('/rateActivity/', object);
 }
 
+export function postNewComment(object) {
+    return postToServer('/postComment/', object);
+}
+
 //Use only this method when doing GET-requests to server for JSON-data, don't make your own
 function fetchFromServer(query) {
     return fetch(query, {

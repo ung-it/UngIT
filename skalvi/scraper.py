@@ -177,7 +177,7 @@ class Scraper:
             allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
 
         # write all to .txt file, for prodction use to fill up database. without re-query
-        with open('aktordatabasen.json', 'w') as file:
+        with open('./app/aktordatabasen.json', 'w') as file:
             json.dump(allProviders, file, indent=4)
 
         return allProviders

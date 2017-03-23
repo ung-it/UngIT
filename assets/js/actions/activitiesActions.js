@@ -1,4 +1,4 @@
-import {  getActivityInfo, getAllActivities, getAllAttendingActivities} from "../APIFunctions";
+import {  getActivityInfo, getAllActivities, getAllAttendingActivities, getAllHostingActivities} from "../APIFunctions";
 /*
 * Action creator and action are two separate things, the action creator is the actual action-function
 *
@@ -26,6 +26,7 @@ import {  getActivityInfo, getAllActivities, getAllAttendingActivities} from "..
 // ACTION TYPES
 export const FETCHED_ALL_ACTIVITIES = 'FETCH_ALL_ACTIVITIES';
 export const FETCHED_ALL_ATTENDING_ACTIVITIES = 'FETCH_ALL_ATTENDING_ACTIVITIES';
+export const FETCHED_ALL_HOSTING_ACTIVITIES = 'FETCH_ALL_HOSTING_ACTIVITIES';
 export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
 export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
 export const ADD_WEEK_FILTER = 'ADD_WEEK_FILTER';
@@ -96,5 +97,20 @@ export function fetchedAllAttendingActivites(attendingActivities) {
     return {
         type: FETCHED_ALL_ATTENDING_ACTIVITIES,
         attendingActivities,
+    }
+}
+
+export function fetchAllHostingActivities() {
+    return (dispatch) => {
+        getAllHostingActivities()
+            .then(result => dispatch(fetchedAllHostingActivites(result)))
+            .catch(error => console.error(error));
+    };
+};
+
+export function fetchedAllHostingActivites(hostingActivities) {
+    return {
+        type: FETCHED_ALL_HOSTING_ACTIVITIES,
+        hostingActivities,
     }
 }

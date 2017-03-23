@@ -22,10 +22,22 @@ class ActivityCard extends React.Component {
     };
 
     createActivityItem = () => {
-        let poster = null;
+        let activity = this.props.activity;
 
-        if(this.props.activity.images.length > 0) {
-            poster = this.props.activity.images;
+        let localImages = new Array(activity.images).filter(image => {
+            return image != "";
+        }).map(image => {
+            return '/media/' + image;
+        });
+        let instaImages = activity.instagram.split(",").filter(image => {
+            return image != "";
+        });
+
+        let images = localImages.concat(instaImages);
+
+        let poster = null;
+        if(images.length > 0){
+            poster = images[0];
         }
 
         return (
@@ -52,7 +64,7 @@ class ActivityCard extends React.Component {
                             <p>{this.props.activity.description}</p>
                         </div>
                     </div>
-                    <ActivityModal id={this.props.id} activity={this.props.activity} show={this.state.show} />
+                    <ActivityModal id={this.props.id} activity={this.props.activity} images={images} show={this.state.show} />
                 </Thumbnail>
             </div>
         );

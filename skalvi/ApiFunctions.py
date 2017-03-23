@@ -12,6 +12,14 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.db.models.base import ObjectDoesNotExist
 
+
+
+import os
+from app.settings import PROJECT_ROOT
+
+
+
+
 @csrf_exempt
 def loginFacebook(request):
     infoArray = request.body.decode('utf-8')  # request becomes string
@@ -71,6 +79,54 @@ def loginFacebook(request):
 
 
 
+# Admin function to populate the SQLdatabase with all providers from Aktørdatabasen.
+def populate(request):
+
+    with open(os.path.join(PROJECT_ROOT, '../app/aktordatabasen.json')) as json_file:
+        json_data = json.load(json_file)
+        #print(json_data)
+
+    # run through each object that is saved
+    for i in json_data:
+        print(i)
+        # Save the object to the database, but first,
+        # check if there is a registered user with profile_name equal to the json_data[name]
+
+        try:
+            i['Navn'] # throws exception if there is no attribute 'Navn'
+            try:
+                entry = UserProfile.objects.filter(profile_name=i['Navn'])
+            except Exception as e:
+                entry = False
+
+            if entry:
+                org = Organisation(user=entry.user, userprofile=entry, aktordatabase=i)
+            else:
+                org = Organisation(aktordatabase=i)
+
+        except:
+            org = Organisation(aktordatabase=i)
+
+        org.save()
+
+    return HttpResponse('Done! not sure if faulty tho, please check.')
 
 
+
+
+
+def _tryAndSaveToDB(instans):
+    try:
+        entry = UserProfile.objects.filter(profile_name=instans['Navn'])
+    except Exception as e:
+        entry = False
+
+    # Create the new Organisation object to be saved, depending on if needs to be hooked up to a User
+    if (entry):
+        org = Organisation(user=entry.user, userprofile=entry, aktordatabase=instans)
+    else:
+        org = Organisation(aktordatabase=instans)
+
+        # Finally save the object into the organisation table
+        # org.save()
 

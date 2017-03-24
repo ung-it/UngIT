@@ -6,18 +6,28 @@ import * as actionTypes from '../actions/activitiesActions';
 * data. It can do so.
 * */
 
+var moment = require('moment');
+
 const initialState = {
     attendingActivityList: [],
+    hostingActivityList: [],
     activityList: [],
     activeActivityFilters: '',
     activeSuitedForFilters: '',
-    activeDateFilter: '',
-    searchText: '',
+    activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
+    activeSearchForFilters: '',
+    activeButtonClicked: false,
+
 }
 
 
 export default function ActivityReducer(state=initialState, action) {
     switch (action.type) {
+        case actionTypes.FETCHED_ALL_HOSTING_ACTIVITIES:
+            return {
+                ...state,
+                hostingActivityList: action.hostingActivities,
+            };
         case actionTypes.FETCHED_ALL_ATTENDING_ACTIVITIES:
             return {
                 ...state,
@@ -42,6 +52,20 @@ export default function ActivityReducer(state=initialState, action) {
             return {
                 ...state,
                 activeDateFilter: action.weekFilter,
+            }
+        case actionTypes.ADD_SEARCH_FOR_FILTER:
+            return {
+                ...state,
+                activeSearchForFilters: action.searchFilter,
+            }
+        case actionTypes.TRASH_BUTTON_CLICKED:
+            return {
+                ...state,
+                activeActivityFilters: '',
+                activeSuitedForFilters: '',
+                activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
+                activeSearchForFilters: '',
+                activeButtonClicked: false,
             }
         default:
             return state;

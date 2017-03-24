@@ -80,7 +80,8 @@ class Commentary(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     userProfile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     comment = models.TextField()
-    date = models.DateTimeField()
+    date = models.DateField()
+    time = models.TimeField()
 
 
 ###########  Relations tables  ##########

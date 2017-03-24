@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.core import serializers
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime
+from datetime import *
 #Python POST-request
 import urllib.request
 import json
@@ -155,7 +155,7 @@ def postComment(request):
     activity = Activity.objects.get(pk=activityId)
     user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
 
-    post = Commentary(userId=request.user, userProfile=user_profile, activityId=activity, comment=comment, date=datetime.now())
+    post = Commentary(userId=request.user, userProfile=user_profile, activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
     return HttpResponse(status=200, content_type='application/json')
 

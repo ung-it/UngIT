@@ -80,5 +80,6 @@
 .facebook-icon-container img {
     width: 40px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 0.4em;
+    background-color: white;
 }

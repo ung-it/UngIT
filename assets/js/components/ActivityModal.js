@@ -69,8 +69,6 @@ class ActivityModal extends Component {
     };
 
     onSignOf = () => {
-        console.log("id " + this.props.id);
-
         var request = {
             id: this.props.id
         };
@@ -95,7 +93,7 @@ class ActivityModal extends Component {
     };
 
     render() {
-        const { date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos} = this.props.activity;
+        const { date, activityName, facebookID,activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos} = this.props.activity;
 
         let suitedForContainer =  [];
         if(suitedForType >= 0) {
@@ -184,7 +182,7 @@ class ActivityModal extends Component {
             attendingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
-                        <h5>Påmelding til {activityName}</h5>
+                        <h4>Påmelding til {activityName}</h4>
                         <Button className="btn btn-success" onClick={this.onSignup}>Meld på!</Button>
                     </div>
             </div>;
@@ -193,10 +191,24 @@ class ActivityModal extends Component {
             attendingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
-                        <h5>Du er påmeldt {activityName}</h5>
+                        <h4>Du er påmeldt {activityName}</h4>
                         <Button onClick={this.onSignOf} className="btn btn-danger">Meld av</Button>
                     </div>
                 </div>;
+        }
+
+        let facebookContainer = null;
+        if (facebookID) {
+
+            let data = getFacebookEventData(facebookID, data => {
+                console.log(data)
+            });
+
+            facebookContainer = (
+                <div className="modal-facebook-container">
+                    <h3>Informasjon om arrangementet fra Facebook</h3>
+                </div>
+            );
         }
 
         return (
@@ -238,6 +250,7 @@ class ActivityModal extends Component {
                     </div>
                     {videoContainer}
                     {imageContainer}
+                    {facebookContainer}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.editActivity}>Endre aktivitet</Button>

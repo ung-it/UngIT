@@ -63,12 +63,6 @@ function postToServer(query, data) {
         body: JSON.stringify(data)
 
     }).then((response) => {
-        console.log(response);
-        if(response.status == 204){
-            this.setState({
-                attending: true
-            });
-        }
-        return response.status;
+        return response;
     })
 }

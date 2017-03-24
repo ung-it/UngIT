@@ -212,6 +212,12 @@ class ActivityModal extends Component {
                 <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating} onStarClick={this.onRateChange.bind(this)}/>;
         }
 
+        // let allComments = []
+        //
+        // for (var i = 0; i < this.state.comments.length; i++) {
+        //   allComments.push(<Commment data={this.props.data[i]} id={'element-' + i} key={i} />)
+        // }
+
         return (
             <Modal
                 show={this.state.show}
@@ -266,7 +272,7 @@ class ActivityModal extends Component {
                         </div>
                         <hr/>
                         <div className="commentBackground"><p className="comment">Det var en gang en gutt med downs som satt i rullestol og var blid. Han skulle på klatring for di han hadde veldig lyst og fordi han ville irritere moren sin. Hun hater å ta han med på aktiviteter han ikke kan være med på fordi det er så jævla flaut. </p></div>
-                        
+
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

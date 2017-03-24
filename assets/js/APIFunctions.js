@@ -32,11 +32,16 @@ export function getAllHostingActivities() {
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
 
-export function signupActivity(id) {
-    let data = {
-        id: id
-    };
-    postToServer('http://localhost:8000/signupActivity/', data);
+export function signupActivity(data) {
+    return postToServer('/signupActivity/', data);
+}
+
+export function signoffActivity(data) {
+    return postToServer('/signOfEvent/', data);
+}
+
+export function checkIfSignedUp(data) {
+    return postToServer('/checkIfSignedUp/', data);
 }
 
 export function postNewRating(object) {
@@ -76,12 +81,6 @@ function postToServer(query, data) {
         body: JSON.stringify(data)
 
     }).then((response) => {
-        console.log(response);
-        if(response.status == 204){
-            this.setState({
-                attending: true
-            });
-        }
-        return response.status;
+        return response;
     })
 }

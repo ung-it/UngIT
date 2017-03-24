@@ -9,7 +9,14 @@ import CalendarDateBox from './CalendarDateBox';
 import '../../styles/modal.css';
 import {SUITED_FOR_TYPES} from './SuitedForPicker';
 import StarRatingComponent from "react-star-rating-component";
-import {postNewRating, postNewComment, getComments} from "../APIFunctions";
+import {
+    signupActivity,
+    signoffActivity,
+    checkIfSignedUp,
+    postNewRating,
+    postNewComment,
+    getComments
+} from "../APIFunctions";
 
 
 class ActivityModal extends Component {
@@ -23,7 +30,6 @@ class ActivityModal extends Component {
             loggedIn: false,
             fetchedComments: false,
             comments: []
-
         }
     }
 
@@ -50,51 +56,52 @@ class ActivityModal extends Component {
     };
 
     onSignup = () => {
-        var request = {
+        const request = {
             id: this.props.id
         };
-
-        fetch('http://localhost:8000/signupActivity/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: "same-origin",
-            body: JSON.stringify(request)
-
-        }).then((response) => {
+        signupActivity(request).then((response) => {
             if (response.status == 204) {
                 this.setState({
                     attending: true
                 });
             }
-            return response.status;
         })
-
     };
 
     onSignOf = () => {
-
-        var request = {
+        const request = {
             id: this.props.id
         };
-
-        fetch('http://localhost:8000/signOfEvent/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: "same-origin",
-            body: JSON.stringify(request)
-
-        }).then((response) => {
-            // console.log(response);
+        signoffActivity(request).then((response) => {
             if (response.status == 210) {
                 this.setState({
                     attending: false
                 });
             }
-            return response.status;
+        })
+    };
+
+    checkIfSignUp = () => {
+        const request = {
+            id: this.props.id
+        };
+        checkIfSignedUp(request).then((response) => {
+            if (response.status == 204) {
+                this.setState({
+                    attending: true,
+                    hasChecked: true,
+                    loggedIn: true
+                });
+            } else if (response.status == 205) {
+                this.setState({
+                    loggedIn: true,
+                    hasChecked: true
+                })
+            } else if (response == 206) {
+                this.setState({
+                    loggedIn: false
+                })
+            }
         })
     };
 
@@ -109,7 +116,7 @@ class ActivityModal extends Component {
     fetchComments = () => {
         getComments(this.props.id).then((result) => {
             this.setState({
-                comments: result,
+                comments: result.reverse(),
                 fetchedComments: true,
             });
         });
@@ -164,39 +171,7 @@ class ActivityModal extends Component {
         }
 
         if (this.state.show && !this.state.hasChecked) {
-            var request = {
-                id: this.props.id
-            };
-            fetch('http://localhost:8000/checkIfSignedUp/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: "same-origin",
-                body: JSON.stringify(request)
-
-            }).then((response) => {
-                if (response.status == 204) {
-                    this.setState({
-                        attending: true,
-                        hasChecked: true,
-                        loggedIn: true
-                    });
-                } else if (response.status == 205) {
-                    this.setState({
-                        loggedIn: true,
-                        hasChecked: true
-
-                    })
-
-                } else if (response == 206) {
-                    this.setState({
-                        loggedIn: false
-                    })
-                }
-
-                return response.status;
-            })
+            this.checkIfSignUp()
         }
 
         let attendingContainer = null;
@@ -233,6 +208,7 @@ class ActivityModal extends Component {
             ratingContainer =
                 <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
                                      onStarClick={this.onRateChange.bind(this)}/>;
+
             postCommentContainer =
                 <div id="postComment">
                     <form className="comment-form" method="POST" action="/postComment/">
@@ -246,7 +222,12 @@ class ActivityModal extends Component {
                 </div>;
         }
 
-        if(this.state.show && !this.state.fetchedComments){
+        if (this.state.noComments) {
+
+
+        }
+
+        if (this.state.show && !this.state.fetchedComments) {
             this.fetchComments()
         }
 
@@ -298,10 +279,10 @@ class ActivityModal extends Component {
                     <h2 className="modal-comments">Kommentarer</h2>
                     {postCommentContainer}
                     <div id="commentDiv">
-                        {allComments.reverse().map((com, i) =>
-                         <div className="commentBackground" key={com.pk}>
-                             <p className="comment">{com.fields.comment}</p>
-                         </div>
+                        {allComments.map((com, i) =>
+                            <div className="commentBackground" key={com.pk}>
+                                <p className="comment">{com.fields.comment}</p>
+                            </div>
                         )}
                     </div>
                 </Modal.Body>

@@ -97,3 +97,13 @@
 .modal-glyphicon {
     color: #f39019;
 }
+
+.modal-facebook-image {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal-facebook-image img{
+    height: 200px;
+    padding: 5px;
+}

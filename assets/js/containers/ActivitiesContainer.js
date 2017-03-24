@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
 
-import { fetchAllActivities } from '../actions/activitiesActions';
+import { fetchAllActivities, fetchFacebookEventData } from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 
@@ -11,6 +11,10 @@ import '../../styles/activityBox.css';
 const store = configureStore();
 
 class ActivitiesContainer extends Component {
+
+    componentWillReceiveProps(props) {
+        this.props.fetchFacebookEventData(props);
+    }
 
     createActivityCardComponent = () => {
         return this.props.activities.map(activity => {
@@ -54,6 +58,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchActivities: () => dispatch(fetchAllActivities()),
+        fetchFacebookEventData: (activities) => dispatch(fetchFacebookEventData(activities)),
     }
 };
 

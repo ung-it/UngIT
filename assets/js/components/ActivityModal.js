@@ -123,16 +123,6 @@ class ActivityModal extends Component {
             return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
         });
 
-        if (this.props.images.length > 0) {
-            imageContainer =
-                <div>
-                    <h3 className="modal-image-header">Bilder fra arrangementet</h3>
-                    <div className="modal-image-container">
-                        {images}
-                    </div>
-                </div>;
-        }
-
         if(this.state.show && !this.state.hasChecked){
             var request = {
                 id: this.props.id
@@ -199,13 +189,30 @@ class ActivityModal extends Component {
 
         let facebookContainer = null;
         if (facebook) {
-            console.log(facebook);
+
+            let fImages = facebook.photos.data.map(image => {
+                return <img src={image.images[0].source} key={image.id} className="modal-image"/>
+            });
+
+            images = images.concat(fImages);
+
             facebookContainer = (
                 <div className="modal-facebook-container">
                     <h3>Informasjon om arrangementet fra Facebook</h3>
-                    <div></div>
+                    <div className="modal-facebook-image">
+                    </div>
                 </div>
             );
+        }
+
+        if (images.length > 0) {
+            imageContainer =
+                <div>
+                    <h3 className="modal-image-header">Bilder fra arrangementet</h3>
+                    <div className="modal-image-container">
+                        {images}
+                    </div>
+                </div>;
         }
 
         return (
@@ -226,6 +233,9 @@ class ActivityModal extends Component {
                 <Modal.Body>
                     <div className="modal-adapted">
                         Dette arrangementet er tilpasset for: <b>{suitedForContainer.label}</b>
+                    </div>
+                    <div>
+                        Antall assistenter: Ikke oppgitt
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">

@@ -49,7 +49,11 @@ export default function ActivityReducer(state=initialState, action) {
                 ...state,
                 activeDateFilter: action.weekFilter,
             };
-
+        case actionTypes.FETCHED_FACEBOOK_EVENT_DATA:
+            return {
+                ...state,
+                activityList: action.facebookData,
+            };
         default:
             return state;
     }

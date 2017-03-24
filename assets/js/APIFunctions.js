@@ -16,20 +16,36 @@ export function getUpcomingActivities(callback) {
 
 export function getAllActivities() {
     return fetchFromServer('/api/activities/').then(response => {
-        return Promise.all(response.map(activity => {
-           if (activity.fields.facebookID) {
-               return new Promise(function (resolve) {
-                   getFacebookEventData(activity.fields.facebookID, resolve);
-               }).then(data => {
-                   activity.fields.facebook = data;
-                   return activity;
-               });
-           }
-           else {
-               return activity;
-           }
-        }));
+        return response;
     });
+}
+
+export function getFacebookEventData(activities) {
+
+    let eventIDs = activities.activities
+        .filter(activity => {return activity.fields.facebookID})
+        .map(activity => {return activity.fields.facebookID});
+
+    return new Promise(function (resolve) {
+        getAccessToken(resolve);
+    }).then(token => {
+
+        let batch = eventIDs.map(id => {
+            return {
+                "method":"GET",
+                "relative_url": id + "?fields=admins,attending,photos{images},picture,roles,videos"}
+        });
+
+        let data = {
+            access_token: token,
+            batch: batch
+        };
+        console.log(data);
+        return postToServer('https://graph.facebook.com', data).then(data => {
+            console.log(data)
+        });
+    });
+
 }
 
 export function getAllAttendingActivities() {

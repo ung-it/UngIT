@@ -42,7 +42,7 @@ class ActivityCardHomePage extends React.Component {
             poster = images[0];
         }
 
-         const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
+        const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
 
         return (
             <div key={this.props.activity.id}>
@@ -50,21 +50,16 @@ class ActivityCardHomePage extends React.Component {
                     className="activitySmalStyle"
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
-                    style="background-image:"{poster}";"
                 >
-
+                    <img src={poster} className="small-image" />
                         <h3>{this.props.activity.activityName}</h3>
                         <div className="info-box-wrapper">
                             <div className="icon-container">
-                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                                <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0,5)} - {this.props.activity.time_end.slice(0,5)}</p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</p>
                             </div>
-                            <div className="info-container">
-                                <p>{date}</p>
-                                <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
-                                <p>{this.props.activity.location}</p>
-                            </div>
+
                         </div>
                     <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
                                    show={this.state.show}/>

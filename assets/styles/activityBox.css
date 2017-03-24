@@ -1,7 +1,7 @@
 /* Styling for activities on home page */
 .activitySmalStyle {
-    width: 25em;
-    height: 25em;
+    width: 75em;
+    height: 35em;
     cursor: pointer;
     margin-left: 5px;
     margin-right: 5px;
@@ -30,10 +30,12 @@
 
 .info-box-wrapper {
     display: flex;
+    flex-direction: row;
+    margin-left: 15px;
 }
 
 .icon-container {
-    width: 1.5em;
+
 }
 
 

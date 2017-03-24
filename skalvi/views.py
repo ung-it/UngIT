@@ -162,6 +162,17 @@ def postComment(request):
     post.save()
     return HttpResponse(status=200, content_type='application/json')
 
+@csrf_exempt
+def getComments(request):
+    activityId = request.path.split("/")[2]
+    activity = Activity.objects.get(pk=activityId)
+    json_serializer = serializers.get_serializer("json")()
+    comments = json_serializer.serialize(Commentary.objects.filter(activityId=activity), ensure_ascii=False)
+    print(comments)
+    return HttpResponse(comments, content_type='application/json')
+
+
+
 
 def logout_user(request):
     userprofiles = UserProfile.objects.filter(user=request.user)

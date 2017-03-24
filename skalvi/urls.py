@@ -37,7 +37,8 @@ urlpatterns = [
 
 
     url(r'^rateActivity/$', views.rateActivity, name='rateActivity'),
-    url(r'^postComment/$', views.postComment, name='postComment')
+    url(r'^postComment/$', views.postComment, name='postComment'),
+    url(r'^comments/[0-9]+/$', views.getComments, name='getComment')
 
 
 ]

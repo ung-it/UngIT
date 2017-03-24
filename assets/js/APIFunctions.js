@@ -18,6 +18,11 @@ export function getAllActivities() {
     return fetchFromServer('/api/activities/');
 }
 
+export function getComments(id) {
+    return fetchFromServer('/comments/'+id);
+}
+
+
 export function getAllAttendingActivities() {
     const profileName = window.location.href.split("/")[4];
     return fetchFromServer('/api/attendingActivities/'+profileName);

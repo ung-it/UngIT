@@ -30,7 +30,6 @@ def index(request):
 def signUpActivity(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
@@ -58,7 +57,6 @@ def signUpActivity(request):
 def checkIfSingedUp(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
@@ -80,7 +78,6 @@ def checkIfSingedUp(request):
 def signOfEvent(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
@@ -168,9 +165,12 @@ def getComments(request):
     activity = Activity.objects.get(pk=activityId)
     json_serializer = serializers.get_serializer("json")()
     comments = json_serializer.serialize(Commentary.objects.filter(activityId=activity), ensure_ascii=False)
-    print(comments)
-    return HttpResponse(comments, content_type='application/json')
+    # if comments == "[]":
+    #     message = '{"message": "ingen kommentar funnet"}'
+    #     print("HEI")
+    #     return HttpResponse(json_serializer.serialize(message))  # no comments
 
+    return HttpResponse(comments, content_type='application/json')
 
 
 

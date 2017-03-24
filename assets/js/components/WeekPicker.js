@@ -4,8 +4,8 @@ import { Thumbnail, Glyphicon } from "react-bootstrap";
 
 import '../../styles/daterangepicker.css'
 
-var moment = require('moment');
-var DateRangePicker = require('react-bootstrap-daterangepicker');
+let moment = require('moment');
+let DateRangePicker = require('react-bootstrap-daterangepicker');
 
 class WeekPicker extends React.Component {
 

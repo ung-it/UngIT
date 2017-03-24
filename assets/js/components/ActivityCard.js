@@ -16,9 +16,9 @@ class ActivityCard extends React.Component {
     };
 
     openActivityModal = () => {
-       this.setState({
-           show: true
-       });
+        this.setState({
+            show: true
+        });
     };
 
     createActivityItem = () => {
@@ -36,9 +36,12 @@ class ActivityCard extends React.Component {
         let images = localImages.concat(instaImages);
 
         let poster = null;
-        if(images.length > 0){
+        if (images.length > 0) {
             poster = images[0];
         }
+
+        let date = ;
+        //if (this.props.activity.date =! 'Invalid Date' || this.props.activity.date_end)
 
         return (
             <div key={this.props.activity.id}>
@@ -47,26 +50,27 @@ class ActivityCard extends React.Component {
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
                 >
-                    <div className="imageItem"><img src={poster}/></div>
                     <div className="infoItem">
-                    <h3>{this.props.activity.activityName}</h3>
-                    <div className="info-box-wrapper">
-                        <div className="icon-container">
-                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
-                        </div>
-                        <div className="info-container">
-                            <p>{getMonth(this.props.activity.date)}</p>
-                            <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
-                            <p>{this.props.activity.location}</p>
-                        </div>
-                        <div className="about-container">
-                            <p>{this.props.activity.description}</p>
+                        <h3>{this.props.activity.activityName}</h3>
+                        <div className="big-info-box-wrapper">
+                            <div className="big-icon-container">
+                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
+                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                            </div>
+                            <div className="big-info-container">
+                                <p className="big-info-container-p">{this.props.activity.date} - {this.props.activity.date_end}</p>
+                                <p className="big-info-container-p">{this.props.activity.time_start} - {this.props.activity.time_end}</p>
+                                <p className="big-info-container-p">{this.props.activity.location}</p>
+                            </div>
+                            <div className="big-about-container">
+                                <p>{this.props.activity.description}</p>
+                            </div>
                         </div>
                     </div>
-                        </div>
-                    <ActivityModal id={this.props.id} activity={this.props.activity} images={images} show={this.state.show} />
+                    <div className="imageItem"><img src={poster}/></div>
+                    <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
+                                   show={this.state.show}/>
                 </div>
             </div>
         );

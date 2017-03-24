@@ -281,6 +281,7 @@ class ActivityModal extends Component {
                     <div id="commentDiv">
                         {allComments.map((com, i) =>
                             <div className="commentBackground" key={com.pk}>
+                                <p className="date">{com.fields.date}</p>
                                 <p className="comment">{com.fields.comment}</p>
                             </div>
                         )}

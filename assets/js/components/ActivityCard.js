@@ -40,10 +40,12 @@ class ActivityCard extends React.Component {
         let poster = null;
         if (images.length > 0) {
             poster = images[0];
+        } else {
+            poster = "/static/images/activityPic.jpeg"
         }
 
-        const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
 
+        const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
         return (
             <div key={this.props.activity.id}>
                 <div

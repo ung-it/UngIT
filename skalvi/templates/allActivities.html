@@ -12,10 +12,16 @@
     <script src="{% static 'js/material.min.js'%}"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <div class="banner-container">
+            <img src="{% static "images/banner.png" %}" alt="Banner" class="banner">
+    </div>
+
     <div class="content">
         {% if user.is_authenticated %}
             <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
         {% endif %}
+
+
 
         <div class="content-margin-top">
             <h2>Aktiviteter</h2>

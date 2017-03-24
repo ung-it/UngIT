@@ -1,8 +1,14 @@
+/* Styling for activities on home page */
 .activitySmalStyle {
-    width: 20em;
+    width: 25em;
+    height: 25em;
     cursor: pointer;
     margin-left: 5px;
     margin-right: 5px;
+    border: 1px solid rgb(42, 42, 42);
+    border-radius: 10px;
+    background-color: rgb(42, 42, 42);
+    color: white;
 }
 
 .activitySmalStyle:hover {
@@ -11,8 +17,11 @@
     border-color: dimgray;
 }
 
-.activitySmalStyle img {
-   height: 15em !important;
+.small-image {
+    width: 25em !important;
+    height: 25em !important;
+    border-radius: 10px;
+    z-index: -1;
 }
 
 .caption {
@@ -26,6 +35,7 @@
 .icon-container {
     width: 1.5em;
 }
+
 
 
 /* Styling for activities on all activities page */
@@ -74,7 +84,7 @@
 
 .big-about-container {
     margin-left: 20px;
-    flex-basis: 700px;
+    flex-basis: 80%;
     flex-grow: 0;
     flex-shrink: 0;
 }

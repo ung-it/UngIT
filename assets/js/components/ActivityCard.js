@@ -5,6 +5,8 @@ import { Thumbnail, Glyphicon } from 'react-bootstrap';
 import ActivityModal from './ActivityModal';
 import { getMonth, getDay } from '../DateFunctions';
 
+const moment = require('moment');
+
 
 class ActivityCard extends React.Component {
 
@@ -40,8 +42,7 @@ class ActivityCard extends React.Component {
             poster = images[0];
         }
 
-        let date = ;
-        //if (this.props.activity.date =! 'Invalid Date' || this.props.activity.date_end)
+        const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
 
         return (
             <div key={this.props.activity.id}>
@@ -59,7 +60,7 @@ class ActivityCard extends React.Component {
                                 <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
                             </div>
                             <div className="big-info-container">
-                                <p className="big-info-container-p">{this.props.activity.date} - {this.props.activity.date_end}</p>
+                                <p className="big-info-container-p">{date}</p>
                                 <p className="big-info-container-p">{this.props.activity.time_start} - {this.props.activity.time_end}</p>
                                 <p className="big-info-container-p">{this.props.activity.location}</p>
                             </div>

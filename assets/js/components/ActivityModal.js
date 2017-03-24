@@ -93,7 +93,7 @@ class ActivityModal extends Component {
     };
 
     render() {
-        const { date, activityName, facebookID,activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos} = this.props.activity;
+        const { date, activityName, facebook, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos} = this.props.activity;
 
         let suitedForContainer =  [];
         if(suitedForType >= 0) {
@@ -198,15 +198,12 @@ class ActivityModal extends Component {
         }
 
         let facebookContainer = null;
-        if (facebookID) {
-
-            let data = getFacebookEventData(facebookID, data => {
-                console.log(data)
-            });
-
+        if (facebook) {
+            console.log(facebook);
             facebookContainer = (
                 <div className="modal-facebook-container">
                     <h3>Informasjon om arrangementet fra Facebook</h3>
+                    <div></div>
                 </div>
             );
         }

@@ -48,7 +48,8 @@ export default function ActivityReducer(state=initialState, action) {
             return {
                 ...state,
                 activeDateFilter: action.weekFilter,
-            }
+            };
+
         default:
             return state;
     }

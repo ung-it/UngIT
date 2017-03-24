@@ -46,7 +46,7 @@ function getFacebookEvents(callback) {
 function getFacebookEventData(eventID, callback) {
     asyncFacebook(function () {
         FB.getLoginStatus(function (response) {
-            $.get('https://graph.facebook.com/v2.8/'.concat(eventID).concat("?fields=admins,attending,photos,picture,roles,videos").concat('&access_token=').concat(response.authResponse.accessToken), function (response) {
+            $.get('https://graph.facebook.com/v2.8/'.concat(eventID).concat("?fields=admins,attending,photos{images},picture,roles,videos").concat('&access_token=').concat(response.authResponse.accessToken), function (response) {
                 if (response && !response.error) {
                     callback(response);
                 }

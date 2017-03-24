@@ -15,7 +15,21 @@ export function getUpcomingActivities(callback) {
 }
 
 export function getAllActivities() {
-    return fetchFromServer('/api/activities/');
+    return fetchFromServer('/api/activities/').then(response => {
+        return Promise.all(response.map(activity => {
+           if (activity.fields.facebookID) {
+               return new Promise(function (resolve) {
+                   getFacebookEventData(activity.fields.facebookID, resolve);
+               }).then(data => {
+                   activity.fields.facebook = data;
+                   return activity;
+               });
+           }
+           else {
+               return activity;
+           }
+        }));
+    });
 }
 
 export function getAllAttendingActivities() {

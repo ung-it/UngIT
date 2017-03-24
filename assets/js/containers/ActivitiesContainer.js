@@ -12,10 +12,6 @@ const store = configureStore();
 
 class ActivitiesContainer extends Component {
 
-    componentDidMount() {
-        this.props.fetchActivities();
-    }
-
     createActivityCardComponent = () => {
         return this.props.activities.map(activity => {
             return (

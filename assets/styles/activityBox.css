@@ -1,14 +1,14 @@
 /* Styling for activities on home page */
 .activitySmalStyle {
-    width: 75em;
-    height: 35em;
+    width: 25em;
+    height: 25em;
     cursor: pointer;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 15px;
     border: 1px solid rgb(42, 42, 42);
     border-radius: 10px;
-    background-color: rgb(42, 42, 42);
     color: white;
+    display: flex;
+    box-shadow: 5px 10px 5px rgb(42, 42, 42);
 }
 
 .activitySmalStyle:hover {
@@ -17,27 +17,31 @@
     border-color: dimgray;
 }
 
-.small-image {
-    width: 25em !important;
-    height: 25em !important;
-    border-radius: 10px;
-    z-index: -1;
-}
 
 .caption {
     height: 12em;
 }
+.info-header {
+    text-align: center;
+    border-bottom: 1px solid white;
+    margin: 0 15px 0 0 ;
+    padding: 10px 0;
+}
 
 .info-box-wrapper {
-    display: flex;
-    flex-direction: row;
-    margin-left: 15px;
+    background-color: rgb(42, 42, 42);
+    opacity: 0.8;
+    padding-left: 15px;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    align-self: flex-end;
+
 }
 
-.icon-container {
-
+.info-box-wrapper:hover {
+    background-color: rgb(42, 42, 42);
 }
-
 
 
 /* Styling for activities on all activities page */

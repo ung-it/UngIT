@@ -46,23 +46,31 @@ class ActivityCardHomePage extends React.Component {
 
         const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
 
+        const divStyle = {
+            backgroundImage: 'url(' + poster + ')',
+            width: '25em',
+            height: '25em',
+            borderRadius: '10px',
+        };
+
         return (
             <div key={this.props.activity.id}>
                 <div
                     className="activitySmalStyle"
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
+                    style={divStyle}
                 >
-                    <img src={poster} className="small-image" />
-                        <h3>{this.props.activity.activityName}</h3>
-                        <div className="info-box-wrapper">
-                            <div className="icon-container">
-                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
-                                <p><Glyphicon glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0,5)} - {this.props.activity.time_end.slice(0,5)}</p>
-                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</p>
-                            </div>
-
+                    <div className="info-box-wrapper">
+                        <h3 className="info-header">{this.props.activity.activityName}</h3>
+                        <div className="icon-container">
+                            <p className="row">
+                                <div className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</div>
+                                <div className="col-md-5"><Glyphicon glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)}- {this.props.activity.time_end.slice(0, 5)}</div>
+                            </p>
+                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</p>
                         </div>
+                    </div>
                     <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
                                    show={this.state.show}/>
                 </div>

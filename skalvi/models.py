@@ -82,7 +82,7 @@ class Commentary(models.Model):
     comment = models.TextField()
     date = models.DateTimeField()
 
-    
+
 ###########  Relations tables  ##########
 
 class ParticipateIn(models.Model):

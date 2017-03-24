@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.core import serializers
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-
+from datetime import datetime
 #Python POST-request
 import urllib.request
 import json
@@ -148,6 +148,31 @@ def rateActivity(request):
     activity.rating = (currentRating + float(rating))
     activity.save()
     return HttpResponse(status=200, content_type='application/json')
+
+
+@csrf_exempt
+def postComment(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
+
+    activity = Activity.objects.get(pk=activityId)
+    user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
+
+    post = Commentary(userId=request.user, userProfile=user_profile, activityId=activity, comment=comment, date=datetime.now())
+    post.save()
+    return HttpResponse(status=200, content_type='application/json')
+
+@csrf_exempt
+def getComments(request):
+    activityId = request.path.split("/")[2]
+    activity = Activity.objects.get(pk=activityId)
+    json_serializer = serializers.get_serializer("json")()
+    comments = json_serializer.serialize(Commentary.objects.filter(activityId=activity), ensure_ascii=False)
+    print(comments)
+    return HttpResponse(comments, content_type='application/json')
+
+
+
 
 def logout_user(request):
     userprofiles = UserProfile.objects.filter(user=request.user)

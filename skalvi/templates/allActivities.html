@@ -8,9 +8,15 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'styles/allactivities.css' %}" />
 
-    <div class="content">
+    <link rel="stylesheet" href="{% static 'styles/material.min.css'%}">
+    <script src="{% static 'js/material.min.js'%}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-        <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
+    <div class="content">
+        {% if user.is_authenticated %}
+            <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
+        {% endif %}
+
         <div class="content-margin-top">
             <h2>Aktiviteter</h2>
             <p>Her er en oversikt over alle aktiviteter og grupper som tilbys i Trondheim kommune</p>

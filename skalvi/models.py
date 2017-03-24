@@ -6,6 +6,9 @@ from django.contrib.auth.models import Permission, User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from jsonfield import JSONField
+
+
 ACTIVITY_TYPES = (
     (0, 'Ukjent'),
     (1, 'Skating'),
@@ -30,6 +33,8 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
     profile_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=False)
+    is_provider = models.BooleanField(default=False)
+    aktordatabase = JSONField()  # contains all found information
 
 
 
@@ -42,7 +47,7 @@ class Activity(models.Model):
     provider = models.CharField(max_length=80)
     facebookID = models.IntegerField(blank=True, null=True)
     facebookInfo = models.BooleanField(blank=True)
-    adaptions = models.TextField()
+    adaptions = models.TextField(blank=True)
     age = models.CharField(max_length=80)
     location = models.CharField(max_length=80)
     description = models.TextField()
@@ -64,13 +69,21 @@ class Activity(models.Model):
 
 
 class Organisation(models.Model):
-    orgNumber = models.CharField(max_length=9, primary_key=True)
-    orgName = models.CharField(max_length=40)
-    phone = models.CharField(max_length=8)
-    email = models.CharField(max_length=40)
+    # not every provider has a org.number, but most do. to handle this we use
+    # auto increment, thus not specifying primary key, and lets Django handle this.
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)  # set the relation / extension to the user model
+    userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)  # set the relation / extension to the user model
+    aktordatabase = JSONField()  # contains all found information
+
 
     def __str__(self):
-        return self.orgName + ": org. number: " + self.orgNumber
+        if self.userprofile:
+            return self.userprofile.profile_name
+        elif self.aktordatabase:
+            return self.aktordatabase['Navn']
+        else:
+            return 'Mangler informasjon'
+
 
 
 ###########  Relations tables  ##########
@@ -84,6 +97,7 @@ class ParticipateIn(models.Model):
 class Hosts(models.Model):
     activityId = models.OneToOneField(Activity, on_delete=models.CASCADE)
     adminId = models.ForeignKey(User, on_delete=models.CASCADE)
+    profileId = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     # orgNr = models.ForeignKey(Organisation, on_delete=models.CASCADE) <-- should get the same information through the
     # admin user reference.
 

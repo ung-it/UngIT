@@ -6,64 +6,68 @@
 {% endblock %}
 
 {% block body %}
-    <link href='http://fonts.googleapis.com/css?family=Unica+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
 
-    <div style="height: 100px"></div>
-    <div id="myPageContent">
+    <div class="content-margin-top">
         <div id="profilesOnMyPage" >
             <ul class="social">
                 {% for profile in profiles %}
-                    <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init">{{profile.initiales}}</a></li>
+                    <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init" class="profileButton">{{profile.initiales}}</a></li>
                 {% endfor %}
 
                 <li style="margin-top: 5em"><a href="/registerProfile/" aria-hidden="true" class="text-init" id="addProfile">+</a></li>
             </ul>
         </div>
+        <div class="content">
+            <div id="myPageContent">
+                <div id="profileOnMyPage">
+                    {% for profile in profiles %}
+                        {% if request.path == profile.path %}
 
-        <div id="profileOnMyPage">
-            {% for profile in profiles %}
-                {% if request.path == profile.path %}
+                            <div id="profile">
 
-                    <div id="profile">
+                                <div id="profilePicture">
+                                    <img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile">
+                                </div>
 
-                        <div id="profilePicture">
-                            <img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile">
-                        </div>
+                                <div id="profileInformation">
+                                    <h4>Profilnavn: {{ profile.profile_name }}</h4>
+                                    {% if profile.type == "P" %}
+                                        <h4>Brukertype: Voksen</h4>
+                                    {%  else %}
+                                        <h4>Brukertype: Barn </h4>
+                                    {% endif %}
+                                    <h4>Telefon: {{ profile.phone }}</h4>
+                                    <h4>Aktiv: {{ profile.is_active }}</h4>
+                                </div>
 
-                        <div id="profileInformation">
-                            <h4>Profilnavn: {{ profile.profile_name }}</h4>
-                            {% if profile.type == "P" %}
-                                <h4>Brukertype: Voksen</h4>
-                            {%  else %}
-                                <h4>Brukertype: Barn </h4>
-                            {% endif %}
-                            <h4>Telefon: {{ profile.phone }}</h4>
-                            <h4>Aktiv: {{ profile.is_active }}</h4>
-                        </div>
 
-                    </div>
+                            </div>
 
-                    <div id="profileActivities">
+                            <div id="profileActivities">
 
-                        <div id="attending_Activities">
-                            <h3>Dine kommende aktiviteter</h3>
-                            <div id="attendingActivities"></div>
-                        </div>
+                                <div id="attending_Activities">
+                                    <h3>Dine kommende aktiviteter</h3>
+                                    <div id="attendingActivities"></div>
+                                </div>
 
-                        <div id="hostingActivities">
-                            <h3>Mine aktiviteter</h3>
-                        </div>
+                                <div id="hosting_Activities">
+                                    <h3>Mine aktiviteter <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a></h3>
+                                    <div id="hostingActivities"></div>
+                                </div>
 
-                    </div>
-                {% endif %}
-            {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
 
 {% block explicitPageFooter %}
     {% render_bundle 'attendingActivitiesContainer' %}
+    {% render_bundle 'hostingActivitiesContainer' %}
 {% endblock %}
 
 

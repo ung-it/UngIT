@@ -21,7 +21,9 @@ class ActivityModal extends Component {
             hasChecked: false,
             attending: false,
             loggedIn: false,
+            fetchedComments: false,
             comments: []
+
         }
     }
 
@@ -42,7 +44,8 @@ class ActivityModal extends Component {
     closeActivityModal = () => {
         this.setState({
             show: false,
-            hasChecked: false
+            hasChecked: false,
+            fetchedComments: false
         });
     };
 
@@ -60,7 +63,6 @@ class ActivityModal extends Component {
             body: JSON.stringify(request)
 
         }).then((response) => {
-            console.log(response);
             if (response.status == 204) {
                 this.setState({
                     attending: true
@@ -72,7 +74,6 @@ class ActivityModal extends Component {
     };
 
     onSignOf = () => {
-        console.log("id " + this.props.id);
 
         var request = {
             id: this.props.id
@@ -87,7 +88,7 @@ class ActivityModal extends Component {
             body: JSON.stringify(request)
 
         }).then((response) => {
-            console.log(response);
+            // console.log(response);
             if (response.status == 210) {
                 this.setState({
                     attending: false
@@ -108,9 +109,9 @@ class ActivityModal extends Component {
     fetchComments = () => {
         getComments(this.props.id).then((result) => {
             this.setState({
-                comments: result
+                comments: result,
+                fetchedComments: true,
             });
-            console.log(this.state.comments)
         });
     };
 
@@ -129,7 +130,6 @@ class ActivityModal extends Component {
         const {date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, images, rating, number_of_ratings} = this.props.activity;
 
         const starRating = rating / number_of_ratings;
-        console.log(starRating)
         let suitedForContainer = [];
         if (suitedForType >= 0) {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
@@ -176,7 +176,6 @@ class ActivityModal extends Component {
                 body: JSON.stringify(request)
 
             }).then((response) => {
-                console.log(response);
                 if (response.status == 204) {
                     this.setState({
                         attending: true,
@@ -202,6 +201,8 @@ class ActivityModal extends Component {
 
         let attendingContainer = null;
         let ratingContainer = null;
+        let postCommentContainer = null;
+
         if (!this.state.loggedIn) {
             attendingContainer =
                 <div className="modal-infobox2">
@@ -232,13 +233,24 @@ class ActivityModal extends Component {
             ratingContainer =
                 <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
                                      onStarClick={this.onRateChange.bind(this)}/>;
+            postCommentContainer =
+                <div id="postComment">
+                    <form className="comment-form" method="POST" action="/postComment/">
+                        <div className="input-group">
+                            <textarea placeholder="Skriv inn din kommentar her" id="commentInput"
+                                      className="form-control custom-control"></textarea>
+                            <span className="input-group-addon btn btn-primary"
+                                  onClick={this.onPostComment.bind(this)}>Send</span>
+                        </div>
+                    </form>
+                </div>;
         }
 
-        // let allComments = []
-        //
-        // for (var i = 0; i < this.state.comments.length; i++) {
-        //   allComments.push(<Commment data={this.props.data[i]} id={'element-' + i} key={i} />)
-        // }
+        if(this.state.show && !this.state.fetchedComments){
+            this.fetchComments()
+        }
+
+        let allComments = this.state.comments;
 
         return (
             <Modal
@@ -283,34 +295,20 @@ class ActivityModal extends Component {
                     {/* videoContainer */}
                     {imageContainer}
                     <hr/>
-                    <div id="postComment">
-                        <form className="comment-form" method="POST" action="/postComment/">
-                            <div className="input-group">
-                                <textarea placeholder="Skriv inn din kommentar her" id="commentInput"
-                                          className="form-control custom-control"></textarea>
-                                <span className="input-group-addon btn btn-primary"
-                                      onClick={this.onPostComment.bind(this)}>Send</span>
-                            </div>
-                        </form>
-                    </div>
+                    <h2 className="modal-comments">Kommentarer</h2>
+                    {postCommentContainer}
                     <div id="commentDiv">
-                        <div className="commentBackground">
-                            <p className="comment">Det var en gang en gutt med downs som satt i rullestol og var blid.
-                                Han skulle på klatring for di han hadde veldig lyst og fordi han ville irritere moren
-                                sin. Hun hater å ta han med på aktiviteter han ikke kan være med på fordi det er så
-                                jævla flaut. </p>
-                        </div>
-                        <hr/>
-                        <div className="commentBackground"><p className="comment">Det var en gang en gutt med downs som satt i rullestol og var blid. Han skulle på klatring for di han hadde veldig lyst og fordi han ville irritere moren sin. Hun hater å ta han med på aktiviteter han ikke kan være med på fordi det er så jævla flaut. </p></div>
-                        <div className="commentBackground"><p className="comment">Det var en gang en gutt med downs som
-                            satt i rullestol og var blid. Han skulle på klatring for di han hadde veldig lyst og fordi
-                            han ville irritere moren sin. Hun hater å ta han med på aktiviteter han ikke kan være med på
-                            fordi det er så jævla flaut. </p></div>
-                        </div>
+                        {allComments.reverse().map((com, i) =>
+                         <div className="commentBackground" key={com.pk}>
+                             <p className="comment">{com.fields.comment}</p>
+                         </div>
+                        )}
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.editActivity}>Endre aktivitet</Button>
                     <Button onClick={this.closeActivityModal}>Lukk</Button>
+                    <Button onClick={this.fetchComments}>Kommentarer</Button>
                 </Modal.Footer>
             </Modal>
         )

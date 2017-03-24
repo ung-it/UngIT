@@ -10,9 +10,9 @@ i{
 
 .commentBackground{
     margin-top: 1em;
-    width: 100%;
+    width: 90%;
     background-color: #f1f0f0;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 #commentDiv{
@@ -160,6 +160,10 @@ background: #03a7ff;
 
 .modal-description-header {
     color: #ffc62f !important;
+}
+
+.modal-comments {
+    color: #03adff !important;
 }
 
 .modal-description {

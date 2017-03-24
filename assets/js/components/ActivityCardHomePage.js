@@ -50,7 +50,6 @@ class ActivityCardHomePage extends React.Component {
                     className="activitySmalStyle"
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
-                    style="background-image:"{poster}";"
                 >
 
                         <h3>{this.props.activity.activityName}</h3>

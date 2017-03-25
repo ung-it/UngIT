@@ -48,8 +48,8 @@
 .activityBigStyle {
     width: 100%;
     cursor: pointer;
-    display: flex;
-    flex-direction: row;
+    /*display: flex;*/
+    /*flex-direction: row;*/
     justify-content: space-between;
     border: 1px solid lightgray;
     border-radius: 4px;
@@ -71,34 +71,31 @@
 }
 
 .big-info-box-wrapper {
-    display: flex;
+    /*display: flex;*/
 }
 
 .big-icon-container {
     margin-right: 10px;
 }
 
-.big-info-container {
-    flex-basis: 300px;
-    flex-grow: 0;
-    flex-shrink: 0;
-}
+/*.big-info-container {*/
+    /*flex-basis: 300px;*/
+    /*flex-grow: 0;*/
+    /*flex-shrink: 0;*/
+/*}*/
 
 .big-info-container-p {
     font-weight: bold;
 }
 
-.big-about-container {
-    margin-left: 20px;
-    flex-basis: 80%;
-    flex-grow: 0;
-    flex-shrink: 0;
-}
+/*.big-about-container {*/
+    /*margin-left: 20px;*/
+    /*flex-basis: 80%;*/
+    /*flex-grow: 0;*/
+    /*flex-shrink: 0;*/
+/*}*/
 
 
-.imageItem {
-
-}
 
 .filter-container {
     margin-top: 15px;

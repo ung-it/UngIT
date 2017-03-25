@@ -53,25 +53,34 @@ class ActivityCard extends React.Component {
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
                 >
-                    <div className="infoItem">
-                        <h3>{this.props.activity.activityName}</h3>
-                        <div className="big-info-box-wrapper">
-                            <div className="big-icon-container">
-                                <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                                <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
-                            </div>
-                            <div className="big-info-container">
-                                <p className="big-info-container-p">{date}</p>
-                                <p className="big-info-container-p">{this.props.activity.time_start} - {this.props.activity.time_end}</p>
-                                <p className="big-info-container-p">{this.props.activity.location}</p>
-                            </div>
-                            <div className="big-about-container">
-                                <p>{this.props.activity.description}</p>
+                    <div className="row">
+                        <div className="col-sm-9">
+                            <h3>{this.props.activity.activityName}</h3>
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <div className="row">
+                                        <div classID="big-icon-container" className="col-md-1">
+                                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
+                                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
+                                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
+                                        </div>
+                                        <div classID="big-info-container" className="col-md-8">
+                                            <p className="big-info-container-p">{date}</p>
+                                            <p className="big-info-container-p">{this.props.activity.time_start}
+                                                - {this.props.activity.time_end}</p>
+                                            <p className="big-info-container-p">{this.props.activity.location}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div className="col-md-8">
+                                    <p>{this.props.activity.description}</p>
+                                </div>
                             </div>
                         </div>
+                        <div className="col-sm-2"><img src={poster}/></div>
                     </div>
-                    <div className="imageItem"><img src={poster}/></div>
+
                     <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
                                    show={this.state.show}/>
                 </div>

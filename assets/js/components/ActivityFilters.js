@@ -29,7 +29,7 @@ class ActivityFilters extends React.Component {
             <div>
                 <div className="row">
                     <div className="col-md-10">
-                        <h3>Finn aktiviteter</h3>
+                        <h2 className="title">Finn aktiviteter</h2>
                     </div>
                     <div className="2">
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">

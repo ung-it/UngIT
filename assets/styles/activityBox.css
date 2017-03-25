@@ -8,7 +8,7 @@
     border-radius: 10px;
     color: white;
     display: flex;
-    box-shadow: 5px 10px 5px rgb(42, 42, 42);
+    box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);
 }
 
 .activitySmalStyle:hover {
@@ -52,20 +52,29 @@
     /*flex-direction: row;*/
     justify-content: space-between;
     border: 1px solid lightgray;
-    border-radius: 4px;
-    background-color: white;
-    margin-bottom: 10px;
+    /*border-radius: 4px;*/
+    background-color: whitesmoke;
+    box-shadow: 2.5px 5px 2.5px lightgrey;
+    margin-bottom: 15px;
     padding: 10px;
+    border-radius: 4px;
 
+}
+
+.big-info-header {
+    border-bottom: 1px solid darkgrey;
+    font-family: Perpetua;
 }
 
 .activityBigStyle img {
     height: 15em;
-    margin-left: 0;
+    margin-top: 10px;
+    display: block;
+    margin: auto;
 }
 
 .activityBigStyle:hover {
-    background-color: whitesmoke;
+    background-color: rgb(230,230,230);
     border-style: solid;
     border-color: dimgray;
 }

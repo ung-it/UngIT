@@ -50,7 +50,9 @@ class ActivityCardHomePage extends React.Component {
             backgroundImage: 'url(' + poster + ')',
             width: '25em',
             height: '25em',
-            borderRadius: '10px',
+            backgroundSize: '25em 25em',
+            borderRadius: '5px',
+            backgroundRepeat: 'no-repeat',
         };
 
         return (
@@ -64,10 +66,10 @@ class ActivityCardHomePage extends React.Component {
                     <div className="info-box-wrapper">
                         <h3 className="info-header">{this.props.activity.activityName}</h3>
                         <div className="icon-container">
-                            <p className="row">
-                                <div className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</div>
-                                <div className="col-md-5"><Glyphicon glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</div>
-                            </p>
+                            <div className="row">
+                                <p className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
+                                <p className="col-md-5"><Glyphicon glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</p>
+                            </div>
                             <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</p>
                         </div>
                     </div>

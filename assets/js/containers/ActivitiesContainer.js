@@ -30,23 +30,18 @@ class ActivitiesContainer extends Component {
 
     render() {
         const styles = {
-            activitiesContainerStyle: {
-                margin: "0px 10px 0px 10px",
-            },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "center",
-                width: '100%'
+                justifyContent: "space-between",
+                width: '100%',
             }
         };
 
         return (
-            <div style={styles.activitiesContainerStyle}>
-              <div style={styles.activitiesStyle}>
-                  {this.createActivityCardComponent()}
-              </div>
+            <div style={styles.activitiesStyle}>
+                {this.createActivityCardComponent()}
             </div>
         );
     }

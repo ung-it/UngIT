@@ -52,12 +52,11 @@
     /*flex-direction: row;*/
     justify-content: space-between;
     border: 1px solid lightgray;
-    /*border-radius: 4px;*/
+    border-radius: 4px;
     background-color: whitesmoke;
     box-shadow: 2.5px 5px 2.5px lightgrey;
     margin-bottom: 15px;
     padding: 10px;
-    border-radius: 4px;
 
 }
 
@@ -93,8 +92,9 @@
     /*flex-shrink: 0;*/
 /*}*/
 
-.big-info-container-p {
+.big-info-container-div {
     font-weight: bold;
+    margin: 20px;
 }
 
 /*.big-about-container {*/

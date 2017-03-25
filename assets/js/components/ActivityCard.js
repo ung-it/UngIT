@@ -57,29 +57,19 @@ class ActivityCard extends React.Component {
                         <div className="col-sm-9">
                             <h3 className="big-info-header">{this.props.activity.activityName}</h3>
                             <div className="row">
-                                <div className="col-md-3">
-                                    <div className="row">
-                                        <div classID="big-icon-container" className="col-md-1">
-                                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
-                                        </div>
-                                        <div classID="big-info-container" className="col-md-8">
-                                            <p className="big-info-container-p">{date}</p>
-                                            <p className="big-info-container-p">{this.props.activity.time_start}
-                                                - {this.props.activity.time_end}</p>
-                                            <p className="big-info-container-p">{this.props.activity.location}</p>
-                                        </div>
+                                    <div classID="big-info-container" className="col-md-3">
+                                        <div className="big-icon-container-div"><Glyphicon glyph="glyphicon glyphicon-calendar"/>{date}</div>
+                                        <div className="big-icon-container-div"><Glyphicon glyph="glyphicon glyphicon-time"/>{this.props.activity.time_start}
+                                            - {this.props.activity.time_end}</div>
+                                        <div className="big-icon-container-div"><Glyphicon glyph="glyphicon glyphicon-map-marker"/>{this.props.activity.location}</div>
                                     </div>
-
-                                </div>
-                                <div className="col-md-8">
-                                    <p>{this.props.activity.description}</p>
-                                </div>
+                            <div className="col-md-8">
+                                <p>{this.props.activity.description}</p>
                             </div>
                         </div>
-                        <div className="col-md-2"><img src={poster}/></div>
                     </div>
+                    <div className="col-md-2"><img src={poster}/></div>
+                </div>
 
                     <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
                                    show={this.state.show}/>

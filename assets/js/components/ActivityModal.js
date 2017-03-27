@@ -29,6 +29,7 @@ class ActivityModal extends Component {
             attending: false,
             loggedIn: false,
             fetchedComments: false,
+            noComments: true,
             comments: []
         }
     }
@@ -115,11 +116,17 @@ class ActivityModal extends Component {
 
     fetchComments = () => {
         getComments(this.props.id).then((result) => {
-            this.setState({
-                comments: result.reverse(),
-                fetchedComments: true,
-            });
-
+            if (result.message == "ingen kommentar funnet") {
+                this.setState({
+                    noComment: true
+                })
+            } else {
+                this.setState({
+                    comments: result.reverse(),
+                    fetchedComments: true,
+                    noComments: false
+                });
+            }
         });
     };
 
@@ -178,6 +185,9 @@ class ActivityModal extends Component {
         let attendingContainer = null;
         let ratingContainer = null;
         let postCommentContainer = null;
+        let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
+        let allComments = this.state.comments;
+
 
         if (!this.state.loggedIn) {
             attendingContainer =
@@ -205,6 +215,7 @@ class ActivityModal extends Component {
                     </div>
                 </div>;
         }
+
         if (this.state.loggedIn) {
             ratingContainer =
                 <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
@@ -223,16 +234,25 @@ class ActivityModal extends Component {
                 </div>;
         }
 
-        if (this.state.noComments) {
-
-
-        }
-
         if (this.state.show && !this.state.fetchedComments) {
-            this.fetchComments()
+            this.fetchComments();
+            console.log("jajajaja")
         }
 
-        let allComments = this.state.comments;
+
+        if (!this.state.noComments) {
+            commentsContainer =
+                <div id="commentDiv">
+                    {allComments.map((com, i) =>
+                        <div className="commentBackground" key={com.pk}>
+                            <p className="date"><span><b>{com.fields.userProfile_name}</b></span> - {com.fields.date}
+                            </p>
+                            <p className="comment">{com.fields.comment}</p>
+                        </div>
+                    )}
+                </div>;
+        }
+
 
         return (
             <Modal
@@ -279,14 +299,8 @@ class ActivityModal extends Component {
                     <hr/>
                     <h2 className="modal-comments">Kommentarer</h2>
                     {postCommentContainer}
-                    <div id="commentDiv">
-                        {allComments.map((com, i) =>
-                            <div className="commentBackground" key={com.pk}>
-                                <p className="date"> <span><b>{com.fields.userProfile_name}</b></span> - {com.fields.date}</p>
-                                <p className="comment">{com.fields.comment}</p>
-                            </div>
-                        )}
-                    </div>
+                    {commentsContainer}
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.editActivity}>Endre aktivitet</Button>

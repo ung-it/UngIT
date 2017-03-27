@@ -165,10 +165,9 @@ def getComments(request):
     activity = Activity.objects.get(pk=activityId)
     json_serializer = serializers.get_serializer("json")()
     comments = json_serializer.serialize(Commentary.objects.filter(activityId=activity), ensure_ascii=False)
-    # if comments == "[]":
-    #     message = '{"message": "ingen kommentar funnet"}'
-    #     print("HEI")
-    #     return HttpResponse(json_serializer.serialize(message))  # no comments
+    if comments == "[]":
+        message = {"message": "ingen kommentar funnet"}
+        return HttpResponse(json.dumps(message))  # no comments
 
     return HttpResponse(comments, content_type='application/json')
 

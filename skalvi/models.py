@@ -79,6 +79,7 @@ class Commentary(models.Model):
     activityId = models.ForeignKey(Activity, on_delete=models.CASCADE)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     userProfile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    userProfile_name = models.TextField()
     comment = models.TextField()
     date = models.DateField()
     time = models.TimeField()

@@ -154,8 +154,8 @@ def postComment(request):
 
     activity = Activity.objects.get(pk=activityId)
     user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
-
-    post = Commentary(userId=request.user, userProfile=user_profile, activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
+    print("profile ", user_profile.profile_name)
+    post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name, activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
     return HttpResponse(status=200, content_type='application/json')
 

@@ -119,6 +119,7 @@ class ActivityModal extends Component {
                 comments: result.reverse(),
                 fetchedComments: true,
             });
+
         });
     };
 
@@ -281,7 +282,7 @@ class ActivityModal extends Component {
                     <div id="commentDiv">
                         {allComments.map((com, i) =>
                             <div className="commentBackground" key={com.pk}>
-                                <p className="date">{com.fields.date}</p>
+                                <p className="date"> <span><b>{com.fields.userProfile_name}</b></span> - {com.fields.date}</p>
                                 <p className="comment">{com.fields.comment}</p>
                             </div>
                         )}
@@ -290,7 +291,6 @@ class ActivityModal extends Component {
                 <Modal.Footer>
                     <Button onClick={this.editActivity}>Endre aktivitet</Button>
                     <Button onClick={this.closeActivityModal}>Lukk</Button>
-                    <Button onClick={this.fetchComments}>Kommentarer</Button>
                 </Modal.Footer>
             </Modal>
         )

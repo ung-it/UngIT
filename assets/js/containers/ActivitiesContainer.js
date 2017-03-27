@@ -30,22 +30,18 @@ class ActivitiesContainer extends Component {
 
     render() {
         const styles = {
-            activitiesContainerStyle: {
-                margin: "0px 10px 0px 10px"
-            },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "center"
+                justifyContent: "space-between",
+                width: '100%',
             }
         };
 
         return (
-            <div style={styles.activitiesContainerStyle}>
-              <div style={styles.activitiesStyle}>
-                  {this.createActivityCardComponent()}
-              </div>
+            <div style={styles.activitiesStyle}>
+                {this.createActivityCardComponent()}
             </div>
         );
     }
@@ -56,7 +52,7 @@ const mapStateToProps = state => {
     return {
         activities: state.activity.activityList
             .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            .slice(0, 5), // Only get five first
+            .slice(0, 4), // Only get five first
     };
 };
 

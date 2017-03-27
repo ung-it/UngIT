@@ -51,7 +51,7 @@ class ActivityCardHomePage extends React.Component {
             width: '25em',
             height: '25em',
             backgroundSize: '25em 25em',
-            borderRadius: '5px',
+            borderRadius: '3px',
             backgroundRepeat: 'no-repeat',
         };
 

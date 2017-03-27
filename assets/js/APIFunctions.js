@@ -31,18 +31,15 @@ export function getFacebookEventData(activities) {
     }).then(token => {
 
         let batch = eventIDs.map(id => {
-            return {
-                "method":"GET",
-                "relative_url": id + "?fields=admins,attending,photos{images},picture,roles,videos"}
+            return {method:"GET", relative_url: id + "?fields=admins,attending,photos{images},picture,roles,videos"};
         });
-
         let data = {
             access_token: token,
             batch: batch
         };
-        console.log(data);
-        return postToServer('https://graph.facebook.com', data).then(data => {
-            console.log(data)
+        return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
+            console.log(data);
+            return data;
         });
     });
 
@@ -91,8 +88,9 @@ function postToServer(query, data) {
         },
         credentials: "same-origin",
         body: JSON.stringify(data)
-
     }).then((response) => {
-        return response;
+        return response.json();
+    }).then(function (result) {
+        return result;
     })
 }

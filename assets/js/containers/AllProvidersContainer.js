@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
 
+import "../../styles/activityBox.css";
+
 import { fetchAllProviders } from "../actions/providersActions";
 import ProvidersList from '../components/ProvidersList';
 import configureStore from "../configureStore";

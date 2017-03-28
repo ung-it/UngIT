@@ -121,6 +121,7 @@ class Scraper:
             values = self.soup.find_all('dd')
             addresses = self.soup.find_all('address')
             categories = self.soup.find_all('ul', class_='unstyled')
+            urlLink = self.soup.find_all('a')
 
             for i in range(0, len(keys)):
                 if(keys[i].string.strip() == 'Kategori(er)'):
@@ -162,6 +163,14 @@ class Scraper:
                     value = value[:-1]
                     information[keys[i].string] = value
 
+                elif (keys[i].string == "Internettadresse"):
+                    for link in urlLink:
+                        site = (link.get('href'))
+
+                    information[keys[i].string] = site
+
+
+
                 elif(keys[i].string != 'Adresse'):
                     information[keys[i].string] = values[i].string
 
@@ -196,7 +205,7 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(1,1478):
+        for i in range(1,1478):   # 1, 1478
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
 

@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 
 import ActivityModal from './ActivityModal';
-import {getMonth, getDay} from '../DateFunctions';
 
 const moment = require('moment');
 
@@ -65,7 +64,6 @@ class ActivityCardHomePage extends React.Component {
         }
 
         let dato = new Date(this.props.activity.date);
-        dato = dato.getDate() + ". "+ getMonth(dato.getMonth());
 
         const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
 
@@ -91,22 +89,11 @@ class ActivityCardHomePage extends React.Component {
                     <div className="info-box-wrapper">
                         <h3 className="info-header">{this.props.activity.activityName}</h3>
                         <div className="icon-container">
-{/*<<<<<<< HEAD*/}
-                            {/*<p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>*/}
-                            {/*<p><Glyphicon glyph="glyphicon glyphicon-time"/></p>*/}
-                            {/*<p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>*/}
-                        {/*</div>*/}
-                        {/*<div className="info-container">*/}
-                            {/*<p>{dato}</p>*/}
-                            {/*<p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>*/}
-                            {/*<p>{this.props.activity.location}</p>*/}
-{/*=======*/}
                             <div className="row">
                                 <p className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
                                 <p className="col-md-5"><Glyphicon glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</p>
                             </div>
                             <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</p>
-{/*>>>>>>> origin/dev*/}
                         </div>
                     </div>
                     <ActivityModal id={this.props.id} activity={this.props.activity} images={images}

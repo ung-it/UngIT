@@ -66,18 +66,23 @@ def checkIfSingedUp(request):
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
-
+        json_serializer = serializers.get_serializer("json")()
+        # response = ""
         # Check if user already is attending
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
-            return HttpResponse(status=204)  # 204 == attending
+            response = {'attending': True}
+            # return HttpResponse(status=204)  # 204 == attending
 
         except ParticipateIn.DoesNotExist:
             # If user isn't signed up
-            return HttpResponse(status=205)  # 205 == not attending
+            response = {'attending': False}
+            # return HttpResponse(status=205)  # 205 == not attending
     else:
         # If user is not loged in
-        return HttpResponse(status=206)  # not logged in
+        response = {'attending': None}
+        # return HttpResponse(status=206)  # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
 def signOfEvent(request):

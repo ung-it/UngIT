@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 //Bootstrap import
 import {Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl,} from 'react-bootstrap';
 //Project component import
-import {getMonth} from '../DateFunctions'
 import CalendarDateBox from './CalendarDateBox';
 //CSS import
 import '../../styles/modal.css';
@@ -86,7 +85,9 @@ class ActivityModal extends Component {
         const request = {
             id: this.props.id
         };
-        checkIfSignedUp(request).then((response) => {
+        console.log("signup")
+        checkIfSignedUp(request, response => {
+            console.log(response)
             if (response.status == 204) {
                 this.setState({
                     attending: true,
@@ -115,7 +116,7 @@ class ActivityModal extends Component {
     };
 
     fetchComments = () => {
-        getComments(this.props.id).then((result) => {
+        getComments(this.props.id,(result) => {
             if (result.message == "ingen kommentar funnet") {
                 this.setState({
                     noComment: true,

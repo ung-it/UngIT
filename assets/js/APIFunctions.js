@@ -58,10 +58,11 @@ function mapActivityToId() {
 
 }
 
-export function getComments(id) {
-    return fetchFromServer('/comments/'+id);
+export function getComments(id, callback) {
+    fetchFromServer('/comments/'+id).then(comments => {
+        callback(comments);
+    });
 }
-
 
 export function getAllAttendingActivities() {
     const profileName = window.location.href.split("/")[4];
@@ -80,8 +81,10 @@ export function signoffActivity(data) {
     return postToServer('/signOfEvent/', data);
 }
 
-export function checkIfSignedUp(data) {
-    return postToServer('/checkIfSignedUp/', data);
+export function checkIfSignedUp(data, callback) {
+    postToServer('/checkIfSignedUp/', data).then(response => {
+        callback(response);
+    });
 }
 
 export function postNewRating(object) {
@@ -98,12 +101,12 @@ function fetchFromServer(query) {
         credentials: "same-origin"
     }).then(response => {
         if (response.status >= 400) {
-            throw new Error("Bad response from server");
+            throw new Error("GET-request: Bad response from server");
         }
         return response.json();
     }).then(function(result) {
         if (result.error || result.length == 0) {
-            console.log("This query gave an empty result or threw an error:\n" + query);
+            console.log("The GET-request gave an empty result or threw an error:\n" + query);
             return Promise.reject(result.error);
         } else {
             return result;
@@ -120,8 +123,16 @@ function postToServer(query, data) {
         credentials: "same-origin",
         body: JSON.stringify(data)
     }).then((response) => {
+        if (response.status >= 400) {
+            throw new Error("POST-request: Bad response from server");
+        }
         return response.json();
     }).then(function (result) {
-        return result;
+        if (result.error || result.length == 0) {
+            console.log("The POST-request gave an empty result or threw an error:\n" + query);
+            return Promise.reject(result.error);
+        } else {
+            return result;
+        }
     })
 }

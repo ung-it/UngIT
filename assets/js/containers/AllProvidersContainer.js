@@ -15,7 +15,7 @@ class AllProvidersContainer extends Component {
 
 
     render() {
-        console.log(this.props.providers);
+
         return (
             <div>
                 <h1>Sigve was here, Christina as well</h1>

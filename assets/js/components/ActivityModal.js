@@ -30,6 +30,7 @@ class ActivityModal extends Component {
             loggedIn: false,
             fetchedComments: false,
             noComments: true,
+            hosting: false,
             comments: []
         }
     }
@@ -52,7 +53,7 @@ class ActivityModal extends Component {
         this.setState({
             show: false,
             hasChecked: false,
-            fetchedComments: false
+            hosting: false
         });
     };
 
@@ -101,7 +102,8 @@ class ActivityModal extends Component {
                 })
             } else if (response == 206) {
                 this.setState({
-                    loggedIn: false
+                    loggedIn: false,
+                    hasChecked: true
                 })
             }
         })
@@ -119,13 +121,11 @@ class ActivityModal extends Component {
         getComments(this.props.id).then((result) => {
             if (result.message == "ingen kommentar funnet") {
                 this.setState({
-                    noComment: true,
-                    fetchedComments: true
+                    noComment: true
                 })
             } else {
                 this.setState({
                     comments: result.reverse(),
-                    fetchedComments: true,
                     noComments: false
                 });
             }
@@ -143,21 +143,28 @@ class ActivityModal extends Component {
     };
 
     fetchHost = () => {
-        let hosting = getHost(this.props.id).then((result) => {
+        getHost(this.props.id,(result) => {
             if(result.host == 'true'){
-                return true
+                this.setState({
+                    hosting: true
+                });
             }
         });
-        console.log(hosting);
-        return hosting
     };
 
 
     render() {
         const {date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
-
         const starRating = rating / number_of_ratings;
         let suitedForContainer = [];
+        let imageContainer = null;
+        let attendingContainer = null;
+        let ratingContainer = null;
+        let postCommentContainer = null;
+        let changeActivityContainer = null;
+        let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
+        let allComments = this.state.comments;
+
         if (suitedForType >= 0) {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
         }
@@ -179,7 +186,6 @@ class ActivityModal extends Component {
         //        </div>;
         //}
 
-        let imageContainer = null;
 
         let images = this.props.images.map(image => {
             return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
@@ -197,16 +203,9 @@ class ActivityModal extends Component {
 
         if (this.state.show && !this.state.hasChecked) {
             this.checkIfSignUp()
-
+            this.fetchComments();
+            this.fetchHost()
         }
-
-        let attendingContainer = null;
-        let ratingContainer = null;
-        let postCommentContainer = null;
-        let changeActivity = null;
-        let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
-        let allComments = this.state.comments;
-
 
         if (!this.state.loggedIn) {
             attendingContainer =
@@ -253,15 +252,10 @@ class ActivityModal extends Component {
                 </div>;
         }
 
-        if (this.state.show && !this.state.fetchedComments) {
-            this.fetchComments();
-            if(this.fetchHost()){
-                changeActivity =
-                    <Button onClick={this.editActivity}>Endre aktivitet</Button>
-
-            }
+        if(this.state.hosting){
+            changeActivityContainer =
+                <Button onClick={this.editActivity}>Endre aktivitet</Button>;
         }
-
 
         if (!this.state.noComments) {
             commentsContainer =
@@ -326,7 +320,7 @@ class ActivityModal extends Component {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    {changeActivity}
+                    {changeActivityContainer}
                     <Button onClick={this.closeActivityModal}>Lukk</Button>
                 </Modal.Footer>
             </Modal>

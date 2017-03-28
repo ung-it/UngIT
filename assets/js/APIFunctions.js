@@ -38,10 +38,21 @@ export function getFacebookEventData(activities) {
             batch: batch
         };
         return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
-            console.log(data);
-            return data;
+            for (let i = 0; i < data.length; i++) {
+                let jsonObject = JSON.parse(data[0].body);
+                for (let j in activities.activities) {
+                    if (activities.activities[j].fields.facebookID == jsonObject.id) {
+                        activities.activities[j].fields.facebook = jsonObject;
+                    }
+                }
+            }
+            return activities.activities;
         });
     });
+
+}
+
+function mapActivityToId() {
 
 }
 

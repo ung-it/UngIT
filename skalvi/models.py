@@ -60,8 +60,8 @@ class Activity(models.Model):
     images = models.ImageField(upload_to='images/',max_length=255, blank=True)
     instagram = models.TextField(blank=True)
     videos = models.ImageField(upload_to='videos/',max_length=255, blank=True)
-    rating = models.FloatField(blank=True, null=True)
-    number_of_ratings = models.IntegerField(blank=True, null=True)
+    rating = models.FloatField(blank=True, default=0)
+    number_of_ratings = models.IntegerField(blank=True, default=0)
 
     def was_published(self):
         return self.pub_date

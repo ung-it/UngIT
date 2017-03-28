@@ -15,7 +15,12 @@ class ProviderCard extends React.Component {
 
 
     createProviderItem = () => {
-        const provider = JSON.parse(this.props.provider.replace("Kategori(er) ", "Kategorier"));
+        const provider = JSON.parse(this.props.provider
+            .replace("Kategori(er) ", "Kategorier")
+            .replace("Type aktivitet ", "TypeAktivitet")
+        );
+
+        console.log(provider);
 
         if(!provider.Navn){
             return null;
@@ -36,7 +41,12 @@ class ProviderCard extends React.Component {
                                         glyph="glyphicon glyphicon-map-marker"/>{provider.Adresse}</div>
                                 </div>
                                 <div className="col-md-8">
-                                    <p>{provider.Kategorier}</p>
+                                    <p>Kategorier: {provider.Kategorier}</p>
+                                    <p>{provider.TypeAktivitet}</p>
+                                    <p>Bydel: {provider.Bydel}</p>
+                                    <p>Telefon: {provider.Telefon}</p>
+                                    <p>Internettadresse: {provider.Internettadresse}</p>
+                                    <p>Medlemmer: {provider.Medlemmer}</p>
                                 </div>
                             </div>
                         </div>

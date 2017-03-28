@@ -20,7 +20,6 @@ class AllProvidersContainer extends Component {
 
         return (
             <div>
-                <h1>Sigve was here, Christina as well</h1>
                 <ProvidersList providers={this.props.providers} />
             </div>
 

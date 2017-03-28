@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 #release.sprint.dayInSprint (relsese = 0 (dev), dayInSprint = totalSprintDays - sprintDaysWorked)
-CURRENT_VERSION = '0.3.11'
+CURRENT_VERSION = '0.4.01'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.gzip.GZipMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

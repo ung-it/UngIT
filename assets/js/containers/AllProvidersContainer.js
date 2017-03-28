@@ -3,21 +3,23 @@ import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
 
 import { fetchAllProviders } from "../actions/providersActions";
+import ProvidersList from '../components/ProvidersList';
 import configureStore from "../configureStore";
 const store = configureStore();
 
 class AllProvidersContainer extends Component {
 
     componentDidMount() {
-        this.props.fetchActivities();
+        this.props.fetchProviders();
     }
 
 
     render() {
+        console.log(this.props.providers);
         return (
             <div>
                 <h1>Sigve was here, Christina as well</h1>
-                {this.props.providers}
+                <ProvidersList providers={this.props.providers} />
             </div>
 
 
@@ -92,7 +94,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchActivities: () => dispatch(fetchAllProviders()),
+        fetchProviders: () => dispatch(fetchAllProviders()),
         // changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         // changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
         // changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),

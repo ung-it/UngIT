@@ -8,6 +8,7 @@ from .models import UserProfile, Activity
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
+
     class Meta:
         model = User
         fields = ['username', "password", "first_name", "last_name", "email"]  # Fields that will appear in form in given order
@@ -15,10 +16,11 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     type = forms.BooleanField(label="Parent", required=False)
+    is_provider = forms.BooleanField(label='Brukernavn registrert i Aktørdatabasen', required=False)
 
     class Meta:
         model = UserProfile
-        fields = ['phone', 'profile_name', 'type']
+        fields = ['phone', 'profile_name', 'type', 'is_provider']
 
 class DateInput(forms.DateInput):
     input_type = 'date'

@@ -93,6 +93,7 @@ class ActivityModal extends Component {
     };
 
     render() {
+
         const { date, activityName, facebook, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos} = this.props.activity;
 
         let suitedForContainer =  [];
@@ -189,7 +190,7 @@ class ActivityModal extends Component {
 
         let facebookContainer = null;
         if (facebook) {
-
+            console.log(facebook)
             let fImages = facebook.photos.data.map(image => {
                 return <img src={image.images[0].source} key={image.id} className="modal-image"/>
             });

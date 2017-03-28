@@ -54,10 +54,6 @@ export function getFacebookEventData(activities) {
 
 }
 
-function mapActivityToId() {
-
-}
-
 export function getComments(id, callback) {
     fetchFromServer('/comments/'+id).then(comments => {
         callback(comments);

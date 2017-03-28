@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^allproviders/', views.allproviders, name='allproviders'),
     # Get activities
     url(r'^api/activities/$', views.getActivities, name="getActivities"),
+    url(r'^api/providers/$', ApiFunctions.getProviders, name="getProviders"),
     url(r'^api/activity/(?P<id>[0-9]+)/$', views.getActivity, name="get-activity"),
     url(r'^api/attendingActivities/[a-zA-Z]+/$', views.getAttendingActivities, name="getAttendingActivities"),
     url(r'^api/hostingActivities/[a-zA-Z]+/$', views.getHostingActivities, name="getHostingActivities"),

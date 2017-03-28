@@ -95,18 +95,15 @@ def signOfEvent(request):
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.delete()
             response = {'attending': True}
-            # return HttpResponse(status=210)  # 210 == unattending
 
         except ParticipateIn.DoesNotExist:
             # Not attending, can't sign of
             response = {'attending': False}
-            # return HttpResponse(status=204)
 
     else:
         # If user is not loged in
         # Will never happen
         response = {'attending': None}
-        # return HttpResponse(status=206)  # not logged in
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 def getAttendingActivities(request):

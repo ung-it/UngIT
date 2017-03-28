@@ -109,8 +109,8 @@ function fetchFromServer(query) {
         }
         return response.json();
     }).then(function(result) {
-        if (result.error || result.length == 0) {
-            console.log("The GET-request gave an empty result or threw an error:\n" + query);
+        if (result.error) {
+            console.log("The GET-request threw an error:\n" + query);
             return Promise.reject(result.error);
         } else {
             return result;
@@ -133,7 +133,7 @@ function postToServer(query, data) {
         return response.json();
     }).then(function (result) {
         if (result.error || result.length == 0) {
-            console.log("The POST-request gave an empty result or threw an error:\n" + query);
+            console.log("The POST-request threw an error:\n" + query);
             return Promise.reject(result.error);
         } else {
             return result;

@@ -22,7 +22,7 @@ class ProviderCard extends React.Component {
         if(!provider.Navn){
             return null;
         }
-        
+
 
         return (
             <div key={provider.Id}>

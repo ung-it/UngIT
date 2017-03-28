@@ -26,7 +26,7 @@ class SearchForActivity extends React.Component {
 		return (
                 <FormControl
                     type="text"
-                    placeholder="Søk på aktivitet eller arrangør..."
+                    placeholder={this.props.placeholderText}
                     onChange={this.handleChange}
                     value={this.props.activeFilters}
                 />
@@ -38,6 +38,7 @@ class SearchForActivity extends React.Component {
 SearchForActivity.propTypes = {
 	onFilterChange: React.PropTypes.func.isRequired,
 	activeFilters: React.PropTypes.string.isRequired,
+	placeholderText: React.PropTypes.string
 };
 
 export default SearchForActivity;

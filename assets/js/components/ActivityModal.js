@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 //Bootstrap import
 import {Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl,} from 'react-bootstrap';
 //Project component import
-import {getMonth} from '../DateFunctions'
 import CalendarDateBox from './CalendarDateBox';
 //CSS import
 import '../../styles/modal.css';
@@ -60,47 +59,48 @@ class ActivityModal extends Component {
         const request = {
             id: this.props.id
         };
-        signupActivity(request).then((response) => {
-            if (response.status == 204) {
+        signupActivity(request, response => {
+            if (response.attending == false) {
                 this.setState({
                     attending: true
                 });
             }
-        })
+        });
     };
 
     onSignOf = () => {
         const request = {
             id: this.props.id
         };
-        signoffActivity(request).then((response) => {
-            if (response.status == 210) {
+        signoffActivity(request, response => {
+            if (response.attending == true) {
                 this.setState({
                     attending: false
                 });
             }
-        })
+        });
     };
 
     checkIfSignUp = () => {
         const request = {
             id: this.props.id
         };
-        checkIfSignedUp(request).then((response) => {
-            if (response.status == 204) {
+        checkIfSignedUp(request, response => {
+            if (response.attending == true) {
                 this.setState({
                     attending: true,
                     hasChecked: true,
                     loggedIn: true
                 });
-            } else if (response.status == 205) {
+            } else if (response.attending == false) {
                 this.setState({
                     loggedIn: true,
                     hasChecked: true
                 })
-            } else if (response == 206) {
+            } else {
                 this.setState({
-                    loggedIn: false
+                    loggedIn: false,
+                    hasChecked: true
                 })
             }
         })
@@ -115,7 +115,7 @@ class ActivityModal extends Component {
     };
 
     fetchComments = () => {
-        getComments(this.props.id).then((result) => {
+        getComments(this.props.id,(result) => {
             if (result.message == "ingen kommentar funnet") {
                 this.setState({
                     noComment: true,
@@ -143,7 +143,7 @@ class ActivityModal extends Component {
 
 
     render() {
-        const {date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
+        const {date, activityName, facebook, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
         const starRating = rating / number_of_ratings;
         let suitedForContainer = [];
@@ -151,38 +151,27 @@ class ActivityModal extends Component {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
         }
 
-        //let videoContainer = null;
-        //if (videos.length > 0) {
-        //    const videos = this.state.videos.map((video, i) => {
-        //        const path = "/media/video/" + video;
-        //        return (
-        //            <video className="modal-video" controls="controls" key={i}>
-        //                <source src={path}/>
-        //            </video>
-        //        )
-        //    });
-        //    videoContainer =
-        //        <div>
-        //            <h3 className="modal-image-header">Video fra arrangementet</h3>
-        //            {videos}
-        //        </div>;
-        //}
+        let videoContainer = null;
+        if (videos.length > 0) {
+           const videos = this.state.videos.map((video, i) => {
+               const path = "/media/video/" + video;
+               return (
+                   <video className="modal-video" controls="controls" key={i}>
+                       <source src={path}/>
+                   </video>
+               )
+               });
+           videoContainer =
+               <div>
+                   <h3 className="modal-image-header">Video fra arrangementet</h3>
+                   {videos}
+               </div>;
+        }
 
-        let imageContainer = null;
 
         let images = this.props.images.map(image => {
             return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
         });
-
-        if (this.props.images.length > 0) {
-            imageContainer =
-                <div>
-                    <h3 className="modal-image-header">Bilder fra arrangementet</h3>
-                    <div className="modal-image-container">
-                        {images}
-                    </div>
-                </div>;
-        }
 
         if (this.state.show && !this.state.hasChecked) {
             this.checkIfSignUp()
@@ -208,7 +197,7 @@ class ActivityModal extends Component {
             attendingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
-                        <h5>Påmelding til {activityName}</h5>
+                        <h4>Påmelding til {activityName}</h4>
                         <Button className="btn btn-success" onClick={this.onSignup}>Meld på!</Button>
                     </div>
                 </div>;
@@ -217,8 +206,37 @@ class ActivityModal extends Component {
             attendingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
-                        <h5>Du er påmeldt {activityName}</h5>
+                        <h4>Du er påmeldt {activityName}</h4>
                         <Button onClick={this.onSignOf} className="btn btn-danger">Meld av</Button>
+                    </div>
+                </div>;
+        }
+
+        let facebookContainer = null;
+        if (facebook) {
+            // console.log(facebook)
+            let fImages = facebook.photos.data.map(image => {
+                return <img src={image.images[0].source} key={image.id} className="modal-image"/>
+            });
+
+            images = images.concat(fImages);
+
+            facebookContainer = (
+                <div className="modal-facebook-container">
+                    <h3>Informasjon om arrangementet fra Facebook</h3>
+                    <div className="modal-facebook-image">
+                    </div>
+                </div>
+            );
+        }
+
+        let imageContainer = null;
+        if (images.length > 0) {
+            imageContainer =
+                <div>
+                    <h3 className="modal-image-header">Bilder fra arrangementet</h3>
+                    <div className="modal-image-container">
+                        {images}
                     </div>
                 </div>;
         }
@@ -245,7 +263,6 @@ class ActivityModal extends Component {
             this.fetchComments();
         }
 
-
         if (!this.state.noComments) {
             commentsContainer =
                 <div id="commentDiv">
@@ -258,7 +275,6 @@ class ActivityModal extends Component {
                     )}
                 </div>;
         }
-
 
         return (
             <Modal
@@ -280,6 +296,9 @@ class ActivityModal extends Component {
                     <div className="modal-adapted">
                         Dette arrangementet er tilpasset for: <b>{suitedForContainer.label}</b>
                     </div>
+                    <div>
+                        Antall assistenter: Ikke oppgitt
+                    </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">
                             <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/>
@@ -300,13 +319,13 @@ class ActivityModal extends Component {
                         <h2 className="modal-description-header">Om arrangementet</h2>
                         <p className="modal-description">{description}</p>
                     </div>
-                    {/* videoContainer */}
+                    {videoContainer}
                     {imageContainer}
+                    {facebookContainer}
                     <hr/>
                     <h2 className="modal-comments">Kommentarer</h2>
                     {postCommentContainer}
                     {commentsContainer}
-
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.editActivity}>Endre aktivitet</Button>

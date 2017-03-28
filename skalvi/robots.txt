@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /migrations/
+Disallow: /tests/
+Disallow: /app/
+Disallow: /

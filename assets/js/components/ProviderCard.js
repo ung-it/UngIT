@@ -15,9 +15,7 @@ class ProviderCard extends React.Component {
 
 
     createProviderItem = () => {
-
-        this.props.provider.replace("Kategori(er) ", "Kategorier");
-        const provider = JSON.parse(this.props.provider);
+        const provider = JSON.parse(this.props.provider.replace("Kategori(er) ", "Kategorier"));
 
         if(!provider.Navn){
             return null;

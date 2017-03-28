@@ -85,23 +85,22 @@ class ActivityModal extends Component {
         const request = {
             id: this.props.id
         };
-        console.log("signup")
         checkIfSignedUp(request, response => {
-            console.log(response)
-            if (response.status == 204) {
+            if (response.attending == true) {
                 this.setState({
                     attending: true,
                     hasChecked: true,
                     loggedIn: true
                 });
-            } else if (response.status == 205) {
+            } else if (response.attending == false) {
                 this.setState({
                     loggedIn: true,
                     hasChecked: true
                 })
-            } else if (response == 206) {
+            } else {
                 this.setState({
-                    loggedIn: false
+                    loggedIn: false,
+                    hasChecked: true
                 })
             }
         })

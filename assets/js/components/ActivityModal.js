@@ -133,13 +133,20 @@ class ActivityModal extends Component {
     };
 
     onPostComment = () => {
-        const obj = {
-            id: this.props.id,
-            comment2: $("#commentInput").val()
-        };
-        $("#commentInput").val("");
-        postNewComment(obj);
-        this.fetchComments();
+        if($("#commentInput").val().trim().length == 0){
+            $("#postError").html("En kommentar kan ikke være tom.");
+        }else {
+            const obj = {
+                id: this.props.id,
+                comment2: $("#commentInput").val()
+            };
+            $("#commentInput").val("");
+            $("#postError").html("");
+            postNewComment(obj);
+            this.fetchComments();
+        }
+
+
     };
 
     fetchHost = () => {
@@ -240,11 +247,15 @@ class ActivityModal extends Component {
                                      onStarClick={this.onRateChange.bind(this)}/>;
 
             postCommentContainer =
+
                 <div id="postComment">
                     <form className="comment-form" method="POST" action="/postComment/">
                         <div className="input-group">
                             <textarea placeholder="Skriv inn din kommentar her" id="commentInput"
-                                      className="form-control custom-control"></textarea>
+                                      className="form-control custom-control">
+                            </textarea>
+                           <span id="postError"> </span>
+
                             <span className="input-group-addon btn btn-primary"
                                   onClick={this.onPostComment.bind(this)}>Send</span>
                         </div>

@@ -40,7 +40,7 @@ class ProviderCard extends React.Component {
                                 </div>
                                 <div className="col-md-8">
                                     <p>Kategorier: {provider.Kategorier}</p>
-                                    <p>{provider.TypeAktivitet}</p>
+                                    <p>Type aktiviteter: {provider.TypeAktivitet}</p>
                                     <p>Bydel: {provider.Bydel}</p>
                                     <p>Telefon: {provider.Telefon}</p>
                                     <p>Internettadresse: {provider.Internettadresse}</p>

@@ -196,12 +196,12 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(486,487):
+        for i in range(1,1478):
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
 
         # write all to .txt file, for prodction use to fill up database. without re-query
-        with open('../app/aktordatabasenTest.json', 'w') as file:
+        with open('../app/aktordatabasen.json', 'w') as file:
             json.dump(allProviders, file, indent=4)
 
         return allProviders
@@ -227,6 +227,6 @@ def main():
     informasjon = s.scrapeAll()
 
     # print:
-    print(informasjon)
+    #print(informasjon)
 
 main()

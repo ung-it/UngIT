@@ -56,9 +56,6 @@ const mapStateToProps = state => {
     const hasWeekFilter = activeDateFilter.length > 0;
     const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
 
-    //console.log(activeDateFilter);
-    //console.log(new Date(weekFilters[0]));
-    //console.log(new Date(weekFilters[1]));
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
@@ -71,7 +68,7 @@ const mapStateToProps = state => {
         ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
         : activityList;
 
-    /*activityList = hasWeekFilter
+    activityList = hasWeekFilter
         ? activityList.filter(activity =>
         (
             ((new Date (activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date (activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date (activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
@@ -80,7 +77,7 @@ const mapStateToProps = state => {
             (weekFilters[0].getYear() <= new Date (activity.fields.date_end).getYear()  && weekFilters[0].getMonth() <= new Date (activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date (activity.fields.date_end).getDay())
         ))
         : activityList;
-*/
+
     activityList = hasSearchForFilter
         ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
         : activityList;
@@ -92,7 +89,7 @@ const mapStateToProps = state => {
         activeDateFilter: activeDateFilter,
         activeSearchForFilters: activeSearchForFilters,
     };
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {

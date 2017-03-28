@@ -36,6 +36,7 @@ def signUpActivity(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
     # User logged in
+
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
@@ -43,20 +44,20 @@ def signUpActivity(request):
         # Check if user already is attending
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
-            return HttpResponse(status=201)
+            response = {'attending': True}
 
         # if user is not attending
         except ParticipateIn.DoesNotExist:
             participate = ParticipateIn(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.save()
 
-            return HttpResponse(status=204)
+            response = {'attending': False}
             # return render(request, "home.html", {"message": "Du er nå påmeldt dette arrangementet."})
     # User not logged in
     else:
         # user is not loged in, should not be possible to attend activity
-        return HttpResponse(status=206) # not logged in
-
+        response = {'attending': None} # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
 def checkIfSingedUp(request):
@@ -72,16 +73,13 @@ def checkIfSingedUp(request):
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
             response = {'attending': True}
-            # return HttpResponse(status=204)  # 204 == attending
 
         except ParticipateIn.DoesNotExist:
             # If user isn't signed up
             response = {'attending': False}
-            # return HttpResponse(status=205)  # 205 == not attending
     else:
         # If user is not loged in
         response = {'attending': None}
-        # return HttpResponse(status=206)  # not logged in
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
@@ -96,16 +94,20 @@ def signOfEvent(request):
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.delete()
-            return HttpResponse(status=210)  # 210 == unattending
+            response = {'attending': True}
+            # return HttpResponse(status=210)  # 210 == unattending
 
         except ParticipateIn.DoesNotExist:
             # Not attending, can't sign of
-            return HttpResponse(status=204)
+            response = {'attending': False}
+            # return HttpResponse(status=204)
 
     else:
         # If user is not loged in
         # Will never happen
-        return HttpResponse(status=206)  # not logged in
+        response = {'attending': None}
+        # return HttpResponse(status=206)  # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]

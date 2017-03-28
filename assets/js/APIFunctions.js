@@ -73,12 +73,16 @@ export function getAllHostingActivities() {
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
 
-export function signupActivity(data) {
-    return postToServer('/signupActivity/', data);
+export function signupActivity(data, callback) {
+    postToServer('/signupActivity/', data).then (response => {
+        callback(response);
+    });
 }
 
-export function signoffActivity(data) {
-    return postToServer('/signOfEvent/', data);
+export function signoffActivity(data, callback) {
+    postToServer('/signOfEvent/', data).then(response => {
+        callback(response);
+    });
 }
 
 export function checkIfSignedUp(data, callback) {

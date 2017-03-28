@@ -59,26 +59,26 @@ class ActivityModal extends Component {
         const request = {
             id: this.props.id
         };
-        signupActivity(request).then((response) => {
-            if (response.status == 204) {
+        signupActivity(request, response => {
+            if (response.attending == false) {
                 this.setState({
                     attending: true
                 });
             }
-        })
+        });
     };
 
     onSignOf = () => {
         const request = {
             id: this.props.id
         };
-        signoffActivity(request).then((response) => {
-            if (response.status == 210) {
+        signoffActivity(request, response => {
+            if (response.attending == true) {
                 this.setState({
                     attending: false
                 });
             }
-        })
+        });
     };
 
     checkIfSignUp = () => {
@@ -214,7 +214,7 @@ class ActivityModal extends Component {
 
         let facebookContainer = null;
         if (facebook) {
-            console.log(facebook)
+            // console.log(facebook)
             let fImages = facebook.photos.data.map(image => {
                 return <img src={image.images[0].source} key={image.id} className="modal-image"/>
             });

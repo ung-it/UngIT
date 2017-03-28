@@ -118,7 +118,8 @@ class ActivityModal extends Component {
         getComments(this.props.id).then((result) => {
             if (result.message == "ingen kommentar funnet") {
                 this.setState({
-                    noComment: true
+                    noComment: true,
+                    fetchedComments: true
                 })
             } else {
                 this.setState({
@@ -236,7 +237,6 @@ class ActivityModal extends Component {
 
         if (this.state.show && !this.state.fetchedComments) {
             this.fetchComments();
-            console.log("jajajaja")
         }
 
 

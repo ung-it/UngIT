@@ -30,6 +30,13 @@ class ActivitiesContainer extends Component {
         });
     };
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.activities.length != nextProps.activities.length) {
+            return true;
+        }
+        return false;
+    }
+
     render() {
         const styles = {
             activitiesStyle: {

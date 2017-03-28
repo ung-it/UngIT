@@ -1,7 +1,7 @@
 {% extends "base_template.html" %}
 {% load render_bundle from webpack_loader %}
 {% load static %}
-{% block pageTitle %}Aktiviteter{% endblock %}
+{% block pageTitle %}Arrangører{% endblock %}
 
 
 {% block body %}
@@ -17,14 +17,12 @@
     </div>
 
     <div class="content">
-    
-
 
         <div class="content-margin-top">
             <h1 class="title">Providers</h1>
-            <p>Her er en oversikt over alle aktivitets tilbydere og grupper som tilbys i Trondheim kommune</p>
+            <p>Her er en oversikt over alle aktivitetstilbydere og grupper som tilbys i Trondheim kommune</p>
             <div>
-                <div id="allActivities"></div>
+                <div id="allProviders"></div>
             </div>
         </div>
 
@@ -33,7 +31,7 @@
 {% endblock %}
 
 {% block explicitPageFooter %}
-    {% render_bundle 'allActivitiesContainer' %}
+    {% render_bundle 'allProvidersContainer' %}
 {#    {% render_bundle 'suitedForPicker' %}#}
 {#    {% render_bundle 'activityPicker' %}#}
 {#    {% render_bundle 'weekPicker' %}#}

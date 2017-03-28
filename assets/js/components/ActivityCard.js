@@ -54,7 +54,7 @@ class ActivityCard extends React.Component {
                     title="Klikk på aktiviteten for mer informasjon"
                 >
                     <div className="row">
-                        <div className="col-sm-9">
+                        <div className="col-9 col-md-9">
                             <h3 className="big-info-header">{this.props.activity.activityName}</h3>
                             <div className="row">
                                     <div classID="big-info-container" className="col-md-3">
@@ -68,7 +68,7 @@ class ActivityCard extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-2"><img src={poster}/></div>
+                    <div className="col-2 col-md-2"><img src={poster}/></div>
                 </div>
 
                     <ActivityModal id={this.props.id} activity={this.props.activity} images={images}

@@ -35,10 +35,15 @@ a.navbar-brand {
 }
 
 .content {
+    padding-top: 20px;
     padding-left: 100px;
     padding-right: 100px;
 }
 
+.nav-content {
+    padding-left: 100px;
+    padding-right: 100px;
+}
 .content-margin-top {
     margin-top: 50px;
 }

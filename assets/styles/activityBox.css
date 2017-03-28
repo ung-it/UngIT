@@ -64,7 +64,8 @@
     justify-content: space-between;
     border: 1px solid lightgray;
     border-radius: 4px;
-    background-color: whitesmoke;
+    /*background-color: whitesmoke;*/
+    background-color: white;
     box-shadow: 2.5px 5px 2.5px lightgrey;
     margin-bottom: 15px;
     padding: 10px;
@@ -77,6 +78,7 @@
 }
 
 .activityBigStyle img {
+    max-width: 22em;
     height: 15em;
     margin-top: 10px;
     display: block;
@@ -84,7 +86,8 @@
 }
 
 .activityBigStyle:hover {
-    background-color: rgb(230,230,230);
+    /*background-color: rgb(230,230,230);*/
+    background-color: whitesmoke;
     border-style: solid;
     border-color: dimgray;
 }

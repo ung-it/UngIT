@@ -23,6 +23,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li {% if "/" == request.path %}class="active"{% endif %}><a href="/">Hjem</a></li>
                     <li {% if "allactivities" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
+                <li {% if "allproviders" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allproviders' %}">Arrangører</a></li>
                     {% include "loginBox.html" %}
                 </ul>
             </div>

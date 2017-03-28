@@ -22,7 +22,7 @@ export function getAllActivities() {
 
 export function getFacebookEventData(activities) {
 
-    let eventIDs = activities.activities
+    let eventIDs = activities
         .filter(activity => {return activity.fields.facebookID})
         .map(activity => {return activity.fields.facebookID});
 
@@ -40,13 +40,13 @@ export function getFacebookEventData(activities) {
         return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
             for (let i = 0; i < data.length; i++) {
                 let jsonObject = JSON.parse(data[0].body);
-                for (let j in activities.activities) {
-                    if (activities.activities[j].fields.facebookID == jsonObject.id) {
-                        activities.activities[j].fields.facebook = jsonObject;
+                for (let j in activities) {
+                    if (activities[j].fields.facebookID == jsonObject.id) {
+                        activities[j].fields.facebook = jsonObject;
                     }
                 }
             }
-            return activities.activities;
+            return activities;
         });
     });
 

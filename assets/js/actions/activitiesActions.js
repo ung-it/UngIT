@@ -79,7 +79,7 @@ export function addWeekFilter(weekFilter) {
 
 export function fetchAllActivities() {
     return (dispatch) => {
-        getAllActivities()
+        return getAllActivities()
             .then(result => dispatch(fetchedAllActivites(result)))
             .catch(error => console.error(error));
     };

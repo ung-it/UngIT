@@ -12,8 +12,10 @@ const store = configureStore();
 
 class ActivitiesContainer extends Component {
 
-    componentWillReceiveProps(props) {
-        this.props.fetchFacebookEventData(props);
+    componentDidMount() {
+        this.props.fetchActivities().then(() => {
+            this.props.fetchFacebookEventData(this.props.activities);
+        });
     }
 
     createActivityCardComponent = () => {
@@ -64,7 +66,7 @@ const mapDispatchToProps = dispatch => {
 
 
 // Fetch initial data for state
-store.dispatch(fetchAllActivities());
+// store.dispatch(fetchAllActivities());
 
 ActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
 

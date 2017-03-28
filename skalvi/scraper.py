@@ -1,6 +1,7 @@
 import requests # html requests
 from bs4 import BeautifulSoup # to extract html content
 import json
+import re
 
 '''
 A class to scrape the organisasjoner.trondheim.kommune aktordatabasen
@@ -173,10 +174,7 @@ class Scraper:
                     adr = adr[start:end]
                     adr = adr.replace('<br>', '')
                     adr = adr.replace('\n', '')
-                    #adr = adr.replace(' ', '')
-                    print(adr)
-                    adr = adr.strip()
-                    print(adr)
+                    adr = re.sub('\s+', ' ', adr)
 
                     information[keys[i].string] = adr.strip()
         if(len(information) !=0 ):

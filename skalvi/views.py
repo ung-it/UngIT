@@ -135,11 +135,9 @@ def getActivityHost(request):
     activity = Activity.objects.get(pk=activityid)
     try:
         host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
-        print("return something")
         host = {"host": 'true'}
         return HttpResponse(json.dumps(host))  # valid host
     except Hosts.DoesNotExist:
-        print("Do something")
         host = {"host": 'false'}
         return HttpResponse(json.dumps(host))  # invalid host
 
@@ -172,10 +170,10 @@ def rateActivity(request):
 def postComment(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
-
+    if comment.strip() == "":  # Checks if comment is blank
+        return HttpResponse()
     activity = Activity.objects.get(pk=activityId)
     user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
-    print("profile ", user_profile.profile_name)
     post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name, activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
     return HttpResponse(status=200, content_type='application/json')

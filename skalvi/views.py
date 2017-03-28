@@ -469,3 +469,7 @@ class RegisterProfileView(View):
 
 def allactivities(request):
     return TemplateResponse(request, 'allActivities.html', {})
+
+
+def allproviders(request):
+    return TemplateResponse(request, 'allProviders.html', {})

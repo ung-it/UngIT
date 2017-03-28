@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 export function getActivityInfo(id, callback) {
     fetchFromServer('/api/activity/' + id).then(data => {
         callback(data[0].fields);

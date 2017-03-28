@@ -14,6 +14,10 @@ from django.core import serializers
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from datetime import *
+
+# Aktørdatabase
+from .scraper import Scraper
+
 #Python POST-request
 import urllib.request
 import json
@@ -22,6 +26,7 @@ import json
 directory = "http://skalvi.no/"
 if settings.DEBUG:
     directory = "http://localhost:8000/"
+
 @csrf_exempt
 def index(request):
     return TemplateResponse(request, "home.html", {})
@@ -126,7 +131,8 @@ def getHostingActivities(request):
 
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
-    activities = json_serializer.serialize(Activity.objects.all(), ensure_ascii=False)
+    activities = Activity.objects.all()
+    activities = json_serializer.serialize(activities, ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
 
 
@@ -287,17 +293,32 @@ class UserFormView(View):
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
             profile_name = profile_form.cleaned_data['profile_name']
+            is_provider = profile_form.cleaned_data['is_provider']
+
+            print("Provider?  " + str(is_provider))
 
             if types:
                 types = "P"
             else:
                 types = "C"
 
+            if is_provider:
+                scraper = Scraper()
+                information = scraper.scrapeAktor(name=profile_name)
+                #information = json.dumps(information, ensure_ascii=False)
+
+                print("Information as json: ", information)
+            else:
+                information = {}
+
+
             # Make som changes or something useful
             user.set_password(password)
             user.save()  # saves users to the database
 
-            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name)
+            print('Before saving information: ', information)
+            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name, aktordatabase=information)
+            userProfile.is_active = True
             userProfile.save()
 
             # Returns User Object if credentials are correct
@@ -307,6 +328,9 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    request.session['username'] = user.username
+                    request.session['profile_name'] = userProfile.profile_name
+                    request.session['profile_pk'] = userProfile.pk
 
                     return redirect('skalvi:index')
 
@@ -326,6 +350,7 @@ class ActivityView(generic.DetailView):
 
         def get(self, request, *args, **kwargs):
             form = self.form_class(initial=model_to_dict(self.get_object()))
+            print(self.kwargs['pk'])
             return activityGet(self, request, form)
 
         def post(self, request, pk):
@@ -338,7 +363,7 @@ class ActivityView(generic.DetailView):
                 form.save()
                 return redirect('/')
             else:
-                return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
+                return render(request, self.template_name, {'form': form, 'error_message': form.errors})
 
 class createActivity(View):
     template_name = "activity.html"
@@ -346,31 +371,39 @@ class createActivity(View):
 
     def get(self, request):
         if request.user.is_authenticated:
+            activityID = request.GET.get('activity')
+            if activityID != '0' and activityID:
+                token = request.GET.get('code')
+                if token:
+                    return redirect('/activity/' + activityID + "?code=" + token)
+                return redirect('/activity/' + activityID)
             form = self.form_class(None)
             return activityGet(self, request, form)
         return HttpResponse("Du må være logget inn for å kunne lage et arrangement")  # Should render/redirect to something usefull
     def post(self, request):
         form = ActivityForm(request.POST, request.FILES)
         if form.is_valid():
-            print("XXXXprintXXXX: ", form.cleaned_data['date'])
-            instagram = request.POST['instagramImages']
-            if instagram:
-                form.cleaned_data['images'] = instagram
+            # instagram = request.POST['instagramImages']
+            # if instagram:
+            #     form.cleaned_data['instagram'] = instagram
             form.save()
 
             user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
-            print("usreprofile", user_profile.profile_name)
+            # print("usreprofile", user_profile.profile_name)
             activity = Activity.objects.latest('id')
-            print("activity", activity.activityName)
+            # print("activity", activity.activityName)
             hosts = Hosts(activityId=activity, adminId=request.user, profileId=user_profile)
             hosts.save()
             return redirect('/')
         else:
-            return render(request, self.template_name, {'form': form, 'error_message': "Kunne ikke lagre aktiviteten. Et eller flere felt har feil verdier"})
+            return render(request, self.template_name, {'form': form, 'error_message': form.errors})
 
 def activityGet(self, request, form):
+    activityID = '0'
+    if 'pk' in self.kwargs:
+        activityID = self.kwargs['pk']
     token = request.GET.get('code')
-    link = 'https://www.instagram.com/oauth/authorize/?client_id=e3b85b32b9eb461190ba27b4c32e2cc6&redirect_uri=' + directory + 'activity/&response_type=code&scope=public_content'
+    link = 'https://www.instagram.com/oauth/authorize/?client_id=e3b85b32b9eb461190ba27b4c32e2cc6&redirect_uri=' + directory + 'activity/?activity=' + activityID + '&response_type=code&scope=public_content'
     if 'accessToken' in request.session:
         accessToken = request.session['accessToken']
     elif token: #User has logged in with Instagram
@@ -400,7 +433,6 @@ def activityGet(self, request, form):
         for image in content['data']:
             images.append(image['images']['standard_resolution']['url'])
         return render(request, self.template_name, {'form': form, 'images': images})
-
     return render(request, self.template_name, {'form': form, 'link': link})
 
 class MyPageView(View):

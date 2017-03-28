@@ -10,6 +10,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+#release.sprint.dayInSprint (relsese = 0 (dev), dayInSprint = totalSprintDays - sprintDaysWorked)
+CURRENT_VERSION = '0.4.01'
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -40,6 +43,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.gzip.GZipMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,6 +60,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'app.urls'
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -68,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'skalvi.context_processors.global_settings',
 
             ],
         },

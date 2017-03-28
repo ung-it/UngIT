@@ -169,18 +169,24 @@ class ActivityModal extends Component {
         //}
 
         let imageContainer = null;
-        if (images.length > 0) {
+
+        let images = this.props.images.map(image => {
+            return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
+        });
+
+        if (this.props.images.length > 0) {
             imageContainer =
                 <div>
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>
                     <div className="modal-image-container">
-                        <img className="modal-image" src={images} alt="Et bilde fra arrangementet"></img>
+                        {images}
                     </div>
                 </div>;
         }
 
         if (this.state.show && !this.state.hasChecked) {
             this.checkIfSignUp()
+
         }
 
         let attendingContainer = null;

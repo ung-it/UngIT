@@ -1,32 +1,21 @@
 {% load base_extras %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <p class="footer-header">Navigasjon</p>
-            <div class="footer-list">
-                <p>Hovedside</p>
-                <p>Alle aktiviteter</p>
-                <p>Min side</p>
-                <p>Formum</p>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4">
-            <p class="footer-header">Laget av</p>
-            <div class="footer-list">
-                <p>Christina H. Andresen</p>
-                <p>Andreas Norstein</p>
-                <p>Ingrid Skar</p>
-                <p>Martin Stigen</p>
-                <p>Sigve Skaugvoll</p>
-                <p>Thomas Wold</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <p class="footer-header">Versjon: </p>
-            <p class="footer-header">Lisens: Apache-2.0 </p>
-        </div>
+    <!--<div class="container-navigation">
+        <p class="navigation-item">Hovedside</p>
+        <p class="navigation-item">Alle aktiviteter</p>
+    </div>-->
+    <div class="container-info">
+        <p class="info-item"><b>Versjon:</b> {{ CURRENT_VERSION }} </p>
+        <p class="info-item"><b>Lisens:</b> Apache-2.0 </p>
     </div>
+    <hr class="footer-divider"/>
+    <div class="container-creators">
+        <p class="creators-item">Christina H. Andresen</p>
+        <p class="creators-item">Andreas Norstein</p>
+        <p class="creators-item">Ingrid Skar</p>
+        <p class="creators-item">Martin Stigen</p>
+        <p class="creators-item">Sigve Skaugvoll</p>
+        <p class="creators-item">Thomas Wold</p>
+    </div>
+
 </div>

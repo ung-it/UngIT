@@ -1,5 +1,6 @@
 import requests # html requests
 from bs4 import BeautifulSoup # to extract html content
+import json
 
 '''
 A class to scrape the organisasjoner.trondheim.kommune aktordatabasen
@@ -39,7 +40,7 @@ class Scraper:
         # [<ul class="nav nav-tabs nav-stacked"> <li> <a href="organisations/573"><i class="icon-chevron-right"></i>ROSENBORG BALLKLUB</a> </li> </ul>]
         if(len(theList) == 0):
             print('No match')
-            return None
+            return {}
 
         self.soup = BeautifulSoup(theList, 'html.parser')
         theLinks = self.soup.find_all('a')
@@ -49,6 +50,9 @@ class Scraper:
         #   Navn som matches querey
         # </a>
         #print(theLinks)
+
+        #list to hold all names
+        matches = {}
 
         for link in theLinks:
             # check for match againt aktordatabasen
@@ -79,19 +83,26 @@ class Scraper:
                 #print('orgLink from scrapeAktor')
                 return self._scrapeInfo(orgLink=orgLink, orgID=aktorID)
 
-        # if not match, return null
-        return None
+            # There are multiple matches, but non exacts.
+            else:
+                matches[resultName] = aktorID
+
+        # if not exact match, return suggestions
+        return matches
 
     '''
-    Private function to scrape the page of an registered provider in the
+    PRIVATE function to scrape the page of an registered provider in the
     aktordatabasen.
 
     :param orgLink: the aktordatabase url to scrape
+    :param orgID: the aktordatabase id for the given aktor
+    :returns dictionary containing information:
     '''
     def _scrapeInfo(self, orgLink, orgID):
         information = {}
         r = requests.get(orgLink)
         self.soup = BeautifulSoup(r.content, 'html.parser')
+        title = self.soup.find("h1")
         #print(self.soup.prettify())
         #self.soup = BeautifulSoup(open('./tests/ROSENBORG_BALLKLUB.html'), 'html.parser')
         rawInformation = self.soup.find_all('div', class_='summary-section')
@@ -143,6 +154,7 @@ class Scraper:
 
                     information[keys[i].string] = adr.strip()
         if(len(information) !=0 ):
+            information['Navn'] = title.string
             information['Id'] = orgID
 
         #print(information)
@@ -150,13 +162,47 @@ class Scraper:
 
 
 
+
+
+
+    '''
+    Function to scrape all registered providers in aktordatabasen, and then return them.
+
+    :returns list containg dictionary-representing each provider found:
+    '''
+    def scrapeAll(self):
+        allProviders = []
+        for i in range(1,1472):
+            orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
+            allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
+
+        # write all to .txt file, for prodction use to fill up database. without re-query
+        with open('./app/aktordatabasen.json', 'w') as file:
+            json.dump(allProviders, file, indent=4)
+
+        return allProviders
+
+
+
+
+
 # Remove before final release, this is only for debugging
 def main():
     s = Scraper()
+
+    # Exact matches
     #informasjon = s.scrapeAktor(name='rosenborg ballklub')
     #informasjon = s.scrapeAktor(name='LEANGEN ISHOCKEYKLUBB')
     #informasjon = s.scrapeAktor(name='Ikea Leangens Volleyball lag')
-    informasjon = s.scrapeAktor(name='DANS MED OSS')
+    #informasjon = s.scrapeAktor(name='DANS MED OSS')
+
+    # Multiple matches
+    informasjon = s.scrapeAktor(name='rosenborg')
+
+    # scrape all
+    #informasjon = s.scrapeAll()
+
+    # print:
     print(informasjon)
 
 #main()

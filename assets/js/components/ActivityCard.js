@@ -5,6 +5,8 @@ import { Thumbnail, Glyphicon } from 'react-bootstrap';
 import ActivityModal from './ActivityModal';
 import { getMonth, getDay } from '../DateFunctions';
 
+const moment = require('moment');
+
 
 class ActivityCard extends React.Component {
 
@@ -16,44 +18,62 @@ class ActivityCard extends React.Component {
     };
 
     openActivityModal = () => {
-       this.setState({
-           show: true
-       });
+        this.setState({
+            show: true
+        });
     };
 
     createActivityItem = () => {
-        let poster = null;
+        let activity = this.props.activity;
 
-        if(this.props.activity.images.length > 0) {
-            poster = this.props.activity.images;
+        let localImages = new Array(activity.images).filter(image => {
+            return image != "";
+        }).map(image => {
+            return '/media/' + image;
+        });
+        let instaImages = activity.instagram.split(",").filter(image => {
+            return image != "";
+        });
+
+        let images = localImages.concat(instaImages);
+
+        let poster = null;
+        if (images.length > 0) {
+            poster = images[0];
+        } else {
+            poster = "/static/images/activityPic.jpeg"
         }
 
+
+        const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
         return (
             <div key={this.props.activity.id}>
-                <Thumbnail
+                <div
                     className="activityBigStyle"
-                    src={poster}
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
                 >
-                    <h3>{this.props.activity.activityName}</h3>
-                    <div className="info-box-wrapper">
-                        <div className="icon-container">
-                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
-                        </div>
-                        <div className="info-container">
-                            <p>{getMonth(this.props.activity.date)}</p>
-                            <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
-                            <p>{this.props.activity.location}</p>
-                        </div>
-                        <div className="about-container">
-                            <p>{this.props.activity.description}</p>
+                    <div className="row">
+                        <div className="col-sm-9">
+                            <h3 className="big-info-header">{this.props.activity.activityName}</h3>
+                            <div className="row">
+                                    <div classID="big-info-container" className="col-md-3">
+                                        <div className="big-icon-container-div"><Glyphicon glyph="glyphicon glyphicon-calendar"/>{date}</div>
+                                        <div className="big-icon-container-div"><Glyphicon glyph="glyphicon glyphicon-time"/>{this.props.activity.time_start}
+                                            - {this.props.activity.time_end}</div>
+                                        <div className="big-icon-container-div"><Glyphicon glyph="glyphicon glyphicon-map-marker"/>{this.props.activity.location}</div>
+                                    </div>
+                            <div className="col-md-8">
+                                <p>{this.props.activity.description}</p>
+                            </div>
                         </div>
                     </div>
-                    <ActivityModal id={this.props.id} activity={this.props.activity} show={this.state.show} />
-                </Thumbnail>
+                    <div className="col-md-2"><img src={poster}/></div>
+                </div>
+
+                    <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
+                                   show={this.state.show}/>
+                </div>
             </div>
         );
     };

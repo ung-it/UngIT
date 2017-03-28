@@ -143,7 +143,7 @@ class ActivityModal extends Component {
 
 
     render() {
-        const {date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, images, rating, number_of_ratings} = this.props.activity;
+        const {date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
         const starRating = rating / number_of_ratings;
         let suitedForContainer = [];

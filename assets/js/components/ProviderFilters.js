@@ -18,7 +18,7 @@ class ProviderFilters extends React.Component {
 
     render() {
         return (
-            <SearchForActivity
+            <SearchForProvider
                 onFilterChange={this.props.onSearchForChange}
                 activeFilters={this.props.searchForFilters}
                 placeholderText="Søk på arrangør..."

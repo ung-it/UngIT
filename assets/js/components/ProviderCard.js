@@ -20,8 +20,6 @@ class ProviderCard extends React.Component {
             .replace("Type aktivitet ", "TypeAktivitet")
         );
 
-        console.log(provider);
-
         if(!provider.Navn){
             return null;
         }

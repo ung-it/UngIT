@@ -6,7 +6,6 @@ const initialState = {
     providerList: [],
     activeActivityFilters: '',
     activeSuitedForFilters: '',
-    activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
     activeSearchForFilters: '',
     activeButtonClicked: false,
 };
@@ -19,6 +18,11 @@ export default function ProviderReducer(state=initialState, action) {
                  ...state,
                  providerList: action.providers
              };
+        case actionTypes.ADD_SEARCH_FOR_FILTER:
+            return {
+                ...state,
+                activeSearchForFilters: action.searchFilter,
+            };
         default: return state;
 
     }

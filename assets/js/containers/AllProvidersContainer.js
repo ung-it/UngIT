@@ -4,8 +4,9 @@ import { Provider, connect } from "react-redux";
 
 import "../../styles/activityBox.css";
 
-import { fetchAllProviders } from "../actions/providersActions";
+import { fetchAllProviders, addSearchForFilter } from "../actions/providersActions";
 import ProvidersList from '../components/ProvidersList';
+import ProviderFilters from '../components/ProviderFilters';
 import configureStore from "../configureStore";
 const store = configureStore();
 
@@ -20,6 +21,10 @@ class AllProvidersContainer extends Component {
 
         return (
             <div>
+                <ProviderFilters
+                    onSearchForChange={this.props.changeSearchForFilter}
+                    searchForFilters={this.props.activeSearchForFilters}
+                />
                 <ProvidersList providers={this.props.providers} />
             </div>
 
@@ -32,10 +37,7 @@ class AllProvidersContainer extends Component {
 
 
 const mapStateToProps = state => {
-    let { provider: { providerList } } = state; // Make activityList and activeActivityFilters from state become variables
-
-
-    // providerList = providerList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
+    let { provider: { providerList, activeSearchForFilters } } = state; // Make activityList and activeActivityFilters from state become variables
 
 
 //     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
@@ -51,8 +53,8 @@ const mapStateToProps = state => {
 //     //console.log(new Date(weekFilters[0]));
 //     //console.log(new Date(weekFilters[1]));
 //
-//     const hasSearchForFilter = activeSearchForFilters.length > 0;
-//     const searchForFilter = activeSearchForFilters.toUpperCase();
+     const hasSearchForFilter = activeSearchForFilters.length > 0;
+     const searchForFilter = activeSearchForFilters.toUpperCase();
 //
 //     activityList = hasActivityFilter
 //         ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
@@ -72,26 +74,18 @@ const mapStateToProps = state => {
 //         ))
 //         : activityList;
 // */
-//     activityList = hasSearchForFilter
-//         ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
-//         : activityList;
+    console.log(searchForFilter);
+    providerList = hasSearchForFilter
+        ? providerList.filter(provider => (console.log(provider.fields.aktordatabase.includes(searchForFilter))))
+        : providerList;
 
     return {
         providers: providerList,
         // activeActivityFilters: activeActivityFilters,
         // activeSuitedForFilters: activeSuitedForFilters,
-        // activeDateFilter: activeDateFilter,
-        // activeSearchForFilters: activeSearchForFilters,
+        activeSearchForFilters: activeSearchForFilters,
     };
 };
-
-
-
-
-
-
-
-
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -99,7 +93,7 @@ const mapDispatchToProps = dispatch => {
         // changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         // changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
         // changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
-        // changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
+        changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
         // changeTrashButton: () => dispatch(trashButtonClicked()),
 
     }

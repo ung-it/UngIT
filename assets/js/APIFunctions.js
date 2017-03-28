@@ -35,7 +35,7 @@ export function getAllHostingActivities() {
 }
 
 export function getHost(id) {
-    return fetchFromServer('/api/getHost/');
+    return fetchFromServer('/api/getHost/' + id);
 }
 
 export function signupActivity(data) {

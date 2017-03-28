@@ -130,14 +130,18 @@ def getHostingActivities(request):
 
 
 def getActivityHost(request):
-    profile = UserProfile.objects.get(user=request.user, profile_name=request.session["proifle_name"])
-    activityid = request.id
+    profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+    activityid = request.path.split("/")[3]
     activity = Activity.objects.get(pk=activityid)
     try:
         host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
         print("return something")
+        host = {"host": 'true'}
+        return HttpResponse(json.dumps(host))  # valid host
     except Hosts.DoesNotExist:
         print("Do something")
+        host = {"host": 'false'}
+        return HttpResponse(json.dumps(host))  # invalid host
 
 
 def getActivities(request):

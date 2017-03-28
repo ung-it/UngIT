@@ -15,10 +15,9 @@ import {
     checkIfSignedUp,
     postNewRating,
     postNewComment,
-    getComments
+    getComments,
+    getHost
 } from "../APIFunctions";
-
-import {getHost} from "../APIFunctions"
 
 class ActivityModal extends Component {
 
@@ -143,6 +142,16 @@ class ActivityModal extends Component {
         this.fetchComments();
     };
 
+    fetchHost = () => {
+        let hosting = getHost(this.props.id).then((result) => {
+            if(result.host == 'true'){
+                return true
+            }
+        });
+        console.log(hosting);
+        return hosting
+    };
+
 
     render() {
         const {date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
@@ -194,6 +203,7 @@ class ActivityModal extends Component {
         let attendingContainer = null;
         let ratingContainer = null;
         let postCommentContainer = null;
+        let changeActivity = null;
         let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
         let allComments = this.state.comments;
 
@@ -245,6 +255,11 @@ class ActivityModal extends Component {
 
         if (this.state.show && !this.state.fetchedComments) {
             this.fetchComments();
+            if(this.fetchHost()){
+                changeActivity =
+                    <Button onClick={this.editActivity}>Endre aktivitet</Button>
+
+            }
         }
 
 
@@ -311,7 +326,7 @@ class ActivityModal extends Component {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.editActivity}>Endre aktivitet</Button>
+                    {changeActivity}
                     <Button onClick={this.closeActivityModal}>Lukk</Button>
                 </Modal.Footer>
             </Modal>

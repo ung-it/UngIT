@@ -9,6 +9,7 @@ import CalendarDateBox from './CalendarDateBox';
 import '../../styles/modal.css';
 import { SUITED_FOR_TYPES } from './SuitedForPicker';
 
+import {getHost} from "../APIFunctions"
 
 class ActivityModal extends Component {
 
@@ -93,6 +94,7 @@ class ActivityModal extends Component {
             return response.status;
         })
     };
+    
 
     render() {
         const { date, activityName, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos} = this.props.activity;

@@ -29,6 +29,10 @@ export function getAllHostingActivities() {
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
 
+export function getHost(id) {
+    return fetchFromServer('/api/getHost/');
+}
+
 export function signupActivity(id) {
     let data = {
         id: id

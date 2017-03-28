@@ -35,8 +35,10 @@ urlpatterns = [
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
 
+    url(r'^api/getHost/$', views.getActivityHost, name="getActivityHost"),
 
     url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase"),
 
 
 ]
+

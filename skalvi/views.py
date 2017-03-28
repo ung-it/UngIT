@@ -131,6 +131,17 @@ def getHostingActivities(request):
     return HttpResponse(hostingActivities, content_type='application/json')
 
 
+def getActivityHost(request):
+    profile = UserProfile.objects.get(user=request.user, profile_name=request.session["proifle_name"])
+    activityid = request.id
+    activity = Activity.objects.get(pk=activityid)
+    try:
+        host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+        print("return something")
+    except Hosts.DoesNotExist:
+        print("Do something")
+
+
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = Activity.objects.all()

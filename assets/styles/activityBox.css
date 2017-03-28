@@ -1,8 +1,21 @@
+/* Styling for activities on home page */
 .activitySmalStyle {
-    width: 20em;
+    width: 25em;
+    height: 25em;
     cursor: pointer;
-    margin-left: 5px;
-    margin-right: 5px;
+    color: white;
+    display: flex;
+    margin-top: 10px;
+    border: 1px solid #f5f5f5;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+
+    /*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*/
+    -webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
+    -moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
+    box-shadow: 0 0 5px 1px rgb(123, 127, 143);
 }
 
 .activitySmalStyle:hover {
@@ -11,48 +24,98 @@
     border-color: dimgray;
 }
 
-.activitySmalStyle img {
-   height: 15em !important;
-}
 
 .caption {
     height: 13em;
 }
+.info-header {
+    text-align: center;
+    border-bottom: 3px solid #3ad7ff;
+    margin: 0 15px 0 0 ;
+    padding: 10px 0;
+}
 
 .info-box-wrapper {
-    display: flex;
+    background-color: rgb(42, 42, 42);
+    opacity: 1;
+    padding-left: 15px;
+    width: 100%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    align-self: flex-end;
+
+}
+
+.info-box-wrapper:hover {
+    background-color: rgb(42, 42, 42);
 }
 
 .icon-container {
-    width: 1.5em;
+    margin-top: 5px;
 }
 
+
+/* Styling for activities on all activities page */
 .activityBigStyle {
-    width: 50em;
+    width: 100%;
     cursor: pointer;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding-bottom: 20px;
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    justify-content: space-between;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    box-shadow: 2.5px 5px 2.5px lightgrey;
+    margin-bottom: 15px;
+    padding: 10px;
+
+}
+
+.big-info-header {
+    border-bottom: 1px solid darkgrey;
+    font-family: "Yuppy SC";
 }
 
 .activityBigStyle img {
     height: 15em;
-    margin-left: 0;
+    margin-top: 10px;
+    display: block;
+    margin: auto;
 }
 
 .activityBigStyle:hover {
-    background-color: whitesmoke;
+    background-color: rgb(230,230,230);
     border-style: solid;
     border-color: dimgray;
 }
 
-.about-container {
-    margin-left: 20px;
+.big-info-box-wrapper {
+    /*display: flex;*/
 }
 
-.activityBigStyle .info-container {
-    font-weight: bold;
+.big-icon-container {
+    margin-right: 10px;
 }
+
+/*.big-info-container {*/
+    /*flex-basis: 300px;*/
+    /*flex-grow: 0;*/
+    /*flex-shrink: 0;*/
+/*}*/
+
+.big-info-container-div {
+    font-weight: bold;
+    margin: 20px;
+}
+
+/*.big-about-container {*/
+    /*margin-left: 20px;*/
+    /*flex-basis: 80%;*/
+    /*flex-grow: 0;*/
+    /*flex-shrink: 0;*/
+/*}*/
+
+
 
 .filter-container {
     margin-top: 15px;

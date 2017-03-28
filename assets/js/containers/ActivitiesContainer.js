@@ -43,14 +43,15 @@ class ActivitiesContainer extends Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "center"
+                justifyContent: "space-between",
+                width: '100%',
             }
         };
 
         return (
-              <div style={styles.activitiesStyle}>
-                  {this.createActivityCardComponent()}
-              </div>
+            <div style={styles.activitiesStyle}>
+                {this.createActivityCardComponent()}
+            </div>
         );
     }
 

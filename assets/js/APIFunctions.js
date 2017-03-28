@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 export function getActivityInfo(id, callback) {
     fetchFromServer('/api/activity/' + id).then(data => {
         callback(data[0].fields);
@@ -56,6 +58,11 @@ function mapActivityToId() {
 
 }
 
+export function getComments(id) {
+    return fetchFromServer('/comments/'+id);
+}
+
+
 export function getAllAttendingActivities() {
     const profileName = window.location.href.split("/")[4];
     return fetchFromServer('/api/attendingActivities/'+profileName);
@@ -65,11 +72,24 @@ export function getAllHostingActivities() {
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
 
-export function signupActivity(id) {
-    let data = {
-        id: id
-    };
-    postToServer('http://localhost:8000/signupActivity/', data);
+export function signupActivity(data) {
+    return postToServer('/signupActivity/', data);
+}
+
+export function signoffActivity(data) {
+    return postToServer('/signOfEvent/', data);
+}
+
+export function checkIfSignedUp(data) {
+    return postToServer('/checkIfSignedUp/', data);
+}
+
+export function postNewRating(object) {
+    return postToServer('/rateActivity/', object);
+}
+
+export function postNewComment(object) {
+    return postToServer('/postComment/', object);
 }
 
 //Use only this method when doing GET-requests to server for JSON-data, don't make your own

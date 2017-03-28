@@ -34,9 +34,12 @@ urlpatterns = [
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
-
-
-    url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase"),
+    # Comments and rating
+    url(r'^rateActivity/$', views.rateActivity, name='rateActivity'),
+    url(r'^postComment/$', views.postComment, name='postComment'),
+    url(r'^comments/[0-9]+/$', views.getComments, name='getComment'),
+    # Populate database
+    url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase")
 
 
 ]

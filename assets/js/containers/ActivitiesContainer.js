@@ -43,7 +43,7 @@ class ActivitiesContainer extends Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "space-around",
                 width: '100%',
             }
         };

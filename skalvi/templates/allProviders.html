@@ -1,0 +1,43 @@
+{% extends "base_template.html" %}
+{% load render_bundle from webpack_loader %}
+{% load static %}
+{% block pageTitle %}Aktiviteter{% endblock %}
+
+
+{% block body %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/allactivities.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'styles/material.min.css'%}">
+    <script src="{% static 'js/material.min.js'%}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <div class="banner-container">
+            <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
+    </div>
+
+    <div class="content">
+        {% if user.is_authenticated %}
+            <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
+        {% endif %}
+
+
+
+        <div class="content-margin-top">
+            <h1 class="title">Aktiviteter</h1>
+            <p>Her er en oversikt over alle aktiviteter og grupper som tilbys i Trondheim kommune</p>
+            <div>
+                <div id="allActivities"></div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block explicitPageFooter %}
+    {% render_bundle 'allActivitiesContainer' %}
+{#    {% render_bundle 'suitedForPicker' %}#}
+{#    {% render_bundle 'activityPicker' %}#}
+{#    {% render_bundle 'weekPicker' %}#}
+{% endblock %}

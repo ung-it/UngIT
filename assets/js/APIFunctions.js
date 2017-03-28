@@ -20,6 +20,11 @@ export function getAllActivities() {
     return fetchFromServer('/api/activities/');
 }
 
+export function getComments(id) {
+    return fetchFromServer('/comments/'+id);
+}
+
+
 export function getAllAttendingActivities() {
     const profileName = window.location.href.split("/")[4];
     return fetchFromServer('/api/attendingActivities/'+profileName);
@@ -33,11 +38,24 @@ export function getHost(id) {
     return fetchFromServer('/api/getHost/');
 }
 
-export function signupActivity(id) {
-    let data = {
-        id: id
-    };
-    postToServer('http://localhost:8000/signupActivity/', data);
+export function signupActivity(data) {
+    return postToServer('/signupActivity/', data);
+}
+
+export function signoffActivity(data) {
+    return postToServer('/signOfEvent/', data);
+}
+
+export function checkIfSignedUp(data) {
+    return postToServer('/checkIfSignedUp/', data);
+}
+
+export function postNewRating(object) {
+    return postToServer('/rateActivity/', object);
+}
+
+export function postNewComment(object) {
+    return postToServer('/postComment/', object);
 }
 
 //Use only this method when doing GET-requests to server for JSON-data, don't make your own
@@ -69,12 +87,6 @@ function postToServer(query, data) {
         body: JSON.stringify(data)
 
     }).then((response) => {
-        console.log(response);
-        if(response.status == 204){
-            this.setState({
-                attending: true
-            });
-        }
-        return response.status;
+        return response;
     })
 }

@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.core import serializers
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from datetime import *
 
 # Aktørdatabase
 from .scraper import Scraper
@@ -34,7 +35,6 @@ def index(request):
 def signUpActivity(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
@@ -62,7 +62,6 @@ def signUpActivity(request):
 def checkIfSingedUp(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
@@ -84,7 +83,6 @@ def checkIfSingedUp(request):
 def signOfEvent(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
@@ -153,6 +151,43 @@ def getActivity(request, id):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
+
+@csrf_exempt
+def rateActivity(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    rating = str(request.body.decode('utf-8')).split(":")[2][:1]
+    activity = Activity.objects.get(pk=activityId)
+    currentRating = activity.rating
+    activity.number_of_ratings = activity.number_of_ratings +1
+    activity.rating = (currentRating + float(rating))
+    activity.save()
+    return HttpResponse(status=200, content_type='application/json')
+
+
+@csrf_exempt
+def postComment(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
+
+    activity = Activity.objects.get(pk=activityId)
+    user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
+    print("profile ", user_profile.profile_name)
+    post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name, activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
+    post.save()
+    return HttpResponse(status=200, content_type='application/json')
+
+@csrf_exempt
+def getComments(request):
+    activityId = request.path.split("/")[2]
+    activity = Activity.objects.get(pk=activityId)
+    json_serializer = serializers.get_serializer("json")()
+    comments = json_serializer.serialize(Commentary.objects.filter(activityId=activity), ensure_ascii=False)
+    if comments == "[]":
+        message = {"message": "ingen kommentar funnet"}
+        return HttpResponse(json.dumps(message))  # no comments
+
+    return HttpResponse(comments, content_type='application/json')
+
 
 
 def logout_user(request):

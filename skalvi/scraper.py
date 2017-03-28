@@ -229,4 +229,4 @@ def main():
     # print:
     #print(informasjon)
 
-main()
+#main()

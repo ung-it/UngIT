@@ -63,16 +63,6 @@
     flex-direction: row;
     background-color: white;
     margin-bottom: 15px;
-}
-
-.activityBigStyle:hover {
-    background-color: whitesmoke;
-    border-style: solid;
-    border-color: dimgray;
-}
-
-.activity-card-info-container {
-    width: 100%;
 
     border: 1px solid #f5f5f5;
     border-radius: 3px;
@@ -86,28 +76,40 @@
     box-shadow: 0 0 5px 1px rgb(123, 127, 143);
 }
 
+.activityBigStyle:hover {
+    background-color: whitesmoke;
+    border-style: solid;
+    border-color: dimgray;
+}
+
+.activity-card-info-container {
+    width: 100%;
+}
+
 .activity-card-header-container {
-    background-color: rgb(42, 42, 42);
+    /*background-color: rgb(42, 42, 42);*/
+    /*color: white;*/
     border: 1px solid #f5f5f5;
+    margin:0;
     border-radius: 3px;
     padding-bottom: 10px;
-    color: white;
     text-align: center;
 }
 
 .big-info-header {
-    border-bottom: 3px solid #3ad7ff;
+    border-bottom: 3px solid lightgrey;
+    font-family: "Yuppy SC", serif;
     margin: 0 15px 0 15px;
     padding: 10px 0;
 }
 
+.activity-card-row-info {
+    margin: 15px 15px 5px 15px;
+    font-weight: bold;
+}
+
 .activity-card-image-container {
-    border: 1px solid #f5f5f5;
-    border-left: none;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
+    border-left: 1px solid #f5f5f5;
 
     /*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*/
     -webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
@@ -122,6 +124,12 @@
 
     overflow-y:auto;
     overflow-x:hidden;
+}
+
+@media screen and (max-width: 760px) {
+    .activity-card-description {
+        visibility: hidden;
+    }
 }
 
 /*Styling filter container*/

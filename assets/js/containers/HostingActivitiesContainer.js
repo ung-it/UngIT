@@ -12,10 +12,6 @@ const store = configureStore();
 
 class HostingActivitiesContainer extends Component {
 
-    componentDidMount() {
-        this.props.fetchHostingActivities();
-    }
-
     createActivityCardComponent = () => {
         return this.props.hostingActivities.map(activity => {
             return (

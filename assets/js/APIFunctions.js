@@ -17,13 +17,48 @@ export function getUpcomingActivities(callback) {
 }
 
 export function getAllActivities() {
-    return fetchFromServer('/api/activities/');
+    return fetchFromServer('/api/activities/').then(response => {
+        return response;
+    });
 }
 
-export function getComments(id) {
-    return fetchFromServer('/comments/'+id);
+export function getFacebookEventData(activities) {
+
+    let eventIDs = activities
+        .filter(activity => {return activity.fields.facebookID})
+        .map(activity => {return activity.fields.facebookID});
+
+    return new Promise(function (resolve) {
+        getAccessToken(resolve);
+    }).then(token => {
+
+        let batch = eventIDs.map(id => {
+            return {method:"GET", relative_url: id + "?fields=admins,attending,photos{images},picture,roles,videos"};
+        });
+        let data = {
+            access_token: token,
+            batch: batch
+        };
+        return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
+            for (let i = 0; i < data.length; i++) {
+                let jsonObject = JSON.parse(data[0].body);
+                for (let j in activities) {
+                    if (activities[j].fields.facebookID == jsonObject.id) {
+                        activities[j].fields.facebook = jsonObject;
+                    }
+                }
+            }
+            return activities;
+        });
+    });
+
 }
 
+export function getComments(id, callback) {
+    fetchFromServer('/comments/'+id).then(comments => {
+        callback(comments);
+    });
+}
 
 export function getAllAttendingActivities() {
     const profileName = window.location.href.split("/")[4];
@@ -34,22 +69,30 @@ export function getAllHostingActivities() {
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
 
+
 export function getHost(id, callback) {
     fetchFromServer('/api/getHost/' + id).then(result => {
         callback(result);
     });
 }
 
-export function signupActivity(data) {
-    return postToServer('/signupActivity/', data);
+
+export function signupActivity(data, callback) {
+    postToServer('/signupActivity/', data).then (response => {
+        callback(response);
+    });
 }
 
-export function signoffActivity(data) {
-    return postToServer('/signOfEvent/', data);
+export function signoffActivity(data, callback) {
+    postToServer('/signOfEvent/', data).then(response => {
+        callback(response);
+    });
 }
 
-export function checkIfSignedUp(data) {
-    return postToServer('/checkIfSignedUp/', data);
+export function checkIfSignedUp(data, callback) {
+    postToServer('/checkIfSignedUp/', data).then(response => {
+        callback(response);
+    });
 }
 
 export function postNewRating(object) {
@@ -66,12 +109,12 @@ function fetchFromServer(query) {
         credentials: "same-origin"
     }).then(response => {
         if (response.status >= 400) {
-            throw new Error("Bad response from server");
+            throw new Error("GET-request: Bad response from server");
         }
         return response.json();
     }).then(function(result) {
-        if (result.error || result.length == 0) {
-            console.log("This query gave an empty result or threw an error:\n" + query);
+        if (result.error) {
+            console.log("The GET-request threw an error:\n" + query);
             return Promise.reject(result.error);
         } else {
             return result;
@@ -87,8 +130,17 @@ function postToServer(query, data) {
         },
         credentials: "same-origin",
         body: JSON.stringify(data)
-
     }).then((response) => {
-        return response;
+        if (response.status >= 400) {
+            throw new Error("POST-request: Bad response from server");
+        }
+        return response.json();
+    }).then(function (result) {
+        if (result.error || result.length == 0) {
+            console.log("The POST-request threw an error:\n" + query);
+            return Promise.reject(result.error);
+        } else {
+            return result;
+        }
     })
 }

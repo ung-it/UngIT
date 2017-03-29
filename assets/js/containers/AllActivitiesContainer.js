@@ -14,10 +14,6 @@ const store = configureStore();
 
 class AllActivitiesContainer extends Component {
 
-    componentDidMount() {
-        this.props.fetchActivities();
-    }
-
     render() {
         return (
             <div>

@@ -1,3 +1,11 @@
+function getAccessToken(callback) {
+    asyncFacebook(function () {
+        FB.getLoginStatus(function (response) {
+            callback(response.authResponse.accessToken);
+        })
+    })
+}
+
 function asyncFacebook(callback) {
     if (typeof(FB) != 'undefined' && FB != null ) {
         callback();
@@ -26,6 +34,7 @@ function asyncFacebook(callback) {
 function logIn() {
     asyncFacebook(function () {
         FB.login(function(response){
+            console.log(response)
             fetchInfo();
         }, {scope: 'user_events'});
     })
@@ -43,17 +52,17 @@ function getFacebookEvents(callback) {
     });
 }
 
-function getFacebookEventImages(eventID, size, callback) {
-    asyncFacebook(function () {
-        FB.getLoginStatus(function (response) {
-            $.get('https://graph.facebook.com'.concat("/v2.8/" + eventID + '/picture?redirect=0&type=' + size + '&access_token=').concat(response.authResponse.accessToken), function (response) {
-                if (response && !response.error) {
-                    callback(response.data);
-                }
-            });
-        });
-    })
-}
+// function getFacebookEventData(eventID, callback) {
+//     asyncFacebook(function () {
+//         FB.getLoginStatus(function (response) {
+//             $.get('https://graph.facebook.com/v2.8/'.concat(eventID).concat("?fields=admins,attending,photos{images},picture,roles,videos").concat('&access_token=').concat(response.authResponse.accessToken), function (response) {
+//                 if (response && !response.error) {
+//                     callback(response);
+//                 }
+//             });
+//         });
+//     });
+// }
 
 function fetchInfo() {
     FB.api('/me', 'GET', {fields: 'id, age_range, first_name, last_name, email, picture'}, function(response) {

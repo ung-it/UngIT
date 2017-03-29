@@ -78,8 +78,6 @@
 
 .activityBigStyle:hover {
     background-color: whitesmoke;
-    border-style: solid;
-    border-color: dimgray;
 }
 
 .activity-card-info-container {
@@ -98,7 +96,8 @@
 
 .big-info-header {
     border-bottom: 3px solid lightgrey;
-    font-family: "Yuppy SC", serif;
+    font-family: "Indie Flower", serif;
+    font-weight: bold;
     margin: 0 15px 0 15px;
     padding: 10px 0;
 }

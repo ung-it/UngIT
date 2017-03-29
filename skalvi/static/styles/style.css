@@ -11,7 +11,8 @@ body {
 }
 
 h1, h2, h3, h4, .title {
-    font-family: "Yuppy SC", serif;
+    font-family: "Indie Flower", serif;
+    font-weight: bold;
 }
 
 .site-content {

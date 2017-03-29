@@ -2,6 +2,21 @@ i{
     font-size: 2em;
 }
 
+#ratingContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.1em;
+    width: 50%;
+}
+
+#ratingFeedback{
+    margin: 0;
+    color: green;
+    font-weight: bolder;
+    float: right;
+}
+
+
 #postError{
     color: red;
     background-color: rgb(255, 255, 255);

@@ -113,7 +113,9 @@ class ActivityModal extends Component {
             id: this.props.id,
             rating: nextValue
         };
-        postNewRating(obj)
+        postNewRating(obj);
+        $("#ratingFeedback").html("Takk for din vurdering.");
+
     };
 
     fetchComments = () => {
@@ -249,7 +251,6 @@ class ActivityModal extends Component {
             );
         }
 
-        let imageContainer = null;
         if (images.length > 0) {
             imageContainer =
                 <div>
@@ -262,8 +263,11 @@ class ActivityModal extends Component {
 
         if (this.state.loggedIn) {
             ratingContainer =
-                <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
-                                     onStarClick={this.onRateChange.bind(this)}/>;
+                <div id="ratingContainer">
+                    <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
+                                     onStarClick={this.onRateChange.bind(this)}/>
+                    <span id="ratingFeedback"></span>
+                </div>;
 
             postCommentContainer =
 
@@ -311,9 +315,10 @@ class ActivityModal extends Component {
                         <CalendarDateBox date={new Date(date)}/>
                         <div className="modal-title-style">
                             <h1><b>{activityName}</b></h1>
-                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b> {ratingContainer}
+                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b>
                             </div>
                         </div>
+                        {ratingContainer}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

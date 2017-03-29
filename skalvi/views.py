@@ -372,9 +372,18 @@ class ActivityView(generic.DetailView):
         form_class = ActivityForm
 
         def get(self, request, *args, **kwargs):
-            form = self.form_class(initial=model_to_dict(self.get_object()))
-            print(self.kwargs['pk'])
-            return activityGet(self, request, form)
+            if request.user.is_authenticated:
+                profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+                activity = Activity.objects.get(pk=self.kwargs["pk"])
+                try:
+                    host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+                    form = self.form_class(initial=model_to_dict(self.get_object()))
+                    print(self.kwargs['pk'])
+                    return activityGet(self, request, form)
+                except Hosts.DoesNotExist:
+                    return redirect("skalvi:index")
+            else:
+                return redirect("skalvi:index")
 
         def post(self, request, pk):
             request.POST = request.POST.copy()

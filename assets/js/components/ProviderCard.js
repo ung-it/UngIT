@@ -43,7 +43,7 @@ class ProviderCard extends React.Component {
                                     <p>Type aktiviteter: {provider.TypeAktivitet}</p>
                                     <p>Bydel: {provider.Bydel}</p>
                                     <p>Telefon: {provider.Telefon}</p>
-                                    <p>Internettadresse: {provider.Internettadresse}</p>
+                                    <p>Internettadresse: <a href={provider.Internettadresse} target="_blank">{provider.Internettadresse}</a></p>
                                     <p>Medlemmer: {provider.Medlemmer}</p>
                                 </div>
                             </div>

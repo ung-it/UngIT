@@ -12,10 +12,6 @@ const store = configureStore();
 
 class AttendingActivitiesContainer extends Component {
 
-    componentDidMount() {
-        this.props.fetchAttendingActivities();
-    }
-
     createActivityCardComponent = () => {
         return this.props.attendingActivities.map(activity => {
             return (
@@ -37,7 +33,7 @@ class AttendingActivitiesContainer extends Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "flex-start"
+                justifyContent: "space-around"
             }
         };
 

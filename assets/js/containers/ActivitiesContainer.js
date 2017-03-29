@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
 
-import { fetchAllActivities } from '../actions/activitiesActions';
+import { fetchAllActivities, fetchFacebookEventData } from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 
@@ -13,7 +13,9 @@ const store = configureStore();
 class ActivitiesContainer extends Component {
 
     componentDidMount() {
-        this.props.fetchActivities();
+        this.props.fetchActivities().then(() => {
+            this.props.fetchFacebookEventData(this.props.activities);
+        });
     }
 
     createActivityCardComponent = () => {
@@ -28,13 +30,20 @@ class ActivitiesContainer extends Component {
         });
     };
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.activities.length != nextProps.activities.length) {
+            return true;
+        }
+        return false;
+    }
+
     render() {
         const styles = {
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "space-around",
                 width: '100%',
             }
         };
@@ -52,19 +61,20 @@ const mapStateToProps = state => {
     return {
         activities: state.activity.activityList
             .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            .slice(0, 4), // Only get five first
+            .slice(0, 4).reverse() // Only get five first
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchActivities: () => dispatch(fetchAllActivities()),
+        fetchFacebookEventData: (activities) => dispatch(fetchFacebookEventData(activities)),
     }
 };
 
 
 // Fetch initial data for state
-store.dispatch(fetchAllActivities());
+// store.dispatch(fetchAllActivities());
 
 ActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
 

@@ -1,22 +1,26 @@
 {% load static %}
-    <!-- Every page needs access to jqueery -->
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <!--Every page needs access to bootstrap -->
-    <link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
-    <link rel="stylesheet" href="../static/styles/chooseUser.css">
+<!-- Every page needs access to jqueery -->
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<!--Every page needs access to bootstrap -->
+<link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
+<link rel="stylesheet" href="../static/styles/chooseUser.css">
 
 {% block body %}
-        <a href="../mypage/{{ request.session.profile_name }}" id="back-arrow"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" ></span></a>
-    <div id="body" >
+    <a href="../mypage/{{ request.session.profile_name }}" id="back-arrow"><span class="glyphicon glyphicon-arrow-left"
+                                                                                 aria-hidden="true"></span></a>
+    <div id="body">
+        <div class="banner-container">
+        <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
+    </div>
         <div style="height: 100px"></div>
-            <h1>Legg til profil</h1>
-            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% include 'form_template.html' %}
-                <div class="form-group">
-                        <button type="submit" class="btn btn-success">Legg til</button>
-                </div>
-            </form>
-        </div>
+        <h1>Legg til profil</h1>
+        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'form_template.html' %}
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Legg til</button>
+            </div>
+        </form>
+    </div>
 
 {% endblock %}

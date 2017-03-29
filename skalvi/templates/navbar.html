@@ -5,7 +5,7 @@
     <div id="fb-root"></div>
     <div class="nav-color">
 
-            <div class="content">
+            <div class="nav-content">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
@@ -22,8 +22,8 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li {% if "/" == request.path %}class="active"{% endif %}><a href="/">Hjem</a></li>
-                    <li {% if "allactivities" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
-                <li {% if "allproviders" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allproviders' %}">Arrangører</a></li>
+                    <li {% if "allproviders" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allproviders' %}">Arrangører</a></li>
+                    <li {% if "act" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
                     {% include "loginBox.html" %}
                 </ul>
             </div>

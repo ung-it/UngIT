@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 
 import ActivityModal from './ActivityModal';
-import {getMonth, getDay} from '../DateFunctions';
 
 const moment = require('moment');
 
@@ -44,6 +43,28 @@ class ActivityCardHomePage extends React.Component {
             poster = "/static/images/activityPic.jpeg"
         }
 
+        let facebookIcon = null;
+        if (activity.facebookID != null) {
+
+            let link = 'https://www.facebook.com/events/' + activity.facebookID;
+
+            facebookIcon = (
+                <div className="facebook-icon-wrapper">
+                    <div className="facebook-icon-container">
+                        <a href={link} target="__blank">
+                            <img src="/static/images/facebook-icon.svg" id="facebookIcon"/>
+                        </a>
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="facebookIcon">
+                            Dette arrangementet er linket til et Facebook arrangement<br/><br/>
+                            Klikk på ikonet for å se arrangementet på Facebook
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        let dato = new Date(this.props.activity.date);
+
         const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
 
         const divStyle = {
@@ -57,7 +78,9 @@ class ActivityCardHomePage extends React.Component {
 
         return (
             <div key={this.props.activity.id}>
+                {facebookIcon}
                 <div
+
                     className="activitySmalStyle"
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"

@@ -3,10 +3,13 @@
 {% block pageTitle %}MyPage{% endblock %}
 {% load static %}
 {% block explicitPageHeader %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
 {% endblock %}
 
 {% block body %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/mypage.css' %}" />
+    <div class="banner-container">
+            <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
+    </div>
 
     <div class="content-margin-top">
         <div id="profilesOnMyPage" >

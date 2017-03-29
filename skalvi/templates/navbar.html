@@ -22,6 +22,7 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li {% if "/" == request.path %}class="active"{% endif %}><a href="/">Hjem</a></li>
+                    <li {% if "allproviders" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allproviders' %}">Arrangører</a></li>
                     <li {% if "act" in request.path %}class="active"{% endif %}><a href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
                     {% include "loginBox.html" %}
                 </ul>

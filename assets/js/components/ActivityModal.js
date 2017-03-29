@@ -14,9 +14,9 @@ import {
     checkIfSignedUp,
     postNewRating,
     postNewComment,
-    getComments
+    getComments,
+    getHost
 } from "../APIFunctions";
-
 
 class ActivityModal extends Component {
 
@@ -29,6 +29,7 @@ class ActivityModal extends Component {
             loggedIn: false,
             fetchedComments: false,
             noComments: true,
+            hosting: false,
             comments: []
         }
     }
@@ -51,7 +52,7 @@ class ActivityModal extends Component {
         this.setState({
             show: false,
             hasChecked: false,
-            fetchedComments: false
+            hosting: false
         });
     };
 
@@ -80,6 +81,7 @@ class ActivityModal extends Component {
             }
         });
     };
+    
 
     checkIfSignUp = () => {
         const request = {
@@ -111,20 +113,20 @@ class ActivityModal extends Component {
             id: this.props.id,
             rating: nextValue
         };
-        postNewRating(obj)
+        postNewRating(obj);
+        $("#ratingFeedback").html("Takk for din vurdering.");
+
     };
 
     fetchComments = () => {
         getComments(this.props.id,(result) => {
             if (result.message == "ingen kommentar funnet") {
                 this.setState({
-                    noComment: true,
-                    fetchedComments: true
+                    noComment: true
                 })
             } else {
                 this.setState({
                     comments: result.reverse(),
-                    fetchedComments: true,
                     noComments: false
                 });
             }
@@ -132,13 +134,30 @@ class ActivityModal extends Component {
     };
 
     onPostComment = () => {
-        const obj = {
-            id: this.props.id,
-            comment2: $("#commentInput").val()
-        };
-        $("#commentInput").val("");
-        postNewComment(obj);
-        this.fetchComments();
+        if($("#commentInput").val().trim().length == 0){
+            $("#postError").html("En kommentar kan ikke være tom.");
+        }else {
+            const obj = {
+                id: this.props.id,
+                comment2: $("#commentInput").val()
+            };
+            $("#commentInput").val("");
+            $("#postError").html("");
+            postNewComment(obj);
+            this.fetchComments();
+        }
+
+
+    };
+
+    fetchHost = () => {
+        getHost(this.props.id,(result) => {
+            if(result.host == 'true'){
+                this.setState({
+                    hosting: true
+                });
+            }
+        });
     };
 
 
@@ -147,6 +166,14 @@ class ActivityModal extends Component {
 
         const starRating = rating / number_of_ratings;
         let suitedForContainer = [];
+        let imageContainer = null;
+        let attendingContainer = null;
+        let ratingContainer = null;
+        let postCommentContainer = null;
+        let changeActivityContainer = null;
+        let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
+        let allComments = this.state.comments;
+
         if (suitedForType >= 0) {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
         }
@@ -175,15 +202,9 @@ class ActivityModal extends Component {
 
         if (this.state.show && !this.state.hasChecked) {
             this.checkIfSignUp()
-
+            this.fetchComments();
+            this.fetchHost()
         }
-
-        let attendingContainer = null;
-        let ratingContainer = null;
-        let postCommentContainer = null;
-        let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
-        let allComments = this.state.comments;
-
 
         if (!this.state.loggedIn) {
             attendingContainer =
@@ -230,7 +251,6 @@ class ActivityModal extends Component {
             );
         }
 
-        let imageContainer = null;
         if (images.length > 0) {
             imageContainer =
                 <div>
@@ -243,15 +263,22 @@ class ActivityModal extends Component {
 
         if (this.state.loggedIn) {
             ratingContainer =
-                <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
-                                     onStarClick={this.onRateChange.bind(this)}/>;
+                <div id="ratingContainer">
+                    <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
+                                     onStarClick={this.onRateChange.bind(this)}/>
+                    <span id="ratingFeedback"></span>
+                </div>;
 
             postCommentContainer =
+
                 <div id="postComment">
                     <form className="comment-form" method="POST" action="/postComment/">
                         <div className="input-group">
                             <textarea placeholder="Skriv inn din kommentar her" id="commentInput"
-                                      className="form-control custom-control"></textarea>
+                                      className="form-control custom-control">
+                            </textarea>
+                           <span id="postError"> </span>
+
                             <span className="input-group-addon btn btn-primary"
                                   onClick={this.onPostComment.bind(this)}>Send</span>
                         </div>
@@ -259,8 +286,9 @@ class ActivityModal extends Component {
                 </div>;
         }
 
-        if (this.state.show && !this.state.fetchedComments) {
-            this.fetchComments();
+        if(this.state.hosting){
+            changeActivityContainer =
+                <Button onClick={this.editActivity}>Endre aktivitet</Button>;
         }
 
         if (!this.state.noComments) {
@@ -287,9 +315,10 @@ class ActivityModal extends Component {
                         <CalendarDateBox date={new Date(date)}/>
                         <div className="modal-title-style">
                             <h1><b>{activityName}</b></h1>
-                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b> {ratingContainer}
+                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b>
                             </div>
                         </div>
+                        {ratingContainer}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -328,7 +357,7 @@ class ActivityModal extends Component {
                     {commentsContainer}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.editActivity}>Endre aktivitet</Button>
+                    {changeActivityContainer}
                     <Button onClick={this.closeActivityModal}>Lukk</Button>
                 </Modal.Footer>
             </Modal>

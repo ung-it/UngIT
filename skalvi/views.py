@@ -108,6 +108,8 @@ def signOfEvent(request):
 
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
+    if profile_name == "undefined":
+        profile_name = request.session['profile_name']
     profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
     activities = ParticipateIn.objects.filter(userId=request.user, user_profile_id=profile)
     activitie_objects = []
@@ -131,6 +133,19 @@ def getHostingActivities(request):
     json_serializer = serializers.get_serializer("json")()
     hostingActivities = json_serializer.serialize(activitie_objects, ensure_ascii=False)
     return HttpResponse(hostingActivities, content_type='application/json')
+
+
+def getActivityHost(request):
+    profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+    activityid = request.path.split("/")[3]
+    activity = Activity.objects.get(pk=activityid)
+    try:
+        host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+        host = {"host": 'true'}
+        return HttpResponse(json.dumps(host))  # valid host
+    except Hosts.DoesNotExist:
+        host = {"host": 'false'}
+        return HttpResponse(json.dumps(host))  # invalid host
 
 
 def getActivities(request):
@@ -161,10 +176,10 @@ def rateActivity(request):
 def postComment(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
-
+    if comment.strip() == "":  # Checks if comment is blank
+        return HttpResponse()
     activity = Activity.objects.get(pk=activityId)
     user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
-    print("profile ", user_profile.profile_name)
     post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name, activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
     return HttpResponse(status=200, content_type='application/json')

@@ -2,6 +2,26 @@ i{
     font-size: 2em;
 }
 
+#ratingContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.1em;
+    width: 50%;
+}
+
+#ratingFeedback{
+    margin: 0;
+    color: green;
+    font-weight: bolder;
+    float: right;
+}
+
+
+#postError{
+    color: red;
+    background-color: rgb(255, 255, 255);
+    font-weight: bolder;
+}
 .comment{
     margin-left: 1em;
     max-width: 100%;
@@ -27,6 +47,7 @@ i{
     background-color: #d2d2d2;
     border-radius: 5px;
     height: 7em;
+    margin-bottom: 1.5em;
 }
 
 .input-group{

@@ -109,8 +109,9 @@ def signOfEvent(request):
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
     json_serializer = serializers.get_serializer("json")()
-    if request.user.is_authenticated and profile_name == "undefined":
-        profile_name = request.session['profile_name']
+    if request.user.is_authenticated:
+        if profile_name == "undefined":
+            profile_name = request.session['profile_name']
     else:
         message = {"message":"no user signed in"}
         return HttpResponse(json.dumps(message))
@@ -372,21 +373,43 @@ class ActivityView(generic.DetailView):
         form_class = ActivityForm
 
         def get(self, request, *args, **kwargs):
-            form = self.form_class(initial=model_to_dict(self.get_object()))
-            print(self.kwargs['pk'])
-            return activityGet(self, request, form)
+            if request.user.is_authenticated:
+                profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+                activity = Activity.objects.get(pk=self.kwargs["pk"])
+                try:
+                    host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+                    form = self.form_class(initial=model_to_dict(self.get_object()))
+                    print(self.kwargs['pk'])
+                    return activityGet(self, request, form)
+                except Hosts.DoesNotExist:
+                    return redirect("skalvi:index")
+            else:
+                return redirect("skalvi:index")
 
         def post(self, request, pk):
-            request.POST = request.POST.copy()
-            instance = get_object_or_404(Activity, pk=pk)
-            form = ActivityForm(request.POST, request.FILES, instance=instance)
-            form.data = form.data.copy()
+            if request.user.is_authenticated:
+                profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+                activity = Activity.objects.get(pk=self.kwargs["pk"])
+                try:
+                    host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+                    form = self.form_class(initial=model_to_dict(self.get_object()))
+                    request.POST = request.POST.copy()
+                    instance = get_object_or_404(Activity, pk=pk)
+                    form = ActivityForm(request.POST, request.FILES, instance=instance)
+                    form.data = form.data.copy()
+                    if form.is_valid():
+                        form.save()
+                        return redirect('/')
+                    else:
+                        return render(request, self.template_name, {'form': form, 'error_message': form.errors})
 
-            if form.is_valid():
-                form.save()
-                return redirect('/')
+                except Hosts.DoesNotExist:
+                    return redirect("skalvi:index")
             else:
-                return render(request, self.template_name, {'form': form, 'error_message': form.errors})
+                return redirect("skalvi:index")
+
+
+
 
 class createActivity(View):
     template_name = "activity.html"

@@ -28,7 +28,7 @@ export function addSearchForFilter(searchFilter) {
 export function fetchAllProviders() {
     return (dispatch) => {
         getAllProviders()
-            .then(result => dispatch(fetchedAllProviders(result)))
+            .then(result => dispatch(fetchedAllProviders(result.map(p => (JSON.parse(p.fields.aktordatabase))))))
             .catch(error => console.log(error));
     }
 }

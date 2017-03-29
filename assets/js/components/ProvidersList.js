@@ -10,7 +10,7 @@ class ProvidersList extends React.Component {
         }
 
         const providers = this.props.providers.map(provider =>
-            <ProviderCard key={provider.pk} provider={provider.fields.aktordatabase} id={provider.pk}/>
+            <ProviderCard key={provider.Id} provider={provider} id={provider.Id}/>
         );
 
         return <div>

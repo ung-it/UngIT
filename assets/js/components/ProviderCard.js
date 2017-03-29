@@ -15,14 +15,21 @@ class ProviderCard extends React.Component {
 
 
     createProviderItem = () => {
-        const provider = JSON.parse(this.props.provider
-            .replace("Kategori(er) ", "Kategorier")
-            .replace("Type aktivitet ", "TypeAktivitet")
-        );
+        let provider = this.props.provider;
+        console.log(this.props.provider);
+        if (this.props.provider.includes("Kategori(er) ")) {
+            provider.replace("Kategori(er) ", "Kategorier");
+        };
 
-        if (!provider.Navn) {
+        if (this.props.provider.includes("Type aktivitet ")) {
+            provider.replace("Type aktivitet ", "TypeAktivitet")
+        };
+
+        console.log(provider);
+
+        /*if (!provider.Navn) {
             return null;
-        }
+        }*/
 
 
         return (

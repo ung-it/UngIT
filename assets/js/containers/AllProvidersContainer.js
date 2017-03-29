@@ -18,7 +18,6 @@ class AllProvidersContainer extends Component {
 
 
     render() {
-
         return (
             <div>
                 <ProviderFilters
@@ -39,6 +38,8 @@ class AllProvidersContainer extends Component {
 const mapStateToProps = state => {
     let { provider: { providerList, activeSearchForFilters } } = state; // Make activityList and activeActivityFilters from state become variables
 
+    //console.log(providerList)
+    //console.log(providerList);
 
 //     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
 //     const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
@@ -74,9 +75,8 @@ const mapStateToProps = state => {
 //         ))
 //         : activityList;
 // */
-    console.log(searchForFilter);
     providerList = hasSearchForFilter
-        ? providerList.filter(provider => (console.log(provider.fields.aktordatabase.includes(searchForFilter))))
+        ? providerList.filter(provider => (provider.Navn))
         : providerList;
 
     return {

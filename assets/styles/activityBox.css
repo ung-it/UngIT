@@ -114,6 +114,9 @@
     -webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
     -moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
     box-shadow: 0 0 5px 1px rgb(123, 127, 143);
+
+    max-width: 25em;
+    max-height: 15em;
 }
 
 .activity-card-description {
@@ -125,7 +128,7 @@
     overflow-x:hidden;
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 1200px) {
     .activity-card-image-container {
         display: none;
     }

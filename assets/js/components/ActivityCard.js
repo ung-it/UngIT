@@ -72,7 +72,7 @@ class ActivityCard extends React.Component {
                                     glyph="glyphicon glyphicon-calendar"/>{date}</div>
                                 <div classID="big-icon-container-div" className="col-md-4"><Glyphicon
                                     glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start}
-                                    - {this.props.activity.time_end}</div>
+                                     - {this.props.activity.time_end}</div>
                                 <div classID="big-icon-container-div" className="col-md-4"><Glyphicon
                                     glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</div>
                             </div>

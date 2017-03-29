@@ -190,7 +190,12 @@ class Scraper:
             information['Navn'] = title.string
             information['Id'] = orgID
 
-        #print(information)
+        print(information)
+        print('Inforamtion: ', information)
+        print("len infor. ", len(information))
+        if(len(information) == 0):
+            return None
+
         return information
 
 
@@ -205,9 +210,12 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(1,1478):   # 1, 1478
+        for i in range(4,10):   # 1, 1478
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
-            allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
+            obj = self._scrapeInfo(orgLink=orgLink, orgID=i)
+            if(obj == None):
+                pass
+            allProviders.append(obj)
 
         # write all to .txt file, for prodction use to fill up database. without re-query
         with open('../app/aktordatabasen.json', 'w') as file:
@@ -236,6 +244,6 @@ def main():
     informasjon = s.scrapeAll()
 
     # print:
-    #print(informasjon)
+    print(informasjon)
 
-#main()
+main()

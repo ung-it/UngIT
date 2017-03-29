@@ -131,14 +131,14 @@ class Scraper:
                         cat = str(cat)
                         #print(cat)
                         start = cat.find('<li>') + 4
-                        end = cat.find('</li>')
+                        end = cat.find(' (')
                         cat = cat[start:end]
                         if(len(categories) == 0):
                             value += cat
                             break
                         else:
                             value += cat + ', '
-                    information[keys[i].string] = value
+                    information['Kategorier'] = value
 
                 elif(keys[i].string == "Type aktivitet "):
                     value = ''
@@ -152,7 +152,7 @@ class Scraper:
                         cat = list.pop()
                         cat = str(cat)
                         end = cat.find('</li>')
-                        cat = cat[:end]
+                        cat = cat[:end + 1]
                         if (len(list) == 0):
                             value += cat
                             break
@@ -161,7 +161,7 @@ class Scraper:
 
                     value = value.strip()
                     value = value[:-1]
-                    information[keys[i].string] = value
+                    information["TypeAktivitet"] = value
 
                 elif (keys[i].string == "Internettadresse"):
                     for link in urlLink:
@@ -210,15 +210,16 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(4,10):   # 1, 1478
+        for i in range(1,1478):   # 1, 1478
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             obj = self._scrapeInfo(orgLink=orgLink, orgID=i)
+            print(obj)
             if(obj == None):
-                pass
+                continue
             allProviders.append(obj)
 
         # write all to .txt file, for prodction use to fill up database. without re-query
-        with open('../app/aktordatabasenTest.json', 'w') as file:
+        with open('../app/aktordatabasen.json', 'w') as file:
             json.dump(allProviders, file, indent=4)
 
         return allProviders

@@ -127,17 +127,13 @@
 
 @media screen and (max-width: 760px) {
     .activity-card-image-container {
-        visibility: hidden;
+        display: none;
     }
-    .activity-card-info-container {
+    .activityBigStyle {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
+        flex-flow: row wrap;
     }
 
-    .activity-card-header-container {
-
-    }
 }
 
 /*Styling filter container*/

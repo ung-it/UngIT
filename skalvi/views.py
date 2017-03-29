@@ -109,8 +109,9 @@ def signOfEvent(request):
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
     json_serializer = serializers.get_serializer("json")()
-    if request.user.is_authenticated and profile_name == "undefined":
-        profile_name = request.session['profile_name']
+    if request.user.is_authenticated:
+        if profile_name == "undefined":
+            profile_name = request.session['profile_name']
     else:
         message = {"message":"no user signed in"}
         return HttpResponse(json.dumps(message))

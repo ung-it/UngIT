@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.core import serializers
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from datetime import *
 
 # Aktørdatabase
 from .scraper import Scraper
@@ -34,8 +35,8 @@ def index(request):
 def signUpActivity(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
+
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
@@ -43,48 +44,48 @@ def signUpActivity(request):
         # Check if user already is attending
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
-            return HttpResponse(status=201)
+            response = {'attending': True}
 
         # if user is not attending
         except ParticipateIn.DoesNotExist:
             participate = ParticipateIn(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.save()
 
-            return HttpResponse(status=204)
+            response = {'attending': False}
             # return render(request, "home.html", {"message": "Du er nå påmeldt dette arrangementet."})
     # User not logged in
     else:
         # user is not loged in, should not be possible to attend activity
-        return HttpResponse(status=206) # not logged in
-
+        response = {'attending': None} # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
 def checkIfSingedUp(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
-
+        json_serializer = serializers.get_serializer("json")()
+        # response = ""
         # Check if user already is attending
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
-            return HttpResponse(status=204)  # 204 == attending
+            response = {'attending': True}
 
         except ParticipateIn.DoesNotExist:
             # If user isn't signed up
-            return HttpResponse(status=205)  # 205 == not attending
+            response = {'attending': False}
     else:
         # If user is not loged in
-        return HttpResponse(status=206)  # not logged in
+        response = {'attending': None}
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
 def signOfEvent(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     activity = Activity.objects.get(pk=activityId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
@@ -93,16 +94,17 @@ def signOfEvent(request):
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.delete()
-            return HttpResponse(status=210)  # 210 == unattending
+            response = {'attending': True}
 
         except ParticipateIn.DoesNotExist:
             # Not attending, can't sign of
-            return HttpResponse(status=204)
+            response = {'attending': False}
 
     else:
         # If user is not loged in
         # Will never happen
-        return HttpResponse(status=206)  # not logged in
+        response = {'attending': None}
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
@@ -142,6 +144,43 @@ def getActivity(request, id):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
+
+@csrf_exempt
+def rateActivity(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    rating = str(request.body.decode('utf-8')).split(":")[2][:1]
+    activity = Activity.objects.get(pk=activityId)
+    currentRating = activity.rating
+    activity.number_of_ratings = activity.number_of_ratings +1
+    activity.rating = (currentRating + float(rating))
+    activity.save()
+    return HttpResponse(status=200, content_type='application/json')
+
+
+@csrf_exempt
+def postComment(request):
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
+
+    activity = Activity.objects.get(pk=activityId)
+    user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
+    print("profile ", user_profile.profile_name)
+    post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name, activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
+    post.save()
+    return HttpResponse(status=200, content_type='application/json')
+
+@csrf_exempt
+def getComments(request):
+    activityId = request.path.split("/")[2]
+    activity = Activity.objects.get(pk=activityId)
+    json_serializer = serializers.get_serializer("json")()
+    comments = json_serializer.serialize(Commentary.objects.filter(activityId=activity), ensure_ascii=False)
+    if comments == "[]":
+        message = {"message": "ingen kommentar funnet"}
+        return HttpResponse(json.dumps(message))  # no comments
+
+    return HttpResponse(comments, content_type='application/json')
+
 
 
 def logout_user(request):

@@ -5,7 +5,7 @@
     cursor: pointer;
     color: white;
     display: flex;
-    margin-top: 10px;
+    margin-top: 16px;
     border: 1px solid #f5f5f5;
     border-radius: 3px;
     -moz-border-radius: 3px;
@@ -26,7 +26,7 @@
 
 
 .caption {
-    height: 12em;
+    height: 13em;
 }
 .info-header {
     text-align: center;
@@ -144,4 +144,21 @@
     border-radius: 3px;
     border-color: darkgrey;
     border-width: thin;
+}
+
+.facebook-icon-wrapper {
+    position: relative;
+}
+
+.facebook-icon-container {
+    position: absolute;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+
+.facebook-icon-container img {
+    width: 40px;
+    height: 40px;
+    border-radius: 0.4em;
+    background-color: white;
 }

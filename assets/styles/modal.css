@@ -1,3 +1,83 @@
+i{
+    font-size: 2em;
+}
+
+.comment{
+    margin-left: 1em;
+    max-width: 100%;
+    text-wrap: normal;
+}
+
+.commentBackground{
+    margin-top: 1em;
+    width: 90%;
+    background-color: #f1f0f0;
+    border-radius: 10px;
+}
+
+#commentDiv{
+    width: 100%;
+    min-height: 15em;
+    max-height: 15em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#postComment{
+    background-color: #d2d2d2;
+    border-radius: 5px;
+    height: 7em;
+}
+
+.input-group{
+    height: 100%;
+    width: 100%;
+}
+
+.comment-form{
+    height: 100%;
+}
+
+#commentInput{
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+#addComment{
+    float: right;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+width: 12px;
+height: 12px;
+}
+
+::-webkit-scrollbar-track {
+border: 1px solid #03a7ff;
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+background: #03adff;
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #03a7ff;
+}
+
+.dv-star-rating{
+    float: right
+}
+
+#rating{
+    display: flex;
+    flex-direction: row;
+    float: left;
+}
+
 .modal-container {
     position: relative;
 }
@@ -39,6 +119,7 @@
     position: absolute;
     bottom: 0px;
     left: 10px;
+    width: 100%;
     textAlign: left;
 }
 
@@ -81,6 +162,10 @@
     color: #ffc62f !important;
 }
 
+.modal-comments {
+    color: #03adff !important;
+}
+
 .modal-description {
     font-size: 13pt;
     padding: 0 20px;
@@ -96,4 +181,14 @@
 
 .modal-glyphicon {
     color: #f39019;
+}
+
+.modal-facebook-image {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal-facebook-image img{
+    height: 200px;
+    padding: 5px;
 }

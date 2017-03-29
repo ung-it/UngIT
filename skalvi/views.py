@@ -386,16 +386,29 @@ class ActivityView(generic.DetailView):
                 return redirect("skalvi:index")
 
         def post(self, request, pk):
-            request.POST = request.POST.copy()
-            instance = get_object_or_404(Activity, pk=pk)
-            form = ActivityForm(request.POST, request.FILES, instance=instance)
-            form.data = form.data.copy()
+            if request.user.is_authenticated:
+                profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+                activity = Activity.objects.get(pk=self.kwargs["pk"])
+                try:
+                    host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+                    form = self.form_class(initial=model_to_dict(self.get_object()))
+                    request.POST = request.POST.copy()
+                    instance = get_object_or_404(Activity, pk=pk)
+                    form = ActivityForm(request.POST, request.FILES, instance=instance)
+                    form.data = form.data.copy()
+                    if form.is_valid():
+                        form.save()
+                        return redirect('/')
+                    else:
+                        return render(request, self.template_name, {'form': form, 'error_message': form.errors})
 
-            if form.is_valid():
-                form.save()
-                return redirect('/')
+                except Hosts.DoesNotExist:
+                    return redirect("skalvi:index")
             else:
-                return render(request, self.template_name, {'form': form, 'error_message': form.errors})
+                return redirect("skalvi:index")
+
+
+
 
 class createActivity(View):
     template_name = "activity.html"

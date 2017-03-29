@@ -6,17 +6,20 @@ from .models import UserProfile, Activity
 # Login View
 # Make a blueprint for user forms
 class UserForm(forms.ModelForm):
-    username = forms.CharField(label="Brukernavn")
     password = forms.CharField(widget=forms.PasswordInput, label="Passord")
-    first_name = forms.CharField(label="Fornavn")
-    last_name = forms.CharField(label="Etternavn")
-    email = forms.CharField(label='Epost')
 
 
 
     class Meta:
         model = User
         fields = ['username', "password", "first_name", "last_name", "email"]  # Fields that will appear in form in given order
+        labels = {
+            'username': 'Brukernavn',
+            'password': 'Passord',
+            'first_name': 'Fornavn',
+            'last_name': 'Etternavn',
+            'email': 'Epost'
+        }
 
 
 class UserProfileForm(forms.ModelForm):

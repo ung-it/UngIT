@@ -93,10 +93,6 @@
     margin-top: 16px;
 }
 
-.submit-button {
-    padding: 16px;
-}
-
 .date-time-container:not( .md-input-has-value ) input:not( :focus ) {
     color: transparent;
 }

@@ -6,7 +6,12 @@ from .models import UserProfile, Activity
 # Login View
 # Make a blueprint for user forms
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label="Brukernavn")
+    password = forms.CharField(widget=forms.PasswordInput, label="Passord")
+    first_name = forms.CharField(label="Fornavn")
+    last_name = forms.CharField(label="Etternavn")
+    email = forms.CharField(label='Epost')
+
 
 
     class Meta:

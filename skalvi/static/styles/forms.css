@@ -4,7 +4,7 @@
     width: 900px;
     margin: 16px auto 8px auto;
     text-align: center;
-    border-bottom: 3px solid #3f51b5;
+    border-bottom: 3px solid #e0e0e0;
 }
 
 .main-wrapper {
@@ -17,4 +17,8 @@
 .alert-wrapper {
     width: 900px;
     margin: auto;
+}
+
+.submit-button {
+    padding: 16px;
 }

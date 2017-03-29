@@ -19,10 +19,17 @@
         {% endif %}
         <div class="main-wrapper mdl-shadow--2dp">
             <div>
-                <form class="form-horizontal" role="form" action="" method="post"
-                      enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% include 'form_template.html' %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <span class="text-danger small">{{ field.errors }}</span>
+                            </div>
+                            <label class="control-label col-sm-2">{{ field.label_tag }}</label>
+                            <div class="col-sm-10">{{ field }}</div>
+                        </div>
+                    {% endfor %}
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
@@ -31,7 +38,7 @@
                 </form>
             </div>
             <div class="panel-footer">
-                Already have an account? <a href="{% url 'skalvi:index' %}">Click here</a> to log in.
+                Har du allerede en bruker? <a href="{% url 'skalvi:index' %}">Klikk her</a> for å logge inn.
             </div>
         </div>
     </div>

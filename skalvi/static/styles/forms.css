@@ -14,8 +14,8 @@
     width: 900px;
 }
 
-.mdl-checkbox__label {
-    font-weight: 400 !important;
+.mdl-checkbox__label label{
+    font-weight: 400;
 }
 
 .alert-wrapper {

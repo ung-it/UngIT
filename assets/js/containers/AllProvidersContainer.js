@@ -35,33 +35,19 @@ class AllProvidersContainer extends Component {
 }
 
 
-
-
 const mapStateToProps = state => {
     let { provider: { providerList, activeSearchForFilters, activeActivityFilters } } = state; // Make activityList and activeActivityFilters from state become variables
 
-    //console.log(providerList)
-    //console.log(providerList);
+    const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
+    const activityFilters = activeActivityFilters.split(','); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
 
-     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-     const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
-//
-//     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
-//     const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
-//
 
-//
-     const hasSearchForFilter = activeSearchForFilters.length > 0;
-     const searchForFilter = activeSearchForFilters.toUpperCase();
-//
-     providerList = hasActivityFilter
-         ? providerList.filter(provider => activityFilters.includes(provider["Type aktivitet "]))
-         : providerList;
-//
-//     activityList = hasSuitedForFilter
-//         ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
-//         : activityList;
-//
+    const hasSearchForFilter = activeSearchForFilters.length > 0;
+    const searchForFilter = activeSearchForFilters.toUpperCase();
+
+    providerList = hasActivityFilter
+        ? providerList.filter(provider => activityFilters.includes(provider.TypeAktivitet))
+        : providerList;
 
     providerList = hasSearchForFilter
         ? providerList.filter(provider => (provider.Navn.includes(searchForFilter)))
@@ -70,7 +56,6 @@ const mapStateToProps = state => {
     return {
         providers: providerList,
         activeActivityFilters: activeActivityFilters,
-        // activeSuitedForFilters: activeSuitedForFilters,
         activeSearchForFilters: activeSearchForFilters,
     };
 };
@@ -79,8 +64,6 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchProviders: () => dispatch(fetchAllProviders()),
         changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
-        // changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
-        // changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
         changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
         // changeTrashButton: () => dispatch(trashButtonClicked()),
 

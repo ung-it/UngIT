@@ -15,21 +15,8 @@ class ProviderCard extends React.Component {
 
 
     createProviderItem = () => {
-        let provider = this.props.provider;
-        console.log(this.props.provider);
-        if (this.props.provider.includes("Kategori(er) ")) {
-            provider.replace("Kategori(er) ", "Kategorier");
-        };
+        const provider = this.props.provider;
 
-        if (this.props.provider.includes("Type aktivitet ")) {
-            provider.replace("Type aktivitet ", "TypeAktivitet")
-        };
-
-        console.log(provider);
-
-        /*if (!provider.Navn) {
-            return null;
-        }*/
 
 
         return (
@@ -48,8 +35,8 @@ class ProviderCard extends React.Component {
                                 <div className="col-md-10">
                                     <div className="row">
                                         <div className="col-sm-10">
-                                        <p>Kategorier: {provider.Kategorier}</p>
-                                        <p>Type aktiviteter: {provider.TypeAktivitet}</p>
+                                        <p>Kategorier: {provider["Kategori(er) "]}</p>
+                                        <p>Type aktiviteter: {provider["Type aktivitet "]}</p>
                                         <p>Bydel: {provider.Bydel}</p>
                                         <p>Telefon: {provider.Telefon}</p>
                                         <p>Internettadresse: <a href={provider.Internettadresse}

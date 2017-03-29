@@ -23,6 +23,11 @@ export default function ProviderReducer(state=initialState, action) {
                 ...state,
                 activeSearchForFilters: action.searchFilter,
             };
+        case actionTypes.ADD_ACTIVITY_FILTER:
+            return {
+                ...state,
+                activeActivityFilters: action.filter,
+            };
         default: return state;
 
     }

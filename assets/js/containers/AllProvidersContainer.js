@@ -4,7 +4,7 @@ import { Provider, connect } from "react-redux";
 
 import "../../styles/activityBox.css";
 
-import { fetchAllProviders, addSearchForFilter } from "../actions/providersActions";
+import { fetchAllProviders, addSearchForFilter, addActivityFilter } from "../actions/providersActions";
 import ProvidersList from '../components/ProvidersList';
 import ProviderFilters from '../components/ProviderFilters';
 import configureStore from "../configureStore";
@@ -23,6 +23,8 @@ class AllProvidersContainer extends Component {
                 <ProviderFilters
                     onSearchForChange={this.props.changeSearchForFilter}
                     searchForFilters={this.props.activeSearchForFilters}
+                    onActivityFilterChange={this.props.changeActivityFilter}
+                    activityFilters={this.props.activeActivityFilters}
                 />
                 <ProvidersList providers={this.props.providers} />
             </div>
@@ -36,13 +38,13 @@ class AllProvidersContainer extends Component {
 
 
 const mapStateToProps = state => {
-    let { provider: { providerList, activeSearchForFilters } } = state; // Make activityList and activeActivityFilters from state become variables
+    let { provider: { providerList, activeSearchForFilters, activeActivityFilters } } = state; // Make activityList and activeActivityFilters from state become variables
 
     //console.log(providerList)
     //console.log(providerList);
 
-//     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-//     const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
+     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
+     const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
 //
 //     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
 //     const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
@@ -52,9 +54,9 @@ const mapStateToProps = state => {
      const hasSearchForFilter = activeSearchForFilters.length > 0;
      const searchForFilter = activeSearchForFilters.toUpperCase();
 //
-//     activityList = hasActivityFilter
-//         ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
-//         : activityList;
+     providerList = hasActivityFilter
+         ? providerList.filter(provider => activityFilters.includes(provider["Type aktivitet "]))
+         : providerList;
 //
 //     activityList = hasSuitedForFilter
 //         ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
@@ -67,7 +69,7 @@ const mapStateToProps = state => {
 
     return {
         providers: providerList,
-        // activeActivityFilters: activeActivityFilters,
+        activeActivityFilters: activeActivityFilters,
         // activeSuitedForFilters: activeSuitedForFilters,
         activeSearchForFilters: activeSearchForFilters,
     };
@@ -76,7 +78,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchProviders: () => dispatch(fetchAllProviders()),
-        // changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
+        changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         // changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
         // changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
         changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),

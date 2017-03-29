@@ -14,10 +14,6 @@ const store = configureStore();
 
 class AllActivitiesContainer extends Component {
 
-    componentDidMount() {
-        this.props.fetchActivities();
-    }
-
     render() {
         return (
             <div>
@@ -56,9 +52,6 @@ const mapStateToProps = state => {
     const hasWeekFilter = activeDateFilter.length > 0;
     const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
 
-    //console.log(activeDateFilter);
-    //console.log(new Date(weekFilters[0]));
-    //console.log(new Date(weekFilters[1]));
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
@@ -92,7 +85,7 @@ const mapStateToProps = state => {
         activeDateFilter: activeDateFilter,
         activeSearchForFilters: activeSearchForFilters,
     };
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {

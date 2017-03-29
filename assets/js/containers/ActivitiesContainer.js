@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, connect } from "react-redux";
 
-import { fetchAllActivities } from '../actions/activitiesActions';
+import { fetchAllActivities, fetchFacebookEventData } from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 
@@ -13,7 +13,9 @@ const store = configureStore();
 class ActivitiesContainer extends Component {
 
     componentDidMount() {
-        this.props.fetchActivities();
+        this.props.fetchActivities().then(() => {
+            this.props.fetchFacebookEventData(this.props.activities);
+        });
     }
 
     createActivityCardComponent = () => {
@@ -28,24 +30,27 @@ class ActivitiesContainer extends Component {
         });
     };
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.activities.length != nextProps.activities.length) {
+            return true;
+        }
+        return false;
+    }
+
     render() {
         const styles = {
-            activitiesContainerStyle: {
-                margin: "0px 10px 0px 10px"
-            },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "center"
+                justifyContent: "space-around",
+                width: '100%',
             }
         };
 
         return (
-            <div style={styles.activitiesContainerStyle}>
-              <div style={styles.activitiesStyle}>
-                  {this.createActivityCardComponent()}
-              </div>
+            <div style={styles.activitiesStyle}>
+                {this.createActivityCardComponent()}
             </div>
         );
     }
@@ -56,19 +61,20 @@ const mapStateToProps = state => {
     return {
         activities: state.activity.activityList
             .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            .slice(0, 5), // Only get five first
+            .slice(0, 4).reverse() // Only get five first
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchActivities: () => dispatch(fetchAllActivities()),
+        fetchFacebookEventData: (activities) => dispatch(fetchFacebookEventData(activities)),
     }
 };
 
 
 // Fetch initial data for state
-store.dispatch(fetchAllActivities());
+// store.dispatch(fetchAllActivities());
 
 ActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
 

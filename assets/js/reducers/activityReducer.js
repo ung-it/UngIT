@@ -6,7 +6,7 @@ import * as actionTypes from '../actions/activitiesActions';
 * data. It can do so.
 * */
 
-var moment = require('moment');
+const moment = require('moment');
 
 const initialState = {
     attendingActivityList: [],
@@ -52,12 +52,18 @@ export default function ActivityReducer(state=initialState, action) {
             return {
                 ...state,
                 activeDateFilter: action.weekFilter,
-            }
+
+            };
+        case actionTypes.FETCHED_FACEBOOK_EVENT_DATA:
+            return {
+                ...state,
+                activityList: action.facebookData,
+            };
         case actionTypes.ADD_SEARCH_FOR_FILTER:
             return {
                 ...state,
                 activeSearchForFilters: action.searchFilter,
-            }
+            };
         case actionTypes.TRASH_BUTTON_CLICKED:
             return {
                 ...state,
@@ -66,7 +72,7 @@ export default function ActivityReducer(state=initialState, action) {
                 activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
                 activeSearchForFilters: '',
                 activeButtonClicked: false,
-            }
+            };
         default:
             return state;
     }

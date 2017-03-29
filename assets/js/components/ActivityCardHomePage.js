@@ -3,7 +3,8 @@ import { connect } from "react-redux"
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 
 import ActivityModal from './ActivityModal';
-import {getMonth, getDay} from '../DateFunctions';
+
+const moment = require('moment');
 
 class ActivityCardHomePage extends React.Component {
 
@@ -38,34 +39,70 @@ class ActivityCardHomePage extends React.Component {
         let poster = null;
         if(images.length > 0){
             poster = images[0];
+        } else {
+            poster = "/static/images/activityPic.jpeg"
         }
+
+        let facebookIcon = null;
+        if (activity.facebookID != null) {
+
+            let link = 'https://www.facebook.com/events/' + activity.facebookID;
+
+            facebookIcon = (
+                <div className="facebook-icon-wrapper">
+                    <div className="facebook-icon-container">
+                        <a href={link} target="__blank">
+                            <img src="/static/images/facebook-icon.svg" id="facebookIcon"/>
+                        </a>
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="facebookIcon">
+                            Dette arrangementet er linket til et Facebook arrangement<br/><br/>
+                            Klikk på ikonet for å se arrangementet på Facebook
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        let dato = new Date(this.props.activity.date);
+
+        const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
+
+        const divStyle = {
+            backgroundImage: 'url(' + poster + ')',
+            width: '25em',
+            height: '25em',
+            backgroundSize: '25em 25em',
+            borderRadius: '3px',
+            backgroundRepeat: 'no-repeat',
+        };
 
         return (
             <div key={this.props.activity.id}>
-                <Thumbnail
+                {facebookIcon}
+                <div
+
                     className="activitySmalStyle"
-                    src={poster}
                     onClick={this.openActivityModal}
                     title="Klikk på aktiviteten for mer informasjon"
+                    style={divStyle}
                 >
-                    <h3>{this.props.activity.activityName}</h3>
                     <div className="info-box-wrapper">
+                        <h3 className="info-header">{this.props.activity.activityName}</h3>
                         <div className="icon-container">
-                            <p><Glyphicon glyph="glyphicon glyphicon-calendar"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-time"/></p>
-                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/></p>
-                        </div>
-                        <div className="info-container">
-                            <p>{getMonth(this.props.activity.date)}</p>
-                            <p>{this.props.activity.time_start} - {this.props.activity.time_end}</p>
-                            <p>{this.props.activity.location}</p>
+                            <div className="row">
+                                <p className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
+                                <p className="col-md-5"><Glyphicon glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</p>
+                            </div>
+                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</p>
                         </div>
                     </div>
-                    <ActivityModal id={this.props.id} activity={this.props.activity} images={images} show={this.state.show} />
-                </Thumbnail>
+                    <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
+                                   show={this.state.show}/>
+                </div>
             </div>
         );
     };
+
 
     render() {
         return (

@@ -7,7 +7,11 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #f5f5f5;
+    background-color: white;
+}
+
+h1, h2, h3, h4, .title {
+    font-family: "Yuppy SC", serif;
 }
 
 .site-content {
@@ -20,49 +24,54 @@ body {
     border: none;
 }
 
+
 a.navbar-brand {
     padding: 0;
 }
 
 .nav-color {
-    background-color: rgb(55, 55, 55);
+    background-color: rgb(42, 42, 42);
+    font-family: "Yuppy SC", serif;
 }
 
 .content {
+    padding-top: 20px;
     padding-left: 100px;
     padding-right: 100px;
 }
 
+.nav-content {
+    padding-left: 100px;
+    padding-right: 100px;
+}
 .content-margin-top {
-    margin-top: 100px;
+    margin-top: 50px;
+}
+
+.content-margin-home {
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 .navbar-right > li {
     padding: 0 5px;
 }
 
-.active > a{
-    background: rgb(0,256,0);
-}
 
  .navbar-default .navbar-nav > .active > a,
  .navbar-default .navbar-nav > .active > a:hover,
  .navbar-default .navbar-nav > .active > a:focus {
-      color: #000;
-      background: #67c200;
+      color: white;
+
  }
 
 .logo-div {
     position: absolute;
 	z-index: 1;
 	text-align: center;
-	background-color: rgb(55, 55, 55);
-
-	/*margin: -30px 37%;*/
+	background-color: rgb(42, 42, 42);
 	margin-top: 30px;
 	padding: 10px;
-	/*width: 185px;
-	height: 75px;*/
     border-radius: 4px;
 }
 
@@ -75,8 +84,16 @@ a.navbar-brand {
     z-index: -1;
 }
 
+.banner-home {
+    width: 100%;
+    height: 400px;
+
+}
+
 .banner {
     width: 100%;
+    height: 100px;
+
 }
 
 pre {
@@ -86,34 +103,59 @@ pre {
 
 
 .footer {
-    padding: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(42, 42, 42);
+    color: rgb(157, 157, 157);
 }
 
-.footer-header {
-    font-weight: bold;
+.footer-divider {
+    margin: 5px;
+    border: 1px solid #3ad7ff;
 }
 
-.footer-list {
+.container-navigation {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navigation-item {
+
+}
+
+.container-creators {
+    display: flex;
+    justify-content: space-around;
+}
+
+.creators-item {
     font-size: 8pt;
+    margin: 15px;
+}
+
+.container-info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info-item {
+    margin: 15px;
 }
 
 
 
 li.dropdown.open > a:focus {
-    color: #000 !important;
-    background: #ffdb61 !important;
-    background: -webkit-linear-gradient(left top, #ffdb61, #ffb200) !important; /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, #ffdb61, #ffb200) !important; /* Standard syntax */
+    color: white !important;
+    border-bottom: 7px solid #3ad7ff !important;
+    /*background: -webkit-linear-gradient(left top,#3ad7ff, #03a7ff) !important; /* For Safari 5.1 to 6.0 */
+    /*background: -o-linear-gradient(bottom right, #3ad7ff, #03a7ff) !important; /* For Opera 11.1 to 12.0 */
+   /* background: -moz-linear-gradient(bottom right, #3ad7ff, #03a7ff) !important; /* For Firefox 3.6 to 15 */
+    /*background: linear-gradient(to bottom right, #3ad7ff, #03a7ff) !important; /* Standard syntax */
 }
 
 .active > a {
-    color: #000 !important;
-    background: #ffdb61 !important;
-    background: -webkit-linear-gradient(left top, #ffdb61, #ffb200) !important; /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, #ffdb61, #ffb200) !important; /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, #ffdb61, #ffb200) !important; /* Standard syntax */
+    color: white !important;
+    border-bottom: 7px solid #3ad7ff !important;
+    /*border-bottom: -webkit-linear-gradient(left top, #3ad7ff, #03a7ff) !important; /* For Safari 5.1 to 6.0 */
+    /*border-bottom: -o-linear-gradient(bottom right, #3ad7ff, #03a7ff) !important; /* For Opera 11.1 to 12.0 */
+    /*border-bottom: -moz-linear-gradient(bottom right, #3ad7ff, #03a7ff) !important; /* For Firefox 3.6 to 15 */
+    /*border-bottom: linear-gradient(to bottom right, #3ad7ff, #03a7ff) !important; /* Standard syntax */
 }

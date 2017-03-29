@@ -8,25 +8,31 @@
 
 
 {% block body %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}"/>
 
     <div class="banner-container">
-        <img src="{% static "images/banner.png" %}" alt="Banner" class="banner">
+        <img src="{% static "images/banner-home.png" %}" alt="Banner" class="banner-home">
     </div>
 
     <div class="content">
+        <div class="content-margin-home">
+            <h1>Kommende Aktiviteter</h1>
+            <div id="activities"></div>
+        </div>
+
         {% if user.is_authenticated %}
-            <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
+            <div class="content-margin-home">
+                <h1>Mine kommende Aktiviteter</h1>
+                <div id="attendingActivities"></div>
+            </div>
         {% endif %}
 
-        <div class="content-margin-top">
-            <h2>Kommende Aktiviteter</h2>
-        </div>
-        <div id="activities"></div>
     </div>
-
 {% endblock %}
 
 {% block explicitPageFooter %}
     {% render_bundle 'activitiesContainer' %}
+    {% if user.is_authenticated %}
+        {% render_bundle 'attendingActivitiesContainer' %}
+    {% endif %}
 {% endblock %}

@@ -65,7 +65,7 @@ class ActivityCard extends React.Component {
 
                 <div className="activity-card-info-container">
                     <div className="activity-card-header-container">
-                        <h3 className="big-info-header"> {this.props.activity.activityName}</h3>
+                        <h2 className="big-info-header"> {this.props.activity.activityName}</h2>
                         <div className="activity-card-row-info">
                             <div className="row">
                                 <div classID="big-icon-container-div" className="col-md-4"><Glyphicon

@@ -23,12 +23,18 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
-    type = forms.BooleanField(label="Parent", required=False)
-    is_provider = forms.BooleanField(label='Brukernavn registrert i Aktørdatabasen', required=False)
+    type = forms.BooleanField(required=False)
+    is_provider = forms.BooleanField(required=False)
 
     class Meta:
         model = UserProfile
         fields = ['phone', 'profile_name', 'type', 'is_provider']
+        labels = {
+            'phone': 'Telefon',
+            'profile_name': 'Profilnavn',
+            'type': 'Forelder',
+            'is_provider': 'Brukernavn registrert i Aktørdatabasen'
+        }
 
 class DateInput(forms.DateInput):
     input_type = 'date'

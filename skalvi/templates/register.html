@@ -30,12 +30,24 @@
                             <div class="col-sm-10">{{ field }}</div>
                         </div>
                     {% endfor %}
+                    {% for field in profile %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <span class="text-danger small">{{ field.errors }}</span>
+                            </div>
+                            <label class="control-label col-sm-2">{{ field.label_tag }}</label>
+                            <div class="col-sm-10">{{ field }}</div>
+                        </div>
+                    {% endfor %}
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Registrer</button>
                         </div>
                     </div>
                 </form>
+
+
+
             </div>
             <div class="panel-footer">
                 Har du allerede en bruker? <a href="{% url 'skalvi:index' %}">Klikk her</a> for å logge inn.

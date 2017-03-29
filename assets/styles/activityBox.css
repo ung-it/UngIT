@@ -126,8 +126,17 @@
 }
 
 @media screen and (max-width: 760px) {
-    .activity-card-description {
+    .activity-card-image-container {
         visibility: hidden;
+    }
+    .activity-card-info-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .activity-card-header-container {
+
     }
 }
 

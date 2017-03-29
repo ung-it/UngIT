@@ -108,6 +108,8 @@ def signOfEvent(request):
 
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
+    if profile_name == "undefined":
+        profile_name = request.session['profile_name']
     profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
     activities = ParticipateIn.objects.filter(userId=request.user, user_profile_id=profile)
     activitie_objects = []

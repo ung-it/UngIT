@@ -190,7 +190,7 @@ class Scraper:
             information['Navn'] = title.string
             information['Id'] = orgID
 
-        
+
         if(len(information) == 0):
             return None
 
@@ -244,4 +244,4 @@ def main():
     # print:
     #print(informasjon)
 
-main()
+#main()

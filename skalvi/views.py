@@ -108,15 +108,19 @@ def signOfEvent(request):
 
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
-    if profile_name == "undefined":
+    json_serializer = serializers.get_serializer("json")()
+    if request.user.is_authenticated and profile_name == "undefined":
         profile_name = request.session['profile_name']
+    else:
+        message = {"message":"no user signed in"}
+        return HttpResponse(json.dumps(message))
+
     profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
     activities = ParticipateIn.objects.filter(userId=request.user, user_profile_id=profile)
     activitie_objects = []
     for activity in activities:
         act = Activity.objects.get(pk=activity.activityId.pk)
         activitie_objects.append(act)
-    json_serializer = serializers.get_serializer("json")()
     attendingActivities = json_serializer.serialize(activitie_objects, ensure_ascii=False)
     return HttpResponse(attendingActivities, content_type='application/json')
 
@@ -523,3 +527,7 @@ class RegisterProfileView(View):
 
 def allactivities(request):
     return TemplateResponse(request, 'allActivities.html', {})
+
+
+def allproviders(request):
+    return TemplateResponse(request, 'allProviders.html', {})

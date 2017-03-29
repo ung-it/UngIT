@@ -11,7 +11,7 @@ from django.template.response import TemplateResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.db.models.base import ObjectDoesNotExist
-
+from django.core import serializers
 
 
 import os
@@ -130,3 +130,11 @@ def _tryAndSaveToDB(instans):
         # Finally save the object into the organisation table
         # org.save()
 
+
+
+
+def getProviders(request):
+    json_serializer = serializers.get_serializer("json")()
+    providers = Organisation.objects.all()
+    providers = json_serializer.serialize(providers, ensure_ascii=False)
+    return HttpResponse(providers, content_type='application/json')

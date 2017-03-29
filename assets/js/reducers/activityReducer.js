@@ -6,7 +6,7 @@ import * as actionTypes from '../actions/activitiesActions';
 * data. It can do so.
 * */
 
-var moment = require('moment');
+const moment = require('moment');
 
 const initialState = {
     attendingActivityList: [],

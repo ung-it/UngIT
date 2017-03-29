@@ -1,6 +1,4 @@
-/**
- * Created by christinaandresen on 16/03/17.
- */
+
 import React from 'react';
 import ActivityCard from './ActivityCard';
 

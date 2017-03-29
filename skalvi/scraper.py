@@ -153,6 +153,8 @@ class Scraper:
                         cat = str(cat)
                         end = cat.find('</li>')
                         cat = cat[:end + 1]
+                        if (cat.find("<")):
+                            cat = cat.replace("<", "")
                         if (len(list) == 0):
                             value += cat
                             break
@@ -208,7 +210,7 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(1,1480):   # 1, 1480
+        for i in range(34,37):   # 1, 1480
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             obj = self._scrapeInfo(orgLink=orgLink, orgID=i)
             if(obj == None):
@@ -216,7 +218,7 @@ class Scraper:
             allProviders.append(obj)
 
         # write all to .txt file, for prodction use to fill up database. without re-query
-        with open('../app/aktordatabasen.json', 'w') as file:
+        with open('../app/aktordatabasenTest.json', 'w') as file:
             json.dump(allProviders, file, indent=4)
 
         return allProviders

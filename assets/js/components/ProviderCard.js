@@ -20,7 +20,7 @@ class ProviderCard extends React.Component {
             .replace("Type aktivitet ", "TypeAktivitet")
         );
 
-        if(!provider.Navn){
+        if (!provider.Navn) {
             return null;
         }
 
@@ -38,13 +38,25 @@ class ProviderCard extends React.Component {
                                     <div className="big-icon-container-div"><Glyphicon
                                         glyph="glyphicon glyphicon-map-marker"/>{provider.Adresse}</div>
                                 </div>
-                                <div className="col-md-8">
-                                    <p>Kategorier: {provider.Kategorier}</p>
-                                    <p>Type aktiviteter: {provider.TypeAktivitet}</p>
-                                    <p>Bydel: {provider.Bydel}</p>
-                                    <p>Telefon: {provider.Telefon}</p>
-                                    <p>Internettadresse: <a href={provider.Internettadresse} target="_blank">{provider.Internettadresse}</a></p>
-                                    <p>Medlemmer: {provider.Medlemmer}</p>
+                                <div className="col-md-10">
+                                    <div className="row">
+                                        <div className="col-sm-10">
+                                        <p>Kategorier: {provider.Kategorier}</p>
+                                        <p>Type aktiviteter: {provider.TypeAktivitet}</p>
+                                        <p>Bydel: {provider.Bydel}</p>
+                                        <p>Telefon: {provider.Telefon}</p>
+                                        <p>Internettadresse: <a href={provider.Internettadresse}
+                                                                target="_blank">{provider.Internettadresse}</a>
+                                        </p>
+                                        <p>Medlemmer: {provider.Medlemmer}</p>
+                                        </div>
+                                        <div className="col-sm-2">
+                                            <p>Aktiviteter</p>
+                                            <ul>
+                                                <li>Ingen registrert</li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

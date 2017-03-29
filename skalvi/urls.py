@@ -22,8 +22,10 @@ urlpatterns = [
     url(r'^activity/$', views.createActivity.as_view(), name="create-activity"),
     url(r'^activity/(?P<pk>\d+)/$', views.ActivityView.as_view(), name="edit-activity"),
     url(r'^allactivities/', views.allactivities, name='allactivities'),
+    url(r'^allproviders/', views.allproviders, name='allproviders'),
     # Get activities
     url(r'^api/activities/$', views.getActivities, name="getActivities"),
+    url(r'^api/providers/$', ApiFunctions.getProviders, name="getProviders"),
     url(r'^api/activity/(?P<id>[0-9]+)/$', views.getActivity, name="get-activity"),
     url(r'^api/attendingActivities/[a-zA-Z]+/$', views.getAttendingActivities, name="getAttendingActivities"),
     url(r'^api/hostingActivities/[a-zA-Z]+/$', views.getHostingActivities, name="getHostingActivities"),
@@ -34,6 +36,9 @@ urlpatterns = [
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
+
+    url(r'^api/getHost/[0-9]+/$', views.getActivityHost, name="getActivityHost"),
+
     # Comments and rating
     url(r'^rateActivity/$', views.rateActivity, name='rateActivity'),
     url(r'^postComment/$', views.postComment, name='postComment'),
@@ -43,3 +48,4 @@ urlpatterns = [
 
 
 ]
+

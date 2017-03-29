@@ -10,7 +10,10 @@
 
 {% block body %}
 
-    <div class="content content-margin-top">
+    <div class="banner-container">
+        <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
+    </div>
+    <div class="content">
         <div class="form-page-title">Registrer ny bruker</div>
         {% if error_message %}
             <div class="alert alert-danger alert-wrapper">

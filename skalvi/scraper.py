@@ -1,6 +1,7 @@
 import requests # html requests
 from bs4 import BeautifulSoup # to extract html content
 import json
+import re
 
 '''
 A class to scrape the organisasjoner.trondheim.kommune aktordatabasen
@@ -120,6 +121,7 @@ class Scraper:
             values = self.soup.find_all('dd')
             addresses = self.soup.find_all('address')
             categories = self.soup.find_all('ul', class_='unstyled')
+            urlLink = self.soup.find_all('a')
 
             for i in range(0, len(keys)):
                 if(keys[i].string.strip() == 'Kategori(er)'):
@@ -138,6 +140,37 @@ class Scraper:
                             value += cat + ', '
                     information[keys[i].string] = value
 
+                elif(keys[i].string == "Type aktivitet "):
+                    value = ''
+
+                    list = categories[0]
+                    list = str(list)
+                    list = list.split("<li>")
+                    list.pop(0)
+
+                    for cat in list:
+                        cat = list.pop()
+                        cat = str(cat)
+                        end = cat.find('</li>')
+                        cat = cat[:end]
+                        if (len(list) == 0):
+                            value += cat
+                            break
+                        else:
+                            value += cat + ', '
+
+                    value = value.strip()
+                    value = value[:-1]
+                    information[keys[i].string] = value
+
+                elif (keys[i].string == "Internettadresse"):
+                    for link in urlLink:
+                        site = (link.get('href'))
+
+                    information[keys[i].string] = site
+
+
+
                 elif(keys[i].string != 'Adresse'):
                     information[keys[i].string] = values[i].string
 
@@ -150,7 +183,7 @@ class Scraper:
                     adr = adr[start:end]
                     adr = adr.replace('<br>', '')
                     adr = adr.replace('\n', '')
-                    adr = adr.replace(' ', '')
+                    adr = re.sub('\s+', ' ', adr)
 
                     information[keys[i].string] = adr.strip()
         if(len(information) !=0 ):
@@ -172,12 +205,12 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(1,1472):
+        for i in range(1,1478):   # 1, 1478
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
 
         # write all to .txt file, for prodction use to fill up database. without re-query
-        with open('./app/aktordatabasen.json', 'w') as file:
+        with open('../app/aktordatabasen.json', 'w') as file:
             json.dump(allProviders, file, indent=4)
 
         return allProviders
@@ -197,12 +230,12 @@ def main():
     #informasjon = s.scrapeAktor(name='DANS MED OSS')
 
     # Multiple matches
-    informasjon = s.scrapeAktor(name='rosenborg')
+    #informasjon = s.scrapeAktor(name='rosenborg')
 
     # scrape all
-    #informasjon = s.scrapeAll()
+    informasjon = s.scrapeAll()
 
     # print:
-    print(informasjon)
+    #print(informasjon)
 
 #main()

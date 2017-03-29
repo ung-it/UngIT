@@ -6,9 +6,6 @@ from .models import UserProfile, Activity
 # Login View
 # Make a blueprint for user forms
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, label="Passord")
-
-
 
     class Meta:
         model = User
@@ -20,11 +17,19 @@ class UserForm(forms.ModelForm):
             'last_name': 'Etternavn',
             'email': 'Epost'
         }
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'password': forms.PasswordInput(attrs={'class': 'mdl-textfield__input'}),
+            'first_name': forms.TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'last_name': forms.TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'email': forms.TextInput(attrs={'class': 'mdl-textfield__input'}),
+        }
 
 
 class UserProfileForm(forms.ModelForm):
-    type = forms.BooleanField(required=False)
-    is_provider = forms.BooleanField(required=False)
+    type = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'}), label="Forelder")
+    is_provider = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'}), label="Brukernavn registrert i Aktørdatabasen")
+
 
     class Meta:
         model = UserProfile
@@ -32,8 +37,10 @@ class UserProfileForm(forms.ModelForm):
         labels = {
             'phone': 'Telefon',
             'profile_name': 'Profilnavn',
-            'type': 'Forelder',
-            'is_provider': 'Brukernavn registrert i Aktørdatabasen'
+        }
+        widgets = {
+            'phone': forms.TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'profile_name': forms.PasswordInput(attrs={'class': 'mdl-textfield__input'}),
         }
 
 class DateInput(forms.DateInput):

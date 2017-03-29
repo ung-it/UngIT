@@ -341,7 +341,7 @@ class UserFormView(View):
             user.save()  # saves users to the database
 
             # print('Before saving information: ', information)
-            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=first_name, last_name=last_name, email=email, aktordatabase={})
+            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=first_name, last_name=last_name, email=email, provider={})
             userProfile.is_active = True
             userProfile.save()
 
@@ -534,13 +534,15 @@ class RegisterProfileView(View):
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
             profile_name = profile_form.cleaned_data['profile_name']
+            last_name = profile_form.cleaned_data['last_name']
+            email = profile_form.cleaned_data['email']
 
             if types:
                 types = "P"
             else:
                 types = "C"
 
-            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
+            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name, last_name=last_name, email=email)
             profile.save()
 
         return redirect("../mypage/" + profile_name )

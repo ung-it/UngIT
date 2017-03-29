@@ -16,6 +16,11 @@ export function getUpcomingActivities(callback) {
     });
 }
 
+
+export function getAllProviders() {
+    return fetchFromServer('/api/providers/')
+}
+
 export function getAllActivities() {
     return fetchFromServer('/api/activities/').then(response => {
         return response;
@@ -144,3 +149,4 @@ function postToServer(query, data) {
         }
     })
 }
+

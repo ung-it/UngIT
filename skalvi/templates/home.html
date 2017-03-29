@@ -22,7 +22,7 @@
 
         {% if user.is_authenticated %}
             <div class="content-margin-home">
-                <h1>Kommende Aktiviteter</h1>
+                <h1>Mine kommende Aktiviteter</h1>
                 <div id="attendingActivities"></div>
             </div>
         {% endif %}
@@ -32,5 +32,7 @@
 
 {% block explicitPageFooter %}
     {% render_bundle 'activitiesContainer' %}
-    {% render_bundle 'attendingActivitiesContainer' %}
+    {% if user.is_authenticated %}
+        {% render_bundle 'attendingActivitiesContainer' %}
+    {% endif %}
 {% endblock %}

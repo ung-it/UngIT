@@ -190,9 +190,7 @@ class Scraper:
             information['Navn'] = title.string
             information['Id'] = orgID
 
-        print(information)
-        print('Inforamtion: ', information)
-        print("len infor. ", len(information))
+        
         if(len(information) == 0):
             return None
 
@@ -210,10 +208,9 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(1,1478):   # 1, 1478
+        for i in range(1,1480):   # 1, 1480
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             obj = self._scrapeInfo(orgLink=orgLink, orgID=i)
-            print(obj)
             if(obj == None):
                 continue
             allProviders.append(obj)
@@ -245,6 +242,6 @@ def main():
     informasjon = s.scrapeAll()
 
     # print:
-    print(informasjon)
+    #print(informasjon)
 
 main()

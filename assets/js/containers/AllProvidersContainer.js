@@ -47,12 +47,7 @@ const mapStateToProps = state => {
 //     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
 //     const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
 //
-//     const hasWeekFilter = activeDateFilter.length > 0;
-//     const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
-//
-//     //console.log(activeDateFilter);
-//     //console.log(new Date(weekFilters[0]));
-//     //console.log(new Date(weekFilters[1]));
+
 //
      const hasSearchForFilter = activeSearchForFilters.length > 0;
      const searchForFilter = activeSearchForFilters.toUpperCase();
@@ -65,18 +60,9 @@ const mapStateToProps = state => {
 //         ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
 //         : activityList;
 //
-//     /*activityList = hasWeekFilter
-//         ? activityList.filter(activity =>
-//         (
-//             ((new Date (activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date (activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date (activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
-//             (new Date (activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date (activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date (activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
-//             (weekFilters[0].getYear() >= new Date (activity.fields.date).getYear()  && weekFilters[0].getMonth() >= new Date (activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date (activity.fields.date).getDay()) &&
-//             (weekFilters[0].getYear() <= new Date (activity.fields.date_end).getYear()  && weekFilters[0].getMonth() <= new Date (activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date (activity.fields.date_end).getDay())
-//         ))
-//         : activityList;
-// */
+
     providerList = hasSearchForFilter
-        ? providerList.filter(provider => (provider.Navn))
+        ? providerList.filter(provider => (provider.Navn.includes(searchForFilter)))
         : providerList;
 
     return {

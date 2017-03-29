@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import '../../styles/AdaptionChips.css'
 
 import IconAccessible from 'material-ui/svg-icons/action/accessible';
 import IconAccessibility from 'material-ui/svg-icons/action/accessibility';
@@ -29,7 +27,7 @@ const style = {
     }
 };
 
-class AdaptionChips extends Component {
+class AdaptionsField extends Component {
 
 
     constructor(props) {
@@ -231,22 +229,4 @@ class AdaptionChips extends Component {
     }
 }
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-const muiTheme = getMuiTheme({
-    palette: {
-        primary1Color: '#3F51B5',
-    },
-});
-
-const App = () => (
-    <MuiThemeProvider muiTheme={muiTheme}>
-        <AdaptionChips />
-    </MuiThemeProvider>
-);
-
-ReactDOM.render(
-    <App/>,
-    document.getElementById('adaptions-container')
-);
+export default AdaptionsField;

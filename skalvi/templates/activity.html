@@ -153,15 +153,22 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
-                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                                {% if form.provider.value != None %}
-                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" value="{{ form.provider.value }}" required>
-                                {% else %}
-                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" required>
-                                {% endif %}
-                                <label class="mdl-textfield__label" for="provider">Arrangør</label>
-                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
-                            </div>
+                            {% if form.provider.value != None %}
+                                <input name="provider" id="provider" hidden value="{{ form.provider.value }}">
+                            {% else %}
+                                <input name="provider" id="provider" hidden>
+                            {% endif %}
+                            <div id="provider-container"></div>
+{#                            <div id="adaptions-container"></div>#}
+{#                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">#}
+{#                                {% if form.provider.value != None %}#}
+{#                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" value="{{ form.provider.value }}" required>#}
+{#                                {% else %}#}
+{#                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" required>#}
+{#                                {% endif %}#}
+{#                                <label class="mdl-textfield__label" for="provider">Arrangør</label>#}
+{#                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>#}
+{#                            </div>#}
                         </span>
                     </li>
                     <li class="mdl-list__item">
@@ -259,5 +266,5 @@
 {% endblock %}
 
 {% block explicitPageFooter %}
-    {% render_bundle 'adaptionChips' %}
+    {% render_bundle 'activityForm' %}
 {% endblock %}

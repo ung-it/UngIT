@@ -1,0 +1,20 @@
+.form-page-title {
+    font-family: "Yuppy SC";
+    font-size: 36px;
+    width: 900px;
+    margin: 16px auto 8px auto;
+    text-align: center;
+    border-bottom: 3px solid #3f51b5;
+}
+
+.main-wrapper {
+    padding: 40px 40px 8px 40px;
+    margin: 8px auto 32px auto;
+    background-color: white;
+    width: 900px;
+}
+
+.alert-wrapper {
+    width: 900px;
+    margin: auto;
+}

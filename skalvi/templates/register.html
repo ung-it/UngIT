@@ -1,36 +1,37 @@
 {% extends "base_template.html" %}
-{% block pageTitle %}Register {% endblock %}
+{% load static %}
+
+{% block explicitPageHeader %}
+    <link rel="stylesheet" href="{% static "styles/forms.css" %}">
+{% endblock %}
+
+{% block pageTitle %}Register ny bruker{% endblock %}
+
+
 {% block body %}
 
-    <div class="content">
-        <div class="content-margin-top">
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h3>Opprett ny bruker</h3>
-                                {% if error_message %}
-                                    <p><strong>{{ error_message }}</strong></p>
-                                {% endif %}
-                                <form class="form-horizontal" role="form" action="" method="post"
-                                      enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    {% include 'form_template.html' %}
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="panel-footer">
-                                Already have an account? <a href="{% url 'skalvi:index' %}">Click here</a> to log in.
-                            </div>
+    <div class="content content-margin-top">
+        <div class="form-page-title">Registrer ny bruker</div>
+        {% if error_message %}
+            <div class="alert alert-danger alert-wrapper">
+                <strong>{{ error_message }}</strong>
+            </div>
+        {% endif %}
+        <div class="main-wrapper mdl-shadow--2dp">
+            <div>
+                <form class="form-horizontal" role="form" action="" method="post"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% include 'form_template.html' %}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
-                </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                Already have an account? <a href="{% url 'skalvi:index' %}">Click here</a> to log in.
             </div>
         </div>
     </div>

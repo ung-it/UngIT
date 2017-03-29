@@ -97,7 +97,7 @@
         "Id": 7,
         "Organisasjonsnummer": "891531702"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -112,7 +112,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "991056009"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -232,7 +232,7 @@
         "Organisasjonsnummer": "997008200",
         "Kategori(er) ": "Rekreasjon og sosiale foreninger (1 300 )"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -548,7 +548,7 @@
         "Internettadresse": "http://www.bunker18.no",
         "Organisasjonsnummer": "995869942"
     },
-    {},
+    
     {
         "Bydel": "Trondheim Vest",
         "Organisasjonsform": "FLI",
@@ -924,7 +924,7 @@
         "Organisasjonsnummer": "998610591",
         "Kategori(er) ": "Rekreasjon og sosiale foreninger (1 300 )"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -1110,7 +1110,7 @@
         "Internettadresse": "http://www.folkeakademiet.no",
         "Organisasjonsnummer": "971372796"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -1689,7 +1689,7 @@
         "Internettadresse": "http://www.heimdalskoleorkester.no",
         "Organisasjonsnummer": "984936184"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -3027,7 +3027,7 @@
         "Internettadresse": "http://www.nidarvollungdomskorps.no",
         "Organisasjonsnummer": "982755425"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -3125,8 +3125,8 @@
         "Id": 227,
         "Organisasjonsnummer": "897014262"
     },
-    {},
-    {},
+    
+    
     {
         "Type aktivitet ": "Ko",
         "Organisasjonsform": "FLI",
@@ -3427,7 +3427,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "999582141"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -5901,7 +5901,7 @@
         "Internettadresse": "http://www.trondelag-hestesportsklubb.no",
         "Organisasjonsnummer": "883369572"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -5944,7 +5944,7 @@
         "Internettadresse": "http://www.tronderbataljonen.no",
         "Organisasjonsnummer": "995689774"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -6372,7 +6372,7 @@
         "Rekrutteringsomr\u00e5de": "Trondheim \u00d8st",
         "Organisasjonsnummer": "983900143"
     },
-    {},
+    
     {
         "Bydel": "Trondheim Vest",
         "Organisasjonsform": "FLI",
@@ -6389,9 +6389,9 @@
         "Internettadresse": "http://www.sporveishistoriskforening.no",
         "Organisasjonsnummer": "978701876"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "40",
@@ -6422,7 +6422,7 @@
         "Internettadresse": "http://www.trondheimbryteklubb.no",
         "Organisasjonsnummer": "984076835"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -6508,7 +6508,7 @@
         "Id": 474,
         "Organisasjonsnummer": "971375973"
     },
-    {},
+    
     {
         "Bydel": "Trondheim S\u00f8r",
         "Organisasjonsform": "FLI",
@@ -6630,7 +6630,7 @@
         "Rekrutteringsomr\u00e5de": "Trondheim Vest",
         "Organisasjonsnummer": "974253860"
     },
-    {},
+    
     {
         "Type aktivitet ": "Basketbal",
         "Organisasjonsform": "FLI",
@@ -6677,8 +6677,8 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "984095244"
     },
-    {},
-    {},
+    
+    
     {
         "Bydel": "Trondheim \u00d8st",
         "Organisasjonsform": "FLI",
@@ -6756,7 +6756,7 @@
         "Internettadresse": "http://www.danseriet.no",
         "Organisasjonsnummer": "993918148"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -6800,7 +6800,7 @@
         "Internettadresse": "http://www.draugen-fmk.no",
         "Organisasjonsnummer": "994449761"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "85",
@@ -6815,8 +6815,8 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "993748439"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "847",
@@ -6832,7 +6832,7 @@
         "Internettadresse": "http://www.flatas.no",
         "Organisasjonsnummer": "971378530"
     },
-    {},
+    
     {
         "Bydel": "Trondheim \u00d8st",
         "Organisasjonsform": "FLI",
@@ -6849,7 +6849,7 @@
         "Internettadresse": "http://www.freidig.idrett.no",
         "Organisasjonsnummer": "937450761"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "74",
@@ -6954,8 +6954,8 @@
         "Internettadresse": "http://www.hippos.no",
         "Organisasjonsnummer": "997880676"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -7015,7 +7015,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "998685990"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "124",
@@ -7030,7 +7030,7 @@
         "Internettadresse": "http://www.kattemhandball.no",
         "Organisasjonsnummer": "996174611"
     },
-    {},
+    
     {
         "Type aktivitet ": "Fotbal",
         "Organisasjonsform": "FLI",
@@ -7076,8 +7076,8 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "996808378"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "20",
@@ -7226,8 +7226,8 @@
         "Internettadresse": "http://www.newmeaning.no",
         "Organisasjonsnummer": "986395431"
     },
-    {},
-    {},
+    
+    
     {
         "Bydel": "Trondheim \u00d8st",
         "Organisasjonsform": "FLI",
@@ -7320,7 +7320,7 @@
         "Internettadresse": "http://www.nidarosrollerderby.no",
         "Organisasjonsnummer": "996096602"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "46",
@@ -7396,7 +7396,7 @@
         "Rekrutteringsomr\u00e5de": "Trondheim \u00d8st",
         "Organisasjonsnummer": "947307576"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "345",
@@ -7487,8 +7487,8 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "975685373"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "21",
@@ -7503,7 +7503,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "995402726"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "104",
@@ -7549,9 +7549,9 @@
         "Internettadresse": "http://www.ranheimfotball.no",
         "Organisasjonsnummer": "995206722"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": "67 57 77 50",
         "Medlemmer under 20 \u00e5r": null,
@@ -7565,8 +7565,8 @@
         "Organisasjonsnummer": "954360709",
         "Kategori(er) ": "Andre helsetjenester (3 400 )"
     },
-    {},
-    {},
+    
+    
     {
         "Type aktivitet ": "Fotbal",
         "Organisasjonsform": "FLI",
@@ -7627,7 +7627,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "984011814"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -7657,7 +7657,7 @@
         "Rekrutteringsomr\u00e5de": "Trondheim S\u00f8r",
         "Organisasjonsnummer": "976760166"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "14",
@@ -7702,7 +7702,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "984089325"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "98",
@@ -7733,8 +7733,8 @@
         "Internettadresse": "http://www.stiftstaden-sk.no/",
         "Organisasjonsnummer": "997978773"
     },
-    {},
-    {},
+    
+    
     {
         "Type aktivitet ": "Kampspor",
         "Organisasjonsform": "FLI",
@@ -7750,7 +7750,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "913396561"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "1961",
@@ -7793,7 +7793,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "994883526"
     },
-    {},
+    
     {
         "Bydel": "Trondheim Sentrum",
         "Organisasjonsform": "FLI",
@@ -7915,7 +7915,7 @@
         "Internettadresse": "http://tiller.idrett.no/",
         "Organisasjonsnummer": "971379049"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "200",
@@ -8049,9 +8049,9 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "912748227"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -8124,7 +8124,7 @@
         "Internettadresse": "http://www.trondheimfrisbeeklubb.no",
         "Organisasjonsnummer": "992726997"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "774",
@@ -8182,7 +8182,7 @@
         "Internettadresse": "http://www.judokwai.no",
         "Organisasjonsnummer": "988470783"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "200",
@@ -8198,7 +8198,7 @@
         "Internettadresse": "http://www.trondheim-klatreklubb.no/web",
         "Organisasjonsnummer": "986159975"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "119",
@@ -8242,10 +8242,10 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "985676232"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Bydel": "Trondheim Sentrum",
         "Organisasjonsform": "FLI",
@@ -8262,9 +8262,9 @@
         "Internettadresse": "http://trondheimsnooker.org",
         "Organisasjonsnummer": "998395712"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": "73 80 74 01",
         "Medlemmer under 20 \u00e5r": null,
@@ -8590,16 +8590,16 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "913314395"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -8612,16 +8612,16 @@
         "Id": 671,
         "Organisasjonsnummer": "988167177"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -8635,9 +8635,9 @@
         "Organisasjonsnummer": "912161250",
         "Navn": "BY\u00c5SEN ARBEIDERLAG"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -8652,7 +8652,7 @@
         "Internettadresse": "http://www.urursom.com",
         "Organisasjonsnummer": "888727752"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": "0",
@@ -8755,7 +8755,7 @@
         "Internettadresse": "http://www.ladehammerfestivalen.no",
         "Organisasjonsnummer": "995987031"
     },
-    {},
+    
     {
         "Type aktivitet ": "Ko",
         "Organisasjonsform": "FLI",
@@ -8800,9 +8800,9 @@
         "Organisasjonsnummer": "913545818",
         "Navn": "BRATSBERG MUSIKKORPS"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": "600",
@@ -8817,7 +8817,7 @@
         "Internettadresse": "http://www.strindahistorielag.no",
         "Organisasjonsnummer": "991834354"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -8914,9 +8914,9 @@
         "Internettadresse": "http://www.facebook.com\\russiskskole",
         "Organisasjonsnummer": "912130258"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Type aktivitet ": "Dan",
         "Organisasjonsform": "FLI",
@@ -8961,8 +8961,8 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "912222519"
     },
-    {},
-    {},
+    
+    
     {
         "Type aktivitet ": "Scenekuns",
         "Organisasjonsform": "FLI",
@@ -8978,8 +8978,8 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "914041872"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -9048,10 +9048,10 @@
         "Rekrutteringsomr\u00e5de": "Trondheim Vest",
         "Organisasjonsnummer": "912869032"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9220,9 +9220,9 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "913382153"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9236,11 +9236,11 @@
         "Organisasjonsnummer": "896262602",
         "Kategori(er) ": "Interesseorganisasjoner (7 100 )"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -9256,7 +9256,7 @@
         "Internettadresse": "http://www.4h.no/fylke/byneset-4H",
         "Organisasjonsnummer": "913375106"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -9271,7 +9271,7 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "914315107"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9284,8 +9284,8 @@
         "Id": 756,
         "Organisasjonsnummer": "997868455"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "STI",
         "Medlemmer": null,
@@ -9301,10 +9301,10 @@
         "Internettadresse": "http://www.kattem.frivilligsentral.no",
         "Organisasjonsnummer": "979965311"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9317,7 +9317,7 @@
         "Id": 764,
         "Organisasjonsnummer": "913920872"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -9332,7 +9332,7 @@
         "Internettadresse": "http://www.bsskorps.no",
         "Organisasjonsnummer": "991198776"
     },
-    {},
+    
     {
         "Type aktivitet ": "Volleyball, Sykling, Orientering, Langrenn, hopp",
         "Organisasjonsform": "FLI",
@@ -9363,9 +9363,9 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "984593104"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -9477,7 +9477,7 @@
         "Id": 780,
         "Organisasjonsnummer": "996688143"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9490,8 +9490,8 @@
         "Id": 782,
         "Organisasjonsnummer": "996805549"
     },
-    {},
-    {},
+    
+    
     {
         "Bydel": "Trondheim Sentrum",
         "Organisasjonsform": "FLI",
@@ -9508,7 +9508,7 @@
         "Internettadresse": "http://www.facebook.com/friformtrondheim",
         "Organisasjonsnummer": "914966000"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9522,7 +9522,7 @@
         "Organisasjonsnummer": "996527271",
         "Navn": "INSTITUT SEVDAHA S\u00d8R-TR\u00d8NDELAG"
     },
-    {},
+    
     {
         "Telefaks": "73 52 12 91",
         "Medlemmer under 20 \u00e5r": null,
@@ -9536,7 +9536,7 @@
         "Id": 789,
         "Organisasjonsnummer": "979637934"
     },
-    {},
+    
     {
         "Bydel": "Trondheim \u00d8st",
         "Organisasjonsform": "FLI",
@@ -9579,8 +9579,8 @@
         "Organisasjonsnummer": "971162015",
         "Navn": "VITENSENTERET"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9594,7 +9594,7 @@
         "Organisasjonsnummer": "982326680",
         "Navn": "INCLUSIVE DANCE COMPANY Tone \u00d8stern"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -9609,9 +9609,9 @@
         "Internettadresse": "http://www.trondheimjazzforum.no",
         "Organisasjonsnummer": "988434582"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9625,7 +9625,7 @@
         "Organisasjonsnummer": "913108620",
         "Navn": "STRINDHEIM FFO AS"
     },
-    {},
+    
     {
         "Telefaks": "73 52 60 09",
         "Medlemmer under 20 \u00e5r": null,
@@ -9663,7 +9663,7 @@
         "Organisasjonsnummer": "986160701",
         "Kategori(er) ": "Interesseorganisasjoner (7 100 )"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9705,8 +9705,8 @@
         "Id": 810,
         "Organisasjonsnummer": "912060969"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -9734,9 +9734,9 @@
         "Internettadresse": "http://propellenteater.blogspot.com",
         "Organisasjonsnummer": "897205432"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "STI",
         "Medlemmer": "38",
@@ -9751,7 +9751,7 @@
         "Internettadresse": "http://www.l-r-v.no",
         "Organisasjonsnummer": "981412583"
     },
-    {},
+    
     {
         "Bydel": "Trondheim \u00d8st",
         "Organisasjonsform": "FLI",
@@ -9820,7 +9820,7 @@
         "Id": 824,
         "Organisasjonsnummer": "999140084"
     },
-    {},
+    
     {
         "Telefaks": "73 82 28 71",
         "Medlemmer under 20 \u00e5r": null,
@@ -9876,9 +9876,9 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "983613802"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Type aktivitet ": "Ko",
         "Organisasjonsform": "FLI",
@@ -9894,8 +9894,8 @@
         "Rekrutteringsomr\u00e5de": "Trondheim \u00d8st",
         "Organisasjonsnummer": "971376767"
     },
-    {},
-    {},
+    
+    
     {
         "Bydel": "Trondheim \u00d8st",
         "Organisasjonsform": "FLI",
@@ -9912,10 +9912,10 @@
         "Internettadresse": "http://lademoenhistorielag.com",
         "Organisasjonsnummer": "912117782"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": "73 96 25 32",
         "Medlemmer under 20 \u00e5r": null,
@@ -9942,8 +9942,8 @@
         "Organisasjonsnummer": "994524321",
         "Navn": "M\u00d8RCK STITCHING"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "KIRK",
         "Medlemmer": "20",
@@ -9958,9 +9958,9 @@
         "Internettadresse": "http://www.nidarosdomen.no/",
         "Organisasjonsnummer": "976998103"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -9975,9 +9975,9 @@
         "Internettadresse": "http://org.ntnu.no/isf/",
         "Organisasjonsnummer": "912042669"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10002,7 +10002,7 @@
         "Id": 854,
         "Organisasjonsnummer": "998307422"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10016,7 +10016,7 @@
         "Organisasjonsnummer": "911759373",
         "Navn": "ARTSCENE TRONDHEIM AS"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -10086,8 +10086,8 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "915169066"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10128,14 +10128,14 @@
         "Organisasjonsnummer": "912252701",
         "Navn": "KAROLINE VIK HEGGE"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10148,7 +10148,7 @@
         "Id": 876,
         "Organisasjonsnummer": "912325164"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -10176,7 +10176,7 @@
         "Organisasjonsnummer": "812577182",
         "Navn": "BILLUCA AS"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10189,7 +10189,7 @@
         "Id": 881,
         "Organisasjonsnummer": "990882703"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10242,7 +10242,7 @@
         "Id": 886,
         "Organisasjonsnummer": "991663193"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10256,7 +10256,7 @@
         "Organisasjonsnummer": "993609072",
         "Navn": "LISA NYBROTT KVERNES"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10282,7 +10282,7 @@
         "Id": 891,
         "Organisasjonsnummer": "913495829"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10308,8 +10308,8 @@
         "Id": 894,
         "Organisasjonsnummer": "882022102"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10385,7 +10385,7 @@
         "Organisasjonsnummer": "981712056",
         "Navn": "ASBJ\u00d8RN BERSON"
     },
-    {},
+    
     {
         "Bydel": "Trondheim Sentrum",
         "Organisasjonsform": "FLI",
@@ -10442,7 +10442,7 @@
         "Internettadresse": "http://cricketkretstrondh.wix.com/ckit",
         "Organisasjonsnummer": "914897912"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10456,18 +10456,18 @@
         "Organisasjonsnummer": "997662210",
         "Navn": "STIFTELSEN SENTER FOR TIDLIGMUSIKK"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10481,8 +10481,8 @@
         "Organisasjonsnummer": "995636425",
         "Navn": "ART HOTEL NORWAY AS"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10522,8 +10522,8 @@
         "Internettadresse": "http://www.cantare.no",
         "Organisasjonsnummer": "890316522"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10537,7 +10537,7 @@
         "Organisasjonsnummer": "938658374",
         "Kategori(er) ": "Frivillighetssentraler (8 200 )"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -10552,8 +10552,8 @@
         "Rekrutteringsomr\u00e5de": "Trondheim \u00d8st",
         "Organisasjonsnummer": "995647265"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -10583,7 +10583,7 @@
         "Internettadresse": "http://www.sthk.no",
         "Organisasjonsnummer": "984553137"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10611,8 +10611,8 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "916342063"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10625,7 +10625,7 @@
         "Id": 942,
         "Organisasjonsnummer": "915280552"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10638,7 +10638,7 @@
         "Id": 944,
         "Organisasjonsnummer": "996148262"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10651,7 +10651,7 @@
         "Id": 946,
         "Organisasjonsnummer": "916125968"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10689,8 +10689,8 @@
         "Organisasjonsnummer": "981756223",
         "Navn": "ELDBJ\u00d8RG RAKNES / MYRECORDINGS"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -10705,8 +10705,8 @@
         "Internettadresse": "http://facebook.com/zteaterz",
         "Organisasjonsnummer": "916149662"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10720,7 +10720,7 @@
         "Organisasjonsnummer": "916380631",
         "Navn": "HAZARA UNITED TRONDHEIM"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10734,7 +10734,7 @@
         "Organisasjonsnummer": "999069118",
         "Navn": "MARTIN MIGUEL ALMAGRO TONNE"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10760,8 +10760,8 @@
         "Id": 961,
         "Organisasjonsnummer": "997932285"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10828,8 +10828,8 @@
         "Internettadresse": "http://www.dansit.no",
         "Organisasjonsnummer": "985553998"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -10857,8 +10857,8 @@
         "Id": 972,
         "Organisasjonsnummer": "993253626"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10885,12 +10885,12 @@
         "Id": 976,
         "Organisasjonsnummer": "913358104"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
+    
     {
         "Type aktivitet ": "Musikk/san",
         "Organisasjonsform": "FLI",
@@ -10944,8 +10944,8 @@
         "Id": 986,
         "Organisasjonsnummer": "913184742"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -10961,7 +10961,7 @@
         "Internettadresse": "http://trondheim.mangfoldhuset.no",
         "Organisasjonsnummer": "913322452"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -10974,9 +10974,9 @@
         "Id": 991,
         "Organisasjonsnummer": "916492340"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11001,10 +11001,10 @@
         "Id": 996,
         "Organisasjonsnummer": "985992142"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11032,8 +11032,8 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "893763872"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11059,9 +11059,9 @@
         "Id": 1006,
         "Organisasjonsnummer": "975488489"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11074,7 +11074,7 @@
         "Id": 1010,
         "Organisasjonsnummer": "915838251"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11099,10 +11099,10 @@
         "Id": 1013,
         "Organisasjonsnummer": "995355574"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -11131,7 +11131,7 @@
         "Organisasjonsnummer": "999131255",
         "Kategori(er) ": "Frivillighetssentraler (8 200 )"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11145,7 +11145,7 @@
         "Organisasjonsnummer": "912418553",
         "Navn": "RABLEFILM VU-YEN NGUYEN"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11214,8 +11214,8 @@
         "Internettadresse": "http://www.wagnild.no",
         "Organisasjonsnummer": "986626018"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -11230,7 +11230,7 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "994507699"
     },
-    {},
+    
     {
         "Type aktivitet ": "H\u00e5ndbal",
         "Organisasjonsform": "FLI",
@@ -11246,7 +11246,7 @@
         "Rekrutteringsomr\u00e5de": "Trondheim Vest",
         "Organisasjonsnummer": "975449246"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11288,7 +11288,7 @@
         "Organisasjonsnummer": "876259192",
         "Kategori(er) ": "Sosiale tjenester (4 100 )"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11345,8 +11345,8 @@
         "Internettadresse": "http://litteraertkollektiv.no",
         "Organisasjonsnummer": "915289525"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "STI",
         "Medlemmer": null,
@@ -11401,8 +11401,8 @@
         "Organisasjonsnummer": "914624835",
         "Navn": "ANDREASSEN JR. MEDIEPRODUKSJON"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11416,7 +11416,7 @@
         "Organisasjonsnummer": "984015488",
         "Kategori(er) ": "Interesseorganisasjoner (7 100 )"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11429,8 +11429,8 @@
         "Id": 1052,
         "Organisasjonsnummer": "986922466"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11444,8 +11444,8 @@
         "Organisasjonsnummer": "916665199",
         "Kategori(er) ": "Interesseorganisasjoner (7 100 )"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11471,7 +11471,7 @@
         "Organisasjonsnummer": "814842762",
         "Navn": "BRAINOBRAIN TRONDHEIM DA"
     },
-    {},
+    
     {
         "Bydel": "Trondheim \u00d8st",
         "Organisasjonsform": "FLI",
@@ -11559,7 +11559,7 @@
         "Internettadresse": "http://www.hexagon.hexcon.no",
         "Organisasjonsnummer": "893429662"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11626,7 +11626,7 @@
         "Organisasjonsnummer": "913461045",
         "Navn": "WANNEBO CREATIVE"
     },
-    {},
+    
     {
         "Telefaks": "72 54 55 21",
         "Medlemmer under 20 \u00e5r": null,
@@ -11678,8 +11678,8 @@
         "Organisasjonsnummer": "989894005",
         "Kategori(er) ": "Rekreasjon og sosiale foreninger (1 300 )"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11719,7 +11719,7 @@
         "Internettadresse": "http://trondheimmusikkskole.no",
         "Organisasjonsnummer": "997553519"
     },
-    {},
+    
     {
         "Telefaks": "73 51 33 72",
         "Medlemmer under 20 \u00e5r": null,
@@ -11733,7 +11733,7 @@
         "Id": 1084,
         "Organisasjonsnummer": "983744273"
     },
-    {},
+    
     {
         "Type aktivitet ": "Basketbal",
         "Organisasjonsform": "FLI",
@@ -11789,7 +11789,7 @@
         "Organisasjonsnummer": "977478553",
         "Kategori(er) ": "Idrett (1 200 )"
     },
-    {},
+    
     {
         "Organisasjonsform": "KIRK",
         "Medlemmer": null,
@@ -11804,10 +11804,10 @@
         "Internettadresse": "http://kirken.no/sverresborg",
         "Organisasjonsnummer": "976998146"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11849,7 +11849,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "815177622"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -11864,7 +11864,7 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "984163177"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11889,7 +11889,7 @@
         "Id": 1103,
         "Organisasjonsnummer": "999221300"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11903,9 +11903,9 @@
         "Organisasjonsnummer": "977528151",
         "Navn": "LEGE ARTIS AS"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -11959,8 +11959,8 @@
         "Organisasjonsnummer": "984583958",
         "Navn": "TONNY ELIASSEN"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -11997,7 +11997,7 @@
         "Id": 1117,
         "Organisasjonsnummer": "912346862"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12038,8 +12038,8 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "916845898"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12064,7 +12064,7 @@
         "Id": 1125,
         "Organisasjonsnummer": "989922521"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12078,10 +12078,10 @@
         "Organisasjonsnummer": "915727859",
         "Kategori(er) ": "Rekreasjon og sosiale foreninger (1 300 )"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12107,9 +12107,9 @@
         "Organisasjonsnummer": "988732419",
         "Navn": "R\u00c5DGIVNINGSGRUPPA I TRONDHEIM"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12122,8 +12122,8 @@
         "Id": 1137,
         "Organisasjonsnummer": "994356747"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12149,9 +12149,9 @@
         "Id": 1141,
         "Organisasjonsnummer": "998071097"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12165,8 +12165,8 @@
         "Organisasjonsnummer": "998384052",
         "Navn": "KRISTIAN BREIVIK JACOBSEN"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -12182,8 +12182,8 @@
         "Internettadresse": "http://www.vsait.org",
         "Organisasjonsnummer": "993646482"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12197,7 +12197,7 @@
         "Organisasjonsnummer": "995606518",
         "Navn": "BYNESET GAMMELDANSFORENING"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12223,7 +12223,7 @@
         "Organisasjonsnummer": "996736407",
         "Navn": "MANDARINSAFT DA"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12236,7 +12236,7 @@
         "Id": 1156,
         "Organisasjonsnummer": "812674382"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12250,7 +12250,7 @@
         "Organisasjonsnummer": "913720539",
         "Kategori(er) ": "Kunst og kultur (1 100 )"
     },
-    {},
+    
     {
         "Telefaks": "73 59 64 41",
         "Medlemmer under 20 \u00e5r": null,
@@ -12305,10 +12305,10 @@
         "Id": 1163,
         "Organisasjonsnummer": "914184797"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12375,7 +12375,7 @@
         "Internettadresse": "http://www.trondheimmakers.com",
         "Organisasjonsnummer": "912616118"
     },
-    {},
+    
     {
         "Type aktivitet ": "Langrenn, hop",
         "Organisasjonsform": "FLI",
@@ -12417,7 +12417,7 @@
         "Id": 1176,
         "Organisasjonsnummer": "984685556"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12445,9 +12445,9 @@
         "Internettadresse": "http://www.trondheimflyklubb.no",
         "Organisasjonsnummer": "984192800"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12472,7 +12472,7 @@
         "Id": 1184,
         "Organisasjonsnummer": "916951981"
     },
-    {},
+    
     {
         "Telefaks": "73 57 36 66",
         "Medlemmer under 20 \u00e5r": null,
@@ -12501,7 +12501,7 @@
         "Internettadresse": "http://www.casualgaming.no",
         "Organisasjonsnummer": "993396605"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -12516,7 +12516,7 @@
         "Internettadresse": "http://www.trikkestallen.com",
         "Organisasjonsnummer": "986763309"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12543,8 +12543,8 @@
         "Rekrutteringsomr\u00e5de": "Trondheim Vest",
         "Organisasjonsnummer": "984066759"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -12559,7 +12559,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "883267362"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -12587,10 +12587,10 @@
         "Id": 1198,
         "Organisasjonsnummer": "917144532"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12662,7 +12662,7 @@
         "Internettadresse": "http://www.skeivungdom.no",
         "Organisasjonsnummer": "987184086"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -12677,10 +12677,10 @@
         "Internettadresse": "http://www.ngomateater.com",
         "Organisasjonsnummer": "995878380"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12694,9 +12694,9 @@
         "Id": 1214,
         "Organisasjonsnummer": "913938232"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Type aktivitet ": "Scenekunst, Musikk/sang",
         "Organisasjonsform": "FLI",
@@ -12739,7 +12739,7 @@
         "Internettadresse": "http://www.bipolarforeningen.no",
         "Organisasjonsnummer": "995854848"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -12832,7 +12832,7 @@
         "Organisasjonsnummer": "816334462",
         "Kategori(er) ": "Annen utdanning (2 300 )"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -12861,7 +12861,7 @@
         "Internettadresse": "http://www.kirken.no/kolstad",
         "Organisasjonsnummer": "876998262"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -12876,7 +12876,7 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "917507864"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -12993,7 +12993,7 @@
         "Organisasjonsnummer": "989506838",
         "Navn": "TRONDHEIM SAMTALESENTER"
     },
-    {},
+    
     {
         "Type aktivitet ": "Biljar",
         "Organisasjonsform": "FLI",
@@ -13022,7 +13022,7 @@
         "Id": 1246,
         "Organisasjonsnummer": "971495464"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -13238,7 +13238,7 @@
         "Organisasjonsnummer": "983190464",
         "Navn": "NEW AGE BOHEMIAN Thomas Kjell Oliver Eirheim"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -13345,7 +13345,7 @@
         "Id": 1272,
         "Organisasjonsnummer": "881694832"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13386,7 +13386,7 @@
         "Internettadresse": "http://www.kirken.no/Bakklandet",
         "Organisasjonsnummer": "876998122"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13439,7 +13439,7 @@
         "Id": 1281,
         "Organisasjonsnummer": "816283582"
     },
-    {},
+    
     {
         "Telefaks": "23 13 54 01",
         "Medlemmer under 20 \u00e5r": null,
@@ -13453,9 +13453,9 @@
         "Id": 1283,
         "Organisasjonsnummer": "992604409"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13468,7 +13468,7 @@
         "Id": 1287,
         "Organisasjonsnummer": "915273831"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13498,9 +13498,9 @@
         "Internettadresse": "http://www.bynesetil.no",
         "Organisasjonsnummer": "983811086"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13526,12 +13526,12 @@
         "Id": 1295,
         "Organisasjonsnummer": "988810703"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
+    
     {
         "Telefaks": "73 59 53 10",
         "Medlemmer under 20 \u00e5r": null,
@@ -13545,8 +13545,8 @@
         "Id": 1302,
         "Organisasjonsnummer": "974767880"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13574,7 +13574,7 @@
         "Internettadresse": "http://www.svartlamonco.no",
         "Organisasjonsnummer": "989995766"
     },
-    {},
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -13589,8 +13589,8 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "917844380"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -13619,9 +13619,9 @@
         "Organisasjonsnummer": "917865787",
         "Kategori(er) ": "Mangfold og inkludering (14 100 )"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Type aktivitet ": "Musikk/san",
         "Organisasjonsform": "FLI",
@@ -13664,8 +13664,8 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "983064035"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -13681,11 +13681,11 @@
         "Internettadresse": "http://ortodoks.trondheim.no",
         "Organisasjonsnummer": "914236797"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13750,8 +13750,8 @@
         "Organisasjonsnummer": "986782354",
         "Navn": "OLUF DIMITRI R\u00d8E"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "AS",
         "Medlemmer": null,
@@ -13767,7 +13767,7 @@
         "Internettadresse": "http://www.gulljazz.no",
         "Organisasjonsnummer": "913095669"
     },
-    {},
+    
     {
         "Type aktivitet ": "Scenekuns",
         "Organisasjonsform": "FLI",
@@ -13784,7 +13784,7 @@
         "Internettadresse": "http://teaterlosjen.no",
         "Organisasjonsnummer": "916668856"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13798,7 +13798,7 @@
         "Organisasjonsnummer": "915986439",
         "Kategori(er) ": "Grunn- og videreg\u00e5ende utdanning (2 100 )"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13811,11 +13811,11 @@
         "Id": 1340,
         "Organisasjonsnummer": "917605505"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13842,8 +13842,8 @@
         "Organisasjonsnummer": "884035112",
         "Navn": "ESPEN A. B\u00d8R\u00d8 TEATERPROSJEKT"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13870,8 +13870,8 @@
         "Internettadresse": "http://www.kirken.no/tiller",
         "Organisasjonsnummer": "976998251"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": "74 15 26 19",
         "Medlemmer under 20 \u00e5r": null,
@@ -13884,10 +13884,10 @@
         "Id": 1354,
         "Organisasjonsnummer": "980546055"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13900,7 +13900,7 @@
         "Id": 1359,
         "Organisasjonsnummer": "981780094"
     },
-    {},
+    
     {
         "Type aktivitet ": "Scenekuns",
         "Organisasjonsform": "FLI",
@@ -13917,9 +13917,9 @@
         "Internettadresse": "http://www.gibberish.no",
         "Organisasjonsnummer": "817973442"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -13957,7 +13957,7 @@
         "Id": 1367,
         "Organisasjonsnummer": "817992382"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14009,7 +14009,7 @@
         "Organisasjonsnummer": "996488276",
         "Navn": "HANNA FAUSKE"
     },
-    {},
+    
     {
         "Organisasjonsform": "ENK",
         "Medlemmer": null,
@@ -14036,8 +14036,8 @@
         "Id": 1375,
         "Organisasjonsnummer": "912093522"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14050,8 +14050,8 @@
         "Id": 1378,
         "Organisasjonsnummer": "918037039"
     },
-    {},
-    {},
+    
+    
     {
         "Type aktivitet ": "Basketbal",
         "Organisasjonsform": "FLI",
@@ -14067,8 +14067,8 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "914106796"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14107,9 +14107,9 @@
         "Organisasjonsnummer": "981241037",
         "Navn": "JUOIGIID SEARVI"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14135,7 +14135,7 @@
         "Organisasjonsnummer": "998738148",
         "Navn": "MARTIN PALMER"
     },
-    {},
+    
     {
         "Organisasjonsform": "ENK",
         "Medlemmer": null,
@@ -14150,7 +14150,7 @@
         "Internettadresse": "http://www.tobiasliljedahl.com",
         "Organisasjonsnummer": "814016242"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14203,8 +14203,8 @@
         "Organisasjonsnummer": "916226438",
         "Navn": "ENGAN FILM"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14218,8 +14218,8 @@
         "Organisasjonsnummer": "995803259",
         "Navn": "FERSTAD MUSIKKTJENESTER"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14257,7 +14257,7 @@
         "Id": 1406,
         "Organisasjonsnummer": "993056227"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14298,9 +14298,9 @@
         "Id": 1410,
         "Organisasjonsnummer": "994787748"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -14315,10 +14315,10 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "917748713"
     },
-    {},
-    {},
-    {},
-    {},
+    
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14346,7 +14346,7 @@
         "Rekrutteringsomr\u00e5de": "Hele Trondheim",
         "Organisasjonsnummer": "918097392"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14360,8 +14360,8 @@
         "Organisasjonsnummer": "914989078",
         "Navn": "SAMEIET MUNKVOLL G\u00c5RD"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14374,8 +14374,8 @@
         "Id": 1425,
         "Organisasjonsnummer": "913412710"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14389,7 +14389,7 @@
         "Id": 1428,
         "Organisasjonsnummer": "817548202"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14415,9 +14415,9 @@
         "Organisasjonsnummer": "917846774",
         "Navn": "NOREWENT UNGDOMSBEDRIFT"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -14446,7 +14446,7 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "991785485"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14475,7 +14475,7 @@
         "Internettadresse": "http://www.bakkefestivalen.no",
         "Organisasjonsnummer": "918438475"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14526,8 +14526,8 @@
         "Organisasjonsnummer": "916991215",
         "Kategori(er) ": "Rekreasjon og sosiale foreninger (1 300 )"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "ESEK",
         "Medlemmer": null,
@@ -14542,8 +14542,8 @@
         "Internettadresse": "http://www.ceb.no",
         "Organisasjonsnummer": "987047380"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14598,7 +14598,7 @@
         "Internettadresse": "http://www.ungekokker.no",
         "Organisasjonsnummer": "914189047"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14611,7 +14611,7 @@
         "Id": 1455,
         "Organisasjonsnummer": "915933068"
     },
-    {},
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14639,9 +14639,9 @@
         "Rekrutteringsomr\u00e5de": "-",
         "Organisasjonsnummer": "985812802"
     },
-    {},
-    {},
-    {},
+    
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14655,7 +14655,7 @@
         "Organisasjonsnummer": "986754148",
         "Kategori(er) ": "Interesseorganisasjoner (7 100 )"
     },
-    {},
+    
     {
         "Telefaks": "73 51 22 99",
         "Medlemmer under 20 \u00e5r": null,
@@ -14668,7 +14668,7 @@
         "Id": 1464,
         "Organisasjonsnummer": "992767650"
     },
-    {},
+    
     {
         "Organisasjonsform": "BRL",
         "Medlemmer": null,
@@ -14683,8 +14683,8 @@
         "Internettadresse": "http://www.maanebakken.no/",
         "Organisasjonsnummer": "979845952"
     },
-    {},
-    {},
+    
+    
     {
         "Telefaks": null,
         "Medlemmer under 20 \u00e5r": null,
@@ -14709,8 +14709,8 @@
         "Id": 1470,
         "Organisasjonsnummer": "983923607"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,
@@ -14725,8 +14725,8 @@
         "Rekrutteringsomr\u00e5de": "Trondheim Vest",
         "Organisasjonsnummer": "917990379"
     },
-    {},
-    {},
+    
+    
     {
         "Organisasjonsform": "FLI",
         "Medlemmer": null,

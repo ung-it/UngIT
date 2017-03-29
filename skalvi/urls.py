@@ -34,6 +34,9 @@ urlpatterns = [
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
+
+    url(r'^api/getHost/[0-9]+/$', views.getActivityHost, name="getActivityHost"),
+
     # Comments and rating
     url(r'^rateActivity/$', views.rateActivity, name='rateActivity'),
     url(r'^postComment/$', views.postComment, name='postComment'),
@@ -43,3 +46,4 @@ urlpatterns = [
 
 
 ]
+

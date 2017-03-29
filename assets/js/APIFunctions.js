@@ -69,6 +69,14 @@ export function getAllHostingActivities() {
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
 
+
+export function getHost(id, callback) {
+    fetchFromServer('/api/getHost/' + id).then(result => {
+        callback(result);
+    });
+}
+
+
 export function signupActivity(data, callback) {
     postToServer('/signupActivity/', data).then (response => {
         callback(response);

@@ -5,11 +5,11 @@ import ReactDOM from 'react-dom';
 import '../../styles/activitypickerStyle.css'
 
 export const SUITED_FOR_TYPES = [
+	{ label: 'Tilrettelegging 1', value: '1' },
+	{ label: 'Tilrettelegging 2', value: '2' },
+	{ label: 'Tilrettelegging 3', value: '3' },
+	{ label: 'Tilrettelegging 4', value: '4' },
 	{ label: 'Ukjent', value: '0' },
-	{ label: 'Tilpasset 1', value: '1' },
-	{ label: 'Tilpasset 2', value: '2' },
-	{ label: 'Tilpasset 3', value: '3' },
-	{ label: 'Tilpasset 4', value: '4' },
 ];
 
 class SuitedForPicker extends React.Component {

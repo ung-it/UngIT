@@ -16,6 +16,10 @@ class ProviderField extends Component {
         super(props);
 
         let selectedProvider = $('#provider').val();
+        let color = {};
+        if (selectedProvider != "") {
+            color = {color: '#3F51B5'};
+        }
 
         this.state = {
             value: selectedProvider,
@@ -24,8 +28,9 @@ class ProviderField extends Component {
             unregistered: ["En aktør jeg ikke representerer", "En annen aktør jeg ikke representerer"],
 
             open: false,
-            color: {}
+            color: color
         }
+
     }
 
     handleChange = (event, index, value) => {

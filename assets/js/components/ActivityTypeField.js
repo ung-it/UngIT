@@ -16,7 +16,10 @@ class ActivityTypeField extends Component {
         super(props);
 
         let selectedActivityType = $('#activityType').val();
-        console.log(selectedActivityType)
+        let color = {};
+        if (selectedActivityType != "") {
+            color = {color: '#3F51B5'};
+        }
 
         let items = [
             "Amerikansk idrett", "Bandy", "Basketball", "Biljard", "Boksing", "Bueskyting", "Cricket",
@@ -34,8 +37,9 @@ class ActivityTypeField extends Component {
             items: items,
 
             open: false,
-            color: {}
+            color: color
         }
+
     }
 
     handleChange = (event, index, value) => {

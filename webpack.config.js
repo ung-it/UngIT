@@ -15,7 +15,7 @@ module.exports = {
         hostingActivitiesContainer: './assets/js/containers/HostingActivitiesContainer',
         allActivitiesContainer: './assets/js/containers/AllActivitiesContainer',
         allProvidersContainer: './assets/js/containers/AllProvidersContainer',
-        adaptionChips: './assets/js/containers/AdaptionChips',
+        activityForm: './assets/js/containers/ActivityForm',
     },
 
     output: {

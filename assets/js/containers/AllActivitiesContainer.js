@@ -53,10 +53,13 @@ const mapStateToProps = state => {
 
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-    const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
+    const activityFilters = activeActivityFilters.split(','); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
+
+    console.log(activityFilters);
 
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
     const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
+
 
     const hasWeekFilter = activeDateFilter.length > 0;
     const weekFilters = activeDateFilter.split(',').map(a => new Date(a));

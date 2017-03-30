@@ -10,7 +10,7 @@ const styles = {
     },
 };
 
-class ProviderField extends Component {
+class ActivityTypeField extends Component {
 
     constructor(props) {
         super(props);
@@ -29,26 +29,15 @@ class ProviderField extends Component {
     }
 
     handleChange = (event, index, value) => {
-        $('#provider').val(value);
+        $('#activityType').val(value);
         this.setState({value, color: {color: '#3F51B5'}});
     };
 
     render() {
 
-        let items1 = this.state.registered.map((item) => {
-           return (
-               <MenuItem key={item} primaryText={item} value={item}/>
-           )
-        });
-        let items2 = this.state.unregistered.map((item) => {
-            return (
-                <MenuItem key={item} primaryText={item} value={item}/>
-            )
-        });
-
         return (
             <SelectField
-                floatingLabelText="Velg Arrangør"
+                floatingLabelText="Velg type aktivitet"
                 floatingLabelStyle={this.state.color}
                 selectedMenuItemStyle={{color: '#3F51B5'}}
                 value={this.state.value}
@@ -56,15 +45,11 @@ class ProviderField extends Component {
                 autoWidth={false}
                 style={styles.customWidth}
             >
-                <MenuItem primaryText={this.state.personal} value={this.state.personal}/>
-                <Subheader>Mine aktører</Subheader>
-                {items1}
-                <Subheader>Andre aktører</Subheader>
-                {items2}
+                {this.state.items}
             </SelectField>
         )
     }
 
 }
 
-export default ProviderField;
+export default ActivityTypeField;

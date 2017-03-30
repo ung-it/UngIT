@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import '../../styles/ActivityForm.css'
+import ActivityTypeField from "../components/ActivityTypeField";
 import AdaptionsField from '../components/AdaptionsField';
 import ProviderField from '../components/ProviderField';
 
@@ -15,18 +16,24 @@ const muiTheme = getMuiTheme({
     },
 });
 
-const App = () => (
-    <div>
-        <MuiThemeProvider muiTheme={muiTheme}>
-            <AdaptionsField/>
-        </MuiThemeProvider>
-        <MuiThemeProvider muiTheme={muiTheme}>
-            <ProviderField/>
-        </MuiThemeProvider>
-    </div>
+ReactDOM.render(
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <ActivityTypeField/>
+    </MuiThemeProvider>,
+    document.getElementById('activityType-container')
 );
 
 ReactDOM.render(
-    <App/>,
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <AdaptionsField/>
+    </MuiThemeProvider>,
     document.getElementById('adaptions-container')
 );
+
+ReactDOM.render(
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <ProviderField/>
+    </MuiThemeProvider>,
+    document.getElementById('provider-container')
+);
+

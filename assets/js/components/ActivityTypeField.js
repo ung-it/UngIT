@@ -15,13 +15,23 @@ class ActivityTypeField extends Component {
     constructor(props) {
         super(props);
 
-        let selectedProvider = $('#provider').val();
+        let selectedActivityType = $('#activityType').val();
+        console.log(selectedActivityType)
+
+        let items = [
+            "Amerikansk idrett", "Bandy", "Basketball", "Biljard", "Boksing", "Bueskyting", "Cricket",
+            "Curling", "Dans", "Fekting", "Festival", "Film/multimedia", "Fotball", "Friidrett", "Historielag",
+            "Hopp", "Husflid", "Håndball", "Ishockey", "Kampsport", "Kor", "Kulturminnevern", "Kunst",
+            "Kurs/opplæring", "Langrenn", "Litteratur", "Musikk/sang", "Orientering", "Scenekunst",
+            "Skiskyting", "Skolekorps", "Skøytesport", "Svømming", "Sykling", "Tennis", "Turn",
+            "Ungdoms/voksenkorps", "Volleyball", "Annet"
+        ].map(item => {
+            return <MenuItem primaryText={item} value={item} key={item}/>
+        });
 
         this.state = {
-            value: selectedProvider,
-            personal: "Meg selv",
-            registered: ["Aktør jeg representerer", "En annen aktør jeg representerer"],
-            unregistered: ["En aktør jeg ikke representerer", "En annen aktør jeg ikke representerer"],
+            value: selectedActivityType,
+            items: items,
 
             open: false,
             color: {}
@@ -34,7 +44,6 @@ class ActivityTypeField extends Component {
     };
 
     render() {
-
         return (
             <SelectField
                 floatingLabelText="Velg type aktivitet"

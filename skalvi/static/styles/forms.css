@@ -1,0 +1,28 @@
+.form-page-title {
+    font-family: "Yuppy SC";
+    font-size: 36px;
+    width: 900px;
+    margin: 16px auto 8px auto;
+    text-align: center;
+    border-bottom: 3px solid #e0e0e0;
+}
+
+.main-wrapper {
+    padding: 40px 40px 8px 40px;
+    margin: 8px auto 32px auto;
+    background-color: white;
+    width: 900px;
+}
+
+.mdl-checkbox__label label{
+    font-weight: 400;
+}
+
+.alert-wrapper {
+    width: 900px;
+    margin: auto;
+}
+
+.submit-button {
+    padding: 16px;
+}

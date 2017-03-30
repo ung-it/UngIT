@@ -1,40 +1,65 @@
 {% extends "base_template.html" %}
 {% load static %}
-{% block pageTitle %}Register {% endblock %}
+
+{% block explicitPageHeader %}
+    <link rel="stylesheet" href="{% static "styles/forms.css" %}">
+{% endblock %}
+
+{% block pageTitle %}Register ny bruker{% endblock %}
+
+
 {% block body %}
+
     <div class="banner-container">
-            <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
+        <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
     </div>
     <div class="content">
-        <div class="content-margin-top">
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h3>Register en bruker</h3>
-                                {% if error_message %}
-                                    <p><strong>{{ error_message }}</strong></p>
-                                {% endif %}
-                                <form class="form-horizontal" role="form" action="" method="post"
-                                      enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    {% include 'form_template.html' %}
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="panel-footer">
-                                Already have an account? <a href="{% url 'skalvi:index' %}">Click here</a> to log in.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="form-page-title">Registrer ny bruker</div>
+        {% if error_message %}
+            <div class="alert alert-danger alert-wrapper">
+                <strong>{{ error_message }}</strong>
             </div>
+        {% endif %}
+        <div class="main-wrapper mdl-shadow--2dp">
+            <ul class='mdl-list'>
+                <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <li class="mdl-list__item">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {{ field }}
+                                <label class="mdl-textfield__label" for="{{ field.auto_id  }}">{{ field.label_tag }}</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    {% for field in profile %}
+                        {% if field.name == "type" or field.name == 'is_provider' %}
+                            <li class="mdl-list__item">
+                                <div class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                    {{ field }}
+                                    <label class="mdl-checkbox__label" for="{{ field.auto_id  }}">{{ field.label_tag }}</label>
+                                    <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    {{ field }}
+                                    <label class="mdl-textfield__label" for="{{ field.auto_id  }}">{{ field.label_tag }}</label>
+                                    <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="submit-button">
+                        <button type="submit" class="btn btn-success">Registrer</button>
+                    </div>
+                </form>
+                <div>
+                    Har du allerede en bruker? <a href="{% url 'skalvi:index' %}">Klikk her</a> for å logge inn.
+                </div>
+            </ul>
         </div>
     </div>
 {% endblock %}

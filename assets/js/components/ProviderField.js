@@ -25,12 +25,13 @@ class ProviderField extends Component {
             unregistered: ["En aktør jeg ikke representerer", "En annen aktør jeg ikke representerer"],
 
             open: false,
+            color: {}
         }
     }
 
     handleChange = (event, index, value) => {
         $('#provider').val(value);
-        this.setState({value});
+        this.setState({value, color: {color: '#3F51B5'}});
     };
 
     render() {
@@ -49,6 +50,8 @@ class ProviderField extends Component {
         return (
             <SelectField
                 floatingLabelText="Velg Arrangør"
+                floatingLabelStyle={this.state.color}
+                selectedMenuItemStyle={{color: '#3F51B5'}}
                 value={this.state.value}
                 onChange={this.handleChange}
                 autoWidth={false}

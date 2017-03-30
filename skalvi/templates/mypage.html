@@ -34,16 +34,19 @@
                                 </div>
 
                                 <div id="profileInformation">
-                                    <h4>Profilnavn: {{ profile.profile_name }}</h4>
-                                    {% if profile.type == "P" %}
-                                        <h4>Brukertype: Voksen</h4>
-                                    {%  else %}
-                                        <h4>Brukertype: Barn </h4>
-                                    {% endif %}
-                                    <h4>Telefon: {{ profile.phone }}</h4>
-                                    <h4>Aktiv: {{ profile.is_active }}</h4>
-                                </div>
+                                    <h4><b>Fornavn:</b> {{ profile.profile_name }}</h4>
+                                    <h4><b>Etternavn:</b> {{ profile.last_name }}</h4>
+                                    <h4><b>Epost:</b> {{ profile.email }}</h4>
+                                    <h4><b>Telefon:</b> {{ profile.phone }}</h4>
 
+                                    {% if profile.type == "P" %}
+                                        <h4><b>Registrert som:</b> Voksen</h4>
+                                    {% endif %}
+
+                                    {% if profile.is_active %}
+                                        <h4><b>Aktiv bruker</b></h4>
+                                    {% endif %}
+                                </div>
 
                             </div>
 
@@ -55,7 +58,10 @@
                                 </div>
 
                                 <div id="hosting_Activities">
-                                    <h3>Mine aktiviteter <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a></h3>
+                                    <div id="hosting_Activities_header">
+                                        <h3>Mine aktiviteter </h3>
+                                        <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
+                                    </div>
                                     <div id="hostingActivities"></div>
                                 </div>
 

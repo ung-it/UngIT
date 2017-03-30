@@ -35,8 +35,8 @@ class ProviderCard extends React.Component {
                                 <div className="col-md-10">
                                     <div className="row">
                                         <div className="col-sm-10">
-                                        <p>Kategorier: {provider["Kategori(er) "]}</p>
-                                        <p>Type aktiviteter: {provider["Type aktivitet "]}</p>
+                                        <p>Kategorier: {provider.Kategorier}</p>
+                                        <p>Type aktiviteter: {provider.TypeAktivitet}</p>
                                         <p>Bydel: {provider.Bydel}</p>
                                         <p>Telefon: {provider.Telefon}</p>
                                         <p>Internettadresse: <a href={provider.Internettadresse}

@@ -130,20 +130,19 @@ class Scraper:
                     catList = str(catList)
                     catList = catList.split("<li>")
                     catList.pop(0)
-                    print("Kategorier list: ", catList)
+
                     index = 0
                     for cat in catList:
                         index += 1
-                        print("index: ", i)
+
                         cat = str(cat)
-                        print("CAT: ", cat)
+
                         end = cat.find('</li>')
                         cat = cat[:end+1]
 
                         end = cat.find(' (')
                         cat = cat[:end]
-                        print('Cat slized: ', cat)
-                        #value += cat + ", "
+
                         if (index == len(catList)):
                             value += cat
                         else:
@@ -224,7 +223,7 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(35,36):   # 1, 1480
+        for i in range(1,1480):   # 1, 1480
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             obj = self._scrapeInfo(orgLink=orgLink, orgID=i)
             if(obj == None):
@@ -232,7 +231,7 @@ class Scraper:
             allProviders.append(obj)
 
         # write all to .txt file, for prodction use to fill up database. without re-query
-        with open('../app/aktordatabasenTest.json', 'w') as file:
+        with open('../app/aktordatabasen.json', 'w') as file:
             json.dump(allProviders, file, indent=4)
 
         return allProviders
@@ -260,4 +259,4 @@ def main():
     # print:
     #print(informasjon)
 
-main()
+#main()

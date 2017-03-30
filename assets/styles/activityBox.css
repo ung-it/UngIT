@@ -24,14 +24,14 @@
     border-color: dimgray;
 }
 
-
 .caption {
     height: 13em;
 }
+
 .info-header {
     text-align: center;
     border-bottom: 3px solid #3ad7ff;
-    margin: 0 15px 0 0 ;
+    margin: 0 15px 0 0;
     padding: 10px 0;
 }
 
@@ -54,90 +54,116 @@
     margin-top: 5px;
 }
 
-
 /* Styling for activities on all activities page */
-.activityBigStyle {
-    width: 100%;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    margin-bottom: 15px;
+/*.activityBigStyle {*/
+/*width: 100%;*/
+/*cursor: pointer;*/
+/*display: flex;*/
+/*flex-direction: row;*/
+/*background-color: white;*/
+/*margin-bottom: 15px;*/
 
-    border: 1px solid #f5f5f5;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
+/*border: 1px solid #f5f5f5;*/
+/*border-radius: 3px;*/
+/*-moz-border-radius: 3px;*/
+/*-webkit-border-radius: 3px;*/
+/*-khtml-border-radius: 3px;*/
 
-    /*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*/
-    -webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    -moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    box-shadow: 0 0 5px 1px rgb(123, 127, 143);
+/*!*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*!*/
+/*-webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);*/
+/*-moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);*/
+/*box-shadow: 0 0 5px 1px rgb(123, 127, 143);*/
+/*}*/
+
+/*.activityBigStyle:hover {*/
+/*background-color: whitesmoke;*/
+/*}*/
+
+/*.activity-card-info-container {*/
+/*width: 100%;*/
+/*}*/
+
+/*.activity-card-header-container {*/
+/*!*background-color: rgb(42, 42, 42);*!*/
+/*!*color: white;*!*/
+/*border: 1px solid #f5f5f5;*/
+/*margin:0;*/
+/*border-radius: 3px;*/
+/*padding-bottom: 10px;*/
+/*text-align: center;*/
+/*}*/
+
+/*.big-info-header {*/
+/*border-bottom: 3px solid lightgrey;*/
+/*font-family: "Dosis", serif;*/
+/*font-weight: bold;*/
+/*margin: 0 15px 0 15px;*/
+/*padding: 10px 0;*/
+/*}*/
+
+/*.activity-card-row-info {*/
+/*margin: 15px 15px 5px 15px;*/
+/*font-weight: bold;*/
+/*}*/
+
+/*.activity-card-image-container {*/
+/*border-left: 1px solid #f5f5f5;*/
+
+/*!*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*!*/
+/*-webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);*/
+/*-moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);*/
+/*box-shadow: 0 0 5px 1px rgb(123, 127, 143);*/
+
+/*max-width: 25em;*/
+/*max-height: 15em;*/
+/*}*/
+
+/*.activity-card-description {*/
+/*margin: 0 15px 0 15px;*/
+/*padding-top: 10px;*/
+/*max-height: 7em;*/
+
+/*overflow-y:auto;*/
+/*overflow-x:hidden;*/
+/*}*/
+
+/*@media screen and (max-width: 1200px) {*/
+/*.activity-card-image-container {*/
+/*display: none;*/
+/*}*/
+/*.activityBigStyle {*/
+/*display: flex;*/
+/*flex-flow: row wrap;*/
+/*}*/
+
+/*}*/
+
+.demo-card-wide.mdl-card {
+    width: 512px;
 }
 
-.activityBigStyle:hover {
-    background-color: whitesmoke;
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
 }
 
-.activity-card-info-container {
-    width: 100%;
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
 }
 
-.activity-card-header-container {
-    /*background-color: rgb(42, 42, 42);*/
-    /*color: white;*/
-    border: 1px solid #f5f5f5;
-    margin:0;
-    border-radius: 3px;
-    padding-bottom: 10px;
-    text-align: center;
+.big-icon-container-div {
+    font-weight: bold;
+    padding: 0.5em;
 }
 
 .big-info-header {
     border-bottom: 3px solid lightgrey;
-    font-family: "Dosis", serif;
-    font-weight: bold;
-    margin: 0 15px 0 15px;
-    padding: 10px 0;
 }
 
-.activity-card-row-info {
-    margin: 15px 15px 5px 15px;
+.demo-card-wide a {
     font-weight: bold;
 }
 
-.activity-card-image-container {
-    border-left: 1px solid #f5f5f5;
-
-    /*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*/
-    -webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    -moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-
-    max-width: 25em;
-    max-height: 15em;
-}
-
-.activity-card-description {
-    margin: 0 15px 0 15px;
-    padding-top: 10px;
-    max-height: 7em;
-
-    overflow-y:auto;
-    overflow-x:hidden;
-}
-
-@media screen and (max-width: 1200px) {
-    .activity-card-image-container {
-        display: none;
-    }
-    .activityBigStyle {
-        display: flex;
-        flex-flow: row wrap;
-    }
-
-}
 
 /*Styling filter container*/
 .filter-container {

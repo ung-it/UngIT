@@ -13,7 +13,6 @@ class ActivitiesList extends React.Component {
         const activities = this.props.activities.map(activity =>
             <ActivityCard key={activity.pk} activity={activity.fields} id={activity.pk}/>
         );
-
         return <div>
             {activities}
         </div>

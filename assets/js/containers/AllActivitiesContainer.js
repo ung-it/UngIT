@@ -14,7 +14,17 @@ const store = configureStore();
 
 class AllActivitiesContainer extends Component {
 
+
     render() {
+        const styles = {
+            activitiesStyle: {
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                width: '100%',
+            }
+        };
         return (
             <div>
                 <div className="filter-container">
@@ -30,7 +40,8 @@ class AllActivitiesContainer extends Component {
                         onButtonChange={this.props.changeTrashButton}
                     />
                 </div>
-                <ActivitiesList activities={this.props.activities}/>
+                <div style={styles.activitiesStyle}><ActivitiesList activities={this.props.activities}/></div>
+
             </div>
         );
     }

@@ -69,9 +69,11 @@ class ActivityForm(forms.ModelForm):
 
 class RegisterProfileForm(forms.ModelForm):
     type = forms.BooleanField(label="Voksen", required=False)
-    profile_name = forms.CharField(label="Profilnavn", required=True)
+    profile_name = forms.CharField(label="Fornavn", required=True)
+    last_name = forms.CharField(label="Etternavn", required=True)
+    email = forms.CharField(label="Epost", required=True)
     phone = forms.CharField(label="Telefon", required=False)
     class Meta:
         model = UserProfile
-        fields = ["profile_name", 'phone', 'type']
+        fields = ["profile_name", "last_name", "email", 'phone', 'type']
 

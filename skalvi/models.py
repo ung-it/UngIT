@@ -13,11 +13,13 @@ from jsonfield import JSONField
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')  # set the relation / extension to the user model
     type = models.CharField(max_length=5)  # A = admin, P = parent, C = child, etc.
-    phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
     profile_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=60, null=False, blank=False)
+    phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
+
     is_active = models.BooleanField(default=False)
-    is_provider = models.BooleanField(default=False)
-    aktordatabase = JSONField()  # contains all found information
+    provider = JSONField()  # contains all found information
 
 
 

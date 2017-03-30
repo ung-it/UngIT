@@ -30,6 +30,7 @@ class ActivityModal extends Component {
             fetchedComments: false,
             noComments: true,
             hosting: false,
+            myrating: 0,
             comments: []
         }
     }
@@ -52,7 +53,7 @@ class ActivityModal extends Component {
         this.setState({
             show: false,
             hasChecked: false,
-            hosting: false
+            hosting: false,
         });
     };
 
@@ -114,8 +115,9 @@ class ActivityModal extends Component {
             rating: nextValue
         };
         postNewRating(obj);
-        $("#ratingFeedback").html("Takk for din vurdering.");
-
+        this.setState({
+            myrating: nextValue
+        });
     };
 
     fetchComments = () => {
@@ -123,7 +125,7 @@ class ActivityModal extends Component {
             if (result.message == "ingen kommentar funnet") {
                 this.setState({
                     noComment: true
-                })
+                });
             } else {
                 this.setState({
                     comments: result.reverse(),
@@ -160,11 +162,21 @@ class ActivityModal extends Component {
         });
     };
 
+    fetchHost = () => {
+        getHost(this.props.id,(result) => {
+            if(result.host == 'true'){
+                this.setState({
+                    hosting: true
+                });
+            }
+        });
+    };
 
     render() {
         const {date, activityName, facebook, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
-        const starRating = rating / number_of_ratings;
+
+        let starRating = rating / number_of_ratings;
         let suitedForContainer = [];
         let imageContainer = null;
         let attendingContainer = null;
@@ -195,15 +207,22 @@ class ActivityModal extends Component {
                </div>;
         }
 
+        if(this.state.myrating > 0){
+            starRating =
+                (rating + this.state.myrating)/(number_of_ratings+1);
+
+            ratingContainer =
+                <span id="ratingFeedback">Takk for din vurdering.</span>;
+        }
 
         let images = this.props.images.map(image => {
             return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
         });
 
         if (this.state.show && !this.state.hasChecked) {
-            this.checkIfSignUp()
+            this.checkIfSignUp();
             this.fetchComments();
-            this.fetchHost()
+            this.fetchHost();
         }
 
         if (!this.state.loggedIn) {
@@ -262,15 +281,20 @@ class ActivityModal extends Component {
         }
 
         if (this.state.loggedIn) {
-            ratingContainer =
-                <div id="ratingContainer">
-                    <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
-                                     onStarClick={this.onRateChange.bind(this)}/>
-                    <span id="ratingFeedback"></span>
-                </div>;
+            if(this.state.myrating > 0){
+                starRating =
+                    (rating + this.state.myrating)/(number_of_ratings+1);
 
+                ratingContainer =
+                    <span id="ratingFeedback">Takk for din vurdering.</span>;
+            }else{
+                ratingContainer =
+                    <div>
+                        <p className="activityRating">Gi din vurdering</p>
+                        <StarRatingComponent className="activityRating" name="activityRating" emptyStarColor="#BBB" onStarClick={this.onRateChange.bind(this)}/>;
+                    </div>
+            }
             postCommentContainer =
-
                 <div id="postComment">
                     <form className="comment-form" method="POST" action="/postComment/">
                         <div className="input-group">
@@ -318,7 +342,9 @@ class ActivityModal extends Component {
                             <div className="modal-provider-title">Arrangeres av: <b>{provider}</b>
                             </div>
                         </div>
-                        {ratingContainer}
+                        <div id="ratingContainer">
+                            <StarRatingComponent id="userRating" name="userRating" emptyStarColor="#BBB" value={starRating} editing={false}/>
+                        </div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -352,7 +378,10 @@ class ActivityModal extends Component {
                     {imageContainer}
                     {facebookContainer}
                     <hr/>
-                    <h2 className="modal-comments">Kommentarer</h2>
+                    <div id="commentAndRating">
+                        <h2 className="modal-comments">Kommentarer</h2>
+                        {ratingContainer}
+                    </div>
                     {postCommentContainer}
                     {commentsContainer}
                 </Modal.Body>

@@ -2,6 +2,12 @@ i{
     font-size: 2em;
 }
 
+#commentAndRating{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 #ratingContainer{
     display: flex;
     flex-direction: column;
@@ -13,7 +19,7 @@ i{
     margin: 0;
     color: green;
     font-weight: bolder;
-    float: right;
+    align-self: center;
 }
 
 
@@ -90,13 +96,12 @@ background: #03a7ff;
 }
 
 .dv-star-rating{
-    float: right
+    align-self: flex-end;
 }
 
-#rating{
-    display: flex;
-    flex-direction: row;
-    float: left;
+p.activityRating{
+    margin: 0;
+    font-size: 1.3em;
 }
 
 .modal-container {

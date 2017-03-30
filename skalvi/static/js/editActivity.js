@@ -98,10 +98,10 @@ function fillForm() {
     $('#facebookInfo-label').addClass('is-checked');
 
     //Getting the event pictures
-    getFacebookEventImages(id, 'large' ,function (response) {
-        $('#facebook-event-image').attr('src', response.url);
-        $('#facebook-thumbnail').css('display', 'block');
-    })
+    // getFacebookEventImages(id, 'large' ,function (response) {
+    //     $('#facebook-event-image').attr('src', response.url);
+    //     $('#facebook-thumbnail').css('display', 'block');
+    // })
 }
 
 function updateInput(input, value) {

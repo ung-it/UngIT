@@ -25,18 +25,9 @@ class ProviderField extends Component {
         }
     }
 
-    handleChange = (event, index, value) => this.setState({value});
-
-    handleToggle = () => {
-        this.setState({
-            open: !this.state.open,
-        });
-    };
-
-    handleNestedListToggle = (item) => {
-        this.setState({
-            open: item.state.open,
-        });
+    handleChange = (event, index, value) => {
+        $('#provider').val(value);
+        this.setState({value});
     };
 
     render() {

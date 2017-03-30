@@ -126,30 +126,44 @@ class Scraper:
             for i in range(0, len(keys)):
                 if(keys[i].string.strip() == 'Kategori(er)'):
                     value = ''
-                    for cat in categories:
-                        cat = categories.pop()
+                    catList = categories[0]
+                    catList = str(catList)
+                    catList = catList.split("<li>")
+                    catList.pop(0)
+                    print("Kategorier list: ", catList)
+                    index = 0
+                    for cat in catList:
+                        index += 1
+                        print("index: ", i)
                         cat = str(cat)
-                        #print(cat)
-                        start = cat.find('<li>') + 4
+                        print("CAT: ", cat)
+                        end = cat.find('</li>')
+                        cat = cat[:end+1]
+
                         end = cat.find(' (')
-                        cat = cat[start:end]
-                        if(len(categories) == 0):
+                        cat = cat[:end]
+                        print('Cat slized: ', cat)
+                        #value += cat + ", "
+                        if (index == len(catList)):
                             value += cat
-                            break
                         else:
                             value += cat + ', '
+
                     information['Kategorier'] = value
 
                 elif(keys[i].string == "Type aktivitet "):
                     value = ''
-
+                    #print('Type aktivitet Categories: ', categories)
                     list = categories[0]
+                    #print('Type aktivitet List: ', list)
                     list = str(list)
                     list = list.split("<li>")
                     list.pop(0)
-
+                    #print('Type aktivitet List 2 : ', list)
                     for cat in list:
-                        cat = list.pop()
+                        #print("cat: ", cat)
+                        #cat = list.pop()
+                        #print("cat 2: ", cat)
                         cat = str(cat)
                         end = cat.find('</li>')
                         cat = cat[:end + 1]
@@ -210,7 +224,7 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(34,37):   # 1, 1480
+        for i in range(35,36):   # 1, 1480
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             obj = self._scrapeInfo(orgLink=orgLink, orgID=i)
             if(obj == None):
@@ -218,7 +232,7 @@ class Scraper:
             allProviders.append(obj)
 
         # write all to .txt file, for prodction use to fill up database. without re-query
-        with open('../app/aktordatabasen.json', 'w') as file:
+        with open('../app/aktordatabasenTest.json', 'w') as file:
             json.dump(allProviders, file, indent=4)
 
         return allProviders
@@ -246,4 +260,4 @@ def main():
     # print:
     #print(informasjon)
 
-#main()
+main()

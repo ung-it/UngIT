@@ -14,25 +14,37 @@ class ProviderFilters extends React.Component {
     };
 
     /*handleEmptyFilter = () => {
-        this.props.onButtonChange(this.state.tButtonClicked);
+     this.props.onButtonChange(this.state.tButtonClicked);
      };*/
 
     render() {
+        const style = {
+            marginTop: '1.7em',
+            zIndex: '1'
+        };
         return (
             <div>
-                <SearchForProvider
-                    onFilterChange={this.props.onSearchForChange}
-                    activeFilters={this.props.searchForFilters}
-                    placeholderText="Søk på arrangør..."
-                />
-                <ActivityPicker
-                    onFilterChange={this.props.onActivityFilterChange}
-                    activeFilters={this.props.activityFilters}
-                />
+                <div className="row">
+                    <div className="col-md-6"
+                         style={style}>
+                        <SearchForProvider
+                            onFilterChange={this.props.onSearchForChange}
+                            activeFilters={this.props.searchForFilters}
+                            placeholderText="Søk på arrangør..."
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <ActivityPicker
+                            onFilterChange={this.props.onActivityFilterChange}
+                            activeFilters={this.props.activityFilters}
+                        />
+                    </div>
+                </div>
             </div>
-    )
+        )
     };
-};
+}
+;
 
 ProviderFilters.propTypes = {
     onSearchForChange: React.PropTypes.func.isRequired,

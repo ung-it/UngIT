@@ -4,7 +4,17 @@ import ProviderCard from './ProviderCard';
 class ProvidersList extends React.Component {
 
     render() {
-        // If no activities found
+        const styles = {
+            activitiesStyle: {
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                width: '100%',
+            }
+        };
+
+        // If no providers found
         if (this.props.providers.length < 1) {
             return <h1>Ingen arrangører funnet</h1>;
         }
@@ -13,7 +23,7 @@ class ProvidersList extends React.Component {
             <ProviderCard key={provider.Id} provider={provider} id={provider.Id}/>
         );
 
-        return <div>
+        return <div style={styles.activitiesStyle}>
             {providers}
         </div>
     }

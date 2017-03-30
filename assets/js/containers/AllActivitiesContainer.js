@@ -47,7 +47,7 @@ const mapStateToProps = state => {
     const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
 
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
-    const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
+    const suitedForFilters = activeSuitedForFilters.split(',');
 
     const hasWeekFilter = activeDateFilter.length > 0;
     const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
@@ -60,8 +60,25 @@ const mapStateToProps = state => {
         ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
         : activityList;
 
+    //const adaptions = ''
+
+
+    //const suitedFor = activityList.map(a => a.fields.adaptions.split(','));
+    //console.log(suitedFor);
+
+
+
+
     activityList = hasSuitedForFilter
-        ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
+        ? activityList.filter(activity =>
+            {
+               let result = activity.fields.adaptions.split(',').filter(adaption =>
+                {
+                    return suitedForFilters.indexOf(adaption) != -1
+                }
+                )
+            return result.length == suitedForFilters.length;
+            })
         : activityList;
 
     activityList = hasWeekFilter

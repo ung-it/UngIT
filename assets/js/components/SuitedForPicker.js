@@ -5,10 +5,10 @@ import ReactDOM from 'react-dom';
 import '../../styles/activitypickerStyle.css'
 
 export const SUITED_FOR_TYPES = [
-	{ label: 'Tilrettelegging 1', value: '1' },
-	{ label: 'Tilrettelegging 2', value: '2' },
-	{ label: 'Tilrettelegging 3', value: '3' },
-	{ label: 'Tilrettelegging 4', value: '4' },
+	{ label: 'Tilrettelegging 1', value: 'Tilrettelegging 1' },
+	{ label: 'Tilrettelegging 2', value: 'Tilrettelegging 2' },
+	{ label: 'Tilrettelegging 3', value: 'Tilrettelegging 3' },
+	{ label: 'Tilrettelegging 4', value: 'Tilrettelegging 4' },
 	{ label: 'Ukjent', value: '0' },
 ];
 

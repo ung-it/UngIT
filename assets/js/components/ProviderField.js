@@ -15,8 +15,11 @@ class ProviderField extends Component {
 
     constructor(props) {
         super(props);
+
+        let selectedProvider = $('#provider').val();
+
         this.state = {
-            value: 0,
+            value: selectedProvider,
             personal: "Meg selv",
             registered: ["Aktør jeg representerer", "En annen aktør jeg representerer"],
             unregistered: ["En aktør jeg ikke representerer", "En annen aktør jeg ikke representerer"],
@@ -32,14 +35,14 @@ class ProviderField extends Component {
 
     render() {
 
-        let items1 = this.state.registered.map((item, i) => {
+        let items1 = this.state.registered.map((item) => {
            return (
-               <MenuItem key={item} primaryText={item} value={i+1}/>
+               <MenuItem key={item} primaryText={item} value={item}/>
            )
         });
-        let items2 = this.state.unregistered.map((item, i) => {
+        let items2 = this.state.unregistered.map((item) => {
             return (
-                <MenuItem key={item} primaryText={item} value={i+1+this.state.registered.length}/>
+                <MenuItem key={item} primaryText={item} value={item}/>
             )
         });
 
@@ -51,7 +54,7 @@ class ProviderField extends Component {
                 autoWidth={false}
                 style={styles.customWidth}
             >
-                <MenuItem primaryText={this.state.personal} value={0}/>
+                <MenuItem primaryText={this.state.personal} value={this.state.personal}/>
                 <Subheader>Mine aktører</Subheader>
                 {items1}
                 <Subheader>Andre aktører</Subheader>

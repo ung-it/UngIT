@@ -126,30 +126,43 @@ class Scraper:
             for i in range(0, len(keys)):
                 if(keys[i].string.strip() == 'Kategori(er)'):
                     value = ''
-                    for cat in categories:
-                        cat = categories.pop()
+                    catList = categories[0]
+                    catList = str(catList)
+                    catList = catList.split("<li>")
+                    catList.pop(0)
+
+                    index = 0
+                    for cat in catList:
+                        index += 1
+
                         cat = str(cat)
-                        #print(cat)
-                        start = cat.find('<li>') + 4
+
+                        end = cat.find('</li>')
+                        cat = cat[:end+1]
+
                         end = cat.find(' (')
-                        cat = cat[start:end]
-                        if(len(categories) == 0):
+                        cat = cat[:end]
+
+                        if (index == len(catList)):
                             value += cat
-                            break
                         else:
                             value += cat + ', '
+
                     information['Kategorier'] = value
 
                 elif(keys[i].string == "Type aktivitet "):
                     value = ''
-
+                    #print('Type aktivitet Categories: ', categories)
                     list = categories[0]
+                    #print('Type aktivitet List: ', list)
                     list = str(list)
                     list = list.split("<li>")
                     list.pop(0)
-
+                    #print('Type aktivitet List 2 : ', list)
                     for cat in list:
-                        cat = list.pop()
+                        #print("cat: ", cat)
+                        #cat = list.pop()
+                        #print("cat 2: ", cat)
                         cat = str(cat)
                         end = cat.find('</li>')
                         cat = cat[:end + 1]
@@ -210,7 +223,7 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(34,37):   # 1, 1480
+        for i in range(1,1480):   # 1, 1480
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
             obj = self._scrapeInfo(orgLink=orgLink, orgID=i)
             if(obj == None):

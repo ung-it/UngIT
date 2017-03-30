@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
-import { connect } from "react-redux";
+import {Provider} from "react-redux";
+import {connect} from "react-redux";
 
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
-import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked } from '../actions/activitiesActions';
+import {
+    fetchAllActivities,
+    addActivityFilter,
+    addSuitedForFilter,
+    addWeekFilter,
+    addSearchForFilter,
+    trashButtonClicked
+} from '../actions/activitiesActions';
 import configureStore from "../configureStore";
 
 import '../../styles/activityBox.css';
@@ -16,15 +23,6 @@ class AllActivitiesContainer extends Component {
 
 
     render() {
-        const styles = {
-            activitiesStyle: {
-                display: "flex",
-                flexWrap: "wrap",
-                flexDirection: "row",
-                justifyContent: "space-around",
-                width: '100%',
-            }
-        };
         return (
             <div>
                 <div className="filter-container">
@@ -40,7 +38,7 @@ class AllActivitiesContainer extends Component {
                         onButtonChange={this.props.changeTrashButton}
                     />
                 </div>
-                <div style={styles.activitiesStyle}><ActivitiesList activities={this.props.activities}/></div>
+                <div><ActivitiesList activities={this.props.activities}/></div>
 
             </div>
         );
@@ -48,7 +46,7 @@ class AllActivitiesContainer extends Component {
 }
 
 const mapStateToProps = state => {
-    let { activity: { activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters } } = state; // Make activityList and activeActivityFilters from state become variables
+    let {activity: {activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
 
     activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
@@ -78,10 +76,10 @@ const mapStateToProps = state => {
     activityList = hasWeekFilter
         ? activityList.filter(activity =>
         (
-            ((new Date (activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date (activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date (activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
-            (new Date (activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date (activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date (activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
-            (weekFilters[0].getYear() >= new Date (activity.fields.date).getYear()  && weekFilters[0].getMonth() >= new Date (activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date (activity.fields.date).getDay()) &&
-            (weekFilters[0].getYear() <= new Date (activity.fields.date_end).getYear()  && weekFilters[0].getMonth() <= new Date (activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date (activity.fields.date_end).getDay())
+            ((new Date(activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date(activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date(activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
+            (new Date(activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date(activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date(activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
+            (weekFilters[0].getYear() >= new Date(activity.fields.date).getYear() && weekFilters[0].getMonth() >= new Date(activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date(activity.fields.date).getDay()) &&
+            (weekFilters[0].getYear() <= new Date(activity.fields.date_end).getYear() && weekFilters[0].getMonth() <= new Date(activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date(activity.fields.date_end).getDay())
         ))
         : activityList;
 

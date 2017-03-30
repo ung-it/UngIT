@@ -54,7 +54,7 @@ class ActivityCard extends React.Component {
         const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
         const divStyle = {
             background: 'url(' + poster + ')',
-            width: '32em',
+            width: '40em',
             height: '20em;',
             backgroundSize: '40em 20em',
             backgroundRepeat: 'no-repeat',

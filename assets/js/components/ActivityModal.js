@@ -200,8 +200,8 @@ class ActivityModal extends Component {
             return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
         });
 
-        if (this.state.show && !this.state.hasChecked) {
-            this.checkIfSignUp()
+        if (this.state.show && !this.state.hasChecked && this.state.loggedIn) {
+            this.checkIfSignUp();
             this.fetchComments();
             this.fetchHost()
         }

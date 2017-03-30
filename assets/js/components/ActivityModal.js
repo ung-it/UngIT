@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl,} from 'react-bootstrap';
 //Project component import
 import CalendarDateBox from './CalendarDateBox';
+import Carousel from './Carousel';
 //CSS import
 import '../../styles/modal.css';
 import {SUITED_FOR_TYPES} from './SuitedForPicker';
@@ -27,7 +28,6 @@ class ActivityModal extends Component {
             hasChecked: false,
             attending: false,
             loggedIn: false,
-            fetchedComments: false,
             noComments: true,
             hosting: false,
             comments: []
@@ -119,19 +119,17 @@ class ActivityModal extends Component {
     };
 
     fetchComments = () => {
+        let hallo = null;
         getComments(this.props.id,(result) => {
             if (result.message == "ingen kommentar funnet") {
-                this.setState({
-                    noComment: true
-                })
             } else {
-                this.setState({
-                    comments: result.reverse(),
-                    noComments: false
-                });
+                hallo = result.reverse()
             }
         });
+        console.log("Bitch", hallo)
     };
+
+
 
     onPostComment = () => {
         if($("#commentInput").val().trim().length == 0){
@@ -166,7 +164,7 @@ class ActivityModal extends Component {
 
         const starRating = rating / number_of_ratings;
         let suitedForContainer = [];
-        let imageContainer = null;
+        let carouselContainer = null;
         let attendingContainer = null;
         let ratingContainer = null;
         let postCommentContainer = null;
@@ -195,15 +193,18 @@ class ActivityModal extends Component {
                </div>;
         }
 
-
         let images = this.props.images.map(image => {
             return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
         });
 
         if (this.state.show && !this.state.hasChecked) {
-            this.checkIfSignUp()
-            this.fetchComments();
-            this.fetchHost()
+            this.checkIfSignUp();
+            if(this.state.loggedIn){
+                this.fetchHost()
+            }
+            if(allComments.length < 1){
+                this.fetchComments();
+            }
         }
 
         if (!this.state.loggedIn) {
@@ -252,11 +253,12 @@ class ActivityModal extends Component {
         }
 
         if (images.length > 0) {
-            imageContainer =
+            carouselContainer =
                 <div>
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>
+                    <Carousel carouselImages={images}/>
                     <div className="modal-image-container">
-                        {images}
+
                     </div>
                 </div>;
         }
@@ -291,7 +293,7 @@ class ActivityModal extends Component {
                 <Button onClick={this.editActivity}>Endre aktivitet</Button>;
         }
 
-        if (!this.state.noComments) {
+        if (allComments.length > 0) {
             commentsContainer =
                 <div id="commentDiv">
                     {allComments.map((com, i) =>
@@ -349,7 +351,7 @@ class ActivityModal extends Component {
                         <p className="modal-description">{description}</p>
                     </div>
                     {videoContainer}
-                    {imageContainer}
+                    {carouselContainer}
                     {facebookContainer}
                     <hr/>
                     <h2 className="modal-comments">Kommentarer</h2>

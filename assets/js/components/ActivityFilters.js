@@ -1,5 +1,6 @@
 import React from 'react';
 import { Glyphicon } from "react-bootstrap";
+import Paper from 'material-ui/Paper';
 
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
@@ -25,8 +26,9 @@ class ActivityFilters extends React.Component {
     };
 
     render() {
+
         return (
-            <div>
+            <Paper className="filter-container">
                 <div className="row">
                     <div className="2">
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">
@@ -72,7 +74,7 @@ class ActivityFilters extends React.Component {
                     </div>
                 </div>
 
-            </div>
+            </Paper>
         )
     }
 }

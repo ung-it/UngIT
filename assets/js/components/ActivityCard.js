@@ -45,8 +45,8 @@ class ActivityCard extends React.Component {
         }
 
         let description = '';
-        if(this.props.activity.description.length > 160) {
-            description = this.props.activity.description.substr(0,160)+ "...";
+        if (this.props.activity.description.length > 160) {
+            description = this.props.activity.description.substr(0, 160) + "...";
         } else {
             description = this.props.activity.description;
         }
@@ -55,28 +55,30 @@ class ActivityCard extends React.Component {
         const divStyle = {
             background: 'url(' + poster + ')',
             width: '40em',
-            height: '20em;',
+            height: '20em',
             backgroundSize: '40em 20em',
             backgroundRepeat: 'no-repeat',
         };
 
         return (
             < div
-                key={this.props.activity.id}>,
-                <div className="demo-card-wide mdl-card mdl-shadow--2dp">
+                key={this.props.activity.id}>
+                <div className="demo-card-wide mdl-card mdl-shadow--2dp"
+                     title="Klikk på aktiviteten for mer informasjon"
+                     onClick={this.openActivityModal}>
                     <div className="mdl-card__title" style={divStyle}/>
                     <div className="mdl-card__supporting-text">
                         <h3 className="big-info-header">{this.props.activity.activityName}</h3>
                         <div className="row">
                             <div className="col-md-6">
                                 {/*<div className="row">*/}
-                                    <div className="big-icon-container-div"><Glyphicon
-                                        glyph="glyphicon glyphicon-calendar"/>{date}</div>
-                                    <div className="big-icon-container-div"><Glyphicon
-                                        glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start}
-                                        - {this.props.activity.time_end}</div>
-                                    <div className="big-icon-container-div"><Glyphicon
-                                        glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</div>
+                                <div className="big-icon-container-div"><Glyphicon
+                                    glyph="glyphicon glyphicon-calendar"/>{date}</div>
+                                <div className="big-icon-container-div"><Glyphicon
+                                    glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start}
+                                    - {this.props.activity.time_end}</div>
+                                <div className="big-icon-container-div"><Glyphicon
+                                    glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</div>
                                 {/*</div>*/}
                             </div>
                             <div className="col-md-6">{description}</div>

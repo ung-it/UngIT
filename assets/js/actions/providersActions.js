@@ -6,6 +6,7 @@ import { getAllProviders } from '../APIFunctions';
 export const FETCHED_ALL_PROVIDERS = 'FETCH_ALL_PROVIDERS';
 export const ADD_SEARCH_FOR_FILTER = 'ADD_SEARCH_FOR_FILTER';
 export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
+export const TRASH_BUTTON_CLICKED = 'TRASH_BUTTON_CLICKED';
 
 
 
@@ -31,6 +32,11 @@ export function addActivityFilter(filter) {
     }
 }
 
+export function trashButtonClicked() {
+    return {
+        type: TRASH_BUTTON_CLICKED,
+    }
+}
 
 
 // HELPING METHODS

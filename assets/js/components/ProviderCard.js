@@ -38,7 +38,7 @@ class ProviderCard extends React.Component {
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="row">
-                                    <div className="col-md-3">
+                                    <div className="col-md-4">
                                         <p className="provider-card-bold-info">Kategorier: </p>
                                         <p className="provider-card-bold-info">Type aktiviteter: </p>
                                         <p className="provider-card-bold-info">Bydel: </p>
@@ -59,12 +59,6 @@ class ProviderCard extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            {/*<div className="col-sm-4">*/}
-                            {/*<p className="provider-card-bold-info">Aktiviteter</p>*/}
-                            {/*<ul>*/}
-                            {/*<li>Ingen registrert</li>*/}
-                            {/*</ul>*/}
-                            {/*</div>*/}
                         </div>
                     </div>
                 </div>

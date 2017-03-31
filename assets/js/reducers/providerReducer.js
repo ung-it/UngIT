@@ -31,7 +31,6 @@ export default function ProviderReducer(state = initialState, action) {
         case actionTypes.TRASH_BUTTON_CLICKED:
             return {
                 ...state,
-                providerList: [],
                 activeActivityFilters: '',
                 activeSuitedForFilters: '',
                 activeSearchForFilters: '',

@@ -498,7 +498,9 @@ class MyPageView(View):
 
             for profile in user_profile_objects:
                 path = "/mypage/" + str(profile.profile_name) + "/"
-                object = {'profile_name': profile.profile_name, "last_name":profile.last_name, "email":profile.email, "type": profile.type, "phone": profile.phone, "is_active": profile.is_active, 'initiales': profile.profile_name[0:2].upper(), 'path': path}
+                facebook = isNum(username)
+                print(facebook)
+                object = {'profile_name': profile.profile_name, "last_name":profile.last_name, "email":profile.email, "type": profile.type, "phone": profile.phone, "is_active": profile.is_active, 'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook}
                 profiles.append(object)
 
             return render(request, self.template_name,
@@ -556,3 +558,10 @@ def allactivities(request):
 
 def allproviders(request):
     return TemplateResponse(request, 'allProviders.html', {})
+
+def isNum(data):
+    try:
+        int(data)
+        return True
+    except ValueError:
+        return False

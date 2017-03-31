@@ -1,7 +1,11 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
+import { Glyphicon } from "react-bootstrap";
 
 import SearchForProvider from './SearchForActivity';
 import ActivityPicker from './ActivityPicker';
+
+import '../../styles/activityFilters.css'
 
 class ProviderFilters extends React.Component {
 
@@ -13,9 +17,9 @@ class ProviderFilters extends React.Component {
         };
     };
 
-    /*handleEmptyFilter = () => {
+    handleEmptyFilter = () => {
      this.props.onButtonChange(this.state.tButtonClicked);
-     };*/
+     };
 
     render() {
         const style = {
@@ -23,7 +27,21 @@ class ProviderFilters extends React.Component {
             zIndex: '1'
         };
         return (
-            <div>
+            <Paper className="filter-container">
+                <div className="row">
+                    <div className="2">
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">
+                            Tøm filter
+                        </div>
+                        <button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
+                            <Glyphicon glyph="glyphicon glyphicon-trash"/>
+                        </button>
+
+                    </div>
+                    <div className="col-md-10">
+                        <h2 className="title">Finn arrangører</h2>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-md-6"
                          style={style}>
@@ -40,7 +58,7 @@ class ProviderFilters extends React.Component {
                         />
                     </div>
                 </div>
-            </div>
+            </Paper>
         )
     };
 }
@@ -51,6 +69,8 @@ ProviderFilters.propTypes = {
     searchForFilters: React.PropTypes.string.isRequired,
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.string.isRequired,
+
+    onButtonChange: React.PropTypes.func.isRequired,
 };
 
 export default ProviderFilters;

@@ -30,7 +30,9 @@
                             <div id="profile">
 
                                 <div id="profilePicture">
-                                    <img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile">
+                                    {% if profile.facebook == True  %}
+                                        <img src="http://graph.facebook.com/{{ user.username}}/picture?type=normal" alt="Profilbile">
+                                    {% endif %}
                                 </div>
 
                                 <div id="profileInformation">

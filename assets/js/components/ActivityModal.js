@@ -271,7 +271,7 @@ class ActivityModal extends Component {
             );
         }
 
-        if (images.length > 0 && this.state.hasChecked) {
+        if (this.state.show && images.length != 0) {
             carouselContainer =
                 <div>
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>
@@ -282,6 +282,8 @@ class ActivityModal extends Component {
                             slideInterval={2000}
                             originalClass="pictureClass"
                             showFullscreenButton={false}
+                            showPlayButton={false}
+                            thumbnailPosition="right"
                         />
                     </div>
                 </div>;

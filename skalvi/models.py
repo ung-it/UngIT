@@ -22,6 +22,10 @@ class UserProfile(models.Model):
     provider = JSONField()  # contains all found information
 
 
+    def __str__(self):
+        return self.profile_name + " " + " " + self.last_name + " - Email: " + self.email
+
+
 
 ########### END USER PROFILE
 
@@ -91,6 +95,9 @@ class ParticipateIn(models.Model):
     activityId = models.ForeignKey(Activity, on_delete=models.CASCADE)
     user_profile_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.activityId.activityName + " - " + self.user_profile_id.profile_name + " - Email: " + self.user_profile_id.email
+
 
 class Hosts(models.Model):
     activityId = models.OneToOneField(Activity, on_delete=models.CASCADE)
@@ -98,6 +105,10 @@ class Hosts(models.Model):
     profileId = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     # orgNr = models.ForeignKey(Organisation, on_delete=models.CASCADE) <-- should get the same information through the
     # admin user reference.
+
+    def __str__(self):
+        return str(self.activityId.activityName + " hosted by " + self.adminId.username + " : " + self.profileId.profile_name + " " + self.profileId.last_name)
+
 
 
 class EmployedIn(models.Model):

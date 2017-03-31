@@ -49,8 +49,6 @@ const mapStateToProps = state => {
     let {activity: {activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
 
-    activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
-
     //TODO: Send all suited for filters as props from suitedforpicker
     const availableSuitedFor = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging 3', 'Tilrettelegging 4', 'Annet'];
 
@@ -106,6 +104,22 @@ const mapStateToProps = state => {
     activityList = hasSearchForFilter
         ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
         : activityList;
+
+
+    const initialStart = new Date();
+    let initialEnd = new Date();
+    initialEnd.setDate(initialEnd.getDate() + 182);
+
+    activityList != hasWeekFilter
+        ? activityList.filter(activity =>
+            ((new Date(activity.fields.date).getYear() >= initialStart.getYear() && new Date(activity.fields.date).getMonth() >= initialStart.getMonth() && new Date(activity.fields.date).getDay() >= initialStart.getDay()) &&
+            (new Date(activity.fields.date).getYear() <= initialEnd.getYear() && new Date(activity.fields.date).getMonth() <= initialEnd.getMonth() && new Date(activity.fields.date).getDay() <= initialEnd.getDay())) ||
+            (initialStart.getYear() >= new Date(activity.fields.date).getYear() && initialStart.getMonth() >= new Date(activity.fields.date).getMonth() && initialStart.getDay() >= new Date(activity.fields.date).getDay()) &&
+            (initialStart.getYear() <= new Date(activity.fields.date_end).getYear() && initialStart.getMonth() <= new Date(activity.fields.date_end).getMonth() && initialStart.getDay() <= new Date(activity.fields.date_end).getDay())
+        )
+        :activityList;
+
+    activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
 
     return {
         activities: activityList,

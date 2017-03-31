@@ -14,7 +14,7 @@ const initialState = {
     activityList: [],
     activeActivityFilters: '',
     activeSuitedForFilters: '',
-    activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
+    activeDateFilter: '',
     activeSearchForFilters: '',
     activeButtonClicked: false,
 
@@ -69,7 +69,7 @@ export default function ActivityReducer(state=initialState, action) {
                 ...state,
                 activeActivityFilters: '',
                 activeSuitedForFilters: '',
-                activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
+                activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(182, 'days').format('DD/MM/YYYY'),
                 activeSearchForFilters: '',
                 activeButtonClicked: false,
             };

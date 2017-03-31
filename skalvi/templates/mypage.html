@@ -13,6 +13,7 @@
 
     <div class="content-margin-top">
         <div id="profilesOnMyPage" >
+            <h4 id="usersTitle">Brukere:</h4>
             <ul class="social">
                 {% for profile in profiles %}
                     <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init" class="profileButton">{{profile.initiales}}</a></li>

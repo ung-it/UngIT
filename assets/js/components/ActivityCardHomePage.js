@@ -68,8 +68,8 @@ class ActivityCardHomePage extends React.Component {
 
         const divStyle = {
             backgroundImage: 'url(' + poster + ')',
-            width: '25em',
-            height: '25em',
+            width: '22em',
+            height: '22em',
             backgroundSize: '25em 25em',
             borderRadius: '3px',
             backgroundRepeat: 'no-repeat',

@@ -42,8 +42,8 @@
 }
 
 .demo-card-square.mdl-card {
-    width: 400px;
-    height: 400px;
+    width: 22em;
+    height: 22em;
 }
 
 .demo-card-square > .mdl-card__title {

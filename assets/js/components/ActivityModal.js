@@ -4,7 +4,13 @@ import React, {Component} from 'react';
 import {Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl,} from 'react-bootstrap';
 //Project component import
 import CalendarDateBox from './CalendarDateBox';
-import Carousel from './Carousel';
+//Image gallery
+import ImageGallery from 'react-image-gallery';
+
+//CSS
+import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
+
+
 //CSS import
 import '../../styles/modal.css';
 import {SUITED_FOR_TYPES} from './SuitedForPicker';
@@ -33,6 +39,17 @@ class ActivityModal extends Component {
             comments: []
         }
     }
+
+    shouldComponentUpdate(nextProps, nextState){
+        if(this.state.show != nextState.show){
+            return true
+        }
+        if(this.state.comments == nextState.comments){
+            return false
+        }
+        return true
+    }
+
 
     componentWillReceiveProps(props) {
         this.setState({
@@ -119,14 +136,15 @@ class ActivityModal extends Component {
     };
 
     fetchComments = () => {
-        let hallo = null;
         getComments(this.props.id,(result) => {
             if (result.message == "ingen kommentar funnet") {
-            } else {
-                hallo = result.reverse()
+            }
+            else {
+                 this.setState({
+                    comments: result.reverse()
+                });
             }
         });
-        console.log("Bitch", hallo)
     };
 
 
@@ -194,7 +212,8 @@ class ActivityModal extends Component {
         }
 
         let images = this.props.images.map(image => {
-            return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
+            {/*<img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>*/}
+            return {original: image, thumbnail: image}
         });
 
         if (this.state.show && !this.state.hasChecked) {
@@ -252,13 +271,18 @@ class ActivityModal extends Component {
             );
         }
 
-        if (images.length > 0) {
+        if (images.length > 0 && this.state.hasChecked) {
             carouselContainer =
                 <div>
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>
-                    <Carousel carouselImages={images}/>
-                    <div className="modal-image-container">
-
+                    {/*<Carousel carouselImages={images}/>*/}
+                    <div id="imageContainer">
+                        <ImageGallery
+                            items={images}
+                            slideInterval={2000}
+                            originalClass="pictureClass"
+                            showFullscreenButton={false}
+                        />
                     </div>
                 </div>;
         }

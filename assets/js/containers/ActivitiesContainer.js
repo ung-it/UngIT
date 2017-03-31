@@ -60,8 +60,8 @@ class ActivitiesContainer extends Component {
 const mapStateToProps = state => {
     return {
         activities: state.activity.activityList
-            // .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            // .slice(0, 4).reverse() // Only get five first
+            .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
+            .slice(0, 4).reverse() // Only get five first
     };
 };
 

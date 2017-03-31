@@ -41,17 +41,6 @@ class ActivityModal extends Component {
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState){
-        if(this.state.show != nextState.show){
-            return true
-        }
-        if(this.state.comments == nextState.comments){
-            return false
-        }
-        return true
-    }
-
-
     componentWillReceiveProps(props) {
         this.setState({
             show: props.show

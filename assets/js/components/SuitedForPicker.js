@@ -34,7 +34,7 @@ class SuitedForPicker extends React.Component {
 					multi
 					simpleValue
 					value={this.props.activeFilters}
-					placeholder="Velg type aktivitet..."
+					placeholder="Velg type tilpassning..."
 					options={this.state.options}
 					onChange={this.handleSelectChange}
 				/>

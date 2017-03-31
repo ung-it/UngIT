@@ -28,6 +28,13 @@ h4#usersTitle{
     flex-wrap: wrap;
 }
 
+#hosting_Activities_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
 #attending_Activities {
     width: 50%;
 }
@@ -54,7 +61,7 @@ h4#usersTitle{
 /*}*/
 
 #new-activity-button{
-    float: right;
+    align-self: flex-end;
     height: 2.5em;
 }
 

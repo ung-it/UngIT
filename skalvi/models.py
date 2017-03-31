@@ -8,23 +8,6 @@ from django.dispatch import receiver
 
 from jsonfield import JSONField
 
-
-ACTIVITY_TYPES = (
-    (0, 'Ukjent'),
-    (1, 'Skating'),
-    (2, 'Klatring'),
-    (3, 'Ski'),
-    (4, 'Svømming'),
-)
-
-SUITED_FOR_TYPES = (
-    (0, 'Ukjent'),
-    (1, 'Tilpasset 1'),
-    (2, 'Tilpasset 2'),
-    (3, 'Tilpasset 3'),
-    (4, 'Tilpasset 4'),
-)
-
 ########### USER PROFILES that extends the auth.models.User table
 
 class UserProfile(models.Model):
@@ -44,8 +27,7 @@ class UserProfile(models.Model):
 
 class Activity(models.Model):
     activityName = models.CharField(max_length=80)
-    activityType = models.PositiveSmallIntegerField(choices=ACTIVITY_TYPES, default=0)  # Defaults to 'Ukjent'
-    suitedForType = models.PositiveSmallIntegerField(choices=SUITED_FOR_TYPES, default=0)  # Defaults to 'Ukjent'
+    activityType = models.CharField(max_length=80)
     provider = models.CharField(max_length=80)
     facebookID = models.IntegerField(blank=True, null=True)
     facebookInfo = models.BooleanField(blank=True)
@@ -64,6 +46,8 @@ class Activity(models.Model):
     videos = models.ImageField(upload_to='videos/',max_length=255, blank=True)
     rating = models.FloatField(blank=True, default=0)
     number_of_ratings = models.IntegerField(blank=True, default=0)
+    assistants_number = models.IntegerField()
+    assistants_text = models.TextField(blank=True, null=True)
 
     def was_published(self):
         return self.pub_date

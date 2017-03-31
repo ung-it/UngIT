@@ -1,44 +1,32 @@
 /* Styling for activities on home page */
-.activitySmalStyle {
-    width: 25em;
-    height: 25em;
-    cursor: pointer;
-    color: white;
+.activitySmallStyle {
     display: flex;
-    margin-top: 16px;
-    border: 1px solid #f5f5f5;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
-
-    /*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*/
-    -webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    -moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    box-shadow: 0 0 5px 1px rgb(123, 127, 143);
 }
 
-.activitySmalStyle:hover {
-    background-color: whitesmoke;
+.activitySmallStyle:hover {
+    /*background-color: whitesmoke;*/
     border-style: solid;
-    border-color: dimgray;
+    border-color: lightgray;
 }
-
 
 .caption {
     height: 13em;
 }
+
+.info-box-wrapper {
+    color: white;
+    padding: 0 17px 0 17px;
+}
+
 .info-header {
-    text-align: center;
+    color: white;
+    text-align: left;
     border-bottom: 3px solid #3ad7ff;
-    margin: 0 15px 0 0 ;
     padding: 10px 0;
 }
 
 .info-box-wrapper {
     background-color: rgb(42, 42, 42);
-    opacity: 1;
-    padding-left: 15px;
     width: 100%;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -54,82 +42,68 @@
     margin-top: 5px;
 }
 
+.demo-card-square.mdl-card {
+    width: 400px;
+    height: 400px;
+    justify-content: space-around;
+}
+
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+}
 
 /* Styling for activities on all activities page */
-.activityBigStyle {
-    width: 100%;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    margin-bottom: 15px;
-
-    border: 1px solid #f5f5f5;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
-
-    /*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*/
-    -webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    -moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    box-shadow: 0 0 5px 1px rgb(123, 127, 143);
+.demo-card-wide.mdl-card {
+    width: 40em;
+    height: 30em;
+    max-height: 40em;
+    margin: 0.5em;
+    overflow-y:auto;
+    overflow-x:hidden;
+    z-index: 0;
 }
 
-.activityBigStyle:hover {
-    background-color: whitesmoke;
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
 }
 
-.activity-card-info-container {
-    width: 100%;
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
 }
 
-.activity-card-header-container {
-    /*background-color: rgb(42, 42, 42);*/
-    /*color: white;*/
-    border: 1px solid #f5f5f5;
-    margin:0;
-    border-radius: 3px;
-    padding-bottom: 10px;
-    text-align: center;
+.big-icon-container-div {
+    font-weight: bold;
+    padding: 0.5em;
 }
 
 .big-info-header {
     border-bottom: 3px solid lightgrey;
+}
+
+.demo-card-wide a {
+    font-weight: bold;
+    font-family: "Dosis";
+}
+
+/*Styling provider cards*/
+
+.big-info-header-provider {
+    margin: 15px;
     font-family: "Dosis", serif;
-    font-weight: bold;
+    border-bottom: 3px solid lightgrey;
+}
+
+.provider-info {
     margin: 0 15px 0 15px;
-    padding: 10px 0;
 }
 
-.activity-card-row-info {
-    margin: 15px 15px 5px 15px;
-    font-weight: bold;
+.provider-card-bold-info {
+    font-weight: bolder;
+    font-size: large;
+    font-family: "Dosis", serif;
 }
 
-.activity-card-image-container {
-    border-left: 1px solid #f5f5f5;
-
-    /*box-shadow: 2.5px 5px 2.5px rgb(123, 127, 143);*/
-    -webkit-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    -moz-box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-    box-shadow: 0 0 5px 1px rgb(123, 127, 143);
-}
-
-.activity-card-description {
-    margin: 0 15px 0 15px;
-    padding-top: 10px;
-    max-height: 7em;
-
-    overflow-y:auto;
-    overflow-x:hidden;
-}
-
-@media screen and (max-width: 760px) {
-    .activity-card-description {
-        visibility: hidden;
-    }
-}
 
 /*Styling filter container*/
 .filter-container {

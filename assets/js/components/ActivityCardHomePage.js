@@ -1,5 +1,5 @@
 import React from "react"
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
 
 import ActivityModal from './ActivityModal';
@@ -15,10 +15,10 @@ class ActivityCardHomePage extends React.Component {
         };
     };
 
-    openActivityModal = () =>  {
-       this.setState({
-           show:true
-       });
+    openActivityModal = () => {
+        this.setState({
+            show: true
+        });
     };
 
     createActivityItem = () => {
@@ -37,7 +37,7 @@ class ActivityCardHomePage extends React.Component {
         let images = localImages.concat(instaImages);
 
         let poster = null;
-        if(images.length > 0){
+        if (images.length > 0) {
             poster = images[0];
         } else {
             poster = "/static/images/activityPic.jpeg"
@@ -79,26 +79,30 @@ class ActivityCardHomePage extends React.Component {
         return (
             <div key={this.props.activity.id}>
                 {facebookIcon}
-                <div
-
-                    className="activitySmalStyle"
-                    onClick={this.openActivityModal}
-                    title="Klikk på aktiviteten for mer informasjon"
-                    style={divStyle}
-                >
-                    <div className="info-box-wrapper">
-                        <h3 className="info-header">{this.props.activity.activityName}</h3>
-                        <div className="icon-container">
-                            <div className="row">
-                                <p className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
-                                <p className="col-md-5"><Glyphicon glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</p>
+                <div className="demo-card-square mdl-card mdl-shadow--2dp">
+                    <div
+                        className="activitySmallStyle"
+                        onClick={this.openActivityModal}
+                        title="Klikk på aktiviteten for mer informasjon"
+                        style={divStyle}>
+                        <div className="info-box-wrapper">
+                            <h3 className="info-header">{this.props.activity.activityName}</h3>
+                            <div className="icon-container">
+                                <div className="row">
+                                    <p className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
+                                    <p className="col-md-5"><Glyphicon
+                                        glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)}
+                                        - {this.props.activity.time_end.slice(0, 5)}</p>
+                                </div>
+                                <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}
+                                </p>
                             </div>
-                            <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</p>
                         </div>
+                        <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
+                                       show={this.state.show}/>
                     </div>
-                    <ActivityModal id={this.props.id} activity={this.props.activity} images={images}
-                                   show={this.state.show}/>
                 </div>
+
             </div>
         );
     };

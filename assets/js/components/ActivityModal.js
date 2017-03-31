@@ -162,7 +162,7 @@ class ActivityModal extends Component {
 
 
     render() {
-        const {date, activityName, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
+        const {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
         const starRating = rating / number_of_ratings;
         let suitedForContainer = [];
@@ -318,6 +318,15 @@ class ActivityModal extends Component {
                 </div>;
         }
 
+        let assistantsInfo = null;
+        if (assistants_text != "") {
+            assistantsInfo = (
+                <div>
+                    Ekstra informasjon om assistentene: {assistants_text}
+                </div>
+            );
+        }
+
         return (
             <Modal
                 show={this.state.show}
@@ -337,10 +346,11 @@ class ActivityModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-adapted">
-                        Dette arrangementet er tilpasset for: <b>{suitedForContainer.label}</b>
+                        Dette arrangementet er tilpasset for: <b>{adaptions}</b>
                     </div>
                     <div>
-                        Antall assistenter: Ikke oppgitt
+                        Antall assistenter: {assistants_number}
+                        {assistantsInfo}
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">

@@ -14,6 +14,10 @@
     width: 900px;
 }
 
+.list-item {
+    align-items: flex-start;
+}
+
 .mdl-checkbox__label label{
     font-weight: 400;
 }

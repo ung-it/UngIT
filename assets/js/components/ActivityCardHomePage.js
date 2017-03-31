@@ -45,7 +45,6 @@ class ActivityCardHomePage extends React.Component {
 
         let facebookIcon = null;
         if (activity.facebookID != null) {
-
             let link = 'https://www.facebook.com/events/' + activity.facebookID;
 
             facebookIcon = (

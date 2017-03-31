@@ -196,6 +196,10 @@ background: #03a7ff;
     color: #83d32c;
 }
 
+.modal-facebook-header {
+    color: #3b5998;
+}
+
 .modal-media-container {
 
 }
@@ -204,12 +208,18 @@ background: #03a7ff;
     color: #f39019;
 }
 
-.modal-facebook-image {
+.modal-facebook-wrapper {
     display: flex;
-    flex-wrap: wrap;
 }
 
-.modal-facebook-image img{
-    height: 200px;
-    padding: 5px;
+.modal-facebook-info {
+    text-align: end;
+    /*width: 50%;*/
+}
+.modal-facebook-data {
+   margin-left: 5px;
+}
+
+.modal-facebook-admin-link {
+    margin-right: 10px;
 }

@@ -121,6 +121,7 @@
 
 .facebook-icon-wrapper {
     position: relative;
+    z-index: 999;
 }
 
 .facebook-icon-container {

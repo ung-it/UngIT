@@ -1,21 +1,18 @@
 /* Styling for activities on home page */
 .activitySmallStyle {
-    display: flex;
+    border-style: solid;
+    border-color: white;
+    margin: 1em;
 }
 
+
 .activitySmallStyle:hover {
-    /*background-color: whitesmoke;*/
     border-style: solid;
     border-color: lightgray;
 }
 
 .caption {
     height: 13em;
-}
-
-.info-box-wrapper {
-    color: white;
-    padding: 0 17px 0 17px;
 }
 
 .info-header {
@@ -26,16 +23,14 @@
 }
 
 .info-box-wrapper {
+    color: white;
+    padding: 0 17px 0 17px;
     background-color: rgb(42, 42, 42);
     width: 100%;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     align-self: flex-end;
 
-}
-
-.info-box-wrapper:hover {
-    background-color: rgb(42, 42, 42);
 }
 
 .icon-container {
@@ -45,7 +40,6 @@
 .demo-card-square.mdl-card {
     width: 400px;
     height: 400px;
-    justify-content: space-around;
 }
 
 .demo-card-square > .mdl-card__title {

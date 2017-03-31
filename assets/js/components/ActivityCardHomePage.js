@@ -74,14 +74,15 @@ class ActivityCardHomePage extends React.Component {
             backgroundSize: '25em 25em',
             borderRadius: '3px',
             backgroundRepeat: 'no-repeat',
+            display: 'flex'
         };
 
         return (
-            <div key={this.props.activity.id}>
+            <div key={this.props.activity.id}
+                 className="activitySmallStyle">
                 {facebookIcon}
                 <div className="demo-card-square mdl-card mdl-shadow--2dp">
                     <div
-                        className="activitySmallStyle"
                         onClick={this.openActivityModal}
                         title="Klikk på aktiviteten for mer informasjon"
                         style={divStyle}>

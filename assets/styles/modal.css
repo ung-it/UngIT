@@ -1,3 +1,7 @@
+#imageContainer{
+    display: flex;
+}
+
 i{
     font-size: 2em;
 }

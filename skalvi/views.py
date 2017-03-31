@@ -315,32 +315,32 @@ class UserFormView(View):
             last_name = form.cleaned_data['last_name']
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
-            profile_name = profile_form.cleaned_data['profile_name']
-            is_provider = profile_form.cleaned_data['is_provider']
+            # profile_name = profile_form.cleaned_data['profile_name']
+            # is_provider = profile_form.cleaned_data['is_provider']
 
-            print("Provider?  " + str(is_provider))
+            # print("Provider?  " + str(is_provider))
 
             if types:
                 types = "P"
             else:
                 types = "C"
 
-            if is_provider:
-                scraper = Scraper()
-                information = scraper.scrapeAktor(name=profile_name)
-                #information = json.dumps(information, ensure_ascii=False)
-
-                print("Information as json: ", information)
-            else:
-                information = {}
+            # if is_provider:
+            #     scraper = Scraper()
+            #     information = scraper.scrapeAktor(name=profile_name)
+            #     #information = json.dumps(information, ensure_ascii=False)
+            #
+            #     print("Information as json: ", information)
+            # else:
+            #     information = {}
 
 
             # Make som changes or something useful
             user.set_password(password)
             user.save()  # saves users to the database
 
-            print('Before saving information: ', information)
-            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name, aktordatabase=information)
+            # print('Before saving information: ', information)
+            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=first_name, last_name=last_name, email=email, provider={})
             userProfile.is_active = True
             userProfile.save()
 
@@ -533,13 +533,15 @@ class RegisterProfileView(View):
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
             profile_name = profile_form.cleaned_data['profile_name']
+            last_name = profile_form.cleaned_data['last_name']
+            email = profile_form.cleaned_data['email']
 
             if types:
                 types = "P"
             else:
                 types = "C"
 
-            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
+            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name, last_name=last_name, email=email)
             profile.save()
 
         return redirect("../mypage/" + profile_name )

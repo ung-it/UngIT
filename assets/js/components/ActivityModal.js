@@ -279,7 +279,7 @@ class ActivityModal extends Component {
                     <div id="imageContainer">
                         <ImageGallery
                             items={images}
-                            slideInterval={2000}
+                            slideInterval={1900}
                             originalClass="pictureClass"
                             showFullscreenButton={false}
                             showPlayButton={false}

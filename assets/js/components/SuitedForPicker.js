@@ -9,7 +9,7 @@ export const SUITED_FOR_TYPES = [
 	{ label: 'Tilrettelegging 2', value: 'Tilrettelegging 2' },
 	{ label: 'Tilrettelegging 3', value: 'Tilrettelegging 3' },
 	{ label: 'Tilrettelegging 4', value: 'Tilrettelegging 4' },
-	{ label: 'Ukjent', value: '0' },
+	{ label: 'Annet', value: 'Annet' },
 ];
 
 class SuitedForPicker extends React.Component {
@@ -34,7 +34,7 @@ class SuitedForPicker extends React.Component {
 					multi
 					simpleValue
 					value={this.props.activeFilters}
-					placeholder="Velg type aktivitet..."
+					placeholder="Velg tilrettelegging..."
 					options={this.state.options}
 					onChange={this.handleSelectChange}
 				/>

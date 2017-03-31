@@ -42,11 +42,12 @@ const mapStateToProps = state => {
 
     activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
 
+    //TODO: Send all suited for filters as props from suitedforpicker
+    const availableSuitedFor = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging 3', 'Tilrettelegging 4', 'Annet'];
+
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
     const activityFilters = activeActivityFilters.split(','); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
-
-    console.log(activityFilters);
 
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
     const suitedForFilters = activeSuitedForFilters.split(',');
@@ -63,14 +64,6 @@ const mapStateToProps = state => {
         ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
         : activityList;
 
-    //const adaptions = ''
-
-
-    //const suitedFor = activityList.map(a => a.fields.adaptions.split(','));
-    //console.log(suitedFor);
-
-
-
 
     activityList = hasSuitedForFilter
         ? activityList.filter(activity =>
@@ -78,9 +71,16 @@ const mapStateToProps = state => {
                let result = activity.fields.adaptions.split(',').filter(adaption =>
                 {
                     return suitedForFilters.indexOf(adaption) != -1
+                });
+
+                if (suitedForFilters.indexOf("Annet") != -1) {
+
+                    result = result.concat(activity.fields.adaptions.split(',').filter( adaption => {
+                        return availableSuitedFor.indexOf(adaption) == -1
+                    }))
                 }
-                )
-            return result.length == suitedForFilters.length;
+
+            return result.length >= suitedForFilters.length;
             })
         : activityList;
 

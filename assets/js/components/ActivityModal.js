@@ -162,7 +162,7 @@ class ActivityModal extends Component {
 
 
     render() {
-        const {date, activityName, facebook, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
+        const {date, activityName, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
         const starRating = rating / number_of_ratings;
         let suitedForContainer = [];
@@ -234,18 +234,33 @@ class ActivityModal extends Component {
         }
 
         let facebookContainer = null;
-        if (facebook) {
-            // console.log(facebook)
+        if (facebook && facebookInfo) {
+            console.log(facebook);
             let fImages = facebook.photos.data.map(image => {
                 return <img src={image.images[0].source} key={image.id} className="modal-image"/>
             });
 
             images = images.concat(fImages);
 
+            let admins = facebook.admins.data.map(admin => {
+                let link = "https://facebook.com/" + admin.id;
+                return <a href={link} key={admin.id} target="_blank" title="Åpner Facebooksiden knyttet til denne personen/organisasjonen" className="modal-facebook-admin-link">{admin.name}</a>
+            });
+
             facebookContainer = (
                 <div className="modal-facebook-container">
-                    <h3>Informasjon om arrangementet fra Facebook</h3>
-                    <div className="modal-facebook-image">
+                    <h2 className="modal-facebook-header">Informasjon om arrangementet fra Facebook</h2>
+                    <div className="modal-facebook-wrapper">
+                        <div className="modal-facebook-info">
+                            <div>Ansvarlige for arrangementet:</div>
+                            <div>Antall påmeldte:</div>
+                            <div>Antall interesserte:</div>
+                        </div>
+                        <div className="modal-facebook-data">
+                            <div>{admins}</div>
+                            <div>{facebook.attending_count}</div>
+                            <div>{facebook.maybe_count}</div>
+                        </div>
                     </div>
                 </div>
             );

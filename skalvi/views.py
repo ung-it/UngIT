@@ -60,7 +60,8 @@ def signUpActivity(request):
 
 @csrf_exempt
 def checkIfSingedUp(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:-1]
+    print("ID ", activityId)
     activity = Activity.objects.get(pk=activityId)
     # User logged in
     if 'username' and 'profile_pk' in request.session:
@@ -83,7 +84,7 @@ def checkIfSingedUp(request):
 
 @csrf_exempt
 def signOfEvent(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:-1]
     activity = Activity.objects.get(pk=activityId)
     # User logged in
     if 'username' and 'profile_pk' in request.session:

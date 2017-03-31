@@ -101,11 +101,13 @@ class ActivityModal extends Component {
                     hasChecked: true,
                     loggedIn: true
                 });
+                this.fetchHost();
             } else if (response.attending == false) {
                 this.setState({
                     loggedIn: true,
                     hasChecked: true
-                })
+                });
+                this.fetchHost();
             } else {
                 this.setState({
                     loggedIn: false,
@@ -227,9 +229,8 @@ class ActivityModal extends Component {
 
         if (this.state.show && !this.state.hasChecked) {
             this.checkIfSignUp();
-
             if(this.state.loggedIn){
-                this.fetchHost()
+                // this.fetchHost()
             }
             if(allComments.length < 1){
                 this.fetchComments();

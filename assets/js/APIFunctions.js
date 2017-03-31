@@ -36,10 +36,12 @@ export function getFacebookEventData(activities) {
     return new Promise(function (resolve) {
         getAccessToken(resolve);
     }).then(token => {
-
         let batch = eventIDs.map(id => {
             return {method:"GET", relative_url: id + "?fields=admins,attending,photos{images},picture,roles,videos"};
         });
+        if (batch.length == 0) {
+            return activities;
+        }
         let data = {
             access_token: token,
             batch: batch

@@ -28,9 +28,6 @@ class ActivityFilters extends React.Component {
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-10">
-                        <h2 className="title">Finn aktiviteter</h2>
-                    </div>
                     <div className="2">
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">
                             Tøm filter
@@ -39,6 +36,9 @@ class ActivityFilters extends React.Component {
                             <Glyphicon glyph="glyphicon glyphicon-trash"/>
                         </button>
 
+                    </div>
+                    <div className="col-md-10">
+                        <h2 className="title">Finn aktiviteter</h2>
                     </div>
                 </div>
                 {/* ADD ALL FILTERS HERE */}

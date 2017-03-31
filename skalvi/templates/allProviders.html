@@ -3,15 +3,14 @@
 {% load static %}
 {% block pageTitle %}Arrangører{% endblock %}
 
-
-{% block body %}
-
+{% block explicitPageHeader %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/allactivities.css' %}" />
-
     <link rel="stylesheet" href="{% static 'styles/material.min.css'%}">
     <script src="{% static 'js/material.min.js'%}"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+{% endblock %}
 
+{% block body %}
     <div class="banner-container">
             <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
     </div>

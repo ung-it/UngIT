@@ -56,7 +56,6 @@ export function getFacebookEventData(activities) {
                     }
                 }
             }
-            console.log("Added FB Event data");
             return activities;
         });
     });

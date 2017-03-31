@@ -235,7 +235,6 @@ class ActivityModal extends Component {
 
         let facebookContainer = null;
         if (facebook && facebookInfo) {
-            console.log(facebook);
             let fImages = facebook.photos.data.map(image => {
                 return <img src={image.images[0].source} key={image.id} className="modal-image"/>
             });
@@ -345,13 +344,10 @@ class ActivityModal extends Component {
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/>
-                                Alder: {age}</div>
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/>
-                                Tid: {time_start} - {time_end}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {time_start} - {time_end}</div>
                             <div className="modal-infobox1-element">
-                                <Glyphicon glyph="glyphicon glyphicon-map-marker"/>
-                                Sted: {location}
+                                <Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {location}
                             </div>
                             <div className="modal-infobox1-map">
                                 <a onClick={this.showMap}>Vis på kart</a>

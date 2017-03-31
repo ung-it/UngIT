@@ -1,21 +1,22 @@
 /* Styling for activities on home page */
 .activitySmallStyle {
-    display: flex;
+    border-style: solid;
+    border-color: white;
+    margin: 1em 0 0 0;
 }
 
+
 .activitySmallStyle:hover {
-    /*background-color: whitesmoke;*/
     border-style: solid;
     border-color: lightgray;
+
+    -webkit-box-shadow: 0 0 5px 1px lightgrey;
+    -moz-box-shadow: 0 0 5px 1px lightgrey;
+    box-shadow: 0 0 5px 1px lightgrey;
 }
 
 .caption {
     height: 13em;
-}
-
-.info-box-wrapper {
-    color: white;
-    padding: 0 17px 0 17px;
 }
 
 .info-header {
@@ -26,16 +27,14 @@
 }
 
 .info-box-wrapper {
+    color: white;
+    padding: 0 17px 0 17px;
     background-color: rgb(42, 42, 42);
     width: 100%;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     align-self: flex-end;
 
-}
-
-.info-box-wrapper:hover {
-    background-color: rgb(42, 42, 42);
 }
 
 .icon-container {
@@ -45,7 +44,6 @@
 .demo-card-square.mdl-card {
     width: 400px;
     height: 400px;
-    justify-content: space-around;
 }
 
 .demo-card-square > .mdl-card__title {
@@ -74,6 +72,7 @@
 
 .big-icon-container-div {
     font-weight: bold;
+    font-family: "Dosis", serif;
     padding: 0.5em;
 }
 
@@ -92,35 +91,34 @@
     margin: 15px;
     font-family: "Dosis", serif;
     border-bottom: 3px solid lightgrey;
+
 }
 
 .provider-info {
-    margin: 0 15px 0 15px;
+    margin: 15px 0 0 0;
 }
 
 .provider-card-bold-info {
     font-weight: bolder;
     font-size: large;
     font-family: "Dosis", serif;
+    margin: 0 15px 0 15px;
+}
+
+.provider-card {
+    margin-top: 2em;
 }
 
 
 /*Styling filter container*/
 .filter-container {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-bottom: 10px;
-    border-style: solid;
-    border-width: thin;
-    border-radius: 3px;
-    border-color: darkgrey;
-    border-width: thin;
+    padding: 1.5em;
 }
 
+/*styling facebook icon*/
 .facebook-icon-wrapper {
     position: relative;
+    z-index: 999;
 }
 
 .facebook-icon-container {

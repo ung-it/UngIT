@@ -17,10 +17,10 @@ class ProviderCard extends React.Component {
     createProviderItem = () => {
         const provider = this.props.provider;
 
-
         return (
 
-            <div key={provider.Id}>
+            <div key={provider.Id}
+                 className="provider-card">
                 <div
                     className="demo-card-wide mdl-card mdl-shadow--2dp"
                 >
@@ -30,11 +30,15 @@ class ProviderCard extends React.Component {
                         <div className="big-icon-container-div"><Glyphicon
                             glyph="glyphicon glyphicon-map-marker"/>{provider.Adresse}</div>
                     </div>
+                    <p className="provider-card-bold-info">Aktiviteter</p>
+                    <ul>
+                        <li>Ingen registrert</li>
+                    </ul>
                     <div className="provider-info">
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="row">
-                                    <div className="col-md-3">
+                                    <div className="col-md-4">
                                         <p className="provider-card-bold-info">Kategorier: </p>
                                         <p className="provider-card-bold-info">Type aktiviteter: </p>
                                         <p className="provider-card-bold-info">Bydel: </p>
@@ -54,17 +58,7 @@ class ProviderCard extends React.Component {
                                         <p>{provider.Medlemmer}</p>
                                     </div>
                                 </div>
-                                <p className="provider-card-bold-info">Aktiviteter</p>
-                                <ul>
-                                    <li>Ingen registrert</li>
-                                </ul>
                             </div>
-                            {/*<div className="col-sm-4">*/}
-                            {/*<p className="provider-card-bold-info">Aktiviteter</p>*/}
-                            {/*<ul>*/}
-                            {/*<li>Ingen registrert</li>*/}
-                            {/*</ul>*/}
-                            {/*</div>*/}
                         </div>
                     </div>
                 </div>

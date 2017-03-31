@@ -19,6 +19,9 @@ import '../../styles/activityBox.css';
 
 const store = configureStore();
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 class AllActivitiesContainer extends Component {
 
 
@@ -142,14 +145,23 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
+
+
 AllActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllActivitiesContainer);
 // Fetch initial data for to the state
 store.dispatch(fetchAllActivities());
 
 ReactDOM.render(
-    <Provider store={store}>
-        <AllActivitiesContainer />
-    </Provider>,
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+            <AllActivitiesContainer />
+        </Provider>
+    </MuiThemeProvider>,
     document.getElementById('allActivities')
 );
 

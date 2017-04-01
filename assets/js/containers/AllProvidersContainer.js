@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import "../../styles/activityBox.css";
 
 import {fetchAllProviders, addSearchForFilter, addActivityFilter, trashButtonClicked} from "../actions/providersActions";
@@ -9,9 +11,6 @@ import ProvidersList from '../components/ProvidersList';
 import ProviderFilters from '../components/ProviderFilters';
 import configureStore from "../configureStore";
 const store = configureStore();
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 class AllProvidersContainer extends Component {
 
@@ -25,7 +24,7 @@ class AllProvidersContainer extends Component {
             <div>
                 <ProviderFilters
                     onSearchForChange={this.props.changeSearchForFilter}
-                    searchForFilters={this.props.activeSearchForFilters}
+                    providersForSearch={this.props.providers}
                     onActivityFilterChange={this.props.changeActivityFilter}
                     activityFilters={this.props.activeActivityFilters}
                     onButtonChange={this.props.changeTrashButton}

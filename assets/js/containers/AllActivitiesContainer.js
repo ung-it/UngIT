@@ -3,24 +3,18 @@ import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 import {connect} from "react-redux";
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import '../../styles/activityBox.css';
+
+
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
-import {
-    fetchAllActivities,
-    addActivityFilter,
-    addSuitedForFilter,
-    addWeekFilter,
-    addSearchForFilter,
-    trashButtonClicked
-} from '../actions/activitiesActions';
+import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked } from '../actions/activitiesActions';
 import configureStore from "../configureStore";
-
-import '../../styles/activityBox.css';
 
 const store = configureStore();
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 class AllActivitiesContainer extends Component {
 

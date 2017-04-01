@@ -26,6 +26,9 @@ class ProviderFilters extends React.Component {
             marginTop: '1.7em',
             zIndex: '1'
         };
+
+        const providerName = this.props.providersForSearch.map(provider => provider.Navn);
+
         return (
             <Paper className="filter-container">
                 <div className="row">
@@ -47,7 +50,7 @@ class ProviderFilters extends React.Component {
                          style={style}>
                         <SearchForProvider
                             onFilterChange={this.props.onSearchForChange}
-                            activeFilters={this.props.searchForFilters}
+                            activitiesName={providerName}
                             placeholderText="Søk på arrangør..."
                         />
                     </div>
@@ -66,7 +69,7 @@ class ProviderFilters extends React.Component {
 
 ProviderFilters.propTypes = {
     onSearchForChange: React.PropTypes.func.isRequired,
-    searchForFilters: React.PropTypes.string.isRequired,
+    providersForSearch: React.PropTypes.array.isRequired,
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.string.isRequired,
 

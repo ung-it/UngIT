@@ -63,9 +63,12 @@ const mapStateToProps = state => {
     const suitedForFilters = activeSuitedForFilters.split(',');
 
 
-    const hasWeekFilter = activeDateFilter.length > 0;
-    const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
+    const hasWeekFilter = activeDateFilter.toString().length > 0;
+    const weekPicker = new Date(activeDateFilter);
 
+    activityList = hasWeekFilter
+        ? activityList.filter(activity => new Date(activity.fields.date) >= weekPicker)
+        : activityList;
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
@@ -94,35 +97,16 @@ const mapStateToProps = state => {
             })
         : activityList;
 
-    activityList = hasWeekFilter
-        ? activityList.filter(activity =>
-        (
-            ((new Date(activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date(activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date(activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
-            (new Date(activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date(activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date(activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
-            (weekFilters[0].getYear() >= new Date(activity.fields.date).getYear() && weekFilters[0].getMonth() >= new Date(activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date(activity.fields.date).getDay()) &&
-            (weekFilters[0].getYear() <= new Date(activity.fields.date_end).getYear() && weekFilters[0].getMonth() <= new Date(activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date(activity.fields.date_end).getDay())
-        ))
-        : activityList;
 
     activityList = hasSearchForFilter
         ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
         : activityList;
 
 
-    const initialStart = new Date();
-    let initialEnd = new Date();
-    initialEnd.setDate(initialEnd.getDate() + 182);
-
-    activityList != hasWeekFilter
-        ? activityList.filter(activity =>
-            ((new Date(activity.fields.date).getYear() >= initialStart.getYear() && new Date(activity.fields.date).getMonth() >= initialStart.getMonth() && new Date(activity.fields.date).getDay() >= initialStart.getDay()) &&
-            (new Date(activity.fields.date).getYear() <= initialEnd.getYear() && new Date(activity.fields.date).getMonth() <= initialEnd.getMonth() && new Date(activity.fields.date).getDay() <= initialEnd.getDay())) ||
-            (initialStart.getYear() >= new Date(activity.fields.date).getYear() && initialStart.getMonth() >= new Date(activity.fields.date).getMonth() && initialStart.getDay() >= new Date(activity.fields.date).getDay()) &&
-            (initialStart.getYear() <= new Date(activity.fields.date_end).getYear() && initialStart.getMonth() <= new Date(activity.fields.date_end).getMonth() && initialStart.getDay() <= new Date(activity.fields.date_end).getDay())
-        )
-        :activityList;
-
     activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
+    console.log(activityList)
+
+    activeDateFilter = activeDateFilter.toString();
 
     return {
         activities: activityList,

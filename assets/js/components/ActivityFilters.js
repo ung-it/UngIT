@@ -85,7 +85,7 @@ ActivityFilters.propTypes = {
     onSuitedForFilterChange: React.PropTypes.func.isRequired,
     suitedForFilters: React.PropTypes.string.isRequired,
     onWeekPickerChange: React.PropTypes.func.isRequired,
-    weekFilters: React.PropTypes.string.isRequired,
+    weekFilters: React.PropTypes.string,
     onSearchForChange: React.PropTypes.func.isRequired,
     searchForFilters: React.PropTypes.string.isRequired,
 

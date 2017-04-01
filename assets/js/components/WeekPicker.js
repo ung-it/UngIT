@@ -50,7 +50,7 @@ class WeekPicker extends React.Component {
 		    	<button type="button" className="btn btn-default"><Glyphicon glyph="glyphicon glyphicon-calendar"/></button>
 			</DateRangePicker>*/
 		return (
-			<DatePicker hintText="Velg en dato.."  mode="landscape" onChange={this.handleEvent}/>
+			<DatePicker hintText="Velg en dato.."  mode="landscape" onChange={this.handleEvent} fullWidth={true}/>
 
 		);
 	};

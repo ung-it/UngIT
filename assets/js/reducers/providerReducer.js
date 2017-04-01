@@ -4,7 +4,7 @@ const moment = require('moment');
 
 const initialState = {
     providerList: [],
-    activeActivityFilters: '',
+    activeActivityFilters: [],
     activeSuitedForFilters: '',
     activeSearchForFilters: '',
     activeButtonClicked: false,

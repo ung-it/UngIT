@@ -22,10 +22,6 @@ class ProviderFilters extends React.Component {
      };
 
     render() {
-        const style = {
-            marginTop: '1.7em',
-            zIndex: '1'
-        };
 
         const providerName = this.props.providersForSearch.map(provider => provider.Navn);
 
@@ -46,8 +42,7 @@ class ProviderFilters extends React.Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6"
-                         style={style}>
+                    <div className="col-md-6">
                         <SearchForProvider
                             onFilterChange={this.props.onSearchForChange}
                             activitiesName={providerName}
@@ -71,7 +66,7 @@ ProviderFilters.propTypes = {
     onSearchForChange: React.PropTypes.func.isRequired,
     providersForSearch: React.PropTypes.array.isRequired,
     onActivityFilterChange: React.PropTypes.func.isRequired,
-    activityFilters: React.PropTypes.string.isRequired,
+    activityFilters: React.PropTypes.array.isRequired,
 
     onButtonChange: React.PropTypes.func.isRequired,
 };

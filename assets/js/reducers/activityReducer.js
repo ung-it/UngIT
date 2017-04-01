@@ -12,7 +12,7 @@ const initialState = {
     attendingActivityList: [],
     hostingActivityList: [],
     activityList: [],
-    activeActivityFilters: '',
+    activeActivityFilters: [],
     activeSuitedForFilters: '',
     activeDateFilter: new Date(),
     activeSearchForFilters: '',

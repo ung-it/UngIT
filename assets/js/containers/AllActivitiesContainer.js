@@ -51,7 +51,6 @@ const mapStateToProps = state => {
 
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-    const activityFilters = activeActivityFilters.split(','); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
 
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
     const suitedForFilters = activeSuitedForFilters.split(',');
@@ -68,7 +67,7 @@ const mapStateToProps = state => {
     const searchForFilter = activeSearchForFilters.toUpperCase();
 
     activityList = hasActivityFilter
-        ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
+        ? activityList.filter(activity => activeActivityFilters.includes(activity.fields.activityType))
         : activityList;
 
 

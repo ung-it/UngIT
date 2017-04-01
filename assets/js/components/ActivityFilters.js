@@ -82,7 +82,7 @@ class ActivityFilters extends React.Component {
 
 ActivityFilters.propTypes = {
     onActivityFilterChange: React.PropTypes.func.isRequired,
-    activityFilters: React.PropTypes.string.isRequired,
+    activityFilters: React.PropTypes.array.isRequired,
     onSuitedForFilterChange: React.PropTypes.func.isRequired,
     suitedForFilters: React.PropTypes.string.isRequired,
     onWeekPickerChange: React.PropTypes.func.isRequired,

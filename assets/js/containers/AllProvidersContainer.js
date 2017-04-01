@@ -4,6 +4,10 @@ import {Provider, connect} from "react-redux";
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
+
 import "../../styles/activityBox.css";
 
 import {fetchAllProviders, addSearchForFilter, addActivityFilter, trashButtonClicked} from "../actions/providersActions";
@@ -42,14 +46,12 @@ const mapStateToProps = state => {
     let {provider: {providerList, activeSearchForFilters, activeActivityFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-    const activityFilters = activeActivityFilters.split(','); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
-
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
 
     providerList = hasActivityFilter
-        ? providerList.filter(provider => activityFilters.includes(provider.TypeAktivitet))
+        ? providerList.filter(provider => activeActivityFilters.includes(provider.TypeAktivitet))
         : providerList;
 
     providerList = hasSearchForFilter

@@ -26,6 +26,7 @@ class ActivityFilters extends React.Component {
     };
 
     render() {
+        const activityName = this.props.activitiesName.map(activity => activity.fields.activityName);
 
         return (
             <Paper className="filter-container">
@@ -48,8 +49,8 @@ class ActivityFilters extends React.Component {
                     <div className="col-md-6">
                         <SearchForActivity
                             onFilterChange={this.props.onSearchForChange}
-                            activeFilters={this.props.searchForFilters}
                             placeholderText="Søk etter en aktivitet..."
+                            activitiesName={activityName}
                         />
                     </div>
                     <div className="col-md-6">
@@ -87,8 +88,7 @@ ActivityFilters.propTypes = {
     onWeekPickerChange: React.PropTypes.func.isRequired,
     weekFilters: React.PropTypes.string,
     onSearchForChange: React.PropTypes.func.isRequired,
-    searchForFilters: React.PropTypes.string.isRequired,
-
+    activitiesName: React.PropTypes.array.isRequired,
     onButtonChange: React.PropTypes.func.isRequired,
 };
 

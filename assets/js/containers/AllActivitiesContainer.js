@@ -37,7 +37,7 @@ class AllActivitiesContainer extends Component {
                         onWeekPickerChange={this.props.changeWeekFilter}
                         weekFilters={this.props.activeDateFilter}
                         onSearchForChange={this.props.changeSearchForFilter}
-                        searchForFilters={this.props.activeSearchForFilters}
+                        activitiesName={this.props.activities}
                         onButtonChange={this.props.changeTrashButton}
                     />
                 </div>
@@ -104,7 +104,6 @@ const mapStateToProps = state => {
 
 
     activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
-    console.log(activityList)
 
     activeDateFilter = activeDateFilter.toString();
 

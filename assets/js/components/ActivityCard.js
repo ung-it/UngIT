@@ -26,7 +26,7 @@ class ActivityCard extends React.Component {
 
     createActivityItem = () => {
 
-        console.log(this.state.show)
+        console.log("Card: " + this.state.show)
 
         let activity = this.props.activity;
 

@@ -19,8 +19,20 @@ class WeekPicker extends React.Component {
 
 
 	render() {
+		let date = {};
+		if (new Date (this.props.activeFilters) == 'Invalid Date') {
+			date = {};
+		} else {
+			date = new Date(this.props.activeFilters);
+		}
+
 		return (
-			<DatePicker hintText="Søk på en dato.."  mode="landscape" onChange={this.handleEvent} fullWidth={true}/>
+			<DatePicker
+				hintText="Søk på en dato.."
+				mode="landscape"
+				value={date}
+				onChange={this.handleEvent}
+				fullWidth={true}/>
 
 		);
 	};

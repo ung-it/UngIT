@@ -64,8 +64,6 @@ const mapStateToProps = state => {
         ? activityList.filter(activity => new Date(activity.fields.date) >= weekPicker)
         : activityList;
 
-    console.log(activeSearchForFilters);
-
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
 

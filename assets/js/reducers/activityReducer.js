@@ -14,7 +14,7 @@ const initialState = {
     activityList: [],
     activeActivityFilters: [],
     activeSuitedForFilters: [],
-    activeDateFilter: new Date(),
+    activeDateFilter: '',
     activeSearchForFilters: '',
     activeButtonClicked: false,
 
@@ -69,7 +69,7 @@ export default function ActivityReducer(state=initialState, action) {
                 ...state,
                 activeActivityFilters: [],
                 activeSuitedForFilters: [],
-                activeDateFilter: new Date(),
+                activeDateFilter: '',
                 activeSearchForFilters: '',
                 activeButtonClicked: false,
             };

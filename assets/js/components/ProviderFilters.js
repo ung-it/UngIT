@@ -67,6 +67,7 @@ ProviderFilters.propTypes = {
     providersForSearch: React.PropTypes.array.isRequired,
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.array.isRequired,
+    searchForFilter: React.PropTypes.string.isRequired,
 
     onButtonChange: React.PropTypes.func.isRequired,
 };

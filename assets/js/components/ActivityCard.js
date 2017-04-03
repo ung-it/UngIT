@@ -11,7 +11,6 @@ const moment = require('moment');
 class ActivityCard extends React.Component {
 
     constructor(props) {
-        console.log("Const");
         super(props);
         this.state = {
             show: false,

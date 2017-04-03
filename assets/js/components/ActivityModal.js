@@ -42,6 +42,7 @@ class ActivityModal extends Component {
     }
 
     componentWillReceiveProps(props) {
+        console.log("ModalProps:" + props.show);
         this.setState({
             show: props.show
         });

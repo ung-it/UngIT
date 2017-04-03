@@ -14,6 +14,7 @@ class ActivitiesContainer extends Component {
 
     componentDidMount() {
         this.props.fetchActivities().then(() => {
+            console.log(this.props);
             this.props.fetchFacebookEventData(this.props.activities);
         });
     }

@@ -11,6 +11,7 @@ const moment = require('moment');
 class ActivityCard extends React.Component {
 
     constructor(props) {
+        console.log("Const");
         super(props);
         this.state = {
             show: false,
@@ -24,6 +25,9 @@ class ActivityCard extends React.Component {
     };
 
     createActivityItem = () => {
+
+        console.log(this.state.show)
+
         let activity = this.props.activity;
 
         let localImages = new Array(activity.images).filter(image => {

@@ -67,7 +67,7 @@ export default function ActivityReducer(state=initialState, action) {
         case actionTypes.TRASH_BUTTON_CLICKED:
             return {
                 ...state,
-                activeActivityFilters: '',
+                activeActivityFilters: [],
                 activeSuitedForFilters: '',
                 activeDateFilter: new Date(),
                 activeSearchForFilters: '',

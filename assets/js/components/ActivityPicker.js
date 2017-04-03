@@ -19,17 +19,9 @@ let names = [
 
 class ActivityPicker extends React.Component {
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			values: [],
-		};
-	};
 
 	handleChange = (event, index, values) => {
 		this.setState({values});
-		console.log(values);
 		this.props.onFilterChange(values);
 
 	};
@@ -52,11 +44,11 @@ class ActivityPicker extends React.Component {
 				<SelectField
 					multiple={true}
 					hintText="Velg type aktivitet..."
-					value={this.state.values}
+					value={this.props.activeFilters}
 					onChange={this.handleChange}
 					fullWidth={true}
 				>
-					{this.menuItems(this.state.values)}
+					{this.menuItems(this.props.activeFilters)}
 				</SelectField>
 			</div>
 		);

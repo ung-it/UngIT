@@ -44,7 +44,8 @@ class SuitedForPicker extends React.Component {
 
 	render() {
 		return (
-			<div className="section">
+			<div className="section" className="row">
+				<div className="col-md-11">
 				<SelectField
 					multiple={true}
 					hintText="Velg tilrettelegging..."
@@ -54,10 +55,15 @@ class SuitedForPicker extends React.Component {
 				>
 					{this.menuItems(this.props.activeFilters)}
 				</SelectField>
-				<button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
-					<Glyphicon glyph="glyphicon glyphicon-trash"/>
-				</button>
+					</div>
+                <div className="col-md-1" id="activity-a-remove">
+                    <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="remove-s-button">
+                            Tøm tilretteleggingsfilter
+                        </div>
+                    <Glyphicon glyph="glyphicon glyphicon-remove" id="remove-s-button" onClick={this.handleEmptyFilter}/>
+                </div>
 			</div>
+
 		);
 	};
 

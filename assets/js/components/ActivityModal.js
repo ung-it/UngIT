@@ -169,16 +169,6 @@ class ActivityModal extends Component {
         });
     };
 
-    fetchHost = () => {
-        getHost(this.props.id,(result) => {
-            if(result.host == 'true'){
-                this.setState({
-                    hosting: true
-                });
-            }
-        });
-    };
-
     render() {
         const {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 

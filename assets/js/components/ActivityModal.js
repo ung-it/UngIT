@@ -1,5 +1,7 @@
 //React Component import
 import React, {Component} from 'react';
+//Paper import
+import Paper from 'material-ui/Paper';
 //Bootstrap import
 import {Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl,} from 'react-bootstrap';
 //Project component import
@@ -88,7 +90,7 @@ class ActivityModal extends Component {
             }
         });
     };
-    
+
 
     checkIfSignUp = () => {
         const request = {
@@ -237,20 +239,20 @@ class ActivityModal extends Component {
 
         if (!this.state.loggedIn) {
             attendingContainer =
-                <div className="modal-infobox2">
+                <Paper className="modal-infobox2">
                     <div className="modal-infobox2-element">
                         <h4>Påmelding til {activityName}</h4>
                         <p>Du må være logget inn for å kunne melde deg på dette arrangementet</p>
                     </div>
-                </div>;
+                </Paper>;
         } else if (this.state.attending == false) {
             attendingContainer =
-                <div className="modal-infobox2">
+                <Paper className="modal-infobox2">
                     <div className="modal-infobox2-element">
                         <h4>Påmelding til {activityName}</h4>
                         <Button className="btn btn-success" onClick={this.onSignup}>Meld på!</Button>
                     </div>
-                </div>;
+                </Paper>;
 
         } else {
             attendingContainer =
@@ -397,7 +399,7 @@ class ActivityModal extends Component {
                         {assistantsInfo}
                     </div>
                     <div className="modal-info-container">
-                        <div className="modal-infobox1">
+                        <Paper className="modal-infobox1">
                             <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
                             <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {time_start} - {time_end}</div>
                             <div className="modal-infobox1-element">
@@ -406,7 +408,7 @@ class ActivityModal extends Component {
                             <div className="modal-infobox1-map">
                                 <a onClick={this.showMap}>Vis på kart</a>
                             </div>
-                        </div>
+                        </Paper>
                         {attendingContainer}
                     </div>
                     <div>

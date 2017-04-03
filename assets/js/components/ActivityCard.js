@@ -69,19 +69,19 @@ class ActivityCard extends React.Component {
                     <div className="mdl-card__title" style={divStyle}/>
                     <div className="mdl-card__supporting-text">
                         <h3 className="big-info-header">{this.props.activity.activityName}</h3>
-                        <div className="row">
-                            <div className="col-md-6">
-                                {/*<div className="row">*/}
-                                <div className="big-icon-container-div"><Glyphicon
-                                    glyph="glyphicon glyphicon-calendar"/>{date}</div>
-                                <div className="big-icon-container-div"><Glyphicon
-                                    glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start}
-                                    - {this.props.activity.time_end}</div>
-                                <div className="big-icon-container-div"><Glyphicon
-                                    glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</div>
-                                {/*</div>*/}
+                        <div className="activity-card-info">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="big-icon-container-div"><Glyphicon
+                                        glyph="glyphicon glyphicon-calendar"/>{date}</div>
+                                    <div className="big-icon-container-div"><Glyphicon
+                                        glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start}
+                                        - {this.props.activity.time_end}</div>
+                                    <div className="big-icon-container-div"><Glyphicon
+                                        glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</div>
+                                </div>
+                                <div className="col-md-6">{description}</div>
                             </div>
-                            <div className="col-md-6">{description}</div>
                         </div>
 
                     </div>

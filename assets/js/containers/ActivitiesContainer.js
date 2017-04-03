@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from "react-redux";
+import {Provider, connect} from "react-redux";
 
-import { fetchAllActivities, fetchFacebookEventData } from '../actions/activitiesActions';
+import {fetchAllActivities, fetchFacebookEventData} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
+// import for material ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import '../../styles/activityBox.css';
 
@@ -72,6 +75,11 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
 
 // Fetch initial data for state
 // store.dispatch(fetchAllActivities());
@@ -79,7 +87,9 @@ const mapDispatchToProps = dispatch => {
 ActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <ActivitiesContainer />
-    </Provider>, document.getElementById('activities')
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+            <ActivitiesContainer />
+        </Provider>
+    </MuiThemeProvider>, document.getElementById('activities')
 );

@@ -51,6 +51,7 @@ class ActivityFilters extends React.Component {
                             onFilterChange={this.props.onSearchForChange}
                             placeholderText="Søk etter en aktivitet..."
                             activitiesName={activityName}
+                            searchForFilter={this.props.searchForFilter}
                         />
                     </div>
                     <div className="col-md-6">
@@ -84,11 +85,12 @@ ActivityFilters.propTypes = {
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.array.isRequired,
     onSuitedForFilterChange: React.PropTypes.func.isRequired,
-    suitedForFilters: React.PropTypes.string.isRequired,
+    suitedForFilters: React.PropTypes.array.isRequired,
     onWeekPickerChange: React.PropTypes.func.isRequired,
     weekFilters: React.PropTypes.string,
     onSearchForChange: React.PropTypes.func.isRequired,
     activitiesName: React.PropTypes.array.isRequired,
+    searchForFilter: React.PropTypes.string.isRequired,
     onButtonChange: React.PropTypes.func.isRequired,
 };
 

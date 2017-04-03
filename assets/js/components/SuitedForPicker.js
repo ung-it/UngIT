@@ -2,51 +2,66 @@ import React from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom';
 
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
+
 import '../../styles/activitypickerStyle.css'
 
-export const SUITED_FOR_TYPES = [
-	{ label: 'Tilrettelegging 1', value: 'Tilrettelegging 1' },
-	{ label: 'Tilrettelegging 2', value: 'Tilrettelegging 2' },
-	{ label: 'Tilrettelegging 3', value: 'Tilrettelegging 3' },
-	{ label: 'Tilrettelegging 4', value: 'Tilrettelegging 4' },
-	{ label: 'Annet', value: 'Annet' },
-];
+export const names = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging 3', 'Tilrettelegging 4', 'Annet'];
 
 class SuitedForPicker extends React.Component {
 
-	constructor(props) {
-		super(props);
 
-		this.state = {
-			options: SUITED_FOR_TYPES
-		};
+	handleChange = (event, index, values) => {
+		this.props.onFilterChange(values);
+
 	};
 
-	handleSelectChange = filter => {
-		this.props.onFilterChange(filter);
-	};
+	menuItems(values) {
+		return names.map((name) => (
+			<MenuItem
+				key={name}
+				insetChildren={true}
+				checked={values && values.includes(name)}
+				value={name}
+				primaryText={name}
+			/>
+		));
+	}
 
 	render() {
 		return (
 			<div className="section">
-				<h3 className="section-heading">{this.props.label}</h3>
-				<Select
-					multi
-					simpleValue
+				<SelectField
+					multiple={true}
+					hintText="Velg type aktivitet..."
 					value={this.props.activeFilters}
-					placeholder="Velg tilrettelegging..."
-					options={this.state.options}
-					onChange={this.handleSelectChange}
-				/>
+					onChange={this.handleChange}
+					fullWidth={true}
+				>
+					{this.menuItems(this.props.activeFilters)}
+				</SelectField>
 			</div>
 		);
 	};
-};
+
+}
+;
 
 SuitedForPicker.propTypes = {
 	onFilterChange: React.PropTypes.func.isRequired,
-	activeFilters: React.PropTypes.string.isRequired,
+	activeFilters: React.PropTypes.array.isRequired,
 };
 
 export default SuitedForPicker;
+
+
+
+
+
+
+
+
+
 

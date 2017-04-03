@@ -32,6 +32,7 @@ class AllActivitiesContainer extends Component {
                         weekFilters={this.props.activeDateFilter}
                         onSearchForChange={this.props.changeSearchForFilter}
                         activitiesName={this.props.activities}
+                        searchForFilter={this.props.activeSearchForFilters}
                         onButtonChange={this.props.changeTrashButton}
                     />
                 </div>
@@ -53,7 +54,7 @@ const mapStateToProps = state => {
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
 
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
-    const suitedForFilters = activeSuitedForFilters.split(',');
+    const suitedForFilters = activeSuitedForFilters;
 
 
     const hasWeekFilter = activeDateFilter.toString().length > 0;
@@ -62,6 +63,8 @@ const mapStateToProps = state => {
     activityList = hasWeekFilter
         ? activityList.filter(activity => new Date(activity.fields.date) >= weekPicker)
         : activityList;
+
+    console.log(activeSearchForFilters);
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
@@ -72,22 +75,19 @@ const mapStateToProps = state => {
 
 
     activityList = hasSuitedForFilter
-        ? activityList.filter(activity =>
-            {
-               let result = activity.fields.adaptions.split(',').filter(adaption =>
-                {
-                    return suitedForFilters.indexOf(adaption) != -1
-                });
+        ? activityList.filter(activity => {
+            let result = activity.fields.adaptions.split(',').filter(adaption => {
+                return suitedForFilters.indexOf(adaption) != -1
+            });
 
-                if (suitedForFilters.indexOf("Annet") != -1) {
+            if (suitedForFilters.indexOf("Annet") != -1) {
 
-                    result = result.concat(activity.fields.adaptions.split(',').filter( adaption => {
-                        return availableSuitedFor.indexOf(adaption) == -1
-                    }))
-                }
-
+                result = result.concat(activity.fields.adaptions.split(',').filter(adaption => {
+                    return availableSuitedFor.indexOf(adaption) == -1
+                }))
+            }
             return result.length >= suitedForFilters.length;
-            })
+        })
         : activityList;
 
 

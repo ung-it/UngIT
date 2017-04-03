@@ -19,9 +19,7 @@ let names = [
 
 class ActivityPicker extends React.Component {
 
-
 	handleChange = (event, index, values) => {
-		this.setState({values});
 		this.props.onFilterChange(values);
 
 	};

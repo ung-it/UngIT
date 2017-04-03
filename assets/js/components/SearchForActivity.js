@@ -13,11 +13,12 @@ class SearchForActivity extends React.Component {
 		this.props.onFilterChange(value);
 	};
 
-	render () {
 
+	render () {
 		return (
 			<div>
 				<AutoComplete
+					searchText={this.props.searchForFilter}
 					hintText={this.props.placeholderText}
 					dataSource={this.props.activitiesName}
 					filter={AutoComplete.fuzzyFilter}
@@ -34,6 +35,8 @@ SearchForActivity.propTypes = {
 	onFilterChange: React.PropTypes.func.isRequired,
 	placeholderText: React.PropTypes.string,
 	activitiesName: React.PropTypes.array.isRequired,
+	searchForFilter: React.PropTypes.string.isRequired,
+
 };
 
 export default SearchForActivity;

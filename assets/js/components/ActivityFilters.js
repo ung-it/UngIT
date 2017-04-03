@@ -72,6 +72,7 @@ class ActivityFilters extends React.Component {
                         <SuitedForPicker
                             onFilterChange={this.props.onSuitedForFilterChange}
                             activeFilters={this.props.suitedForFilters}
+                            suitedForButton={this.props.suitedForButton}
                         />
                     </div>
                 </div>
@@ -84,13 +85,18 @@ class ActivityFilters extends React.Component {
 ActivityFilters.propTypes = {
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.array.isRequired,
+
     onSuitedForFilterChange: React.PropTypes.func.isRequired,
     suitedForFilters: React.PropTypes.array.isRequired,
+    suitedForButton: React.PropTypes.func.isRequired,
+
     onWeekPickerChange: React.PropTypes.func.isRequired,
     weekFilters: React.PropTypes.string,
+
     onSearchForChange: React.PropTypes.func.isRequired,
     activitiesName: React.PropTypes.array.isRequired,
     searchForFilter: React.PropTypes.string.isRequired,
+
     onButtonChange: React.PropTypes.func.isRequired,
 };
 

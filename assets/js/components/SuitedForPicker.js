@@ -13,14 +13,13 @@ export const names = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging
 
 class SuitedForPicker extends React.Component {
 
-
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			suitedForValue: []
-		}
-	}
+            suitedForButtonClicked: true,
+		};
+	};
 
 	handleChange = (event, index, values) => {
 		this.props.onFilterChange(values);
@@ -40,16 +39,16 @@ class SuitedForPicker extends React.Component {
 	};
 
 	handleEmptyFilter = () => {
-
+		console.log("test");
+		this.props.suitedForButton(this.state.suitedForButtonClicked)
 	};
 
 	render() {
-
 		return (
 			<div className="section">
 				<SelectField
 					multiple={true}
-					hintText="Velg type aktivitet..."
+					hintText="Velg tilrettelegging..."
 					value={this.props.activeFilters}
 					onChange={this.handleChange}
 					fullWidth={true}
@@ -64,11 +63,11 @@ class SuitedForPicker extends React.Component {
 	};
 
 }
-;
 
 SuitedForPicker.propTypes = {
 	onFilterChange: React.PropTypes.func.isRequired,
 	activeFilters: React.PropTypes.array.isRequired,
+	suitedForButton: React.PropTypes.func.isRequired
 };
 
 export default SuitedForPicker;

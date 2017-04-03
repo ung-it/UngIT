@@ -10,7 +10,7 @@ import '../../styles/activityBox.css';
 
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
-import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked } from '../actions/activitiesActions';
+import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked, suitedForButtonClicked } from '../actions/activitiesActions';
 import configureStore from "../configureStore";
 
 const store = configureStore();
@@ -28,6 +28,7 @@ class AllActivitiesContainer extends Component {
                         activityFilters={this.props.activeActivityFilters}
                         onSuitedForFilterChange={this.props.changeSuitedForFilter}
                         suitedForFilters={this.props.activeSuitedForFilters}
+                        suitedForButton={this.props.changeSuitedForButton}
                         onWeekPickerChange={this.props.changeWeekFilter}
                         weekFilters={this.props.activeDateFilter}
                         onSearchForChange={this.props.changeSearchForFilter}
@@ -115,6 +116,7 @@ const mapDispatchToProps = dispatch => {
         changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
         changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
         changeTrashButton: () => dispatch(trashButtonClicked()),
+        changeSuitedForButton: () => dispatch(suitedForButtonClicked())
 
     }
 }

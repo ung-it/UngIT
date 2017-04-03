@@ -73,6 +73,12 @@ export default function ActivityReducer(state=initialState, action) {
                 activeSearchForFilters: '',
                 activeButtonClicked: false,
             };
+        case actionTypes.SUITED_FOR_BUTTON_CLICKED:
+            return {
+                ...state,
+                activeSuitedForFilters: [],
+
+            }
         default:
             return state;
     }

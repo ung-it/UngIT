@@ -77,3 +77,8 @@ class RegisterProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ["profile_name", "last_name", "email", 'phone', 'type']
 
+
+class ProviderForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ["provider"]

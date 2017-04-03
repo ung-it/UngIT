@@ -36,6 +36,8 @@ urlpatterns = [
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
+    # Add provider to sub-user
+    url(r'^provider/$', views.ProviderView.as_view(), name='provider'),
 
     url(r'^api/getHost/[0-9]+/$', views.getActivityHost, name="getActivityHost"),
 

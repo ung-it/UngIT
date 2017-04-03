@@ -1,0 +1,62 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+{% block explicitPageHeader %}
+    <link rel="stylesheet" href="{% static "styles/forms.css" %}">
+{% endblock %}
+
+{% block pageTitle %}Register aktør til bruker{% endblock %}
+
+
+{% block body %}
+
+    <div class="banner-container">
+        <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
+    </div>
+    <div class="content">
+        <div class="form-page-title">Registrer aktør til bruker</div>
+        {% if error_message %}
+            <div class="alert alert-danger alert-wrapper">
+                <strong>{{ error_message }}</strong>
+            </div>
+        {% endif %}
+        <div class="main-wrapper mdl-shadow--2dp">
+            <ul class='mdl-list'>
+                <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <li class="mdl-list__item">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {{ field }}
+                                <label class="mdl-textfield__label" for="{{ field.auto_id  }}">{{ field.label_tag }}</label>
+                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    {% for field in profile %}
+                        {% if field.name == "type" or field.name == 'is_provider' %}
+                            <li class="mdl-list__item">
+                                <div class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                    {{ field }}
+                                    <label class="mdl-checkbox__label" for="{{ field.auto_id  }}">{{ field.label_tag }}</label>
+                                    <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    {{ field }}
+                                    <label class="mdl-textfield__label" for="{{ field.auto_id  }}">{{ field.label_tag }}</label>
+                                    <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="submit-button">
+                        <button type="submit" class="btn btn-success">Registrer</button>
+                    </div>
+                </form>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

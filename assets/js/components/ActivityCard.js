@@ -24,6 +24,11 @@ class ActivityCard extends React.Component {
         });
     };
 
+    componentWillReceiveProps(newProps) {
+        //Redux saved modal to be open sometimes, this is not intended and it must therefore be set to false
+        this.state.show = false;
+    }
+
     render() {
         // this.state.show = false;
 

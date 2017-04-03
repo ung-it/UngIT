@@ -77,8 +77,12 @@ export default function ActivityReducer(state=initialState, action) {
             return {
                 ...state,
                 activeSuitedForFilters: [],
-
-            }
+            };
+        case actionTypes.ACTIVITY_BUTTON_CLICKED:
+            return {
+                 ...state,
+                activeActivityFilters: [],
+            };
         default:
             return state;
     }

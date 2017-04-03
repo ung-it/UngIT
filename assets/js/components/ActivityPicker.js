@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import { Glyphicon } from "react-bootstrap";
+
 
 import '../../styles/activitypickerStyle.css';
 
@@ -18,6 +20,14 @@ let names = [
 
 
 class ActivityPicker extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+            activityButtonClicked: true,
+		};
+	};
 
 	handleChange = (event, index, values) => {
 		this.props.onFilterChange(values);
@@ -34,7 +44,11 @@ class ActivityPicker extends React.Component {
 				primaryText={name}
 			/>
 		));
-	}
+	};
+
+	handleEmptyFilter = () => {
+		this.props.activityButton(this.state.activityButtonClicked)
+	};
 
 	render() {
 		return (
@@ -48,14 +62,18 @@ class ActivityPicker extends React.Component {
 				>
 					{this.menuItems(this.props.activeFilters)}
 				</SelectField>
+				<button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
+					<Glyphicon glyph="glyphicon glyphicon-trash"/>
+				</button>
 			</div>
 		);
-  }
+  };
 }
 
 ActivityPicker.propTypes = {
 	onFilterChange: React.PropTypes.func.isRequired,
 	activeFilters: React.PropTypes.array.isRequired,
+	activityButton: React.PropTypes.func.isRequired,
 };
 
 export default ActivityPicker;

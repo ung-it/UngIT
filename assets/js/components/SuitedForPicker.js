@@ -39,7 +39,6 @@ class SuitedForPicker extends React.Component {
 	};
 
 	handleEmptyFilter = () => {
-		console.log("test");
 		this.props.suitedForButton(this.state.suitedForButtonClicked)
 	};
 

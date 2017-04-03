@@ -54,6 +54,7 @@ class ProviderFilters extends React.Component {
                         <ActivityPicker
                             onFilterChange={this.props.onActivityFilterChange}
                             activeFilters={this.props.activityFilters}
+                            activityButton={this.props.activityButton}
                         />
                     </div>
                 </div>
@@ -69,6 +70,8 @@ ProviderFilters.propTypes = {
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.array.isRequired,
     searchForFilter: React.PropTypes.string.isRequired,
+    activityButton: React.PropTypes.func.isRequired,
+
 
     onButtonChange: React.PropTypes.func.isRequired,
 };

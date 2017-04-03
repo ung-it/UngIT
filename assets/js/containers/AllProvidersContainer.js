@@ -10,7 +10,7 @@ injectTapEventPlugin();
 
 import "../../styles/activityBox.css";
 
-import {fetchAllProviders, addSearchForFilter, addActivityFilter, trashButtonClicked} from "../actions/providersActions";
+import {fetchAllProviders, addSearchForFilter, addActivityFilter, trashButtonClicked, activityButtonClicked} from "../actions/providersActions";
 import ProvidersList from '../components/ProvidersList';
 import ProviderFilters from '../components/ProviderFilters';
 import configureStore from "../configureStore";
@@ -32,6 +32,7 @@ class AllProvidersContainer extends Component {
                     searchForFilter={this.props.activeSearchForFilters}
                     onActivityFilterChange={this.props.changeActivityFilter}
                     activityFilters={this.props.activeActivityFilters}
+                    activityButton={this.props.changeActivityButton}
                     onButtonChange={this.props.changeTrashButton}
                 />
                 <ProvidersList providers={this.props.providers}/>
@@ -72,7 +73,7 @@ const mapDispatchToProps = dispatch => {
         changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
         changeTrashButton: () => dispatch(trashButtonClicked()),
-
+        changeActivityButton: () => dispatch(activityButtonClicked()),
     }
 };
 

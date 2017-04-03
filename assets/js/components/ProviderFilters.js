@@ -47,6 +47,7 @@ class ProviderFilters extends React.Component {
                             onFilterChange={this.props.onSearchForChange}
                             activitiesName={providerName}
                             placeholderText="Søk på arrangør..."
+                            searchForFilter={this.props.searchForFilter}
                         />
                     </div>
                     <div className="col-md-6">

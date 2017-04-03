@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import { Glyphicon } from "react-bootstrap";
 
 
 import '../../styles/activitypickerStyle.css'
@@ -12,6 +13,14 @@ export const names = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging
 
 class SuitedForPicker extends React.Component {
 
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			suitedForValue: []
+		}
+	}
 
 	handleChange = (event, index, values) => {
 		this.props.onFilterChange(values);
@@ -28,9 +37,14 @@ class SuitedForPicker extends React.Component {
 				primaryText={name}
 			/>
 		));
-	}
+	};
+
+	handleEmptyFilter = () => {
+
+	};
 
 	render() {
+
 		return (
 			<div className="section">
 				<SelectField
@@ -42,6 +56,9 @@ class SuitedForPicker extends React.Component {
 				>
 					{this.menuItems(this.props.activeFilters)}
 				</SelectField>
+				<button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
+					<Glyphicon glyph="glyphicon glyphicon-trash"/>
+				</button>
 			</div>
 		);
 	};

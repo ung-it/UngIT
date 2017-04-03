@@ -29,6 +29,7 @@ class AllProvidersContainer extends Component {
                 <ProviderFilters
                     onSearchForChange={this.props.changeSearchForFilter}
                     providersForSearch={this.props.providers}
+                    searchForFilter={this.props.activeSearchForFilters}
                     onActivityFilterChange={this.props.changeActivityFilter}
                     activityFilters={this.props.activeActivityFilters}
                     onButtonChange={this.props.changeTrashButton}

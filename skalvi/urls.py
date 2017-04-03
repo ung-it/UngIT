@@ -44,7 +44,8 @@ urlpatterns = [
     url(r'^postComment/$', views.postComment, name='postComment'),
     url(r'^comments/[0-9]+/$', views.getComments, name='getComment'),
     # Populate database
-    url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase")
+    url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase"),
+    url(r'^robots.txt$', views.robots, name="robots"),
 
 
 ]

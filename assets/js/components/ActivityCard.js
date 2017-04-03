@@ -24,9 +24,8 @@ class ActivityCard extends React.Component {
         });
     };
 
-    createActivityItem = () => {
-
-        console.log("Card: " + this.state.show)
+    render() {
+        // this.state.show = false;
 
         let activity = this.props.activity;
 
@@ -110,15 +109,6 @@ class ActivityCard extends React.Component {
                     show={this.state.show}/>
             </div >
         )
-            ;
-    };
-
-    render() {
-        return (
-            <div>
-                {this.createActivityItem()}
-            </div>
-        );
     }
 }
 

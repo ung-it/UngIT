@@ -1,18 +1,29 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
-import { connect } from "react-redux";
+import {Provider} from "react-redux";
+import {connect} from "react-redux";
 
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
-import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked } from '../actions/activitiesActions';
+import {
+    fetchAllActivities,
+    addActivityFilter,
+    addSuitedForFilter,
+    addWeekFilter,
+    addSearchForFilter,
+    trashButtonClicked
+} from '../actions/activitiesActions';
 import configureStore from "../configureStore";
 
 import '../../styles/activityBox.css';
 
 const store = configureStore();
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 class AllActivitiesContainer extends Component {
+
 
     render() {
         return (
@@ -30,31 +41,32 @@ class AllActivitiesContainer extends Component {
                         onButtonChange={this.props.changeTrashButton}
                     />
                 </div>
-                <ActivitiesList activities={this.props.activities}/>
+                <div><ActivitiesList activities={this.props.activities}/></div>
+
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    let { activity: { activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters } } = state; // Make activityList and activeActivityFilters from state become variables
+    let {activity: {activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
 
     activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
 
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-    const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
+    const activityFilters = activeActivityFilters.split(','); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
+
+    console.log(activityFilters);
 
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
     const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
 
+
     const hasWeekFilter = activeDateFilter.length > 0;
     const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
 
-    //console.log(activeDateFilter);
-    //console.log(new Date(weekFilters[0]));
-    //console.log(new Date(weekFilters[1]));
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
@@ -67,16 +79,16 @@ const mapStateToProps = state => {
         ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
         : activityList;
 
-    /*activityList = hasWeekFilter
+    activityList = hasWeekFilter
         ? activityList.filter(activity =>
         (
-            ((new Date (activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date (activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date (activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
-            (new Date (activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date (activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date (activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
-            (weekFilters[0].getYear() >= new Date (activity.fields.date).getYear()  && weekFilters[0].getMonth() >= new Date (activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date (activity.fields.date).getDay()) &&
-            (weekFilters[0].getYear() <= new Date (activity.fields.date_end).getYear()  && weekFilters[0].getMonth() <= new Date (activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date (activity.fields.date_end).getDay())
+            ((new Date(activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date(activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date(activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
+            (new Date(activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date(activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date(activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
+            (weekFilters[0].getYear() >= new Date(activity.fields.date).getYear() && weekFilters[0].getMonth() >= new Date(activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date(activity.fields.date).getDay()) &&
+            (weekFilters[0].getYear() <= new Date(activity.fields.date_end).getYear() && weekFilters[0].getMonth() <= new Date(activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date(activity.fields.date_end).getDay())
         ))
         : activityList;
-*/
+
     activityList = hasSearchForFilter
         ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
         : activityList;
@@ -88,7 +100,7 @@ const mapStateToProps = state => {
         activeDateFilter: activeDateFilter,
         activeSearchForFilters: activeSearchForFilters,
     };
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -102,14 +114,23 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
+
+
 AllActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllActivitiesContainer);
 // Fetch initial data for to the state
 store.dispatch(fetchAllActivities());
 
 ReactDOM.render(
-    <Provider store={store}>
-        <AllActivitiesContainer />
-    </Provider>,
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+            <AllActivitiesContainer />
+        </Provider>
+    </MuiThemeProvider>,
     document.getElementById('allActivities')
 );
 

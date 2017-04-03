@@ -33,10 +33,9 @@ def index(request):
 
 @csrf_exempt
 def signUpActivity(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:-1]
     activity = Activity.objects.get(pk=activityId)
     # User logged in
-
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
@@ -61,7 +60,7 @@ def signUpActivity(request):
 
 @csrf_exempt
 def checkIfSingedUp(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:-1]
     activity = Activity.objects.get(pk=activityId)
     # User logged in
     if 'username' and 'profile_pk' in request.session:
@@ -84,7 +83,7 @@ def checkIfSingedUp(request):
 
 @csrf_exempt
 def signOfEvent(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1][:-1]
     activity = Activity.objects.get(pk=activityId)
     # User logged in
     if 'username' and 'profile_pk' in request.session:
@@ -108,13 +107,20 @@ def signOfEvent(request):
 
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
+    json_serializer = serializers.get_serializer("json")()
+    if request.user.is_authenticated:
+        if profile_name == "undefined":
+            profile_name = request.session['profile_name']
+    else:
+        message = {"message":"no user signed in"}
+        return HttpResponse(json.dumps(message))
+
     profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
     activities = ParticipateIn.objects.filter(userId=request.user, user_profile_id=profile)
     activitie_objects = []
     for activity in activities:
         act = Activity.objects.get(pk=activity.activityId.pk)
         activitie_objects.append(act)
-    json_serializer = serializers.get_serializer("json")()
     attendingActivities = json_serializer.serialize(activitie_objects, ensure_ascii=False)
     return HttpResponse(attendingActivities, content_type='application/json')
 
@@ -131,6 +137,19 @@ def getHostingActivities(request):
     json_serializer = serializers.get_serializer("json")()
     hostingActivities = json_serializer.serialize(activitie_objects, ensure_ascii=False)
     return HttpResponse(hostingActivities, content_type='application/json')
+
+
+def getActivityHost(request):
+    profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+    activityid = request.path.split("/")[3]
+    activity = Activity.objects.get(pk=activityid)
+    try:
+        host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+        host = {"host": 'true'}
+        return HttpResponse(json.dumps(host))  # valid host
+    except Hosts.DoesNotExist:
+        host = {"host": 'false'}
+        return HttpResponse(json.dumps(host))  # invalid host
 
 
 def getActivities(request):
@@ -161,10 +180,10 @@ def rateActivity(request):
 def postComment(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
     comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
-
+    if comment.strip() == "":  # Checks if comment is blank
+        return HttpResponse()
     activity = Activity.objects.get(pk=activityId)
     user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
-    print("profile ", user_profile.profile_name)
     post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name, activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
     return HttpResponse(status=200, content_type='application/json')
@@ -296,32 +315,32 @@ class UserFormView(View):
             last_name = form.cleaned_data['last_name']
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
-            profile_name = profile_form.cleaned_data['profile_name']
-            is_provider = profile_form.cleaned_data['is_provider']
+            # profile_name = profile_form.cleaned_data['profile_name']
+            # is_provider = profile_form.cleaned_data['is_provider']
 
-            print("Provider?  " + str(is_provider))
+            # print("Provider?  " + str(is_provider))
 
             if types:
                 types = "P"
             else:
                 types = "C"
 
-            if is_provider:
-                scraper = Scraper()
-                information = scraper.scrapeAktor(name=profile_name)
-                #information = json.dumps(information, ensure_ascii=False)
-
-                print("Information as json: ", information)
-            else:
-                information = {}
+            # if is_provider:
+            #     scraper = Scraper()
+            #     information = scraper.scrapeAktor(name=profile_name)
+            #     #information = json.dumps(information, ensure_ascii=False)
+            #
+            #     print("Information as json: ", information)
+            # else:
+            #     information = {}
 
 
             # Make som changes or something useful
             user.set_password(password)
             user.save()  # saves users to the database
 
-            print('Before saving information: ', information)
-            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=profile_name, aktordatabase=information)
+            # print('Before saving information: ', information)
+            userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=first_name, last_name=last_name, email=email, provider={})
             userProfile.is_active = True
             userProfile.save()
 
@@ -353,21 +372,43 @@ class ActivityView(generic.DetailView):
         form_class = ActivityForm
 
         def get(self, request, *args, **kwargs):
-            form = self.form_class(initial=model_to_dict(self.get_object()))
-            print(self.kwargs['pk'])
-            return activityGet(self, request, form)
+            if request.user.is_authenticated:
+                profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+                activity = Activity.objects.get(pk=self.kwargs["pk"])
+                try:
+                    host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+                    form = self.form_class(initial=model_to_dict(self.get_object()))
+                    print(self.kwargs['pk'])
+                    return activityGet(self, request, form)
+                except Hosts.DoesNotExist:
+                    return redirect("skalvi:index")
+            else:
+                return redirect("skalvi:index")
 
         def post(self, request, pk):
-            request.POST = request.POST.copy()
-            instance = get_object_or_404(Activity, pk=pk)
-            form = ActivityForm(request.POST, request.FILES, instance=instance)
-            form.data = form.data.copy()
+            if request.user.is_authenticated:
+                profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+                activity = Activity.objects.get(pk=self.kwargs["pk"])
+                try:
+                    host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
+                    form = self.form_class(initial=model_to_dict(self.get_object()))
+                    request.POST = request.POST.copy()
+                    instance = get_object_or_404(Activity, pk=pk)
+                    form = ActivityForm(request.POST, request.FILES, instance=instance)
+                    form.data = form.data.copy()
+                    if form.is_valid():
+                        form.save()
+                        return redirect('/')
+                    else:
+                        return render(request, self.template_name, {'form': form, 'error_message': form.errors})
 
-            if form.is_valid():
-                form.save()
-                return redirect('/')
+                except Hosts.DoesNotExist:
+                    return redirect("skalvi:index")
             else:
-                return render(request, self.template_name, {'form': form, 'error_message': form.errors})
+                return redirect("skalvi:index")
+
+
+
 
 class createActivity(View):
     template_name = "activity.html"
@@ -456,7 +497,8 @@ class MyPageView(View):
 
             for profile in user_profile_objects:
                 path = "/mypage/" + str(profile.profile_name) + "/"
-                object = {'profile_name': profile.profile_name, "type": profile.type, "phone": profile.phone, "is_active": profile.is_active, 'initiales': profile.profile_name[0:2].upper(), 'path': path}
+                facebook = isNum(username)
+                object = {'profile_name': profile.profile_name, "last_name":profile.last_name, "email":profile.email, "type": profile.type, "phone": profile.phone, "is_active": profile.is_active, 'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook}
                 profiles.append(object)
 
             return render(request, self.template_name,
@@ -492,13 +534,15 @@ class RegisterProfileView(View):
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
             profile_name = profile_form.cleaned_data['profile_name']
+            last_name = profile_form.cleaned_data['last_name']
+            email = profile_form.cleaned_data['email']
 
             if types:
                 types = "P"
             else:
                 types = "C"
 
-            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name)
+            profile = UserProfile(user=request.user, phone=phone, type=types, profile_name=profile_name, last_name=last_name, email=email)
             profile.save()
 
         return redirect("../mypage/" + profile_name )
@@ -508,3 +552,14 @@ class RegisterProfileView(View):
 
 def allactivities(request):
     return TemplateResponse(request, 'allActivities.html', {})
+
+
+def allproviders(request):
+    return TemplateResponse(request, 'allProviders.html', {})
+
+def isNum(data):
+    try:
+        int(data)
+        return True
+    except ValueError:
+        return False

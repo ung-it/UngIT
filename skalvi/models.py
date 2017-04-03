@@ -8,33 +8,18 @@ from django.dispatch import receiver
 
 from jsonfield import JSONField
 
-
-ACTIVITY_TYPES = (
-    (0, 'Ukjent'),
-    (1, 'Skating'),
-    (2, 'Klatring'),
-    (3, 'Ski'),
-    (4, 'Svømming'),
-)
-
-SUITED_FOR_TYPES = (
-    (0, 'Ukjent'),
-    (1, 'Tilpasset 1'),
-    (2, 'Tilpasset 2'),
-    (3, 'Tilpasset 3'),
-    (4, 'Tilpasset 4'),
-)
-
 ########### USER PROFILES that extends the auth.models.User table
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')  # set the relation / extension to the user model
     type = models.CharField(max_length=5)  # A = admin, P = parent, C = child, etc.
-    phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
     profile_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=60, null=False, blank=False)
+    phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
+
     is_active = models.BooleanField(default=False)
-    is_provider = models.BooleanField(default=False)
-    aktordatabase = JSONField()  # contains all found information
+    provider = JSONField()  # contains all found information
 
 
 
@@ -42,8 +27,7 @@ class UserProfile(models.Model):
 
 class Activity(models.Model):
     activityName = models.CharField(max_length=80)
-    activityType = models.PositiveSmallIntegerField(choices=ACTIVITY_TYPES, default=0)  # Defaults to 'Ukjent'
-    suitedForType = models.PositiveSmallIntegerField(choices=SUITED_FOR_TYPES, default=0)  # Defaults to 'Ukjent'
+    activityType = models.CharField(max_length=80)
     provider = models.CharField(max_length=80)
     facebookID = models.IntegerField(blank=True, null=True)
     facebookInfo = models.BooleanField(blank=True)
@@ -60,8 +44,10 @@ class Activity(models.Model):
     images = models.ImageField(upload_to='images/',max_length=255, blank=True)
     instagram = models.TextField(blank=True)
     videos = models.ImageField(upload_to='videos/',max_length=255, blank=True)
-    rating = models.FloatField(blank=True, null=True)
-    number_of_ratings = models.IntegerField(blank=True, null=True)
+    rating = models.FloatField(blank=True, default=0)
+    number_of_ratings = models.IntegerField(blank=True, default=0)
+    assistants_number = models.IntegerField()
+    assistants_text = models.TextField(blank=True, null=True)
 
     def was_published(self):
         return self.pub_date

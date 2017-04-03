@@ -16,6 +16,11 @@ export function getUpcomingActivities(callback) {
     });
 }
 
+
+export function getAllProviders() {
+    return fetchFromServer('/api/providers/')
+}
+
 export function getAllActivities() {
     return fetchFromServer('/api/activities/').then(response => {
         return response;
@@ -31,12 +36,15 @@ export function getFacebookEventData(activities) {
     return new Promise(function (resolve) {
         getAccessToken(resolve);
     }).then(token => {
-
         let batch = eventIDs.map(id => {
-            return {method:"GET", relative_url: id + "?fields=admins,attending,photos{images},picture,roles,videos"};
+            return {method:"GET", relative_url: id + "?fields=admins,attending_count,maybe_count,photos{images},picture,roles,videos"};
         });
+        if (batch.length == 0) {
+            return activities;
+        }
         let data = {
             access_token: token,
+            include_headers: false,
             batch: batch
         };
         return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
@@ -68,6 +76,14 @@ export function getAllHostingActivities() {
     const profileName = window.location.href.split("/")[4];
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
+
+
+export function getHost(id, callback) {
+    fetchFromServer('/api/getHost/' + id).then(result => {
+        callback(result);
+    });
+}
+
 
 export function signupActivity(data, callback) {
     postToServer('/signupActivity/', data).then (response => {
@@ -136,3 +152,4 @@ function postToServer(query, data) {
         }
     })
 }
+

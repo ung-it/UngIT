@@ -1,6 +1,7 @@
 import requests # html requests
 from bs4 import BeautifulSoup # to extract html content
 import json
+import re
 
 '''
 A class to scrape the organisasjoner.trondheim.kommune aktordatabasen
@@ -120,23 +121,70 @@ class Scraper:
             values = self.soup.find_all('dd')
             addresses = self.soup.find_all('address')
             categories = self.soup.find_all('ul', class_='unstyled')
+            urlLink = self.soup.find_all('a')
 
             for i in range(0, len(keys)):
                 if(keys[i].string.strip() == 'Kategori(er)'):
                     value = ''
-                    for cat in categories:
-                        cat = categories.pop()
+                    catList = categories[0]
+                    catList = str(catList)
+                    catList = catList.split("<li>")
+                    catList.pop(0)
+
+                    index = 0
+                    for cat in catList:
+                        index += 1
+
                         cat = str(cat)
-                        #print(cat)
-                        start = cat.find('<li>') + 4
+
                         end = cat.find('</li>')
-                        cat = cat[start:end]
-                        if(len(categories) == 0):
+                        cat = cat[:end+1]
+
+                        end = cat.find(' (')
+                        cat = cat[:end]
+
+                        if (index == len(catList)):
+                            value += cat
+                        else:
+                            value += cat + ', '
+
+                    information['Kategorier'] = value
+
+                elif(keys[i].string == "Type aktivitet "):
+                    value = ''
+                    #print('Type aktivitet Categories: ', categories)
+                    list = categories[0]
+                    #print('Type aktivitet List: ', list)
+                    list = str(list)
+                    list = list.split("<li>")
+                    list.pop(0)
+                    #print('Type aktivitet List 2 : ', list)
+                    for cat in list:
+                        #print("cat: ", cat)
+                        #cat = list.pop()
+                        #print("cat 2: ", cat)
+                        cat = str(cat)
+                        end = cat.find('</li>')
+                        cat = cat[:end + 1]
+                        if (cat.find("<")):
+                            cat = cat.replace("<", "")
+                        if (len(list) == 0):
                             value += cat
                             break
                         else:
                             value += cat + ', '
-                    information[keys[i].string] = value
+
+                    value = value.strip()
+                    value = value[:-1]
+                    information["TypeAktivitet"] = value
+
+                elif (keys[i].string == "Internettadresse"):
+                    for link in urlLink:
+                        site = (link.get('href'))
+
+                    information[keys[i].string] = site
+
+
 
                 elif(keys[i].string != 'Adresse'):
                     information[keys[i].string] = values[i].string
@@ -150,14 +198,17 @@ class Scraper:
                     adr = adr[start:end]
                     adr = adr.replace('<br>', '')
                     adr = adr.replace('\n', '')
-                    adr = adr.replace(' ', '')
+                    adr = re.sub('\s+', ' ', adr)
 
                     information[keys[i].string] = adr.strip()
         if(len(information) !=0 ):
             information['Navn'] = title.string
             information['Id'] = orgID
 
-        #print(information)
+
+        if(len(information) == 0):
+            return None
+
         return information
 
 
@@ -172,12 +223,15 @@ class Scraper:
     '''
     def scrapeAll(self):
         allProviders = []
-        for i in range(1,1472):
+        for i in range(1,1480):   # 1, 1480
             orgLink ="https://organisasjoner.trondheim.kommune.no/organisations" + '/' + str(i)
-            allProviders.append(self._scrapeInfo(orgLink=orgLink, orgID=i))
+            obj = self._scrapeInfo(orgLink=orgLink, orgID=i)
+            if(obj == None):
+                continue
+            allProviders.append(obj)
 
         # write all to .txt file, for prodction use to fill up database. without re-query
-        with open('./app/aktordatabasen.json', 'w') as file:
+        with open('../app/aktordatabasen.json', 'w') as file:
             json.dump(allProviders, file, indent=4)
 
         return allProviders
@@ -197,12 +251,12 @@ def main():
     #informasjon = s.scrapeAktor(name='DANS MED OSS')
 
     # Multiple matches
-    informasjon = s.scrapeAktor(name='rosenborg')
+    #informasjon = s.scrapeAktor(name='rosenborg')
 
     # scrape all
-    #informasjon = s.scrapeAll()
+    informasjon = s.scrapeAll()
 
     # print:
-    print(informasjon)
+    #print(informasjon)
 
 #main()

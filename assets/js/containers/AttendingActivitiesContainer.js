@@ -33,15 +33,21 @@ class AttendingActivitiesContainer extends Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "flex-start"
-            }
+                justifyContent: "space-around"
+            },
         };
 
-        return (
-            <div style={styles.activitiesContainerStyle}>
+        let attendingContainer = <p>Du er ikke påmeldt noen aktiviteter</p>;
+        if(this.props.attendingActivities.length > 0){
+            attendingContainer=
               <div style={styles.activitiesStyle}>
                   {this.createActivityCardComponent()}
               </div>
+        }
+
+        return (
+            <div style={styles.activitiesContainerStyle}>
+                {attendingContainer}
             </div>
         );
     }

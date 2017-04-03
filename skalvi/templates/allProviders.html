@@ -1,15 +1,13 @@
 {% extends "base_template.html" %}
 {% load render_bundle from webpack_loader %}
 {% load static %}
-{% block pageTitle %}Aktiviteter{% endblock %}
+{% block pageTitle %}Arrangører{% endblock %}
 
 {% block explicitPageHeader %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/allactivities.css' %}" />
     <link rel="stylesheet" href="{% static 'styles/material.min.css'%}">
-    <link rel="stylesheet" href="{% static "styles/style.css" %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Dosis">
     <script src="{% static 'js/material.min.js'%}"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -18,17 +16,12 @@
     </div>
 
     <div class="content">
-        {% if user.is_authenticated %}
-            <a href="/activity" class="btn btn-info" role="button" id="new-activity-button">Opprett ny aktivitet</a>
-        {% endif %}
-
-
 
         <div class="content-margin-top">
-            <h1 class="title">Aktiviteter</h1>
-            <p>Her er en oversikt over alle aktiviteter som tilbys i Trondheim kommune</p>
+            <h1 class="title">Arrangører</h1>
+            <p>Her er en oversikt over alle aktivitetstilbydere og grupper som tilbys i Trondheim kommune</p>
             <div>
-                <div id="allActivities"></div>
+                <div id="allProviders"></div>
             </div>
         </div>
 
@@ -37,7 +30,7 @@
 {% endblock %}
 
 {% block explicitPageFooter %}
-    {% render_bundle 'allActivitiesContainer' %}
+    {% render_bundle 'allProvidersContainer' %}
 {#    {% render_bundle 'suitedForPicker' %}#}
 {#    {% render_bundle 'activityPicker' %}#}
 {#    {% render_bundle 'weekPicker' %}#}

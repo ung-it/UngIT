@@ -37,7 +37,7 @@ class HostingActivitiesContainer extends Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "flex-start"
+                justifyContent: "space-between",
             },
         };
 

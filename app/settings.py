@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 #release.sprint.dayInSprint (relsese = 0 (dev), dayInSprint = totalSprintDays - sprintDaysWorked)
-CURRENT_VERSION = '0.4.03'
+CURRENT_VERSION = '0.4.07'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

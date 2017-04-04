@@ -42,7 +42,7 @@ class ProvidersList extends React.Component {
 
 
 
-
+        // Slice the reducer data that is provided to match the offset. 
         const prov = this.props.providers.slice(0, this.state.offset);
 
 

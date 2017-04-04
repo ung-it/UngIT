@@ -130,17 +130,17 @@ def follow(request):
         # Check if user already is following
         try:
             follows = Follows.objects.get(orgId=providerId, userId=request.user, user_profile_id=profile)
-            response = {'attending': True}
+            response = {'following': True}
         # if user is not following
         except Follows.DoesNotExist:
             follows = Follows(orgId=providerId, userId=request.user, user_profile_id=profile)
             follows.save()
 
-            response = {'attending': False}
+            response = {'following': False}
     # User not logged in
     else:
         # user is not loged in, should not be possible to attend activity
-        response = {'attending': None}  # not logged in
+        response = {'following': None}  # not logged in
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
@@ -155,15 +155,15 @@ def unFollow(request):
         try:
             follows = Follows.objects.get(orgId=providerId, userId=request.user, user_profile_id=profile)
             follows.delete()
-            response = {'attending': True}
+            response = {'following': True}
         # if user is not following
         except Follows.DoesNotExist:
             #  Not following, can't unfollow
-            response = {'attending': False}
+            response = {'following': False}
     # User not logged in
     else:
         # user is not loged in, should not be possible to attend activity
-        response = {'attending': None}  # not logged in
+        response = {'following': None}  # not logged in
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
@@ -178,14 +178,14 @@ def checkIfFollowing(request):
         try:
             follows = Follows.objects.get(orgId=providerId, userId=request.user,
                                                     user_profile_id=profile)
-            response = {'attending': True}
+            response = {'following': True}
 
         except ParticipateIn.DoesNotExist:
             # If user does not follow
-            response = {'attending': False}
+            response = {'following': False}
     else:
         # If user is not loged in
-        response = {'attending': None}
+        response = {'following': None}
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 

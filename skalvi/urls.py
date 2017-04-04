@@ -4,6 +4,7 @@ from . import views
 from . import ApiFunctions
 
 app_name = 'skalvi'
+
 urlpatterns = [
     # Index
     url(r'^$', views.index, name='index'),
@@ -44,8 +45,10 @@ urlpatterns = [
     url(r'^postComment/$', views.postComment, name='postComment'),
     url(r'^comments/[0-9]+/$', views.getComments, name='getComment'),
     # Populate database
-    url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase")
+    url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase"),
 
-
+    #Follow
+    url(r'^follow/$', views.follow, name='follow'),
+    url(r'^checkIfFollowing/$', views.checkIfFollowing, name='checkIfFollowing'),
+    url(r'^unfollow/$', views.unFollow, name='unfollow')
 ]
-

@@ -19,10 +19,6 @@ class ProviderField extends Component {
         super(props);
 
         let selectedProviders = $('#provider').val();
-        let color = {};
-        if (selectedProviders !== "") {
-            color = {color: '#3F51B5'};
-        }
 
         this.state = {
             value: selectedProviders,
@@ -30,7 +26,6 @@ class ProviderField extends Component {
             data: [],
             selected: [],
             selectedRows: [],
-            color: color,
             showButton: false,
             showRemoveButton: false,
         };
@@ -40,13 +35,15 @@ class ProviderField extends Component {
         this.handleRowSelect = this.handleRowSelect.bind(this);
     }
 
-    handleChange = (chosenRequest, index) => {
-        if (chosenRequest != "") {
-            this.setState({value: index, color: {color: '#3F51B5'}, showButton: true});
-        }
+    handleSelect = (chosenRequest, index) => {
+        this.setState({value: index, showButton: true});
     };
 
     render() {
+
+        $('#provider').val(this.state.selected.map(provider => {
+            return provider.pk;
+        }));
 
         const providers = this.state.selected.map(provider => {
             const json = JSON.parse(provider.fields.aktordatabase);
@@ -69,7 +66,8 @@ class ProviderField extends Component {
                         maxSearchResults={10}
                         fullWidth={true}
                         style={styles.customWidth}
-                        onNewRequest={this.handleChange}
+                        onNewRequest={this.handleSelect}
+                        ref="autoComplete"
                     />
                     <RaisedButton
                         label="Legg til"
@@ -125,7 +123,8 @@ class ProviderField extends Component {
         const provider = this.state.providers[this.state.value];
         if (this.state.selected.indexOf(provider) === -1) {
             const selected = this.state.selected.concat(provider);
-            this.setState({selected});
+            this.setState({selected, showButton: false});
+            this.refs.autoComplete.setState({ searchText: ''})
         }
     }
 

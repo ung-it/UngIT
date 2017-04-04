@@ -29,6 +29,7 @@ class ProviderField extends Component {
             providers: [],
             data: [],
             selected: [],
+            selectedRows: [],
             color: color,
             showButton: false,
             showRemoveButton: false,
@@ -36,6 +37,7 @@ class ProviderField extends Component {
 
         this.addProvider = this.addProvider.bind(this);
         this.removeProvider = this.removeProvider.bind(this);
+        this.handleRowSelect = this.handleRowSelect.bind(this);
     }
 
     handleChange = (chosenRequest, index) => {
@@ -80,6 +82,7 @@ class ProviderField extends Component {
                 <Table
                     height={'300px'}
                     multiSelectable={true}
+                    onRowSelection={this.handleRowSelect}
                 >
                     <TableHeader
                         displaySelectAll={false}
@@ -90,8 +93,7 @@ class ProviderField extends Component {
                             <TableHeaderColumn tooltip="Organisasjonsnummer">Organisasjonsnummer</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
-                        {providers}
+                    <TableBody children={providers}>
                     </TableBody>
                 </Table>
                 <div className="remove-button-container">
@@ -127,8 +129,22 @@ class ProviderField extends Component {
         }
     }
 
-    removeProvider() {
+    handleRowSelect(selectedRows) {
+        this.state.selectedRows = selectedRows;
+        if (selectedRows.length > 0) {
+            this.setState({showRemoveButton: true});
+        }
+        else {
+            this.setState({showRemoveButton: false});
+        }
+    }
 
+    removeProvider() {
+        for (let i in this.state.selectedRows.reverse()) {
+            const row = this.state.selectedRows[i];
+            this.state.selected.splice(row, 1);
+        }
+        this.forceUpdate();
     }
 
 }

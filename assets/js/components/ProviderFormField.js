@@ -4,6 +4,8 @@ import { getAllOrganisations } from '../APIFunctions';
 import AutoComplete from 'material-ui/AutoComplete';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
+    from 'material-ui/Table';
 
 const styles = {
     customWidth: {
@@ -36,14 +38,22 @@ class ProviderField extends Component {
 
     handleChange = (chosenRequest, index) => {
         if (chosenRequest != "") {
-            this.setState({value: chosenRequest, color: {color: '#3F51B5'}, showButton: true});
+            this.setState({value: index, color: {color: '#3F51B5'}, showButton: true});
         }
     };
 
     render() {
 
         const providers = this.state.selected.map(provider => {
-            return provider;
+            const json = JSON.parse(provider.fields.aktordatabase);
+            console.log(json);
+            return (
+                <TableRow key={provider}>
+                    <TableRowColumn>{json.Id}</TableRowColumn>
+                    <TableRowColumn>{json.Navn}</TableRowColumn>
+                    <TableRowColumn>{json.Organisasjonsnummer}</TableRowColumn>
+                </TableRow>
+            );
         });
 
         return (
@@ -66,7 +76,22 @@ class ProviderField extends Component {
                         disabled={!this.state.showButton}
                     />
                 </div>
-                {providers}
+                <Table
+                    height={'500px'}
+                >
+                    <TableHeader
+                        displaySelectAll={false}
+                    >
+                        <TableRow>
+                            <TableHeaderColumn tooltip="ID tilhørende aktørdatabasen">ID</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Navn på aktør">Navn</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Organisasjonsnummer">Organisasjonsnummer</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {providers}
+                    </TableBody>
+                </Table>
             </div>
         )
     }
@@ -84,8 +109,9 @@ class ProviderField extends Component {
     }
 
     addProvider() {
-        if (this.state.selected.indexOf(this.state.value) === -1) {
-            const selected = this.state.selected.concat(this.state.value);
+        const provider = this.state.providers[this.state.value];
+        if (this.state.selected.indexOf(provider) === -1) {
+            const selected = this.state.selected.concat(provider);
             this.setState({selected});
         }
     }

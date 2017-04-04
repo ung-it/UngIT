@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from "react-redux";
+import {Provider, connect} from "react-redux";
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
 
 import "../../styles/activityBox.css";
 
-import { fetchAllProviders, addSearchForFilter, addActivityFilter } from "../actions/providersActions";
+import {fetchAllProviders, addSearchForFilter, addActivityFilter, trashButtonClicked, activityButtonClicked} from "../actions/providersActions";
 import ProvidersList from '../components/ProvidersList';
 import ProviderFilters from '../components/ProviderFilters';
 import configureStore from "../configureStore";
@@ -22,11 +28,14 @@ class AllProvidersContainer extends Component {
             <div>
                 <ProviderFilters
                     onSearchForChange={this.props.changeSearchForFilter}
-                    searchForFilters={this.props.activeSearchForFilters}
+                    providersForSearch={this.props.providers}
+                    searchForFilter={this.props.activeSearchForFilters}
                     onActivityFilterChange={this.props.changeActivityFilter}
                     activityFilters={this.props.activeActivityFilters}
+                    activityButton={this.props.changeActivityButton}
+                    onButtonChange={this.props.changeTrashButton}
                 />
-                <ProvidersList providers={this.props.providers} />
+                <ProvidersList providers={this.props.providers}/>
             </div>
 
 
@@ -35,33 +44,17 @@ class AllProvidersContainer extends Component {
 }
 
 
-
-
 const mapStateToProps = state => {
-    let { provider: { providerList, activeSearchForFilters, activeActivityFilters } } = state; // Make activityList and activeActivityFilters from state become variables
+    let {provider: {providerList, activeSearchForFilters, activeActivityFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
-    //console.log(providerList)
-    //console.log(providerList);
+    const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
 
-     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-     const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
-//
-//     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
-//     const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
-//
+    const hasSearchForFilter = activeSearchForFilters.length > 0;
+    const searchForFilter = activeSearchForFilters.toUpperCase();
 
-//
-     const hasSearchForFilter = activeSearchForFilters.length > 0;
-     const searchForFilter = activeSearchForFilters.toUpperCase();
-//
-     providerList = hasActivityFilter
-         ? providerList.filter(provider => activityFilters.includes(provider["Type aktivitet "]))
-         : providerList;
-//
-//     activityList = hasSuitedForFilter
-//         ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
-//         : activityList;
-//
+    providerList = hasActivityFilter
+        ? providerList.filter(provider => activeActivityFilters.includes(provider.TypeAktivitet))
+        : providerList;
 
     providerList = hasSearchForFilter
         ? providerList.filter(provider => (provider.Navn.includes(searchForFilter)))
@@ -70,7 +63,6 @@ const mapStateToProps = state => {
     return {
         providers: providerList,
         activeActivityFilters: activeActivityFilters,
-        // activeSuitedForFilters: activeSuitedForFilters,
         activeSearchForFilters: activeSearchForFilters,
     };
 };
@@ -79,13 +71,17 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchProviders: () => dispatch(fetchAllProviders()),
         changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
-        // changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
-        // changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
         changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
-        // changeTrashButton: () => dispatch(trashButtonClicked()),
-
+        changeTrashButton: () => dispatch(trashButtonClicked()),
+        changeActivityButton: () => dispatch(activityButtonClicked()),
     }
 };
+
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
 
 
 AllProvidersContainer = connect(mapStateToProps, mapDispatchToProps)(AllProvidersContainer);
@@ -93,11 +89,11 @@ AllProvidersContainer = connect(mapStateToProps, mapDispatchToProps)(AllProvider
 store.dispatch(fetchAllProviders());
 
 
-
-
 ReactDOM.render(
-    <Provider store={store}>
-        <AllProvidersContainer />
-    </Provider>,
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+            <AllProvidersContainer />
+        </Provider>
+    </MuiThemeProvider>,
     document.getElementById('allProviders')
 );

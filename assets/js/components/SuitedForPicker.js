@@ -2,15 +2,14 @@ import React from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom';
 
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import { Glyphicon } from "react-bootstrap";
+
+
 import '../../styles/activitypickerStyle.css'
 
-export const SUITED_FOR_TYPES = [
-	{ label: 'Ukjent', value: '0' },
-	{ label: 'Tilpasset 1', value: '1' },
-	{ label: 'Tilpasset 2', value: '2' },
-	{ label: 'Tilpasset 3', value: '3' },
-	{ label: 'Tilpasset 4', value: '4' },
-];
+export const names = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging 3', 'Tilrettelegging 4', 'Annet'];
 
 class SuitedForPicker extends React.Component {
 
@@ -18,35 +17,72 @@ class SuitedForPicker extends React.Component {
 		super(props);
 
 		this.state = {
-			options: SUITED_FOR_TYPES
+            suitedForButtonClicked: true,
 		};
 	};
 
-	handleSelectChange = filter => {
-		this.props.onFilterChange(filter);
+	handleChange = (event, index, values) => {
+		this.props.onFilterChange(values);
+
+	};
+
+	menuItems(values) {
+		return names.map((name) => (
+			<MenuItem
+				key={name}
+				insetChildren={true}
+				checked={values && values.includes(name)}
+				value={name}
+				primaryText={name}
+			/>
+		));
+	};
+
+	handleEmptyFilter = () => {
+		this.props.suitedForButton(this.state.suitedForButtonClicked)
 	};
 
 	render() {
 		return (
-			<div className="section">
-				<h3 className="section-heading">{this.props.label}</h3>
-				<Select
-					multi
-					simpleValue
+			<div className="section" className="row">
+				<div className="col-md-11">
+				<SelectField
+					multiple={true}
+					hintText="Velg tilrettelegging..."
 					value={this.props.activeFilters}
-					placeholder="Velg type aktivitet..."
-					options={this.state.options}
-					onChange={this.handleSelectChange}
-				/>
+					onChange={this.handleChange}
+					fullWidth={true}
+				>
+					{this.menuItems(this.props.activeFilters)}
+				</SelectField>
+					</div>
+                <div className="col-md-1" id="activity-a-remove">
+                    <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="remove-s-button">
+                            Tøm tilretteleggingsfilter
+                        </div>
+                    <Glyphicon glyph="glyphicon glyphicon-remove" id="remove-s-button" onClick={this.handleEmptyFilter}/>
+                </div>
 			</div>
+
 		);
 	};
-};
+
+}
 
 SuitedForPicker.propTypes = {
 	onFilterChange: React.PropTypes.func.isRequired,
-	activeFilters: React.PropTypes.string.isRequired,
+	activeFilters: React.PropTypes.array.isRequired,
+	suitedForButton: React.PropTypes.func.isRequired
 };
 
 export default SuitedForPicker;
+
+
+
+
+
+
+
+
+
 

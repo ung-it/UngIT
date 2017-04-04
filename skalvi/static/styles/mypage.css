@@ -1,7 +1,11 @@
+h4#usersTitle{
+    text-align: center;
+}
+
 #myPageContent{
     display: flex;
     flex-direction: row;
-    padding-left: 6em;
+    padding-left: 5em;
     margin-right: 0;
 }
 
@@ -24,8 +28,15 @@
     flex-wrap: wrap;
 }
 
+#hosting_Activities_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
 #attending_Activities {
-    width: 55%;
+    width: 50%;
 }
 
 #attendingActivities {
@@ -33,7 +44,7 @@
 }
 
 #hosting_Activities {
-    width: 45%;
+    width: 50%;
 }
 #profileInformation {
     margin-left: 2em;
@@ -50,7 +61,7 @@
 /*}*/
 
 #new-activity-button{
-    float: right;
+    align-self: flex-end;
     height: 2.5em;
 }
 
@@ -69,6 +80,7 @@ a {
 }
 
 ul.social {
+    padding-left: 4em;
     text-align: center;
 }
 

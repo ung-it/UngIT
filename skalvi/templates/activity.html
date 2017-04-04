@@ -3,8 +3,7 @@
 {% load static %}
 
 {% block explicitPageHeader %}
-    <link rel="stylesheet" href="{% static "styles/material.components.ext.min.css" %}">
-    <script src="{% static 'js/material.components.ext.min.js'%}"></script>
+    <link rel="stylesheet" href="{% static "styles/forms.css" %}">
 
     <link rel="stylesheet" href="{% static "styles/editActivity.css" %}">
     <script type="text/javascript" src="{% static 'js/editActivity.js' %}"></script>
@@ -19,7 +18,8 @@
     <div class="banner-container">
             <img src="{% static "images/top-banner.png" %}" alt="Banner" class="banner">
     </div>
-        <div class="content content-margin-top">
+        <div class="content">
+            <div class="form-page-title">Opprett aktivitet</div>
             {% if error_message %}
                 <div class="alert alert-danger alert-wrapper">
                     <strong>{{ error_message }}</strong>
@@ -114,7 +114,7 @@
                             </div>
                         </span>
                     </li>
-                    <li class="mdl-list__item">
+                    <li class="mdl-list__item list-item">
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.location.value != None %}
@@ -125,6 +125,14 @@
                                 <label class="mdl-textfield__label" for="location">Sted</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                             {% if form.activityType.value != None %}
+                                 <input name="activityType" id="activityType" hidden value="{{ form.activityType.value }}">
+                             {% else %}
+                                 <input name="activityType" id="activityType" hidden>
+                             {% endif %}
+                            <div id="activityType-container"></div>
                         </span>
                     </li>
                     <li class="mdl-list__item">
@@ -137,6 +145,29 @@
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="description">Om arrangement</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item list-item">
+                        <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                {% if form.assistants_number.value != None %}
+                                    <input class="mdl-textfield__input" name="assistants_number" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="assistants_number" value="{{ form.assistants_number.value }}" required>
+                                {% else %}
+                                    <input class="mdl-textfield__input" name="assistants_number" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="assistants_number" required>
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="assistants_number">Totalt antall assistenter tilgjengelig</label>
+                                <span class="mdl-textfield__error">Antall må være et tall</span>
+                            </div>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {% if form.assistants_text.value != None %}
+                                    <textarea class="mdl-textfield__input" name="assistants_text" type="text" rows="5" maxrows="10" id="assistants_text">{{ form.assistants_text.value }}</textarea>
+                                {% else %}
+                                    <textarea class="mdl-textfield__input" name="assistants_text" type="text" rows="5" maxrows="10" id="assistants_text"></textarea>
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="description">Ekstra informasjon om assistenter</label>
                             </div>
                         </span>
                     </li>
@@ -153,15 +184,12 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
-                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
-                                {% if form.provider.value != None %}
-                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" value="{{ form.provider.value }}" required>
-                                {% else %}
-                                    <input class="mdl-textfield__input" name="provider" type="text" id="provider" required>
-                                {% endif %}
-                                <label class="mdl-textfield__label" for="provider">Arrangør</label>
-                                <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
-                            </div>
+                            {% if form.provider.value != None %}
+                                <input name="provider" id="provider" hidden value="{{ form.provider.value }}">
+                            {% else %}
+                                <input name="provider" id="provider" hidden>
+                            {% endif %}
+                            <div id="provider-container"></div>
                         </span>
                     </li>
                     <li class="mdl-list__item">
@@ -259,5 +287,5 @@
 {% endblock %}
 
 {% block explicitPageFooter %}
-    {% render_bundle 'adaptionChips' %}
+    {% render_bundle 'activityForm' %}
 {% endblock %}

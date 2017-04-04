@@ -17,39 +17,45 @@ class ProviderCard extends React.Component {
     createProviderItem = () => {
         const provider = this.props.provider;
 
-
-
         return (
-            <div key={provider.Id}>
+
+            <div key={provider.Id}
+                 className="provider-card">
                 <div
-                    className="activityBigStyle"
+                    className="demo-card-wide mdl-card mdl-shadow--2dp"
                 >
-                    <div className="row">
-                        <div className="col-sm-9">
-                            <h3 className="big-info-header">{provider.Navn}</h3>
-                            <div className="row">
-                                <div classID="big-info-container" className="col-md-3">
-                                    <div className="big-icon-container-div"><Glyphicon
-                                        glyph="glyphicon glyphicon-map-marker"/>{provider.Adresse}</div>
-                                </div>
-                                <div className="col-md-10">
-                                    <div className="row">
-                                        <div className="col-sm-10">
-                                        <p>Kategorier: {provider["Kategori(er) "]}</p>
-                                        <p>Type aktiviteter: {provider["Type aktivitet "]}</p>
-                                        <p>Bydel: {provider.Bydel}</p>
-                                        <p>Telefon: {provider.Telefon}</p>
-                                        <p>Internettadresse: <a href={provider.Internettadresse}
-                                                                target="_blank">{provider.Internettadresse}</a>
+                    <h3 className="big-info-header-provider">{provider.Navn}</h3>
+
+                    <div classID="big-info-container">
+                        <div className="big-icon-container-div"><Glyphicon
+                            glyph="glyphicon glyphicon-map-marker"/>{provider.Adresse}</div>
+                    </div>
+                    <p className="provider-card-bold-info">Aktiviteter</p>
+                    <ul>
+                        <li>Ingen registrert</li>
+                    </ul>
+                    <div className="provider-info">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <p className="provider-card-bold-info">Kategorier: </p>
+                                        <p className="provider-card-bold-info">Type aktiviteter: </p>
+                                        <p className="provider-card-bold-info">Bydel: </p>
+                                        <p className="provider-card-bold-info">Telefon: </p>
+                                        <p className="provider-card-bold-info">Internettadresse:
                                         </p>
-                                        <p>Medlemmer: {provider.Medlemmer}</p>
-                                        </div>
-                                        <div className="col-sm-2">
-                                            <p>Aktiviteter</p>
-                                            <ul>
-                                                <li>Ingen registrert</li>
-                                            </ul>
-                                        </div>
+                                        <p className="provider-card-bold-info">Medlemmer: </p>
+                                    </div>
+                                    <div className="col-md-7">
+                                        <p>{provider["Kategori(er) "]}</p>
+                                        <p>{provider["Type aktivitet "]}</p>
+                                        <p>{provider.Bydel}</p>
+                                        <p>{provider.Telefon}</p>
+                                        <p><a href={provider.Internettadresse}
+                                              target="_blank">{provider.Internettadresse}</a>
+                                        </p>
+                                        <p>{provider.Medlemmer}</p>
                                     </div>
                                 </div>
                             </div>

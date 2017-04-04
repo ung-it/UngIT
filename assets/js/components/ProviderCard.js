@@ -1,6 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
+import  {follow, unfollow, checkIfFollowing } from "../APIFunctions";
 
 
 const moment = require('moment');
@@ -10,9 +11,65 @@ class ProviderCard extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            following: false,
+            hasChecked: false,
+            loggedIn: false
 
+        }
+    };
+    
+    onFollow = () => {
+        const request = {
+            id: this.props.id
+        };
+        follow(request, response => {
+            if (response.following == false) {
+                this.setState({
+                    following: true
+                });
+            }
+        });
     };
 
+    onUnfollow = () => {
+        const request = {
+            id: this.props.id
+        };
+        unfollow(request, response => {
+            if (response.following == true) {
+                this.setState({
+                    following: false
+                });
+            }
+        });
+    };
+
+
+    onCheckIFollowing = () => {
+        const request = {
+            id: this.props.id
+        };
+        checkIfFollowing(request, response => {
+            if (response.following == true) {
+                this.setState({
+                    attending: true,
+                    hasChecked: true,
+                    loggedIn: true
+                });
+            } else if (response.following == false) {
+                this.setState({
+                    loggedIn: true,
+                    hasChecked: true
+                });
+            } else {
+                this.setState({
+                    loggedIn: false,
+                    hasChecked: true
+                })
+            }
+        })
+    };
 
     createProviderItem = () => {
         const provider = this.props.provider;

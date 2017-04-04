@@ -49,6 +49,7 @@ class ProviderField extends Component {
                     filter={AutoComplete.caseInsensitiveFilter}
                     fullWidth={true}
                     style={styles.customWidth}
+                    maxSearchResults={10}
                 />
             </div>
         )

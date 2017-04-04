@@ -103,6 +103,30 @@ export function checkIfSignedUp(data, callback) {
     });
 }
 
+
+
+export function follow(data, callback) {
+    postToServer('/follow/', data).then (response => {
+        callback(response);
+    });
+}
+
+export function unfollow(data, callback) {
+    postToServer('/unfollow/', data).then(response => {
+        callback(response);
+    });
+}
+
+export function checkIfFollowing(data, callback) {
+    postToServer('/checkIfFollowing/', data).then(response => {
+        callback(response);
+    });
+}
+
+
+
+
+
 export function postNewRating(object) {
     return postToServer('/rateActivity/', object);
 }

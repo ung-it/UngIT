@@ -1,14 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from "react-redux";
+import {Provider, connect} from "react-redux";
 
-import { fetchAllAttendingActivities } from '../actions/activitiesActions';
+import {fetchAllAttendingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 
 import '../../styles/activityBox.css';
 
 const store = configureStore();
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 class AttendingActivitiesContainer extends Component {
 
@@ -38,11 +41,11 @@ class AttendingActivitiesContainer extends Component {
         };
 
         let attendingContainer = <p>Du er ikke påmeldt noen aktiviteter</p>;
-        if(this.props.attendingActivities.length > 0){
-            attendingContainer=
-              <div style={styles.activitiesStyle}>
-                  {this.createActivityCardComponent()}
-              </div>
+        if (this.props.attendingActivities.length > 0) {
+            attendingContainer =
+                <div style={styles.activitiesStyle}>
+                    {this.createActivityCardComponent()}
+                </div>
         }
 
         return (
@@ -58,7 +61,7 @@ const mapStateToProps = state => {
     return {
         attendingActivities: state.activity.attendingActivityList
             .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            // Only get five first
+        // Only get five first
     };
 };
 
@@ -68,6 +71,11 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
 
 // Fetch initial data for state
 store.dispatch(fetchAllAttendingActivities());
@@ -75,9 +83,11 @@ store.dispatch(fetchAllAttendingActivities());
 AttendingActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AttendingActivitiesContainer);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <AttendingActivitiesContainer />
-    </Provider>, document.getElementById('attendingActivities')
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+            <AttendingActivitiesContainer />
+        </Provider>
+    </MuiThemeProvider>, document.getElementById('attendingActivities')
 );
 
 

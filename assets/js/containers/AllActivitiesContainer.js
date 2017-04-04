@@ -11,6 +11,7 @@ import '../../styles/activityBox.css';
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
 import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked, suitedForButtonClicked, activityButtonClicked } from '../actions/activitiesActions';
+
 import configureStore from "../configureStore";
 
 const store = configureStore();
@@ -18,6 +19,11 @@ const store = configureStore();
 
 class AllActivitiesContainer extends Component {
 
+    componentDidMount() {
+        this.props.fetchActivities().then(() => {
+            this.props.fetchFacebookEventData(this.props.activities);
+        });
+    }
 
     render() {
         return (
@@ -48,16 +54,12 @@ class AllActivitiesContainer extends Component {
 const mapStateToProps = state => {
     let {activity: {activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
-
-    //TODO: Send all suited for filters as props from suitedforpicker
     const availableSuitedFor = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging 3', 'Tilrettelegging 4', 'Annet'];
-
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
 
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
     const suitedForFilters = activeSuitedForFilters;
-
 
     const hasWeekFilter = activeDateFilter.toString().length > 0;
     const weekPicker = new Date(activeDateFilter);
@@ -112,6 +114,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchActivities: () => dispatch(fetchAllActivities()),
+        fetchFacebookEventData: (activities) => dispatch(fetchFacebookEventData(activities)),
         changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
         changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
@@ -130,8 +133,6 @@ const muiTheme = getMuiTheme({
 
 
 AllActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllActivitiesContainer);
-// Fetch initial data for to the state
-store.dispatch(fetchAllActivities());
 
 ReactDOM.render(
     <MuiThemeProvider muiTheme={muiTheme}>

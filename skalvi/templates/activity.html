@@ -114,7 +114,7 @@
                             </div>
                         </span>
                     </li>
-                    <li class="mdl-list__item">
+                    <li class="mdl-list__item list-item">
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.location.value != None %}
@@ -145,6 +145,29 @@
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="description">Om arrangement</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item list-item">
+                        <span class="mdl-list__item-primary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
+                                {% if form.assistants_number.value != None %}
+                                    <input class="mdl-textfield__input" name="assistants_number" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="assistants_number" value="{{ form.assistants_number.value }}" required>
+                                {% else %}
+                                    <input class="mdl-textfield__input" name="assistants_number" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="assistants_number" required>
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="assistants_number">Totalt antall assistenter tilgjengelig</label>
+                                <span class="mdl-textfield__error">Antall må være et tall</span>
+                            </div>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {% if form.assistants_text.value != None %}
+                                    <textarea class="mdl-textfield__input" name="assistants_text" type="text" rows="5" maxrows="10" id="assistants_text">{{ form.assistants_text.value }}</textarea>
+                                {% else %}
+                                    <textarea class="mdl-textfield__input" name="assistants_text" type="text" rows="5" maxrows="10" id="assistants_text"></textarea>
+                                {% endif %}
+                                <label class="mdl-textfield__label" for="description">Ekstra informasjon om assistenter</label>
                             </div>
                         </span>
                     </li>

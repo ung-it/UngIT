@@ -65,7 +65,7 @@ class ActivityForm(forms.ModelForm):
 
     class Meta:
         model = Activity
-        fields = ['activityName', 'activityType', 'provider', 'facebookID', 'facebookInfo', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'date_end', 'time_start', 'time_end', 'images', 'instagram', 'videos']
+        fields = ['activityName', 'activityType', 'provider', 'facebookID', 'facebookInfo', 'assistants_number', 'assistants_text', 'adaptions', 'age', 'location', 'description', 'registration_required', 'price', 'date', 'date_end', 'time_start', 'time_end', 'images', 'instagram', 'videos']
 
 class RegisterProfileForm(forms.ModelForm):
     type = forms.BooleanField(label="Voksen", required=False)

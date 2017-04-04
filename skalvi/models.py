@@ -46,6 +46,8 @@ class Activity(models.Model):
     videos = models.ImageField(upload_to='videos/',max_length=255, blank=True)
     rating = models.FloatField(blank=True, default=0)
     number_of_ratings = models.IntegerField(blank=True, default=0)
+    assistants_number = models.IntegerField()
+    assistants_text = models.TextField(blank=True, null=True)
 
     def was_published(self):
         return self.pub_date

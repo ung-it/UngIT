@@ -26,6 +26,7 @@ class ActivityFilters extends React.Component {
     };
 
     render() {
+        const activityName = this.props.activitiesName.map(activity => activity.fields.activityName);
 
         return (
             <Paper className="filter-container">
@@ -48,8 +49,9 @@ class ActivityFilters extends React.Component {
                     <div className="col-md-6">
                         <SearchForActivity
                             onFilterChange={this.props.onSearchForChange}
-                            activeFilters={this.props.searchForFilters}
-                            placeholderText="Søk på aktivitet..."
+                            placeholderText="Søk etter en aktivitet..."
+                            activitiesName={activityName}
+                            searchForFilter={this.props.searchForFilter}
                         />
                     </div>
                     <div className="col-md-6">
@@ -61,15 +63,18 @@ class ActivityFilters extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <ActivityPicker
-                            onFilterChange={this.props.onActivityFilterChange}
-                            activeFilters={this.props.activityFilters}
-                        />
-                    </div>
-                    <div className="col-md-6">
                         <SuitedForPicker
                             onFilterChange={this.props.onSuitedForFilterChange}
                             activeFilters={this.props.suitedForFilters}
+                            suitedForButton={this.props.suitedForButton}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <ActivityPicker
+                            onFilterChange={this.props.onActivityFilterChange}
+                            activeFilters={this.props.activityFilters}
+                            activityButton={this.props.activityButton}
+
                         />
                     </div>
                 </div>
@@ -81,13 +86,19 @@ class ActivityFilters extends React.Component {
 
 ActivityFilters.propTypes = {
     onActivityFilterChange: React.PropTypes.func.isRequired,
-    activityFilters: React.PropTypes.string.isRequired,
+    activityFilters: React.PropTypes.array.isRequired,
+    activityButton: React.PropTypes.func.isRequired,
+
     onSuitedForFilterChange: React.PropTypes.func.isRequired,
-    suitedForFilters: React.PropTypes.string.isRequired,
+    suitedForFilters: React.PropTypes.array.isRequired,
+    suitedForButton: React.PropTypes.func.isRequired,
+
     onWeekPickerChange: React.PropTypes.func.isRequired,
-    weekFilters: React.PropTypes.string.isRequired,
+    weekFilters: React.PropTypes.string,
+
     onSearchForChange: React.PropTypes.func.isRequired,
-    searchForFilters: React.PropTypes.string.isRequired,
+    activitiesName: React.PropTypes.array.isRequired,
+    searchForFilter: React.PropTypes.string.isRequired,
 
     onButtonChange: React.PropTypes.func.isRequired,
 };

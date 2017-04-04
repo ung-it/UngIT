@@ -23,7 +23,14 @@ class ActivityCard extends React.Component {
         });
     };
 
-    createActivityItem = () => {
+    componentWillReceiveProps(newProps) {
+        //Redux saved modal to be open sometimes, this is not intended and it must therefore be set to false
+        this.state.show = false;
+    }
+
+    render() {
+        // this.state.show = false;
+
         let activity = this.props.activity;
 
         let localImages = new Array(activity.images).filter(image => {
@@ -51,7 +58,13 @@ class ActivityCard extends React.Component {
             description = this.props.activity.description;
         }
 
-        const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
+        let dato = new Date(this.props.activity.date);
+        let datoEnd = new Date(this.props.activity.date_end);
+
+        let date = dato.getDate() + ". " + getMonth(dato.getMonth())+ " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
+
+
+        // const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
         const divStyle = {
             background: 'url(' + poster + ')',
             width: '40em',
@@ -101,15 +114,6 @@ class ActivityCard extends React.Component {
                     show={this.state.show}/>
             </div >
         )
-            ;
-    };
-
-    render() {
-        return (
-            <div>
-                {this.createActivityItem()}
-            </div>
-        );
     }
 }
 

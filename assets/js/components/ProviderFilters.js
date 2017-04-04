@@ -22,10 +22,9 @@ class ProviderFilters extends React.Component {
      };
 
     render() {
-        const style = {
-            marginTop: '1.7em',
-            zIndex: '1'
-        };
+
+        const providerName = this.props.providersForSearch.map(provider => provider.Navn);
+
         return (
             <Paper className="filter-container">
                 <div className="row">
@@ -43,18 +42,19 @@ class ProviderFilters extends React.Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6"
-                         style={style}>
+                    <div className="col-md-6">
                         <SearchForProvider
                             onFilterChange={this.props.onSearchForChange}
-                            activeFilters={this.props.searchForFilters}
+                            activitiesName={providerName}
                             placeholderText="Søk på arrangør..."
+                            searchForFilter={this.props.searchForFilter}
                         />
                     </div>
                     <div className="col-md-6">
                         <ActivityPicker
                             onFilterChange={this.props.onActivityFilterChange}
                             activeFilters={this.props.activityFilters}
+                            activityButton={this.props.activityButton}
                         />
                     </div>
                 </div>
@@ -66,9 +66,12 @@ class ProviderFilters extends React.Component {
 
 ProviderFilters.propTypes = {
     onSearchForChange: React.PropTypes.func.isRequired,
-    searchForFilters: React.PropTypes.string.isRequired,
+    providersForSearch: React.PropTypes.array.isRequired,
     onActivityFilterChange: React.PropTypes.func.isRequired,
-    activityFilters: React.PropTypes.string.isRequired,
+    activityFilters: React.PropTypes.array.isRequired,
+    searchForFilter: React.PropTypes.string.isRequired,
+    activityButton: React.PropTypes.func.isRequired,
+
 
     onButtonChange: React.PropTypes.func.isRequired,
 };

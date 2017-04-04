@@ -391,11 +391,14 @@ class ActivityModal extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <div>
+                        Type aktivitet: <b>{activityType}</b>
+                    </div>
                     <div className="modal-adapted">
                         Dette arrangementet er tilpasset for: <b>{adaptions}</b>
                     </div>
                     <div>
-                        Antall assistenter: {assistants_number}
+                        Antall assistenter: <b>{assistants_number}</b>
                         {assistantsInfo}
                     </div>
                     <div className="modal-info-container">

@@ -6,9 +6,11 @@
     Skalvi.no
 {% endblock %}
 
+{% block explicitPageHeader %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}"/>
+{% endblock %}
 
 {% block body %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}"/>
 
     <div class="banner-container">
         <img src="{% static "images/banner-home.png" %}" alt="Banner" class="banner-home">

@@ -1,10 +1,10 @@
 {% load static %}
-<!-- Every page needs access to jqueery -->
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-<!--Every page needs access to bootstrap -->
-<link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
-<link rel="stylesheet" href="../static/styles/chooseUser.css">
-<link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+{% block explicitPageHeader %}
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
+    <link rel="stylesheet" href="../static/styles/chooseUser.css">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
     <a href="../mypage/{{ request.session.profile_name }}" id="back-arrow"><span class="glyphicon glyphicon-arrow-left"

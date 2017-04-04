@@ -3,6 +3,7 @@
     border-style: solid;
     border-color: white;
     margin: 1em 0 0 0;
+    cursor: pointer;
 }
 
 
@@ -53,12 +54,13 @@
 /* Styling for activities on all activities page */
 .demo-card-wide.mdl-card {
     width: 40em;
-    height: 30em;
+    height: 40em;
     max-height: 40em;
     margin: 2em 1em 0 1em;
     overflow-y:auto;
     overflow-x:hidden;
     z-index: 0;
+    cursor: pointer;
 }
 
 .demo-card-wide > .mdl-card__title {
@@ -98,13 +100,12 @@
     margin: 15px;
     font-family: "Dosis", serif;
     border-bottom: 3px solid lightgrey;
-
 }
 
 .provider-info {
     margin: 15px 0 0 0;
     font-family: "Dosis", serif;
-    font-size: 0.8em;
+    font-size: 1em;
 }
 
 .provider-card-bold-info {
@@ -139,10 +140,4 @@
     height: 40px;
     border-radius: 0.4em;
     background-color: white;
-}
-
-/*flytt til style*/
-
-.title {
-    font-size: 4em;
 }

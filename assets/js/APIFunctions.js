@@ -1,4 +1,9 @@
+import Promise from "promise-polyfill"
 import 'whatwg-fetch';
+
+if(!window.Promise){
+    window.Promise = Promise;
+}
 
 export function getUserState() {
     return fetchFromServer('/checkIfLogedIn/').then(response => {

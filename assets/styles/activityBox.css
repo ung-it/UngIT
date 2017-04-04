@@ -55,7 +55,7 @@
     width: 40em;
     height: 30em;
     max-height: 40em;
-    margin: 0.5em;
+    margin: 2em 1em 0 1em;
     overflow-y:auto;
     overflow-x:hidden;
     z-index: 0;
@@ -78,6 +78,7 @@
 
 .big-info-header {
     margin: 0;
+    font-size: 400%;
     border-bottom: 3px solid lightgrey;
 }
 
@@ -88,6 +89,7 @@
 
 .activity-card-info {
     margin: 1em 0 1.5em 0;
+    font-size: 1.5em;
 }
 
 /*Styling provider cards*/
@@ -102,11 +104,11 @@
 .provider-info {
     margin: 15px 0 0 0;
     font-family: "Dosis", serif;
+    font-size: 0.8em;
 }
 
 .provider-card-bold-info {
     font-weight: bolder;
-    font-size: large;
     margin: 0 15px 0 15px;
 }
 
@@ -137,4 +139,10 @@
     height: 40px;
     border-radius: 0.4em;
     background-color: white;
+}
+
+/*flytt til style*/
+
+.title {
+    font-size: 4em;
 }

@@ -40,7 +40,7 @@ class ActivityFilters extends React.Component {
 
                     </div>
                     <div className="col-md-10">
-                        <h2 className="title">Finn aktiviteter</h2>
+                        <h1>Finn aktiviteter</h1>
                     </div>
                 </div>
                 {/* ADD ALL FILTERS HERE */}

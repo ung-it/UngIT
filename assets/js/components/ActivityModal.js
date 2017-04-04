@@ -256,12 +256,12 @@ class ActivityModal extends Component {
 
         } else {
             attendingContainer =
-                <div className="modal-infobox2">
+                <Paper className="modal-infobox2">
                     <div className="modal-infobox2-element">
                         <h4>Du er påmeldt {activityName}</h4>
                         <Button onClick={this.onSignOf} className="btn btn-danger">Meld av</Button>
                     </div>
-                </div>;
+                </Paper>;
         }
 
         let facebookContainer = null;

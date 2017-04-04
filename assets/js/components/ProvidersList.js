@@ -1,7 +1,7 @@
 import React from 'react';
 import ProviderCard from './ProviderCard';
 
-import { Button } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 
 class ProvidersList extends React.Component {
 
@@ -9,15 +9,15 @@ class ProvidersList extends React.Component {
         super(props);
 
         this.state = {
-            offset: 50,
+            offset: 10,
         };
 
     };
 
 
-    loadMore(){
+    loadMore() {
         this.setState({
-          offset: this.state.offset +=50
+            offset: this.state.offset += 50
         });
 
     }
@@ -31,6 +31,12 @@ class ProvidersList extends React.Component {
                 justifyContent: "space-around",
                 width: '100%',
             },
+            loadButtonStyle: {
+                margin: "50px",
+                width: '100%',
+                height: "100px",
+
+            }
 
         };
 
@@ -41,20 +47,21 @@ class ProvidersList extends React.Component {
         }
 
 
-
-        // Slice the reducer data that is provided to match the offset. 
+        // Slice the reducer data that is provided to match the offset.
         const prov = this.props.providers.slice(0, this.state.offset);
-
-
 
 
         const providers = prov.map(provider =>
             <ProviderCard key={provider.Id} provider={provider} id={provider.Id}/>
         );
 
-        return <div style={styles.activitiesStyle}>
-            {providers}
-            <Button   className="btn-success" onClick={() => this.loadMore()}>Last flere</Button>
+        return <div>
+            <div style={styles.activitiesStyle}>
+                {providers}
+                <Button style={styles.loadButtonStyle} className="btn-info" onClick={ () => this.loadMore() }>Last flere</Button>
+            </div>
+
+
         </div>
     }
 }

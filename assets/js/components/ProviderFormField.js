@@ -3,10 +3,11 @@ import { getAllOrganisations } from '../APIFunctions';
 
 import AutoComplete from 'material-ui/AutoComplete';
 import SearchIcon from 'material-ui/svg-icons/action/search';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
     customWidth: {
-        width: 788,
+        width: 700,
     },
 };
 
@@ -24,14 +25,16 @@ class ProviderField extends Component {
         this.state = {
             value: selectedProviders,
             providers: [],
-            color: color
+            color: color,
+            showButton: false
         }
 
     }
 
-    handleChange = (event, index, value) => {
-        $('#provider').val(value);
-        this.setState({value, color: {color: '#3F51B5'}});
+    handleChange = (chosenRequest, index) => {
+        console.log(chosenRequest)
+        this.setState({value: chosenRequest, color: {color: '#3F51B5'}});
+        // $('#provider').val(value);
     };
 
     render() {
@@ -42,14 +45,22 @@ class ProviderField extends Component {
         });
 
         return (
-            <div>
+            <div className="provider-form-field">
                 <AutoComplete
                     floatingLabelText={<div><SearchIcon/> Søk etter aktør</div>}
                     dataSource={data}
                     filter={AutoComplete.caseInsensitiveFilter}
+                    maxSearchResults={10}
                     fullWidth={true}
                     style={styles.customWidth}
-                    maxSearchResults={10}
+                    onNewRequest={this.handleChange}
+                />
+                <RaisedButton
+                    label="Legg til"
+                    className='provider-add-button'
+                    onTouchTap={this.addNewButton}
+                    primary={this.state.showButton}
+                    disabled={!this.state.showButton}
                 />
             </div>
         )

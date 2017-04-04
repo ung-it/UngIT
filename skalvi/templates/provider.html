@@ -23,10 +23,10 @@
         {% endif %}
         <div class="main-wrapper mdl-shadow--2dp">
             <ul class='mdl-list'>
+                <div id="provider-container"></div>
                 <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input id="provider" hidden>
-                    <div id="provider-container"></div>
                     <div class="submit-button">
                         <button type="submit" class="btn btn-success">Registrer</button>
                     </div>

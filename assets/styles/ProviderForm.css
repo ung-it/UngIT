@@ -1,0 +1,9 @@
+.provider-form-field {
+    display: flex;
+    justify-content: space-between;
+}
+
+.provider-add-button {
+    height: 36px;
+    margin-top: 26px;
+}

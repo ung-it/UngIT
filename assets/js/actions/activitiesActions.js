@@ -33,6 +33,10 @@ export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
 export const ADD_WEEK_FILTER = 'ADD_WEEK_FILTER';
 export const ADD_SEARCH_FOR_FILTER = 'ADD_SEARCH_FOR_FILTER';
 export const TRASH_BUTTON_CLICKED = 'TRASH_BUTTON_CLICKED';
+export const SUITED_FOR_BUTTON_CLICKED = 'SUITED_FOR_BUTTON_CLICKED';
+export const ACTIVITY_BUTTON_CLICKED = 'ACTIVITY_BUTTON_CLICKED';
+
+
 // more actions types here
 
 
@@ -65,10 +69,22 @@ export function addActivityFilter(filter) {
     }
 }
 
+export function activityButtonClicked() {
+    return {
+        type: ACTIVITY_BUTTON_CLICKED,
+    }
+}
+
 export function addSuitedForFilter(suitedFilter) {
     return {
         type: ADD_SUITED_FOR_FILTER,
         suitedFilter,
+    }
+}
+
+export function suitedForButtonClicked() {
+    return {
+        type: SUITED_FOR_BUTTON_CLICKED,
     }
 }
 

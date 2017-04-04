@@ -4,8 +4,7 @@ const moment = require('moment');
 
 const initialState = {
     providerList: [],
-    activeActivityFilters: '',
-    activeSuitedForFilters: '',
+    activeActivityFilters: [],
     activeSearchForFilters: '',
     activeButtonClicked: false,
 };
@@ -31,10 +30,15 @@ export default function ProviderReducer(state = initialState, action) {
         case actionTypes.TRASH_BUTTON_CLICKED:
             return {
                 ...state,
-                activeActivityFilters: '',
+                activeActivityFilters: [],
                 activeSuitedForFilters: '',
                 activeSearchForFilters: '',
                 activeButtonClicked: false,
+            };
+        case actionTypes.ACTIVITY_BUTTON_CLICKED:
+            return {
+                 ...state,
+                activeActivityFilters: [],
             };
         default:
             return state;

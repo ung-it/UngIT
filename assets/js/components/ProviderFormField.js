@@ -30,10 +30,12 @@ class ProviderField extends Component {
             data: [],
             selected: [],
             color: color,
-            showButton: false
+            showButton: false,
+            showRemoveButton: false,
         };
 
         this.addProvider = this.addProvider.bind(this);
+        this.removeProvider = this.removeProvider.bind(this);
     }
 
     handleChange = (chosenRequest, index) => {
@@ -46,11 +48,10 @@ class ProviderField extends Component {
 
         const providers = this.state.selected.map(provider => {
             const json = JSON.parse(provider.fields.aktordatabase);
-            console.log(json);
             return (
-                <TableRow key={provider}>
-                    <TableRowColumn>{json.Id}</TableRowColumn>
-                    <TableRowColumn>{json.Navn}</TableRowColumn>
+                <TableRow key={provider.pk}>
+                    <TableRowColumn style={{width: 100}}>{json.Id}</TableRowColumn>
+                    <TableRowColumn style={{width: 500}}>{json.Navn}</TableRowColumn>
                     <TableRowColumn>{json.Organisasjonsnummer}</TableRowColumn>
                 </TableRow>
             );
@@ -77,14 +78,15 @@ class ProviderField extends Component {
                     />
                 </div>
                 <Table
-                    height={'500px'}
+                    height={'300px'}
+                    multiSelectable={true}
                 >
                     <TableHeader
                         displaySelectAll={false}
                     >
                         <TableRow>
-                            <TableHeaderColumn tooltip="ID tilhørende aktørdatabasen">ID</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Navn på aktør">Navn</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="ID tilhørende aktørdatabasen" style={{width: 100}}>ID</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Navn på aktør" style={{width: 500}}>Navn</TableHeaderColumn>
                             <TableHeaderColumn tooltip="Organisasjonsnummer">Organisasjonsnummer</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
@@ -92,6 +94,15 @@ class ProviderField extends Component {
                         {providers}
                     </TableBody>
                 </Table>
+                <div className="remove-button-container">
+                    <RaisedButton
+                        label="Fjern valgte"
+                        className='provider-remove-button'
+                        onTouchTap={this.removeProvider}
+                        primary={this.state.showRemoveButton}
+                        disabled={!this.state.showRemoveButton}
+                    />
+                </div>
             </div>
         )
     }
@@ -114,6 +125,10 @@ class ProviderField extends Component {
             const selected = this.state.selected.concat(provider);
             this.setState({selected});
         }
+    }
+
+    removeProvider() {
+
     }
 
 }

@@ -7,3 +7,12 @@
     height: 36px;
     margin-top: 26px;
 }
+
+.remove-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.provider-remove-button {
+    height: 36px;
+}

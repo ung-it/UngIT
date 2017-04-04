@@ -1,9 +1,13 @@
-import Promise from "promise-polyfill"
 import 'whatwg-fetch';
+
+const Promise = require("promise-polyfill");
+const setAsap = require("setasap");
+Promise._immediateFn = setAsap;
 
 if(!window.Promise){
     window.Promise = Promise;
 }
+
 
 export function getUserState() {
     return fetchFromServer('/checkIfLogedIn/').then(response => {

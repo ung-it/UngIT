@@ -105,6 +105,7 @@ def signOfEvent(request):
         response = {'attending': None}
     return HttpResponse(json.dumps(response), content_type='application/json')
 
+@csrf_exempt
 def getFollowingProviders(request):
     profile_name = request.path.split("/")[3]
     profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
@@ -116,9 +117,77 @@ def getFollowingProviders(request):
         follows_objects.append(prov)
     json_serializer = serializers.get_serializer("json")()
     followingProviders = json_serializer.serialize(follows_objects, ensure_ascii=False)
-    return HttpResponse(followingProviders, content_type=''
-                                                         ''
-                                                         'application/json')
+    return HttpResponse(followingProviders, content_type='application/json')
+
+@csrf_exempt
+def follow(request):
+    providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
+    provider = Organisation.objects.get(pk=providerId)
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+        # Check if user already is following
+        try:
+            follows = Follows.objects.get(orgId=providerId, userId=request.user, user_profile_id=profile)
+            response = {'attending': True}
+        # if user is not following
+        except Follows.DoesNotExist:
+            follows = Follows(orgId=providerId, userId=request.user, user_profile_id=profile)
+            follows.save()
+
+            response = {'attending': False}
+    # User not logged in
+    else:
+        # user is not loged in, should not be possible to attend activity
+        response = {'attending': None}  # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+@csrf_exempt
+def unFollow(request):
+    providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
+    provider = Organisation.objects.get(pk=providerId)
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+        # Check if user already is following
+        try:
+            follows = Follows.objects.get(orgId=providerId, userId=request.user, user_profile_id=profile)
+            follows.delete()
+            response = {'attending': True}
+        # if user is not following
+        except Follows.DoesNotExist:
+            #  Not following, can't unfollow
+            response = {'attending': False}
+    # User not logged in
+    else:
+        # user is not loged in, should not be possible to attend activity
+        response = {'attending': None}  # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+@csrf_exempt
+def checkIfFollowing(request):
+    providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
+    activity = Activity.objects.get(pk=providerId)
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+        # Check if user already is attending
+        try:
+            follows = Follows.objects.get(orgId=providerId, userId=request.user,
+                                                    user_profile_id=profile)
+            response = {'attending': True}
+
+        except ParticipateIn.DoesNotExist:
+            # If user does not follow
+            response = {'attending': False}
+    else:
+        # If user is not loged in
+        response = {'attending': None}
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
 
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]

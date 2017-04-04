@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
     # Add provider to sub-user
     url(r'^provider/$', views.ProviderView.as_view(), name='provider'),
+    url(r'^api/organisations/$', ApiFunctions.getOrganisations, name='APIProvider'),
 
     url(r'^api/getHost/[0-9]+/$', views.getActivityHost, name="getActivityHost"),
 

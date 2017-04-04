@@ -16,6 +16,11 @@ export function getUpcomingActivities(callback) {
     });
 }
 
+export function getAllOrganisations(callback) {
+    return fetchFromServer('/api/organisations/').then(response => {
+        callback(response);
+    })
+}
 
 export function getAllProviders() {
     return fetchFromServer('/api/providers/')

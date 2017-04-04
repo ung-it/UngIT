@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { getAllOrganisations } from '../APIFunctions';
 
 import AutoComplete from 'material-ui/AutoComplete';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
 const styles = {
     customWidth: {
-        width: 300,
+        width: 788,
     },
 };
 
@@ -35,14 +36,28 @@ class ProviderField extends Component {
 
     render() {
 
+        const data = this.state.providers.map(provider => {
+            const json = JSON.parse(provider.fields.aktordatabase);
+            return json.Navn;
+        });
+
         return (
             <div>
                 <AutoComplete
                     floatingLabelText={<div><SearchIcon/> Søk etter aktør</div>}
-                    dataSource={this.state.providers}
+                    dataSource={data}
+                    filter={AutoComplete.caseInsensitiveFilter}
+                    fullWidth={true}
+                    style={styles.customWidth}
                 />
             </div>
         )
+    }
+
+    componentDidMount() {
+        getAllOrganisations(organisations => {
+            this.setState({providers: organisations});
+        })
     }
 
 }

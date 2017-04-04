@@ -7,6 +7,7 @@ import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
 import {
     fetchAllActivities,
+    fetchFacebookEventData,
     addActivityFilter,
     addSuitedForFilter,
     addWeekFilter,
@@ -24,6 +25,11 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 class AllActivitiesContainer extends Component {
 
+    componentDidMount() {
+        this.props.fetchActivities().then(() => {
+            this.props.fetchFacebookEventData(this.props.activities);
+        });
+    }
 
     render() {
         return (
@@ -58,8 +64,6 @@ const mapStateToProps = state => {
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
     const activityFilters = activeActivityFilters.split(','); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
 
-    console.log(activityFilters);
-
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
     const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
 
@@ -79,15 +83,15 @@ const mapStateToProps = state => {
         ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
         : activityList;
 
-    activityList = hasWeekFilter
-        ? activityList.filter(activity =>
-        (
-            ((new Date(activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date(activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date(activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
-            (new Date(activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date(activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date(activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
-            (weekFilters[0].getYear() >= new Date(activity.fields.date).getYear() && weekFilters[0].getMonth() >= new Date(activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date(activity.fields.date).getDay()) &&
-            (weekFilters[0].getYear() <= new Date(activity.fields.date_end).getYear() && weekFilters[0].getMonth() <= new Date(activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date(activity.fields.date_end).getDay())
-        ))
-        : activityList;
+    // activityList = hasWeekFilter
+    //     ? activityList.filter(activity =>
+    //     (
+    //         ((new Date(activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date(activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date(activity.fields.date).getDate() >= weekFilters[0].getDate()) &&
+    //         (new Date(activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date(activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date(activity.fields.date).getDate() <= weekFilters[1].getDate())) ||
+    //         (weekFilters[0].getYear() >= new Date(activity.fields.date).getYear() && weekFilters[0].getMonth() >= new Date(activity.fields.date).getMonth() && weekFilters[0].getDate() >= new Date(activity.fields.date).getDate()) &&
+    //         (weekFilters[0].getYear() <= new Date(activity.fields.date_end).getYear() && weekFilters[0].getMonth() <= new Date(activity.fields.date_end).getMonth() && weekFilters[0].getDate() <= new Date(activity.fields.date_end).getDate())
+    //     ))
+    //     : activityList;
 
     activityList = hasSearchForFilter
         ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
@@ -105,12 +109,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchActivities: () => dispatch(fetchAllActivities()),
+        fetchFacebookEventData: (activities) => dispatch(fetchFacebookEventData(activities)),
         changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
         changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
         changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
         changeTrashButton: () => dispatch(trashButtonClicked()),
-
     }
 }
 
@@ -122,8 +126,6 @@ const muiTheme = getMuiTheme({
 
 
 AllActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllActivitiesContainer);
-// Fetch initial data for to the state
-store.dispatch(fetchAllActivities());
 
 ReactDOM.render(
     <MuiThemeProvider muiTheme={muiTheme}>

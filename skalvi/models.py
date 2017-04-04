@@ -90,6 +90,8 @@ class Commentary(models.Model):
 
 ###########  Relations tables  ##########
 
+
+
 class ParticipateIn(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     activityId = models.ForeignKey(Activity, on_delete=models.CASCADE)
@@ -115,4 +117,7 @@ class EmployedIn(models.Model):
     orgNr = models.ForeignKey(Organisation, on_delete=models.CASCADE)
     userId = models.OneToOneField(User, on_delete=models.CASCADE)
 
-
+class Follows(models.Model):
+    orgId = models.ForeignKey(Organisation, on_delete=models.CASCADE)
+    userId = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_profile_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE)

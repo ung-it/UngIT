@@ -33,15 +33,21 @@ class HostingActivitiesContainer extends Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "flex-start"
-            }
+                justifyContent: "space-around"
+            },
         };
+
+        let hostingContainer = <p>Du har ikke opprettet noen aktiviteter</p>;
+        if(this.props.hostingActivities.length > 0){
+            hostingContainer=
+                <div style={styles.activitiesStyle}>
+                    {this.createActivityCardComponent()}
+                </div>
+        }
 
         return (
             <div style={styles.activitiesContainerStyle}>
-              <div style={styles.activitiesStyle}>
-                  {this.createActivityCardComponent()}
-              </div>
+                {hostingContainer}
             </div>
         );
     }

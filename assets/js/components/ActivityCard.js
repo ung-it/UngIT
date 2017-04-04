@@ -23,7 +23,14 @@ class ActivityCard extends React.Component {
         });
     };
 
-    createActivityItem = () => {
+    componentWillReceiveProps(newProps) {
+        //Redux saved modal to be open sometimes, this is not intended and it must therefore be set to false
+        this.state.show = false;
+    }
+
+    render() {
+        // this.state.show = false;
+
         let activity = this.props.activity;
 
         let localImages = new Array(activity.images).filter(image => {
@@ -44,42 +51,57 @@ class ActivityCard extends React.Component {
             poster = "/static/images/activityPic.jpeg"
         }
 
+        let description = '';
+        if (this.props.activity.description.length > 160) {
+            description = this.props.activity.description.substr(0, 160) + "...";
+        } else {
+            description = this.props.activity.description;
+        }
 
-        const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
+        let dato = new Date(this.props.activity.date);
+        let datoEnd = new Date(this.props.activity.date_end);
+
+        let date = dato.getDate() + ". " + getMonth(dato.getMonth())+ " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
+
+
+        // const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
         const divStyle = {
-            backgroundImage: 'url(' + poster + ')',
-            width: '25em',
-            height: '15em',
-            backgroundSize: '25em 25em',
-            borderRadius: '3px',
+            background: 'url(' + poster + ')',
+            width: '40em',
+            height: '20em',
+            backgroundSize: '40em 20em',
             backgroundRepeat: 'no-repeat',
         };
 
         return (
-            <div key={this.props.activity.id}
-                 className="activityBigStyle"
-                 onClick={this.openActivityModal}
-                 title="Klikk på aktiviteten for mer informasjon">
-
-                <div className="activity-card-image-container" style={divStyle}/>
-
-                <div className="activity-card-info-container">
-                    <div className="activity-card-header-container">
-                        <h3 className="big-info-header"> {this.props.activity.activityName}</h3>
-                        <div className="activity-card-row-info">
-                            <div className="row">
-                                <div classID="big-icon-container-div" className="col-md-4"><Glyphicon
-                                    glyph="glyphicon glyphicon-calendar"/>{date}</div>
-                                <div classID="big-icon-container-div" className="col-md-4"><Glyphicon
-                                    glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start}
-                                    - {this.props.activity.time_end}</div>
-                                <div classID="big-icon-container-div" className="col-md-4"><Glyphicon
+            < div
+                key={this.props.activity.id}>
+                <div className="demo-card-wide mdl-card mdl-shadow--2dp"
+                     title="Klikk på aktiviteten for mer informasjon"
+                     onClick={this.openActivityModal}>
+                    <div className="mdl-card__title" style={divStyle}/>
+                    <div className="mdl-card__supporting-text">
+                        <h3 className="big-info-header">{this.props.activity.activityName}</h3>
+                        <div className="row">
+                            <div className="col-md-6">
+                                {/*<div className="row">*/}
+                                <div className="big-icon-container-div"><Glyphicon
+                                    glyph="glyphicon glyphicon-calendar"/> {date}</div>
+                                <div className="big-icon-container-div"><Glyphicon
+                                    glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</div>
+                                <div className="big-icon-container-div"><Glyphicon
                                     glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</div>
+                                {/*</div>*/}
                             </div>
+                            <div className="col-md-6">{description}</div>
                         </div>
+
                     </div>
-                    <div className="activity-card-description">
-                        <p>{this.props.activity.description}</p>
+                    <div className="mdl-card__actions mdl-card--border">
+                        <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                           onClick={this.openActivityModal}>
+                            Les mer..
+                        </a>
                     </div>
                 </div>
 
@@ -91,15 +113,6 @@ class ActivityCard extends React.Component {
                     show={this.state.show}/>
             </div >
         )
-            ;
-    };
-
-    render() {
-        return (
-            <div>
-                {this.createActivityItem()}
-            </div>
-        );
     }
 }
 

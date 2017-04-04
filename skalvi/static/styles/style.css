@@ -10,8 +10,8 @@ body {
     background-color: white;
 }
 
-h1, h2, h3, h4, .title {
-    font-family: "Indie Flower", serif;
+h1, h2, h3, .title {
+    font-family: "Dosis", serif;
     font-weight: bold;
 }
 
@@ -32,7 +32,7 @@ a.navbar-brand {
 
 .nav-color {
     background-color: rgb(42, 42, 42);
-    font-family: "Yuppy SC", serif;
+    font-family: "Dosis", serif;
 }
 
 .content {

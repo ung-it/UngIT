@@ -2,12 +2,6 @@
     width: 900px;
 }
 
-.main-wrapper {
-    padding: 40px 40px 8px 40px;
-    margin: 8px auto 32px auto;
-    background-color: white;
-    width: 900px;
-}
 .facebook-event-wrapper {
     margin: 8px auto 20px auto;
     padding: 16px 16px 16px 16px;
@@ -88,7 +82,7 @@
 }
 
 #event-select {
-    font-family: "Helvetica","Arial",sans-serif;
+    font-family: "Helvetica", "Arial", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
@@ -97,10 +91,6 @@
 #event-button {
     display: none;
     margin-top: 16px;
-}
-
-.submit-button {
-    padding: 16px;
 }
 
 .date-time-container:not( .md-input-has-value ) input:not( :focus ) {

@@ -4,6 +4,13 @@ import React, {Component} from 'react';
 import {Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl,} from 'react-bootstrap';
 //Project component import
 import CalendarDateBox from './CalendarDateBox';
+//Image gallery
+import ImageGallery from 'react-image-gallery';
+
+//CSS
+import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
+
+
 //CSS import
 import '../../styles/modal.css';
 import {SUITED_FOR_TYPES} from './SuitedForPicker';
@@ -27,9 +34,9 @@ class ActivityModal extends Component {
             hasChecked: false,
             attending: false,
             loggedIn: false,
-            fetchedComments: false,
             noComments: true,
             hosting: false,
+            myrating: 0,
             comments: []
         }
     }
@@ -52,7 +59,7 @@ class ActivityModal extends Component {
         this.setState({
             show: false,
             hasChecked: false,
-            hosting: false
+            hosting: false,
         });
     };
 
@@ -94,11 +101,13 @@ class ActivityModal extends Component {
                     hasChecked: true,
                     loggedIn: true
                 });
+                this.fetchHost();
             } else if (response.attending == false) {
                 this.setState({
                     loggedIn: true,
                     hasChecked: true
-                })
+                });
+                this.fetchHost();
             } else {
                 this.setState({
                     loggedIn: false,
@@ -114,24 +123,24 @@ class ActivityModal extends Component {
             rating: nextValue
         };
         postNewRating(obj);
-        $("#ratingFeedback").html("Takk for din vurdering.");
-
+        this.setState({
+            myrating: nextValue
+        });
     };
 
     fetchComments = () => {
         getComments(this.props.id,(result) => {
             if (result.message == "ingen kommentar funnet") {
-                this.setState({
-                    noComment: true
-                })
-            } else {
-                this.setState({
-                    comments: result.reverse(),
-                    noComments: false
+            }
+            else {
+                 this.setState({
+                    comments: result.reverse()
                 });
             }
         });
     };
+
+
 
     onPostComment = () => {
         if($("#commentInput").val().trim().length == 0){
@@ -160,13 +169,23 @@ class ActivityModal extends Component {
         });
     };
 
+    fetchHost = () => {
+        getHost(this.props.id,(result) => {
+            if(result.host == 'true'){
+                this.setState({
+                    hosting: true
+                });
+            }
+        });
+    };
 
     render() {
-        const {date, activityName, facebook, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
+        const {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
-        const starRating = rating / number_of_ratings;
+
+        let starRating = rating / number_of_ratings;
         let suitedForContainer = [];
-        let imageContainer = null;
+        let carouselContainer = null;
         let attendingContainer = null;
         let ratingContainer = null;
         let postCommentContainer = null;
@@ -195,16 +214,26 @@ class ActivityModal extends Component {
                </div>;
         }
 
+        if(this.state.myrating > 0){
+            starRating =
+                (rating + this.state.myrating)/(number_of_ratings+1);
+
+            ratingContainer =
+                <span id="ratingFeedback">Takk for din vurdering.</span>;
+        }
 
         let images = this.props.images.map(image => {
-            return <img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>
+            {/*<img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>*/}
+            return {original: image, thumbnail: image}
         });
 
         if (this.state.show && !this.state.hasChecked) {
-            this.checkIfSignUp()
-            this.fetchComments();
-            this.fetchHost()
+            this.checkIfSignUp();
+            if (allComments.length < 1) {
+                this.fetchComments();
+            }
         }
+
 
         if (!this.state.loggedIn) {
             attendingContainer =
@@ -234,43 +263,70 @@ class ActivityModal extends Component {
         }
 
         let facebookContainer = null;
-        if (facebook) {
-            // console.log(facebook)
+        if (facebook && facebookInfo) {
             let fImages = facebook.photos.data.map(image => {
                 return <img src={image.images[0].source} key={image.id} className="modal-image"/>
             });
 
             images = images.concat(fImages);
 
+            let admins = facebook.admins.data.map(admin => {
+                let link = "https://facebook.com/" + admin.id;
+                return <a href={link} key={admin.id} target="_blank" title="Åpner Facebooksiden knyttet til denne personen/organisasjonen" className="modal-facebook-admin-link">{admin.name}</a>
+            });
+
             facebookContainer = (
                 <div className="modal-facebook-container">
-                    <h3>Informasjon om arrangementet fra Facebook</h3>
-                    <div className="modal-facebook-image">
+                    <h2 className="modal-facebook-header">Informasjon om arrangementet fra Facebook</h2>
+                    <div className="modal-facebook-wrapper">
+                        <div className="modal-facebook-info">
+                            <div>Ansvarlige for arrangementet:</div>
+                            <div>Antall påmeldte:</div>
+                            <div>Antall interesserte:</div>
+                        </div>
+                        <div className="modal-facebook-data">
+                            <div>{admins}</div>
+                            <div>{facebook.attending_count}</div>
+                            <div>{facebook.maybe_count}</div>
+                        </div>
                     </div>
                 </div>
             );
         }
 
-        if (images.length > 0) {
-            imageContainer =
+        if (this.state.show && images.length != 0) {
+            carouselContainer =
                 <div>
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>
-                    <div className="modal-image-container">
-                        {images}
+                    {/*<Carousel carouselImages={images}/>*/}
+                    <div id="imageContainer">
+                        <ImageGallery
+                            items={images}
+                            slideInterval={1900}
+                            originalClass="pictureClass"
+                            showFullscreenButton={false}
+                            showPlayButton={false}
+                            thumbnailPosition="right"
+                        />
                     </div>
                 </div>;
         }
 
         if (this.state.loggedIn) {
-            ratingContainer =
-                <div id="ratingContainer">
-                    <StarRatingComponent id="activityRating" name="activityRating" emptyStarColor="#BBB" value={starRating}
-                                     onStarClick={this.onRateChange.bind(this)}/>
-                    <span id="ratingFeedback"></span>
-                </div>;
+            if(this.state.myrating > 0){
+                starRating =
+                    (rating + this.state.myrating)/(number_of_ratings+1);
 
+                ratingContainer =
+                    <span id="ratingFeedback">Takk for din vurdering.</span>;
+            }else{
+                ratingContainer =
+                    <div>
+                        <p className="activityRating">Gi din vurdering</p>
+                        <StarRatingComponent className="activityRating" name="activityRating" emptyStarColor="#BBB" onStarClick={this.onRateChange.bind(this)}/>;
+                    </div>
+            }
             postCommentContainer =
-
                 <div id="postComment">
                     <form className="comment-form" method="POST" action="/postComment/">
                         <div className="input-group">
@@ -291,7 +347,7 @@ class ActivityModal extends Component {
                 <Button onClick={this.editActivity}>Endre aktivitet</Button>;
         }
 
-        if (!this.state.noComments) {
+        if (allComments.length > 0) {
             commentsContainer =
                 <div id="commentDiv">
                     {allComments.map((com, i) =>
@@ -302,6 +358,15 @@ class ActivityModal extends Component {
                         </div>
                     )}
                 </div>;
+        }
+
+        let assistantsInfo = null;
+        if (assistants_text != "") {
+            assistantsInfo = (
+                <div>
+                    Ekstra informasjon om assistentene: {assistants_text}
+                </div>
+            );
         }
 
         return (
@@ -318,25 +383,28 @@ class ActivityModal extends Component {
                             <div className="modal-provider-title">Arrangeres av: <b>{provider}</b>
                             </div>
                         </div>
-                        {ratingContainer}
+                        <div id="ratingContainer">
+                            <StarRatingComponent id="userRating" name="userRating" emptyStarColor="#BBB" value={starRating} editing={false}/>
+                        </div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <div>
+                        Type aktivitet: <b>{activityType}</b>
+                    </div>
                     <div className="modal-adapted">
-                        Dette arrangementet er tilpasset for: <b>{suitedForContainer.label}</b>
+                        Dette arrangementet er tilpasset for: <b>{adaptions}</b>
                     </div>
                     <div>
-                        Antall assistenter: Ikke oppgitt
+                        Antall assistenter: <b>{assistants_number}</b>
+                        {assistantsInfo}
                     </div>
                     <div className="modal-info-container">
                         <div className="modal-infobox1">
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/>
-                                Alder: {age}</div>
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/>
-                                Tid: {time_start} - {time_end}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {time_start} - {time_end}</div>
                             <div className="modal-infobox1-element">
-                                <Glyphicon glyph="glyphicon glyphicon-map-marker"/>
-                                Sted: {location}
+                                <Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {location}
                             </div>
                             <div className="modal-infobox1-map">
                                 <a onClick={this.showMap}>Vis på kart</a>
@@ -349,10 +417,13 @@ class ActivityModal extends Component {
                         <p className="modal-description">{description}</p>
                     </div>
                     {videoContainer}
-                    {imageContainer}
+                    {carouselContainer}
                     {facebookContainer}
                     <hr/>
-                    <h2 className="modal-comments">Kommentarer</h2>
+                    <div id="commentAndRating">
+                        <h2 className="modal-comments">Kommentarer</h2>
+                        {ratingContainer}
+                    </div>
                     {postCommentContainer}
                     {commentsContainer}
                 </Modal.Body>

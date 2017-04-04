@@ -1,18 +1,29 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
-import { connect } from "react-redux";
+import {Provider} from "react-redux";
+import {connect} from "react-redux";
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import '../../styles/activityBox.css';
+
 
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
-import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked } from '../actions/activitiesActions';
-import configureStore from "../configureStore";
+import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked, suitedForButtonClicked, activityButtonClicked } from '../actions/activitiesActions';
 
-import '../../styles/activityBox.css';
+import configureStore from "../configureStore";
 
 const store = configureStore();
 
+
 class AllActivitiesContainer extends Component {
+
+    componentDidMount() {
+        this.props.fetchActivities().then(() => {
+            this.props.fetchFacebookEventData(this.props.activities);
+        });
+    }
 
     render() {
         return (
@@ -21,62 +32,75 @@ class AllActivitiesContainer extends Component {
                     <ActivityFilters
                         onActivityFilterChange={this.props.changeActivityFilter}
                         activityFilters={this.props.activeActivityFilters}
+                        activityButton={this.props.changeActivityButton}
                         onSuitedForFilterChange={this.props.changeSuitedForFilter}
                         suitedForFilters={this.props.activeSuitedForFilters}
+                        suitedForButton={this.props.changeSuitedForButton}
                         onWeekPickerChange={this.props.changeWeekFilter}
                         weekFilters={this.props.activeDateFilter}
                         onSearchForChange={this.props.changeSearchForFilter}
-                        searchForFilters={this.props.activeSearchForFilters}
+                        activitiesName={this.props.activities}
+                        searchForFilter={this.props.activeSearchForFilters}
                         onButtonChange={this.props.changeTrashButton}
                     />
                 </div>
-                <ActivitiesList activities={this.props.activities}/>
+                <div><ActivitiesList activities={this.props.activities}/></div>
+
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    let { activity: { activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters } } = state; // Make activityList and activeActivityFilters from state become variables
+    let {activity: {activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
-
-    activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
-
+    const availableSuitedFor = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging 3', 'Tilrettelegging 4', 'Annet'];
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-    const activityFilters = activeActivityFilters.split(',').map(a => parseInt(a)); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
 
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
-    const suitedForFilters = activeSuitedForFilters.split(',').map(a => parseInt(a));
+    const suitedForFilters = activeSuitedForFilters;
 
-    const hasWeekFilter = activeDateFilter.length > 0;
-    const weekFilters = activeDateFilter.split(',').map(a => new Date(a));
+    const hasWeekFilter = activeDateFilter.toString().length > 0;
+    const weekPicker = new Date(activeDateFilter);
 
+    activityList = hasWeekFilter
+        ? activityList.filter(activity => new Date(activity.fields.date) >= weekPicker)
+        : activityList;
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
 
     activityList = hasActivityFilter
-        ? activityList.filter(activity => activityFilters.includes(activity.fields.activityType))
+        ? activityList.filter(activity => activeActivityFilters.includes(activity.fields.activityType))
         : activityList;
+
 
     activityList = hasSuitedForFilter
-        ? activityList.filter(activity => suitedForFilters.includes(activity.fields.suitedForType))
+        ? activityList.filter(activity => {
+            let result = activity.fields.adaptions.split(',').filter(adaption => {
+                return suitedForFilters.indexOf(adaption) != -1
+            });
+
+            if (suitedForFilters.indexOf("Annet") != -1) {
+
+                result = result.concat(activity.fields.adaptions.split(',').filter(adaption => {
+                    return availableSuitedFor.indexOf(adaption) == -1
+                }))
+            }
+            return result.length >= suitedForFilters.length;
+        })
         : activityList;
 
-    activityList = hasWeekFilter
-        ? activityList.filter(activity =>
-        (
-            ((new Date (activity.fields.date).getYear() >= weekFilters[0].getYear() && new Date (activity.fields.date).getMonth() >= weekFilters[0].getMonth() && new Date (activity.fields.date).getDay() >= weekFilters[0].getDay()) &&
-            (new Date (activity.fields.date).getYear() <= weekFilters[1].getYear() && new Date (activity.fields.date).getMonth() <= weekFilters[1].getMonth() && new Date (activity.fields.date).getDay() <= weekFilters[1].getDay())) ||
-            (weekFilters[0].getYear() >= new Date (activity.fields.date).getYear()  && weekFilters[0].getMonth() >= new Date (activity.fields.date).getMonth() && weekFilters[0].getDay() >= new Date (activity.fields.date).getDay()) &&
-            (weekFilters[0].getYear() <= new Date (activity.fields.date_end).getYear()  && weekFilters[0].getMonth() <= new Date (activity.fields.date_end).getMonth() && weekFilters[0].getDay() <= new Date (activity.fields.date_end).getDay())
-        ))
-        : activityList;
 
     activityList = hasSearchForFilter
         ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
         : activityList;
+
+
+    activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
+
+    activeDateFilter = activeDateFilter.toString();
 
     return {
         activities: activityList,
@@ -90,23 +114,32 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchActivities: () => dispatch(fetchAllActivities()),
+        fetchFacebookEventData: (activities) => dispatch(fetchFacebookEventData(activities)),
         changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
         changeWeekFilter: (weekFilter) => dispatch(addWeekFilter(weekFilter)),
         changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
         changeTrashButton: () => dispatch(trashButtonClicked()),
-
+        changeSuitedForButton: () => dispatch(suitedForButtonClicked()),
+        changeActivityButton: () => dispatch(activityButtonClicked()),
     }
 }
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
+
+
 AllActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllActivitiesContainer);
-// Fetch initial data for to the state
-store.dispatch(fetchAllActivities());
 
 ReactDOM.render(
-    <Provider store={store}>
-        <AllActivitiesContainer />
-    </Provider>,
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+            <AllActivitiesContainer />
+        </Provider>
+    </MuiThemeProvider>,
     document.getElementById('allActivities')
 );
 

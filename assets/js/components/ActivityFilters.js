@@ -1,5 +1,6 @@
 import React from 'react';
 import { Glyphicon } from "react-bootstrap";
+import Paper from 'material-ui/Paper';
 
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
@@ -25,12 +26,11 @@ class ActivityFilters extends React.Component {
     };
 
     render() {
+        const activityName = this.props.activitiesName.map(activity => activity.fields.activityName);
+
         return (
-            <div>
+            <Paper className="filter-container">
                 <div className="row">
-                    <div className="col-md-10">
-                        <h2 className="title">Finn aktiviteter</h2>
-                    </div>
                     <div className="2">
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">
                             Tøm filter
@@ -40,14 +40,18 @@ class ActivityFilters extends React.Component {
                         </button>
 
                     </div>
+                    <div className="col-md-10">
+                        <h2 className="title">Finn aktiviteter</h2>
+                    </div>
                 </div>
                 {/* ADD ALL FILTERS HERE */}
                 <div className="row">
                     <div className="col-md-6">
                         <SearchForActivity
                             onFilterChange={this.props.onSearchForChange}
-                            activeFilters={this.props.searchForFilters}
-                            placeholderText="Søk på aktivitet..."
+                            placeholderText="Søk etter en aktivitet..."
+                            activitiesName={activityName}
+                            searchForFilter={this.props.searchForFilter}
                         />
                     </div>
                     <div className="col-md-6">
@@ -59,33 +63,42 @@ class ActivityFilters extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <ActivityPicker
-                            onFilterChange={this.props.onActivityFilterChange}
-                            activeFilters={this.props.activityFilters}
-                        />
-                    </div>
-                    <div className="col-md-6">
                         <SuitedForPicker
                             onFilterChange={this.props.onSuitedForFilterChange}
                             activeFilters={this.props.suitedForFilters}
+                            suitedForButton={this.props.suitedForButton}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <ActivityPicker
+                            onFilterChange={this.props.onActivityFilterChange}
+                            activeFilters={this.props.activityFilters}
+                            activityButton={this.props.activityButton}
+
                         />
                     </div>
                 </div>
 
-            </div>
+            </Paper>
         )
     }
 }
 
 ActivityFilters.propTypes = {
     onActivityFilterChange: React.PropTypes.func.isRequired,
-    activityFilters: React.PropTypes.string.isRequired,
+    activityFilters: React.PropTypes.array.isRequired,
+    activityButton: React.PropTypes.func.isRequired,
+
     onSuitedForFilterChange: React.PropTypes.func.isRequired,
-    suitedForFilters: React.PropTypes.string.isRequired,
+    suitedForFilters: React.PropTypes.array.isRequired,
+    suitedForButton: React.PropTypes.func.isRequired,
+
     onWeekPickerChange: React.PropTypes.func.isRequired,
-    weekFilters: React.PropTypes.string.isRequired,
+    weekFilters: React.PropTypes.string,
+
     onSearchForChange: React.PropTypes.func.isRequired,
-    searchForFilters: React.PropTypes.string.isRequired,
+    activitiesName: React.PropTypes.array.isRequired,
+    searchForFilter: React.PropTypes.string.isRequired,
 
     onButtonChange: React.PropTypes.func.isRequired,
 };

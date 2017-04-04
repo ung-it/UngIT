@@ -50,11 +50,11 @@ const mapStateToProps = state => {
     const searchForFilter = activeSearchForFilters.toUpperCase();
 
     providerList = hasActivityFilter
-        ? providerList.filter(provider => activityFilters.includes(provider.TypeAktivitet))
+        ? providerList.filter(provider=> activityFilters.includes(provider.fields.aktordatabase.TypeAktivitet))
         : providerList;
 
     providerList = hasSearchForFilter
-        ? providerList.filter(provider => (provider.Navn.includes(searchForFilter)))
+        ? providerList.filter(provider => (provider.fields.aktordatabase.Navn.includes(searchForFilter)))
         : providerList;
 
     return {

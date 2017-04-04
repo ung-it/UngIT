@@ -1,5 +1,11 @@
 import 'whatwg-fetch';
 
+export function getUserState() {
+    return fetchFromServer('/checkIfLogedIn/').then(response => {
+        return response;
+    });
+}
+
 export function getActivityInfo(id, callback) {
     fetchFromServer('/api/activity/' + id).then(data => {
         callback(data[0].fields);
@@ -122,10 +128,6 @@ export function checkIfFollowing(data, callback) {
         callback(response);
     });
 }
-
-
-
-
 
 export function postNewRating(object) {
     return postToServer('/rateActivity/', object);

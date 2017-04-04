@@ -18,9 +18,10 @@ class ProvidersList extends React.Component {
         if (this.props.providers.length < 1) {
             return <h1>Ingen arrangører funnet</h1>;
         }
+        const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
+        const providers = this.props.providers.map((provider, k) =>
+            <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} />,
 
-        const providers = this.props.providers.map(provider =>
-            <ProviderCard key={provider.Id} provider={provider} id={provider.Id}/>
         );
 
         return <div style={styles.activitiesStyle}>

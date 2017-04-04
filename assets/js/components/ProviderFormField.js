@@ -18,58 +18,76 @@ class ProviderField extends Component {
 
         let selectedProviders = $('#provider').val();
         let color = {};
-        if (selectedProviders != "") {
+        if (selectedProviders !== "") {
             color = {color: '#3F51B5'};
         }
 
         this.state = {
             value: selectedProviders,
             providers: [],
+            data: [],
+            selected: [],
             color: color,
             showButton: false
-        }
+        };
 
+        this.addProvider = this.addProvider.bind(this);
     }
 
     handleChange = (chosenRequest, index) => {
-        console.log(chosenRequest)
-        this.setState({value: chosenRequest, color: {color: '#3F51B5'}});
-        // $('#provider').val(value);
+        if (chosenRequest != "") {
+            this.setState({value: chosenRequest, color: {color: '#3F51B5'}, showButton: true});
+        }
     };
 
     render() {
 
-        const data = this.state.providers.map(provider => {
-            const json = JSON.parse(provider.fields.aktordatabase);
-            return json.Navn;
+        const providers = this.state.selected.map(provider => {
+            return provider;
         });
 
         return (
-            <div className="provider-form-field">
-                <AutoComplete
-                    floatingLabelText={<div><SearchIcon/> Søk etter aktør</div>}
-                    dataSource={data}
-                    filter={AutoComplete.caseInsensitiveFilter}
-                    maxSearchResults={10}
-                    fullWidth={true}
-                    style={styles.customWidth}
-                    onNewRequest={this.handleChange}
-                />
-                <RaisedButton
-                    label="Legg til"
-                    className='provider-add-button'
-                    onTouchTap={this.addNewButton}
-                    primary={this.state.showButton}
-                    disabled={!this.state.showButton}
-                />
+            <div>
+                <div className="provider-form-field">
+                    <AutoComplete
+                        floatingLabelText={<div><SearchIcon/> Søk etter aktør</div>}
+                        dataSource={this.state.data}
+                        filter={AutoComplete.caseInsensitiveFilter}
+                        maxSearchResults={10}
+                        fullWidth={true}
+                        style={styles.customWidth}
+                        onNewRequest={this.handleChange}
+                    />
+                    <RaisedButton
+                        label="Legg til"
+                        className='provider-add-button'
+                        onTouchTap={this.addProvider}
+                        primary={this.state.showButton}
+                        disabled={!this.state.showButton}
+                    />
+                </div>
+                {providers}
             </div>
         )
     }
 
     componentDidMount() {
         getAllOrganisations(organisations => {
-            this.setState({providers: organisations});
+
+            const data = organisations.map(provider => {
+                const json = JSON.parse(provider.fields.aktordatabase);
+                return json.Navn;
+            });
+
+            this.setState({providers: organisations, data});
         })
+    }
+
+    addProvider() {
+        if (this.state.selected.indexOf(this.state.value) === -1) {
+            const selected = this.state.selected.concat(this.state.value);
+            this.setState({selected});
+        }
     }
 
 }

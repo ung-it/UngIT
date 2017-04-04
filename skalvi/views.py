@@ -123,17 +123,18 @@ def getFollowingProviders(request):
 def follow(request):
     providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
     provider = Organisation.objects.get(pk=providerId)
+    print("providerid ", providerId)
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
         # Check if user already is following
         try:
-            follows = Follows.objects.get(orgId=providerId, userId=request.user, user_profile_id=profile)
+            follows = Follows.objects.get(orgId=provider, userId=request.user, user_profile_id=profile)
             response = {'following': True}
         # if user is not following
         except Follows.DoesNotExist:
-            follows = Follows(orgId=providerId, userId=request.user, user_profile_id=profile)
+            follows = Follows(orgId=provider, userId=request.user, user_profile_id=profile)
             follows.save()
 
             response = {'following': False}
@@ -153,7 +154,7 @@ def unFollow(request):
         profile = UserProfile.objects.get(pk=profileId)
         # Check if user already is following
         try:
-            follows = Follows.objects.get(orgId=providerId, userId=request.user, user_profile_id=profile)
+            follows = Follows.objects.get(orgId=provider, userId=request.user, user_profile_id=profile)
             follows.delete()
             response = {'following': True}
         # if user is not following
@@ -169,23 +170,34 @@ def unFollow(request):
 @csrf_exempt
 def checkIfFollowing(request):
     providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
-    activity = Activity.objects.get(pk=providerId)
+    provider = Organisation.objects.get(pk=providerId)
+
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
         # Check if user already is attending
         try:
-            follows = Follows.objects.get(orgId=providerId, userId=request.user,
+            follows = Follows.objects.get(orgId=provider, userId=request.user,
                                                     user_profile_id=profile)
             response = {'following': True}
 
-        except ParticipateIn.DoesNotExist:
+        except Follows.DoesNotExist:
             # If user does not follow
             response = {'following': False}
     else:
         # If user is not loged in
         response = {'following': None}
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+
+def checkIfLogedIn(request):
+    if 'username' and 'profile_pk' in request.session:
+        response = {"active": True}
+        print("ACTIVE")
+    else:
+        response = {"active:": False}
+        print("INACTIVE")
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 

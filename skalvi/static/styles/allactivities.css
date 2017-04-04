@@ -13,3 +13,8 @@
     padding-right: 15px;
 }
 
+#followButton{
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+}

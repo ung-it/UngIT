@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^api/hostingActivities/[a-zA-Z]+/$', views.getHostingActivities, name="getHostingActivities"),
     # MyPage
     url(r'^mypage/$', views.MyPageView.as_view(), name='mypage'),
-    url(r'^mypage/(?P<id>[a-zA-Z]+)/$', views.MyPageView.as_view(), name='mypage'),
+    url(r'^mypage/(?P<id>[a-zA-Z ]+)/$', views.MyPageView.as_view(), name='mypage'),
     # Sign up and off
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),

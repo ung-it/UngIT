@@ -1,5 +1,7 @@
 #imageContainer{
     display: flex;
+    max-width: 60%;
+    height: auto;
 }
 
 i{

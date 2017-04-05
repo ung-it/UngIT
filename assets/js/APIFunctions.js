@@ -9,9 +9,9 @@ if(!window.Promise){
 }
 
 
-export function getUserState() {
+export function getUserState(callback) {
     return fetchFromServer('/checkIfLogedIn/').then(response => {
-        return response;
+        callback(response.active);
     });
 }
 
@@ -87,11 +87,11 @@ export function getAllAttendingActivities() {
     const profileName = window.location.href.split("/")[4];
     return fetchFromServer('/api/attendingActivities/'+profileName);
 }
+
 export function getAllHostingActivities() {
     const profileName = window.location.href.split("/")[4];
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
-
 
 export function getHost(id, callback) {
     fetchFromServer('/api/getHost/' + id).then(result => {
@@ -118,8 +118,6 @@ export function checkIfSignedUp(data, callback) {
     });
 }
 
-
-
 export function follow(data, callback) {
     postToServer('/follow/', data).then (response => {
         callback(response);
@@ -134,6 +132,12 @@ export function unfollow(data, callback) {
 
 export function checkIfFollowing(data, callback) {
     postToServer('/checkIfFollowing/', data).then(response => {
+        callback(response);
+    });
+}
+
+export function getFollowingProviders(callback) {
+    return fetchFromServer('/getFollowingProviders/').then (response => {
         callback(response);
     });
 }

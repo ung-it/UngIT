@@ -71,40 +71,13 @@ class ProviderCard extends React.Component {
         })
     };
 
-    checkUserState = () => {
-        getUserState(response => {
-            console.log(response);
-            if(response.active){
-                this.setState({
-                    loggedIn: true,
-                    hasChecked: true
-                });
-                return true;
-
-            }
-            else{
-                this.setState({
-                   loggedIn: false,
-                    hasChecked:true
-                });
-                return false;
-            }
-        })
-    };
-
 
     createProviderItem = () => {
         const provider = this.props.provider;
         let followingContainer = null;
-
-        if (!this.state.loggedIn) {
-            followingContainer =
-                <div className="modal-infobox2">
-                    <div className="modal-infobox2-element">
-                        <p>Du må være logget inn for å kunne følge denne aktøren</p>
-                    </div>
-                </div>;
-        } else if (this.state.following == false) {
+        console.log(this.props.following);
+        if (!this.props.following) {
+            console.log("not following");
             followingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
@@ -112,7 +85,8 @@ class ProviderCard extends React.Component {
                     </div>
                 </div>;
 
-        } else {
+        }else if (this.props.following) {
+            console.log("following");
             followingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
@@ -120,7 +94,6 @@ class ProviderCard extends React.Component {
                     </div>
                 </div>;
         }
-
 
         return (
 

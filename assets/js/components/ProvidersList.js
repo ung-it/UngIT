@@ -1,7 +1,7 @@
 import React from 'react';
 import ProviderCard from './ProviderCard';
-
 import {Button} from "react-bootstrap";
+import  {getFollowingProviders, getUserState} from "../APIFunctions";
 
 class ProvidersList extends React.Component {
 
@@ -10,10 +10,15 @@ class ProvidersList extends React.Component {
 
         this.state = {
             offset: 10,
-        };
+            following: [],
+            providers: []
 
+        };
     };
 
+    componentDidMount(){
+        this.doEverything();
+    }
 
     loadMore() {
         this.setState({
@@ -21,6 +26,50 @@ class ProvidersList extends React.Component {
         });
 
     }
+
+    contains = (a, obj) => {
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] === obj) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+
+    doEverything = () => {
+        getUserState(val => {
+            if (val) {
+                console.log("logget inn");
+                getFollowingProviders(response => {
+                    this.state.following = response.map(p => p.pk);
+
+                    console.log("HEI", this.state.following);
+                    // Slice the reducer data that is provided to match the offset.
+                    const prov = this.props.providers.slice(0, this.state.offset);
+                    const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
+                    this.state.providers = prov.map((provider, k) => {
+
+                        if ($.inArray(provider.pk, this.state.following) != -1) {
+                            return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={true}/>
+                        } else {
+                            return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={false}/>
+                        }
+                    });
+
+                });
+
+            } else {
+                console.log("not logged in");
+                // Slice the reducer data that is provided to match the offset.
+                const prov = this.props.providers.slice(0, this.state.offset);
+                const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
+                this.state.providers = prov.map((provider, k) => {
+                    return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={null}/>
+            });
+            }
+        });
+};
 
     render() {
         const styles = {
@@ -39,29 +88,18 @@ class ProvidersList extends React.Component {
             }
 
         };
-
-
         // If no providers found
         if (this.props.providers.length < 1) {
             return <h1>Ingen arrangører funnet</h1>;
         }
-        // Slice the reducer data that is provided to match the offset.
-        const prov = this.props.providers.slice(0, this.state.offset);
-
-
-        const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
-        const providers = prov.map((provider, k) =>
-            <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} />,
-        );
-
+        console.log(this.state.providers);
         return <div>
             <div style={styles.activitiesStyle}>
-                {providers}
-                <Button style={styles.loadButtonStyle} className="btn-info" onClick={ () => this.loadMore() }>Last flere</Button>
+                {this.state.providers}
+                <Button style={styles.loadButtonStyle} className="btn-info" onClick={ () => this.loadMore() }>Last
+                    flere</Button>
             </div>
-
-
-        </div>
+        </div>;
     }
 }
 

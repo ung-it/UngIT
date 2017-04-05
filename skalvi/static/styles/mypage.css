@@ -5,7 +5,7 @@ h4#usersTitle{
 #myPageContent{
     display: flex;
     flex-direction: row;
-    padding-left: 5em;
+    padding-left: 0em;
     margin-right: 0;
 }
 
@@ -20,32 +20,7 @@ h4#usersTitle{
     flex-direction: row;
 }
 
-#profileActivities{
-    margin-top: 5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
 
-#hosting_Activities_header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-
-#attending_Activities {
-    width: 50%;
-}
-
-#attendingActivities {
-    margin: 0;
-}
-
-#hosting_Activities {
-    width: 50%;
-}
 #profileInformation {
     margin-left: 2em;
 }
@@ -54,16 +29,15 @@ h4#usersTitle{
     width: 9%;
 }
 
+.my-page-activities {
+   /*width: 500%;*/
+}
+
 /*hvis bilde skal være hele diven*/
 /*.profile_picture > img{*/
     /*width: 100%;*/
     /*height: 100%;*/
 /*}*/
-
-#new-activity-button{
-    align-self: flex-end;
-    height: 2.5em;
-}
 
 ol, ul {
     float: left;

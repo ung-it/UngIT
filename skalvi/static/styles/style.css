@@ -31,6 +31,10 @@ h1, h2, h3, .title {
     font-size: 1.1em;
 }
 
+#new-activity-button {
+    float: right;
+}
+
 .site-content {
     flex: 1;
 }

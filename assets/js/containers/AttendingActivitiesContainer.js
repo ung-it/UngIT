@@ -30,14 +30,14 @@ class AttendingActivitiesContainer extends Component {
     render() {
         const styles = {
             activitiesContainerStyle: {
-                display: 'flex',
-                justifyContent: 'flex-start'
+                padding: "1em"
             },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
+                padding: "0.5em"
             },
         };
 

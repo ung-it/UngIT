@@ -175,6 +175,7 @@ def getActivityHost(request):
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = Activity.objects.all()
+    print("Hello" + activities[0].provider)
     activities = json_serializer.serialize(activities, ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
 

@@ -154,3 +154,9 @@ def getUser(request):
     data = {'name': username, 'providers': providers}
     # json = json_serializer.serialize(data, ensure_ascii=False)
     return HttpResponse(json.dumps(data), content_type='application/json')
+
+def getProvider(request, pk):
+    provider = Organisation.objects.get(pk=pk)
+    json_serializer = serializers.get_serializer("json")()
+    json = json_serializer.serialize(provider, ensure_ascii=False)
+    return HttpResponse(json, content_type='application/json')  

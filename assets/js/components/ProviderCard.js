@@ -26,40 +26,23 @@ class ProviderCard extends React.Component {
                 >
                     <h3 className="big-info-header-provider">{provider.Navn}</h3>
 
-                    <div classID="big-info-container">
+                    <div classID="bold-info-text">
                         <div className="big-icon-container-div"><Glyphicon
                             glyph="glyphicon glyphicon-map-marker"/>{provider.Adresse}</div>
                     </div>
-                    <p className="provider-card-bold-info">Aktiviteter</p>
-                    <ul>
-                        <li>Ingen registrert</li>
-                    </ul>
                     <div className="provider-info">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="row">
-                                    <div className="col-md-4">
-                                        <p className="provider-card-bold-info">Kategorier: </p>
-                                        <p className="provider-card-bold-info">Type aktiviteter: </p>
-                                        <p className="provider-card-bold-info">Bydel: </p>
-                                        <p className="provider-card-bold-info">Telefon: </p>
-                                        <p className="provider-card-bold-info">Internettadresse:
-                                        </p>
-                                        <p className="provider-card-bold-info">Medlemmer: </p>
-                                    </div>
-                                    <div className="col-md-7">
-                                        <p>{provider["Kategori(er) "]}</p>
-                                        <p>{provider["Type aktivitet "]}</p>
-                                        <p>{provider.Bydel}</p>
-                                        <p>{provider.Telefon}</p>
-                                        <p><a href={provider.Internettadresse}
-                                              target="_blank">{provider.Internettadresse}</a>
-                                        </p>
-                                        <p>{provider.Medlemmer}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <p className="bold-info-text">Aktiviteter</p>
+                        <ul>
+                            <li>Ingen registrert</li>
+                        </ul>
+                        <p><span className="bold-info-text"> Kategorier: </span> {provider["Kategori(er) "]} </p>
+                        <p><span className="bold-info-text"> Type aktiviteter: </span> {provider["Type aktivitet "]}</p>
+                        <p><span className="bold-info-text"> Bydel: </span> {provider.Bydel}</p>
+                        <p><span className="bold-info-text"> Telefon: </span> {provider.Telefon}</p>
+                        <p><span className="bold-info-text"> Internettadresse: </span> <a
+                            href={provider.Internettadresse}
+                            target="_blank">{provider.Internettadresse}</a></p>
+                        <p><span className="bold-info-text"> Medlemmer: </span> {provider.Medlemmer}</p>
                     </div>
                 </div>
             </div>

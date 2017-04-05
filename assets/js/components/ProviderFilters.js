@@ -38,7 +38,7 @@ class ProviderFilters extends React.Component {
 
                     </div>
                     <div className="col-md-10">
-                        <h2 className="title">Finn arrangører</h2>
+                        <h1>Finn arrangører</h1>
                     </div>
                 </div>
                 <div className="row">

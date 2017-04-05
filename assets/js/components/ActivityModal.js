@@ -382,7 +382,7 @@ class ActivityModal extends Component {
                         <CalendarDateBox date={new Date(date)}/>
                         <div className="modal-title-style">
                             <h1><b>{activityName}</b></h1>
-                            <div className="modal-provider-title">Arrangeres av: <b>{provider}</b>
+                            <div className="modal-provider-title"><span className="bold-info-text"> Arrangeres av: </span> {provider}
                             </div>
                         </div>
                         <div id="ratingContainer">
@@ -392,21 +392,21 @@ class ActivityModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        Type aktivitet: <b>{activityType}</b>
+                        <span className="bold-small-info-text"> Type aktivitet: </span>{activityType}
                     </div>
                     <div className="modal-adapted">
-                        Dette arrangementet er tilpasset for: <b>{adaptions}</b>
+                        <span className="bold-small-info-text"> Dette arrangementet er tilpasset for:</span> {adaptions}
                     </div>
                     <div>
-                        Antall assistenter: <b>{assistants_number}</b>
+                        <span className="bold-small-info-text"> Antall assistenter: </span> {assistants_number}
                         {assistantsInfo}
                     </div>
                     <div className="modal-info-container">
                         <Paper className="modal-infobox1">
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> Alder: {age}</div>
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> Tid: {time_start} - {time_end}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> <span className="bold-info-text"> Alder: </span> {age}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> <span className="bold-info-text"> Tid: </span> {time_start.slice(0, 5)} - {time_end.slice(0, 5)}</div>
                             <div className="modal-infobox1-element">
-                                <Glyphicon glyph="glyphicon glyphicon-map-marker"/> Sted: {location}
+                                <Glyphicon glyph="glyphicon glyphicon-map-marker"/> <span className="bold-info-text"> Sted:</span> {location}
                             </div>
                             <div className="modal-infobox1-map">
                                 <a onClick={this.showMap}>Vis på kart</a>

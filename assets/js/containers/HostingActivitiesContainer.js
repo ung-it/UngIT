@@ -72,6 +72,11 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
 
 // Fetch initial data for state
 store.dispatch(fetchAllHostingActivities());

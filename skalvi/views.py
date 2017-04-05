@@ -659,3 +659,6 @@ def isNum(data):
         return True
     except ValueError:
         return False
+
+def robots(request):
+    return TemplateResponse(request, 'robots.txt', content_type='text/plain')

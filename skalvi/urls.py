@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'^follow/$', views.follow, name='follow'),
     url(r'^checkIfFollowing/$', views.checkIfFollowing, name='checkIfFollowing'),
     url(r'^unfollow/$', views.unFollow, name='unfollow'),
+    url(r'^robots.txt$', views.robots, name="robots"),
 
     #Loged in
     url(r'^checkIfLogedIn/$', views.checkIfLogedIn, name='checkIfLogedIn')

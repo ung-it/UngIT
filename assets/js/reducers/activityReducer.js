@@ -12,9 +12,9 @@ const initialState = {
     attendingActivityList: [],
     hostingActivityList: [],
     activityList: [],
-    activeActivityFilters: '',
-    activeSuitedForFilters: '',
-    activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
+    activeActivityFilters: [],
+    activeSuitedForFilters: [],
+    activeDateFilter: '',
     activeSearchForFilters: '',
     activeButtonClicked: false,
 
@@ -67,11 +67,21 @@ export default function ActivityReducer(state=initialState, action) {
         case actionTypes.TRASH_BUTTON_CLICKED:
             return {
                 ...state,
-                activeActivityFilters: '',
-                activeSuitedForFilters: '',
-                activeDateFilter: moment().format('DD/MM/YYYY') + ' - ' + moment().add(29, 'days').format('DD/MM/YYYY'),
+                activeActivityFilters: [],
+                activeSuitedForFilters: [],
+                activeDateFilter: '',
                 activeSearchForFilters: '',
                 activeButtonClicked: false,
+            };
+        case actionTypes.SUITED_FOR_BUTTON_CLICKED:
+            return {
+                ...state,
+                activeSuitedForFilters: [],
+            };
+        case actionTypes.ACTIVITY_BUTTON_CLICKED:
+            return {
+                 ...state,
+                activeActivityFilters: [],
             };
         default:
             return state;

@@ -1,44 +1,43 @@
 import React from 'react';
 import Select from 'react-select';
 import ReactDOM from 'react-dom';
-import { FormGroup, FormControl } from 'react-bootstrap';
+import AutoComplete from 'material-ui/AutoComplete';
+
 
 
 class SearchForActivity extends React.Component {
 
-	constructor(props) {
-		super(props);
 
-		this.state = {
-            searchText: '',
-		};
+	handleUpdateInput = value => {
+
+		this.props.onFilterChange(value);
 	};
 
-	handleChange = event => {
-        this.setState ({
-            searchText: event.target.value
-        })
-        const searchText = event.target.value;
-		this.props.onFilterChange(searchText);
-	};
 
 	render () {
 		return (
-                <FormControl
-                    type="text"
-                    placeholder={this.props.placeholderText}
-                    onChange={this.handleChange}
-                    value={this.props.activeFilters}
-                />
-
+			<div>
+				<AutoComplete
+					searchText={this.props.searchForFilter}
+					hintText={this.props.placeholderText}
+					dataSource={this.props.activitiesName}
+					filter={AutoComplete.fuzzyFilter}
+					maxSearchResults={10}
+					onUpdateInput={this.handleUpdateInput}
+					fullWidth={true}
+				/>
+			</div>
 		);
 	}
 }
 
 SearchForActivity.propTypes = {
 	onFilterChange: React.PropTypes.func.isRequired,
-	activeFilters: React.PropTypes.string.isRequired,
-	placeholderText: React.PropTypes.string
+	placeholderText: React.PropTypes.string,
+	activitiesName: React.PropTypes.array.isRequired,
+	searchForFilter: React.PropTypes.string.isRequired,
+
 };
 
 export default SearchForActivity;
+

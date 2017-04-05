@@ -2,16 +2,19 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
+
 import "../../styles/activityBox.css";
 
-import {fetchAllProviders, addSearchForFilter, addActivityFilter, trashButtonClicked} from "../actions/providersActions";
+import {fetchAllProviders, addSearchForFilter, addActivityFilter, trashButtonClicked, activityButtonClicked} from "../actions/providersActions";
 import ProvidersList from '../components/ProvidersList';
 import ProviderFilters from '../components/ProviderFilters';
 import configureStore from "../configureStore";
 const store = configureStore();
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 class AllProvidersContainer extends Component {
 
@@ -25,9 +28,11 @@ class AllProvidersContainer extends Component {
             <div>
                 <ProviderFilters
                     onSearchForChange={this.props.changeSearchForFilter}
-                    searchForFilters={this.props.activeSearchForFilters}
+                    providersForSearch={this.props.providers}
+                    searchForFilter={this.props.activeSearchForFilters}
                     onActivityFilterChange={this.props.changeActivityFilter}
                     activityFilters={this.props.activeActivityFilters}
+                    activityButton={this.props.changeActivityButton}
                     onButtonChange={this.props.changeTrashButton}
                 />
                 <ProvidersList providers={this.props.providers}/>
@@ -43,14 +48,12 @@ const mapStateToProps = state => {
     let {provider: {providerList, activeSearchForFilters, activeActivityFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-    const activityFilters = activeActivityFilters.split(','); // Convert activeActivityFilters into a list of int, to be able to check against activityType from the server
-
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
 
     providerList = hasActivityFilter
-        ? providerList.filter(provider=> activityFilters.includes(provider.fields.aktordatabase.TypeAktivitet))
+        ? providerList.filter(provider => activityFilters.includes(provider.fields.aktordatabase.TypeAktivitet))
         : providerList;
 
     providerList = hasSearchForFilter
@@ -70,7 +73,7 @@ const mapDispatchToProps = dispatch => {
         changeActivityFilter: (filter) => dispatch(addActivityFilter(filter)),
         changeSearchForFilter: (searchFilter) => dispatch(addSearchForFilter(searchFilter)),
         changeTrashButton: () => dispatch(trashButtonClicked()),
-
+        changeActivityButton: () => dispatch(activityButtonClicked()),
     }
 };
 

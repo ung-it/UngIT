@@ -18,6 +18,8 @@ urlpatterns = [
     # SubUsers
     url(r'^choose/$', views.ChooseUserView.as_view(), name='choose'),
     url(r'^selected/$', views.selectedUser, name='selected'),
+    url(r'^api/user/$', ApiFunctions.getUser, name='getUser'),
+
     # Activity Views
     url(r'^activity/$', views.createActivity.as_view(), name="create-activity"),
     url(r'^activity/(?P<pk>\d+)/$', views.ActivityView.as_view(), name="edit-activity"),
@@ -36,6 +38,11 @@ urlpatterns = [
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
+    # Add provider to sub-user
+    url(r'^provider/$', views.ProviderView.as_view(), name='provider'),
+    url(r'^api/provider/(?P<pk>\d+)/$', ApiFunctions.getProvider, name='getProvider'),
+    url(r'^api/userproviders/$', ApiFunctions.getUserProviders, name='getUserProviders'),
+
 
     url(r'^api/getHost/[0-9]+/$', views.getActivityHost, name="getActivityHost"),
 

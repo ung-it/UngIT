@@ -16,6 +16,7 @@ module.exports = {
         allActivitiesContainer: './assets/js/containers/AllActivitiesContainer',
         allProvidersContainer: './assets/js/containers/AllProvidersContainer',
         activityForm: './assets/js/containers/ActivityForm',
+        providerForm: './assets/js/containers/ProviderForm',
     },
 
     output: {

@@ -87,8 +87,7 @@ class ProvidersList extends React.Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "space-around",
-                width: '100%',
+                justifyContent: "space-between"
             },
             loadButtonStyle: {
                 margin: "50px",

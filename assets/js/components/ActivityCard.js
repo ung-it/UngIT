@@ -48,7 +48,7 @@ class ActivityCard extends React.Component {
         if (images.length > 0) {
             poster = images[0];
         } else {
-            poster = "/static/images/activityPic.jpeg"
+            poster = "/static/images/activityPic.jpg"
         }
 
         let description = '';
@@ -67,9 +67,9 @@ class ActivityCard extends React.Component {
         // const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
         const divStyle = {
             background: 'url(' + poster + ')',
-            width: '40em',
+            width: '42em',
             height: '20em',
-            backgroundSize: '40em 20em',
+            backgroundSize: '42em 20em',
             backgroundRepeat: 'no-repeat',
         };
 
@@ -82,18 +82,19 @@ class ActivityCard extends React.Component {
                     <div className="mdl-card__title" style={divStyle}/>
                     <div className="mdl-card__supporting-text">
                         <h3 className="big-info-header">{this.props.activity.activityName}</h3>
-                        <div className="row">
-                            <div className="col-md-6">
-                                {/*<div className="row">*/}
-                                <div className="big-icon-container-div"><Glyphicon
-                                    glyph="glyphicon glyphicon-calendar"/> {date}</div>
-                                <div className="big-icon-container-div"><Glyphicon
-                                    glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</div>
-                                <div className="big-icon-container-div"><Glyphicon
-                                    glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</div>
-                                {/*</div>*/}
+                        <div className="activity-card-info">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="big-icon-container-div"><Glyphicon
+                                        glyph="glyphicon glyphicon-calendar"/>{date}</div>
+                                    <div className="big-icon-container-div"><Glyphicon
+                                        glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)}
+                                        - {this.props.activity.time_end.slice(0, 5)}</div>
+                                    <div className="big-icon-container-div"><Glyphicon
+                                        glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}</div>
+                                </div>
+                                <div className="col-md-6">{description}</div>
                             </div>
-                            <div className="col-md-6">{description}</div>
                         </div>
 
                     </div>

@@ -1,5 +1,7 @@
 #imageContainer{
     display: flex;
+    max-width: 60%;
+    height: auto;
 }
 
 i{
@@ -162,12 +164,15 @@ p.activityRating{
     margin-top: 20px;
     padding: 0 20px;
     font-size: 13pt;
+    justify-content: space-between;
 }
 
 .modal-infobox1 {
-    width: 50%;
-    textAlign: left-justify;
-    lineHeight: 2;
+    width: 90%;
+    /*textAlign: left-justify;*/
+    /*lineHeight: 2;*/
+    margin: 0 0.5em 0 0;
+    padding: 0.5em;
 }
 
 .modal-infobox1-element {
@@ -180,12 +185,14 @@ p.activityRating{
 }
 
 .modal-infobox2 {
-    width: 50%;
+    width: 90%;
+    margin: 0 0 0 0.5em;
+    padding: 0.5em;
 }
 
 .modal-infobox2-element {
     text-align: center;
-    padding-top: 10px;
+    /*padding-top: 10px;*/
 }
 
 .modal-description-header {

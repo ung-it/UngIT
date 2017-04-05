@@ -1,10 +1,15 @@
 import 'whatwg-fetch';
 
+export function getUser(callback) {
+    return fetchFromServer('/api/user/').then(response => {
+        callback(response);
+    });
+}
+
 export function getActivityInfo(id, callback) {
     fetchFromServer('/api/activity/' + id).then(data => {
         callback(data[0].fields);
     });
-
 }
 
 export function getUpcomingActivities(callback) {
@@ -19,7 +24,7 @@ export function getUpcomingActivities(callback) {
 export function getAllOrganisations(callback) {
     return fetchFromServer('/api/providers/').then(response => {
         callback(response);
-    })
+    });
 }
 
 export function getUserProviders(callback) {

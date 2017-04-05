@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { getUserProviders } from '../APIFunctions';
+import { getUserProviders, getAllOrganisations, getUser } from '../APIFunctions';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -12,12 +12,14 @@ const styles = {
     },
 };
 
+const selectedProvider = $('#provider').val();
+
 class ProviderField extends Component {
 
     constructor(props) {
         super(props);
 
-        let selectedProvider = $('#provider').val();
+        console.log(selectedProvider)
         let color = {};
         if (selectedProvider != "") {
             color = {color: '#3F51B5'};
@@ -25,6 +27,7 @@ class ProviderField extends Component {
 
         this.state = {
             value: selectedProvider,
+            providers: [],
             personal: "Meg selv",
             registered: [],
             unregistered: ["En aktør jeg ikke representerer", "En annen aktør jeg ikke representerer"],
@@ -76,8 +79,14 @@ class ProviderField extends Component {
     }
 
     componentDidMount() {
+        getAllOrganisations(providers => {
+            this.state.providers = providers;
+        });
         getUserProviders(providers => {
-            this.setState({registered: providers})
+            this.state.registered = providers;
+        });
+        getUser(name => {
+
         })
     }
 

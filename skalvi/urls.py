@@ -18,6 +18,8 @@ urlpatterns = [
     # SubUsers
     url(r'^choose/$', views.ChooseUserView.as_view(), name='choose'),
     url(r'^selected/$', views.selectedUser, name='selected'),
+    url(r'^api/user/$', ApiFunctions.getUser, name='getUser'),
+
     # Activity Views
     url(r'^activity/$', views.createActivity.as_view(), name="create-activity"),
     url(r'^activity/(?P<pk>\d+)/$', views.ActivityView.as_view(), name="edit-activity"),

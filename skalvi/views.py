@@ -576,6 +576,11 @@ class ProviderView(View):
         else:
             return redirect("skalvi:index")
 
+    def post(self, request):
+        print(request.POST)
+        # user_form = self.form_class(request.POST)
+        return redirect("skalvi:provider")
+
 
 def allactivities(request):
     return TemplateResponse(request, 'allActivities.html', {})

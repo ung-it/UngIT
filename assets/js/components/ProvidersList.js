@@ -29,16 +29,6 @@ class ProvidersList extends React.Component {
 
     }
 
-    contains = (a, obj) => {
-        for (let i = 0; i < a.length; i++) {
-            if (a[i] === obj) {
-                return true;
-            }
-        }
-        return false;
-    };
-
-
     doEverything = () => {
         getUserState(val => {
             if (val) {

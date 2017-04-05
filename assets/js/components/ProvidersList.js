@@ -7,7 +7,6 @@ class ProvidersList extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log('PL: ', this.props.providers);
         this.state = {
             offset: 10,
             following: [],
@@ -18,7 +17,6 @@ class ProvidersList extends React.Component {
 
 
     componentWillReceiveProps() {
-        console.log('CHANGED MAH MAFAKKING PROPS YALL');
         this.doEverything();
     }
 
@@ -44,11 +42,9 @@ class ProvidersList extends React.Component {
     doEverything = () => {
         getUserState(val => {
             if (val) {
-                console.log("logget inn");
                 getFollowingProviders(response => {
                     this.state.following = response.map(p => p.pk);
 
-                    console.log("HEI", this.state.following);
                     // Slice the reducer data that is provided to match the offset.
                     const prov = this.props.providers.slice(0, this.state.offset);
                     const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
@@ -70,7 +66,6 @@ class ProvidersList extends React.Component {
                 });
 
             } else {
-                console.log("not logged in");
                 // Slice the reducer data that is provided to match the offset.
                 const prov = this.props.providers.slice(0, this.state.offset);
                 const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
@@ -107,8 +102,7 @@ class ProvidersList extends React.Component {
         if (this.props.providers.length < 1) {
             return <h1>Ingen arrangører funnet</h1>;
         }
-
-        console.log('render props: ', this.props.providers);
+        
         return <div>
             <div style={styles.activitiesStyle}>
                 {this.state.providers}

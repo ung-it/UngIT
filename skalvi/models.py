@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
 
     is_active = models.BooleanField(default=False)
-    provider = models.TextField()  # contains all found information
+    provider = models.TextField(null=True, blank=True)  # contains all found information
 
 
 

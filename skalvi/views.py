@@ -480,6 +480,11 @@ def activityGet(self, request, form):
         except urllib.error.URLError as e:
             return redirect(link)
 
+    profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+    providers = profile.provider.split(",")
+    print(providers)
+    Organisation.objects.get()
+
     if 'accessToken' in locals():
         url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
         # url = 'https://api.instagram.com/v1/users/5405987/media/recent?access_token=' + accessToken

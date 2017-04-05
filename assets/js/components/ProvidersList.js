@@ -12,13 +12,11 @@ class ProvidersList extends React.Component {
             offset: 10,
             following: [],
             providers: []
-
         };
+        this.doEverything();
     };
 
-    componentDidMount(){
-        this.doEverything();
-    }
+
 
     loadMore() {
         this.setState({
@@ -27,18 +25,10 @@ class ProvidersList extends React.Component {
 
     }
 
-    contains = (a, obj) => {
-        for (let i = 0; i < a.length; i++) {
-            if (a[i] === obj) {
-                return true;
-            }
-        }
-        return false;
-    };
-
-
     doEverything = () => {
         getUserState(val => {
+            const prov = this.props.providers.slice(0, this.state.offset);
+
             if (val) {
                 console.log("logget inn");
                 getFollowingProviders(response => {
@@ -46,23 +36,19 @@ class ProvidersList extends React.Component {
 
                     console.log("HEI", this.state.following);
                     // Slice the reducer data that is provided to match the offset.
-                    const prov = this.props.providers.slice(0, this.state.offset);
                     const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
                     this.state.providers = prov.map((provider, k) => {
-
                         if ($.inArray(provider.pk, this.state.following) != -1) {
                             return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={true}/>
                         } else {
                             return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={false}/>
                         }
                     });
-
                 });
 
             } else {
                 console.log("not logged in");
                 // Slice the reducer data that is provided to match the offset.
-                const prov = this.props.providers.slice(0, this.state.offset);
                 const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
                 this.state.providers = prov.map((provider, k) => {
                     return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={null}/>
@@ -84,10 +70,9 @@ class ProvidersList extends React.Component {
                 margin: "50px",
                 width: '100%',
                 height: "100px",
-
             }
-
         };
+
         // If no providers found
         if (this.props.providers.length < 1) {
             return <h1>Ingen arrangører funnet</h1>;

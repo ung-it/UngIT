@@ -571,8 +571,7 @@ class ProviderView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
-            form = self.form_class(None)
-            return render(request, self.template_name, {'form': form, 'user': profile})
+            return render(request, self.template_name, {'user': profile})
         else:
             return redirect("skalvi:index")
 

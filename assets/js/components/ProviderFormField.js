@@ -13,15 +13,14 @@ const styles = {
     },
 };
 
+const selectedProviders = $('#provider').val().split(",");
+
 class ProviderField extends Component {
 
     constructor(props) {
         super(props);
-
-        let selectedProviders = $('#provider').val();
-
         this.state = {
-            value: selectedProviders,
+            value: "",
             providers: [],
             data: [],
             selected: [],
@@ -111,6 +110,10 @@ class ProviderField extends Component {
         getAllOrganisations(organisations => {
 
             const data = organisations.map(provider => {
+                if(selectedProviders.indexOf(String(provider.pk)) !== -1) {
+                    this.state.selected.push(provider);
+                }
+
                 const json = JSON.parse(provider.fields.aktordatabase);
                 return json.Navn;
             });

@@ -257,9 +257,8 @@ class ActivityModal extends Component {
         let facebookContainer = null;
         if (facebook && facebookInfo) {
             let fImages = facebook.photos.data.map(image => {
-                return <img src={image.images[0].source} key={image.id} className="modal-image"/>
+                return {original: image.images[0].source, thumbnail: image.images[0].source}
             });
-
             images = images.concat(fImages);
 
             let admins = facebook.admins.data.map(admin => {
@@ -285,8 +284,8 @@ class ActivityModal extends Component {
                 </div>
             );
         }
-
         if (this.state.show && images.length != 0) {
+
             carouselContainer =
                 <div>
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>

@@ -157,6 +157,7 @@ def getUser(request):
 
 def getProvider(request, pk):
     provider = Organisation.objects.get(pk=pk)
-    json_serializer = serializers.get_serializer("json")()
-    json = json_serializer.serialize(provider, ensure_ascii=False)
-    return HttpResponse(json, content_type='application/json')  
+    data = {
+        'aktordatabase': provider.aktordatabase
+    }
+    return HttpResponse(json.dumps(data), content_type='application/json')

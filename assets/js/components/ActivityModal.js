@@ -10,6 +10,7 @@ import ImageGallery from 'react-image-gallery';
 //CSS
 import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
+import { getProvider, isNumeric } from '../APIFunctions';
 
 //CSS import
 import '../../styles/modal.css';
@@ -37,7 +38,8 @@ class ActivityModal extends Component {
             noComments: true,
             hosting: false,
             myrating: 0,
-            comments: []
+            comments: [],
+            provider: ""
         }
     }
 
@@ -170,7 +172,7 @@ class ActivityModal extends Component {
     };
 
     render() {
-        const {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
+        let {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
 
         let starRating = rating / number_of_ratings;
@@ -359,6 +361,10 @@ class ActivityModal extends Component {
             );
         }
 
+        if (this.state.provider !== "") {
+            provider = this.state.provider.aktordatabase.Navn;
+        }
+
         return (
             <Modal
                 show={this.state.show}
@@ -423,6 +429,14 @@ class ActivityModal extends Component {
                 </Modal.Footer>
             </Modal>
         )
+    }
+
+    componentDidMount() {
+        if (isNumeric(this.props.activity.provider)) {
+            getProvider(this.props.activity.provider, provider => {
+                this.setState({provider});
+            })
+        }
     }
 }
 

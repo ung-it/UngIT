@@ -1,5 +1,9 @@
 import 'whatwg-fetch';
 
+export function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 export function getUser(callback) {
     return fetchFromServer('/api/user/').then(response => {
         callback(response);
@@ -35,6 +39,12 @@ export function getUserProviders(callback) {
 
 export function getAllProviders() {
     return fetchFromServer('/api/providers/')
+}
+
+export function getProvider(id, callback) {
+    fetchFromServer('/api/provider/' + id).then(response => {
+        callback(response);
+    });
 }
 
 export function getAllActivities() {

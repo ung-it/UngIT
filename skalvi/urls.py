@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^signOfEvent/$', views.signOfEvent, name='signOfEvent'),
     # Add provider to sub-user
     url(r'^provider/$', views.ProviderView.as_view(), name='provider'),
-    url(r'^provider/(?P<pk>\d+)/$', ApiFunctions.getProvider, name='getProvider'),
+    url(r'^api/provider/(?P<pk>\d+)/$', ApiFunctions.getProvider, name='getProvider'),
     url(r'^api/userproviders/$', ApiFunctions.getUserProviders, name='getUserProviders'),
 
 

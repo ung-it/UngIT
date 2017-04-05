@@ -1,10 +1,19 @@
 import 'whatwg-fetch';
 
+export function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+export function getUser(callback) {
+    return fetchFromServer('/api/user/').then(response => {
+        callback(response);
+    });
+}
+
 export function getActivityInfo(id, callback) {
     fetchFromServer('/api/activity/' + id).then(data => {
         callback(data[0].fields);
     });
-
 }
 
 export function getUpcomingActivities(callback) {
@@ -16,9 +25,26 @@ export function getUpcomingActivities(callback) {
     });
 }
 
+export function getAllOrganisations(callback) {
+    return fetchFromServer('/api/providers/').then(response => {
+        callback(response);
+    });
+}
+
+export function getUserProviders(callback) {
+    return fetchFromServer('/api/userproviders/').then(response => {
+        callback(response);
+    })
+}
 
 export function getAllProviders() {
     return fetchFromServer('/api/providers/')
+}
+
+export function getProvider(id, callback) {
+    fetchFromServer('/api/provider/' + id).then(response => {
+        callback(response);
+    });
 }
 
 export function getAllActivities() {
@@ -47,6 +73,7 @@ export function getFacebookEventData(activities) {
             include_headers: false,
             batch: batch
         };
+
         return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
             for (let i = 0; i < data.length; i++) {
                 let jsonObject = JSON.parse(data[0].body);

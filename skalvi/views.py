@@ -577,9 +577,15 @@ class ProviderView(View):
             return redirect("skalvi:index")
 
     def post(self, request):
-        print(request.POST)
-        # user_form = self.form_class(request.POST)
-        return redirect("skalvi:provider")
+        if request.user.is_authenticated:
+            profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+            providers = request.POST.get("provider")
+            profile.provider = providers
+            profile.save(update_fields=["provider"])
+            # user_form = self.form_class(request.POST)
+            return redirect("skalvi:provider")
+        else:
+            return redirect("skalvi:index")
 
 
 def allactivities(request):

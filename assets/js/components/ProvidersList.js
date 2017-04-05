@@ -7,23 +7,27 @@ class ProvidersList extends React.Component {
 
     constructor(props) {
         super(props);
-
+        console.log('PL: ', this.props.providers);
         this.state = {
             offset: 10,
             following: [],
-            providers: []
+            providers: this.props.providers,
 
         };
     };
 
-    componentDidMount(){
+
+    componentWillReceiveProps() {
+        console.log('CHANGED MAH MAFAKKING PROPS YALL');
         this.doEverything();
     }
+
 
     loadMore() {
         this.setState({
             offset: this.state.offset += 50
         });
+        this.doEverything();
 
     }
 
@@ -48,13 +52,19 @@ class ProvidersList extends React.Component {
                     // Slice the reducer data that is provided to match the offset.
                     const prov = this.props.providers.slice(0, this.state.offset);
                     const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
-                    this.state.providers = prov.map((provider, k) => {
+                    this.setState({
+                        providers: prov.map((provider, k) => {
 
-                        if ($.inArray(provider.pk, this.state.following) != -1) {
-                            return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={true}/>
-                        } else {
-                            return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={false}/>
-                        }
+                            if ($.inArray(provider.pk, this.state.following) != -1) {
+                                return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]}
+                                                     id={parsedProviders[k].Id} pk={provider.pk} following={true}/>
+                            } else {
+                                return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]}
+                                                     id={parsedProviders[k].Id} pk={provider.pk} following={false}/>
+                            }
+                        }),
+
+
                     });
 
                 });
@@ -64,12 +74,17 @@ class ProvidersList extends React.Component {
                 // Slice the reducer data that is provided to match the offset.
                 const prov = this.props.providers.slice(0, this.state.offset);
                 const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
-                this.state.providers = prov.map((provider, k) => {
-                    return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]} id={parsedProviders[k].Id} pk={provider.pk} following={null}/>
-            });
+                this.setState({
+                    providers: this.state.providers = prov.map((provider, k) => {
+                        return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]}
+                                             id={parsedProviders[k].Id} pk={provider.pk} following={null}/>
+                    }),
+
+                });
+
             }
         });
-};
+    };
 
     render() {
         const styles = {
@@ -92,7 +107,8 @@ class ProvidersList extends React.Component {
         if (this.props.providers.length < 1) {
             return <h1>Ingen arrangører funnet</h1>;
         }
-        console.log(this.state.providers);
+
+        console.log('render props: ', this.props.providers);
         return <div>
             <div style={styles.activitiesStyle}>
                 {this.state.providers}

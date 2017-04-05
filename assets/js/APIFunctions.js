@@ -22,6 +22,12 @@ export function getAllOrganisations(callback) {
     })
 }
 
+export function getUserProviders(callback) {
+    return fetchFromServer('/api/userproviders/').then(response => {
+        callback(response);
+    })
+}
+
 export function getAllProviders() {
     return fetchFromServer('/api/providers/')
 }

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
+import { getUserProviders } from '../APIFunctions';
+
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Subheader from 'material-ui/Subheader';
 
 const styles = {
     customWidth: {
-        width: 300,
+        width: 788,
     },
 };
 
@@ -24,7 +26,7 @@ class ProviderField extends Component {
         this.state = {
             value: selectedProvider,
             personal: "Meg selv",
-            registered: ["Aktør jeg representerer", "En annen aktør jeg representerer"],
+            registered: [],
             unregistered: ["En aktør jeg ikke representerer", "En annen aktør jeg ikke representerer"],
 
             open: false,
@@ -41,8 +43,11 @@ class ProviderField extends Component {
     render() {
 
         let items1 = this.state.registered.map((item) => {
+
+            const json = JSON.parse(item.fields.aktordatabase);
+
            return (
-               <MenuItem key={item} primaryText={item} value={item}/>
+               <MenuItem key={item} primaryText={json.Navn} value={item.pk}/>
            )
         });
         let items2 = this.state.unregistered.map((item) => {
@@ -68,6 +73,12 @@ class ProviderField extends Component {
                 {items2}
             </SelectField>
         )
+    }
+
+    componentDidMount() {
+        getUserProviders(providers => {
+            this.setState({registered: providers})
+        })
     }
 
 }

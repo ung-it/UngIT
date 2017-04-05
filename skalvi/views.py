@@ -480,10 +480,6 @@ def activityGet(self, request, form):
         except urllib.error.URLError as e:
             return redirect(link)
 
-    profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
-    providers = profile.provider.split(",")
-    profileProviders = Organisation.objects.filter(pk__in=providers)
-
     if 'accessToken' in locals():
         url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
         # url = 'https://api.instagram.com/v1/users/5405987/media/recent?access_token=' + accessToken
@@ -492,8 +488,8 @@ def activityGet(self, request, form):
         images = []
         for image in content['data']:
             images.append(image['images']['standard_resolution']['url'])
-        return render(request, self.template_name, {'form': form, 'images': images, 'providers': profileProviders})
-    return render(request, self.template_name, {'form': form, 'link': link, 'providers': profileProviders})
+        return render(request, self.template_name, {'form': form, 'images': images})
+    return render(request, self.template_name, {'form': form, 'link': link})
 
 
 class MyPageView(View):

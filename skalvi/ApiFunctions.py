@@ -138,3 +138,11 @@ def getProviders(request):
     providers = Organisation.objects.all()
     providers = json_serializer.serialize(providers, ensure_ascii=False)
     return HttpResponse(providers, content_type='application/json')
+
+def getUserProviders(request):
+    profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
+    providers = profile.provider.split(",")
+    profileProviders = Organisation.objects.filter(pk__in=providers)
+    json_serializer = serializers.get_serializer("json")()
+    json = json_serializer.serialize(profileProviders, ensure_ascii=False)
+    return HttpResponse(json, content_type='application/json')

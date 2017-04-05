@@ -53,8 +53,8 @@
 
 /* Styling for activities on all activities page */
 .demo-card-wide.mdl-card {
-    width: 40em;
-    height: 40em;
+    width: 42em;
+    height: 35em;
     max-height: 40em;
     margin: 2em 1em 0 1em;
     overflow-y:auto;

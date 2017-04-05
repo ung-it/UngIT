@@ -48,7 +48,7 @@ class ActivityCard extends React.Component {
         if (images.length > 0) {
             poster = images[0];
         } else {
-            poster = "/static/images/activityPic.jpeg"
+            poster = "/static/images/activityPic.jpg"
         }
 
         let description = '';
@@ -67,9 +67,9 @@ class ActivityCard extends React.Component {
         // const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
         const divStyle = {
             background: 'url(' + poster + ')',
-            width: '40em',
+            width: '42em',
             height: '20em',
-            backgroundSize: '40em 20em',
+            backgroundSize: '42em 20em',
             backgroundRepeat: 'no-repeat',
         };
 

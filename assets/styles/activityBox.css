@@ -3,6 +3,7 @@
     border-style: solid;
     border-color: white;
     margin: 1em 0 0 0;
+    cursor: pointer;
 }
 
 
@@ -52,13 +53,14 @@
 
 /* Styling for activities on all activities page */
 .demo-card-wide.mdl-card {
-    width: 40em;
-    height: 30em;
+    width: 42em;
+    height: 35em;
     max-height: 40em;
-    margin: 0.5em;
+    margin: 2em 1em 0 1em;
     overflow-y:auto;
     overflow-x:hidden;
     z-index: 0;
+    cursor: pointer;
 }
 
 .demo-card-wide > .mdl-card__title {
@@ -77,6 +79,8 @@
 }
 
 .big-info-header {
+    margin: 0;
+    font-size: 400%;
     border-bottom: 3px solid lightgrey;
 }
 
@@ -85,24 +89,21 @@
     font-family: "Dosis";
 }
 
+.activity-card-info {
+    margin: 1em 0 1.5em 0;
+    font-size: 1.5em;
+}
+
 /*Styling provider cards*/
 
 .big-info-header-provider {
     margin: 15px;
     font-family: "Dosis", serif;
     border-bottom: 3px solid lightgrey;
-
 }
 
 .provider-info {
-    margin: 15px 0 0 0;
-}
-
-.provider-card-bold-info {
-    font-weight: bolder;
-    font-size: large;
-    font-family: "Dosis", serif;
-    margin: 0 15px 0 15px;
+    margin: 1.2em 0 0 1.2em;
 }
 
 .provider-card {

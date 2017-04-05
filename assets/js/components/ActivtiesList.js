@@ -11,8 +11,7 @@ class ActivitiesList extends React.Component {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "space-around",
-                width: '100%',
+                justifyContent: "space-between"
             }
         };
 

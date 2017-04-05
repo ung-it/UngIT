@@ -41,7 +41,7 @@ class ActivityCardHomePage extends React.Component {
         if (images.length > 0) {
             poster = images[0];
         } else {
-            poster = "/static/images/activityPic.jpeg"
+            poster = "/static/images/activityPic.jpg"
         }
 
         let facebookIcon = null;

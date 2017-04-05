@@ -138,9 +138,3 @@ def getProviders(request):
     providers = Organisation.objects.all()
     providers = json_serializer.serialize(providers, ensure_ascii=False)
     return HttpResponse(providers, content_type='application/json')
-
-def getOrganisations(request):
-    json_serializer = serializers.get_serializer("json")()
-    organisations = Organisation.objects.all()
-    organisations = json_serializer.serialize(organisations, ensure_ascii=False)
-    return HttpResponse(organisations, content_type='application/json')

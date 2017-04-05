@@ -17,7 +17,7 @@ export function getUpcomingActivities(callback) {
 }
 
 export function getAllOrganisations(callback) {
-    return fetchFromServer('/api/organisations/').then(response => {
+    return fetchFromServer('/api/providers/').then(response => {
         callback(response);
     })
 }

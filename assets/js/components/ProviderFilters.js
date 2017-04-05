@@ -4,6 +4,7 @@ import { Glyphicon } from "react-bootstrap";
 
 import SearchForProvider from './SearchForActivity';
 import ActivityPicker from './ActivityPicker';
+import SuitedForPicker from './SuitedForPicker';
 
 import '../../styles/activityFilters.css'
 
@@ -18,8 +19,8 @@ class ProviderFilters extends React.Component {
     };
 
     handleEmptyFilter = () => {
-     this.props.onButtonChange(this.state.tButtonClicked);
-     };
+        this.props.onButtonChange(this.state.tButtonClicked);
+    };
 
     render() {
 
@@ -32,7 +33,8 @@ class ProviderFilters extends React.Component {
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">
                             Tøm filter
                         </div>
-                        <button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
+                        <button type="button" className="btn btn-warning" id="button-trash"
+                                onClick={this.handleEmptyFilter}>
                             <Glyphicon glyph="glyphicon glyphicon-trash"/>
                         </button>
 
@@ -41,13 +43,20 @@ class ProviderFilters extends React.Component {
                         <h1>Finn arrangører</h1>
                     </div>
                 </div>
+
+                <SearchForProvider
+                    onFilterChange={this.props.onSearchForChange}
+                    activitiesName={providerName}
+                    placeholderText="Søk på arrangør..."
+                    searchForFilter={this.props.searchForFilter}
+                />
+
                 <div className="row">
                     <div className="col-md-6">
-                        <SearchForProvider
-                            onFilterChange={this.props.onSearchForChange}
-                            activitiesName={providerName}
-                            placeholderText="Søk på arrangør..."
-                            searchForFilter={this.props.searchForFilter}
+                        <SuitedForPicker
+                            onFilterChange={this.props.onSuitedForFilterChange}
+                            activeFilters={this.props.suitedForFilters}
+                            suitedForButton={this.props.suitedForButton}
                         />
                     </div>
                     <div className="col-md-6">
@@ -67,9 +76,14 @@ class ProviderFilters extends React.Component {
 ProviderFilters.propTypes = {
     onSearchForChange: React.PropTypes.func.isRequired,
     providersForSearch: React.PropTypes.array.isRequired,
+    searchForFilter: React.PropTypes.string.isRequired,
+
+    onSuitedForFilterChange: React.PropTypes.func.isRequired,
+    suitedForFilters: React.PropTypes.array.isRequired,
+    suitedForButton: React.PropTypes.func.isRequired,
+
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.array.isRequired,
-    searchForFilter: React.PropTypes.string.isRequired,
     activityButton: React.PropTypes.func.isRequired,
 
 

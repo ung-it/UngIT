@@ -5,6 +5,7 @@ const moment = require('moment');
 const initialState = {
     providerList: [],
     activeActivityFilters: [],
+    activeSuitedForFilters: [],
     activeSearchForFilters: '',
     activeButtonClicked: false,
 };
@@ -27,11 +28,16 @@ export default function ProviderReducer(state = initialState, action) {
                 ...state,
                 activeActivityFilters: action.filter,
             };
+        case actionTypes.ADD_SUITED_FOR_FILTER:
+            return {
+                ...state,
+                activeSuitedForFilters: action.suitedFilter,
+            };
         case actionTypes.TRASH_BUTTON_CLICKED:
             return {
                 ...state,
                 activeActivityFilters: [],
-                activeSuitedForFilters: '',
+                activeSuitedForFilters: [],
                 activeSearchForFilters: '',
                 activeButtonClicked: false,
             };
@@ -39,6 +45,11 @@ export default function ProviderReducer(state = initialState, action) {
             return {
                  ...state,
                 activeActivityFilters: [],
+            };
+        case actionTypes.SUITED_FOR_BUTTON_CLICKED:
+            return {
+                ...state,
+                activeSuitedForFilters: [],
             };
         default:
             return state;

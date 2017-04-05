@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { getUserProviders, getAllOrganisations, getUser } from '../APIFunctions';
+import {getUserProviders, getAllOrganisations, getUser} from '../APIFunctions';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -19,7 +19,6 @@ class ProviderField extends Component {
     constructor(props) {
         super(props);
 
-        console.log(selectedProvider)
         let color = {};
         if (selectedProvider != "") {
             color = {color: '#3F51B5'};
@@ -46,12 +45,14 @@ class ProviderField extends Component {
     render() {
 
         let items1 = this.state.registered.map((item) => {
+            const provider = this.getProvider(item);
+            if (provider) {
+                const json = JSON.parse(provider.fields.aktordatabase);
+                return (
+                    <MenuItem key={item} primaryText={json.Navn} value={item}/>
+                )
+            }
 
-            const json = JSON.parse(item.fields.aktordatabase);
-
-           return (
-               <MenuItem key={item} primaryText={json.Navn} value={item.pk}/>
-           )
         });
         let items2 = this.state.unregistered.map((item) => {
             return (
@@ -69,6 +70,7 @@ class ProviderField extends Component {
                 autoWidth={false}
                 style={styles.customWidth}
             >
+                <Subheader>Privatperson</Subheader>
                 <MenuItem primaryText={this.state.personal} value={this.state.personal}/>
                 <Subheader>Mine aktører</Subheader>
                 {items1}
@@ -80,14 +82,23 @@ class ProviderField extends Component {
 
     componentDidMount() {
         getAllOrganisations(providers => {
-            this.state.providers = providers;
+            this.setState({providers});
         });
-        getUserProviders(providers => {
-            this.state.registered = providers;
-        });
-        getUser(name => {
-
+        getUser(user => {
+            this.setState({
+                personal: user.name,
+                registered: user.providers,
+            });
         })
+    }
+
+    getProvider(pk) {
+        for (let i in this.state.providers) {
+            const provider = this.state.providers[i];
+            if (provider.pk == pk) {
+                return provider;
+            }
+        }
     }
 
 }

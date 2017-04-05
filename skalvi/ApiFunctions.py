@@ -151,6 +151,6 @@ def getUser(request):
     profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
     providers = profile.provider.split(",")
     username = profile.profile_name
-    data = {'username': username, 'providers': providers}
+    data = {'name': username, 'providers': providers}
     # json = json_serializer.serialize(data, ensure_ascii=False)
     return HttpResponse(json.dumps(data), content_type='application/json')

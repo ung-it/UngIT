@@ -1,11 +1,14 @@
 h4#usersTitle{
     text-align: center;
+    font-family: "Dosis", serif;
+    font-weight: bolder;
+    margin: 0 0 0 1em;
 }
 
 #myPageContent{
     display: flex;
     flex-direction: row;
-    padding-left: 5em;
+    padding-left: 0em;
     margin-right: 0;
 }
 
@@ -13,58 +16,42 @@ h4#usersTitle{
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 0 0 0 4em;
 }
 
 #profile{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
 }
 
-#profileActivities{
-    margin-top: 5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.profileInformation {
+    margin: 0 0 0 1.5em;
 }
 
-#hosting_Activities_header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.profileExtras {
+    margin: 0 0 0 6em;
 }
-
-
-#attending_Activities {
-    width: 50%;
-}
-
-#attendingActivities {
-    margin: 0;
-}
-
-#hosting_Activities {
-    width: 50%;
-}
-#profileInformation {
-    margin-left: 2em;
-}
-
 #profilesOnMyPage{
     width: 9%;
+
 }
 
-/*hvis bilde skal være hele diven*/
-/*.profile_picture > img{*/
-    /*width: 100%;*/
-    /*height: 100%;*/
-/*}*/
-
-#new-activity-button{
-    align-self: flex-end;
-    height: 2.5em;
+.profilePicture {
+    margin: 1em 0 0 0;
 }
 
+.demo-card.mdl-card {
+    width: 40em;
+    height: 12em;
+}
+
+.my-page-activities {
+    margin: 1.5em 0 0 0;
+}
+
+
+/*Styling users*/
 ol, ul {
     float: left;
     list-style: none;

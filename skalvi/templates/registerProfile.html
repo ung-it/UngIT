@@ -1,17 +1,17 @@
 {% load static %}
-<!-- Every page needs access to jqueery -->
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-<!--Every page needs access to bootstrap -->
-<link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
-<link rel="stylesheet" href="../static/styles/chooseUser.css">
-<link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+{% block explicitPageHeader %}
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <link rel="stylesheet" href={% static 'styles/bootstrap.min.css' %}>
+    <link rel="stylesheet" href="../static/styles/chooseUser.css">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
     <a href="../mypage/{{ request.session.profile_name }}" id="back-arrow"><span class="glyphicon glyphicon-arrow-left"
                                                                                  aria-hidden="true"></span></a>
     <div id="body">
-        <div class="banner-container">
-            <img src="{% static "images/logoSmall.png" %}" alt="Banner" class="banner">
+        <div>
+            <img src="{% static "images/skalvino.png" %}" alt="logo" id="logo-image">
         </div>
         <div style="height: 100px"></div>
         <h1>Legg til profil</h1>

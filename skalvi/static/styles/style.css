@@ -15,6 +15,26 @@ h1, h2, h3, .title {
     font-weight: bold;
 }
 
+.title {
+    font-size: 4em;
+}
+
+.bold-info-text {
+    font-weight: bolder;
+    font-family: "Dosis", serif;
+    font-size: 1.2em;
+}
+
+.bold-small-info-text {
+    font-weight: bolder;
+    font-family: "Dosis", serif;
+    font-size: 1.1em;
+}
+
+#new-activity-button {
+    float: right;
+}
+
 .site-content {
     flex: 1;
 }
@@ -77,8 +97,8 @@ a.navbar-brand {
 }
 
 #logo-image {
-    height: 75px;
-    margin-top: -20px;
+    height: 90px;
+    margin-top: -35px;
 }
 
 .banner-container {

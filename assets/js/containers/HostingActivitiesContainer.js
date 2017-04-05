@@ -1,14 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from "react-redux";
+import {Provider, connect} from "react-redux";
 
-import { fetchAllHostingActivities } from '../actions/activitiesActions';
+import {fetchAllHostingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 
 import '../../styles/activityBox.css';
 
 const store = configureStore();
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 class HostingActivitiesContainer extends Component {
 
@@ -27,19 +30,20 @@ class HostingActivitiesContainer extends Component {
     render() {
         const styles = {
             activitiesContainerStyle: {
-                margin: "0px 10px 0px 10px"
+                display: 'flex',
+                justifyContent: 'flex-start'
             },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "space-around"
+                justifyContent: "space-between",
             },
         };
 
         let hostingContainer = <p>Du har ikke opprettet noen aktiviteter</p>;
-        if(this.props.hostingActivities.length > 0){
-            hostingContainer=
+        if (this.props.hostingActivities.length > 0) {
+            hostingContainer =
                 <div style={styles.activitiesStyle}>
                     {this.createActivityCardComponent()}
                 </div>
@@ -58,7 +62,7 @@ const mapStateToProps = state => {
     return {
         hostingActivities: state.activity.hostingActivityList
             .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            // Only get five first
+        // Only get five first
     };
 };
 
@@ -68,6 +72,11 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#3F51B5',
+    },
+});
 
 // Fetch initial data for state
 store.dispatch(fetchAllHostingActivities());
@@ -75,9 +84,11 @@ store.dispatch(fetchAllHostingActivities());
 HostingActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(HostingActivitiesContainer);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <HostingActivitiesContainer />
-    </Provider>, document.getElementById('hostingActivities')
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+            <HostingActivitiesContainer />
+        </Provider>
+    </MuiThemeProvider>, document.getElementById('hostingActivities')
 );
 
 

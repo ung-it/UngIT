@@ -1,5 +1,7 @@
 h4#usersTitle{
     text-align: center;
+    font-family: "Dosis", serif;
+    font-weight: bolder;
 }
 
 #myPageContent{
@@ -13,6 +15,7 @@ h4#usersTitle{
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 0 0 0 4em;
 }
 
 #profile{
@@ -20,25 +23,24 @@ h4#usersTitle{
     flex-direction: row;
 }
 
-
-#profileInformation {
-    margin-left: 2em;
-}
-
 #profilesOnMyPage{
     width: 9%;
 }
 
-.my-page-activities {
-   /*width: 500%;*/
+.profilePicture {
+    margin: 1em 0 0 0;
 }
 
-/*hvis bilde skal være hele diven*/
-/*.profile_picture > img{*/
-    /*width: 100%;*/
-    /*height: 100%;*/
-/*}*/
+.demo-card-square.mdl-card {
+    width: 22em;
+    height: auto;
+}
 
+.my-page-activities {
+    margin: 1.5em 0 0 0;
+}
+
+/*Styling users*/
 ol, ul {
     float: left;
     list-style: none;

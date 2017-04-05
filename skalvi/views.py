@@ -107,23 +107,24 @@ def signOfEvent(request):
 
 @csrf_exempt
 def getFollowingProviders(request):
-    profile_name = request.path.split("/")[3]
-    profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
+    if request.user.is_authenticated:
+        profile_name = request.session['profile_name']
+        profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
 
-    providers = Follows.objects.filter(userId=request.user, user_profile_id=profile)
-    follows_objects = []
-    for provider in providers:
-        prov = Organisation.objects.get(pk=provider.pk)
-        follows_objects.append(prov)
-    json_serializer = serializers.get_serializer("json")()
-    followingProviders = json_serializer.serialize(follows_objects, ensure_ascii=False)
-    return HttpResponse(followingProviders, content_type='application/json')
+        providers = Follows.objects.filter(userId=request.user, user_profile_id=profile)
+        follows_objects = []
+        for provider in providers:
+            prov = Organisation.objects.get(pk=provider.orgId.pk)
+            follows_objects.append(prov)
+        json_serializer = serializers.get_serializer("json")()
+        followingProviders = json_serializer.serialize(follows_objects, ensure_ascii=False)
+        return HttpResponse(followingProviders, content_type='application/json')
+
 
 @csrf_exempt
 def follow(request):
     providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
     provider = Organisation.objects.get(pk=providerId)
-    print("providerid ", providerId)
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']

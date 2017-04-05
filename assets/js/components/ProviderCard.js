@@ -6,7 +6,6 @@ import  {follow, unfollow, checkIfFollowing, getUserState } from "../APIFunction
 
 const moment = require('moment');
 
-
 class ProviderCard extends React.Component {
 
     constructor(props) {
@@ -15,7 +14,6 @@ class ProviderCard extends React.Component {
             following: false,
             hasChecked: false,
             loggedIn: false
-
         }
     };
 
@@ -24,11 +22,11 @@ class ProviderCard extends React.Component {
             id: this.props.pk
         };
         follow(request, response => {
-            if (response.following == false) {
-                this.setState({
-                    following: true
-                });
-            }
+            if (!response.following) {
+    this.setState({
+        following: true
+    });
+}
         });
     };
 
@@ -37,7 +35,7 @@ class ProviderCard extends React.Component {
             id: this.props.pk
         };
         unfollow(request, response => {
-            if (response.following == true) {
+            if (response.following) {
                 this.setState({
                     following: false
                 });
@@ -75,9 +73,11 @@ class ProviderCard extends React.Component {
     createProviderItem = () => {
         const provider = this.props.provider;
         let followingContainer = null;
-        console.log(this.props.following);
-        if (!this.props.following) {
-            console.log("not following");
+
+        if(this.props.following === null) {
+            followingContainer = <div> </div>;
+        }
+        else if (!this.props.following) {
             followingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
@@ -86,7 +86,6 @@ class ProviderCard extends React.Component {
                 </div>;
 
         }else if (this.props.following) {
-            console.log("following");
             followingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
@@ -94,6 +93,7 @@ class ProviderCard extends React.Component {
                     </div>
                 </div>;
         }
+
 
         return (
 

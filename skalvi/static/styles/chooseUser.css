@@ -1,11 +1,9 @@
 body{
     margin-top: 7.5em;
-    /*background-image: url("../images/login_background.jpg");*/
-    /*background-repeat: no-repeat;*/
     text-align: center;
 
     background: linear-gradient(to bottom, grey, black);
-      background-attachment: scroll;
+    background-attachment: scroll;
     background-size: 100% 900px;
     overflow: hidden;
 }

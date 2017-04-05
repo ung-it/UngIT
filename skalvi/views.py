@@ -581,8 +581,7 @@ class ProviderView(View):
             providers = request.POST.get("provider")
             profile.provider = providers
             profile.save(update_fields=["provider"])
-            # user_form = self.form_class(request.POST)
-            return redirect("skalvi:provider")
+            return redirect("skalvi:mypage")
         else:
             return redirect("skalvi:index")
 

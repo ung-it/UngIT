@@ -1,7 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {Thumbnail, Glyphicon, Button} from 'react-bootstrap';
-import  {follow, unfollow, checkIfFollowing, getUserState } from "../APIFunctions";
+import  {follow, unfollow, checkIfFollowing, getUserState} from "../APIFunctions";
 
 
 const moment = require('moment');
@@ -11,7 +11,7 @@ class ProviderCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            following: false,
+            following: this.props.following,
             hasChecked: false,
             loggedIn: false
         }
@@ -23,10 +23,10 @@ class ProviderCard extends React.Component {
         };
         follow(request, response => {
             if (!response.following) {
-    this.setState({
-        following: true
-    });
-}
+                this.setState({
+                    following: true
+                });
+            }
         });
     };
 
@@ -74,10 +74,10 @@ class ProviderCard extends React.Component {
         const provider = this.props.provider;
         let followingContainer = null;
 
-        if(this.props.following === null) {
-            followingContainer = <div> </div>;
+        if (this.state.following === null) {
+            followingContainer = <div></div>;
         }
-        else if (!this.props.following) {
+        else if (!this.state.following) {
             followingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
@@ -85,11 +85,12 @@ class ProviderCard extends React.Component {
                     </div>
                 </div>;
 
-        }else if (this.props.following) {
+        } else if (this.state.following) {
             followingContainer =
                 <div className="modal-infobox2">
                     <div className="modal-infobox2-element">
-                        <Button id="followButton" onClick={this.onUnfollow} className="btn btn-danger">Slutt å følge</Button>
+                        <Button id="followButton" onClick={this.onUnfollow} className="btn btn-danger">Slutt å
+                            følge</Button>
                     </div>
                 </div>;
         }

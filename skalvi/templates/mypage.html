@@ -14,7 +14,7 @@
 
     {#    <div class="content-margin-top">#}
     <div id="profilesOnMyPage">
-        <h4 id="usersTitle">Brukere:</h4>
+        <h4 id="usersTitle">Brukere</h4>
         <ul class="social">
             {% for profile in profiles %}
                 <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init"
@@ -31,7 +31,7 @@
             <div id="profileOnMyPage">
                 {% for profile in profiles %}
                     {% if request.path == profile.path %}
-                        <div id="profile" class="demo-card-square mdl-card mdl-shadow--2dp">
+                        <div id="profile" class="demo-card mdl-card mdl-shadow--2dp">
                             <div>
                                 {% if profile.facebook == True %}
                                     <img class="profilePicture"
@@ -40,12 +40,13 @@
                                 {% endif %}
                             </div>
 
-                            <div id="profileInformation">
+                            <div class="profileInformation">
                                 <h4><span class="bold-info-text">Fornavn:</span> {{ profile.profile_name }}</h4>
                                 <h4><span class="bold-info-text">Etternavn:</span> {{ profile.last_name }}</h4>
                                 <h4><span class="bold-info-text">Epost:</span> {{ profile.email }}</h4>
                                 <h4><span class="bold-info-text">Telefon:</span> {{ profile.phone }}</h4>
-
+                            </div>
+                            <div class="profileExtras">
                                 {% if profile.type == "P" %}
                                     <h4><span class="bold-info-text">Registrert som:</span> Voksen</h4>
                                 {% endif %}

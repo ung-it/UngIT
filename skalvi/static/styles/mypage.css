@@ -2,6 +2,7 @@ h4#usersTitle{
     text-align: center;
     font-family: "Dosis", serif;
     font-weight: bolder;
+    margin: 0 0 0 1em;
 }
 
 #myPageContent{
@@ -21,24 +22,34 @@ h4#usersTitle{
 #profile{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
 }
 
+.profileInformation {
+    margin: 0 0 0 1.5em;
+}
+
+.profileExtras {
+    margin: 0 0 0 6em;
+}
 #profilesOnMyPage{
     width: 9%;
+
 }
 
 .profilePicture {
     margin: 1em 0 0 0;
 }
 
-.demo-card-square.mdl-card {
-    width: 22em;
-    height: auto;
+.demo-card.mdl-card {
+    width: 40em;
+    height: 12em;
 }
 
 .my-page-activities {
     margin: 1.5em 0 0 0;
 }
+
 
 /*Styling users*/
 ol, ul {

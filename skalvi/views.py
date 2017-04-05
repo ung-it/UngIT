@@ -110,6 +110,21 @@ def signOfEvent(request):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
+def getFollowingProviders(request):
+    profile_name = request.path.split("/")[3]
+    profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
+
+    providers = Follows.objects.filter(userId=request.user, user_profile_id=profile)
+    follows_objects = []
+    for provider in providers:
+        prov = Organisation.objects.get(pk=provider.pk)
+        follows_objects.append(prov)
+    json_serializer = serializers.get_serializer("json")()
+    followingProviders = json_serializer.serialize(follows_objects, ensure_ascii=False)
+    return HttpResponse(followingProviders, content_type=''
+                                                         ''
+                                                         'application/json')
+
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
     json_serializer = serializers.get_serializer("json")()

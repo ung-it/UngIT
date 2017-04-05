@@ -60,3 +60,8 @@ h1 {
     float: right;
 }
 
+#logo-image {
+    height: 150px;
+    margin-top: -35px;
+}
+

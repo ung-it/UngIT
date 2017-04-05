@@ -12,6 +12,7 @@ import ImageGallery from 'react-image-gallery';
 //CSS
 import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
+import { getProvider, isNumeric } from '../APIFunctions';
 
 //CSS import
 import '../../styles/modal.css';
@@ -39,7 +40,8 @@ class ActivityModal extends Component {
             noComments: true,
             hosting: false,
             myrating: 0,
-            comments: []
+            comments: [],
+            provider: ""
         }
     }
 
@@ -171,18 +173,8 @@ class ActivityModal extends Component {
         });
     };
 
-    fetchHost = () => {
-        getHost(this.props.id,(result) => {
-            if(result.host == 'true'){
-                this.setState({
-                    hosting: true
-                });
-            }
-        });
-    };
-
     render() {
-        const {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
+        let {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
 
         let starRating = rating / number_of_ratings;
@@ -267,9 +259,8 @@ class ActivityModal extends Component {
         let facebookContainer = null;
         if (facebook && facebookInfo) {
             let fImages = facebook.photos.data.map(image => {
-                return <img src={image.images[0].source} key={image.id} className="modal-image"/>
+                return {original: image.images[0].source, thumbnail: image.images[0].source}
             });
-
             images = images.concat(fImages);
 
             let admins = facebook.admins.data.map(admin => {
@@ -295,8 +286,8 @@ class ActivityModal extends Component {
                 </div>
             );
         }
-
         if (this.state.show && images.length != 0) {
+
             carouselContainer =
                 <div>
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>
@@ -371,6 +362,10 @@ class ActivityModal extends Component {
             );
         }
 
+        if (this.state.provider !== "") {
+            provider = this.state.provider.aktordatabase.Navn;
+        }
+
         return (
             <Modal
                 show={this.state.show}
@@ -435,6 +430,14 @@ class ActivityModal extends Component {
                 </Modal.Footer>
             </Modal>
         )
+    }
+
+    componentDidMount() {
+        if (isNumeric(this.props.activity.provider)) {
+            getProvider(this.props.activity.provider, provider => {
+                this.setState({provider});
+            })
+        }
     }
 }
 

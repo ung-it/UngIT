@@ -10,7 +10,10 @@ import '../../styles/activityBox.css';
 
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
-import { fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter, trashButtonClicked, suitedForButtonClicked, activityButtonClicked } from '../actions/activitiesActions';
+import {
+    fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter,
+    trashButtonClicked, suitedForButtonClicked, activityButtonClicked, fetchFacebookEventData
+} from '../actions/activitiesActions';
 
 import configureStore from "../configureStore";
 

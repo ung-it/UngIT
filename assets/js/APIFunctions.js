@@ -73,6 +73,8 @@ export function getFacebookEventData(activities) {
             include_headers: false,
             batch: batch
         };
+
+        console.log(data)
         return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
             for (let i = 0; i < data.length; i++) {
                 let jsonObject = JSON.parse(data[0].body);

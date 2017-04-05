@@ -41,7 +41,8 @@ class ProviderField extends Component {
     render() {
 
         $('#provider').val(this.state.selected.map(provider => {
-            return provider.pk;
+            const json = JSON.parse(provider.fields.aktordatabase);
+            return json.Organisasjonsnummer;
         }));
 
         const providers = this.state.selected.map(provider => {
@@ -110,11 +111,12 @@ class ProviderField extends Component {
         getAllOrganisations(organisations => {
 
             const data = organisations.map(provider => {
-                if(selectedProviders.indexOf(String(provider.pk)) !== -1) {
+
+                const json = JSON.parse(provider.fields.aktordatabase);
+                if(selectedProviders.indexOf(json.Organisasjonsnummer) !== -1) {
                     this.state.selected.push(provider);
                 }
 
-                const json = JSON.parse(provider.fields.aktordatabase);
                 return json.Navn;
             });
 

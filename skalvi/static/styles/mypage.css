@@ -2,7 +2,7 @@ h4#usersTitle{
     text-align: center;
     font-family: "Dosis", serif;
     font-weight: bolder;
-    margin: 0 0 0 1em;
+    margin: 0 0 0.5em 3.2em
 }
 
 #myPageContent{
@@ -41,15 +41,15 @@ h4#usersTitle{
 
 
 .profileInformation {
-    margin: 0 0 0 1.5em;
+    margin: 0 0 0 1em;
 }
 
 .profileExtras {
-    margin: 0 0 0 6em;
+    margin: 0 0 0 2em;
 }
 #profilesOnMyPage{
-    width: 9%;
-
+    max-width: 0.9em;
+    margin: 1.7em 0 0 0;
 }
 
 .profilePicture {
@@ -58,14 +58,41 @@ h4#usersTitle{
 
 .demo-card.mdl-card {
     width: 40em;
-    height: 12em;
+    min-height: 12em;
 }
 
 .my-page-activities {
     margin: 1.5em 0 0 0;
+    display: flex;
 }
 
+.my-page-attending {
+    width: 50%;
+}
 
+.my-page-hosting {
+    width: 50%;
+}
+
+.title-follow-card {
+    margin: 1em 0 0.5em 1em;
+}
+
+#adminProvider {
+    width: 100%;
+    margin: 1.5em 0 0 0;
+}
+
+#followButton{
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+}
+
+.admin-provider-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 /*Styling users*/
 ol, ul {
     float: left;

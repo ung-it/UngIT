@@ -63,14 +63,13 @@ class ActivityCard extends React.Component {
 
         let date = dato.getDate() + ". " + getMonth(dato.getMonth())+ " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
 
-
-        // const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
         const divStyle = {
             background: 'url(' + poster + ')',
             width: '42em',
             height: '20em',
             backgroundSize: '42em 20em',
             backgroundRepeat: 'no-repeat',
+            cursor: 'pointer'
         };
 
         return (

@@ -599,11 +599,21 @@ class MyPageView(View):
 
                 for f in iFollow:
                     provider = Organisation.objects.get(pk=f.orgId.pk)
-                    follow.append([f.orgId.pk, provider.aktordatabase["Navn"]])
+                    follow.append(["../../provider/"+str(f.orgId.pk)+"/", provider.aktordatabase["Navn"]])
+
+                prov = []
+                if( profile.provider != None and not str(profile.provider) == ''):
+                    splitString = str(profile.provider)
+                    if(',' in profile.provider):
+                        myProviders = splitString.split(',')
+                        for p in myProviders:
+                            prov.append(Organisation.objects.get(pk=p).aktordatabase["Navn"])
+                    else:
+                        prov.append(Organisation.objects.get(pk=splitString).aktordatabase["Navn"])
 
                 object = {'profile_name': profile.profile_name, "last_name": profile.last_name, "email": profile.email,
                           "type": profile.type, "phone": profile.phone, "is_active": profile.is_active,
-                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook, "follow": follow}
+                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook, "follow": follow, "providers": prov}
                 profiles.append(object)
 
             return render(request, self.template_name,
@@ -673,9 +683,34 @@ class ProviderView(View):
             profile.provider = providers
             profile.save(update_fields=["provider"])
 
-            return redirect("skalvi:mypage")
+            return redirect("../mypage/" + request.session["profile_name"])
         else:
             return redirect("skalvi:index")
+
+class SingleProviderView(View):
+    model = Organisation
+    template_name = "singleProvider.html"
+
+    def get(self, request, *args, **kwargs):
+        print("PATH ", request.path) ## /provider/1/
+        orgId = request.path.split("/")[2]
+
+        try:
+            organisation = Organisation.objects.get(pk=orgId)
+            print(organisation.aktordatabase)
+
+            context = {"provider": organisation.aktordatabase}
+
+            return render(request, self.template_name, context)
+
+        except Organisation.DoesNotExist:
+            return redirect("skalvi:index")
+
+
+
+
+
+
 
 
 def allactivities(request):

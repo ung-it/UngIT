@@ -14,6 +14,7 @@ admin.site.register(Hosts)
 admin.site.register(EmployedIn)
 admin.site.register(UserProfile)
 admin.site.register(Commentary)
+admin.site.register(Follows)
 
 
 # Define an inline admin descriptor for UserProfile model

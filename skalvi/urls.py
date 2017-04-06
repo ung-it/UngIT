@@ -4,6 +4,7 @@ from . import views
 from . import ApiFunctions
 
 app_name = 'skalvi'
+
 urlpatterns = [
     # Index
     url(r'^$', views.index, name='index'),
@@ -33,7 +34,7 @@ urlpatterns = [
     url(r'^api/hostingActivities/[a-zA-Z]+/$', views.getHostingActivities, name="getHostingActivities"),
     # MyPage
     url(r'^mypage/$', views.MyPageView.as_view(), name='mypage'),
-    url(r'^mypage/(?P<id>[a-zA-Z]+)/$', views.MyPageView.as_view(), name='mypage'),
+    url(r'^mypage/(?P<id>[a-zA-Z ]+)/$', views.MyPageView.as_view(), name='mypage'),
     # Sign up and off
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
@@ -52,8 +53,17 @@ urlpatterns = [
     url(r'^comments/[0-9]+/$', views.getComments, name='getComment'),
     # Populate database
     url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase"),
+
+    #Follow
+    url(r'^follow/$', views.follow, name='follow'),
+    url(r'^checkIfFollowing/$', views.checkIfFollowing, name='checkIfFollowing'),
+    url(r'^unfollow/$', views.unFollow, name='unfollow'),
+    url(r'^getFollowingProviders/$', views.getFollowingProviders, name='getFollowingProviders'),
+
+    #Robots
     url(r'^robots.txt$', views.robots, name="robots"),
 
-
+    #Loged in
+    url(r'^checkIfLogedIn/$', views.checkIfLogedIn, name='checkIfLogedIn')
 ]
 

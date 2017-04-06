@@ -1,21 +1,100 @@
 import React from "react"
 import {connect} from "react-redux"
-import {Thumbnail, Glyphicon} from 'react-bootstrap';
+import {Thumbnail, Glyphicon, Button} from 'react-bootstrap';
+import  {follow, unfollow, checkIfFollowing, getUserState} from "../APIFunctions";
 
 
 const moment = require('moment');
-
 
 class ProviderCard extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            following: this.props.following,
+            hasChecked: false,
+            loggedIn: false
+        }
+    };
 
+    onFollow = () => {
+        const request = {
+            id: this.props.pk
+        };
+        follow(request, response => {
+            if (!response.following) {
+                this.setState({
+                    following: true
+                });
+            }
+        });
+    };
+
+    onUnfollow = () => {
+        const request = {
+            id: this.props.pk
+        };
+        unfollow(request, response => {
+            if (response.following) {
+                this.setState({
+                    following: false
+                });
+            }
+        });
+    };
+
+
+    onCheckIFollowing = () => {
+        const request = {
+            id: this.props.pk
+        };
+        checkIfFollowing(request, response => {
+            if (response.following == true) {
+                this.setState({
+                    attending: true,
+                    hasChecked: true,
+                    loggedIn: true
+                });
+            } else if (response.following == false) {
+                this.setState({
+                    loggedIn: true,
+                    hasChecked: true
+                });
+            } else {
+                this.setState({
+                    loggedIn: false,
+                    hasChecked: true
+                })
+            }
+        })
     };
 
 
     createProviderItem = () => {
         const provider = this.props.provider;
+        let followingContainer = null;
+
+        if (this.state.following === null) {
+            followingContainer = <div></div>;
+        }
+        else if (!this.state.following) {
+            followingContainer =
+                <div className="modal-infobox2">
+                    <div className="modal-infobox2-element">
+                        <Button id="followButton" className="btn btn-success" onClick={this.onFollow}>Følg</Button>
+                    </div>
+                </div>;
+
+        } else if (this.state.following) {
+            followingContainer =
+                <div className="modal-infobox2">
+                    <div className="modal-infobox2-element">
+                        <Button id="followButton" onClick={this.onUnfollow} className="btn btn-danger">Slutt å
+                            følge</Button>
+                    </div>
+                </div>;
+        }
+
 
         return (
 
@@ -44,6 +123,7 @@ class ProviderCard extends React.Component {
                             target="_blank">{provider.Internettadresse}</a></p>
                         <p><span className="bold-info-text"> Medlemmer: </span> {provider.Medlemmer}</p>
                     </div>
+                    {followingContainer}
                 </div>
             </div>
         )
@@ -52,6 +132,8 @@ class ProviderCard extends React.Component {
 
 
     render() {
+
+
         return (
             <div>
                 {this.createProviderItem()}

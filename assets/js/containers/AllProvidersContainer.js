@@ -52,6 +52,7 @@ const mapStateToProps = state => {
     let {provider: {providerList, activeSearchForFilters, activeActivityFilters, activeSuitedForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
     const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
+    const activityFilter = activeActivityFilters;
 
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
@@ -59,11 +60,11 @@ const mapStateToProps = state => {
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
 
     providerList = hasActivityFilter
-        ? providerList.filter(provider => activeActivityFilters.includes(provider.TypeAktivitet))
+        ? providerList.filter(provider => activityFilter.includes(JSON.parse(provider.fields.aktordatabase).TypeAktivitet))
         : providerList;
 
     providerList = hasSearchForFilter
-        ? providerList.filter(provider => (provider.Navn.includes(searchForFilter)))
+        ? providerList.filter(provider => (JSON.parse(provider.fields.aktordatabase).Navn.includes(searchForFilter)))
         : providerList;
 
     if (hasSuitedForFilter) {

@@ -601,9 +601,17 @@ class MyPageView(View):
                     provider = Organisation.objects.get(pk=f.orgId.pk)
                     follow.append([f.orgId.pk, provider.aktordatabase["Navn"]])
 
+                prov = []
+                if( profile.provider != None and ',' in profile.provider):
+                    splitString = str(profile.provider)
+                    myProviders = splitString.split(',')
+                    for p in myProviders:
+                         prov.append(Organisation.objects.get(pk=p).aktordatabase["Navn"])
+
+
                 object = {'profile_name': profile.profile_name, "last_name": profile.last_name, "email": profile.email,
                           "type": profile.type, "phone": profile.phone, "is_active": profile.is_active,
-                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook, "follow": follow}
+                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook, "follow": follow, "providers": prov}
                 profiles.append(object)
 
             return render(request, self.template_name,

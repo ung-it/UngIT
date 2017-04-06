@@ -1,7 +1,8 @@
 #imageContainer{
     display: flex;
-    max-width: 60%;
+    max-width: 40em;
     height: auto;
+
 }
 
 i{
@@ -51,7 +52,7 @@ i{
     width: 100%;
     min-height: 15em;
     max-height: 15em;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
@@ -79,26 +80,6 @@ i{
 
 #addComment{
     float: right;
-}
-
-/* Scrollbar styles */
-::-webkit-scrollbar {
-width: 12px;
-height: 12px;
-}
-
-::-webkit-scrollbar-track {
-border: 1px solid #03a7ff;
-border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-background: #03adff;
-border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-background: #03a7ff;
 }
 
 .dv-star-rating{

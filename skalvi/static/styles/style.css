@@ -91,6 +91,10 @@ a.navbar-brand {
     color: white !important;
     border-bottom: 7px solid #3ad7ff !important;
 }
+.username-font {
+    font-family: "Dosis", serif;
+    font-weight: bold;
+}
 
 .active > a {
     color: white !important;
@@ -110,6 +114,16 @@ a.navbar-brand {
 #logo-image {
     height: 90px;
     margin-top: -35px;
+}
+
+@media screen and (max-width: 1020px) {
+    #logo-image {
+        display: none; !important;
+    }
+
+    .logo-div {
+        display: none; !important;
+    }
 }
 
 .banner-container {

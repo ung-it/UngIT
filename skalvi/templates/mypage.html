@@ -65,15 +65,27 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="my-page-activities">
-                                <div class="my-page-attending">
-                                    <h2>Påmeldte aktiviteter</h2>
-                                    <div id="attendingActivities"></div>
-                                </div>
-                                <div class="my-page-hosting">
-                                    <h2>Mine aktiviteter</h2>
-                                    <div id="hostingActivities"></div>
-                                </div>
+
+                            <div id="adminProvider" class="demo-card mdl-card mdl-shadow--2dp">
+                                <h3 class="title-follow-card">Arangører jeg administrerer</h3>
+                                <a href="/provider" class="btn btn-info" role="button" id="followButton">Administrer arrangører</a>
+                                <ul class="admin-provider-list">
+                                    {% for f in profile.providers %}
+                                        <li>{{ f }}</li>
+                                    {% empty %}
+                                        <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge til</a>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                        <div class="my-page-activities">
+                            <div class="my-page-attending">
+                                <h2>Påmeldte aktiviteter</h2>
+                                <div id="attendingActivities"></div>
+                            </div>
+                            <div class="my-page-hosting">
+                                <h2>Mine aktiviteter</h2>
+                                <div id="hostingActivities"></div>
                             </div>
                         {% endif %}
                     {% endfor %}

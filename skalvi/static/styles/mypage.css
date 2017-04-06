@@ -63,12 +63,36 @@ h4#usersTitle{
 
 .my-page-activities {
     margin: 1.5em 0 0 0;
+    display: flex;
+}
+
+.my-page-attending {
+    width: 50%;
+}
+
+.my-page-hosting {
+    width: 50%;
 }
 
 .title-follow-card {
     margin: 1em 0 0.5em 1em;
 }
 
+#adminProvider {
+    width: 100%;
+    margin: 1.5em 0 0 0;
+}
+
+#followButton{
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+}
+
+.admin-provider-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 /*Styling users*/
 ol, ul {
     float: left;

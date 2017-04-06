@@ -44,7 +44,6 @@ urlpatterns = [
     url(r'^api/provider/(?P<pk>\d+)/$', ApiFunctions.getProvider, name='getProvider'),
     url(r'^api/userproviders/$', ApiFunctions.getUserProviders, name='getUserProviders'),
 
-
     url(r'^api/getHost/[0-9]+/$', views.getActivityHost, name="getActivityHost"),
 
     # Comments and rating
@@ -64,6 +63,9 @@ urlpatterns = [
     url(r'^robots.txt$', views.robots, name="robots"),
 
     #Loged in
-    url(r'^checkIfLogedIn/$', views.checkIfLogedIn, name='checkIfLogedIn')
-]
+    url(r'^checkIfLogedIn/$', views.checkIfLogedIn, name='checkIfLogedIn'),
 
+    #SingleProviderView
+    url(r'^provider/([0-9]+)/$', views.SingleProviderView.as_view(), name="singleProvider")
+
+]

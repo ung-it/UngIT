@@ -602,12 +602,14 @@ class MyPageView(View):
                     follow.append([f.orgId.pk, provider.aktordatabase["Navn"]])
 
                 prov = []
-                if( profile.provider != None and ',' in profile.provider):
+                if( profile.provider != None):
                     splitString = str(profile.provider)
-                    myProviders = splitString.split(',')
-                    for p in myProviders:
-                         prov.append(Organisation.objects.get(pk=p).aktordatabase["Navn"])
-
+                    if(',' in profile.provider):
+                        myProviders = splitString.split(',')
+                        for p in myProviders:
+                            prov.append(Organisation.objects.get(pk=p).aktordatabase["Navn"])
+                    else:
+                        prov.append(Organisation.objects.get(pk=splitString).aktordatabase["Navn"])
 
                 object = {'profile_name': profile.profile_name, "last_name": profile.last_name, "email": profile.email,
                           "type": profile.type, "phone": profile.phone, "is_active": profile.is_active,
@@ -681,7 +683,7 @@ class ProviderView(View):
             profile.provider = providers
             profile.save(update_fields=["provider"])
 
-            return redirect("skalvi:mypage")
+            return redirect("../mypage/" + request.session["profile_name"])
         else:
             return redirect("skalvi:index")
 

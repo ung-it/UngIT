@@ -65,6 +65,18 @@
                                     {% endfor %}
                                 </ul>
                             </div>
+
+                            <div id="provider" class="demo-card mdl-card mdl-shadow--2dp">
+                                <h3>Arangører jeg administrerer</h3>
+                                <ul>
+                                    {% for f in profile.providers %}
+                                        <li>{{ f }}</li>
+                                    {% empty %}
+                                        <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge til</a>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
                         </div>
                         <div class="my-page-activities">
                             <div class="my-page-attending">

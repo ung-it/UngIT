@@ -19,11 +19,26 @@ h4#usersTitle{
     margin: 0 0 0 4em;
 }
 
+#top-content-mypage{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
 #profile{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 }
+
+#provider{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
 
 .profileInformation {
     margin: 0 0 0 1.5em;

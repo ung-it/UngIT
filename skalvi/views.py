@@ -420,25 +420,11 @@ class UserFormView(View):
             last_name = form.cleaned_data['last_name']
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
-            # profile_name = profile_form.cleaned_data['profile_name']
-            # is_provider = profile_form.cleaned_data['is_provider']
-
-            # print("Provider?  " + str(is_provider))
 
             if types:
                 types = "P"
             else:
                 types = "C"
-
-            # if is_provider:
-            #     scraper = Scraper()
-            #     information = scraper.scrapeAktor(name=profile_name)
-            #     #information = json.dumps(information, ensure_ascii=False)
-            #
-            #     print("Information as json: ", information)
-            # else:
-            #     information = {}
-
 
             # Make som changes or something useful
             user.set_password(password)
@@ -603,13 +589,21 @@ class MyPageView(View):
             user_object = request.user
             user_profile_objects = UserProfile.objects.filter(user=request.user)
             profiles = []
-
             for profile in user_profile_objects:
                 path = "/mypage/" + str(profile.profile_name) + "/"
                 facebook = isNum(username)
+                iFollow = Follows.objects.filter(userId=request.user, user_profile_id=profile)
+                follow = []
+                if not iFollow:
+                    follow.append(["../../allproviders/", "Du følger ingen akøter. Se om du finner noen du liker."])
+
+                for f in iFollow:
+                    provider = Organisation.objects.get(pk=f.orgId.pk)
+                    follow.append([f.orgId.pk, provider.aktordatabase["Navn"]])
+
                 object = {'profile_name': profile.profile_name, "last_name": profile.last_name, "email": profile.email,
                           "type": profile.type, "phone": profile.phone, "is_active": profile.is_active,
-                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook}
+                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook, "follow": follow}
                 profiles.append(object)
 
             return render(request, self.template_name,

@@ -187,4 +187,23 @@ pre {
     margin: 15px;
 }
 
+/* Scrollbar styles */
+::-webkit-scrollbar {
+width: 12px;
+height: 12px;
+}
+
+::-webkit-scrollbar-track {
+border: 1px solid #03a7ff;
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+background: #03adff;
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #03a7ff;
+}
 

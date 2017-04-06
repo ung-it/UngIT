@@ -10,6 +10,18 @@ body {
     background-color: white;
 }
 
+.site-content {
+    flex: 1;
+}
+
+.content {
+    padding-top: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+/*Text styling*/
+
 h1, h2, h3, .title {
     font-family: "Dosis", serif;
     font-weight: bold;
@@ -35,10 +47,7 @@ h1, h2, h3, .title {
     float: right;
 }
 
-.site-content {
-    flex: 1;
-}
-
+/*styling navbar*/
 .navbar.navbar-inverse {
     margin-bottom: 0px;
     border-radius: 0;
@@ -53,12 +62,6 @@ a.navbar-brand {
 .nav-color {
     background-color: rgb(42, 42, 42);
     font-family: "Dosis", serif;
-}
-
-.content {
-    padding-top: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
 }
 
 .nav-content {
@@ -78,13 +81,25 @@ a.navbar-brand {
     padding: 0 5px;
 }
 
-
  .navbar-default .navbar-nav > .active > a,
  .navbar-default .navbar-nav > .active > a:hover,
  .navbar-default .navbar-nav > .active > a:focus {
       color: white;
-
  }
+
+ li.dropdown.open > a:focus {
+    color: white !important;
+    border-bottom: 7px solid #3ad7ff !important;
+}
+.username-font {
+    font-family: "Dosis", serif;
+    font-weight: bold;
+}
+
+.active > a {
+    color: white !important;
+    border-bottom: 7px solid #3ad7ff !important;
+}
 
 .logo-div {
     position: absolute;
@@ -99,6 +114,16 @@ a.navbar-brand {
 #logo-image {
     height: 90px;
     margin-top: -35px;
+}
+
+@media screen and (max-width: 1020px) {
+    #logo-image {
+        display: none; !important;
+    }
+
+    .logo-div {
+        display: none; !important;
+    }
 }
 
 .banner-container {
@@ -122,6 +147,7 @@ pre {
     background-color: transparent;
 }
 
+/*styling footer*/
 
 .footer {
     background-color: rgb(42, 42, 42);
@@ -161,22 +187,23 @@ pre {
     margin: 15px;
 }
 
-
-
-li.dropdown.open > a:focus {
-    color: white !important;
-    border-bottom: 7px solid #3ad7ff !important;
-    /*background: -webkit-linear-gradient(left top,#3ad7ff, #03a7ff) !important; /* For Safari 5.1 to 6.0 */
-    /*background: -o-linear-gradient(bottom right, #3ad7ff, #03a7ff) !important; /* For Opera 11.1 to 12.0 */
-   /* background: -moz-linear-gradient(bottom right, #3ad7ff, #03a7ff) !important; /* For Firefox 3.6 to 15 */
-    /*background: linear-gradient(to bottom right, #3ad7ff, #03a7ff) !important; /* Standard syntax */
+/* Scrollbar styles */
+::-webkit-scrollbar {
+width: 12px;
+height: 12px;
 }
 
-.active > a {
-    color: white !important;
-    border-bottom: 7px solid #3ad7ff !important;
-    /*border-bottom: -webkit-linear-gradient(left top, #3ad7ff, #03a7ff) !important; /* For Safari 5.1 to 6.0 */
-    /*border-bottom: -o-linear-gradient(bottom right, #3ad7ff, #03a7ff) !important; /* For Opera 11.1 to 12.0 */
-    /*border-bottom: -moz-linear-gradient(bottom right, #3ad7ff, #03a7ff) !important; /* For Firefox 3.6 to 15 */
-    /*border-bottom: linear-gradient(to bottom right, #3ad7ff, #03a7ff) !important; /* Standard syntax */
+::-webkit-scrollbar-track {
+border: 1px solid #03a7ff;
+border-radius: 10px;
 }
+
+::-webkit-scrollbar-thumb {
+background: #03adff;
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #03a7ff;
+}
+

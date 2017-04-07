@@ -26,6 +26,7 @@
     "es6-promise": "^4.0.5",
     "isomorphic-fetch": "^2.2.1",
     "material-ui": "^0.17.1",
+    "promise-polyfill": "^6.0.2",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-bootstrap-daterangepicker": "^3.2.2",
@@ -37,6 +38,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "setasap": "^2.0.0",
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {

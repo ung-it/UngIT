@@ -66,7 +66,7 @@ export function trashButtonClicked() {
 export function fetchAllProviders() {
     return (dispatch) => {
         getAllProviders()
-            .then(result => dispatch(fetchedAllProviders(result.map(p => (JSON.parse(p.fields.aktordatabase))))))
+            .then(result => dispatch(fetchedAllProviders(result.map(p => (p)))))
             .catch(error => console.log(error));
     }
 }

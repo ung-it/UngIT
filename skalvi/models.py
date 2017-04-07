@@ -119,5 +119,9 @@ class EmployedIn(models.Model):
 
 class Follows(models.Model):
     orgId = models.ForeignKey(Organisation, on_delete=models.CASCADE)
-    userId = models.OneToOneField(User, on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
     user_profile_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+    # def __str__(self):
+    #     return str(self.user_profile_id.email + " follows " + self.orgId.aktordatabase)
+

@@ -49,7 +49,8 @@ def loginFacebook(request):
         else:
             type = "C"
 
-        userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name)
+        userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name, last_name=last_name,
+                                  email=email, provider={})
         userProfile.save()
         login(request, user)
 

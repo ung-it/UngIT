@@ -5,6 +5,10 @@ h4#usersTitle{
     margin: 0 0 0.5em 3.2em
 }
 
+.active-span {
+    color: green;
+}
+
 #myPageContent{
     display: flex;
     flex-direction: row;
@@ -12,6 +16,7 @@ h4#usersTitle{
     margin-right: 0;
 }
 
+/*profile info styling*/
 #profileOnMyPage{
     width: 100%;
     display: flex;
@@ -19,26 +24,12 @@ h4#usersTitle{
     margin: 0 0 0 4em;
 }
 
-#top-content-mypage{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-}
 
 #profile{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 }
-
-#provider{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow-y: auto;
-}
-
 
 .profileInformation {
     margin: 0 0 0 1em;
@@ -47,18 +38,56 @@ h4#usersTitle{
 .profileExtras {
     margin: 0 0 0 2em;
 }
+
 #profilesOnMyPage{
     max-width: 0.9em;
     margin: 1.7em 0 0 0;
+}
+
+/*Cards styling*/
+.demo-card.mdl-card {
+    width: 40em;
+    min-height: 12em;
 }
 
 .profilePicture {
     margin: 1em 0 0 0;
 }
 
-.demo-card.mdl-card {
-    width: 40em;
-    min-height: 12em;
+.provider-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+#adminProvider {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    margin-top: 1.5em;
+}
+
+#provider{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    margin-top: 1.5em;
+}
+
+
+#followButton{
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+}
+
+.admin-provider-list {
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .my-page-activities {
@@ -76,22 +105,6 @@ h4#usersTitle{
 
 .title-follow-card {
     margin: 1em 0 0.5em 1em;
-}
-
-#adminProvider {
-    width: 100%;
-    margin: 1.5em 0 0 0;
-}
-
-#followButton{
-    width: 100%;
-    position: absolute;
-    bottom: 5px;
-}
-
-.admin-provider-list {
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 /*Styling users*/
 ol, ul {

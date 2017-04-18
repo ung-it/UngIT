@@ -13,9 +13,25 @@
 
     <div style="margin: 150px ">
         <h1>
-           Her kommer informasjon om {{ provider.Navn }}
+            {{ provider.Navn }}
         </h1>
-    <div>{{ provider }}</div>
+        <div id="providerInformation" class="demo-card mdl-card mdl-shadow--2dp">
+            <h4><span class="bold-info-text">Kategorier:</span> {{ provider.Kategorier }}</h4>
+            <h4><span class="bold-info-text">Organisasjonsnummer:</span> {{ provider.Organisasjonsnummer }}</h4>
+            <h4><span class="bold-info-text">Adresse:</span> {{ provider.Adresse }}</h4>
+            {% if provider.Telefaks == None %}
+                <h4><span class="bold-info-text">Medlemmer:</span> Ikke registrert</h4>
+            {% else %}
+                <h4><span class="bold-info-text">Medlemmer:</span>{{ provider.Medlemmer }}</h4>
+            {% endif %}
+            <h4><span class="bold-info-text">Organisasjonsform:</span> {{ provider.Organisasjonsform }}</h4>
+            <h4><span class="bold-info-text">Rekrutteringsområde:</span> {{ provider.Rekrutteringsområde}}</h4>
+            <h4><span class="bold-info-text">Telefon:</span> {{ provider.Telefon }}</h4>
+            {% if provider.Telefaks != None %}
+                <h4><span class="bold-info-text">Telefaks:</span> {{ provider.Telefaks }}</h4>
+            {% endif %}
+
+        </div>
         <br>
     <h3>Aktiviteter som denne aktøren har laget skal vises her</h3>
     <h3>Og informasjon om aktøren kommer også her</h3>

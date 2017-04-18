@@ -602,8 +602,9 @@ class MyPageView(View):
                     follow.append(["../../provider/"+str(f.orgId.pk)+"/", provider.aktordatabase["Navn"]])
 
                 prov = []
-                if( profile.provider != None and not str(profile.provider) == ''):
+                if profile.provider != None and not str(profile.provider) == '' and not str(profile.provider) == "{}":
                     splitString = str(profile.provider)
+                    print("Splitstring " , splitString)
                     if(',' in profile.provider):
                         myProviders = splitString.split(',')
                         for p in myProviders:

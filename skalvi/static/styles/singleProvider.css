@@ -1,10 +1,20 @@
-#providerInformation{
-    width: 40%;
-
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
+#providerInformation{
+    width: 80%;
+
+}
 
 .bold-info-text{
     margin: 0 0 0 1em;
 
+}
+
+#proHostingActivities{
+    width: 20%;
 }

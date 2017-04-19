@@ -366,6 +366,11 @@ class ActivityModal extends Component {
             provider = this.state.provider.aktordatabase.Navn;
         }
 
+
+        // Split up description, avoid wall of text
+        let desc = description;
+        console.log(desc);
+
         return (
             <Modal
                 show={this.state.show}
@@ -411,7 +416,7 @@ class ActivityModal extends Component {
                     </div>
                     <div>
                         <h2 className="modal-description-header">Om arrangementet</h2>
-                        <p className="modal-description">{description}</p>
+                        <pre className="modal-description">{description}</pre>
                     </div>
                     {videoContainer}
                     {carouselContainer}

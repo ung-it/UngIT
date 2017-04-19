@@ -16,27 +16,31 @@
 
 #activity-s-remove {
     padding: 0;
+    color: lightgrey;
 }
 
 #remove-s-button {
     line-height: 3;
+    color: lightgrey;
 }
 
 #remove-s-button:hover {
-    color: red;
     cursor: pointer;
+    color: dimgrey;
 }
 
 #activity-a-remove {
     padding: 0;
+    color: lightgrey;
 }
 
 #remove-a-button {
     line-height: 3;
+    color: lightgrey;
 }
 
 #remove-a-button:hover {
-    color: red;
+    color: dimgrey;
     cursor: pointer;
 }
 

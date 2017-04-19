@@ -326,7 +326,7 @@ class ActivityModal extends Component {
                 ratingContainer =
                     <div>
                         <p className="activityRating">Gi din vurdering</p>
-                        <StarRatingComponent className="activityRating" name="activityRating" emptyStarColor="#BBB" onStarClick={this.onRateChange.bind(this)}/>;
+                        <StarRatingComponent className="activityRating" name="activityRating" emptyStarColor="#BBB" onStarClick={this.onRateChange.bind(this)}/>
                     </div>
             }
             postCommentContainer =

@@ -64,6 +64,13 @@ def loginFacebook(request):
         login(request,user)
 
         if user.is_staff:
+            for profile in profiles:
+                profile.is_active = True
+                profile.save()
+                request.session['username'] = user.username
+                request.session['profile_name'] = profile.profile_name
+                request.session['profile_pk'] = profile.pk
+                break
             return redirect("/admin")
         elif len(profiles) > 1:
             return redirect("skalvi:choose")

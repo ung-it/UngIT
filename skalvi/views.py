@@ -347,6 +347,13 @@ def loginView(request):
                     profiles = UserProfile.objects.filter(user=user)
                     login(request, user)
                     if user.is_staff:
+                        for profile in profiles:
+                            profile.is_active = True
+                            profile.save()
+                            request.session['username'] = user.username
+                            request.session['profile_name'] = profile.profile_name
+                            request.session['profile_pk'] = profile.pk
+                            break
                         return redirect("/admin")
                     elif len(profiles) > 1:
                         return redirect("skalvi:choose")
@@ -354,8 +361,11 @@ def loginView(request):
                         for profile in profiles:
                             profile.is_active = True
                             profile.save()
+                            request.session['username'] = user.username
+                            request.session['profile_name'] = profile.profile_name
+                            request.session['profile_pk'] = profile.pk
+                            break
                         return redirect("/")
-                        # return render(request, "chooseUser.html")
         else:
             return render(request, template_name, {
                 'error_message': "Kontoen eksisterer ikke, ellers er det feil kombinasjon av brukernavn og passord"})

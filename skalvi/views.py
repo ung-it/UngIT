@@ -443,7 +443,7 @@ class UserFormView(View):
             user.save()  # saves users to the database
 
             userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=first_name, last_name=last_name,
-                                      email=email, provider={})
+                                      email=email, provider="")
             userProfile.is_active = True
             userProfile.save()
 

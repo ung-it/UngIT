@@ -280,7 +280,7 @@ def rateActivity(request):
 
 @csrf_exempt
 def postComment(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
     comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
     if comment.strip() == "":  # Checks if comment is blank
         return HttpResponse()

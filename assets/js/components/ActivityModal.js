@@ -41,7 +41,8 @@ class ActivityModal extends Component {
             hosting: false,
             myrating: 0,
             comments: [],
-            provider: ""
+            provider: "",
+            fullDescription: false,
         }
     }
 
@@ -64,6 +65,7 @@ class ActivityModal extends Component {
             show: false,
             hasChecked: false,
             hosting: false,
+            fullDescription: false,
         });
     };
 
@@ -173,6 +175,12 @@ class ActivityModal extends Component {
         });
     };
 
+    fullDes = () => {
+        this.setState({
+            fullDescription: true
+        });
+    };
+
     render() {
         let {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
 
@@ -186,6 +194,8 @@ class ActivityModal extends Component {
         let changeActivityContainer = null;
         let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
         let allComments = this.state.comments;
+        let descriptionContainer = null;
+
 
         if (suitedForType >= 0) {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
@@ -367,9 +377,23 @@ class ActivityModal extends Component {
         }
 
 
-        // Split up description, avoid wall of text
-        let desc = description;
-        console.log(desc);
+
+        if(description.length > 300){
+            if(this.state.fullDescription){
+                descriptionContainer =
+                    <div>
+                        <pre className="modal-description">{description}</pre>
+                    </div>
+            }
+            else{
+                let des = description.substring(0,300) + "...";
+                descriptionContainer =
+                    <div>
+                        <pre className="modal-description">{des}</pre> <a onClick={this.fullDes}>Les mer</a>
+                    </div>
+            }
+        }
+
 
         return (
             <Modal
@@ -416,7 +440,7 @@ class ActivityModal extends Component {
                     </div>
                     <div>
                         <h2 className="modal-description-header">Om arrangementet</h2>
-                        <pre className="modal-description">{description}</pre>
+                        {descriptionContainer}
                     </div>
                     {videoContainer}
                     {carouselContainer}

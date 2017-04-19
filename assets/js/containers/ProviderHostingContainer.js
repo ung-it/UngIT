@@ -8,6 +8,7 @@ import {Provider, connect} from "react-redux";
 import {fetchAllProHostingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
+import { withoutTime } from "../DateFunctions";
 
 import '../../styles/activityBox.css';
 
@@ -64,7 +65,7 @@ class ProviderHostingContainer extends Component {
 const mapStateToProps = state => {
     return {
         proHostingActivities: state.activity.proHostingList
-            .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
+            .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date)))
     };
 };
 

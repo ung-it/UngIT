@@ -46,7 +46,7 @@ class ProviderHostingContainer extends Component {
             },
         };
 
-        let proHostingContainer = <p>Du har ikke opprettet noen aktiviteter</p>;
+        let proHostingContainer = <p>Vi har desverre ingen kommende aktiviteter for øyeblikket</p>;
         if (this.props.proHostingActivities.length > 0) {
             proHostingContainer =
                 <div style={styles.activitiesStyle}>

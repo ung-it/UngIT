@@ -5,7 +5,7 @@ import {Provider, connect} from "react-redux";
 import {fetchAllAttendingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
-
+import { withoutTime } from "../DateFunctions";
 import '../../styles/activityBox.css';
 
 const store = configureStore();
@@ -61,7 +61,8 @@ class AttendingActivitiesContainer extends Component {
 const mapStateToProps = state => {
     return {
         attendingActivities: state.activity.attendingActivityList
-            .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
+            .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date))) // Sort descending based on date
+            .filter((a) => withoutTime(new Date(a.fields.date_end)) >= withoutTime(new Date()))
         // Only get five first
     };
 };

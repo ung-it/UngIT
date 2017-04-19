@@ -275,7 +275,9 @@ def rateActivity(request):
     activity.number_of_ratings = activity.number_of_ratings + 1
     activity.rating = (currentRating + float(rating))
     activity.save()
-    return HttpResponse(status=200, content_type='application/json')
+    
+    response = {'posted': None}  # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 
 @csrf_exempt
@@ -292,7 +294,7 @@ def postComment(request):
 
     response = {'posted': None}  # not logged in
     return HttpResponse(json.dumps(response), content_type='application/json')
-    
+
 
 
 @csrf_exempt

@@ -65,11 +65,18 @@ class ActivitiesContainer extends Component {
 
 }
 
+Date.prototype.withoutTime = function () {
+    let d = new Date(this);
+    d.setHours(0,0,0,0);
+    return d;
+}
+
 const mapStateToProps = state => {
     return {
         activities: state.activity.activityList
-            .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            .slice(0, 4).reverse() // Only get five first
+            .sort((a, b) => new Date(a.fields.date).withoutTime() > new Date(b.fields.date).withoutTime()) // Sort descending based on date
+            .filter((a) => new Date(a.fields.date_end).withoutTime() >= new Date().withoutTime())
+            // .slice(0, 4).reverse() // Only get five first
     };
 };
 

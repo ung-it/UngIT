@@ -54,6 +54,12 @@ class AllActivitiesContainer extends Component {
     }
 }
 
+Date.prototype.withoutTime = function () {
+    let d = new Date(this);
+    d.setHours(0,0,0,0);
+    return d;
+}
+
 const mapStateToProps = state => {
     let {activity: {activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
@@ -101,7 +107,9 @@ const mapStateToProps = state => {
         : activityList;
 
 
-    activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
+    activityList = activityList.sort((a, b) => new Date(a.fields.date).withoutTime() > new Date(b.fields.date).withoutTime()); // Sort descending based on date
+    activityList = activityList.filter((a) => new Date(a.fields.date_end).withoutTime() >= new Date().withoutTime())
+
 
     activeDateFilter = activeDateFilter.toString();
 

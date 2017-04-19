@@ -50,7 +50,7 @@ def loginFacebook(request):
             type = "C"
 
         userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name, last_name=last_name,
-                                  email=email, provider={})
+                                  email=email, provider={}, is_active=True)
         userProfile.save()
         login(request, user)
 

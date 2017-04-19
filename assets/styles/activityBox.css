@@ -2,7 +2,7 @@
 .activitySmallStyle {
     border-style: solid;
     border-color: white;
-    margin: 1em 0 0 0;
+    /*margin: 1em 0 0 0;*/
     cursor: pointer;
 }
 

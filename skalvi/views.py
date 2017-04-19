@@ -289,7 +289,10 @@ def postComment(request):
     post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name,
                       activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
-    return HttpResponse(status=200, content_type='application/json')
+
+    response = {'posted': None}  # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
+    
 
 
 @csrf_exempt

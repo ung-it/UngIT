@@ -220,3 +220,10 @@ p.activityRating{
 .modal-facebook-admin-link {
     margin-right: 10px;
 }
+
+pre {
+    white-space: pre-wrap;
+    word-break: keep-all;
+    hyphens: auto;
+    text-align: left;
+}

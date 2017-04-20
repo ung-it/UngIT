@@ -281,19 +281,21 @@ def getActivity(request, id):
 
 @csrf_exempt
 def rateActivity(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
+    print(activityId)
     rating = str(request.body.decode('utf-8')).split(":")[2][:1]
     activity = Activity.objects.get(pk=activityId)
     currentRating = activity.rating
     activity.number_of_ratings = activity.number_of_ratings + 1
     activity.rating = (currentRating + float(rating))
     activity.save()
-    return HttpResponse(status=200, content_type='application/json')
+    message = {"rateed": None}
+    return HttpResponse(json.dumps(message), content_type='application/json')
 
 
 @csrf_exempt
 def postComment(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
     comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
     if comment.strip() == "":  # Checks if comment is blank
         return HttpResponse()
@@ -302,7 +304,8 @@ def postComment(request):
     post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name,
                       activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
-    return HttpResponse(status=200, content_type='application/json')
+    response = {'posted': None}
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 
 @csrf_exempt

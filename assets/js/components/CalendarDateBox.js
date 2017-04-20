@@ -15,6 +15,8 @@ class CalendarDateBox extends Component {
 
         let weekday = getDay(date.getDay());
         let month = getMonth(date.getMonth());
+        let year = date.getFullYear();
+
         let diff = date.getTime() - new Date().getTime();
         let titleInfo = null;
         if (diff < 0) {
@@ -27,7 +29,7 @@ class CalendarDateBox extends Component {
         return(
             <time className="icon" title={titleInfo}>
                 <i>{weekday}</i>
-                <b>{month}</b>
+                <b>{month} {year}</b>
                 <span>{date.getDate()}</span>
             </time>
         )

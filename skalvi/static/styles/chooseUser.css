@@ -70,14 +70,13 @@ body {
 }
 .mdl-layout {
     align-items: center;
-  justify-content: center;
+    justify-content: center;
 }
 .mdl-layout__content {
     padding: 24px;
     flex: none;
 }
-.mdl-button {
-    margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 10px;
+#registerButton {
+    width: 8em;
+    float: right;
 }

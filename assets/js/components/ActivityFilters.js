@@ -49,7 +49,6 @@ class ActivityFilters extends React.Component {
                     <div className="col-md-6">
                         <SearchForActivity
                             onFilterChange={this.props.onSearchForChange}
-                            placeholderText="Søk etter en aktivitet..."
                             activitiesName={activityName}
                             searchForFilter={this.props.searchForFilter}
                         />

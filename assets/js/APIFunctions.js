@@ -173,8 +173,10 @@ export function postNewRating(object) {
     return postToServer('/rateActivity/', object);
 }
 
-export function postNewComment(object) {
-    return postToServer('/postComment/', object);
+export function postNewComment(object, callback) {
+    return postToServer('/postComment/', object).then(comments => {
+        callback(comments);
+    });
 }
 
 //Use only this method when doing GET-requests to server for JSON-data, don't make your own

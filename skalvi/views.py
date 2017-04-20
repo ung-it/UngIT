@@ -281,19 +281,21 @@ def getActivity(request, id):
 
 @csrf_exempt
 def rateActivity(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
+    print(activityId)
     rating = str(request.body.decode('utf-8')).split(":")[2][:1]
     activity = Activity.objects.get(pk=activityId)
     currentRating = activity.rating
     activity.number_of_ratings = activity.number_of_ratings + 1
     activity.rating = (currentRating + float(rating))
     activity.save()
-    return HttpResponse(status=200, content_type='application/json')
+    message = {"rateed": None}
+    return HttpResponse(json.dumps(message), content_type='application/json')
 
 
 @csrf_exempt
 def postComment(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
     comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
     if comment.strip() == "":  # Checks if comment is blank
         return HttpResponse()
@@ -302,7 +304,8 @@ def postComment(request):
     post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name,
                       activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
-    return HttpResponse(status=200, content_type='application/json')
+    response = {'posted': None}
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 
 @csrf_exempt
@@ -492,7 +495,6 @@ class ActivityView(generic.DetailView):
             try:
                 host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
                 form = self.form_class(initial=model_to_dict(self.get_object()))
-                print(self.kwargs['pk'])
                 return activityGet(self, request, form)
             except Hosts.DoesNotExist:
                 return redirect("skalvi:index")
@@ -565,21 +567,26 @@ def activityGet(self, request, form):
     if 'accessToken' in request.session:
         accessToken = request.session['accessToken']
     elif token:  # User has logged in with Instagram
+        print("TOKEN")
         post_data = [
             ('client_id', 'e3b85b32b9eb461190ba27b4c32e2cc6'),
             ('client_secret', 'f9ad52972e1a4a21a7d34fa508d2bba4'),
             ('grant_type', 'authorization_code'),
-            ('redirect_uri', directory + 'activity/'),
+            ('redirect_uri', directory + 'activity/?activity=' + activityID),
             ('code', token)
         ]
         data = urllib.parse.urlencode(post_data)
         try:
+            print("POST")
             result = urllib.request.urlopen('https://api.instagram.com/oauth/access_token', data.encode("ascii"))
+            print("END POST")
             temp = result.read().decode('ascii')
             content = json.loads(temp)
             accessToken = content['access_token']
             request.session['accessToken'] = accessToken
+            print("Saved in session")
         except urllib.error.URLError as e:
+            print(e)
             return redirect(link)
 
     if 'accessToken' in locals():

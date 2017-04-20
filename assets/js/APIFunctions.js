@@ -91,10 +91,12 @@ export function getFacebookEventData(activities) {
 
         return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
             for (let i = 0; i < data.length; i++) {
-                let jsonObject = JSON.parse(data[0].body);
-                for (let j in activities) {
-                    if (activities[j].fields.facebookID == jsonObject.id) {
-                        activities[j].fields.facebook = jsonObject;
+                let jsonObject = JSON.parse(data[i].body);
+                if (data[i].code == 200) {
+                    for (let j in activities) {
+                        if (activities[j].fields.facebookID == jsonObject.id) {
+                            activities[j].fields.facebook = jsonObject;
+                        }
                     }
                 }
             }
@@ -178,8 +180,10 @@ export function postNewRating(object) {
     return postToServer('/rateActivity/', object);
 }
 
-export function postNewComment(object) {
-    return postToServer('/postComment/', object);
+export function postNewComment(object, callback) {
+    return postToServer('/postComment/', object).then(comments => {
+        callback(comments);
+    });
 }
 
 //Use only this method when doing GET-requests to server for JSON-data, don't make your own

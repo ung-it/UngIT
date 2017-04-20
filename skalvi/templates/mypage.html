@@ -70,8 +70,9 @@
                                         <li>{{ f }}</li>
                                     {% empty %}
                                         {% if profile.is_active %}
-                                        <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge
-                                            til</a>
+                                            <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge
+                                                til
+                                            </a>
                                         {% else %}
                                             <p>Du representerer ingen arrangører.</p>
                                         {% endif %}
@@ -83,6 +84,15 @@
                                 <ul>
                                     {% for f in profile.follow %}
                                         <li><a href="{{ f.0 }}"> {{ f.1 }} </a></li>
+                                        {% empty %}
+                                            {% if profile.is_active %}
+                                                <a href="../../allproviders">Du følger ingen arrangører. Klikk her for å legge
+                                                til
+                                            </a>
+                                            {% else %}
+                                                <p>Du følger ingen arrangører</p>
+                                            {% endif %}
+
                                     {% endfor %}
                                 </ul>
                             </div>

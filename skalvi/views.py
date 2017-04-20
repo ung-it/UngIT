@@ -660,7 +660,6 @@ class RegisterProfileView(View):
 
     def post(self, request):
         profile_form = self.form_class(request.POST)
-
         if profile_form.is_valid():
             # Take submitted data and save to database
             profile_form.save(commit=False)
@@ -680,7 +679,8 @@ class RegisterProfileView(View):
                                   last_name=last_name, email=email)
             profile.save()
 
-        return redirect("../mypage/" + profile_name)
+            return redirect("../mypage/" + profile_name)
+        return redirect("../mypage/" + request.session["profile_name"])
 
 
 class ProviderView(View):

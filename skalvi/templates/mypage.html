@@ -29,7 +29,7 @@
             <div id="profileOnMyPage">
                 {% for profile in profiles %}
                     {% if request.path == profile.path %}
-                        <div id="profile" class="demo-card mdl-card mdl-shadow--2dp">
+                        <div id="profile">
                             <div>
                                 {% if profile.facebook == True %}
                                     <img class="profilePicture"
@@ -54,30 +54,35 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <br>
 
-                        <div class="provider-container">
-                            <div id="adminProvider" class="demo-card mdl-card mdl-shadow--2dp">
-                                <h3 class="title-follow-card">Arangører jeg administrerer</h3>
-                                <a href="/provider" class="btn btn-info" role="button" id="followButton">Administrer
-                                    arrangører</a>
-                                <ul class="admin-provider-list">
-                                    {% for f in profile.providers %}
-                                        <li>{{ f }}</li>
-                                    {% empty %}
-                                        <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge
-                                            til</a>
-                                    {% endfor %}
-                                </ul>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="adminProvider" class="demo-card mdl-card mdl-shadow--2dp">
+                                    <h3 class="title-follow-card">Arangører jeg administrerer</h3>
+                                    <a href="/provider" class="btn btn-info" role="button" id="followButton">Administrer
+                                        arrangører</a>
+                                    <ul class="admin-provider-list">
+                                        {% for f in profile.providers %}
+                                            <li>{{ f }}</li>
+                                        {% empty %}
+                                            <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge
+                                                til</a>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
                             </div>
-                            <div id="provider" class="demo-card mdl-card mdl-shadow--2dp">
-                                <h3 class="title-follow-card">Arangører jeg følger</h3>
-                                <ul>
-                                    {% for f in profile.follow %}
-                                        <li><a href="{{ f.0 }}"> {{ f.1 }} </a></li>
-                                    {% endfor %}
-                                </ul>
+                            <div class="col-md-6">
+                                <div id="provider" class="demo-card mdl-card mdl-shadow--2dp">
+                                    <h3 class="title-follow-card">Arangører jeg følger</h3>
+                                    <ul>
+                                        {% for f in profile.follow %}
+                                            <li><a href="{{ f.0 }}"> {{ f.1 }} </a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
                             </div>
+
+
                         </div>
 
 

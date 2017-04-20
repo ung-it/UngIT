@@ -616,8 +616,6 @@ class MyPageView(View):
                 facebook = isNum(username)
                 iFollow = Follows.objects.filter(userId=request.user, user_profile_id=profile)
                 follow = []
-                # if not iFollow:
-                #     follow.append(["../../allproviders/", "Du følger ingen akøter. Se om du finner noen du liker."])
 
                 for f in iFollow:
                     provider = Organisation.objects.get(pk=f.orgId.pk)

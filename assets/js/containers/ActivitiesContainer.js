@@ -35,7 +35,7 @@ class ActivitiesContainer extends Component {
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.activities.length != nextProps.activities.length) {
+        if (this.props.activities != nextProps.activities) {
             return true;
         }
         return false;

@@ -99,9 +99,6 @@ export function getFacebookEventData(activities) {
                         }
                     }
                 }
-                else {
-                    console.log(jsonObject);
-                }
             }
             return activities;
         });

@@ -260,6 +260,19 @@ def getActivities(request):
     return HttpResponse(activities, content_type='application/json')
 
 
+def getProHostingActivities(request, *args, **kwargs):
+    orgId = request.path.split("/")[3] # /api/proHosting/8411/
+    json_serializer = serializers.get_serializer("json")()
+    try:
+        organisation = Organisation.objects.get(pk=orgId)
+        activities = Activity.objects.filter(provider=orgId)
+        activities = json_serializer.serialize(activities, ensure_ascii=False)
+        return HttpResponse(activities, content_type='application/json')
+    except Organisation.DoesNotExist:
+        return redirect("skalvi:index")
+
+
+
 def getActivity(request, id):
     json_serializer = serializers.get_serializer("json")()
     activities = json_serializer.serialize(Activity.objects.filter(pk=id), ensure_ascii=False)
@@ -337,6 +350,13 @@ def loginView(request):
                     profiles = UserProfile.objects.filter(user=user)
                     login(request, user)
                     if user.is_staff:
+                        for profile in profiles:
+                            profile.is_active = True
+                            profile.save()
+                            request.session['username'] = user.username
+                            request.session['profile_name'] = profile.profile_name
+                            request.session['profile_pk'] = profile.pk
+                            break
                         return redirect("/admin")
                     elif len(profiles) > 1:
                         return redirect("skalvi:choose")
@@ -344,8 +364,11 @@ def loginView(request):
                         for profile in profiles:
                             profile.is_active = True
                             profile.save()
+                            request.session['username'] = user.username
+                            request.session['profile_name'] = profile.profile_name
+                            request.session['profile_pk'] = profile.pk
+                            break
                         return redirect("/")
-                        # return render(request, "chooseUser.html")
         else:
             return render(request, template_name, {
                 'error_message': "Kontoen eksisterer ikke, ellers er det feil kombinasjon av brukernavn og passord"})
@@ -432,7 +455,6 @@ class UserFormView(View):
             user.set_password(password)
             user.save()  # saves users to the database
 
-            # print('Before saving information: ', information)
             userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=first_name, last_name=last_name,
                                       email=email, provider="")
             userProfile.is_active = True
@@ -529,9 +551,7 @@ class createActivity(View):
             form.save()
 
             user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
-            # print("usreprofile", user_profile.profile_name)
             activity = Activity.objects.latest('id')
-            # print("activity", activity.activityName)
             hosts = Hosts(activityId=activity, adminId=request.user, profileId=user_profile)
             hosts.save()
             return redirect('/')
@@ -604,7 +624,7 @@ class MyPageView(View):
                     follow.append(["../../provider/"+str(f.orgId.pk)+"/", provider.aktordatabase["Navn"]])
 
                 prov = []
-                if( profile.provider != None and not str(profile.provider) == ''):
+                if profile.provider != None and not str(profile.provider) == '' and not str(profile.provider) == "{}":
                     splitString = str(profile.provider)
                     if(',' in profile.provider):
                         myProviders = splitString.split(',')
@@ -694,23 +714,16 @@ class SingleProviderView(View):
     template_name = "singleProvider.html"
 
     def get(self, request, *args, **kwargs):
-        print("PATH ", request.path) ## /provider/1/
-        orgId = request.path.split("/")[2]
+        orgId = request.path.split("/")[2] ## /provider/1/
 
         try:
             organisation = Organisation.objects.get(pk=orgId)
-            print(organisation.aktordatabase)
-
             context = {"provider": organisation.aktordatabase}
 
             return render(request, self.template_name, context)
 
         except Organisation.DoesNotExist:
             return redirect("skalvi:index")
-
-
-
-
 
 
 

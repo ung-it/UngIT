@@ -468,7 +468,7 @@ class UserFormView(View):
                     request.session['profile_name'] = userProfile.profile_name
                     request.session['profile_pk'] = userProfile.pk
 
-                    return redirect('skalvi:index')
+                    return redirect('/mypage/' + userProfile.profile_name)
 
         # If not successfully logged in, returns to the same page.
         # Return to the login page

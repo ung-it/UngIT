@@ -91,11 +91,16 @@ export function getFacebookEventData(activities) {
 
         return postToServer('https://graph.facebook.com/v2.8/', data).then(data => {
             for (let i = 0; i < data.length; i++) {
-                let jsonObject = JSON.parse(data[0].body);
-                for (let j in activities) {
-                    if (activities[j].fields.facebookID == jsonObject.id) {
-                        activities[j].fields.facebook = jsonObject;
+                let jsonObject = JSON.parse(data[i].body);
+                if (data[i].code == 200) {
+                    for (let j in activities) {
+                        if (activities[j].fields.facebookID == jsonObject.id) {
+                            activities[j].fields.facebook = jsonObject;
+                        }
                     }
+                }
+                else {
+                    console.log(jsonObject);
                 }
             }
             return activities;

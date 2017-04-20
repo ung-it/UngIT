@@ -35,13 +35,12 @@
                     {% endfor %}
                     {% for field in profile %}
                         {% if field.name == "type" %}
-                            {{ field.auto_id }}
                             <li class="mdl-list__item">
-                                <div class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{ field.auto_id }}">
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{ field.auto_id }}">
                                     <input type="checkbox" name="{{ field.name }}" id="{{ field.auto_id }}" class="mdl-checkbox__input" required>
                                     <span class="mdl-checkbox__label">{{ field.label }}</span>
                                     <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
-                                </div>
+                                </label>
                             </li>
                         {% else %}
                             <li class="mdl-list__item">

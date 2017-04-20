@@ -158,8 +158,9 @@ class ActivityModal extends Component {
             };
             $("#commentInput").val("");
             $("#postError").html("");
-            postNewComment(obj).then(this.fetchComments());
-
+            postNewComment(obj, response => {
+                this.fetchComments();
+            });
         }
 
 

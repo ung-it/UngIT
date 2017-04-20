@@ -13,6 +13,6 @@
 #followButton{
     width: 95%;
     position: absolute;
-    bottom: 5px;
+    /*bottom: 5px;*/
     margin: 0 1em 1em 1em;
 }

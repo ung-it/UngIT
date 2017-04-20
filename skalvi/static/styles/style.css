@@ -139,14 +139,12 @@ a.navbar-brand {
 
 .banner-home {
     width: 100%;
-    height: 5%;
-
+    height: 20em;
 }
 
 .banner {
     width: 100%;
     height: 2%;
-
 }
 
 pre {

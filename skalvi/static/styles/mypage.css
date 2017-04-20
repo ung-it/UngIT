@@ -2,7 +2,11 @@ h4#usersTitle{
     text-align: center;
     font-family: "Dosis", serif;
     font-weight: bolder;
-    margin: 0 0 0 1em;
+    margin: 0 0 0.5em 3.2em
+}
+
+.active-span {
+    color: green;
 }
 
 #myPageContent{
@@ -12,12 +16,14 @@ h4#usersTitle{
     margin-right: 0;
 }
 
+/*profile info styling*/
 #profileOnMyPage{
     width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0 0 0 4em;
 }
+
 
 #profile{
     display: flex;
@@ -26,31 +32,84 @@ h4#usersTitle{
 }
 
 .profileInformation {
-    margin: 0 0 0 1.5em;
+    margin: 0 0 0 1em;
 }
 
 .profileExtras {
-    margin: 0 0 0 6em;
+    margin: 0 0 0 2em;
 }
-#profilesOnMyPage{
-    width: 9%;
 
+#profilesOnMyPage{
+    max-width: 0.9em;
+    margin: 1.7em 0 0 0;
+}
+
+/*Cards styling*/
+.demo-card.mdl-card {
+    width: 40em;
+    min-height: 12em;
 }
 
 .profilePicture {
     margin: 1em 0 0 0;
 }
 
-.demo-card.mdl-card {
-    width: 40em;
-    height: 12em;
+.provider-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+#adminProvider {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    margin-top: 1.5em;
+    max-height: 12em;
+}
+
+#provider{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    margin-top: 1.5em;
+    max-height: 12em;
+}
+
+
+#followButton{
+    width: 95%;
+    position: absolute;
+    bottom: 5px;
+    margin: 0 1em 1em 1em;
+}
+
+
+.admin-provider-list {
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .my-page-activities {
     margin: 1.5em 0 0 0;
+    display: flex;
 }
 
+.my-page-attending {
+    width: 50%;
+}
 
+.my-page-hosting {
+    width: 50%;
+}
+
+.title-follow-card {
+    margin: 1em 0 0.5em 1em;
+}
 /*Styling users*/
 ol, ul {
     float: left;

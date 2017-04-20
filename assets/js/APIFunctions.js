@@ -1,5 +1,20 @@
 import 'whatwg-fetch';
 
+const Promise = require("promise-polyfill");
+const setAsap = require("setasap");
+Promise._immediateFn = setAsap;
+
+if(!window.Promise){
+    window.Promise = Promise;
+}
+
+
+export function getUserState(callback) {
+    return fetchFromServer('/checkIfLogedIn/').then(response => {
+        callback(response.active);
+    });
+}
+
 export function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
@@ -99,11 +114,16 @@ export function getAllAttendingActivities() {
     const profileName = window.location.href.split("/")[4];
     return fetchFromServer('/api/attendingActivities/'+profileName);
 }
+
 export function getAllHostingActivities() {
     const profileName = window.location.href.split("/")[4];
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
 
+export function getAllProHosting() {
+    const id = window.location.href.split("/")[4];
+    return fetchFromServer('/api/proHosting/'+ String(id));
+}
 
 export function getHost(id, callback) {
     fetchFromServer('/api/getHost/' + id).then(result => {
@@ -126,6 +146,30 @@ export function signoffActivity(data, callback) {
 
 export function checkIfSignedUp(data, callback) {
     postToServer('/checkIfSignedUp/', data).then(response => {
+        callback(response);
+    });
+}
+
+export function follow(data, callback) {
+    postToServer('/follow/', data).then (response => {
+        callback(response);
+    });
+}
+
+export function unfollow(data, callback) {
+    postToServer('/unfollow/', data).then(response => {
+        callback(response);
+    });
+}
+
+export function checkIfFollowing(data, callback) {
+    postToServer('/checkIfFollowing/', data).then(response => {
+        callback(response);
+    });
+}
+
+export function getFollowingProviders(callback) {
+    return fetchFromServer('/getFollowingProviders/').then (response => {
         callback(response);
     });
 }

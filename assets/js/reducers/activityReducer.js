@@ -1,16 +1,17 @@
 import * as actionTypes from '../actions/activitiesActions';
 /*
-* A reducer is just a little pice of data that we want to return
-* It gets notified from all Action creators when they are fired, with the action type
-* Thus, the reducer can listen for action type, and if it's something the reducer wants to handle and return some
-* data. It can do so.
-* */
+ * A reducer is just a little pice of data that we want to return
+ * It gets notified from all Action creators when they are fired, with the action type
+ * Thus, the reducer can listen for action type, and if it's something the reducer wants to handle and return some
+ * data. It can do so.
+ * */
 
 const moment = require('moment');
 
 const initialState = {
     attendingActivityList: [],
     hostingActivityList: [],
+    proHostingList: [],
     activityList: [],
     activeActivityFilters: [],
     activeSuitedForFilters: [],
@@ -18,15 +19,20 @@ const initialState = {
     activeSearchForFilters: '',
     activeButtonClicked: false,
 
-}
+};
 
 
-export default function ActivityReducer(state=initialState, action) {
+export default function ActivityReducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.FETCHED_ALL_HOSTING_ACTIVITIES:
             return {
                 ...state,
                 hostingActivityList: action.hostingActivities,
+            };
+        case actionTypes.FETCHED_ALL_PROVIDER_HOSTING_ACTIVITIES:
+            return {
+                ...state,
+                proHostingList: action.proHostingActivities,
             };
         case actionTypes.FETCHED_ALL_ATTENDING_ACTIVITIES:
             return {
@@ -80,7 +86,7 @@ export default function ActivityReducer(state=initialState, action) {
             };
         case actionTypes.ACTIVITY_BUTTON_CLICKED:
             return {
-                 ...state,
+                ...state,
                 activeActivityFilters: [],
             };
         default:

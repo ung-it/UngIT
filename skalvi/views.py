@@ -109,21 +109,102 @@ def signOfEvent(request):
         response = {'attending': None}
     return HttpResponse(json.dumps(response), content_type='application/json')
 
-
+@csrf_exempt
 def getFollowingProviders(request):
-    profile_name = request.path.split("/")[3]
-    profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
+    if request.user.is_authenticated:
+        profile_name = request.session['profile_name']
+        profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
 
-    providers = Follows.objects.filter(userId=request.user, user_profile_id=profile)
-    follows_objects = []
-    for provider in providers:
-        prov = Organisation.objects.get(pk=provider.pk)
-        follows_objects.append(prov)
-    json_serializer = serializers.get_serializer("json")()
-    followingProviders = json_serializer.serialize(follows_objects, ensure_ascii=False)
-    return HttpResponse(followingProviders, content_type=''
-                                                         ''
-                                                         'application/json')
+        providers = Follows.objects.filter(userId=request.user, user_profile_id=profile)
+        follows_objects = []
+        for provider in providers:
+            prov = Organisation.objects.get(pk=provider.orgId.pk)
+            follows_objects.append(prov)
+        json_serializer = serializers.get_serializer("json")()
+        followingProviders = json_serializer.serialize(follows_objects, ensure_ascii=False)
+        return HttpResponse(followingProviders, content_type='application/json')
+
+
+@csrf_exempt
+def follow(request):
+    providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
+    provider = Organisation.objects.get(pk=providerId)
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+        # Check if user already is following
+        try:
+            follows = Follows.objects.get(orgId=provider, userId=request.user, user_profile_id=profile)
+            response = {'following': True}
+        # if user is not following
+        except Follows.DoesNotExist:
+            follows = Follows(orgId=provider, userId=request.user, user_profile_id=profile)
+            follows.save()
+
+            response = {'following': False}
+    # User not logged in
+    else:
+        # user is not loged in, should not be possible to attend activity
+        response = {'following': None}  # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+@csrf_exempt
+def unFollow(request):
+    providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
+    provider = Organisation.objects.get(pk=providerId)
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+        # Check if user already is following
+        try:
+            follows = Follows.objects.get(orgId=provider, userId=request.user, user_profile_id=profile)
+            follows.delete()
+            response = {'following': True}
+        # if user is not following
+        except Follows.DoesNotExist:
+            #  Not following, can't unfollow
+            response = {'following': False}
+    # User not logged in
+    else:
+        # user is not loged in, should not be possible to attend activity
+        response = {'following': None}  # not logged in
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+@csrf_exempt
+def checkIfFollowing(request):
+    providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
+    provider = Organisation.objects.get(pk=providerId)
+
+    # User logged in
+    if 'username' and 'profile_pk' in request.session:
+        profileId = request.session['profile_pk']
+        profile = UserProfile.objects.get(pk=profileId)
+        # Check if user already is attending
+        try:
+            follows = Follows.objects.get(orgId=provider, userId=request.user,
+                                                    user_profile_id=profile)
+            response = {'following': True}
+
+        except Follows.DoesNotExist:
+            # If user does not follow
+            response = {'following': False}
+    else:
+        # If user is not loged in
+        response = {'following': None}
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+
+def checkIfLogedIn(request):
+    if 'username' and 'profile_pk' in request.session:
+        response = {"active": True}
+        print("ACTIVE")
+    else:
+        response = {"active:": False}
+        print("INACTIVE")
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
 
 def getAttendingActivities(request):
     profile_name = request.path.split("/")[3]
@@ -175,9 +256,21 @@ def getActivityHost(request):
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = Activity.objects.all()
-    print("Hello" + activities[0].provider)
     activities = json_serializer.serialize(activities, ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
+
+
+def getProHostingActivities(request, *args, **kwargs):
+    orgId = request.path.split("/")[3] # /api/proHosting/8411/
+    json_serializer = serializers.get_serializer("json")()
+    try:
+        organisation = Organisation.objects.get(pk=orgId)
+        activities = Activity.objects.filter(provider=orgId)
+        activities = json_serializer.serialize(activities, ensure_ascii=False)
+        return HttpResponse(activities, content_type='application/json')
+    except Organisation.DoesNotExist:
+        return redirect("skalvi:index")
+
 
 
 def getActivity(request, id):
@@ -254,6 +347,13 @@ def loginView(request):
                     profiles = UserProfile.objects.filter(user=user)
                     login(request, user)
                     if user.is_staff:
+                        for profile in profiles:
+                            profile.is_active = True
+                            profile.save()
+                            request.session['username'] = user.username
+                            request.session['profile_name'] = profile.profile_name
+                            request.session['profile_pk'] = profile.pk
+                            break
                         return redirect("/admin")
                     elif len(profiles) > 1:
                         return redirect("skalvi:choose")
@@ -261,8 +361,11 @@ def loginView(request):
                         for profile in profiles:
                             profile.is_active = True
                             profile.save()
+                            request.session['username'] = user.username
+                            request.session['profile_name'] = profile.profile_name
+                            request.session['profile_pk'] = profile.pk
+                            break
                         return redirect("/")
-                        # return render(request, "chooseUser.html")
         else:
             return render(request, template_name, {
                 'error_message': "Kontoen eksisterer ikke, ellers er det feil kombinasjon av brukernavn og passord"})
@@ -339,33 +442,18 @@ class UserFormView(View):
             last_name = form.cleaned_data['last_name']
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
-            # profile_name = profile_form.cleaned_data['profile_name']
-            # is_provider = profile_form.cleaned_data['is_provider']
-
-            # print("Provider?  " + str(is_provider))
 
             if types:
                 types = "P"
             else:
                 types = "C"
 
-            # if is_provider:
-            #     scraper = Scraper()
-            #     information = scraper.scrapeAktor(name=profile_name)
-            #     #information = json.dumps(information, ensure_ascii=False)
-            #
-            #     print("Information as json: ", information)
-            # else:
-            #     information = {}
-
-
             # Make som changes or something useful
             user.set_password(password)
             user.save()  # saves users to the database
 
-            # print('Before saving information: ', information)
             userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=first_name, last_name=last_name,
-                                      email=email, provider={})
+                                      email=email, provider="")
             userProfile.is_active = True
             userProfile.save()
 
@@ -460,9 +548,7 @@ class createActivity(View):
             form.save()
 
             user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
-            # print("usreprofile", user_profile.profile_name)
             activity = Activity.objects.latest('id')
-            # print("activity", activity.activityName)
             hosts = Hosts(activityId=activity, adminId=request.user, profileId=user_profile)
             hosts.save()
             return redirect('/')
@@ -522,13 +608,31 @@ class MyPageView(View):
             user_object = request.user
             user_profile_objects = UserProfile.objects.filter(user=request.user)
             profiles = []
-
             for profile in user_profile_objects:
                 path = "/mypage/" + str(profile.profile_name) + "/"
                 facebook = isNum(username)
+                iFollow = Follows.objects.filter(userId=request.user, user_profile_id=profile)
+                follow = []
+                if not iFollow:
+                    follow.append(["../../allproviders/", "Du følger ingen akøter. Se om du finner noen du liker."])
+
+                for f in iFollow:
+                    provider = Organisation.objects.get(pk=f.orgId.pk)
+                    follow.append(["../../provider/"+str(f.orgId.pk)+"/", provider.aktordatabase["Navn"]])
+
+                prov = []
+                if profile.provider != None and not str(profile.provider) == '' and not str(profile.provider) == "{}":
+                    splitString = str(profile.provider)
+                    if(',' in profile.provider):
+                        myProviders = splitString.split(',')
+                        for p in myProviders:
+                            prov.append(Organisation.objects.get(pk=p).aktordatabase["Navn"])
+                    else:
+                        prov.append(Organisation.objects.get(pk=splitString).aktordatabase["Navn"])
+
                 object = {'profile_name': profile.profile_name, "last_name": profile.last_name, "email": profile.email,
                           "type": profile.type, "phone": profile.phone, "is_active": profile.is_active,
-                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook}
+                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook, "follow": follow, "providers": prov}
                 profiles.append(object)
 
             return render(request, self.template_name,
@@ -598,9 +702,27 @@ class ProviderView(View):
             profile.provider = providers
             profile.save(update_fields=["provider"])
 
-            return redirect("skalvi:mypage")
+            return redirect("../mypage/" + request.session["profile_name"])
         else:
             return redirect("skalvi:index")
+
+class SingleProviderView(View):
+    model = Organisation
+    template_name = "singleProvider.html"
+
+    def get(self, request, *args, **kwargs):
+        orgId = request.path.split("/")[2] ## /provider/1/
+
+        try:
+            organisation = Organisation.objects.get(pk=orgId)
+            context = {"provider": organisation.aktordatabase}
+
+            return render(request, self.template_name, context)
+
+        except Organisation.DoesNotExist:
+            return redirect("skalvi:index")
+
+
 
 
 def allactivities(request):

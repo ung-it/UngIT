@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=8, null=True, blank=True)  # 90 90 99 09 <-- gives length 8
 
     is_active = models.BooleanField(default=False)
-    provider = models.TextField(null=True, blank=True)  # contains all found information
+    provider = models.TextField(default="", blank=True)  # contains all found information
 
 
     def __str__(self):
@@ -119,5 +119,9 @@ class EmployedIn(models.Model):
 
 class Follows(models.Model):
     orgId = models.ForeignKey(Organisation, on_delete=models.CASCADE)
-    userId = models.OneToOneField(User, on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
     user_profile_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+    # def __str__(self):
+    #     return str(self.user_profile_id.email + " follows " + self.orgId.aktordatabase)
+

@@ -4,7 +4,7 @@ body{
 
     background: linear-gradient(to bottom, grey, black);
     background-attachment: scroll;
-    background-size: 100% 900px;
+    background-size: 100% auto;
     overflow: hidden;
 }
 

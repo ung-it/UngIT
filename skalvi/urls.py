@@ -4,6 +4,7 @@ from . import views
 from . import ApiFunctions
 
 app_name = 'skalvi'
+
 urlpatterns = [
     # Index
     url(r'^$', views.index, name='index'),
@@ -31,9 +32,11 @@ urlpatterns = [
     url(r'^api/activity/(?P<id>[0-9]+)/$', views.getActivity, name="get-activity"),
     url(r'^api/attendingActivities/[a-zA-Z]+/$', views.getAttendingActivities, name="getAttendingActivities"),
     url(r'^api/hostingActivities/[a-zA-Z]+/$', views.getHostingActivities, name="getHostingActivities"),
+    url(r'^api/proHosting/[0-9]+/$', views.getProHostingActivities, name="getProHostingActivities"),
+
     # MyPage
     url(r'^mypage/$', views.MyPageView.as_view(), name='mypage'),
-    url(r'^mypage/(?P<id>[a-zA-Z]+)/$', views.MyPageView.as_view(), name='mypage'),
+    url(r'^mypage/(?P<id>[a-zA-Z ]+)/$', views.MyPageView.as_view(), name='mypage'),
     # Sign up and off
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),
@@ -43,7 +46,6 @@ urlpatterns = [
     url(r'^api/provider/(?P<pk>\d+)/$', ApiFunctions.getProvider, name='getProvider'),
     url(r'^api/userproviders/$', ApiFunctions.getUserProviders, name='getUserProviders'),
 
-
     url(r'^api/getHost/[0-9]+/$', views.getActivityHost, name="getActivityHost"),
 
     # Comments and rating
@@ -52,8 +54,20 @@ urlpatterns = [
     url(r'^comments/[0-9]+/$', views.getComments, name='getComment'),
     # Populate database
     url(r'^api/skalvi/populate/$', ApiFunctions.populate, name="populateDatabase"),
+
+    #Follow
+    url(r'^follow/$', views.follow, name='follow'),
+    url(r'^checkIfFollowing/$', views.checkIfFollowing, name='checkIfFollowing'),
+    url(r'^unfollow/$', views.unFollow, name='unfollow'),
+    url(r'^getFollowingProviders/$', views.getFollowingProviders, name='getFollowingProviders'),
+
+    #Robots
     url(r'^robots.txt$', views.robots, name="robots"),
 
+    #Loged in
+    url(r'^checkIfLogedIn/$', views.checkIfLogedIn, name='checkIfLogedIn'),
+
+    #SingleProviderView
+    url(r'^provider/([0-9]+)/$', views.SingleProviderView.as_view(), name="singleProvider")
 
 ]
-

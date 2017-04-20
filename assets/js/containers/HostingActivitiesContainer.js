@@ -5,7 +5,7 @@ import {Provider, connect} from "react-redux";
 import {fetchAllHostingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
-
+import { withoutTime } from "../DateFunctions";
 import '../../styles/activityBox.css';
 
 const store = configureStore();
@@ -30,14 +30,14 @@ class HostingActivitiesContainer extends Component {
     render() {
         const styles = {
             activitiesContainerStyle: {
-                display: 'flex',
-                justifyContent: 'flex-start'
+                padding: "1em"
             },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
+                padding: "0.5em"
             },
         };
 
@@ -58,10 +58,16 @@ class HostingActivitiesContainer extends Component {
 
 }
 
+Date.prototype.withoutTime = function () {
+    let d = new Date(this);
+    d.setHours(0,0,0,0);
+    return d;
+}
+
 const mapStateToProps = state => {
     return {
         hostingActivities: state.activity.hostingActivityList
-            .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
+            .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date)))
         // Only get five first
     };
 };

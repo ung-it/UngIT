@@ -14302,5 +14302,18 @@
         "Telefaks": null,
         "Telefon": "90 83 46 43",
         "Id": 1477
+    },
+    {
+        "Organisasjonsnummer": "971436875",
+        "Adresse": "Sentervegen 4, 2953, Beitostølen",
+        "Medlemmer under 20 \u00e5r": null,
+        "Medlemmer": null,
+        "Navn": "BEITOSTØLEN HELSESPORTSENTER",
+        "Organisasjonsform": "Stiftelse",
+        "Rekrutteringsomr\u00e5de": "-",
+        "Internettadresse": "http://www.bhss.no",
+        "Telefaks": null,
+        "Telefon": "61 34 08 00",
+        "Id": 1478
     }
 ]

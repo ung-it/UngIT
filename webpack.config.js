@@ -13,6 +13,7 @@ module.exports = {
         activitiesContainer: './assets/js/containers/ActivitiesContainer',
         attendingActivitiesContainer: './assets/js/containers/AttendingActivitiesContainer',
         hostingActivitiesContainer: './assets/js/containers/HostingActivitiesContainer',
+        proHostingContainer: './assets/js/containers/ProviderHostingContainer',
         allActivitiesContainer: './assets/js/containers/AllActivitiesContainer',
         allProvidersContainer: './assets/js/containers/AllProvidersContainer',
         activityForm: './assets/js/containers/ActivityForm',

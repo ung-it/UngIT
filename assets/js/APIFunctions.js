@@ -120,6 +120,11 @@ export function getAllHostingActivities() {
     return fetchFromServer('/api/hostingActivities/'+profileName);
 }
 
+export function getAllProHosting() {
+    const id = window.location.href.split("/")[4];
+    return fetchFromServer('/api/proHosting/'+ String(id));
+}
+
 export function getHost(id, callback) {
     fetchFromServer('/api/getHost/' + id).then(result => {
         callback(result);

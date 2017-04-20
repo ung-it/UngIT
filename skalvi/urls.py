@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^api/activity/(?P<id>[0-9]+)/$', views.getActivity, name="get-activity"),
     url(r'^api/attendingActivities/[a-zA-Z]+/$', views.getAttendingActivities, name="getAttendingActivities"),
     url(r'^api/hostingActivities/[a-zA-Z]+/$', views.getHostingActivities, name="getHostingActivities"),
+    url(r'^api/proHosting/[0-9]+/$', views.getProHostingActivities, name="getProHostingActivities"),
+
     # MyPage
     url(r'^mypage/$', views.MyPageView.as_view(), name='mypage'),
     url(r'^mypage/(?P<id>[a-zA-Z ]+)/$', views.MyPageView.as_view(), name='mypage'),

@@ -268,7 +268,8 @@ def getActivity(request, id):
 
 @csrf_exempt
 def rateActivity(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
+    print(activityId)
     rating = str(request.body.decode('utf-8')).split(":")[2][:1]
     activity = Activity.objects.get(pk=activityId)
     currentRating = activity.rating
@@ -290,7 +291,7 @@ def postComment(request):
     post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name,
                       activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
-    response = {'posted': None} 
+    response = {'posted': None}
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 

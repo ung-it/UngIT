@@ -44,6 +44,32 @@ class ActivityCard extends React.Component {
 
         let images = localImages.concat(instaImages);
 
+        let facebookIcon = null;
+        if (activity.facebook != null) {
+
+            let fImages = activity.facebook.photos.data.map(image => {
+                return image.images[0].source;
+            });
+
+            images = images.concat(fImages);
+
+            let link = 'https://www.facebook.com/events/' + activity.facebookID;
+
+            facebookIcon = (
+                <div className="facebook-icon-wrapper">
+                    <div className="facebook-icon-container">
+                        <a href={link} target="__blank">
+                            <img src="/static/images/facebook-icon.svg" id={activity.facebookID}/>
+                        </a>
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for={activity.facebookID}>
+                            Dette arrangementet er linket til et Facebook arrangement<br/><br/>
+                            Klikk på ikonet for å se arrangementet på Facebook
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
         let poster = null;
         if (images.length > 0) {
             poster = images[0];
@@ -75,6 +101,9 @@ class ActivityCard extends React.Component {
         return (
             < div
                 key={this.props.activity.id}>
+                <div className="activity-card-facebook">
+                    {facebookIcon}
+                </div>
                 <div className="demo-card-wide mdl-card mdl-shadow--2dp"
                      title="Klikk på aktiviteten for mer informasjon"
                      onClick={this.openActivityModal}>

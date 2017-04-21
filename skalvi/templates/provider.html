@@ -32,8 +32,8 @@
                 <div id="provider-container"></div>
                 <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% if user.provider != None %}
-                        <input id="provider" name="provider" hidden value="{{ user.provider }}">
+                    {% if profile.provider != None %}
+                        <input id="provider" name="provider" hidden value="{{ profile.provider }}">
                     {% else %}
                         <input id="provider" name="provider" hidden>
                     {% endif %}

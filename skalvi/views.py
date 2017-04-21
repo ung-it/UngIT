@@ -693,7 +693,7 @@ class ProviderView(View):
         if request.user.is_authenticated:
             user_object = request.user
             profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
-            return render(request, self.template_name, {'user': user_object})
+            return render(request, self.template_name, {'user': user_object, 'profile': profile})
         else:
             return redirect("skalvi:index")
 

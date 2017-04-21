@@ -620,8 +620,6 @@ class MyPageView(View):
                 facebook = isNum(username)
                 iFollow = Follows.objects.filter(userId=request.user, user_profile_id=profile)
                 follow = []
-                if not iFollow:
-                    follow.append(["../../allproviders/", "Du følger ingen akøter. Se om du finner noen du liker."])
 
                 for f in iFollow:
                     provider = Organisation.objects.get(pk=f.orgId.pk)
@@ -697,8 +695,9 @@ class ProviderView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
+            user_object = request.user
             profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
-            return render(request, self.template_name, {'user': profile})
+            return render(request, self.template_name, {'user': user_object, 'profile': profile})
         else:
             return redirect("skalvi:index")
 

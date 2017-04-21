@@ -58,15 +58,24 @@
 
                         <div class="provider-container">
                             <div id="adminProvider" class="demo-card mdl-card mdl-shadow--2dp">
+
                                 <h3 class="title-follow-card">Arangører jeg administrerer</h3>
-                                <a href="/provider" class="btn btn-info" role="button" id="followButton">Administrer
-                                    arrangører</a>
+                                {% if profile.is_active %}
+                                    <a href="/provider" class="btn btn-info" role="button" id="followButton">Administrer
+                                        arrangører
+                                    </a>
+                                {% endif %}
                                 <ul class="admin-provider-list">
                                     {% for f in profile.providers %}
                                         <li>{{ f }}</li>
                                     {% empty %}
-                                        <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge
-                                            til</a>
+                                        {% if profile.is_active %}
+                                            <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge
+                                                til
+                                            </a>
+                                        {% else %}
+                                            <p>Du representerer ingen arrangører.</p>
+                                        {% endif %}
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -75,6 +84,15 @@
                                 <ul>
                                     {% for f in profile.follow %}
                                         <li><a href="{{ f.0 }}"> {{ f.1 }} </a></li>
+                                        {% empty %}
+                                            {% if profile.is_active %}
+                                                <a href="../../allproviders">Du følger ingen arrangører. Klikk her for å legge
+                                                til
+                                            </a>
+                                            {% else %}
+                                                <p>Du følger ingen arrangører</p>
+                                            {% endif %}
+
                                     {% endfor %}
                                 </ul>
                             </div>

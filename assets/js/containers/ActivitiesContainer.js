@@ -26,7 +26,7 @@ class ActivitiesContainer extends Component {
         return this.props.activities.map(activity => {
             return (
                 <ActivityCardHomePage
-                    key={activity.id + activity.fields.activityName}
+                    key={activity.pk + activity.fields.activityName}
                     id={activity.pk}
                     activity={activity.fields}
                 />
@@ -35,7 +35,7 @@ class ActivitiesContainer extends Component {
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.activities.length != nextProps.activities.length) {
+        if (this.props.activities != nextProps.activities) {
             return true;
         }
         return false;
@@ -54,8 +54,6 @@ class ActivitiesContainer extends Component {
                 padding: "0.5em"
             },
         };
-
-
 
         return (
             <div style={styles.activitiesContainerStyle}>

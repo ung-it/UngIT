@@ -61,8 +61,6 @@ class ProviderField extends Component {
 
         let choosen = false;
 
-        console.log(this.state.value);
-
         let items1 = this.state.registered.map((item) => {
             const provider = this.getProvider(item);
             if (provider) {

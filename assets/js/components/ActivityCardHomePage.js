@@ -45,7 +45,7 @@ class ActivityCardHomePage extends React.Component {
         }
 
         let facebookIcon = null;
-        if (activity.facebookID != null) {
+        if (activity.facebook != null) {
             let link = 'https://www.facebook.com/events/' + activity.facebookID;
 
             facebookIcon = (
@@ -109,7 +109,6 @@ class ActivityCardHomePage extends React.Component {
             </div>
         );
     };
-
 
     render() {
         return (

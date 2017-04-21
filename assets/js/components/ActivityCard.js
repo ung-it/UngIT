@@ -59,9 +59,9 @@ class ActivityCard extends React.Component {
                 <div className="facebook-icon-wrapper">
                     <div className="facebook-icon-container">
                         <a href={link} target="__blank">
-                            <img src="/static/images/facebook-icon.svg" id="facebookIcon"/>
+                            <img src="/static/images/facebook-icon.svg" id={activity.facebookID}/>
                         </a>
-                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="facebookIcon">
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for={activity.facebookID}>
                             Dette arrangementet er linket til et Facebook arrangement<br/><br/>
                             Klikk på ikonet for å se arrangementet på Facebook
                         </div>

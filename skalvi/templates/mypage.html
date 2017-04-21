@@ -60,7 +60,7 @@
                                 <div id="adminProvider" class="demo-card mdl-card mdl-shadow--2dp">
 
                                     <div style="width: 100%">
-                                        <h3 class="title-follow-card">Arangører jeg administrerer
+                                        <h3 class="title-follow-card">Arrangører jeg administrerer
 
                                         {% if profile.is_active %}
                                             <a href="/provider" class="btn btn-info" role="button" id="followButton">Administrer
@@ -88,7 +88,7 @@
                                     </ul>
                                 </div>
                                 <div id="provider" class="demo-card mdl-card mdl-shadow--2dp">
-                                    <h3 class="title-follow-card">Arangører jeg følger</h3>
+                                    <h3 class="title-follow-card">Arrangører jeg følger</h3>
                                     <ul>
                                         {% for f in profile.follow %}
                                             <li><a href="{{ f.0 }}"> {{ f.1 }} </a></li>

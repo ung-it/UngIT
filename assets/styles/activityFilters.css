@@ -3,3 +3,10 @@
     margin-right: 15px;
     margin-top: 5px;
 }
+
+.row1 {
+    height: 72px;
+    width: 400px;
+    display: flex;
+    align-items: flex-end;
+}

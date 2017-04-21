@@ -54,10 +54,12 @@ class ActivityFilters extends React.Component {
                         />
                     </div>
                     <div className="col-md-6">
-                        <WeekPicker
-                            onFilterChange={this.props.onWeekPickerChange}
-                            activeFilters={this.props.weekFilters}
-                        />
+                        <div className="row1">
+                            <WeekPicker
+                                onFilterChange={this.props.onWeekPickerChange}
+                                activeFilters={this.props.weekFilters}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="row">

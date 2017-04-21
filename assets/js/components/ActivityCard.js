@@ -101,6 +101,7 @@ class ActivityCard extends React.Component {
         return (
             < div
                 key={this.props.activity.id}>
+                {facebookIcon}
                 <div className="demo-card-wide mdl-card mdl-shadow--2dp"
                      title="Klikk på aktiviteten for mer informasjon"
                      onClick={this.openActivityModal}>

@@ -46,8 +46,7 @@ h4#usersTitle{
 
 /*Cards styling*/
 .demo-card.mdl-card {
-    width: 40em;
-    min-height: 12em;
+    width: auto;
 }
 
 .profilePicture {

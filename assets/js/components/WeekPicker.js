@@ -19,7 +19,7 @@ class WeekPicker extends React.Component {
 
 	formatDate = (date) => {
 		return date.getDate() + " / " + (date.getMonth() + 1) + " / " + date.getFullYear();
-	}
+	};
 
 
 	render() {
@@ -38,8 +38,8 @@ class WeekPicker extends React.Component {
 				onChange={this.handleEvent}
 				fullWidth={true}
 				formatDate={this.formatDate}
+				className = "filterItem"
 			/>
-
 		);
 	};
 };

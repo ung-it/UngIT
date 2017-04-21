@@ -6,7 +6,10 @@
 
 .row1 {
     height: 72px;
-    width: 400px;
     display: flex;
     align-items: flex-end;
+}
+
+.filterItem {
+    width: 100%;
 }

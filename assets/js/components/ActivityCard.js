@@ -53,7 +53,7 @@ class ActivityCard extends React.Component {
 
         let description = '';
         if (this.props.activity.description.length > 160) {
-            description = this.props.activity.description.substr(0, 160) + "...";
+            description = this.props.activity.description.substr(0, 150) + "...";
         } else {
             description = this.props.activity.description;
         }
@@ -65,9 +65,9 @@ class ActivityCard extends React.Component {
 
         const divStyle = {
             background: 'url(' + poster + ')',
-            width: '42em',
+            width: '200%',
             height: '20em',
-            backgroundSize: '42em 20em',
+            backgroundSize: '55em 20em',
             backgroundRepeat: 'no-repeat',
             cursor: 'pointer'
         };

@@ -12,90 +12,97 @@
         <img src="{% static "images/top-banner.jpg" %}" alt="Banner" class="banner">
     </div>
     <div class="full-my-page">
-    <div id="profilesOnMyPage">
-        <h4 id="usersTitle">Brukere</h4>
-        <ul class="social">
-            {% for profile in profiles %}
-                <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init"
-                       class="profileButton">{{ profile.initiales }}</a></li>
-            {% endfor %}
-
-            <li style="margin-top: 5em"><a href="/registerProfile/" aria-hidden="true" class="text-init"
-                                           id="addProfile">+</a></li>
-        </ul>
-    </div>
-    <div class="content">
-        <div id="myPageContent">
-            <div id="profileOnMyPage">
+        <div id="profilesOnMyPage">
+            <h4 id="usersTitle">Brukere</h4>
+            <ul class="social">
                 {% for profile in profiles %}
-                    {% if request.path == profile.path %}
-                        <div id="profile" class="demo-card mdl-card mdl-shadow--2dp">
-                            <div>
-                                {% if profile.facebook == True %}
-                                    <img class="profilePicture"
-                                         src="http://graph.facebook.com/{{ user.username }}/picture?type=normal"
-                                         alt="Profilbile">
-                                {% endif %}
-                            </div>
-
-                            <div class="profileInformation">
-                                <h4><span class="bold-info-text">Fornavn:</span> {{ profile.profile_name }}</h4>
-                                <h4><span class="bold-info-text">Etternavn:</span> {{ profile.last_name }}</h4>
-                                <h4><span class="bold-info-text">Epost:</span> {{ profile.email }}</h4>
-                                <h4><span class="bold-info-text">Telefon:</span> {{ profile.phone }}</h4>
-                            </div>
-                            <div class="profileExtras">
-                                {% if profile.type == "P" %}
-                                    <h4><span class="bold-info-text">Registrert som:</span> Voksen</h4>
-                                {% endif %}
-
-                                {% if profile.is_active %}
-                                    <h4 class="active-span"><span class="bold-info-text">Aktiv bruker</span></h4>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="provider-container">
-                            <div id="adminProvider" class="demo-card mdl-card mdl-shadow--2dp">
-                                <h3 class="title-follow-card">Arangører jeg administrerer</h3>
-                                <a href="/provider" class="btn btn-info" role="button" id="followButton">Administrer
-                                    arrangører</a>
-                                <ul class="admin-provider-list">
-                                    {% for f in profile.providers %}
-                                        <li>{{ f }}</li>
-                                    {% empty %}
-                                        <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge
-                                            til</a>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div id="provider" class="demo-card mdl-card mdl-shadow--2dp">
-                                <h3 class="title-follow-card">Arangører jeg følger</h3>
-                                <ul>
-                                    {% for f in profile.follow %}
-                                        <li><a href="{{ f.0 }}"> {{ f.1 }} </a></li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-
-
-                        <div class="my-page-activities">
-                        <div class="my-page-attending">
-                            <h2>Påmeldte aktiviteter</h2>
-                            <div id="attendingActivities"></div>
-                        </div>
-                        <div class="my-page-hosting">
-                            <h2>Mine aktiviteter</h2>
-                            <div id="hostingActivities"></div>
-                        </div>
-                    {% endif %}
+                    <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init"
+                           class="profileButton">{{ profile.initiales }}</a></li>
                 {% endfor %}
+
+                <li style="margin-top: 5em"><a href="/registerProfile/" aria-hidden="true" class="text-init"
+                                               id="addProfile">+</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div id="myPageContent">
+                <div id="profileOnMyPage">
+                    {% for profile in profiles %}
+                        {% if request.path == profile.path %}
+                            <div id="profile">
+                                <div>
+                                    {% if profile.facebook == True %}
+                                        <img class="profilePicture"
+                                             src="http://graph.facebook.com/{{ user.username }}/picture?type=normal"
+                                             alt="Profilbile">
+                                    {% endif %}
+                                </div>
+
+                                <div class="profileInformation">
+                                    <h4><span class="bold-info-text">Fornavn:</span> {{ profile.profile_name }}</h4>
+                                    <h4><span class="bold-info-text">Etternavn:</span> {{ profile.last_name }}</h4>
+                                    <h4><span class="bold-info-text">Epost:</span> {{ profile.email }}</h4>
+                                    {% if profile.phone != None %}
+                                        <h4><span class="bold-info-text">Telefon:</span> {{ profile.phone }}</h4>
+                                    {% endif %}
+                                </div>
+                                <div class="profileExtras">
+                                    {% if profile.type == "P" %}
+                                        <h4><span class="bold-info-text">Registrert som:</span> Voksen</h4>
+                                    {% endif %}
+
+                                    {% if profile.is_active %}
+                                        <h4 class="active-span"><span class="bold-info-text">Aktiv bruker</span></h4>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="adminProvider" class="demo-card mdl-card mdl-shadow--2dp">
+                                        <h3 class="title-follow-card">Arangører jeg administrerer</h3>
+                                        <a href="/provider" class="btn btn-info" role="button" id="followButton">Administrer
+                                            arrangører</a>
+                                        <ul class="admin-provider-list">
+                                            {% for f in profile.providers %}
+                                                <li>{{ f }}</li>
+                                            {% empty %}
+                                                <a href="/provider">Du representerer ingen arrangører. Klikk her for å
+                                                    legge
+                                                    til</a>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="provider" class="demo-card mdl-card mdl-shadow--2dp">
+                                        <h3 class="title-follow-card">Arangører jeg følger</h3>
+                                        <ul>
+                                            {% for f in profile.follow %}
+                                                <li><a href="{{ f.0 }}"> {{ f.1 }} </a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="my-page-activities">
+                            <div class="my-page-attending">
+                                <h2>Påmeldte aktiviteter</h2>
+                                <div id="attendingActivities"></div>
+                            </div>
+                            <div class="my-page-hosting">
+                                <h2>Mine aktiviteter</h2>
+                                <div id="hostingActivities"></div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}
 

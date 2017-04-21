@@ -18,7 +18,7 @@ class SearchForActivity extends React.Component {
 		return (
 			<div>
 				<AutoComplete
-					floatingLabelText={<div><SearchIcon/> Søk etter en aktivitet...</div>}
+					floatingLabelText={<div><SearchIcon/> Søk...</div>}
 					searchText={this.props.searchForFilter}
 					hintText={this.props.placeholderText}
 					dataSource={this.props.activitiesName}

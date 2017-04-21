@@ -32,9 +32,11 @@
                             <div id="profile">
                                 <div>
                                     {% if profile.facebook == True %}
-                                        <img class="profilePicture"
-                                             src="http://graph.facebook.com/{{ user.username }}/picture?type=normal"
-                                             alt="Profilbile">
+                                        {% if profile.profile_name == user.first_name and profile.last_name == user.last_name %}
+                                            <img class="profilePicture"
+                                                 src="http://graph.facebook.com/{{ user.username }}/picture?type=normal"
+                                                 alt="Profilbile">
+                                        {% endif %}
                                     {% endif %}
                                 </div>
 

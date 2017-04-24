@@ -44,6 +44,32 @@ class ActivityCard extends React.Component {
 
         let images = localImages.concat(instaImages);
 
+        let facebookIcon = null;
+        if (activity.facebook != null) {
+
+            let fImages = activity.facebook.photos.data.map(image => {
+                return image.images[0].source;
+            });
+
+            images = images.concat(fImages);
+
+            let link = 'https://www.facebook.com/events/' + activity.facebookID;
+
+            facebookIcon = (
+                <div className="facebook-icon-wrapper">
+                    <div className="facebook-icon-container">
+                        <a href={link} target="__blank">
+                            <img src="/static/images/facebook-icon.svg" id={activity.facebookID}/>
+                        </a>
+                        <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for={activity.facebookID}>
+                            Dette arrangementet er linket til et Facebook arrangement<br/><br/>
+                            Klikk på ikonet for å se arrangementet på Facebook
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
         let poster = null;
         if (images.length > 0) {
             poster = images[0];
@@ -53,7 +79,7 @@ class ActivityCard extends React.Component {
 
         let description = '';
         if (this.props.activity.description.length > 160) {
-            description = this.props.activity.description.substr(0, 160) + "...";
+            description = this.props.activity.description.substr(0, 150) + "...";
         } else {
             description = this.props.activity.description;
         }
@@ -65,9 +91,9 @@ class ActivityCard extends React.Component {
 
         const divStyle = {
             background: 'url(' + poster + ')',
-            width: '42em',
+            width: '200%',
             height: '20em',
-            backgroundSize: '42em 20em',
+            backgroundSize: '55em 20em',
             backgroundRepeat: 'no-repeat',
             cursor: 'pointer'
         };
@@ -75,6 +101,9 @@ class ActivityCard extends React.Component {
         return (
             < div
                 key={this.props.activity.id}>
+                <div className="activity-card-facebook">
+                    {facebookIcon}
+                </div>
                 <div className="demo-card-wide mdl-card mdl-shadow--2dp"
                      title="Klikk på aktiviteten for mer informasjon"
                      onClick={this.openActivityModal}>
@@ -85,7 +114,7 @@ class ActivityCard extends React.Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="big-icon-container-div"><Glyphicon
-                                        glyph="glyphicon glyphicon-calendar"/>{date}</div>
+                                        glyph="glyphicon glyphicon-calendar"/> {date}</div>
                                     <div className="big-icon-container-div"><Glyphicon
                                         glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)}
                                         - {this.props.activity.time_end.slice(0, 5)}</div>

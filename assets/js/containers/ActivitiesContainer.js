@@ -8,8 +8,9 @@ import configureStore from "../configureStore";
 // import for material ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
+import { withoutTime } from "../DateFunctions";
 import '../../styles/activityBox.css';
+
 
 const store = configureStore();
 
@@ -25,7 +26,7 @@ class ActivitiesContainer extends Component {
         return this.props.activities.map(activity => {
             return (
                 <ActivityCardHomePage
-                    key={activity.id + activity.fields.activityName}
+                    key={activity.pk + activity.fields.activityName}
                     id={activity.pk}
                     activity={activity.fields}
                 />
@@ -34,7 +35,7 @@ class ActivitiesContainer extends Component {
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.activities.length != nextProps.activities.length) {
+        if (this.props.activities != nextProps.activities) {
             return true;
         }
         return false;
@@ -54,8 +55,6 @@ class ActivitiesContainer extends Component {
             },
         };
 
-
-
         return (
             <div style={styles.activitiesContainerStyle}>
                 <div style={styles.activitiesStyle}>{this.createActivityCardComponent()}</div>
@@ -68,8 +67,9 @@ class ActivitiesContainer extends Component {
 const mapStateToProps = state => {
     return {
         activities: state.activity.activityList
-            .sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)) // Sort descending based on date
-            .slice(0, 4).reverse() // Only get five first
+            .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date))) // Sort descending based on date
+            .filter((a) => withoutTime(new Date(a.fields.date_end)) >= withoutTime(new Date()))
+            .slice(0, 4) // Only get five first
     };
 };
 

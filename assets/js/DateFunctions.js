@@ -45,3 +45,9 @@ export function getMonth(month) {
             return "Desember";
     }
 }
+
+export function withoutTime(date){
+    let d = date;
+    d.setHours(0,0,0,0);
+    return d;
+}

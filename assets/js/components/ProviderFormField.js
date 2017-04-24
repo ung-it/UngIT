@@ -74,6 +74,7 @@ class ProviderField extends Component {
                         onTouchTap={this.addProvider}
                         primary={this.state.showButton}
                         disabled={!this.state.showButton}
+                        labelStyle={{textTransform: "none"}}
                     />
                 </div>
                 <Table
@@ -100,6 +101,7 @@ class ProviderField extends Component {
                         onTouchTap={this.removeProvider}
                         primary={this.state.showRemoveButton}
                         disabled={!this.state.showRemoveButton}
+                        labelStyle={{textTransform: "none"}}
                     />
                 </div>
             </div>

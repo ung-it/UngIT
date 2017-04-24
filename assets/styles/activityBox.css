@@ -2,7 +2,7 @@
 .activitySmallStyle {
     border-style: solid;
     border-color: white;
-    margin: 1em 0 0 0;
+    /*margin: 1em 0 0 0;*/
     cursor: pointer;
 }
 
@@ -53,9 +53,8 @@
 
 /* Styling for activities on all activities page */
 .demo-card-wide.mdl-card {
-    width: 42em;
-    height: 35em;
-    max-height: 40em;
+    width: auto;
+    height: 40em;
     margin: 2em 1em 0 1em;
     overflow-y:auto;
     overflow-x:hidden;
@@ -132,4 +131,8 @@
     height: 40px;
     border-radius: 0.4em;
     background-color: white;
+}
+
+.activity-card-facebook {
+    padding-left: 16px;
 }

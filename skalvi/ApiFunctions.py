@@ -49,7 +49,8 @@ def loginFacebook(request):
         else:
             type = "C"
 
-        userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name)
+        userProfile = UserProfile(user=user, type=type, phone=None, profile_name=first_name, last_name=last_name,
+                                  email=email, provider={}, is_active=True)
         userProfile.save()
         login(request, user)
 
@@ -63,6 +64,13 @@ def loginFacebook(request):
         login(request,user)
 
         if user.is_staff:
+            for profile in profiles:
+                profile.is_active = True
+                profile.save()
+                request.session['username'] = user.username
+                request.session['profile_name'] = profile.profile_name
+                request.session['profile_pk'] = profile.pk
+                break
             return redirect("/admin")
         elif len(profiles) > 1:
             return redirect("skalvi:choose")

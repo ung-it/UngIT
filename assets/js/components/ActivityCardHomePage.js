@@ -37,15 +37,15 @@ class ActivityCardHomePage extends React.Component {
 
         let images = localImages.concat(instaImages);
 
-        let poster = null;
-        if (images.length > 0) {
-            poster = images[0];
-        } else {
-            poster = "/static/images/activityPic.jpg"
-        }
-
         let facebookIcon = null;
-        if (activity.facebookID != null) {
+        if (activity.facebook != null) {
+
+            let fImages = activity.facebook.photos.data.map(image => {
+                return image.images[0].source;
+            });
+
+            images = images.concat(fImages);
+
             let link = 'https://www.facebook.com/events/' + activity.facebookID;
 
             facebookIcon = (
@@ -61,6 +61,13 @@ class ActivityCardHomePage extends React.Component {
                     </div>
                 </div>
             )
+        }
+
+        let poster = null;
+        if (images.length > 0) {
+            poster = images[0];
+        } else {
+            poster = "/static/images/activityPic.jpg"
         }
 
         let dato = new Date(this.props.activity.date);
@@ -109,7 +116,6 @@ class ActivityCardHomePage extends React.Component {
             </div>
         );
     };
-
 
     render() {
         return (

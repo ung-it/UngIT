@@ -1,22 +1,27 @@
+/**
+ * Created by Andy on 19-Apr-17.
+ */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
 
-import {fetchAllAttendingActivities} from '../actions/activitiesActions';
+import {fetchAllProHostingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 import { withoutTime } from "../DateFunctions";
+
 import '../../styles/activityBox.css';
 
 const store = configureStore();
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+// import Provider from "react-redux/src/components/Provider";
 
-class AttendingActivitiesContainer extends Component {
+class ProviderHostingContainer extends Component {
 
     createActivityCardComponent = () => {
-        return this.props.attendingActivities.map(activity => {
+        return this.props.proHostingActivities.map(activity => {
             return (
                 <ActivityCardHomePage
                     key={activity.id + activity.fields.activityName}
@@ -41,9 +46,9 @@ class AttendingActivitiesContainer extends Component {
             },
         };
 
-        let attendingContainer = <p>Du er ikke påmeldt noen aktiviteter</p>;
-        if (this.props.attendingActivities.length > 0) {
-            attendingContainer =
+        let proHostingContainer = <p>Vi har desverre ingen kommende aktiviteter for øyeblikket</p>;
+        if (this.props.proHostingActivities.length > 0) {
+            proHostingContainer =
                 <div style={styles.activitiesStyle}>
                     {this.createActivityCardComponent()}
                 </div>
@@ -51,25 +56,22 @@ class AttendingActivitiesContainer extends Component {
 
         return (
             <div style={styles.activitiesContainerStyle}>
-                {attendingContainer}
+                {proHostingContainer}
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
     return {
-        attendingActivities: state.activity.attendingActivityList
-            .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date))) // Sort descending based on date
-            .filter((a) => withoutTime(new Date(a.fields.date_end)) >= withoutTime(new Date()))
-        // Only get five first
+        proHostingActivities: state.activity.proHostingList
+            .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date)))
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAttendingActivities: () => dispatch(fetchAllAttendingActivities()),
+        fetchProHostingActivities: () => dispatch(fetchAllProHostingActivities()),
     }
 };
 
@@ -80,16 +82,16 @@ const muiTheme = getMuiTheme({
 });
 
 // Fetch initial data for state
-store.dispatch(fetchAllAttendingActivities());
+store.dispatch(fetchAllProHostingActivities());
 
-AttendingActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AttendingActivitiesContainer);
+ProviderHostingContainer = connect(mapStateToProps, mapDispatchToProps)(ProviderHostingContainer);
 
 ReactDOM.render(
     <MuiThemeProvider muiTheme={muiTheme}>
         <Provider store={store}>
-            <AttendingActivitiesContainer />
+            <ProviderHostingContainer />
         </Provider>
-    </MuiThemeProvider>, document.getElementById('attendingActivities')
+    </MuiThemeProvider>, document.getElementById('proHostingActivities')
 );
 
 

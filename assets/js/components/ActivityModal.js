@@ -41,7 +41,8 @@ class ActivityModal extends Component {
             hosting: false,
             myrating: 0,
             comments: [],
-            provider: ""
+            provider: "",
+            fullDescription: false,
         }
     }
 
@@ -64,6 +65,7 @@ class ActivityModal extends Component {
             show: false,
             hasChecked: false,
             hosting: false,
+            fullDescription: false,
         });
     };
 
@@ -156,8 +158,9 @@ class ActivityModal extends Component {
             };
             $("#commentInput").val("");
             $("#postError").html("");
-            postNewComment(obj);
-            this.fetchComments();
+            postNewComment(obj, response => {
+                this.fetchComments();
+            });
         }
 
 
@@ -170,6 +173,12 @@ class ActivityModal extends Component {
                     hosting: true
                 });
             }
+        });
+    };
+
+    fullDes = () => {
+        this.setState({
+            fullDescription: true
         });
     };
 
@@ -186,6 +195,8 @@ class ActivityModal extends Component {
         let changeActivityContainer = null;
         let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
         let allComments = this.state.comments;
+        let descriptionContainer = null;
+
 
         if (suitedForType >= 0) {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
@@ -316,7 +327,7 @@ class ActivityModal extends Component {
                 ratingContainer =
                     <div>
                         <p className="activityRating">Gi din vurdering</p>
-                        <StarRatingComponent className="activityRating" name="activityRating" emptyStarColor="#BBB" onStarClick={this.onRateChange.bind(this)}/>;
+                        <StarRatingComponent className="activityRating" name="activityRating" emptyStarColor="#BBB" onStarClick={this.onRateChange.bind(this)}/>
                     </div>
             }
             postCommentContainer =
@@ -366,6 +377,25 @@ class ActivityModal extends Component {
             provider = this.state.provider.aktordatabase.Navn;
         }
 
+
+
+        if(description.length > 300){
+            if(this.state.fullDescription){
+                descriptionContainer =
+                    <div>
+                        <pre className="modal-description">{description}</pre>
+                    </div>
+            }
+            else{
+                let des = description.substring(0,300) + "...";
+                descriptionContainer =
+                    <div>
+                        <pre className="modal-description">{des}</pre> <a onClick={this.fullDes}>Les mer</a>
+                    </div>
+            }
+        }
+
+
         return (
             <Modal
                 show={this.state.show}
@@ -411,7 +441,7 @@ class ActivityModal extends Component {
                     </div>
                     <div>
                         <h2 className="modal-description-header">Om arrangementet</h2>
-                        <p className="modal-description">{description}</p>
+                        {descriptionContainer}
                     </div>
                     {videoContainer}
                     {carouselContainer}

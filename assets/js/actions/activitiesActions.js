@@ -1,4 +1,4 @@
-import {  getActivityInfo, getAllActivities, getAllAttendingActivities, getAllHostingActivities, getFacebookEventData} from "../APIFunctions";
+import {  getActivityInfo, getAllActivities, getAllAttendingActivities, getAllHostingActivities, getAllProHosting, getFacebookEventData} from "../APIFunctions";
 /*
 * Action creator and action are two separate things, the action creator is the actual action-function
 *
@@ -28,6 +28,7 @@ export const FETCHED_ALL_ACTIVITIES = 'FETCH_ALL_ACTIVITIES';
 export const FETCHED_FACEBOOK_EVENT_DATA = 'FETCHED_FACEBOOK_EVENT_DATA';
 export const FETCHED_ALL_ATTENDING_ACTIVITIES = 'FETCH_ALL_ATTENDING_ACTIVITIES';
 export const FETCHED_ALL_HOSTING_ACTIVITIES = 'FETCH_ALL_HOSTING_ACTIVITIES';
+export const FETCHED_ALL_PROVIDER_HOSTING_ACTIVITIES = 'FETCH_ALL_PROVIDER_HOSTING_ACTIVITIES';
 export const ADD_ACTIVITY_FILTER = 'ADD_ACTIVITY_FILTER';
 export const ADD_SUITED_FOR_FILTER = 'ADD_SUITED_FOR_FILTER';
 export const ADD_WEEK_FILTER = 'ADD_WEEK_FILTER';
@@ -141,9 +142,23 @@ export function fetchAllHostingActivities() {
     };
 }
 
+export function fetchAllProHostingActivities() {
+    return (dispatch) => {
+        getAllProHosting()
+            .then(result =>  dispatch(fetchedAllProHostingActivites(result)))
+            .catch(error => console.error(error));
+    };
+}
+
 export function fetchedAllHostingActivites(hostingActivities) {
     return {
         type: FETCHED_ALL_HOSTING_ACTIVITIES,
         hostingActivities,
+    }
+}
+export function fetchedAllProHostingActivites(proHostingActivities) {
+    return {
+        type: FETCHED_ALL_PROVIDER_HOSTING_ACTIVITIES,
+        proHostingActivities,
     }
 }

@@ -28,19 +28,15 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     type = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'}), label="Forelder")
-    is_provider = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'mdl-checkbox__input'}), label="Brukernavn registrert i Aktørdatabasen")
-
 
     class Meta:
         model = UserProfile
-        fields = ['phone', 'profile_name', 'type', 'is_provider']
+        fields = ['phone', 'type']
         labels = {
             'phone': 'Telefon',
-            'profile_name': 'Profilnavn',
         }
         widgets = {
             'phone': forms.TextInput(attrs={'class': 'mdl-textfield__input'}),
-            'profile_name': forms.PasswordInput(attrs={'class': 'mdl-textfield__input'}),
         }
 
 class DateInput(forms.DateInput):

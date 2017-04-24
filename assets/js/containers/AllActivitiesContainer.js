@@ -16,7 +16,7 @@ import {
 } from '../actions/activitiesActions';
 
 import configureStore from "../configureStore";
-
+import { withoutTime } from "../DateFunctions";
 const store = configureStore();
 
 
@@ -101,7 +101,8 @@ const mapStateToProps = state => {
         : activityList;
 
 
-    activityList = activityList.sort((a, b) => new Date(a.fields.date) > new Date(b.fields.date)); // Sort descending based on date
+    activityList = activityList.sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date))); // Sort descending based on date
+    activityList = activityList.filter((a) => withoutTime(new Date(a.fields.date_end)) >= withoutTime(new Date()));
 
     activeDateFilter = activeDateFilter.toString();
 

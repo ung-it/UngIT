@@ -256,9 +256,21 @@ def getActivityHost(request):
 def getActivities(request):
     json_serializer = serializers.get_serializer("json")()
     activities = Activity.objects.all()
-    print("Hello" + activities[0].provider)
     activities = json_serializer.serialize(activities, ensure_ascii=False)
     return HttpResponse(activities, content_type='application/json')
+
+
+def getProHostingActivities(request, *args, **kwargs):
+    orgId = request.path.split("/")[3] # /api/proHosting/8411/
+    json_serializer = serializers.get_serializer("json")()
+    try:
+        organisation = Organisation.objects.get(pk=orgId)
+        activities = Activity.objects.filter(provider=orgId)
+        activities = json_serializer.serialize(activities, ensure_ascii=False)
+        return HttpResponse(activities, content_type='application/json')
+    except Organisation.DoesNotExist:
+        return redirect("skalvi:index")
+
 
 
 def getActivity(request, id):
@@ -269,19 +281,21 @@ def getActivity(request, id):
 
 @csrf_exempt
 def rateActivity(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
+    print(activityId)
     rating = str(request.body.decode('utf-8')).split(":")[2][:1]
     activity = Activity.objects.get(pk=activityId)
     currentRating = activity.rating
     activity.number_of_ratings = activity.number_of_ratings + 1
     activity.rating = (currentRating + float(rating))
     activity.save()
-    return HttpResponse(status=200, content_type='application/json')
+    message = {"rateed": None}
+    return HttpResponse(json.dumps(message), content_type='application/json')
 
 
 @csrf_exempt
 def postComment(request):
-    activityId = str(request.body.decode('utf-8')).split(":")[1][:1]
+    activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
     comment = str(request.body.decode('utf-8')).split(":")[-1][1:-2]
     if comment.strip() == "":  # Checks if comment is blank
         return HttpResponse()
@@ -290,7 +304,8 @@ def postComment(request):
     post = Commentary(userId=request.user, userProfile=user_profile, userProfile_name=user_profile.profile_name,
                       activityId=activity, comment=comment, date=datetime.now().date(), time=datetime.now().time())
     post.save()
-    return HttpResponse(status=200, content_type='application/json')
+    response = {'posted': None}
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 
 @csrf_exempt
@@ -335,6 +350,13 @@ def loginView(request):
                     profiles = UserProfile.objects.filter(user=user)
                     login(request, user)
                     if user.is_staff:
+                        for profile in profiles:
+                            profile.is_active = True
+                            profile.save()
+                            request.session['username'] = user.username
+                            request.session['profile_name'] = profile.profile_name
+                            request.session['profile_pk'] = profile.pk
+                            break
                         return redirect("/admin")
                     elif len(profiles) > 1:
                         return redirect("skalvi:choose")
@@ -342,8 +364,11 @@ def loginView(request):
                         for profile in profiles:
                             profile.is_active = True
                             profile.save()
+                            request.session['username'] = user.username
+                            request.session['profile_name'] = profile.profile_name
+                            request.session['profile_pk'] = profile.pk
+                            break
                         return redirect("/")
-                        # return render(request, "chooseUser.html")
         else:
             return render(request, template_name, {
                 'error_message': "Kontoen eksisterer ikke, ellers er det feil kombinasjon av brukernavn og passord"})
@@ -430,7 +455,6 @@ class UserFormView(View):
             user.set_password(password)
             user.save()  # saves users to the database
 
-            # print('Before saving information: ', information)
             userProfile = UserProfile(user=user, type=types, phone=phone, profile_name=first_name, last_name=last_name,
                                       email=email, provider="")
             userProfile.is_active = True
@@ -471,7 +495,6 @@ class ActivityView(generic.DetailView):
             try:
                 host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
                 form = self.form_class(initial=model_to_dict(self.get_object()))
-                print(self.kwargs['pk'])
                 return activityGet(self, request, form)
             except Hosts.DoesNotExist:
                 return redirect("skalvi:index")
@@ -527,9 +550,7 @@ class createActivity(View):
             form.save()
 
             user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
-            # print("usreprofile", user_profile.profile_name)
             activity = Activity.objects.latest('id')
-            # print("activity", activity.activityName)
             hosts = Hosts(activityId=activity, adminId=request.user, profileId=user_profile)
             hosts.save()
             return redirect('/')
@@ -546,21 +567,26 @@ def activityGet(self, request, form):
     if 'accessToken' in request.session:
         accessToken = request.session['accessToken']
     elif token:  # User has logged in with Instagram
+        print("TOKEN")
         post_data = [
             ('client_id', 'e3b85b32b9eb461190ba27b4c32e2cc6'),
             ('client_secret', 'f9ad52972e1a4a21a7d34fa508d2bba4'),
             ('grant_type', 'authorization_code'),
-            ('redirect_uri', directory + 'activity/'),
+            ('redirect_uri', directory + 'activity/?activity=' + activityID),
             ('code', token)
         ]
         data = urllib.parse.urlencode(post_data)
         try:
+            print("POST")
             result = urllib.request.urlopen('https://api.instagram.com/oauth/access_token', data.encode("ascii"))
+            print("END POST")
             temp = result.read().decode('ascii')
             content = json.loads(temp)
             accessToken = content['access_token']
             request.session['accessToken'] = accessToken
+            print("Saved in session")
         except urllib.error.URLError as e:
+            print(e)
             return redirect(link)
 
     if 'accessToken' in locals():
@@ -594,15 +620,13 @@ class MyPageView(View):
                 facebook = isNum(username)
                 iFollow = Follows.objects.filter(userId=request.user, user_profile_id=profile)
                 follow = []
-                if not iFollow:
-                    follow.append(["../../allproviders/", "Du følger ingen akøter. Se om du finner noen du liker."])
 
                 for f in iFollow:
                     provider = Organisation.objects.get(pk=f.orgId.pk)
                     follow.append(["../../provider/"+str(f.orgId.pk)+"/", provider.aktordatabase["Navn"]])
 
                 prov = []
-                if( profile.provider != None and not str(profile.provider) == ''):
+                if profile.provider != None and not str(profile.provider) == '' and not str(profile.provider) == "{}":
                     splitString = str(profile.provider)
                     if(',' in profile.provider):
                         myProviders = splitString.split(',')
@@ -641,7 +665,6 @@ class RegisterProfileView(View):
 
     def post(self, request):
         profile_form = self.form_class(request.POST)
-
         if profile_form.is_valid():
             # Take submitted data and save to database
             profile_form.save(commit=False)
@@ -661,7 +684,8 @@ class RegisterProfileView(View):
                                   last_name=last_name, email=email)
             profile.save()
 
-        return redirect("../mypage/" + profile_name)
+            return redirect("../mypage/" + profile_name)
+        return redirect("../mypage/" + request.session["profile_name"])
 
 
 class ProviderView(View):
@@ -671,8 +695,9 @@ class ProviderView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
+            user_object = request.user
             profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
-            return render(request, self.template_name, {'user': profile})
+            return render(request, self.template_name, {'user': user_object, 'profile': profile})
         else:
             return redirect("skalvi:index")
 
@@ -692,23 +717,16 @@ class SingleProviderView(View):
     template_name = "singleProvider.html"
 
     def get(self, request, *args, **kwargs):
-        print("PATH ", request.path) ## /provider/1/
-        orgId = request.path.split("/")[2]
+        orgId = request.path.split("/")[2] ## /provider/1/
 
         try:
             organisation = Organisation.objects.get(pk=orgId)
-            print(organisation.aktordatabase)
-
             context = {"provider": organisation.aktordatabase}
 
             return render(request, self.template_name, context)
 
         except Organisation.DoesNotExist:
             return redirect("skalvi:index")
-
-
-
-
 
 
 

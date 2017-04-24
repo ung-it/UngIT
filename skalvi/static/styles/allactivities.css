@@ -11,7 +11,12 @@
 }
 
 #followButton{
-    width: 100%;
+    width: 95%;
     position: absolute;
     bottom: 5px;
+    margin: 0 1em 1em 1em;
+}
+
+#allActivities {
+    margin-bottom: 5%;
 }

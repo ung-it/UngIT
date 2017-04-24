@@ -20,14 +20,37 @@
 
 
 {% for field in registerProfileForm %}
-        <div class="form-group">
-            <div>
-                <span class="text-danger small">{{ field.errors }}</span>
+    <div class="form-group">
+        {% if field.name == "type" %}
+            <li class="mdl-list__item">
+                <div>
+                    {{ field }}
+                    <label style="color: white" class="mdl-checkbox__label formLabel" for="{{ field.auto_id }}">{{ field.label }}</label>
+                    <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
+                </div>
+            </li>
+        {% elif field.name == "profile_name" or field.name == "last_name" %}
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input style="color: white" class="mdl-textfield__input" name={{ field.name }} type="text" id="{{ field.auto_id }}" pattern="[A-Z ,a-z ]*" required/>
+                <label style="color: lightcyan;" class="mdl-textfield__label formLabel"
+                       for="{{ field.auto_id }}">{{ field.label }}</label>
+                <span style="color: #ff1919" class="mdl-textfield__error">{{ field.label_tag }} kan kun inneholde bokstaver</span>
             </div>
-            <label class="control-label formLabel">{{ field.label_tag }}</label>
-            <div>{{ field }}</div>
-        </div>
-
+        {% elif field.name == "email" %}
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input style="color: white" name={{ field.name }} class="mdl-textfield__input" type="text" id="{{ field.auto_id }}" pattern="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" required/>
+                <label style="color: lightcyan;" class="mdl-textfield__label formLabel"
+                       for="{{ field.auto_id }}">{{ field.label }}</label>
+                <span style="color: #ff1919" class="mdl-textfield__error">Ugyldig epost </span>
+            </div>
+        {% else %}
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input style="color: white" name={{ field.name }} class="mdl-textfield__input" type="text" pattern="[0-9]{8}" id="{{ field.auto_id }}" required/>
+                <label style="color: lightcyan;" class="mdl-textfield__label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                <span style="color: #ff1919" class="mdl-textfield__error">Telefonnummeret må bestå av 8 tall</span>
+            </div>
+        {% endif %}
+    </div>
 {% endfor %}
 
 

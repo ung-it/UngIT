@@ -1,8 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {Thumbnail, Glyphicon, Button} from 'react-bootstrap';
-import  {follow, unfollow, checkIfFollowing, getUserState} from "../APIFunctions";
-
+import {follow, unfollow, checkIfFollowing} from "../APIFunctions";
 
 const moment = require('moment');
 
@@ -43,33 +42,6 @@ class ProviderCard extends React.Component {
         });
     };
 
-
-    onCheckIFollowing = () => {
-        const request = {
-            id: this.props.pk
-        };
-        checkIfFollowing(request, response => {
-            if (response.following == true) {
-                this.setState({
-                    attending: true,
-                    hasChecked: true,
-                    loggedIn: true
-                });
-            } else if (response.following == false) {
-                this.setState({
-                    loggedIn: true,
-                    hasChecked: true
-                });
-            } else {
-                this.setState({
-                    loggedIn: false,
-                    hasChecked: true
-                })
-            }
-        })
-    };
-
-
     createProviderItem = () => {
         const provider = this.props.provider;
         let followingContainer = null;
@@ -95,9 +67,7 @@ class ProviderCard extends React.Component {
                 </div>;
         }
 
-
         return (
-
             <div key={provider.Id}
                  className="provider-card">
                 <div
@@ -127,13 +97,9 @@ class ProviderCard extends React.Component {
                 </div>
             </div>
         )
-
     };
 
-
     render() {
-
-
         return (
             <div>
                 {this.createProviderItem()}

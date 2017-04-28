@@ -1,24 +1,20 @@
 {% load static %}
 
-{% block explicitPageHeader %}
-    <link rel="stylesheet" href="../static/styles/chooseUser.css">
-    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
-{% endblock %}
+<link rel="stylesheet" href="../static/styles/chooseUser.css">
+<link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
 
-{% block body %}
-    <div id="body">
-        <div>
-            <img src="{% static "images/skalvino.png" %}" alt="logo" id="logo-image">
-        </div>
-        <h1>Velg bruker</h1>
-        <div id="users">
-            {% for profile in userprofiles %}
-                <form class="choose-user-box" action="/selected/" method="POST">
-                    <input type="text" name="profile_name" value="{{ profile.profile_name }}" hidden>
-                    <input type="text" name="pk" value="{{ profile.pk }}" hidden>
-                    <input class="buttons" type="submit" value="{{ profile.profile_name }}">
-                </form>
-            {% endfor %}
-        </div>
+<div id="body">
+    <div>
+        <img src="{% static "images/skalvino.png" %}" alt="logo" id="logo-image">
     </div>
-{% endblock %}
+    <h1>Velg bruker</h1>
+    <div id="users">
+        {% for profile in userprofiles %}
+            <form class="choose-user-box" action="/selected/" method="POST">
+                <input type="text" name="profile_name" value="{{ profile.profile_name }}" hidden>
+                <input type="text" name="pk" value="{{ profile.pk }}" hidden>
+                <input class="buttons" type="submit" value="{{ profile.profile_name }}">
+            </form>
+        {% endfor %}
+    </div>
+</div>

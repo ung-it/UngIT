@@ -12,55 +12,58 @@
     Oppdater Aktivitet
 {% endblock %}
 
-
 {% block body %}
     <div class="banner-container">
-            <img src="{% static "images/top-banner.jpg" %}" alt="Banner" class="banner">
+        <img src="{% static "images/top-banner.jpg" %}" alt="Banner" class="banner">
     </div>
-        <div class="content">
-            <div class="form-page-title"><h1>Opprett aktivitet</h1></div>
-            {% if error_message %}
-                <div class="alert alert-danger alert-wrapper">
-                    <strong>{{ error_message }}</strong>
-                </div>
-            {% endif %}
-            <div class="facebook-event-wrapper mdl-shadow--2dp">
-                <button type="button" class="close" aria-label="Close" onClick="closeFacebookBox()">
-                    <span aria-hidden="true">&times;</span>
+    <div class="content">
+        <div class="form-page-title"><h1>Opprett aktivitet</h1></div>
+        {% if error_message %}
+            <div class="alert alert-danger alert-wrapper">
+                <strong>{{ error_message }}</strong>
+            </div>
+        {% endif %}
+        <div class="facebook-event-wrapper mdl-shadow--2dp">
+            <button type="button" class="close" aria-label="Close" onClick="closeFacebookBox()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="facebook-content-box">
+                <div class="facebook-info-title">Vi fant disse arrangementene på Facebook</div>
+                <select id="event-select" class="facebook-event-select">
+                    <option selected disabled hidden>Velg arrangement her</option>
+                </select>
+                <button id="event-button" class="btn btn-primary">
+                    Bruk arrangement
                 </button>
-                <div class="facebook-content-box">
-                    <div class="facebook-info-title">Vi fant disse arrangementene på Facebook</div>
-                    <select id="event-select" class="facebook-event-select">
-                        <option selected disabled hidden>Velg arrangement her</option>
-                    </select>
-                    <button id="event-button" class="btn btn-primary">
-                        Bruk arrangement
-                    </button>
-                    <div class="mdl-tooltip  mdl-tooltip--large" data-mdl-for="event-button">
-                        Fyller informasjonen registrert på Facebook inn i skjemaet nedenfor
-                    </div>
+                <div class="mdl-tooltip  mdl-tooltip--large" data-mdl-for="event-button">
+                    Fyller informasjonen registrert på Facebook inn i skjemaet nedenfor
                 </div>
             </div>
-            <div class="content main-wrapper mdl-shadow--2dp">
-            <form action="" method="post" enctype="multipart/form-data" id="saveForm"/>
-                {% csrf_token %}
+        </div>
+        <div class="content main-wrapper mdl-shadow--2dp">
+            <form action="" method="post" enctype="multipart/form-data" id="saveForm"></form>
+            {% csrf_token %}
             <div>
                 <ul class='mdl-list'>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.activityName.value != None %}
-                                    <input class="mdl-textfield__input" name="activityName" type="text" id="activityName" value="{{ form.activityName.value }}" required>
-                                    {% else %}
-                                        <input class="mdl-textfield__input" name="activityName" type="text" id="activityName" required>
+                                    <input class="mdl-textfield__input" name="activityName" type="text"
+                                           id="activityName" value="{{ form.activityName.value }}" required>
+                                {% else %}
+                                    <input class="mdl-textfield__input" name="activityName" type="text"
+                                           id="activityName" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="activityName">Navn på aktivitet</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
                         <span class="mdl-list__item-secondary-content facebook-info-box">
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" id='facebookInfo-label' for="facebookInfo">
-                                <input type="checkbox" name="facebookInfo" id="facebookInfo" class="mdl-checkbox__input">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" id='facebookInfo-label'
+                                   for="facebookInfo">
+                                <input type="checkbox" name="facebookInfo" id="facebookInfo"
+                                       class="mdl-checkbox__input">
                                 <span class="mdl-checkbox__label">Vis ekstra informasjon om arrangementet hentet fra Facebook</span>
                             </label>
                         </span>
@@ -69,7 +72,8 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="date-time-container mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                  {% if form.date.value != None %}
-                                     <input class="mdl-textfield__input" name="date" type="date" id="date" value="{{ form.date.value|date:"Y-m-d" }}" required>
+                                     <input class="mdl-textfield__input" name="date" type="date" id="date"
+                                            value="{{ form.date.value|date:"Y-m-d" }}" required>
                                  {% else %}
                                      <input class="mdl-textfield__input" name="date" type="date" id="date" required>
                                  {% endif %}
@@ -80,9 +84,11 @@
                         <span class="mdl-list__item-secondary-content">
                              <div class="date-time-container mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {% if form.date.value != None %}
-                                    <input class="mdl-textfield__input" name="date_end" type="date" id="date_end" value="{{ form.date_end.value|date:"Y-m-d" }}" required>
+                                    <input class="mdl-textfield__input" name="date_end" type="date" id="date_end"
+                                           value="{{ form.date_end.value|date:"Y-m-d" }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="date_end" type="date" id="date_end" required>
+                                    <input class="mdl-textfield__input" name="date_end" type="date" id="date_end"
+                                           required>
                                 {% endif %}
                                  <label class="mdl-textfield__label" for="date">Dato slutt</label>
                                  <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
@@ -93,9 +99,11 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="date-time-container mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {% if form.time_start.value != None %}
-                                    <input class="mdl-textfield__input" name="time_start" type="time" id="time_start" value="{{ form.time_start.value|time:"H:i" }}" required>
+                                    <input class="mdl-textfield__input" name="time_start" type="time" id="time_start"
+                                           value="{{ form.time_start.value|time:"H:i" }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="time_start" type="time" id="time_start" required>
+                                    <input class="mdl-textfield__input" name="time_start" type="time" id="time_start"
+                                           required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="time_start">Tid start</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
@@ -104,11 +112,13 @@
                         <span class="mdl-list__item-secondary-content">
                              <div class="date-time-container mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                  {% if form.time_end.value != None %}
-                                     <input class="mdl-textfield__input" name="time_end" type="time" id="time_end" value="{{ form.time_end.value|time:"H:i" }}" required>
+                                     <input class="mdl-textfield__input" name="time_end" type="time" id="time_end"
+                                            value="{{ form.time_end.value|time:"H:i" }}" required>
                                  {% else %}
-                                     <input class="mdl-textfield__input" name="time_end" type="time" id="time_end" required>
+                                     <input class="mdl-textfield__input" name="time_end" type="time" id="time_end"
+                                            required>
                                  {% endif %}
-                                <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
+                                 <label class="mdl-textfield__label" for="time_end">Tid slutt</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </span>
@@ -117,9 +127,11 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.location.value != None %}
-                                    <input class="mdl-textfield__input" name="location" type="text" id="location" value="{{ form.location.value }}" required>
+                                    <input class="mdl-textfield__input" name="location" type="text" id="location"
+                                           value="{{ form.location.value }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="location" type="text" id="location" required>
+                                    <input class="mdl-textfield__input" name="location" type="text" id="location"
+                                           required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="location">Sted</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
@@ -127,7 +139,8 @@
                         </span>
                         <span class="mdl-list__item-secondary-content">
                              {% if form.activityType.value != None %}
-                                 <input name="activityType" id="activityType" hidden value="{{ form.activityType.value }}">
+                                 <input name="activityType" id="activityType" hidden
+                                        value="{{ form.activityType.value }}">
                              {% else %}
                                  <input name="activityType" id="activityType" hidden>
                              {% endif %}
@@ -138,9 +151,12 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box full-box">
                                  {% if form.description.value != None %}
-                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required>{{ form.description.value }}</textarea>
+                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10"
+                                               maxrows="20" id="description"
+                                               required>{{ form.description.value }}</textarea>
                                  {% else %}
-                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10" maxrows="20" id="description" required></textarea>
+                                     <textarea class="mdl-textfield__input" name="description" type="text" rows="10"
+                                               maxrows="20" id="description" required></textarea>
                                  {% endif %}
                                 <label class="mdl-textfield__label" for="description">Om arrangement</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
@@ -151,9 +167,12 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.assistants_number.value != None %}
-                                    <input class="mdl-textfield__input" name="assistants_number" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="assistants_number" value="{{ form.assistants_number.value }}" required>
+                                    <input class="mdl-textfield__input" name="assistants_number" type="text"
+                                           pattern="-?[0-9]*(\.[0-9]+)?" id="assistants_number"
+                                           value="{{ form.assistants_number.value }}" required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="assistants_number" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="assistants_number" required>
+                                    <input class="mdl-textfield__input" name="assistants_number" type="text"
+                                           pattern="-?[0-9]*(\.[0-9]+)?" id="assistants_number" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="assistants_number">Totalt antall assistenter tilgjengelig</label>
                                 <span class="mdl-textfield__error">Antall må være et tall</span>
@@ -162,11 +181,15 @@
                         <span class="mdl-list__item-secondary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {% if form.assistants_text.value != None %}
-                                    <textarea class="mdl-textfield__input" name="assistants_text" type="text" rows="5" maxrows="10" id="assistants_text">{{ form.assistants_text.value }}</textarea>
+                                    <textarea class="mdl-textfield__input" name="assistants_text" type="text" rows="5"
+                                              maxrows="10"
+                                              id="assistants_text">{{ form.assistants_text.value }}</textarea>
                                 {% else %}
-                                    <textarea class="mdl-textfield__input" name="assistants_text" type="text" rows="5" maxrows="10" id="assistants_text"></textarea>
+                                    <textarea class="mdl-textfield__input" name="assistants_text" type="text" rows="5"
+                                              maxrows="10" id="assistants_text"></textarea>
                                 {% endif %}
-                                <label class="mdl-textfield__label" for="description">Ekstra informasjon om assistenter</label>
+                                <label class="mdl-textfield__label"
+                                       for="description">Ekstra informasjon om assistenter</label>
                             </div>
                         </span>
                     </li>
@@ -195,7 +218,8 @@
                         <span class="mdl-list__item-primary-content">
                              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.age.value != None %}
-                                    <input class="mdl-textfield__input" name="age" type="text" id="age" value="{{ form.age.value }}" required>
+                                    <input class="mdl-textfield__input" name="age" type="text" id="age"
+                                           value="{{ form.age.value }}" required>
                                 {% else %}
                                     <input class="mdl-textfield__input" name="age" type="text" id="age" required>
                                 {% endif %}
@@ -206,11 +230,14 @@
                     </li>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect input-box" for="registration_required">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect input-box"
+                                   for="registration_required">
                                 {% if form.registration_required.value %}
-                                    <input type="checkbox" name="registration_required" id="registration_required" class="mdl-checkbox__input" checked>
+                                    <input type="checkbox" name="registration_required" id="registration_required"
+                                           class="mdl-checkbox__input" checked>
                                 {% else %}
-                                    <input type="checkbox" name="registration_required" id="registration_required" class="mdl-checkbox__input">
+                                    <input type="checkbox" name="registration_required" id="registration_required"
+                                           class="mdl-checkbox__input">
                                 {% endif %}
                                 <span class="mdl-checkbox__label">Arrangement krever registrering</span>
                             </label>
@@ -220,9 +247,12 @@
                         <span class="mdl-list__item-primary-content">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-box">
                                 {% if form.price.value != None %}
-                                    <input class="mdl-textfield__input" name="price" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}" required>
+                                    <input class="mdl-textfield__input" name="price" type="text"
+                                           pattern="-?[0-9]*(\.[0-9]+)?" id="price" value="{{ form.price.value }}"
+                                           required>
                                 {% else %}
-                                    <input class="mdl-textfield__input" name="price" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price" required>
+                                    <input class="mdl-textfield__input" name="price" type="text"
+                                           pattern="-?[0-9]*(\.[0-9]+)?" id="price" required>
                                 {% endif %}
                                 <label class="mdl-textfield__label" for="price">Pris i kr</label>
                                 <span class="mdl-textfield__error">Pris må være et tall</span>
@@ -234,16 +264,17 @@
                              <div class="mdl-file mdl-js-file mdl-file--floating-label">
                                  <input type="file" name="images" id="images">
                                  {% if form.images.value != ""  and form.images.value %}
-                                    <label class="mdl-file__label" for="images">Last opp et annet bilde</label>
-                                     {% else %}
-                                    <label class="mdl-file__label" for="images">Last opp et bilde</label>
+                                     <label class="mdl-file__label" for="images">Last opp et annet bilde</label>
+                                 {% else %}
+                                     <label class="mdl-file__label" for="images">Last opp et bilde</label>
                                  {% endif %}
                              </div>
                         </span>
                         <span class="mdl-list__item-secondary-content">
                             {% if form.images.value != "" and form.images.value %}
                                 <div class="thumbnail">
-                                    <img src="{{ MEDIA_URL }}{{ form.images.value }}" alt="Bilde lastet opp tidligere" class="upladed-image">
+                                    <img src="{{ MEDIA_URL }}{{ form.images.value }}" alt="Bilde lastet opp tidligere"
+                                         class="upladed-image">
                                     <div class="caption">
                                         <span>Bilde lastet opp tidligere</span>
                                     </div>
@@ -257,14 +288,15 @@
                             <span>Klikk på et bilde for å legge det til</span>
                             <div id="instagram-div">
                                 {% for image in images %}
-                                    <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram" src={{ image }}>
+                                    <img class='instagram-image' onclick="imageClicked(this)" alt="Bilde fra Instagram"
+                                         src={{ image }}>
                                 {% endfor %}
                             </div>
                             {% if form.instagram.value != "" and form.instagram.value %}
                                 <script> selectedImages("{{ form.instagram.value }}") </script>
                             {% endif %}
-                            {% else %}
-                            <a class="btn btn-primary" role="button" href={{ link }} >Finn bilde på Instagram</a>
+                        {% else %}
+                            <a class="btn btn-primary" role="button" href={{ link }}>Finn bilde på Instagram</a>
                         {% endif %}
                     </li>
                     <li class="mdl-list__item">

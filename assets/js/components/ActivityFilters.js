@@ -9,7 +9,6 @@ import SearchForActivity from './SearchForActivity';
 
 import '../../styles/activityFilters.css'
 
-
 class ActivityFilters extends React.Component {
 
     constructor(props) {
@@ -19,7 +18,6 @@ class ActivityFilters extends React.Component {
             tButtonClicked: true,
 		};
 	};
-
 
     handleEmptyFilter = () => {
         this.props.onButtonChange(this.state.tButtonClicked);

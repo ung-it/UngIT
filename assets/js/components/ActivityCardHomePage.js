@@ -1,6 +1,6 @@
 import React from "react"
-import {connect} from "react-redux"
-import {Thumbnail, Glyphicon} from 'react-bootstrap';
+import { connect } from "react-redux"
+import { Thumbnail, Glyphicon } from 'react-bootstrap';
 import { getMonth } from '../DateFunctions'
 
 import ActivityModal from './ActivityModal';
@@ -75,8 +75,6 @@ class ActivityCardHomePage extends React.Component {
 
         let date = dato.getDate() + ". " + getMonth(dato.getMonth())+ " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
 
-        // const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
-
         const divStyle = {
             backgroundImage: 'url(' + poster + ')',
             width: '22em',
@@ -126,5 +124,4 @@ class ActivityCardHomePage extends React.Component {
     }
 }
 
-// connect actually calles the functions so that their purposes are fulfilled
 export default ActivityCardHomePage;

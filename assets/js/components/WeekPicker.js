@@ -3,7 +3,6 @@ import {Thumbnail, Glyphicon} from "react-bootstrap";
 import DatePicker from 'material-ui/DatePicker';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import '../../styles/daterangepicker.css'
 
 injectTapEventPlugin();
 

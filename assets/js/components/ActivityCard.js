@@ -1,9 +1,9 @@
 import React from "react"
-import {connect} from "react-redux"
-import {Thumbnail, Glyphicon} from 'react-bootstrap';
+import { connect } from "react-redux"
+import { Thumbnail, Glyphicon } from 'react-bootstrap';
 
 import ActivityModal from './ActivityModal';
-import {getMonth, getDay} from '../DateFunctions';
+import { getMonth } from '../DateFunctions';
 
 const moment = require('moment');
 
@@ -29,8 +29,6 @@ class ActivityCard extends React.Component {
     }
 
     render() {
-        // this.state.show = false;
-
         let activity = this.props.activity;
 
         let localImages = new Array(activity.images).filter(image => {
@@ -133,7 +131,6 @@ class ActivityCard extends React.Component {
                         </a>
                     </div>
                 </div>
-
 
                 < ActivityModal
                     id={this.props.id}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { getDay, getMonth } from '../DateFunctions'
-
 import '../../styles/time.css';
 
 class CalendarDateBox extends Component {
@@ -10,7 +9,6 @@ class CalendarDateBox extends Component {
     }
 
     render() {
-
         const date = this.props.date;
 
         let weekday = getDay(date.getDay());
@@ -34,7 +32,6 @@ class CalendarDateBox extends Component {
             </time>
         )
     }
-
 }
 
 export default CalendarDateBox;

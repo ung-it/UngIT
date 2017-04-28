@@ -1,7 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {Thumbnail, Glyphicon, Button} from 'react-bootstrap';
-import {follow, unfollow, checkIfFollowing} from "../APIFunctions";
+import {follow, unfollow} from "../APIFunctions";
 
 const moment = require('moment');
 

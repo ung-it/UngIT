@@ -1,12 +1,10 @@
 import React from 'react';
 import { Glyphicon } from "react-bootstrap";
 import Paper from 'material-ui/Paper';
-
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
 import WeekPicker from './WeekPicker';
 import SearchForActivity from './SearchForActivity';
-
 import '../../styles/activityFilters.css'
 
 class ActivityFilters extends React.Component {

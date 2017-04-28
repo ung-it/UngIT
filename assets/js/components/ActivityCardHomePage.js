@@ -2,7 +2,6 @@ import React from "react"
 import { connect } from "react-redux"
 import { Thumbnail, Glyphicon } from 'react-bootstrap';
 import { getMonth } from '../DateFunctions'
-
 import ActivityModal from './ActivityModal';
 
 const moment = require('moment');

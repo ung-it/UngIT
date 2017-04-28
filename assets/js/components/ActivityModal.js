@@ -1,22 +1,12 @@
-//React Component import
-import React, {Component} from 'react';
-//Paper import
+import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
-//Bootstrap import
-import {Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl,} from 'react-bootstrap';
-//Project component import
+import { Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import CalendarDateBox from './CalendarDateBox';
-//Image gallery
 import ImageGallery from 'react-image-gallery';
-
-//CSS
 import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
-
 import { getProvider, isNumeric } from '../APIFunctions';
-
-//CSS import
 import '../../styles/modal.css';
-import {SUITED_FOR_TYPES} from './SuitedForPicker';
+import { SUITED_FOR_TYPES } from './SuitedForPicker';
 import StarRatingComponent from "react-star-rating-component";
 import {
     signupActivity,

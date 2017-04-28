@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Thumbnail, Glyphicon } from 'react-bootstrap';
-
 import ActivityModal from './ActivityModal';
 import { getMonth } from '../DateFunctions';
 

@@ -1,6 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-
 import rootReducer from "./reducers/indexReducer";
 
 export default function configureStore() {
@@ -19,5 +18,4 @@ export default function configureStore() {
     );
 
     return store;
-
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Glyphicon } from "react-bootstrap";
+import {Glyphicon} from "react-bootstrap";
 import Paper from 'material-ui/Paper';
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
@@ -10,12 +10,12 @@ import '../../styles/activityFilters.css'
 class ActivityFilters extends React.Component {
 
     constructor(props) {
-		super(props);
+        super(props);
 
-		this.state = {
+        this.state = {
             tButtonClicked: true,
-		};
-	};
+        };
+    };
 
     handleEmptyFilter = () => {
         this.props.onButtonChange(this.state.tButtonClicked);
@@ -31,7 +31,8 @@ class ActivityFilters extends React.Component {
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">
                             Tøm filter
                         </div>
-                        <button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
+                        <button type="button" className="btn btn-warning" id="button-trash"
+                                onClick={this.handleEmptyFilter}>
                             <Glyphicon glyph="glyphicon glyphicon-trash"/>
                         </button>
                     </div>

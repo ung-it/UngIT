@@ -1,4 +1,4 @@
-import { getAllProviders } from '../APIFunctions';
+import {getAllProviders} from '../APIFunctions';
 
 // ACTION TYPES
 export const FETCHED_ALL_PROVIDERS = 'FETCH_ALL_PROVIDERS';

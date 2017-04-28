@@ -1,7 +1,7 @@
 import React from "react"
-import { connect } from "react-redux"
-import { Thumbnail, Glyphicon } from 'react-bootstrap';
-import { getMonth } from '../DateFunctions'
+import {connect} from "react-redux"
+import {Thumbnail, Glyphicon} from 'react-bootstrap';
+import {getMonth} from '../DateFunctions'
 import ActivityModal from './ActivityModal';
 
 const moment = require('moment');
@@ -72,7 +72,7 @@ class ActivityCardHomePage extends React.Component {
         let dato = new Date(this.props.activity.date);
         let datoEnd = new Date(this.props.activity.date_end);
 
-        let date = dato.getDate() + ". " + getMonth(dato.getMonth())+ " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
+        let date = dato.getDate() + ". " + getMonth(dato.getMonth()) + " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
 
         const divStyle = {
             backgroundImage: 'url(' + poster + ')',
@@ -99,7 +99,8 @@ class ActivityCardHomePage extends React.Component {
                                 <div className="row">
                                     <p className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
                                     <p className="col-md-5"><Glyphicon
-                                        glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</p>
+                                        glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)}
+                                        - {this.props.activity.time_end.slice(0, 5)}</p>
                                 </div>
                                 <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}
                                 </p>

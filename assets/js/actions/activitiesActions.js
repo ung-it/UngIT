@@ -1,4 +1,10 @@
-import { getAllActivities, getAllAttendingActivities, getAllHostingActivities, getAllProHosting, getFacebookEventData} from "../APIFunctions";
+import {
+    getAllActivities,
+    getAllAttendingActivities,
+    getAllHostingActivities,
+    getAllProHosting,
+    getFacebookEventData
+} from "../APIFunctions";
 
 // ACTION TYPES
 export const FETCHED_ALL_ACTIVITIES = 'FETCH_ALL_ACTIVITIES';
@@ -118,7 +124,7 @@ export function fetchAllHostingActivities() {
 export function fetchAllProHostingActivities() {
     return (dispatch) => {
         getAllProHosting()
-            .then(result =>  dispatch(fetchedAllProHostingActivites(result)))
+            .then(result => dispatch(fetchedAllProHostingActivites(result)))
             .catch(error => console.error(error));
     };
 }

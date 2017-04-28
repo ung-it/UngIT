@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Paper from 'material-ui/Paper';
-import { Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import {Glyphicon, Modal, Button, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 import CalendarDateBox from './CalendarDateBox';
 import ImageGallery from 'react-image-gallery';
 import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
-import { getProvider, isNumeric } from '../APIFunctions';
+import {getProvider, isNumeric} from '../APIFunctions';
 import '../../styles/modal.css';
-import { SUITED_FOR_TYPES } from './SuitedForPicker';
+import {SUITED_FOR_TYPES} from './SuitedForPicker';
 import StarRatingComponent from "react-star-rating-component";
 import {
     signupActivity,
@@ -125,23 +125,21 @@ class ActivityModal extends Component {
     };
 
     fetchComments = () => {
-        getComments(this.props.id,(result) => {
+        getComments(this.props.id, (result) => {
             if (result.message == "ingen kommentar funnet") {
             }
             else {
-                 this.setState({
+                this.setState({
                     comments: result.reverse()
                 });
             }
         });
     };
 
-
-
     onPostComment = () => {
-        if($("#commentInput").val().trim().length == 0){
+        if ($("#commentInput").val().trim().length == 0) {
             $("#postError").html("En kommentar kan ikke være tom.");
-        }else {
+        } else {
             const obj = {
                 id: this.props.id,
                 comment2: $("#commentInput").val()
@@ -152,13 +150,11 @@ class ActivityModal extends Component {
                 this.fetchComments();
             });
         }
-
-
     };
 
     fetchHost = () => {
-        getHost(this.props.id,(result) => {
-            if(result.host == 'true'){
+        getHost(this.props.id, (result) => {
+            if (result.host == 'true') {
                 this.setState({
                     hosting: true
                 });
@@ -174,8 +170,6 @@ class ActivityModal extends Component {
 
     render() {
         let {date, activityName, assistants_number, assistants_text, facebook, facebookInfo, activityType, suitedForType, provider, adaptions, age, time_start, time_end, location, description, videos, rating, number_of_ratings} = this.props.activity;
-
-
         let starRating = rating / number_of_ratings;
         let suitedForContainer = [];
         let carouselContainer = null;
@@ -186,39 +180,38 @@ class ActivityModal extends Component {
         let commentsContainer = <div id="commentDiv"><h4>Ingen kommentarer</h4></div>;
         let allComments = this.state.comments;
         let descriptionContainer = null;
-
+        let videoContainer = null;
+        let facebookContainer = null;
 
         if (suitedForType >= 0) {
             suitedForContainer = SUITED_FOR_TYPES.filter(type => parseInt(type.value) === suitedForType)[0];
         }
 
-        let videoContainer = null;
         if (videos.length > 0) {
-           const videos = this.state.videos.map((video, i) => {
-               const path = "/media/video/" + video;
-               return (
-                   <video className="modal-video" controls="controls" key={i}>
-                       <source src={path}/>
-                   </video>
-               )
-               });
-           videoContainer =
-               <div>
-                   <h3 className="modal-image-header">Video fra arrangementet</h3>
-                   {videos}
-               </div>;
+            const videos = this.state.videos.map((video, i) => {
+                const path = "/media/video/" + video;
+                return (
+                    <video className="modal-video" controls="controls" key={i}>
+                        <source src={path}/>
+                    </video>
+                )
+            });
+            videoContainer =
+                <div>
+                    <h3 className="modal-image-header">Video fra arrangementet</h3>
+                    {videos}
+                </div>;
         }
 
-        if(this.state.myrating > 0){
+        if (this.state.myrating > 0) {
             starRating =
-                (rating + this.state.myrating)/(number_of_ratings+1);
+                (rating + this.state.myrating) / (number_of_ratings + 1);
 
             ratingContainer =
                 <span id="ratingFeedback">Takk for din vurdering.</span>;
         }
 
         let images = this.props.images.map(image => {
-            {/*<img  key={image} className="modal-image" src={image} alt="Et bilde fra arrangementet"></img>*/}
             return {original: image, thumbnail: image}
         });
 
@@ -228,7 +221,6 @@ class ActivityModal extends Component {
                 this.fetchComments();
             }
         }
-
 
         if (!this.state.loggedIn) {
             attendingContainer =
@@ -246,7 +238,6 @@ class ActivityModal extends Component {
                         <Button className="btn btn-success" onClick={this.onSignup}>Meld på!</Button>
                     </div>
                 </Paper>;
-
         } else {
             attendingContainer =
                 <Paper className="modal-infobox2">
@@ -257,7 +248,6 @@ class ActivityModal extends Component {
                 </Paper>;
         }
 
-        let facebookContainer = null;
         if (facebook && facebookInfo) {
             let fImages = facebook.photos.data.map(image => {
                 return {original: image.images[0].source, thumbnail: image.images[0].source}
@@ -266,7 +256,9 @@ class ActivityModal extends Component {
 
             let admins = facebook.admins.data.map(admin => {
                 let link = "https://facebook.com/" + admin.id;
-                return <a href={link} key={admin.id} target="_blank" title="Åpner Facebooksiden knyttet til denne personen/organisasjonen" className="modal-facebook-admin-link">{admin.name}</a>
+                return <a href={link} key={admin.id} target="_blank"
+                          title="Åpner Facebooksiden knyttet til denne personen/organisasjonen"
+                          className="modal-facebook-admin-link">{admin.name}</a>
             });
 
             facebookContainer = (
@@ -288,11 +280,9 @@ class ActivityModal extends Component {
             );
         }
         if (this.state.show && images.length != 0) {
-
             carouselContainer =
                 <div>
                     <h3 className="modal-image-header">Bilder fra arrangementet</h3>
-                    {/*<Carousel carouselImages={images}/>*/}
                     <div id="imageContainer">
                         <ImageGallery
                             items={images}
@@ -307,17 +297,18 @@ class ActivityModal extends Component {
         }
 
         if (this.state.loggedIn) {
-            if(this.state.myrating > 0){
+            if (this.state.myrating > 0) {
                 starRating =
-                    (rating + this.state.myrating)/(number_of_ratings+1);
+                    (rating + this.state.myrating) / (number_of_ratings + 1);
 
                 ratingContainer =
                     <span id="ratingFeedback">Takk for din vurdering.</span>;
-            }else{
+            } else {
                 ratingContainer =
                     <div>
                         <p className="activityRating">Gi din vurdering</p>
-                        <StarRatingComponent className="activityRating" name="activityRating" emptyStarColor="#BBB" onStarClick={this.onRateChange.bind(this)}/>
+                        <StarRatingComponent className="activityRating" name="activityRating" emptyStarColor="#BBB"
+                                             onStarClick={this.onRateChange.bind(this)}/>
                     </div>
             }
             postCommentContainer =
@@ -327,7 +318,7 @@ class ActivityModal extends Component {
                             <textarea placeholder="Skriv inn din kommentar her" id="commentInput"
                                       className="form-control custom-control">
                             </textarea>
-                           <span id="postError"> </span>
+                            <span id="postError"> </span>
 
                             <span className="input-group-addon btn btn-primary"
                                   onClick={this.onPostComment.bind(this)}>Send</span>
@@ -336,7 +327,7 @@ class ActivityModal extends Component {
                 </div>;
         }
 
-        if(this.state.hosting){
+        if (this.state.hosting) {
             changeActivityContainer =
                 <Button onClick={this.editActivity}>Endre aktivitet</Button>;
         }
@@ -367,24 +358,22 @@ class ActivityModal extends Component {
             provider = this.state.provider.aktordatabase.Navn;
         }
 
-
-
-        if(description.length > 300){
-            if(this.state.fullDescription){
+        if (description.length > 300) {
+            if (this.state.fullDescription) {
                 descriptionContainer =
                     <div>
                         <pre className="modal-description">{description}</pre>
                     </div>
             }
-            else{
-                let des = description.substring(0,300) + "...";
+            else {
+                let des = description.substring(0, 300) + "...";
                 descriptionContainer =
                     <div>
-                        <pre className="modal-description">{des}</pre> <a onClick={this.fullDes}>Les mer</a>
+                        <pre className="modal-description">{des}</pre>
+                        <a onClick={this.fullDes}>Les mer</a>
                     </div>
             }
         }
-
 
         return (
             <Modal
@@ -397,11 +386,13 @@ class ActivityModal extends Component {
                         <CalendarDateBox date={new Date(date)}/>
                         <div className="modal-title-style">
                             <h1><b>{activityName}</b></h1>
-                            <div className="modal-provider-title"><span className="bold-info-text"> Arrangeres av: </span> {provider}
+                            <div className="modal-provider-title"><span
+                                className="bold-info-text"> Arrangeres av: </span> {provider}
                             </div>
                         </div>
                         <div id="ratingContainer">
-                            <StarRatingComponent id="userRating" name="userRating" emptyStarColor="#BBB" value={starRating} editing={false}/>
+                            <StarRatingComponent id="userRating" name="userRating" emptyStarColor="#BBB"
+                                                 value={starRating} editing={false}/>
                         </div>
                     </Modal.Title>
                 </Modal.Header>
@@ -418,8 +409,11 @@ class ActivityModal extends Component {
                     </div>
                     <div className="modal-info-container">
                         <Paper className="modal-infobox1">
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> <span className="bold-info-text"> Alder: </span> {age}</div>
-                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> <span className="bold-info-text"> Tid: </span> {time_start.slice(0, 5)} - {time_end.slice(0, 5)}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-user"/> <span
+                                className="bold-info-text"> Alder: </span> {age}</div>
+                            <div className="modal-infobox1-element"><Glyphicon glyph="glyphicon glyphicon-time"/> <span
+                                className="bold-info-text"> Tid: </span> {time_start.slice(0, 5)}
+                                - {time_end.slice(0, 5)}</div>
                             <div className="modal-infobox1-element">
                                 <Glyphicon glyph="glyphicon glyphicon-map-marker"/> <span className="bold-info-text"> Sted:</span> {location}
                             </div>

@@ -1,8 +1,8 @@
 import React from "react"
-import { connect } from "react-redux"
-import { Thumbnail, Glyphicon } from 'react-bootstrap';
+import {connect} from "react-redux"
+import {Thumbnail, Glyphicon} from 'react-bootstrap';
 import ActivityModal from './ActivityModal';
-import { getMonth } from '../DateFunctions';
+import {getMonth} from '../DateFunctions';
 
 const moment = require('moment');
 
@@ -84,7 +84,7 @@ class ActivityCard extends React.Component {
         let dato = new Date(this.props.activity.date);
         let datoEnd = new Date(this.props.activity.date_end);
 
-        let date = dato.getDate() + ". " + getMonth(dato.getMonth())+ " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
+        let date = dato.getDate() + ". " + getMonth(dato.getMonth()) + " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
 
         const divStyle = {
             background: 'url(' + poster + ')',

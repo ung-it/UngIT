@@ -73,7 +73,6 @@ class ProvidersList extends React.Component {
                 marginBottom: "2%",
                 width: '100%',
                 height: "100px",
-
             }
         };
         if (this.props.providers.length < 1) {

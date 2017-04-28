@@ -6,13 +6,11 @@
 {% endblock %}
 
 {% block body %}
-
     <div id="body">
         <div>
             <img src="{% static "images/skalvino.png" %}" alt="logo" id="logo-image">
         </div>
         <h1>Velg bruker</h1>
-
         <div id="users">
             {% for profile in userprofiles %}
                 <form class="choose-user-box" action="/selected/" method="POST">
@@ -20,9 +18,7 @@
                     <input type="text" name="pk" value="{{ profile.pk }}" hidden>
                     <input class="buttons" type="submit" value="{{ profile.profile_name }}">
                 </form>
-
             {% endfor %}
         </div>
     </div>
-
 {% endblock %}

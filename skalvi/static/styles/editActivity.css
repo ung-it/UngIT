@@ -5,7 +5,7 @@
 .facebook-event-wrapper {
     margin: 8px auto 20px auto;
     padding: 16px 16px 16px 16px;
-    height: 171.2px;
+    height: 171px;
     background-color: white;
     display: none;
     width: 900px;
@@ -17,7 +17,7 @@
 }
 
 .facebook-info-title {
-    font-family: "Helvetica","Arial",sans-serif;
+    font-family: "Helvetica", "Arial", sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 20px;

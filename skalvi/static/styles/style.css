@@ -28,7 +28,6 @@ body {
 }
 
 /*Text styling*/
-
 h1, h2, h3, .title {
     font-family: "Dosis", serif;
     font-weight: bold;
@@ -61,7 +60,6 @@ h1, h2, h3, .title {
     border: none;
 }
 
-
 a.navbar-brand {
     padding: 0;
 }
@@ -75,6 +73,7 @@ a.navbar-brand {
     padding-left: 100px;
     padding-right: 100px;
 }
+
 .content-margin-top {
     margin-top: 50px;
 }
@@ -88,16 +87,17 @@ a.navbar-brand {
     padding: 0 5px;
 }
 
- .navbar-default .navbar-nav > .active > a,
- .navbar-default .navbar-nav > .active > a:hover,
- .navbar-default .navbar-nav > .active > a:focus {
-      color: white;
- }
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: white;
+}
 
- li.dropdown.open > a:focus {
+li.dropdown.open > a:focus {
     color: white !important;
     border-bottom: 7px solid #3ad7ff !important;
 }
+
 .username-font {
     font-family: "Dosis", serif;
     font-weight: bold;
@@ -110,11 +110,11 @@ a.navbar-brand {
 
 .logo-div {
     position: absolute;
-	z-index: 1;
-	text-align: center;
-	background-color: rgb(42, 42, 42);
-	margin-top: 30px;
-	padding: 10px;
+    z-index: 1;
+    text-align: center;
+    background-color: rgb(42, 42, 42);
+    margin-top: 30px;
+    padding: 10px;
     border-radius: 4px;
 }
 
@@ -125,11 +125,13 @@ a.navbar-brand {
 
 @media screen and (max-width: 1020px) {
     #logo-image {
-        display: none; !important;
+        display: none;
+    !important;
     }
 
     .logo-div {
-        display: none; !important;
+        display: none;
+    !important;
     }
 }
 
@@ -153,7 +155,6 @@ pre {
 }
 
 /*styling footer*/
-
 .footer {
     background-color: rgb(42, 42, 42);
     color: rgb(157, 157, 157);
@@ -167,10 +168,6 @@ pre {
 .container-navigation {
     display: flex;
     justify-content: space-around;
-}
-
-.navigation-item {
-
 }
 
 .container-creators {
@@ -194,21 +191,20 @@ pre {
 
 /* Scrollbar styles */
 ::-webkit-scrollbar {
-width: 12px;
-height: 12px;
+    width: 12px;
+    height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-border: 1px solid #03a7ff;
-border-radius: 10px;
+    border: 1px solid #03a7ff;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-background: #03adff;
-border-radius: 10px;
+    background: #03adff;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: #03a7ff;
+    background: #03a7ff;
 }
-

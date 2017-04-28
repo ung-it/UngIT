@@ -1,18 +1,15 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import { Glyphicon } from "react-bootstrap";
-
+import {Glyphicon} from "react-bootstrap";
 import SearchForProvider from './SearchForActivity';
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
-
 import '../../styles/activityFilters.css'
 
 class ProviderFilters extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             tButtonClicked: true,
         };
@@ -23,7 +20,6 @@ class ProviderFilters extends React.Component {
     };
 
     render() {
-
         const providerName = this.props.providersForSearch.map(provider => provider.Navn);
 
         return (
@@ -37,7 +33,6 @@ class ProviderFilters extends React.Component {
                                 onClick={this.handleEmptyFilter}>
                             <Glyphicon glyph="glyphicon glyphicon-trash"/>
                         </button>
-
                     </div>
                     <div className="col-md-10">
                         <h1>Finn arrangører</h1>
@@ -50,7 +45,6 @@ class ProviderFilters extends React.Component {
                     placeholderText="Søk på arrangør..."
                     searchForFilter={this.props.searchForFilter}
                 />
-
                 <div className="row">
                     <div className="col-md-6">
                         <SuitedForPicker
@@ -70,8 +64,7 @@ class ProviderFilters extends React.Component {
             </Paper>
         )
     };
-}
-;
+};
 
 ProviderFilters.propTypes = {
     onSearchForChange: React.PropTypes.func.isRequired,
@@ -85,7 +78,6 @@ ProviderFilters.propTypes = {
     onActivityFilterChange: React.PropTypes.func.isRequired,
     activityFilters: React.PropTypes.array.isRequired,
     activityButton: React.PropTypes.func.isRequired,
-
 
     onButtonChange: React.PropTypes.func.isRequired,
 };

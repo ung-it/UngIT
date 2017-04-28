@@ -36,7 +36,6 @@ class ActivityFilters extends React.Component {
                         <button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
                             <Glyphicon glyph="glyphicon glyphicon-trash"/>
                         </button>
-
                     </div>
                     <div className="col-md-10">
                         <h1>Finn aktiviteter</h1>
@@ -73,11 +72,9 @@ class ActivityFilters extends React.Component {
                             onFilterChange={this.props.onActivityFilterChange}
                             activeFilters={this.props.activityFilters}
                             activityButton={this.props.activityButton}
-
                         />
                     </div>
                 </div>
-
             </Paper>
         )
     }

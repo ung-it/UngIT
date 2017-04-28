@@ -24,31 +24,10 @@ export function getUser(callback) {
     });
 }
 
-export function getActivityInfo(id, callback) {
-    fetchFromServer('/api/activity/' + id).then(data => {
-        callback(data[0].fields);
-    });
-}
-
-export function getUpcomingActivities(callback) {
-    fetchFromServer('/api/activities/').then(data => {
-        const ids = data.map(activity => {
-            return activity.pk;
-        });
-        callback(ids);
-    });
-}
-
 export function getAllOrganisations(callback) {
     return fetchFromServer('/api/providers/').then(response => {
         callback(response);
     });
-}
-
-export function getUserProviders(callback) {
-    return fetchFromServer('/api/userproviders/').then(response => {
-        callback(response);
-    })
 }
 
 export function getAllProviders() {
@@ -164,12 +143,6 @@ export function follow(data, callback) {
 
 export function unfollow(data, callback) {
     postToServer('/unfollow/', data).then(response => {
-        callback(response);
-    });
-}
-
-export function checkIfFollowing(data, callback) {
-    postToServer('/checkIfFollowing/', data).then(response => {
         callback(response);
     });
 }

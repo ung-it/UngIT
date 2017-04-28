@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-
 # Register your models here.
 from .models import *
 
@@ -16,7 +15,6 @@ admin.site.register(UserProfile)
 admin.site.register(Commentary)
 admin.site.register(Follows)
 
-
 # Define an inline admin descriptor for UserProfile model
 # which acts a bit like a singleton
 
@@ -26,11 +24,9 @@ class UserProfileInline(admin.StackedInline):
     verbose_name_plural = 'User profiles'
     fk_name = 'user'
 
-
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = (UserProfileInline, )
-
 
 # Re-register UserAdmin
 admin.site.unregister(User)

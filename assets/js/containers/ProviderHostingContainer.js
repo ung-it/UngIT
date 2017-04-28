@@ -1,22 +1,15 @@
-/**
- * Created by Andy on 19-Apr-17.
- */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
-
 import {fetchAllProHostingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
-import { withoutTime } from "../DateFunctions";
-
+import {withoutTime} from "../DateFunctions";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../../styles/activityBox.css';
 
 const store = configureStore();
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import Provider from "react-redux/src/components/Provider";
 
 class ProviderHostingContainer extends Component {
 

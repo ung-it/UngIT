@@ -7,11 +7,7 @@ config.output.publicPath = '/static/dist/';
 
 config.plugins = config.plugins.concat([
     new BundleTracker({filename: './webpack-stats-prod.json'}),
-    new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: JSON.stringify('production'),
-        }
-    }),
+
     new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false
@@ -28,5 +24,13 @@ config.plugins = config.plugins.concat([
         comments: false
     })
 ]);
+
+config.plugins.unshift(
+    new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify('production'),
+        }
+    })
+);
 
 module.exports = config;

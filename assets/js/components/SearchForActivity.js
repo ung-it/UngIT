@@ -1,18 +1,12 @@
 import React from 'react';
-import Select from 'react-select';
-import ReactDOM from 'react-dom';
 import AutoComplete from 'material-ui/AutoComplete';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
-
-
 class SearchForActivity extends React.Component {
-
 
 	handleUpdateInput = value => {
 		this.props.onFilterChange(value);
 	};
-
 
 	render () {
 		return (

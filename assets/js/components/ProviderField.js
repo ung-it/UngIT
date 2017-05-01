@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-
-import {getUserProviders, getAllOrganisations, getUser} from '../APIFunctions';
-
+import {getAllOrganisations, getUser} from '../APIFunctions';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Subheader from 'material-ui/Subheader';
@@ -25,8 +23,8 @@ class ProviderField extends Component {
 
     constructor(props) {
         super(props);
-
         let color = {};
+
         if (selectedProvider != "") {
             color = {color: '#3F51B5'};
         }
@@ -43,7 +41,6 @@ class ProviderField extends Component {
             open: false,
             color: color
         }
-
     }
 
     handleChange = (event, index, value) => {
@@ -58,7 +55,6 @@ class ProviderField extends Component {
     };
 
     render() {
-
         let choosen = false;
 
         let items1 = this.state.registered.map((item) => {
@@ -73,8 +69,8 @@ class ProviderField extends Component {
                 )
             }
             return null;
-
         });
+
         if (this.state.registered[0] === "") {
             items1 = <MenuItem disabled={true}>Ingen aktører registrert</MenuItem>;
         }
@@ -120,12 +116,10 @@ class ProviderField extends Component {
 
     componentDidMount() {
         getAllOrganisations(providers => {
-
             const data = providers.map(provider => {
                 const json = JSON.parse(provider.fields.aktordatabase);
                 return json.Navn;
             });
-
             this.setState({providers, data});
         });
         getUser(user => {
@@ -144,7 +138,6 @@ class ProviderField extends Component {
             }
         }
     }
-
 }
 
 export default ProviderField;

@@ -7,9 +7,7 @@
 
 {% block pageTitle %}Register ny bruker{% endblock %}
 
-
 {% block body %}
-
     <div class="banner-container">
         <img src="{% static "images/top-banner.jpg" %}" alt="Banner" class="banner">
     </div>
@@ -28,7 +26,7 @@
                         <li class="mdl-list__item">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 {{ field }}
-                                <label class="mdl-textfield__label" for="{{ field.auto_id  }}">{{ field.label }}</label>
+                                <label class="mdl-textfield__label" for="{{ field.auto_id }}">{{ field.label }}</label>
                                 <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                             </div>
                         </li>
@@ -36,8 +34,10 @@
                     {% for field in profile %}
                         {% if field.name == "type" %}
                             <li class="mdl-list__item">
-                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{ field.auto_id }}">
-                                    <input type="checkbox" name="{{ field.name }}" id="{{ field.auto_id }}" class="mdl-checkbox__input" required>
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                       for="{{ field.auto_id }}">
+                                    <input type="checkbox" name="{{ field.name }}" id="{{ field.auto_id }}"
+                                           class="mdl-checkbox__input" required>
                                     <span class="mdl-checkbox__label">{{ field.label }}</span>
                                     <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                                 </label>
@@ -46,7 +46,8 @@
                             <li class="mdl-list__item">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     {{ field }}
-                                    <label class="mdl-textfield__label" for="{{ field.auto_id  }}">{{ field.label_tag }}</label>
+                                    <label class="mdl-textfield__label"
+                                           for="{{ field.auto_id }}">{{ field.label_tag }}</label>
                                     <span class="mdl-textfield__error">Dette feltet må fylles ut</span>
                                 </div>
                             </li>

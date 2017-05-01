@@ -1,19 +1,25 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
-injectTapEventPlugin();
-
 import "../../styles/activityBox.css";
-
-import {fetchAllProviders, addSearchForFilter, addActivityFilter, addSuitedForFilter, trashButtonClicked, activityButtonClicked, suitedForButtonClicked} from "../actions/providersActions";
+import {
+    fetchAllProviders,
+    addSearchForFilter,
+    addActivityFilter,
+    addSuitedForFilter,
+    trashButtonClicked,
+    activityButtonClicked,
+    suitedForButtonClicked
+} from "../actions/providersActions";
 import ProvidersList from '../components/ProvidersList';
 import ProviderFilters from '../components/ProviderFilters';
 import configureStore from "../configureStore";
+
+injectTapEventPlugin();
+
 const store = configureStore();
 
 class AllProvidersContainer extends Component {
@@ -21,7 +27,6 @@ class AllProvidersContainer extends Component {
     componentDidMount() {
         this.props.fetchProviders();
     }
-
 
     render() {
         return (
@@ -34,29 +39,22 @@ class AllProvidersContainer extends Component {
                     activityFilters={this.props.activeActivityFilters}
                     activityButton={this.props.changeActivityButton}
                     onButtonChange={this.props.changeTrashButton}
-
                     onSuitedForFilterChange={this.props.changeSuitedForFilter}
                     suitedForFilters={this.props.activeSuitedForFilters}
                     suitedForButton={this.props.changeSuitedForButton}
                 />
                 <ProvidersList providers={this.props.providers}/>
             </div>
-
-
         )
     }
 }
 
-
 const mapStateToProps = state => {
     let {provider: {providerList, activeSearchForFilters, activeActivityFilters, activeSuitedForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
-
-    const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
+    const hasActivityFilter = activeActivityFilters.length > 0;
     const activityFilter = activeActivityFilters;
-
     const hasSearchForFilter = activeSearchForFilters.length > 0;
     const searchForFilter = activeSearchForFilters.toUpperCase();
-
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
 
     providerList = hasActivityFilter
@@ -88,7 +86,6 @@ const mapDispatchToProps = dispatch => {
         changeActivityButton: () => dispatch(activityButtonClicked()),
         changeSuitedForButton: () => dispatch(suitedForButtonClicked()),
         changeSuitedForFilter: (suitedFilter) => dispatch(addSuitedForFilter(suitedFilter)),
-
     }
 };
 
@@ -98,11 +95,9 @@ const muiTheme = getMuiTheme({
     },
 });
 
-
 AllProvidersContainer = connect(mapStateToProps, mapDispatchToProps)(AllProvidersContainer);
 // Fetch initial data for to the state
 store.dispatch(fetchAllProviders());
-
 
 ReactDOM.render(
     <MuiThemeProvider muiTheme={muiTheme}>

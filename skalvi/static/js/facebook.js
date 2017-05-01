@@ -14,10 +14,10 @@ function asyncFacebook(callback) {
     window.fbAsyncInit = function() {
         FB.init({
             appId      : '1658650714438155',
-            cookie     : true,  // enable cookies to allow the server to access
+            cookie     : true,
             // the session
-            xfbml      : true,  // parse social plugins on this page
-            version    : 'v2.8' // use version 2.1
+            xfbml      : true,
+            version    : 'v2.8'
         });
         callback();
     };
@@ -34,7 +34,6 @@ function asyncFacebook(callback) {
 function logIn() {
     asyncFacebook(function () {
         FB.login(function(response){
-            console.log(response)
             fetchInfo();
         }, {scope: 'user_events'});
     })
@@ -51,18 +50,6 @@ function getFacebookEvents(callback) {
         });
     });
 }
-
-// function getFacebookEventData(eventID, callback) {
-//     asyncFacebook(function () {
-//         FB.getLoginStatus(function (response) {
-//             $.get('https://graph.facebook.com/v2.8/'.concat(eventID).concat("?fields=admins,attending,photos{images},picture,roles,videos").concat('&access_token=').concat(response.authResponse.accessToken), function (response) {
-//                 if (response && !response.error) {
-//                     callback(response);
-//                 }
-//             });
-//         });
-//     });
-// }
 
 function fetchInfo() {
     FB.api('/me', 'GET', {fields: 'id, age_range, first_name, last_name, email, picture'}, function(response) {

@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
-
 import {fetchAllAttendingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
-import { withoutTime } from "../DateFunctions";
+import {withoutTime} from "../DateFunctions";
 import '../../styles/activityBox.css';
-
-const store = configureStore();
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const store = configureStore();
 
 class AttendingActivitiesContainer extends Component {
 
@@ -55,15 +53,13 @@ class AttendingActivitiesContainer extends Component {
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
     return {
         attendingActivities: state.activity.attendingActivityList
-            .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date))) // Sort descending based on date
+            .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date)))
             .filter((a) => withoutTime(new Date(a.fields.date_end)) >= withoutTime(new Date()))
-        // Only get five first
     };
 };
 

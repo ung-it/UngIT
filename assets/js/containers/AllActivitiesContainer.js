@@ -2,23 +2,19 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 import {connect} from "react-redux";
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../../styles/activityBox.css';
-
-
 import ActivityFilters from '../components/ActivityFilters';
 import ActivitiesList from '../components/ActivtiesList'
 import {
     fetchAllActivities, addActivityFilter, addSuitedForFilter, addWeekFilter, addSearchForFilter,
     trashButtonClicked, suitedForButtonClicked, activityButtonClicked, fetchFacebookEventData
 } from '../actions/activitiesActions';
-
 import configureStore from "../configureStore";
 import { withoutTime } from "../DateFunctions";
-const store = configureStore();
 
+const store = configureStore();
 
 class AllActivitiesContainer extends Component {
 
@@ -48,7 +44,6 @@ class AllActivitiesContainer extends Component {
                     />
                 </div>
                 <div><ActivitiesList activities={this.props.activities}/></div>
-
             </div>
         );
     }
@@ -58,12 +53,9 @@ const mapStateToProps = state => {
     let {activity: {activityList, activeActivityFilters, activeSuitedForFilters, activeDateFilter, activeSearchForFilters}} = state; // Make activityList and activeActivityFilters from state become variables
 
     const availableSuitedFor = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging 3', 'Tilrettelegging 4', 'Annet'];
-
-    const hasActivityFilter = activeActivityFilters.length > 0; // Make boolean telling whether or not an active filter is present
-
+    const hasActivityFilter = activeActivityFilters.length > 0;
     const hasSuitedForFilter = activeSuitedForFilters.length > 0;
     const suitedForFilters = activeSuitedForFilters;
-
     const hasWeekFilter = activeDateFilter.toString().length > 0;
     const weekPicker = new Date(activeDateFilter);
 
@@ -78,13 +70,11 @@ const mapStateToProps = state => {
         ? activityList.filter(activity => activeActivityFilters.includes(activity.fields.activityType))
         : activityList;
 
-
     activityList = hasSuitedForFilter
         ? activityList.filter(activity => {
             let result = activity.fields.adaptions.split(',').filter(adaption => {
                 return suitedForFilters.indexOf(adaption) != -1
             });
-
             if (suitedForFilters.indexOf("Annet") != -1) {
 
                 result = result.concat(activity.fields.adaptions.split(',').filter(adaption => {
@@ -95,11 +85,9 @@ const mapStateToProps = state => {
         })
         : activityList;
 
-
     activityList = hasSearchForFilter
         ? activityList.filter(activity => (activity.fields.activityName.toUpperCase().includes(searchForFilter) || activity.fields.provider.toUpperCase().includes(searchForFilter)))
         : activityList;
-
 
     activityList = activityList.sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date))); // Sort descending based on date
     activityList = activityList.filter((a) => withoutTime(new Date(a.fields.date_end)) >= withoutTime(new Date()));
@@ -127,14 +115,13 @@ const mapDispatchToProps = dispatch => {
         changeSuitedForButton: () => dispatch(suitedForButtonClicked()),
         changeActivityButton: () => dispatch(activityButtonClicked()),
     }
-}
+};
 
 const muiTheme = getMuiTheme({
     palette: {
         primary1Color: '#3F51B5',
     },
 });
-
 
 AllActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllActivitiesContainer);
 
@@ -146,4 +133,3 @@ ReactDOM.render(
     </MuiThemeProvider>,
     document.getElementById('allActivities')
 );
-

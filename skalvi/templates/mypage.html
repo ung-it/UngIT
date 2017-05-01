@@ -19,7 +19,6 @@
                     <li><a href="/mypage/{{ profile.profile_name }}" aria-hidden="true" class="text-init"
                            class="profileButton">{{ profile.initiales }}</a></li>
                 {% endfor %}
-
                 <li style="margin-top: 5em"><a href="/registerProfile/" aria-hidden="true" class="text-init"
                                                id="addProfile">+</a></li>
             </ul>
@@ -39,7 +38,6 @@
                                         {% endif %}
                                     {% endif %}
                                 </div>
-
                                 <div class="profileInformation">
                                     <h4><span class="bold-info-text">Fornavn:</span> {{ profile.profile_name }}</h4>
                                     <h4><span class="bold-info-text">Etternavn:</span> {{ profile.last_name }}</h4>
@@ -48,19 +46,16 @@
                                         <h4><span class="bold-info-text">Telefon:</span> {{ profile.phone }}</h4>
                                     {% endif %}
                                 </div>
-                            
                                 <div class="profileExtras">
                                     {% if profile.type == "P" %}
                                         <h4><span class="bold-info-text">Registrert som:</span> Voksen</h4>
                                     {% endif %}
-
                                     {% if profile.is_active %}
                                         <h4 class="active-span"><span class="bold-info-text">Aktiv bruker</span></h4>
                                     {% endif %}
                                 </div>
                             </div>
                             <br>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div id="adminProvider" class="demo-card mdl-card mdl-shadow--2dp">
@@ -79,10 +74,7 @@
                                                 <li>{{ f }}</li>
                                             {% empty %}
                                                 {% if profile.is_active %}
-                                                    <a href="/provider">Du representerer ingen arrangører. Klikk her for
-                                                        å
-                                                        legge
-                                                        til
+                                                    <a href="/provider">Du representerer ingen arrangører. Klikk her for å legge til
                                                     </a>
                                                 {% else %}
                                                     <p>Du representerer ingen arrangører.</p>
@@ -112,7 +104,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="my-page-activities">
                             <div class="my-page-attending">
                                 <h2>Påmeldte aktiviteter</h2>

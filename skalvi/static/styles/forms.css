@@ -1,5 +1,5 @@
 .form-page-title {
-    font-family: "Yuppy SC";
+    font-family: "Yuppy SC", serif;
     font-size: 36px;
     width: 900px;
     margin: 16px auto 8px auto;
@@ -34,4 +34,3 @@
 .admin-provider-info-text {
     text-align: center;
 }
-

@@ -1,23 +1,21 @@
-.content{
+.content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: column;
 }
 
-#providerInformationCard{
+#providerInformationCard {
     width: 80%;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
-
 }
 
-.bold-info-text{
+.bold-info-text {
     margin: 0 0 0 1em;
-
 }
 
-#proHostingActivities{
+#proHostingActivities {
     width: 20%;
 }

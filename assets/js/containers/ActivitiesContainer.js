@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
-
 import {fetchAllActivities, fetchFacebookEventData} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
-// import for material ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { withoutTime } from "../DateFunctions";
+import {withoutTime} from "../DateFunctions";
 import '../../styles/activityBox.css';
-
 
 const store = configureStore();
 
@@ -61,7 +58,6 @@ class ActivitiesContainer extends Component {
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
@@ -85,9 +81,6 @@ const muiTheme = getMuiTheme({
         primary1Color: '#3F51B5',
     },
 });
-
-// Fetch initial data for state
-// store.dispatch(fetchAllActivities());
 
 ActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
 

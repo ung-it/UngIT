@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { getAllOrganisations } from '../APIFunctions';
-
+import React, {Component} from 'react';
+import {getAllOrganisations} from '../APIFunctions';
 import AutoComplete from 'material-ui/AutoComplete';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
+import {
+    Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn
+}
     from 'material-ui/Table';
 
 const styles = {
@@ -39,7 +40,6 @@ class ProviderField extends Component {
     };
 
     render() {
-
         $('#provider').val(this.state.selected.map(provider => {
             return provider.pk;
         }));
@@ -86,7 +86,8 @@ class ProviderField extends Component {
                         displaySelectAll={false}
                     >
                         <TableRow>
-                            <TableHeaderColumn tooltip="ID tilhørende aktørdatabasen" style={{width: 100}}>ID</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="ID tilhørende aktørdatabasen"
+                                               style={{width: 100}}>ID</TableHeaderColumn>
                             <TableHeaderColumn tooltip="Navn på aktør" style={{width: 500}}>Navn</TableHeaderColumn>
                             <TableHeaderColumn tooltip="Organisasjonsnummer">Organisasjonsnummer</TableHeaderColumn>
                         </TableRow>
@@ -112,7 +113,7 @@ class ProviderField extends Component {
         getAllOrganisations(organisations => {
 
             const data = organisations.map(provider => {
-                if(selectedProviders.indexOf(String(provider.pk)) !== -1) {
+                if (selectedProviders.indexOf(String(provider.pk)) !== -1) {
                     this.state.selected.push(provider);
                 }
 
@@ -129,7 +130,7 @@ class ProviderField extends Component {
         if (this.state.selected.indexOf(provider) === -1) {
             const selected = this.state.selected.concat(provider);
             this.setState({selected, showButton: false});
-            this.refs.autoComplete.setState({ searchText: ''})
+            this.refs.autoComplete.setState({searchText: ''})
         }
     }
 
@@ -150,7 +151,6 @@ class ProviderField extends Component {
         }
         this.forceUpdate();
     }
-
 }
 
 export default ProviderField;

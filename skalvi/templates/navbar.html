@@ -4,7 +4,6 @@
 <nav class="navbar navbar-inverse">
     <div id="fb-root"></div>
     <div class="nav-color">
-
         <div class="nav-content">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -18,7 +17,6 @@
                         <img src="{% static "images/skalvino.png" %}" id="logo-image" alt="Logo">
                     </a>
                 </div>
-
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -29,7 +27,7 @@
                             href="{% url 'skalvi:allactivities' %}">Aktiviteter</a></li>
                     {% if user.is_authenticated %}
                         <li {% if "activity" in request.path %}class="active"{% endif %}><a
-                           href="/activity">Opprett aktivitet</a></li>
+                                href="/activity">Opprett aktivitet</a></li>
                     {% endif %}
                     {% include "loginBox.html" %}
                 </ul>

@@ -46,8 +46,8 @@ export function getMonth(month) {
     }
 }
 
-export function withoutTime(date){
+export function withoutTime(date) {
     let d = date;
-    d.setHours(0,0,0,0);
+    d.setHours(0, 0, 0, 0);
     return d;
 }

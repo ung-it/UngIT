@@ -46,7 +46,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "webpack --config webpack.config.js --progress --colors",
-    "build-production": "webpack --config webpack.prod.config.js --progress --colors",
+    "build-production": "webpack -p --config webpack.prod.config.js --progress --colors",
     "watch": "node server.js",
     "server": "webpack-dev-server",
     "test": "react-scripts test --env=jsdom",

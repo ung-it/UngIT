@@ -22,13 +22,8 @@ $(document).ready(function () {
             eventSelect.append($('<option>', {value: key})
                 .text(value));
         }
-        //START DEV
-        // eventSelect.val(564635400412646);
-        // $('#event-button').trigger('click');
-        //END DEV
         $(".facebook-event-wrapper").slideDown(500);
     });
-
 });
 
 function imageClicked(image) {
@@ -56,7 +51,6 @@ function selectedImages(images) {
     }
 }
 
-
 function showEvent() {
     $('#event-button').show();
 }
@@ -67,7 +61,7 @@ function fillForm() {
     let event = $.grep(eventData, function (e) {
         return e.id == id;
     })[0];
-    
+
     //Filling the form with data
     updateInput($('#activityName'), event.name);
     updateInput($('#description'), event.description);
@@ -75,7 +69,7 @@ function fillForm() {
     const startDate = new Date(event.start_time);
     let day = ("0" + startDate.getDate()).slice(-2);
     let month = ("0" + (startDate.getMonth() + 1)).slice(-2);
-    const date_start = startDate.getFullYear()+"-"+(month)+"-"+(day) ;
+    const date_start = startDate.getFullYear() + "-" + (month) + "-" + (day);
     updateInput($('#date'), date_start);
     let hours = ("0" + startDate.getHours()).slice(-2);
     let minutes = ("0" + startDate.getMinutes()).slice(-2);
@@ -84,7 +78,7 @@ function fillForm() {
     const endDate = new Date(event.end_time);
     day = ("0" + endDate.getDate()).slice(-2);
     month = ("0" + (endDate.getMonth() + 1)).slice(-2);
-    const date_end = endDate.getFullYear()+"-"+(month)+"-"+(day) ;
+    const date_end = endDate.getFullYear() + "-" + (month) + "-" + (day);
     updateInput($('#date_end'), date_end);
     hours = ("0" + endDate.getHours()).slice(-2);
     minutes = ("0" + endDate.getMinutes()).slice(-2);
@@ -96,12 +90,6 @@ function fillForm() {
     $('.facebook-info-box').css("cssText", "display: block !important;");
     $('#facebookInfo').attr('checked', true);
     $('#facebookInfo-label').addClass('is-checked');
-
-    //Getting the event pictures
-    // getFacebookEventImages(id, 'large' ,function (response) {
-    //     $('#facebook-event-image').attr('src', response.url);
-    //     $('#facebook-thumbnail').css('display', 'block');
-    // })
 }
 
 function updateInput(input, value) {

@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-
 import '../../styles/ActivityForm.css'
 import ActivityTypeField from "../components/ActivityTypeField";
 import AdaptionsField from '../components/AdaptionsField';
 import ProviderField from '../components/ProviderField';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
 
 const muiTheme = getMuiTheme({
     palette: {

@@ -40,14 +40,11 @@ class ProviderHostingContainer extends Component {
 
     render() {
         const styles = {
-            activitiesContainerStyle: {
-                // padding: "1em"
-            },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
                 padding: "0.5em"
             },
         };
@@ -61,7 +58,7 @@ class ProviderHostingContainer extends Component {
         }
 
         return (
-            <div style={styles.activitiesContainerStyle}>
+            <div>
                 {proHostingContainer}
             </div>
         );

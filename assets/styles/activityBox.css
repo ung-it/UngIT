@@ -3,6 +3,7 @@
     border-style: solid;
     border-color: white;
     cursor: pointer;
+    margin: 0 2.5em 2.5em 0;
 }
 
 .activitySmallStyle:hover {
@@ -62,6 +63,7 @@
     color: #fff;
     height: 176px;
 }
+
 
 .demo-card-wide > .mdl-card__menu {
     color: #fff;

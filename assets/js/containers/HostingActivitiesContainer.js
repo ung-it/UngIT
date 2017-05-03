@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
-import {fetchAllHostingActivities} from '../actions/activitiesActions';
+import {fetchAllHostingActivities, fetchFacebookEventData} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
 import {withoutTime} from "../DateFunctions";
@@ -12,6 +12,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 const store = configureStore();
 
 class HostingActivitiesContainer extends Component {
+
+    componentDidMount() {
+        this.props.fetchAllHostingActivities().then(() => {
+            this.props.fetchFacebookEventData(this.props.hostingActivities);
+        });
+    }
 
     createActivityCardComponent = () => {
         return this.props.hostingActivities.map(activity => {
@@ -24,6 +30,13 @@ class HostingActivitiesContainer extends Component {
             )
         });
     };
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.hostingActivities != nextProps.hostingActivities) {
+            return true;
+        }
+        return false;
+    }
 
     render() {
         const styles = {
@@ -70,7 +83,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchHostingActivities: () => dispatch(fetchAllHostingActivities()),
+        fetchAllHostingActivities: () => dispatch(fetchAllHostingActivities()),
+        fetchFacebookEventData: (activities) => dispatch(fetchFacebookEventData(activities)),
     }
 };
 
@@ -79,9 +93,6 @@ const muiTheme = getMuiTheme({
         primary1Color: '#3F51B5',
     },
 });
-
-// Fetch initial data for state
-store.dispatch(fetchAllHostingActivities());
 
 HostingActivitiesContainer = connect(mapStateToProps, mapDispatchToProps)(HostingActivitiesContainer);
 

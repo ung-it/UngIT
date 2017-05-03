@@ -41,13 +41,13 @@ class ProviderHostingContainer extends Component {
     render() {
         const styles = {
             activitiesContainerStyle: {
-                padding: "1em"
+                // padding: "1em"
             },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "flex-start",
+                justifyContent: "space-between",
                 padding: "0.5em"
             },
         };

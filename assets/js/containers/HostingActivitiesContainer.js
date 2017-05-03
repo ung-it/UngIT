@@ -20,6 +20,7 @@ class HostingActivitiesContainer extends Component {
     }
 
     createActivityCardComponent = () => {
+        console.log("yp");
         return this.props.hostingActivities.map(activity => {
             return (
                 <ActivityCardHomePage
@@ -41,13 +42,13 @@ class HostingActivitiesContainer extends Component {
     render() {
         const styles = {
             activitiesContainerStyle: {
-                padding: "1em"
+                // padding: "1em"
             },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
                 flexDirection: "row",
-                justifyContent: "flex-start",
+                justifyContent: "space-between",
                 padding: "0.5em"
             },
         };

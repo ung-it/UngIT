@@ -1,24 +1,18 @@
 import React from 'react';
-import Select from 'react-select';
-import ReactDOM from 'react-dom';
 import AutoComplete from 'material-ui/AutoComplete';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
-
-
 class SearchForActivity extends React.Component {
-
 
 	handleUpdateInput = value => {
 		this.props.onFilterChange(value);
 	};
 
-
 	render () {
 		return (
 			<div>
 				<AutoComplete
-					floatingLabelText={<div><SearchIcon/> Søk etter en aktivitet...</div>}
+					floatingLabelText={<div><SearchIcon/> Søk...</div>}
 					searchText={this.props.searchForFilter}
 					hintText={this.props.placeholderText}
 					dataSource={this.props.activitiesName}

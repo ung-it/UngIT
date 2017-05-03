@@ -1,8 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {Thumbnail, Glyphicon} from 'react-bootstrap';
-import { getMonth } from '../DateFunctions'
-
+import {getMonth} from '../DateFunctions'
 import ActivityModal from './ActivityModal';
 
 const moment = require('moment');
@@ -37,15 +36,15 @@ class ActivityCardHomePage extends React.Component {
 
         let images = localImages.concat(instaImages);
 
-        let poster = null;
-        if (images.length > 0) {
-            poster = images[0];
-        } else {
-            poster = "/static/images/activityPic.jpg"
-        }
-
         let facebookIcon = null;
         if (activity.facebook != null) {
+
+            let fImages = activity.facebook.photos.data.map(image => {
+                return image.images[0].source;
+            });
+
+            images = images.concat(fImages);
+
             let link = 'https://www.facebook.com/events/' + activity.facebookID;
 
             facebookIcon = (
@@ -63,12 +62,17 @@ class ActivityCardHomePage extends React.Component {
             )
         }
 
+        let poster = null;
+        if (images.length > 0) {
+            poster = images[0];
+        } else {
+            poster = "/static/images/activityPic.jpg"
+        }
+
         let dato = new Date(this.props.activity.date);
         let datoEnd = new Date(this.props.activity.date_end);
 
-        let date = dato.getDate() + ". " + getMonth(dato.getMonth())+ " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
-
-        // const date = moment(this.props.activity.date).format('DD/MM/YYYY') + ' - ' + moment(this.props.activity.date_end).format('DD/MM/YYYY');
+        let date = dato.getDate() + ". " + getMonth(dato.getMonth()) + " - " + datoEnd.getDate() + ". " + getMonth(datoEnd.getMonth());
 
         const divStyle = {
             backgroundImage: 'url(' + poster + ')',
@@ -95,7 +99,8 @@ class ActivityCardHomePage extends React.Component {
                                 <div className="row">
                                     <p className="col-md-7"><Glyphicon glyph="glyphicon glyphicon-calendar"/> {date}</p>
                                     <p className="col-md-5"><Glyphicon
-                                        glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)} - {this.props.activity.time_end.slice(0, 5)}</p>
+                                        glyph="glyphicon glyphicon-time"/> {this.props.activity.time_start.slice(0, 5)}
+                                        - {this.props.activity.time_end.slice(0, 5)}</p>
                                 </div>
                                 <p><Glyphicon glyph="glyphicon glyphicon-map-marker"/> {this.props.activity.location}
                                 </p>
@@ -119,5 +124,4 @@ class ActivityCardHomePage extends React.Component {
     }
 }
 
-// connect actually calles the functions so that their purposes are fulfilled
 export default ActivityCardHomePage;

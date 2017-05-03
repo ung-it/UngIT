@@ -11,9 +11,7 @@
     <div class="banner-container">
             <img src="{% static "images/top-banner.jpg" %}" alt="Banner" class="banner">
     </div>
-
     <div class="content">
-
         <div class="content-margin-top">
             <h1 class="title">Arrangører</h1>
             <p>Her er en oversikt over alle aktivitetstilbydere og grupper som tilbys i Trondheim kommune</p>
@@ -21,14 +19,9 @@
                 <div id="allProviders"></div>
             </div>
         </div>
-
     </div>
-
 {% endblock %}
 
 {% block explicitPageFooter %}
     {% render_bundle 'allProvidersContainer' %}
-{#    {% render_bundle 'suitedForPicker' %}#}
-{#    {% render_bundle 'activityPicker' %}#}
-{#    {% render_bundle 'weekPicker' %}#}
 {% endblock %}

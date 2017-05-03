@@ -1,5 +1,5 @@
 //This function fixes texfields showing 'is-required-error" when form loads
-(function() {
+(function () {
     'use strict';
 
     //noinspection JSUnresolvedVariable
@@ -10,7 +10,7 @@
      *
      * @private
      */
-    MaterialTextfield.prototype.onBlur_ = function() {
+    MaterialTextfield.prototype.onBlur_ = function () {
         this.element_.classList.remove(this.CssClasses_.IS_FOCUSED);
         this.checkValidity();
     };
@@ -19,7 +19,7 @@
      *
      * @private
      */
-    MaterialTextfield.prototype.onChange_ = function() {
+    MaterialTextfield.prototype.onChange_ = function () {
         this.checkValidity();
     };
 
@@ -28,7 +28,7 @@
      *
      * @private
      */
-    MaterialTextfield.prototype.updateClasses_ = function() {
+    MaterialTextfield.prototype.updateClasses_ = function () {
         this.checkDisabled();
         this.checkDirty();
         var dirty = this.element_.classList.contains(this.CssClasses_.IS_DIRTY);
@@ -43,7 +43,7 @@
      *
      * @public
      */
-    MaterialTextfield.prototype.enable = function() {
+    MaterialTextfield.prototype.enable = function () {
         this.input_.disabled = false;
         this.updateClasses_();
         this.checkValidity();
@@ -53,7 +53,7 @@
     /**
      * Initialize element.
      */
-    MaterialTextfield.prototype.init = function() {
+    MaterialTextfield.prototype.init = function () {
         if (this.element_) {
             this.label_ = this.element_.querySelector('.' + this.CssClasses_.LABEL);
             this.input_ = this.element_.querySelector('.' + this.CssClasses_.INPUT);
@@ -102,5 +102,6 @@
     };
     // The component registers itself. It can assume componentHandler is available
     // in the global scope.
-    componentHandler.registerUpgradedCallback(MaterialTextfield, function(textfield){});
+    componentHandler.registerUpgradedCallback(MaterialTextfield, function (textfield) {
+    });
 })();

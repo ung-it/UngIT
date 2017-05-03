@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React, {Component} from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -13,7 +12,6 @@ class ActivityTypeField extends Component {
 
     constructor(props) {
         super(props);
-
         let selectedActivityType = $('#activityType').val();
         let color = {};
         if (selectedActivityType != "") {
@@ -38,7 +36,6 @@ class ActivityTypeField extends Component {
             open: false,
             color: color
         }
-
     }
 
     handleChange = (event, index, value) => {
@@ -61,7 +58,6 @@ class ActivityTypeField extends Component {
             </SelectField>
         )
     }
-
 }
 
 export default ActivityTypeField;

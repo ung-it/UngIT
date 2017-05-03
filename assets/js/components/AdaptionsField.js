@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-
+import React, {Component} from 'react';
 import IconAccessible from 'material-ui/svg-icons/action/accessible';
 import IconAccessibility from 'material-ui/svg-icons/action/accessibility';
 import IconVisibility from 'material-ui/svg-icons/action/visibility';
 import IconHearing from 'material-ui/svg-icons/av/hearing';
 import IconNew from 'material-ui/svg-icons/content/add';
 import {orange500} from 'material-ui/styles/colors';
-
 import {List, ListItem} from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
 injectTapEventPlugin();
 
 const style = {
@@ -29,10 +28,14 @@ const style = {
 
 class AdaptionsField extends Component {
 
-
     constructor(props) {
         super(props);
-        const chipIcons =  {'Tilrettelegging 1':<IconAccessible/>,'Tilrettelegging 2':<IconAccessibility/>,'Tilrettelegging 3':<IconVisibility/>,'Tilrettelegging 4':<IconHearing/>};
+        const chipIcons = {
+            'Tilrettelegging 1': <IconAccessible/>,
+            'Tilrettelegging 2': <IconAccessibility/>,
+            'Tilrettelegging 3': <IconVisibility/>,
+            'Tilrettelegging 4': <IconHearing/>
+        };
 
         let selected = $('#adaptions').val().split(",");
         let unselected = [];
@@ -91,7 +94,7 @@ class AdaptionsField extends Component {
             )
         });
 
-        let unselected = this.state.unselected.map( name => {
+        let unselected = this.state.unselected.map(name => {
             let icon = this.state.chipIcons[name];
             let deleteButton = null;
             if (Object.keys(this.state.chipIcons).indexOf(name) == -1) {
@@ -117,10 +120,10 @@ class AdaptionsField extends Component {
         let showButton = false;
         let errorText = null;
 
-        if(this.state.value != "") {
+        if (this.state.value != "") {
             if (!this.notExists(this.state.value)) {
-                console.log(this.notExists(this.state.value))
-                errorText = "Denne tilretteleggingen finnes allerede"
+                console.log(this.notExists(this.state.value));
+                errorText = "Denne tilretteleggingen finnes allerede";
             }
             else {
                 showButton = true;
@@ -132,7 +135,7 @@ class AdaptionsField extends Component {
                 <div className="adaptions-header">Tilrettelegginger</div>
                 <Paper zDepth={1}>
                     <div className="adaptions-info-container">
-                        <i id="adaptions-i" className="material-icons adaptions-info" >help</i>
+                        <i id="adaptions-i" className="material-icons adaptions-info">help</i>
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="adaptions-i">
                             Klikk på en tilrettelegging for å flytte den over til den andre listen
                         </div>
@@ -154,17 +157,17 @@ class AdaptionsField extends Component {
                     <div className="adaptions-add">
                         <div className="adaptions-add-input">
                             <form onSubmit={this.addNew}>
-                            <TextField
-                                ref="AdaptionInput"
-                                hintText="Navn på tilrettelegging"
-                                value = {this.state.value}
-                                floatingLabelText="Legg til ny tilrettelegging"
-                                fullWidth={true}
-                                onKeyPress={this.addNew}
-                                onChange={this.inputChange}
-                                errorStyle={style.errorStyle}
-                                errorText={errorText}
-                            />
+                                <TextField
+                                    ref="AdaptionInput"
+                                    hintText="Navn på tilrettelegging"
+                                    value={this.state.value}
+                                    floatingLabelText="Legg til ny tilrettelegging"
+                                    fullWidth={true}
+                                    onKeyPress={this.addNew}
+                                    onChange={this.inputChange}
+                                    errorStyle={style.errorStyle}
+                                    errorText={errorText}
+                                />
                             </form>
                         </div>
                         <RaisedButton

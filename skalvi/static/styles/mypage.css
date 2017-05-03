@@ -1,4 +1,4 @@
-h4#usersTitle{
+h4#usersTitle {
     text-align: center;
     font-family: "Dosis", serif;
     font-weight: bolder;
@@ -9,7 +9,7 @@ h4#usersTitle{
     color: green;
 }
 
-#myPageContent{
+#myPageContent {
     display: flex;
     flex-direction: row;
     padding-left: 0em;
@@ -17,15 +17,14 @@ h4#usersTitle{
 }
 
 /*profile info styling*/
-#profileOnMyPage{
+#profileOnMyPage {
     width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0 0 0 4em;
 }
 
-
-#profile{
+#profile {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -39,15 +38,14 @@ h4#usersTitle{
     margin: 0 0 0 2em;
 }
 
-#profilesOnMyPage{
+#profilesOnMyPage {
     max-width: 0.9em;
     margin: 1.7em 0 0 0;
 }
 
 /*Cards styling*/
 .demo-card.mdl-card {
-    width: 40em;
-    min-height: 12em;
+    width: auto;
 }
 
 .profilePicture {
@@ -61,7 +59,6 @@ h4#usersTitle{
     flex-wrap: wrap;
 }
 
-
 #adminProvider {
     display: flex;
     flex-direction: column;
@@ -71,7 +68,7 @@ h4#usersTitle{
     max-height: 12em;
 }
 
-#provider{
+#provider {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -80,14 +77,10 @@ h4#usersTitle{
     max-height: 12em;
 }
 
-
-#followButton{
-    width: 95%;
-    position: absolute;
-    bottom: 5px;
-    margin: 0 1em 1em 1em;
+#followButton {
+    float: right;
+    margin-right: 1.5em;
 }
-
 
 .admin-provider-list {
     overflow-y: auto;
@@ -110,6 +103,7 @@ h4#usersTitle{
 .title-follow-card {
     margin: 1em 0 0.5em 1em;
 }
+
 /*Styling users*/
 ol, ul {
     float: left;
@@ -121,7 +115,7 @@ a {
     text-decoration: none;
 }
 
-#addProfile{
+#addProfile {
     font-size: 2em;
 }
 
@@ -139,7 +133,7 @@ ul.social li {
     line-height: 60px;
     background: #404040;
     border-radius: 100%;
-    margin-bottom:.5em;
+    margin-bottom: .5em;
     -webkit-transition-duration: 0.7s;
     -moz-transition-duration: 0.7s;
     -o-transition-duration: 0.7s;
@@ -163,8 +157,7 @@ ul.social li a {
     height: 200%;
     position: relative;
     top: 0;
-    background:  -webkit-linear-gradient(#ffdb61, #ffb200);
+    background: -webkit-linear-gradient(#ffdb61, #ffb200);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-

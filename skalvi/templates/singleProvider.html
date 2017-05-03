@@ -7,9 +7,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/singleProvider.css' %}"/>
 {% endblock %}
 
-
-
-
 {% block body %}
     <div class="banner-container">
         <img src="{% static "images/top-banner.jpg" %}" alt="Banner" class="banner">
@@ -29,8 +26,7 @@
                     <h4><span class="bold-info-text">Medlemmer:</span>{{ provider.Medlemmer }}</h4>
                 {% endif %}
                 <h4><span class="bold-info-text">Organisasjonsform:</span> {{ provider.Organisasjonsform }}</h4>
-                <h4><span class="bold-info-text">Rekrutteringsområde:</span> {{ provider.Rekrutteringsområde}}</h4>
-
+                <h4><span class="bold-info-text">Rekrutteringsområde:</span> {{ provider.Rekrutteringsområde }}</h4>
             </div>
             <div id="providerInformationExtra">
                 <h4><span class="bold-info-text">Telefon:</span> {{ provider.Telefon }}</h4>
@@ -39,18 +35,15 @@
                 {% endif %}
                 <h4><span class="bold-info-text">Internettadresse:</span> <a
                         href="{{ provider.Internettadresse }}">{{ provider.Internettadresse }}</a></h4>
-
             </div>
         </div>
         <br>
-
         <h1>
             Aktiviteter
         </h1>
         <div id="proHostingActivities"></div>
     </div>
     </div>
-
 {% endblock %}
 
 {% block explicitPageFooter %}

@@ -11,22 +11,18 @@ class ProvidersList extends React.Component {
             offset: 10,
             following: [],
             providers: this.props.providers,
-
         };
     };
-
 
     componentWillReceiveProps() {
         this.doEverything();
     }
-
 
     loadMore() {
         this.setState({
             offset: this.state.offset += 50
         });
         this.doEverything();
-
     }
 
     doEverything = () => {
@@ -35,65 +31,56 @@ class ProvidersList extends React.Component {
                 getFollowingProviders(response => {
                     this.state.following = response.map(p => p.pk);
 
-                    // Slice the reducer data that is provided to match the offset.
                     const prov = this.props.providers.slice(0, this.state.offset);
                     const parsedProviders = prov.map(p => (JSON.parse(p.fields.aktordatabase)));
                     this.setState({
                         providers: prov.map((provider, k) => {
 
                             if ($.inArray(provider.pk, this.state.following) != -1) {
-                                return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]}
-                                                     id={parsedProviders[k].Id} pk={provider.pk} following={true}/>
+                                return <div className="col-md-6" key={parsedProviders[k].Id}>
+                                    <ProviderCard provider={parsedProviders[k]}
+                                                  id={parsedProviders[k].Id} pk={provider.pk} following={true}/>
+                                </div>
                             } else {
-                                return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]}
-                                                     id={parsedProviders[k].Id} pk={provider.pk} following={false}/>
+                                return <div className="col-md-6" key={parsedProviders[k].Id}>
+                                    <ProviderCard provider={parsedProviders[k]}
+                                                  id={parsedProviders[k].Id} pk={provider.pk} following={false}/>
+                                </div>
                             }
                         }),
-
-
                     });
-
                 });
-
-            } else {
-                // Slice the reducer data that is provided to match the offset.
+            }
+            else {
                 const prov = this.props.providers.slice(0, this.state.offset);
                 const parsedProviders = this.props.providers.map(p => (JSON.parse(p.fields.aktordatabase)));
                 this.setState({
                     providers: this.state.providers = prov.map((provider, k) => {
-                        return <ProviderCard key={parsedProviders[k].Id} provider={parsedProviders[k]}
-                                             id={parsedProviders[k].Id} pk={provider.pk} following={null}/>
+                        return <div className="col-md-6" key={parsedProviders[k].Id}>
+                            <ProviderCard provider={parsedProviders[k]}
+                                          id={parsedProviders[k].Id} pk={provider.pk} following={null}/>
+                        </div>
                     }),
-
                 });
-
             }
         });
     };
 
     render() {
         const styles = {
-            activitiesStyle: {
-                display: "flex",
-                flexWrap: "wrap",
-                flexDirection: "row",
-                justifyContent: "space-between"
-            },
             loadButtonStyle: {
-                margin: "50px",
+                marginTop: "2%",
+                marginBottom: "2%",
                 width: '100%',
                 height: "100px",
-
             }
-
         };
-        // If no providers found
         if (this.props.providers.length < 1) {
             return <h1>Ingen arrangører funnet</h1>;
         }
-        
+
         return <div>
-            <div style={styles.activitiesStyle}>
+            <div className="row">
                 {this.state.providers}
                 <Button style={styles.loadButtonStyle} className="btn-info" onClick={ () => this.loadMore() }>Last
                     flere</Button>

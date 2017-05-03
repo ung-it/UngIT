@@ -1,27 +1,10 @@
-import {  getActivityInfo, getAllActivities, getAllAttendingActivities, getAllHostingActivities, getAllProHosting, getFacebookEventData} from "../APIFunctions";
-/*
-* Action creator and action are two separate things, the action creator is the actual action-function
-*
-* the action is actually the part that gets returned, and consist only of two things, type and payload.
-* type: just a string that explains what action happend, EVERY reducer gets notified with this type when an action
-* occurs.
-*
-* payload: any informasion or extra / new  data needed to perform the action
-*
-* Action creator and action is just a function that is something you can do on your application,
-* like submitting a form, clicking a button, adding a user, etc.
-* If that action is to change some state or database or reducer ( something in the store ) we need actions because
-* they are used to change the application state
-*
-* To use an Action, you need to import it in the file where you want to use it, then hook it up, through a onClick, etc.
-* But to hook it up, you cant just use it like a import function, then you buypass Redux, NOT cool. So -->
-* we need to connect the Action to the containar / component through the connect function and another function called
-*   matchDispatchToProps(dispatch) <-- Pass in the action as a prop (this.prop)
-*   connect(matchDispatchToProps)(className) <-- Make the pass to the class/container/component
-*
-* Dispatch means/is just a fancy way of saying 'call a function'
-*
-* */
+import {
+    getAllActivities,
+    getAllAttendingActivities,
+    getAllHostingActivities,
+    getAllProHosting,
+    getFacebookEventData
+} from "../APIFunctions";
 
 // ACTION TYPES
 export const FETCHED_ALL_ACTIVITIES = 'FETCH_ALL_ACTIVITIES';
@@ -36,10 +19,6 @@ export const ADD_SEARCH_FOR_FILTER = 'ADD_SEARCH_FOR_FILTER';
 export const TRASH_BUTTON_CLICKED = 'TRASH_BUTTON_CLICKED';
 export const SUITED_FOR_BUTTON_CLICKED = 'SUITED_FOR_BUTTON_CLICKED';
 export const ACTIVITY_BUTTON_CLICKED = 'ACTIVITY_BUTTON_CLICKED';
-
-
-// more actions types here
-
 
 // ACTION CREATORS
 export function fetchedAllActivites(activities) {
@@ -145,7 +124,7 @@ export function fetchAllHostingActivities() {
 export function fetchAllProHostingActivities() {
     return (dispatch) => {
         getAllProHosting()
-            .then(result =>  dispatch(fetchedAllProHostingActivites(result)))
+            .then(result => dispatch(fetchedAllProHostingActivites(result)))
             .catch(error => console.error(error));
     };
 }

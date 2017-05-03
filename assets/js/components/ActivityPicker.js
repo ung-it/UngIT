@@ -1,12 +1,7 @@
 import React from 'react';
-import Select from 'react-select';
-import ReactDOM from 'react-dom';
-
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import { Glyphicon } from "react-bootstrap";
-
-
+import {Glyphicon} from "react-bootstrap";
 import '../../styles/activitypickerStyle.css';
 
 let names = [
@@ -18,12 +13,10 @@ let names = [
     "Ungdoms/voksenkorps", "Volleyball", "Annet"
 ];
 
-
 class ActivityPicker extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             activityButtonClicked: true,
         };
@@ -31,7 +24,6 @@ class ActivityPicker extends React.Component {
 
     handleChange = (event, index, values) => {
         this.props.onFilterChange(values);
-
     };
 
     menuItems(values) {
@@ -52,7 +44,7 @@ class ActivityPicker extends React.Component {
 
     render() {
         return (
-            <div className="section" className="row">
+            <div className="section row">
                 <div className="col-md-11">
                     <SelectField
                         multiple={true}
@@ -66,9 +58,10 @@ class ActivityPicker extends React.Component {
                 </div>
                 <div className="col-md-1" id="activity-a-remove">
                     <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="remove-a-button">
-                            Tøm aktivitetsfilter
-                        </div>
-                    <Glyphicon glyph="glyphicon glyphicon-remove" id="remove-a-button" onClick={this.handleEmptyFilter}/>
+                        Tøm aktivitetsfilter
+                    </div>
+                    <Glyphicon glyph="glyphicon glyphicon-remove" id="remove-a-button"
+                               onClick={this.handleEmptyFilter}/>
                 </div>
             </div>
         );

@@ -11,7 +11,6 @@ const initialState = {
 };
 
 export default function ProviderReducer(state = initialState, action) {
-
     switch (action.type) {
         case actionTypes.FETCHED_ALL_PROVIDERS:
             return {
@@ -43,7 +42,7 @@ export default function ProviderReducer(state = initialState, action) {
             };
         case actionTypes.ACTIVITY_BUTTON_CLICKED:
             return {
-                 ...state,
+                ...state,
                 activeActivityFilters: [],
             };
         case actionTypes.SUITED_FOR_BUTTON_CLICKED:
@@ -53,6 +52,5 @@ export default function ProviderReducer(state = initialState, action) {
             };
         default:
             return state;
-
     }
 }

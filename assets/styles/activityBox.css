@@ -2,15 +2,12 @@
 .activitySmallStyle {
     border-style: solid;
     border-color: white;
-    margin: 1em 0 0 0;
     cursor: pointer;
 }
-
 
 .activitySmallStyle:hover {
     border-style: solid;
     border-color: lightgray;
-
     -webkit-box-shadow: 0 0 5px 1px lightgrey;
     -moz-box-shadow: 0 0 5px 1px lightgrey;
     box-shadow: 0 0 5px 1px lightgrey;
@@ -35,7 +32,6 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     align-self: flex-end;
-
 }
 
 .icon-container {
@@ -53,12 +49,11 @@
 
 /* Styling for activities on all activities page */
 .demo-card-wide.mdl-card {
-    width: 42em;
-    height: 35em;
-    max-height: 40em;
+    width: auto;
+    height: 40em;
     margin: 2em 1em 0 1em;
-    overflow-y:auto;
-    overflow-x:hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     z-index: 0;
 }
 
@@ -94,7 +89,6 @@
 }
 
 /*Styling provider cards*/
-
 .big-info-header-provider {
     margin: 15px;
     font-family: "Dosis", serif;
@@ -108,7 +102,6 @@
 .provider-card {
     margin-top: 2em;
 }
-
 
 /*Styling filter container*/
 .filter-container {
@@ -132,4 +125,8 @@
     height: 40px;
     border-radius: 0.4em;
     background-color: white;
+}
+
+.activity-card-facebook {
+    padding-left: 16px;
 }

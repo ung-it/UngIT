@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider, connect} from "react-redux";
-
 import {fetchAllHostingActivities} from '../actions/activitiesActions';
 import ActivityCardHomePage from '../components/ActivityCardHomePage';
 import configureStore from "../configureStore";
-import { withoutTime } from "../DateFunctions";
+import {withoutTime} from "../DateFunctions";
 import '../../styles/activityBox.css';
-
-const store = configureStore();
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const store = configureStore();
 
 class HostingActivitiesContainer extends Component {
 
@@ -55,20 +53,18 @@ class HostingActivitiesContainer extends Component {
             </div>
         );
     }
-
 }
 
 Date.prototype.withoutTime = function () {
     let d = new Date(this);
-    d.setHours(0,0,0,0);
+    d.setHours(0, 0, 0, 0);
     return d;
-}
+};
 
 const mapStateToProps = state => {
     return {
         hostingActivities: state.activity.hostingActivityList
             .sort((a, b) => withoutTime(new Date(a.fields.date)) > withoutTime(new Date(b.fields.date)))
-        // Only get five first
     };
 };
 

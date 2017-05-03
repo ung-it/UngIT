@@ -11,24 +11,20 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="banner-container">
         <img src="{% static "images/banner-home.jpg" %}" alt="Banner" class="banner-home">
     </div>
-
     <div class="content">
         <div class="content-margin-home">
             <h1>Kommende aktiviteter</h1>
             <div id="activities"></div>
         </div>
-
         {% if user.is_authenticated %}
             <div class="content-margin-home">
                 <h1>Påmeldte aktiviteter</h1>
                 <div id="attendingActivities"></div>
             </div>
         {% endif %}
-
     </div>
 {% endblock %}
 

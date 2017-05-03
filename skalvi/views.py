@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.shortcuts import render, redirect
@@ -14,13 +13,8 @@ from django.core import serializers
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from datetime import *
-
-# Aktørdatabase
-from .scraper import Scraper
-
-# Python POST-request
-import urllib.request
 import json
+import urllib.request
 
 # Changing directories if in dev/prod
 directory = "http://skalvi.no/"
@@ -31,7 +25,6 @@ if settings.DEBUG:
 @csrf_exempt
 def index(request):
     return TemplateResponse(request, "home.html", {})
-
 
 @csrf_exempt
 def signUpActivity(request):
@@ -60,7 +53,6 @@ def signUpActivity(request):
         response = {'attending': None}  # not logged in
     return HttpResponse(json.dumps(response), content_type='application/json')
 
-
 @csrf_exempt
 def checkIfSingedUp(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:-1]
@@ -69,8 +61,7 @@ def checkIfSingedUp(request):
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
-        json_serializer = serializers.get_serializer("json")()
-        # response = ""
+
         # Check if user already is attending
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
@@ -84,7 +75,6 @@ def checkIfSingedUp(request):
         response = {'attending': None}
     return HttpResponse(json.dumps(response), content_type='application/json')
 
-
 @csrf_exempt
 def signOfEvent(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1][:-1]
@@ -93,19 +83,15 @@ def signOfEvent(request):
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
         profile = UserProfile.objects.get(pk=profileId)
-
         try:
             participate = ParticipateIn.objects.get(activityId=activity, userId=request.user, user_profile_id=profile)
             participate.delete()
             response = {'attending': True}
-
         except ParticipateIn.DoesNotExist:
             # Not attending, can't sign of
             response = {'attending': False}
-
     else:
-        # If user is not loged in
-        # Will never happen
+        # If user is not loged in. Will never happen
         response = {'attending': None}
     return HttpResponse(json.dumps(response), content_type='application/json')
 
@@ -114,7 +100,6 @@ def getFollowingProviders(request):
     if request.user.is_authenticated:
         profile_name = request.session['profile_name']
         profile = UserProfile.objects.get(user=request.user, profile_name=profile_name)
-
         providers = Follows.objects.filter(userId=request.user, user_profile_id=profile)
         follows_objects = []
         for provider in providers:
@@ -123,7 +108,6 @@ def getFollowingProviders(request):
         json_serializer = serializers.get_serializer("json")()
         followingProviders = json_serializer.serialize(follows_objects, ensure_ascii=False)
         return HttpResponse(followingProviders, content_type='application/json')
-
 
 @csrf_exempt
 def follow(request):
@@ -176,7 +160,6 @@ def unFollow(request):
 def checkIfFollowing(request):
     providerId = str(request.body.decode('utf-8')).split(":")[1][:-1]
     provider = Organisation.objects.get(pk=providerId)
-
     # User logged in
     if 'username' and 'profile_pk' in request.session:
         profileId = request.session['profile_pk']
@@ -184,7 +167,7 @@ def checkIfFollowing(request):
         # Check if user already is attending
         try:
             follows = Follows.objects.get(orgId=provider, userId=request.user,
-                                                    user_profile_id=profile)
+                                          user_profile_id=profile)
             response = {'following': True}
 
         except Follows.DoesNotExist:
@@ -195,14 +178,11 @@ def checkIfFollowing(request):
         response = {'following': None}
     return HttpResponse(json.dumps(response), content_type='application/json')
 
-
 def checkIfLogedIn(request):
     if 'username' and 'profile_pk' in request.session:
         response = {"active": True}
-        print("ACTIVE")
     else:
         response = {"active:": False}
-        print("INACTIVE")
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
@@ -261,7 +241,7 @@ def getActivities(request):
 
 
 def getProHostingActivities(request, *args, **kwargs):
-    orgId = request.path.split("/")[3] # /api/proHosting/8411/
+    orgId = request.path.split("/")[3]  # /api/proHosting/8411/
     json_serializer = serializers.get_serializer("json")()
     try:
         organisation = Organisation.objects.get(pk=orgId)
@@ -270,7 +250,6 @@ def getProHostingActivities(request, *args, **kwargs):
         return HttpResponse(activities, content_type='application/json')
     except Organisation.DoesNotExist:
         return redirect("skalvi:index")
-
 
 
 def getActivity(request, id):
@@ -282,7 +261,6 @@ def getActivity(request, id):
 @csrf_exempt
 def rateActivity(request):
     activityId = str(request.body.decode('utf-8')).split(":")[1].split(",")[0]
-    print(activityId)
     rating = str(request.body.decode('utf-8')).split(":")[2][:1]
     activity = Activity.objects.get(pk=activityId)
     currentRating = activity.rating
@@ -493,7 +471,6 @@ class ActivityView(generic.DetailView):
             profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
             activity = Activity.objects.get(pk=self.kwargs["pk"])
             try:
-                host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
                 form = self.form_class(initial=model_to_dict(self.get_object()))
                 return activityGet(self, request, form)
             except Hosts.DoesNotExist:
@@ -503,11 +480,7 @@ class ActivityView(generic.DetailView):
 
     def post(self, request, pk):
         if request.user.is_authenticated:
-            profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
-            activity = Activity.objects.get(pk=self.kwargs["pk"])
             try:
-                host_activity = Hosts.objects.get(adminId=request.user, profileId=profile, activityId=activity)
-                form = self.form_class(initial=model_to_dict(self.get_object()))
                 request.POST = request.POST.copy()
                 instance = get_object_or_404(Activity, pk=pk)
                 form = ActivityForm(request.POST, request.FILES, instance=instance)
@@ -517,7 +490,6 @@ class ActivityView(generic.DetailView):
                     return redirect('/')
                 else:
                     return render(request, self.template_name, {'form': form, 'error_message': form.errors})
-
             except Hosts.DoesNotExist:
                 return redirect("skalvi:index")
         else:
@@ -544,11 +516,7 @@ class createActivity(View):
     def post(self, request):
         form = ActivityForm(request.POST, request.FILES)
         if form.is_valid():
-            # instagram = request.POST['instagramImages']
-            # if instagram:
-            #     form.cleaned_data['instagram'] = instagram
             form.save()
-
             user_profile = UserProfile.objects.get(pk=request.session['profile_pk'])
             activity = Activity.objects.latest('id')
             hosts = Hosts(activityId=activity, adminId=request.user, profileId=user_profile)
@@ -567,7 +535,6 @@ def activityGet(self, request, form):
     if 'accessToken' in request.session:
         accessToken = request.session['accessToken']
     elif token:  # User has logged in with Instagram
-        print("TOKEN")
         post_data = [
             ('client_id', 'e3b85b32b9eb461190ba27b4c32e2cc6'),
             ('client_secret', 'f9ad52972e1a4a21a7d34fa508d2bba4'),
@@ -577,21 +544,16 @@ def activityGet(self, request, form):
         ]
         data = urllib.parse.urlencode(post_data)
         try:
-            print("POST")
             result = urllib.request.urlopen('https://api.instagram.com/oauth/access_token', data.encode("ascii"))
-            print("END POST")
             temp = result.read().decode('ascii')
             content = json.loads(temp)
             accessToken = content['access_token']
             request.session['accessToken'] = accessToken
-            print("Saved in session")
         except urllib.error.URLError as e:
-            print(e)
             return redirect(link)
 
     if 'accessToken' in locals():
         url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + accessToken
-        # url = 'https://api.instagram.com/v1/users/5405987/media/recent?access_token=' + accessToken
         result = urllib.request.urlopen(url)
         content = json.loads(result.read().decode('ascii'))
         images = []
@@ -599,7 +561,6 @@ def activityGet(self, request, form):
             images.append(image['images']['standard_resolution']['url'])
         return render(request, self.template_name, {'form': form, 'images': images})
     return render(request, self.template_name, {'form': form, 'link': link})
-
 
 class MyPageView(View):
     template_name = 'mypage.html'
@@ -611,7 +572,6 @@ class MyPageView(View):
 
             if 'username' in request.session:
                 username = request.session['username']
-
             user_object = request.user
             user_profile_objects = UserProfile.objects.filter(user=request.user)
             profiles = []
@@ -620,17 +580,13 @@ class MyPageView(View):
                 facebook = isNum(username)
                 iFollow = Follows.objects.filter(userId=request.user, user_profile_id=profile)
                 follow = []
-                if not iFollow:
-                    follow.append(["../../allproviders/", "Du følger ingen akøter. Se om du finner noen du liker."])
-
                 for f in iFollow:
                     provider = Organisation.objects.get(pk=f.orgId.pk)
-                    follow.append(["../../provider/"+str(f.orgId.pk)+"/", provider.aktordatabase["Navn"]])
-
+                    follow.append(["../../provider/" + str(f.orgId.pk) + "/", provider.aktordatabase["Navn"]])
                 prov = []
                 if profile.provider != None and not str(profile.provider) == '' and not str(profile.provider) == "{}":
                     splitString = str(profile.provider)
-                    if(',' in profile.provider):
+                    if (',' in profile.provider):
                         myProviders = splitString.split(',')
                         for p in myProviders:
                             prov.append(Organisation.objects.get(pk=p).aktordatabase["Navn"])
@@ -639,9 +595,9 @@ class MyPageView(View):
 
                 object = {'profile_name': profile.profile_name, "last_name": profile.last_name, "email": profile.email,
                           "type": profile.type, "phone": profile.phone, "is_active": profile.is_active,
-                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook, "follow": follow, "providers": prov}
+                          'initiales': profile.profile_name[0:2].upper(), 'path': path, 'facebook': facebook,
+                          "follow": follow, "providers": prov}
                 profiles.append(object)
-
             return render(request, self.template_name,
                           {
                               'user': user_object,
@@ -649,7 +605,6 @@ class MyPageView(View):
 
                           })
         return HttpResponse("Du må være logget inn for å ha tilgang til denne siden")
-
 
 class RegisterProfileView(View):
     template_name = 'registerProfile.html'
@@ -668,15 +623,12 @@ class RegisterProfileView(View):
     def post(self, request):
         profile_form = self.form_class(request.POST)
         if profile_form.is_valid():
-            # Take submitted data and save to database
             profile_form.save(commit=False)
-            # Cleaned (normalized) data / formated properly
             phone = profile_form.cleaned_data['phone']
             types = profile_form.cleaned_data['type']
             profile_name = profile_form.cleaned_data['profile_name']
             last_name = profile_form.cleaned_data['last_name']
             email = profile_form.cleaned_data['email']
-
             if types:
                 types = "P"
             else:
@@ -697,8 +649,9 @@ class ProviderView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
+            user_object = request.user
             profile = UserProfile.objects.get(user=request.user, profile_name=request.session["profile_name"])
-            return render(request, self.template_name, {'user': profile})
+            return render(request, self.template_name, {'user': user_object, 'profile': profile})
         else:
             return redirect("skalvi:index")
 
@@ -708,28 +661,25 @@ class ProviderView(View):
             providers = request.POST.get("provider")
             profile.provider = providers
             profile.save(update_fields=["provider"])
-
             return redirect("../mypage/" + request.session["profile_name"])
         else:
             return redirect("skalvi:index")
+
 
 class SingleProviderView(View):
     model = Organisation
     template_name = "singleProvider.html"
 
     def get(self, request, *args, **kwargs):
-        orgId = request.path.split("/")[2] ## /provider/1/
+        orgId = request.path.split("/")[2]
 
         try:
             organisation = Organisation.objects.get(pk=orgId)
             context = {"provider": organisation.aktordatabase}
-
             return render(request, self.template_name, context)
 
         except Organisation.DoesNotExist:
             return redirect("skalvi:index")
-
-
 
 
 def allactivities(request):

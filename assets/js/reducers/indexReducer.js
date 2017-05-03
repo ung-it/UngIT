@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import activityReducer from "./activityReducer";
 import providerReducer from "./providerReducer";
 

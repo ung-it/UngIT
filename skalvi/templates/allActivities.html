@@ -4,25 +4,20 @@
 {% block pageTitle %}Aktiviteter{% endblock %}
 
 {% block explicitPageHeader %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/allactivities.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/allactivities.css' %}"/>
 {% endblock %}
 
 {% block body %}
     <div class="banner-container">
-            <img src="{% static "images/top-banner.jpg" %}" alt="Banner" class="banner">
+        <img src="{% static "images/top-banner.jpg" %}" alt="Banner" class="banner">
     </div>
-
     <div class="content">
         <div class="content-margin-top">
             <h1 class="title">Aktiviteter</h1>
             <p>Her er en oversikt over alle aktiviteter som tilbys i Trondheim kommune</p>
-            <div>
-                <div id="allActivities"></div>
-            </div>
+            <div id="allActivities"></div>
         </div>
-
     </div>
-
 {% endblock %}
 
 {% block explicitPageFooter %}

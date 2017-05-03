@@ -1,25 +1,21 @@
 import React from 'react';
-import { Glyphicon } from "react-bootstrap";
+import {Glyphicon} from "react-bootstrap";
 import Paper from 'material-ui/Paper';
-
 import ActivityPicker from './ActivityPicker';
 import SuitedForPicker from './SuitedForPicker';
 import WeekPicker from './WeekPicker';
 import SearchForActivity from './SearchForActivity';
-
 import '../../styles/activityFilters.css'
-
 
 class ActivityFilters extends React.Component {
 
     constructor(props) {
-		super(props);
+        super(props);
 
-		this.state = {
+        this.state = {
             tButtonClicked: true,
-		};
-	};
-
+        };
+    };
 
     handleEmptyFilter = () => {
         this.props.onButtonChange(this.state.tButtonClicked);
@@ -35,10 +31,10 @@ class ActivityFilters extends React.Component {
                         <div className="mdl-tooltip  mdl-tooltip--large" data-mdl-for="button-trash">
                             Tøm filter
                         </div>
-                        <button type="button" className="btn btn-warning" id="button-trash" onClick={this.handleEmptyFilter}>
+                        <button type="button" className="btn btn-warning" id="button-trash"
+                                onClick={this.handleEmptyFilter}>
                             <Glyphicon glyph="glyphicon glyphicon-trash"/>
                         </button>
-
                     </div>
                     <div className="col-md-10">
                         <h1>Finn aktiviteter</h1>
@@ -54,10 +50,12 @@ class ActivityFilters extends React.Component {
                         />
                     </div>
                     <div className="col-md-6">
-                        <WeekPicker
-                            onFilterChange={this.props.onWeekPickerChange}
-                            activeFilters={this.props.weekFilters}
-                        />
+                        <div className="row1">
+                            <WeekPicker
+                                onFilterChange={this.props.onWeekPickerChange}
+                                activeFilters={this.props.weekFilters}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="row">
@@ -73,11 +71,9 @@ class ActivityFilters extends React.Component {
                             onFilterChange={this.props.onActivityFilterChange}
                             activeFilters={this.props.activityFilters}
                             activityButton={this.props.activityButton}
-
                         />
                     </div>
                 </div>
-
             </Paper>
         )
     }

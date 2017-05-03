@@ -4,10 +4,9 @@ const Promise = require("promise-polyfill");
 const setAsap = require("setasap");
 Promise._immediateFn = setAsap;
 
-if(!window.Promise){
+if (!window.Promise) {
     window.Promise = Promise;
 }
-
 
 export function getUserState(callback) {
     return fetchFromServer('/checkIfLogedIn/').then(response => {
@@ -25,31 +24,10 @@ export function getUser(callback) {
     });
 }
 
-export function getActivityInfo(id, callback) {
-    fetchFromServer('/api/activity/' + id).then(data => {
-        callback(data[0].fields);
-    });
-}
-
-export function getUpcomingActivities(callback) {
-    fetchFromServer('/api/activities/').then(data => {
-        const ids = data.map(activity => {
-            return activity.pk;
-        });
-        callback(ids);
-    });
-}
-
 export function getAllOrganisations(callback) {
     return fetchFromServer('/api/providers/').then(response => {
         callback(response);
     });
-}
-
-export function getUserProviders(callback) {
-    return fetchFromServer('/api/userproviders/').then(response => {
-        callback(response);
-    })
 }
 
 export function getAllProviders() {
@@ -71,14 +49,21 @@ export function getAllActivities() {
 export function getFacebookEventData(activities) {
 
     let eventIDs = activities
-        .filter(activity => {return activity.fields.facebookID})
-        .map(activity => {return activity.fields.facebookID});
+        .filter(activity => {
+            return activity.fields.facebookID
+        })
+        .map(activity => {
+            return activity.fields.facebookID
+        });
 
     return new Promise(function (resolve) {
         getAccessToken(resolve);
     }).then(token => {
         let batch = eventIDs.map(id => {
-            return {method:"GET", relative_url: id + "?fields=admins,attending_count,maybe_count,photos{images},picture,roles,videos"};
+            return {
+                method: "GET",
+                relative_url: id + "?fields=admins,attending_count,maybe_count,photos{images},picture,roles,videos"
+            };
         });
         if (batch.length == 0) {
             return activities;
@@ -103,28 +88,27 @@ export function getFacebookEventData(activities) {
             return activities;
         });
     });
-
 }
 
 export function getComments(id, callback) {
-    fetchFromServer('/comments/'+id).then(comments => {
+    fetchFromServer('/comments/' + id).then(comments => {
         callback(comments);
     });
 }
 
 export function getAllAttendingActivities() {
     const profileName = window.location.href.split("/")[4];
-    return fetchFromServer('/api/attendingActivities/'+profileName);
+    return fetchFromServer('/api/attendingActivities/' + profileName);
 }
 
 export function getAllHostingActivities() {
     const profileName = window.location.href.split("/")[4];
-    return fetchFromServer('/api/hostingActivities/'+profileName);
+    return fetchFromServer('/api/hostingActivities/' + profileName);
 }
 
 export function getAllProHosting() {
     const id = window.location.href.split("/")[4];
-    return fetchFromServer('/api/proHosting/'+ String(id));
+    return fetchFromServer('/api/proHosting/' + String(id));
 }
 
 export function getHost(id, callback) {
@@ -133,9 +117,8 @@ export function getHost(id, callback) {
     });
 }
 
-
 export function signupActivity(data, callback) {
-    postToServer('/signupActivity/', data).then (response => {
+    postToServer('/signupActivity/', data).then(response => {
         callback(response);
     });
 }
@@ -153,7 +136,7 @@ export function checkIfSignedUp(data, callback) {
 }
 
 export function follow(data, callback) {
-    postToServer('/follow/', data).then (response => {
+    postToServer('/follow/', data).then(response => {
         callback(response);
     });
 }
@@ -164,14 +147,8 @@ export function unfollow(data, callback) {
     });
 }
 
-export function checkIfFollowing(data, callback) {
-    postToServer('/checkIfFollowing/', data).then(response => {
-        callback(response);
-    });
-}
-
 export function getFollowingProviders(callback) {
-    return fetchFromServer('/getFollowingProviders/').then (response => {
+    return fetchFromServer('/getFollowingProviders/').then(response => {
         callback(response);
     });
 }
@@ -195,7 +172,7 @@ function fetchFromServer(query) {
             throw new Error("GET-request: Bad response from server");
         }
         return response.json();
-    }).then(function(result) {
+    }).then(function (result) {
         if (result.error) {
             console.log("The GET-request threw an error:\n" + query);
             return Promise.reject(result.error);

@@ -1,12 +1,7 @@
 import React from 'react';
-import Select from 'react-select';
-import ReactDOM from 'react-dom';
-
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import { Glyphicon } from "react-bootstrap";
-
-
 import '../../styles/activitypickerStyle.css'
 
 export const names = ['Tilrettelegging 1', 'Tilrettelegging 2', 'Tilrettelegging 3', 'Tilrettelegging 4', 'Annet'];
@@ -44,7 +39,7 @@ class SuitedForPicker extends React.Component {
 
 	render() {
 		return (
-			<div className="section" className="row">
+			<div className="section row">
 				<div className="col-md-11">
 				<SelectField
 					multiple={true}
@@ -63,10 +58,8 @@ class SuitedForPicker extends React.Component {
                     <Glyphicon glyph="glyphicon glyphicon-remove" id="remove-s-button" onClick={this.handleEmptyFilter}/>
                 </div>
 			</div>
-
 		);
 	};
-
 }
 
 SuitedForPicker.propTypes = {
@@ -76,13 +69,3 @@ SuitedForPicker.propTypes = {
 };
 
 export default SuitedForPicker;
-
-
-
-
-
-
-
-
-
-

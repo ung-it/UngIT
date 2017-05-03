@@ -41,7 +41,7 @@ class ActivitiesContainer extends Component {
     render() {
         const styles = {
             activitiesContainerStyle: {
-                padding: "1em"
+                // padding: "1em"
             },
             activitiesStyle: {
                 display: "flex",

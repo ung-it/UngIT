@@ -10,12 +10,8 @@ import os
 
 @csrf_exempt
 def loginFacebook(request):
-    print(request)
-    print(request.body)
-    print()
     infoArray = request.body.decode('UTF-8') # request becomes string
     infoArray = infoArray.split("&")
-    print(infoArray)
 
     if "%C3%85" in infoArray[2]:
         infoArray[2] = infoArray[2].replace("%C3%85", "Å")

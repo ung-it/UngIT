@@ -89,8 +89,7 @@ class ActivityCard extends React.Component {
         const divStyle = {
             background: 'url(' + poster + ') 0% 0% / cover no-repeat',
             width: '55em',
-            height: '20em',
-            cursor: 'pointer'
+            height: '20em'
 
         };
 

@@ -10,8 +10,41 @@ import os
 
 @csrf_exempt
 def loginFacebook(request):
-    infoArray = request.body.decode('utf-8')  # request becomes string
+    infoArray = request.body.decode('UTF-8') # request becomes string
     infoArray = infoArray.split("&")
+
+    if "%C3%85" in infoArray[2]:
+        infoArray[2] = infoArray[2].replace("%C3%85", "Å")
+    if "%C3%86" in infoArray[2]:
+        infoArray[2] = infoArray[2].replace("%C3%86", "Æ")
+    if "%C3%98" in infoArray[2]:
+        infoArray[2] = infoArray[2].replace("%C3%98", "Ø")
+
+    if "%C3%A5" in infoArray[2]:
+        infoArray[2] = infoArray[2].replace("%C3%A5", "å")
+    if "%C3%A6" in infoArray[2]:
+        infoArray[2] = infoArray[2].replace("%C3%A6", "æ")
+    if "%C3%B8" in infoArray[2]:
+        infoArray[2] = infoArray[2].replace("%C3%B8", "ø")
+
+    if "%C3%85" in infoArray[3]:
+        infoArray[3] = infoArray[3].replace("%C3%85", "Å")
+    if "%C3%86" in infoArray[3]:
+        infoArray[3] = infoArray[3].replace("%C3%86", "Æ")
+    if "%C3%98" in infoArray[3]:
+        infoArray[3] = infoArray[3].replace("%C3%98", "Ø")
+
+    if "%C3%A5" in infoArray[3]:
+        infoArray[3] = infoArray[3].replace("%C3%A5", "å")
+    if "%C3%A6" in infoArray[3]:
+        infoArray[3] = infoArray[3].replace("%C3%A6", "æ")
+    if "%C3%B8" in infoArray[3]:
+        infoArray[3] = infoArray[3].replace("%C3%B8", "ø")
+
+    if "+" in infoArray[2]:
+        infoArray[2] = infoArray[2].replace("+", " ")
+    if "+" in infoArray[3]:
+        infoArray[3] = infoArray[3].replace("+", " ")
 
     if len(infoArray) > 4:
         email = infoArray[4].split("=")[1]

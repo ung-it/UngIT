@@ -32,7 +32,7 @@
         {% elif field.name == "profile_name" or field.name == "last_name" %}
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input style="color: white" class="mdl-textfield__input" name={{ field.name }} type="text"
-                       id="{{ field.auto_id }}" pattern="[A-Z ,a-z ]*" required/>
+                       id="{{ field.auto_id }}" pattern="[ÆØÅæøåA-Z ,a-z ]*" required/>
                 <label style="color: lightcyan;" class="mdl-textfield__label formLabel"
                        for="{{ field.auto_id }}">{{ field.label }}</label>
                 <span style="color: #ff1919" class="mdl-textfield__error">{{ field.label_tag }} kan kun inneholde bokstaver</span>

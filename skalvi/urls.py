@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^api/proHosting/[0-9]+/$', views.getProHostingActivities, name="getProHostingActivities"),
     # MyPage
     url(r'^mypage/$', views.MyPageView.as_view(), name='mypage'),
-    url(r'^mypage/(?P<id>[a-zA-Z ]+)/$', views.MyPageView.as_view(), name='mypage'),
+    url(r'^mypage/(?P<id>[ÆØÅæøåa-zA-Z ]+)/$', views.MyPageView.as_view(), name='mypage'),
     # Sign up and off
     url(r'^signupActivity/$', views.signUpActivity, name='signupActivity'),
     url(r'^checkIfSignedUp/$', views.checkIfSingedUp, name='checkIfSignedUp'),

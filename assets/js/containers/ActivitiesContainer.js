@@ -40,9 +40,6 @@ class ActivitiesContainer extends Component {
 
     render() {
         const styles = {
-            activitiesContainerStyle: {
-                padding: "1em"
-            },
             activitiesStyle: {
                 display: "flex",
                 flexWrap: "wrap",
@@ -53,9 +50,7 @@ class ActivitiesContainer extends Component {
         };
 
         return (
-            <div style={styles.activitiesContainerStyle}>
-                <div style={styles.activitiesStyle}>{this.createActivityCardComponent()}</div>
-            </div>
+            <div style={styles.activitiesStyle}>{this.createActivityCardComponent()}</div>
         );
     }
 }

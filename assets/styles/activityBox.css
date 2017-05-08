@@ -3,6 +3,7 @@
     border-style: solid;
     border-color: white;
     cursor: pointer;
+    margin: 0 2em 2em 0;
 }
 
 .activitySmallStyle:hover {
@@ -21,7 +22,7 @@
     color: white;
     text-align: left;
     border-bottom: 3px solid #3ad7ff;
-    padding: 10px 0;
+    padding: 0 0;
 }
 
 .info-box-wrapper {
@@ -29,6 +30,7 @@
     padding: 0 17px 0 17px;
     background-color: rgb(42, 42, 42);
     width: 100%;
+    height: 10em;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     align-self: flex-end;
@@ -39,7 +41,7 @@
 }
 
 .demo-card-square.mdl-card {
-    width: 22em;
+    width: 20em;
     height: 22em;
 }
 
@@ -55,12 +57,14 @@
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 0;
+    cursor: pointer;
 }
 
 .demo-card-wide > .mdl-card__title {
     color: #fff;
     height: 176px;
 }
+
 
 .demo-card-wide > .mdl-card__menu {
     color: #fff;

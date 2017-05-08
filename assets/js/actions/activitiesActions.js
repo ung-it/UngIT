@@ -106,7 +106,7 @@ export function fetchFacebookEventData(activities) {
 
 export function fetchAllAttendingActivities() {
     return (dispatch) => {
-        getAllAttendingActivities()
+        return getAllAttendingActivities()
             .then(result => dispatch(fetchedAllAttendingActivites(result)))
             .catch(error => console.error(error));
     };
@@ -115,7 +115,7 @@ export function fetchAllAttendingActivities() {
 
 export function fetchAllHostingActivities() {
     return (dispatch) => {
-        getAllHostingActivities()
+        return getAllHostingActivities()
             .then(result => dispatch(fetchedAllHostingActivites(result)))
             .catch(error => console.error(error));
     };
@@ -123,7 +123,7 @@ export function fetchAllHostingActivities() {
 
 export function fetchAllProHostingActivities() {
     return (dispatch) => {
-        getAllProHosting()
+        return getAllProHosting()
             .then(result => dispatch(fetchedAllProHostingActivites(result)))
             .catch(error => console.error(error));
     };
